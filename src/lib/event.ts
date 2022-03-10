@@ -7,7 +7,7 @@ import {
   PJAX_ENTER,
   PJAX_LEAVE,
   WINDOW_RESIZE,
-} from 'const'
+} from '@/const'
 
 type Events = {
   [LOADING_PROGRESS]: {
@@ -29,11 +29,11 @@ type Events = {
   }
   [WINDOW_RESIZE]: {
     windowH: number
-    screenH: number
     screenW: number
+    screenH: number
   }
 }
 
-const eventbus = mitt<Events>()
+const bus = mitt<Events>()
 
-export { eventbus }
+export { bus }

@@ -18,7 +18,7 @@
     "baseUrl": "./",
     "downlevelIteration": true,
     "paths": {
-      "@/*": ["src/scripts/*"]
+      "@/*": ["src/*"]
     },
     /**
      * Typecheck JS in `.svelte` and `.js` files by default.

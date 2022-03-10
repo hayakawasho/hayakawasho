@@ -1,7 +1,8 @@
 import 'ress'
-import 'virtual:windi.css'
+import './assets/styles/global.css'
+import './tailwind.dist.css'
 
-import { init } from './features/initializeApp'
+import { init } from './featureModules/initializeApp'
 
 const isDev = process.env.NODE_ENV === 'development'
 

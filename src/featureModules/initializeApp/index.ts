@@ -1,12 +1,13 @@
-import { router } from './router'
 import { createSceneManager } from './sceneManager'
-import { DefaultPage } from '../../page'
+import { DefaultPage } from '@/components/page'
+import { router } from '@/lib'
 
 export function init() {
   const sceneManager = createSceneManager()
+
   router
     .use('*', _req => {
-      sceneManager.goto(new DefaultPage())
+      // sceneManager.goto(new DefaultPage())
     })
 
   router.listen()

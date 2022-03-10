@@ -1,16 +1,16 @@
-import type { IScene } from '../functional/InitializeApp/sceneManager'
-import { gsap } from '@/lib'
+import type { IScene } from '@/featureModules/initializeApp/sceneManager'
+import { selector } from '@/utils/selector'
 
 export default abstract class implements IScene {
   scope!: HTMLElement
-  $$!: gsap.utils.SelectorFunc
+  $$!: typeof selector
 
   /**
    * DO NOT OVERWRITE
    */
   enter = async (scope = document.body) => {
     this.scope = scope
-    this.$$ = gsap.utils.selector(this.scope)
+    this.$$ = selector
 
     this.init()
   }

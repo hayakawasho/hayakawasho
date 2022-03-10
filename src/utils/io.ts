@@ -1,4 +1,10 @@
-const defaults = {
+type Props = {
+  root?: HTMLElement | null
+  rootMargin?: string
+  threshold?: number[]
+}
+
+const defaults: Props = {
   root: null,
   rootMargin: '0px',
   threshold: [0, 1],

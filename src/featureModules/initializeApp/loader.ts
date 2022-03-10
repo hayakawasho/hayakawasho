@@ -1,7 +1,7 @@
-import { gsap, eventbus } from '@/lib'
-import type { IManifestProps } from '@/manifest'
-import { LOADING_PROGRESS, LOADING_TIMEOUT, LOADING_DONE } from 'const'
-import { Utils } from 'utils'
+import type { Manifest } from './sceneManager'
+import { LOADING_PROGRESS, LOADING_TIMEOUT, LOADING_DONE } from '@/const'
+import { TWEEN, bus } from '@/lib'
+import { Util } from '@/utils'
 
 const TIMEOUT = 4000
 
@@ -15,11 +15,10 @@ const state = {
 }
 
 const handleProgress = (e: any) => {
-  gsap.killTweensOf(state.progress)
-  gsap.to(state.progress, {
-    duration: 0.3,
+  TWEEN.tween(state.progress, 0.3, null, {
     now: (e.progress as number) * 100,
-    onUpdate: () => {
+  })
+    .onUpdate(() => {
       if (state.progress.now <= state.progress.before) {
         return
       }
@@ -27,9 +26,9 @@ const handleProgress = (e: any) => {
       const progress = Math.round(state.progress.now)
       state.progress.before = progress
 
-      eventbus.emit(LOADING_PROGRESS, { progress })
-    },
-  })
+      bus.emit(LOADING_PROGRESS, { progress })
+    })
+    .play()
 }
 
 const handleFileLoaed = (e: any) => {
@@ -38,7 +37,7 @@ const handleFileLoaed = (e: any) => {
   if (elapsedTime > TIMEOUT && !state.isTimeOuted) {
     state.isTimeOuted = true
 
-    eventbus.emit(LOADING_TIMEOUT, {
+    bus.emit(LOADING_TIMEOUT, {
       id: e.item.id,
       timeout: elapsedTime,
     })
@@ -50,9 +49,9 @@ const handleFileLoaed = (e: any) => {
 }
 
 const handleComplete = async (e: any) => {
-  await Utils.wait(300) // progressのduration待機
+  await Util.wait(300) // progressのduration待機
 
-  eventbus.emit(LOADING_DONE, {
+  bus.emit(LOADING_DONE, {
     done: performance.now() - state.clock,
   })
 
@@ -67,8 +66,8 @@ loadQueue.addEventListener('progress', handleProgress)
 loadQueue.addEventListener('fileload', handleFileLoaed)
 loadQueue.addEventListener('complete', handleComplete)
 
-const loadingManager = {
-  loadStart: (now: number, manifest: IManifestProps[]) => {
+const loader = {
+  loadStart: (now: number, manifest: Manifest) => {
     state.clock = now
     loadQueue.loadManifest(manifest)
   },
@@ -78,6 +77,6 @@ const loadingManager = {
   },
 }
 
-Object.freeze(loadingManager)
+Object.freeze(loader)
 
-export { loadingManager }
+export { loader }

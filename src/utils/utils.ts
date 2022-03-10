@@ -1,4 +1,19 @@
-class Utils {
+export type Await<T> = T extends {
+  then(onfulfilled?: (value: infer U) => unknown): unknown
+}
+  ? U
+  : T
+
+const timeoutPromise = (timeout: number) => {
+  return new Promise((_resolve, reject) => {
+    window.setTimeout(
+      () => reject(new Error(`timed out after ${timeout} ms`)),
+      timeout
+    )
+  })
+}
+
+export class Util {
   static wait(ms: number): Promise<void> {
     return new Promise(resolve => {
       window.setTimeout(() => resolve(), ms)
@@ -33,17 +48,15 @@ class Utils {
     })
   }
 
-  static timeout(promise: Promise<void>[], ms: number): Promise<void[] | void> {
-    return Promise.race([Promise.all(promise), this.wait(ms)])
+  static timeout(promise: Promise<unknown>, ms: number) {
+    return Promise.race([promise, timeoutPromise(ms)])
   }
 
   static async nextTick(): Promise<void> {
-    await this.waitFrame(1)
+    await Util.waitFrame(1)
   }
 
   static zeroPadding(num: number | string, length: number) {
     return `${num}`.padStart(length, '0')
   }
 }
-
-export { Utils }
