@@ -16,7 +16,7 @@
     "@types/prettier": "^2.4.4",
     "@typescript-eslint/eslint-plugin": "^5.14.0",
     "@typescript-eslint/parser": "^5.14.0",
-    "astro": "^0.22.20",
+    "astro": "^0.24.3",
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-typescript": "^2.5.0",
@@ -31,16 +31,16 @@
   },
   "dependencies": {
     "@dogstudio/highway": "^2.2.1",
+    "@sanity/cli": "^2.28.0",
     "axios": "^0.25.0",
     "detect-gpu": "^4.0.8",
     "lazysizes": "^5.3.2",
     "mitt": "^3.0.0",
     "modujs": "^1.4.2",
-    "neverthrow": "^4.3.1",
     "prouter": "^10.0.13",
     "ress": "^4.0.0",
-    "robot3": "^0.2.21",
     "three": "^0.137.5",
+    "ts-pattern": "^3.3.5",
     "tween24": "^1.0.0"
   }
 }
