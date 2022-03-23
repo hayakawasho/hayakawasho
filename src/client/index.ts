@@ -1,5 +1,5 @@
 import { createSceneManager } from "./sceneManager";
-import { DefaultPage } from "@/components/page";
+import { DefaultPage } from "@/components/route";
 import { router } from "@/foundation";
 
 export function initApp() {

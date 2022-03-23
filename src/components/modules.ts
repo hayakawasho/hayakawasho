@@ -1,1 +1,1 @@
-// export { default as Glworld } from './featureModule/m_glworld'
+import Hello from "./Hello/index.svelte";

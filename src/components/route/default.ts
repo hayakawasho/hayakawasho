@@ -1,4 +1,4 @@
-import Abstract from "@/components/page/_AbstractPage";
+import Abstract from "@/components/route/_AbstractPage";
 
 export class DefaultPage extends Abstract {
   private constructor() {
