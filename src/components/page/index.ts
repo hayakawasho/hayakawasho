@@ -1,2 +1,2 @@
-export { default as DefaultPage } from './default'
-export { default as WorksPage } from './works'
+export { DefaultPage } from "./default";
+// export { default as WorksPage } from './works'
