@@ -64,8 +64,9 @@ class SceneManager {
     return SceneManager._instance;
   }
 
-  async #once(scene: IScene) {
-    const now: number = performance.now();
+  #once = async (scene: IScene) => {
+    const now = performance.now();
+
     loader.loadStart(now, manifest);
 
     globals();
@@ -77,19 +78,19 @@ class SceneManager {
     ]);
 
     this.#newScene = scene;
-  }
+  };
 
-  async goto(scene: IScene) {
-    if (!this.#pjaxIsStarted) {
-      await this.#once(scene);
-      this.#pjaxIsStarted = true;
-    } else {
+  goto = async (scene: IScene) => {
+    if (this.#pjaxIsStarted) {
       await scene.enter(this.#scope);
       this.#newScene = scene;
+    } else {
+      await this.#once(scene);
+      this.#pjaxIsStarted = true;
     }
 
     eventbus.emit(AFTER_PAGE_READY);
-  }
+  };
 }
 
 const createSceneManager = () => {

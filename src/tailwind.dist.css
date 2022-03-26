@@ -3,3 +3,29 @@
 .static {
   position: static
 }
+
+.relative {
+  position: relative
+}
+
+.m-auto {
+  margin: auto
+}
+
+.m-\[2rem\] {
+  margin: 2rem
+}
+
+@media (min-width: 640px) {
+  .sm\:relative {
+    position: relative
+  }
+
+  .sm\:text-center {
+    text-align: center
+  }
+
+  .sm\:text-current {
+    color: currentColor
+  }
+}

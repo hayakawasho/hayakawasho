@@ -1,81 +1,61 @@
-import axios from 'axios'
+import axios from "axios";
 
 /**
  * https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
  */
 
 type ErrorCodeName =
-  | 'OK'
-  | 'CANCELLED'
-  | 'UNKNOWN'
-  | 'INVALID_ARGUMENT'
-  | 'DEADLINE_EXCEEDED'
-  | 'NOT_FOUND'
-  | 'ALREADY_EXISTS'
-  | 'PERMISSION_DENIED'
-  | 'UNAUTHENTICATED'
-  | 'RESOURCE_EXHAUSTED'
-  | 'FAILED_PRECONDITION'
-  | 'ABORTED'
-  | 'OUT_OF_RANGE'
-  | 'UNIMPLEMENTED'
-  | 'INTERNAL'
-  | 'UNAVAILABLE'
-  | 'DATA_LOSS'
-  | 'UNEXPECTED' // Oops, an unexpected error has occurred.
+  | "OK"
+  | "CANCELLED"
+  | "UNKNOWN"
+  | "INVALID_ARGUMENT"
+  | "DEADLINE_EXCEEDED"
+  | "NOT_FOUND"
+  | "ALREADY_EXISTS"
+  | "PERMISSION_DENIED"
+  | "UNAUTHENTICATED"
+  | "RESOURCE_EXHAUSTED"
+  | "FAILED_PRECONDITION"
+  | "ABORTED"
+  | "OUT_OF_RANGE"
+  | "UNIMPLEMENTED"
+  | "INTERNAL"
+  | "UNAVAILABLE"
+  | "DATA_LOSS"
+  | "UNEXPECTED"; // Oops, an unexpected error has occurred.
+
+const errCodeBook: any = {
+  500: "UNKNOWN",
+  400: "INVALID_ARGUMENT",
+  504: "DEADLINE_EXCEEDED",
+  404: "NOT_FOUND",
+  409: "ALREADY_EXISTS",
+  403: "PERMISSION_DENIED",
+  401: "UNAUTHENTICATED",
+  429: "RESOURCE_EXHAUSTED",
+  503: "UNAVAILABLE",
+};
 
 class RpcError extends Error {
   constructor(readonly code: ErrorCodeName, message?: string) {
-    super(message)
-    this.code = code
+    super(message);
+    this.code = code;
   }
 }
 
 const httpErrorHandler = (error: unknown) => {
   if (error instanceof RpcError) {
-    return error
+    return error;
   }
 
   if (axios.isAxiosError(error)) {
-    let code: ErrorCodeName
+    const code: ErrorCodeName =
+      errCodeBook(error.response?.status) ?? "UNEXPECTED";
 
-    switch (error.response?.status) {
-      case 500:
-        code = 'UNKNOWN'
-        break
-      case 400:
-        code = 'INVALID_ARGUMENT'
-        break
-      case 504:
-        code = 'DEADLINE_EXCEEDED'
-        break
-      case 404:
-        code = 'NOT_FOUND'
-        break
-      case 409:
-        code = 'ALREADY_EXISTS'
-        break
-      case 403:
-        code = 'PERMISSION_DENIED'
-        break
-      case 401:
-        code = 'UNAUTHENTICATED'
-        break
-      case 429:
-        code = 'RESOURCE_EXHAUSTED'
-        break
-      case 503:
-        code = 'UNAVAILABLE'
-        break
-      default:
-        code = 'UNEXPECTED'
-        break
-    }
-
-    return new RpcError(code, error.message)
+    return new RpcError(code, error.message);
   }
 
-  return new RpcError('UNEXPECTED', 'Oops, an unexpected error has occurred.')
-}
+  return new RpcError("UNEXPECTED", "Oops, an unexpected error has occurred.");
+};
 
-export { RpcError, httpErrorHandler }
+export { RpcError, httpErrorHandler };
