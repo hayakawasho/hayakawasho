@@ -7,8 +7,8 @@ import {
   LOADING_DONE,
   LOADING_TIMEOUT,
 } from "@/const";
-// import { g } from '@/env'
 import { eventbus, router } from "@/foundation";
+import { match } from "ts-pattern";
 
 const manifest = [
   {
@@ -64,7 +64,7 @@ class SceneManager {
     return SceneManager._instance;
   }
 
-  #once = async (scene: IScene) => {
+  async #once(scene: IScene) {
     const now = performance.now();
 
     loader.loadStart(now, manifest);
@@ -78,19 +78,22 @@ class SceneManager {
     ]);
 
     this.#newScene = scene;
-  };
+  }
 
-  goto = async (scene: IScene) => {
-    if (this.#pjaxIsStarted) {
-      await scene.enter(this.#scope);
-      this.#newScene = scene;
-    } else {
-      await this.#once(scene);
-      this.#pjaxIsStarted = true;
-    }
+  goto(scene: IScene) {
+    match(this.#pjaxIsStarted)
+      .with(true, async () => {
+        await scene.enter(this.#scope);
+        this.#newScene = scene;
+      })
+      .with(false, async () => {
+        await this.#once(scene);
+        this.#pjaxIsStarted = true;
+      })
+      .exhaustive();
 
     eventbus.emit(AFTER_PAGE_READY);
-  };
+  }
 }
 
 const createSceneManager = () => {

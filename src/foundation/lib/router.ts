@@ -1,4 +1,5 @@
-import { browserRouter, ProuterRequestCallback, ProuterGroup } from "prouter";
+import { browserRouter } from "prouter";
+import type { ProuterRequestCallback, ProuterGroup } from "prouter";
 import { Do } from "@/foundation";
 
 const router = Do(() => {

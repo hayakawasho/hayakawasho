@@ -2,6 +2,7 @@
 import Head from '../components/Head.astro'
 import AboutContainer from '../components/page/About/Container.jsx'
 
+
 ---
 
 <html lang="ja">
@@ -9,6 +10,6 @@ import AboutContainer from '../components/page/About/Container.jsx'
   <Head />
 </head>
 <body>
-  <AboutContainer />
+  <AboutContainer client:visible />
 </body>
 </html>

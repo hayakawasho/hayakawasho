@@ -4,16 +4,31 @@
   position: static
 }
 
+.fixed {
+  position: fixed
+}
+
 .relative {
   position: relative
 }
 
-.m-auto {
-  margin: auto
+.inset-0 {
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px
 }
 
 .m-\[2rem\] {
   margin: 2rem
+}
+
+.h-screen {
+  height: 100vh
+}
+
+.w-screen {
+  width: 100vw
 }
 
 @media (min-width: 640px) {
@@ -23,9 +38,5 @@
 
   .sm\:text-center {
     text-align: center
-  }
-
-  .sm\:text-current {
-    color: currentColor
   }
 }
