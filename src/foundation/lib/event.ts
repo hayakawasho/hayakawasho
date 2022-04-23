@@ -7,7 +7,7 @@ import {
   PJAX_ENTER,
   PJAX_LEAVE,
   WINDOW_RESIZE,
-} from "@/const";
+} from "@/foundation/const";
 
 type EventsType = {
   [LOADING_PROGRESS]: {

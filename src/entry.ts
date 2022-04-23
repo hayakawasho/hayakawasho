@@ -2,11 +2,11 @@ import "ress";
 import "./assets/styles/global.css";
 import "./tailwind.dist.css";
 
-import { initApp } from "./client";
+import { initializeApp } from "./client";
 
 const isDev = process.env.NODE_ENV === "development";
 
-document.addEventListener("DOMContentLoaded", initApp);
+document.addEventListener("DOMContentLoaded", initializeApp);
 
 if (isDev) {
   const showStats = async () => {

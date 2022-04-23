@@ -1,6 +1,6 @@
 ---
 import Head from '../components/Head.astro'
-// import HomeContainer from '../components/page/Home/Container.jsx'
+import Index from '../components/index.astro'
 
 ---
 
@@ -9,7 +9,8 @@ import Head from '../components/Head.astro'
   <Head />
 </head>
 <body>
-  {// <HomeContainer client:visible />
-  }
+  <div>
+    <Index client:media />
+  </div>
 </body>
 </html>

@@ -1,24 +1,17 @@
-import { createSceneManager } from "./sceneManager";
-import { DefaultPage } from "@/components/page";
-import { router, define, require, lake } from "@/foundation";
+import { withSvelte, mountComponent, registerComponent, q } from '@/foundation'
+import GLWorld from '../components/GLWorld/index.svelte'
 
-import { withSvelte } from "./withSvelte";
-import Sns from "./components/Sns/index.svelte";
-import Glworld from "./components/Glworld/index.svelte";
-// import Test from './components/Test/Test.svelte'
-//
+function mount(scope = document.body) {
+  q(`[data-component]`, scope).forEach(el => {
+    const { component, props } = el.dataset
+    const newProps = props ?? {}
 
-export function initApp() {
-  const { goto } = createSceneManager();
+    mountComponent(el, newProps, component as string)
+  })
+}
 
-  define("Sns", withSvelte(Sns));
-  define("Glworld", withSvelte(Glworld));
+export function initializeApp() {
+  registerComponent('GLWorld', withSvelte(GLWorld))
 
-  console.log(lake, "lake");
-
-  router
-    .route("*", () => {
-      goto(DefaultPage.exec());
-    })
-    .exec();
+  mount()
 }

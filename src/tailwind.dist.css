@@ -8,19 +8,11 @@
   position: fixed
 }
 
-.relative {
-  position: relative
-}
-
 .inset-0 {
   top: 0px;
   right: 0px;
   bottom: 0px;
   left: 0px
-}
-
-.m-\[2rem\] {
-  margin: 2rem
 }
 
 .h-screen {
@@ -31,12 +23,6 @@
   width: 100vw
 }
 
-@media (min-width: 640px) {
-  .sm\:relative {
-    position: relative
-  }
-
-  .sm\:text-center {
-    text-align: center
-  }
+.resize {
+  resize: both
 }

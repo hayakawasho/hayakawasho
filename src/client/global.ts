@@ -1,4 +1,4 @@
-import { WINDOW_RESIZE } from "@/const";
+import { WINDOW_RESIZE } from "@/foundation/const";
 import { eventbus } from "@/foundation";
 
 export default function () {
