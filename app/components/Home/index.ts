@@ -1,7 +1,10 @@
-import { defineComponent } from 'lake'
+import { defineComponent, withSvelte } from 'lake'
+import Gl from '../GLWorld/index.svelte'
 
 export default defineComponent({
-  components: {},
+  components: {
+    '#gl': withSvelte(Gl),
+  },
 
   setup() {
     console.log('HOME')
