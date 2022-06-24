@@ -1,13 +1,8 @@
 module.exports = {
-  content: [
-    "./src/**/*.{astro,js,ts,jsx,tsx,svelte,js,vue}",
-  ],
+  content: ['./pages/**/*.{jsx,tsx}'],
   theme: {
     extend: {
-      fontFamily: {
-        en: ['Montserrat'],
-        roboto: ['Roboto Condensed'],
-      },
+      fontFamily: {},
     },
   },
   plugins: [],

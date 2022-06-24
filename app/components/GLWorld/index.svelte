@@ -1,20 +1,19 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { createScene, resize } from './scene'
 
-  let canvasRef: HTMLCanvasElement
+  let refCanvas: HTMLCanvasElement
 
   function onResize() {
-    resize()
+    //
   }
 
   onMount(() => {
-    createScene(canvasRef)
+    console.log(refCanvas)
   })
 </script>
 
 <div class="fixed inset-0">
-  <canvas class="h-screen w-screen" bind:this={canvasRef} />
+  <canvas class="h-screen w-screen" bind:this={refCanvas} />
 </div>
 
 <svelte:window on:resize={onResize} />
