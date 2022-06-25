@@ -1,8 +1,6 @@
 import { useEffect, useRef } from 'react'
 import type { EffectCallback } from 'react'
 
-const noop = () => {}
-
 export function useMount(cb: EffectCallback) {
   const didLogRef = useRef(false)
 
@@ -13,10 +11,6 @@ export function useMount(cb: EffectCallback) {
 
     didLogRef.current = true
 
-    const dispose = cb() || noop
-
-    return () => {
-      dispose()
-    }
+    cb()
   })
 }

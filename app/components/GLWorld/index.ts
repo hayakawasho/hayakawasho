@@ -1,6 +1,6 @@
-import * as PIXI from 'pixi.js'
+import { Application } from 'pixi.js'
 
-class World extends PIXI.Application {}
+class World extends Application {}
 
 export function createGl(el: HTMLCanvasElement) {
   new World({
