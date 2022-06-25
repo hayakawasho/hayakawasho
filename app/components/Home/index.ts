@@ -1,11 +1,11 @@
 import { defineComponent, withSvelte } from 'lake'
 import Gl from '../GLWorld/index.svelte'
-import Grid from '../Grid'
+import Works from '../Works'
 
 export default defineComponent({
   components: {
     '#Gl': withSvelte(Gl),
-    '#Grid': Grid,
+    '#Works': Works,
   },
 
   setup() {
