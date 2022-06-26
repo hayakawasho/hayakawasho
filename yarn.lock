@@ -1514,8 +1514,8 @@ json5@^2.1.2:
     object.assign "^4.1.2"
 
 "lake@https://github.com/hayakawasho/lake":
-  version "0.7.2"
-  resolved "https://github.com/hayakawasho/lake#b32145fe043efc1e3fea73a9771c967ad546d266"
+  version "0.7.3"
+  resolved "https://github.com/hayakawasho/lake#2ab91077ceded540c18f5db6af01e0c70ca2a86c"
 
 language-subtag-registry@~0.3.2:
   version "0.3.21"

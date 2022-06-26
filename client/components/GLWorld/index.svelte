@@ -8,6 +8,10 @@
     console.log('resize')
   }
 
+  function onMousemove(e: MouseEvent) {
+    console.log(e, 'mounsemove')
+  }
+
   onMount(() => {
     createGl(canvas)
   })
@@ -16,3 +20,4 @@
 <canvas class="h-screen w-screen" bind:this={canvas} />
 
 <svelte:window on:resize={onResize} />
+<svelte:body on:mousemove={onMousemove} />
