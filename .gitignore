@@ -1,19 +1,14 @@
-# build output
-dist
-
-# dependencies
+_site
+# Node dependencies
 /node_modules/
-
-# logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# environment variables
-.env
-.env.production
-
-# macOS-specific files
+# System files
+*.log
 .DS_Store
+.cache
 
-public
+.env
+.node-version
+
+tmp
+
+/transpiled
