@@ -16,10 +16,9 @@ export const Head = props => {
 
   return (
     <head>
-      <meta charSet="UTF-8" />
+      <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="format-detection" content="telephone=no" />
-      <meta httpEquiv="Content-Type" content="text/html" />
       <title>{title}</title>
       <meta name="description" content={description} />
       <meta property="og:title" content={title} />
@@ -36,10 +35,7 @@ export const Head = props => {
         styles={css`
           :root {
             --font: 'Noto Sans JP', sans-serif;
-            --font-roboto: 'Roboto Condensed', sans-serif;
-
             --vh: 1vh;
-
             --color-text: #e3e3e3;
             --color-text-primary: #858585;
             --color-theme: #1793a9;
@@ -52,7 +48,6 @@ export const Head = props => {
           }
 
           html {
-            min-height: 100vh;
             font-size: calc(10 / 1280 * 100vw);
 
             @media (min-width: 1280px) {
@@ -70,7 +65,6 @@ export const Head = props => {
 
           body {
             color: var(--color-text);
-            background: #191918;
             overflow-x: hidden;
             font-family: var(--font);
             overflow-wrap: break-word;
@@ -78,7 +72,6 @@ export const Head = props => {
             -webkit-font-smoothing: subpixel-antialiased;
             -moz-osx-font-smoothing: unset;
             -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-            font-feature-settings: 'palt' 1;
 
             & ::-moz-selection {
               color: #fff;
@@ -137,12 +130,6 @@ export const Head = props => {
         `}
       />
       {!idDev && <link rel="stylesheet" href="/assets/entry.css" />}
-      <script
-        src="https://polyfill.io/v3/polyfill.min.js?features=MediaQueryList.prototype.addEventListener%2CMediaQueryList.prototype.removeEventListener%2CString.prototype.padStart%2CIntersectionObserver%2CResizeObserver"
-        defer
-      />
-      {idDev && <script type="module" src="http://localhost:3000/src/entry.ts" defer />}
-      {!idDev && <script type="module" src="/assets/entry.js" defer />}
       <Global
         styles={css`
           .u-sp {
@@ -155,28 +142,6 @@ export const Head = props => {
             @media (max-width: 639px) {
               display: none !important;
             }
-          }
-
-          .u-in {
-            position: relative;
-            width: 100%;
-            height: 100%;
-          }
-
-          .u-cf {
-            &::after {
-              display: block;
-              clear: both;
-              content: '';
-            }
-          }
-
-          .u-fit {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
           }
         `}
       />

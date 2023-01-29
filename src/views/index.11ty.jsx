@@ -1,14 +1,17 @@
 import { renderToStaticMarkup as r } from 'react-dom/server'
-import { PageWithHeader } from './components/page/PageWithHeader'
-import { PageWithPjax } from './components/page/PageWithPjax'
+import { PageWithHeader } from './components/PageWithHeader'
+import { Body } from './components/Body'
+import { Header } from './components/Header'
+import { Progressbar } from './components/Progressbar'
 
 export const render = () => {
   return `<!DOCTYPE html>
   ${r(
-    <PageWithHeader title="WORKS">
-      <PageWithPjax>
-        <main></main>
-      </PageWithPjax>
+    <PageWithHeader header={<Header />}>
+      <Body namespace="Top" data-component="Top">
+        <Progressbar />
+        <div></div>
+      </Body>
     </PageWithHeader>
   )}`
 }

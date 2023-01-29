@@ -1,9 +1,5 @@
-// import { css, keyframes } from '@emotion/react'
+import { css } from '@emotion/react'
 
 export const Header = () => {
-  return (
-    <>
-      <header className=""></header>
-    </>
-  )
+  return <header css={css``}></header>
 }

@@ -14,20 +14,22 @@ document.addEventListener('DOMContentLoaded', () => {
     Gl: withSvelte(Gl),
   }
 
-  const bootstrap = (targets: HTMLElement[], { reboot = false }) => {
-    targets.forEach(el => {
+  const bootstrap = (scope: HTMLElement, { reboot = false }) => {
+    q('[data-component]', scope).forEach(el => {
       const name = el.dataset.component || 'Noop'
 
       try {
         const mount = component(table[`${name}`])
-        mount(el, { reboot })
+        mount(el, {
+          reboot,
+        })
       } catch (error) {
         console.error(error)
       }
     })
   }
 
-  bootstrap(q('[data-component]'), {
+  bootstrap(document.documentElement, {
     reboot: false,
   })
 
@@ -65,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
             TWEEN.tween(next, 1, EASE.expoOut).opacity(1)
           ).play()
 
-          bootstrap(q('[data-component]', next), {
+          bootstrap(next, {
             reboot: true,
           })
         },

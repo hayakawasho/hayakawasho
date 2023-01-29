@@ -1,28 +1,13 @@
-import { Renderer, Camera, Geometry, Program, Mesh } from 'ogl'
+import { Geometry, Program, Mesh } from 'ogl'
+import { createCamera } from './createCamera'
+import { createRenderer } from './createRenderer'
 import { useTick } from '@/libs'
 
 export const useGl = (canvas: HTMLCanvasElement, width: number, height: number) => {
   const dpr = Math.min(window.devicePixelRatio, 1.5)
 
-  const renderer = new Renderer({
-    canvas,
-    dpr,
-  })
-
-  renderer.setSize(width, height)
-
-  const { gl } = renderer
-
-  gl.clearColor(0, 0, 0, 0)
-
-  const camera = new Camera(gl, {
-    fov: 45,
-    aspect: width / height,
-    near: 0.1,
-    far: 100,
-  })
-
-  camera.position.z = 50
+  const { renderer, gl } = createRenderer(canvas, width, height, dpr)
+  const { camera } = createCamera(gl, width / height)
 
   const geometry = new Geometry(gl, {
     position: {
@@ -77,8 +62,9 @@ export const useGl = (canvas: HTMLCanvasElement, width: number, height: number) 
   })
 
   return {
-    resize(w: number, h: number) {
-      renderer.setSize(w, h)
+    resize(width: number, height: number) {
+      renderer.setSize(width, height)
+
       camera.perspective({
         aspect: gl.canvas.width / gl.canvas.height,
       })
