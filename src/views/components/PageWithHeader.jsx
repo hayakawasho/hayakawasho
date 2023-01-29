@@ -13,7 +13,10 @@ export const PageWithHeader = props => {
       <body>
         {props.header}
         {props.children}
-        <div data-component="Gl"></div>
+        <div id="js-observer" aria-hidden="true"></div>
+        <div id="js-gl" className="fixed inset-0">
+          <canvas className="w-full h-full" data-ref="canvas"></canvas>
+        </div>
         <script
           src="https://polyfill.io/v3/polyfill.min.js?features=MediaQueryList.prototype.addEventListener%2CMediaQueryList.prototype.removeEventListener%2CString.prototype.padStart%2CIntersectionObserver%2CResizeObserver"
           defer

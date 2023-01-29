@@ -2,8 +2,10 @@ import 'virtual:windi.css'
 import barba from '@barba/core'
 import { createApp, q, withSvelte } from 'lake'
 import type { IComponent } from 'lake'
-import Gl from '@/components/gl/index.svelte'
+import Gl from '@/components/gl'
+import Home from '@/components/home'
 import Noop from '@/components/noop'
+import Observer from '@/components/observer/index.svelte'
 import { TWEEN, EASE } from '@/libs'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,8 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const table: Record<string, IComponent> = {
     Noop,
-    Gl: withSvelte(Gl),
+    Home,
   }
+
+  component(withSvelte(Observer))(document.getElementById('js-observer')!)
+  const gl = component(Gl)(document.getElementById('js-gl')!)
 
   const bootstrap = (scope: HTMLElement, { reboot = false }) => {
     q('[data-component]', scope).forEach(el => {
@@ -22,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const mount = component(table[`${name}`])
         mount(el, {
           reboot,
+          GL: gl.current,
         })
       } catch (error) {
         console.error(error)

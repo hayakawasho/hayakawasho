@@ -1,6 +1,6 @@
 import { renderToStaticMarkup as r } from 'react-dom/server'
 import { PageWithHeader } from './components/PageWithHeader'
-import { Body } from './components/Body'
+import { Content } from './components/Content'
 import { Header } from './components/Header'
 import { Progressbar } from './components/Progressbar'
 
@@ -8,10 +8,10 @@ export const render = () => {
   return `<!DOCTYPE html>
   ${r(
     <PageWithHeader header={<Header />}>
-      <Body namespace="Top" data-component="Top">
+      <Content namespace="Home" data-component="Home">
         <Progressbar />
         <div></div>
-      </Body>
+      </Content>
     </PageWithHeader>
   )}`
 }

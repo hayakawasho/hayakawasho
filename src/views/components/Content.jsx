@@ -2,7 +2,7 @@
 // @ts-nocheck
 import { css } from '@emotion/react'
 
-export const Body = props => {
+export const Content = props => {
   return (
     <div css={wrap} data-pjax="wrap">
       <div
