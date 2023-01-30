@@ -33,6 +33,6 @@
     "checkJs": true
   },
   "include": ["src/**/*", "@types"],
-  "exclude": ["node_modules/*", "static/*"],
+  "exclude": ["node_modules/*", "static/*", "src/api/**/*"],
   "extends": "@tsconfig/svelte/tsconfig.json"
 }

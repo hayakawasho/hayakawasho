@@ -16,8 +16,8 @@
     "build": "NODE_ENV=production run-s clean build:*",
     "preview": "yarn build && vite preview",
     "type-check": "tsc",
-    "prettier:write": "yarn prettier --write ./src/**/*.{js,jsx,ts,svelte}",
-    "eslint": "eslint './src/**/*.{js,jsx,ts,svelte}' -c .eslintrc.json --fix",
+    "prettier:write": "yarn prettier --write ./src/**/*.{jsx,ts,svelte}",
+    "eslint": "eslint './src/**/*.{jsx,ts,svelte}' -c .eslintrc.js --fix",
     "format": "yarn prettier:write && yarn eslint"
   },
   "devDependencies": {

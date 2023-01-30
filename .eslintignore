@@ -7,3 +7,4 @@ _site/
 /vite.config.ts
 wp
 /windi.config.ts
+src/api

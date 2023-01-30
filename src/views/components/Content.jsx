@@ -5,12 +5,7 @@ import { css } from '@emotion/react'
 export const Content = props => {
   return (
     <div css={wrap} data-pjax="wrap">
-      <div
-        css={view}
-        data-pjax="view"
-        data-pjax-namespace={props.namespace}
-        data-component={props['data-component']}
-      >
+      <div css={view} data-pjax="view" data-pjax-namespace={props.namespace}>
         {props.children}
       </div>
     </div>
