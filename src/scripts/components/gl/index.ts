@@ -6,7 +6,7 @@ export default defineComponent({
     const { refs } = useDOMRef<{ canvas: HTMLCanvasElement }>('canvas')
 
     const { width, height } = el.getBoundingClientRect()
-    const { resize, addScene } = useGl(refs.canvas, width, height)
+    const { resize, addScene, removeScene } = useGl(refs.canvas, width, height)
 
     const ro = new ResizeObserver(([entry]) => {
       const { width, height } = entry.contentRect
@@ -17,6 +17,7 @@ export default defineComponent({
 
     return {
       addScene,
+      removeScene,
     }
   },
 })

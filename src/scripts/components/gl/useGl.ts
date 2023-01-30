@@ -1,6 +1,8 @@
 import { Geometry, Program, Mesh } from 'ogl'
 import { createCamera } from './createCamera'
 import { createRenderer } from './createRenderer'
+// import { createScene } from './createScene'
+// import { createPool } from './createPool'
 import { useTick } from '@/libs'
 
 export const useGl = (canvas: HTMLCanvasElement, width: number, height: number) => {
@@ -68,6 +70,14 @@ export const useGl = (canvas: HTMLCanvasElement, width: number, height: number) 
       camera.perspective({
         aspect: gl.canvas.width / gl.canvas.height,
       })
+    },
+
+    addScene() {
+      console.log('addScene')
+    },
+
+    removeScene() {
+      console.log('removeScene')
     },
   }
 }

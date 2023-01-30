@@ -8,15 +8,14 @@ import Noop from '@/components/noop'
 import Observer from '@/components/observer/index.svelte'
 import { TWEEN, EASE } from '@/libs'
 
+const table: Readonly<Record<string, IComponent>> = {
+  Noop,
+  Home,
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const { component, unmount } = createApp()
 
-  const table: Record<string, IComponent> = {
-    Noop,
-    Home,
-  }
-
-  component(withSvelte(Observer))(document.getElementById('js-observer')!)
   const gl = component(Gl)(document.getElementById('js-gl')!)
 
   const bootstrap = (scope: HTMLElement, { reboot = false }) => {
@@ -26,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         const mount = component(table[`${name}`])
         mount(el, {
-          reboot,
+          REBOOT: reboot,
           GL: gl.current,
         })
       } catch (error) {
@@ -35,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
+  component(withSvelte(Observer))(document.getElementById('js-observer')!)
   bootstrap(document.documentElement, {
     reboot: false,
   })
