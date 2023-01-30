@@ -1,21 +1,15 @@
 import { defineComponent, useDOMRef } from 'lake'
 import { useGl } from './useGl'
+import { viewportGetters } from '@/states/viewport'
 
 export default defineComponent({
-  setup(el) {
+  setup() {
+    const { width, height } = viewportGetters()
     const { refs } = useDOMRef<{ canvas: HTMLCanvasElement }>('canvas')
-
-    const { width, height } = el.getBoundingClientRect()
-    const { resize, addScene, removeScene } = useGl(refs.canvas, width, height)
-
-    const ro = new ResizeObserver(([entry]) => {
-      const { width, height } = entry.contentRect
-      resize(width, height)
-    })
-
-    ro.observe(el)
+    const { onResize, addScene, removeScene } = useGl(refs.canvas, width, height)
 
     return {
+      onResize,
       addScene,
       removeScene,
     }

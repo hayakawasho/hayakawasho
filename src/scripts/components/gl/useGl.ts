@@ -64,7 +64,7 @@ export const useGl = (canvas: HTMLCanvasElement, width: number, height: number) 
   })
 
   return {
-    resize(width: number, height: number) {
+    onResize(width: number, height: number) {
       renderer.setSize(width, height)
 
       camera.perspective({

@@ -11,8 +11,12 @@ export const PageWithHeader = props => {
     <html lang="ja">
       <Head title={props.title} description={props.description} />
       <body>
-        <div id="js-observer" aria-hidden="true"></div>
-        <div id="js-gl" className="fixed inset-0">
+        <div
+          className="fixed inset-0 w-screen h-screen pointer-events-none -z-1"
+          data-component="Observer"
+          aria-hidden="true"
+        ></div>
+        <div id="js-gl" className="fixed inset-0 w-screen h-screen">
           <canvas className="w-full h-full" data-ref="canvas"></canvas>
         </div>
         {props.header}

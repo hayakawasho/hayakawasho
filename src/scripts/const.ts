@@ -1,7 +1,8 @@
 export type Provides = {
   REBOOT: boolean
-  GL: Readonly<{
+  GL: {
+    onResize: (width: number, height: number) => void
     addScene: () => void
     removeScene: () => void
-  }>
+  }
 }

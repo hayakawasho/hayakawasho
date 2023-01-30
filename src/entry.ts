@@ -11,6 +11,7 @@ import { TWEEN, EASE } from '@/libs'
 const table: Readonly<Record<string, IComponent>> = {
   Noop,
   Home,
+  Observer: withSvelte(Observer),
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -34,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  component(withSvelte(Observer))(document.getElementById('js-observer')!)
   bootstrap(document.documentElement, {
     reboot: false,
   })
