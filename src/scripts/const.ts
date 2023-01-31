@@ -1,8 +1,8 @@
 export type Provides = {
   REBOOT: boolean
-  GL: {
+  GL_WORLD: {
     onResize: (width: number, height: number) => void
-    addScene: () => void
-    removeScene: () => void
+    addScene: (scene: any) => void
+    removeScene: (scene: any) => void
   }
 }

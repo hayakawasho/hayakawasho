@@ -12,7 +12,7 @@ export const PageWithHeader = props => {
       <Head title={props.title} description={props.description} />
       <body>
         <div
-          className="fixed inset-0 w-screen h-screen pointer-events-none -z-1"
+          className="fixed inset-0 w-screen h-screen pointer-events-none -z-1 invisible"
           data-component="Observer"
           aria-hidden="true"
         ></div>

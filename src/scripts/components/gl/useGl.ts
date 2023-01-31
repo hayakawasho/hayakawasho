@@ -64,6 +64,7 @@ export const useGl = (canvas: HTMLCanvasElement, width: number, height: number) 
   })
 
   return {
+    // gl,
     onResize(width: number, height: number) {
       renderer.setSize(width, height)
 

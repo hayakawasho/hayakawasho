@@ -17,20 +17,20 @@ const table: Readonly<Record<string, IComponent>> = {
 document.addEventListener('DOMContentLoaded', () => {
   const { component, unmount } = createApp()
 
-  const gl = component(Gl)(document.getElementById('js-gl')!)
+  const glWorld = component(Gl)(document.getElementById('js-gl')!)
 
   const bootstrap = (scope: HTMLElement, { reboot = false }) => {
-    q('[data-component]', scope).forEach(el => {
+    return q('[data-component]', scope).map(el => {
       const name = el.dataset.component || 'Noop'
-
       try {
         const mount = component(table[`${name}`])
-        mount(el, {
+        return mount(el, {
           REBOOT: reboot,
-          GL: gl.current,
+          GL_WORLD: glWorld.current,
         })
       } catch (error) {
         console.error(error)
+        return
       }
     })
   }

@@ -30,11 +30,16 @@ export const Head = props => {
       <link rel="icon" href="/favicon.ico" />
       {!idDev && <link rel="preload" href="/assets/entry.css" as="style" />}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+        href="https://fonts.googleapis.com/css?family=Montserrat:100,300,400&display=swap"
+        rel="stylesheet"
+      />
       <Global
         styles={css`
           :root {
-            --font: 'Noto Sans JP', sans-serif;
+            --font: Montserrat, 'YuGothic Medium', 'Yu Gothic', YuGothic, '游ゴシック',
+              'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
             --vh: 1vh;
             --color-text: #e3e3e3;
             --color-text-primary: #858585;
@@ -65,8 +70,8 @@ export const Head = props => {
 
           body {
             color: var(--color-text);
+            font-family: var(--font) !important;
             overflow-x: hidden;
-            font-family: var(--font);
             overflow-wrap: break-word;
             -webkit-text-size-adjust: 100%;
             -webkit-font-smoothing: subpixel-antialiased;

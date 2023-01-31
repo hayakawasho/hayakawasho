@@ -70,7 +70,7 @@
     "@aspida/fetch": "^1.11.0",
     "@barba/core": "^2.9.7",
     "cdate": "^0.0.4",
-    "detect-gpu": "^3.1.25",
+    "detect-gpu": "^5.0.9",
     "lake": "https://github.com/hayakawasho/lake",
     "lil-gui": "^0.16.1",
     "nanostores": "^0.7.1",
