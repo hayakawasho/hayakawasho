@@ -1,16 +1,12 @@
 import { defineComponent } from 'lake'
-import { pick } from 'remeda'
 import { createPlane } from './createPlane'
 import type { Provides } from '@/const'
 
-type Props = Pick<Provides, 'GL_WORLD'>
+type Props = Pick<Provides, 'GL_WORLD'> & { img: HTMLImageElement }
 
 export default defineComponent<Props>({
   setup(el: HTMLImageElement, { GL_WORLD }) {
-    const rect = el.getBoundingClientRect()
-    const { src } = el.dataset
-
-    const plane = createPlane(src!, pick(rect, ['width', 'height', 'left', 'top']))
+    const plane = createPlane(GL_WORLD.gl, el)
 
     GL_WORLD.addScene(plane)
   },

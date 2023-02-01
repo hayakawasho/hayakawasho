@@ -5,12 +5,12 @@ import { Header } from './components/Header'
 import { PageWithHeader } from './components/PageWithHeader'
 
 const imgs = [
-  'http://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/tex1.jpg',
-  'http://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/tex2.jpg',
-  'http://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/tex1.jpg',
-  'http://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/tex2.jpg',
-  'http://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/tex1.jpg',
-  'http://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/tex2.jpg',
+  '/assets/1619176897-2048x1280.jpg',
+  '/assets/1619176933-2048x1280.jpg',
+  '/assets/1619176897-2048x1280.jpg',
+  '/assets/1619176933-2048x1280.jpg',
+  '/assets/1619176897-2048x1280.jpg',
+  '/assets/1619176933-2048x1280.jpg',
 ]
 export const render = () => {
   return `<!DOCTYPE html>
@@ -21,9 +21,9 @@ export const render = () => {
           <div css={list}>
             {imgs.map(src => {
               return (
-                <figure>
+                <figure className="relative mb-[1rem]">
                   <div css={aspect}></div>
-                  <img data-src={src} alt="" className="hidden" data-ref="plane" />
+                  <img src={src} alt="" className="fit2parent invisible" data-ref="plane" />
                 </figure>
               )
             })}
@@ -34,6 +34,10 @@ export const render = () => {
   )}`
 }
 
-const list = css``
+const list = css`
+  margin: 0 1rem;
+`
 
-const aspect = css``
+const aspect = css`
+  aspect-ratio: 1536 / 960;
+`
