@@ -1,7 +1,7 @@
 import 'virtual:windi.css'
 import barba from '@barba/core'
 import { createApp, q, withSvelte } from 'lake'
-import type { IComponent } from 'lake'
+import type { IComponent, ComponentContext } from 'lake'
 import Gl from '@/components/gl'
 import Home from '@/components/home'
 import Noop from '@/components/noop'
@@ -20,24 +20,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const glWorld = component(Gl)(document.getElementById('js-gl')!)
 
   const bootstrap = (scope: HTMLElement, { reboot = false }) => {
-    return q('[data-component]', scope).map(el => {
+    return q('[data-component]', scope).reduce<ComponentContext[]>((acc, el) => {
       const name = el.dataset.component || 'Noop'
       try {
         const mount = component(table[`${name}`])
-        return mount(el, {
-          REBOOT: reboot,
-          GL_WORLD: glWorld.current,
-        })
+        acc.push(
+          mount(el, {
+            REBOOT: reboot,
+            GL_WORLD: glWorld.current,
+          })
+        )
       } catch (error) {
         console.error(error)
-        return
       }
-    })
+      return acc
+    }, [])
   }
 
-  bootstrap(document.documentElement, {
-    reboot: false,
-  })
+  bootstrap(document.documentElement, {})
 
   barba.init({
     schema: {

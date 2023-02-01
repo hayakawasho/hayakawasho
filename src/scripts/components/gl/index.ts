@@ -5,12 +5,11 @@ export default defineComponent({
   setup(el) {
     const { width, height } = el.getBoundingClientRect()
     const { refs } = useDOMRef<{ canvas: HTMLCanvasElement }>('canvas')
-    const { onResize, addScene, removeScene } = useGl(refs.canvas, width, height)
+
+    const glWorldContext = useGl(refs.canvas, width, height)
 
     return {
-      onResize,
-      addScene,
-      removeScene,
-    }
+      ...glWorldContext,
+    } as const
   },
 })
