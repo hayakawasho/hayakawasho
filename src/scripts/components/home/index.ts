@@ -1,4 +1,5 @@
-import { defineComponent, useSlot, useDOMRef } from 'lake'
+import { defineComponent, useSlot, useDOMRef, useUnmount } from 'lake'
+import { Transform } from 'ogl'
 import Plane from './plane'
 import type { Provides } from '@/const'
 
@@ -9,8 +10,17 @@ export default defineComponent<Props>({
     const { refs } = useDOMRef<{ plane: HTMLImageElement[] }>('plane')
     const { addChild } = useSlot()
 
+    const planesGroup = new Transform()
+
     addChild(refs.plane, Plane, {
-      GL_WORLD,
+      gl: GL_WORLD.gl,
+      planesGroup,
+    })
+
+    GL_WORLD.addScene(planesGroup)
+
+    useUnmount(() => {
+      GL_WORLD.removeScene(planesGroup)
     })
   },
 })

@@ -1,13 +1,62 @@
 import { defineComponent } from 'lake'
-import { createPlane } from './createPlane'
-import type { Provides } from '@/const'
+import type { Transform } from 'ogl'
+import type { OGLRenderingContext } from 'ogl'
+import { Mesh, Plane, Program, Texture } from 'ogl'
+import { useTick } from '@/libs'
+import { ImagePlane } from './ImagePlane'
+import fragment from './frag.glsl'
+import vertex from './vert.glsl'
 
-type Props = Pick<Provides, 'GL_WORLD'> & { img: HTMLImageElement }
+type Props = {
+  gl: OGLRenderingContext
+  planesGroup: Transform
+}
 
 export default defineComponent<Props>({
-  setup(el: HTMLImageElement, { GL_WORLD }) {
-    const plane = createPlane(GL_WORLD.gl, el)
+  setup(img: HTMLImageElement, { gl, planesGroup }) {
+    const rect = img.getBoundingClientRect()
 
-    GL_WORLD.addScene(plane)
+    const texture = new Texture(gl)
+
+    img.decode().then(() => {
+      texture.image = img
+    })
+
+    const geometry = new Plane(gl)
+
+    const program = new Program(gl, {
+      vertex,
+      fragment,
+      uniforms: {
+        uTexture: {
+          value: texture,
+        },
+        uImageAspect: {
+          value: img.naturalWidth / img.naturalHeight,
+        },
+        uPlaneAspect: {
+          value: rect.width / rect.height,
+        },
+      },
+    })
+
+    const mesh = new Mesh(gl, {
+      geometry,
+      program,
+    })
+
+    mesh.setParent(planesGroup)
+
+    const plane = new ImagePlane(mesh, img)
+
+    useTick(() => {
+      plane.update()
+    })
+
+    return {
+      resize(size: { width: number; height: number }) {
+        plane.resize(size)
+      },
+    }
   },
 })

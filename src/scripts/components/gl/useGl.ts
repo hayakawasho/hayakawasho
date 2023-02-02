@@ -8,10 +8,9 @@ export const useGl = (canvas: HTMLCanvasElement, width: number, height: number) 
 
   const { renderer } = createRenderer(canvas, width, height, dpr)
   const { gl } = renderer
+  const { camera } = createCamera(gl, width, height)
 
   const scene = new Transform()
-
-  const { camera } = createCamera(gl, width, height)
 
   useTick(({ timestamp: _ }) => {
     renderer.render({ scene, camera })
