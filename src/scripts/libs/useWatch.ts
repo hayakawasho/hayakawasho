@@ -6,7 +6,7 @@ export const useWatch = <T extends object>(
   refState: Ref<WritableAtom<T>> | Ref<MapStore<T>>,
   callback: (payload: T) => void
 ) => {
-  const unbind = refState.value.subscribe(() => {
+  const unbind = refState.value.listen(() => {
     const send = refState.value.get()
     callback(send)
   })

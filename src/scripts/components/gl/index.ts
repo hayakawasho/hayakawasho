@@ -1,15 +1,23 @@
 import { defineComponent, useDOMRef } from 'lake'
-import { useGl } from './useGl'
+import { useStableFluid } from './fluid/useStableFluid'
+import { useGlWorld } from './useGlWorld'
 
 export default defineComponent({
   setup(el) {
     const { width, height } = el.getBoundingClientRect()
     const { refs } = useDOMRef<{ canvas: HTMLCanvasElement }>('canvas')
 
-    const glWorldContext = useGl(refs.canvas, width, height)
+    const { gl, addScene, ...rest } = useGlWorld(refs.canvas, width, height)
+
+    useStableFluid({
+      gl,
+      addScene,
+    })
 
     return {
-      ...glWorldContext,
+      gl,
+      addScene,
+      ...rest,
     } as const
   },
 })

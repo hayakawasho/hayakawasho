@@ -24,7 +24,6 @@ export default defineComponent<Props>({
     })
 
     const geometry = new Plane(gl)
-
     const program = new Program(gl, {
       vertex,
       fragment,
@@ -56,6 +55,7 @@ export default defineComponent<Props>({
 
     useWatch(viewportRef, ({ width, height }) => {
       plane.resize({ width, height })
+      plane.update()
     })
   },
 })

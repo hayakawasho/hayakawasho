@@ -14,5 +14,5 @@ export const mousePosGetters = () => xy.get()
 export const mousePosMutators = (update: Parameters) => xy.set(update)
 
 const running = atom(false)
-export const mousemovingGetters = () => running.get()
-export const mousemovingMutators = (update: boolean) => running.set(update)
+export const mousemoveRunningGetters = () => running.get()
+export const mousemoveRunningMutators = (update: boolean) => running.set(update)

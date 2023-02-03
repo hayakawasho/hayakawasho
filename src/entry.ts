@@ -2,6 +2,7 @@ import 'virtual:windi.css'
 import barba from '@barba/core'
 import { createApp, q, withSvelte } from 'lake'
 import type { IComponent, ComponentContext } from 'lake'
+import Cursor from '@/components/cursor'
 import Gl from '@/components/gl'
 import Home from '@/components/home'
 import Noop from '@/components/noop'
@@ -12,6 +13,7 @@ const table: Readonly<Record<string, IComponent>> = {
   Noop,
   Home,
   Observer: withSvelte(Observer),
+  Cursor,
 }
 
 document.addEventListener('DOMContentLoaded', () => {
