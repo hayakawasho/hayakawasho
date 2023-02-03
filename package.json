@@ -70,6 +70,7 @@
   "dependencies": {
     "@aspida/fetch": "^1.11.0",
     "@barba/core": "^2.9.7",
+    "@studio-freight/lenis": "^0.2.28",
     "cdate": "^0.0.4",
     "detect-gpu": "^5.0.9",
     "lake": "https://github.com/hayakawasho/lake",

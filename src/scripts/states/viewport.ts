@@ -1,3 +1,4 @@
+import { ref, readonly } from 'lake'
 import { map } from 'nanostores'
 
 type Parameters = {
@@ -11,5 +12,7 @@ const viewport = map<Parameters>({
   width: innerWidth,
   height: innerHeight,
 })
+
 export const viewportGetters = () => viewport.get()
 export const viewportMutators = (update: Parameters) => viewport.set(update)
+export const viewportRef = ref(viewport)

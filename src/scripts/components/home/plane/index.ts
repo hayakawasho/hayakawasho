@@ -2,7 +2,8 @@ import { defineComponent } from 'lake'
 import type { Transform } from 'ogl'
 import type { OGLRenderingContext } from 'ogl'
 import { Mesh, Plane, Program, Texture } from 'ogl'
-import { useTick } from '@/libs'
+import { useSmooth, useWatch } from '@/libs'
+import { viewportRef } from '@/states/viewport'
 import { ImagePlane } from './ImagePlane'
 import fragment from './frag.glsl'
 import vertex from './vert.glsl'
@@ -49,14 +50,12 @@ export default defineComponent<Props>({
 
     const plane = new ImagePlane(mesh, img)
 
-    useTick(() => {
+    useSmooth(() => {
       plane.update()
     })
 
-    return {
-      resize(size: { width: number; height: number }) {
-        plane.resize(size)
-      },
-    }
+    useWatch(viewportRef, ({ width, height }) => {
+      plane.resize({ width, height })
+    })
   },
 })
