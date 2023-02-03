@@ -3,11 +3,11 @@ import type { Ref } from 'lake'
 import type { MapStore, WritableAtom } from 'nanostores'
 
 export const useWatch = <T extends object>(
-  ref: Ref<WritableAtom<T>> | Ref<MapStore<T>>,
-  callback: (params: T) => void
+  refState: Ref<WritableAtom<T>> | Ref<MapStore<T>>,
+  callback: (payload: T) => void
 ) => {
-  const unbind = ref.value.subscribe(() => {
-    const send = ref.value.get()
+  const unbind = refState.value.subscribe(() => {
+    const send = refState.value.get()
     callback(send)
   })
 

@@ -1,4 +1,4 @@
-import { ref, readonly } from 'lake'
+import { ref } from 'lake'
 import { map } from 'nanostores'
 
 type Parameters = {
