@@ -8,3 +8,5 @@ export type Provides = {
     removeScene: (scene: Transform) => void
   }
 }
+
+export type Size = { width: number; height: number }

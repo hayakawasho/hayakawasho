@@ -1,7 +1,7 @@
 import { defineComponent, useIntersectionWatch, useMount } from 'lake'
 import type { Transform } from 'ogl'
 import { Mesh, Plane, Program, Texture } from 'ogl'
-import type { Provides } from '@/const'
+import type { Provides, Size } from '@/const'
 import { useSmooth, useWatch } from '@/libs/lake'
 import { viewportRef, viewportGetters } from '@/states/viewport'
 import { ImagePlane } from './ImagePlane'
@@ -19,29 +19,33 @@ export default defineComponent<Props>({
       visible: false,
     }
 
+    const planesIndex = Number(domImg.dataset.index)
     const rect = domImg.getBoundingClientRect()
 
     const texture = new Texture(gl)
 
     domImg.decode().then(() => {
       texture.image = domImg
+      uniforms.uImageAspect.value = domImg.naturalWidth / domImg.naturalHeight
     })
+
+    const uniforms = {
+      uTexture: {
+        value: texture,
+      },
+      uImageAspect: {
+        value: 1,
+      },
+      uPlaneAspect: {
+        value: rect.width / rect.height,
+      },
+    }
 
     const geometry = new Plane(gl)
     const program = new Program(gl, {
       vertex,
       fragment,
-      uniforms: {
-        uTexture: {
-          value: texture,
-        },
-        uImageAspect: {
-          value: domImg.naturalWidth / domImg.naturalHeight,
-        },
-        uPlaneAspect: {
-          value: rect.width / rect.height,
-        },
-      },
+      uniforms,
     })
 
     const mesh = new Mesh(gl, {
@@ -53,7 +57,7 @@ export default defineComponent<Props>({
 
     const plane = new ImagePlane(mesh, domImg)
 
-    const draw = (size: { width: number; height: number }) => {
+    const draw = (size: Size) => {
       plane.resize(size)
       plane.update()
     }

@@ -1,10 +1,8 @@
 import { ref } from 'lake'
 import { map } from 'nanostores'
+import type { Size } from '@/const'
 
-type Parameters = {
-  width: number
-  height: number
-}
+type Parameters = Size
 
 const { innerWidth, innerHeight } = window
 
