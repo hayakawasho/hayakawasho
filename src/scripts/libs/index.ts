@@ -1,12 +1,7 @@
 export { clamp } from 'remeda'
 export * from './tween'
 export * from './aspida'
-export * from './math'
 export * from './debounce'
 export * from './wait'
 export * from './pjax'
 export * from './image'
-
-export * from './useTick'
-export * from './useSmooth'
-export * from './useWatch'

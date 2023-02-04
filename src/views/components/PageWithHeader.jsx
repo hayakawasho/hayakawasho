@@ -16,7 +16,7 @@ export const PageWithHeader = props => {
           data-component="Observer"
           aria-hidden="true"
         ></div>
-        <div id="js-gl" className="fixed inset-0 w-screen h-screen">
+        <div id="js-gl" className="fixed inset-0 w-screen h-screen pointer-events-none">
           <canvas className="w-full h-full" data-ref="canvas"></canvas>
         </div>
         {props.header}
