@@ -1,8 +1,8 @@
-import { defineComponent } from 'lake'
+import { defineComponent, useIntersectionWatch } from 'lake'
 import type { Transform } from 'ogl'
 import type { OGLRenderingContext } from 'ogl'
 import { Mesh, Plane, Program, Texture } from 'ogl'
-import { useSmooth, useWatch } from '@/libs'
+import { useSmooth, useWatch } from '@/libs/lake'
 import { viewportRef } from '@/states/viewport'
 import { ImagePlane } from './ImagePlane'
 import fragment from './frag.glsl'
@@ -14,13 +14,18 @@ type Props = {
 }
 
 export default defineComponent<Props>({
-  setup(img: HTMLImageElement, { gl, planesGroup }) {
-    const rect = img.getBoundingClientRect()
+  setup(domImg: HTMLImageElement, { gl, planesGroup }) {
+    const state = {
+      resizing: false,
+      visible: false,
+    }
+
+    const rect = domImg.getBoundingClientRect()
 
     const texture = new Texture(gl)
 
-    img.decode().then(() => {
-      texture.image = img
+    domImg.decode().then(() => {
+      texture.image = domImg
     })
 
     const geometry = new Plane(gl)
@@ -32,7 +37,7 @@ export default defineComponent<Props>({
           value: texture,
         },
         uImageAspect: {
-          value: img.naturalWidth / img.naturalHeight,
+          value: domImg.naturalWidth / domImg.naturalHeight,
         },
         uPlaneAspect: {
           value: rect.width / rect.height,
@@ -47,15 +52,30 @@ export default defineComponent<Props>({
 
     mesh.setParent(planesGroup)
 
-    const plane = new ImagePlane(mesh, img)
+    const plane = new ImagePlane(mesh, domImg)
+
+    const { unwatch: _unwatch } = useIntersectionWatch(
+      domImg,
+      ([entry]) => {
+        state.visible = entry.isIntersecting
+      },
+      {
+        rootMargin: '25% 0px',
+      }
+    )
 
     useSmooth(() => {
+      if (state.resizing || !state.visible) {
+        return
+      }
       plane.update()
     })
 
     useWatch(viewportRef, ({ width, height }) => {
+      state.resizing = true
       plane.resize({ width, height })
       plane.update()
+      state.resizing = false
     })
   },
 })

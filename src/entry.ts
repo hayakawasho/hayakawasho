@@ -9,12 +9,12 @@ import Noop from '@/components/noop'
 import Observer from '@/components/observer/index.svelte'
 import { TWEEN, EASE } from '@/libs'
 
-const table: Readonly<Record<string, IComponent>> = {
+const table: Record<string, IComponent> = {
   Noop,
   Home,
   Observer: withSvelte(Observer),
   Cursor,
-}
+} as const
 
 document.addEventListener('DOMContentLoaded', () => {
   const { component, unmount } = createApp()

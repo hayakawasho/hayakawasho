@@ -1,5 +1,5 @@
 import { useTick } from './useTick'
-import { lerp } from '@/libs'
+import { lerp } from '@/libs/math'
 import { scrollPosYGetters, scrollRunningGetters } from '@/states/scroll'
 
 export const useSmooth = (callback: (payload: { target: number; current: number }) => void) => {
