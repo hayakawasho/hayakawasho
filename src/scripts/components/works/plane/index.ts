@@ -1,15 +1,14 @@
-import { defineComponent, useIntersectionWatch } from 'lake'
+import { defineComponent, useIntersectionWatch, useMount } from 'lake'
 import type { Transform } from 'ogl'
-import type { OGLRenderingContext } from 'ogl'
 import { Mesh, Plane, Program, Texture } from 'ogl'
+import type { Provides } from '@/const'
 import { useSmooth, useWatch } from '@/libs/lake'
-import { viewportRef } from '@/states/viewport'
+import { viewportRef, viewportGetters } from '@/states/viewport'
 import { ImagePlane } from './ImagePlane'
 import fragment from './frag.glsl'
 import vertex from './vert.glsl'
 
-type Props = {
-  gl: OGLRenderingContext
+type Props = Pick<Provides['GL_WORLD'], 'gl'> & {
   planesGroup: Transform
 }
 
@@ -54,6 +53,11 @@ export default defineComponent<Props>({
 
     const plane = new ImagePlane(mesh, domImg)
 
+    const draw = (size: { width: number; height: number }) => {
+      plane.resize(size)
+      plane.update()
+    }
+
     const { unwatch: _unwatch } = useIntersectionWatch(
       domImg,
       ([entry]) => {
@@ -64,6 +68,11 @@ export default defineComponent<Props>({
       }
     )
 
+    useMount(() => {
+      const size = viewportGetters()
+      draw(size)
+    })
+
     useSmooth(() => {
       if (state.resizing || !state.visible) {
         return
@@ -71,10 +80,9 @@ export default defineComponent<Props>({
       plane.update()
     })
 
-    useWatch(viewportRef, ({ width, height }) => {
+    useWatch(viewportRef, size => {
       state.resizing = true
-      plane.resize({ width, height })
-      plane.update()
+      draw(size)
       state.resizing = false
     })
   },

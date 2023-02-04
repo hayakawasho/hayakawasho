@@ -4,7 +4,6 @@
     "preinstall": "npx only-allow yarn",
     "prepare": "husky install",
     "clean": "rimraf _site/* transpiled/*",
-    "openapi2aspida": "npx openapi2aspida",
     "dev:jsx": "babel src/views --watch --extensions '.js,.jsx' --out-dir transpiled --copy-files",
     "dev:vite": "vite",
     "dev:11ty": "eleventy --serve",

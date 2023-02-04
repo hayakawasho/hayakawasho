@@ -14,7 +14,6 @@ export const Content = props => {
 
 const wrap = css`
   position: relative;
-  z-index: 1;
 `
 
 const view = css`

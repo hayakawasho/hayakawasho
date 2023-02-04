@@ -1,19 +1,23 @@
 import 'virtual:windi.css'
 import barba from '@barba/core'
+import About from '@/components/about'
 import { createApp, q, withSvelte } from 'lake'
-import type { IComponent, ComponentContext } from 'lake'
 import Cursor from '@/components/cursor'
+import type { IComponent, ComponentContext } from 'lake'
 import Gl from '@/components/gl'
-import Home from '@/components/home'
 import Noop from '@/components/noop'
 import Observer from '@/components/observer/index.svelte'
+import Works from '@/components/works'
+import WorksDetail from '@/components/works/[slug]'
 import { TWEEN, EASE } from '@/libs'
 
 const table: Record<string, IComponent> = {
   Noop,
-  Home,
   Observer: withSvelte(Observer),
   Cursor,
+  Works,
+  WorksDetail,
+  About,
 } as const
 
 document.addEventListener('DOMContentLoaded', () => {
