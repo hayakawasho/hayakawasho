@@ -1,15 +1,16 @@
 import 'virtual:windi.css'
 import About from '@/components/about'
-import barba from '@barba/core'
 import Cursor from '@/components/cursor'
-import { createApp, q, withSvelte } from 'lake'
+import barba from '@barba/core'
 import Gl from '@/components/gl'
-import type { IComponent, ComponentContext } from 'lake'
+import { createApp, q, withSvelte } from 'lake'
 import Home from '@/components/home'
+import type { IComponent, ComponentContext } from 'lake'
 import Noop from '@/components/noop'
 import Observer from '@/components/observer/index.svelte'
 import Works from '@/components/works'
 import WorksDetail from '@/components/works/[slug]'
+import type { Provides } from '@/const'
 import { TWEEN, EASE } from '@/libs'
 
 const table: Record<string, IComponent> = {
@@ -27,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const glWorld = component(Gl)(document.getElementById('js-gl')!)
 
-  const bootstrap = (scope: HTMLElement, { reboot = false }) => {
+  const bootstrap = (scope: HTMLElement, reboot: Provides['REBOOT'] = false) => {
     return q('[data-component]', scope).reduce<ComponentContext[]>((acc, el) => {
       const name = el.dataset.component || 'Noop'
       try {
@@ -45,8 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, [])
   }
 
-  bootstrap(document.documentElement, {})
-
   barba.init({
     schema: {
       prefix: 'data-pjax',
@@ -57,6 +56,9 @@ document.addEventListener('DOMContentLoaded', () => {
       {
         name: 'default',
         sync: false,
+        once(_data) {
+          bootstrap(document.documentElement)
+        },
         leave(data) {
           return new Promise(resolve => {
             const current = data.current.container
@@ -74,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
           })
         },
         enter(data) {
-          const next = data.next.container
+          const { namespace, container: next, url } = data.next
 
           TWEEN.serial(
             TWEEN.prop(next).opacity(0),
@@ -82,7 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
           ).play()
 
           bootstrap(next, {
-            reboot: true,
+            namespace,
+            ...url,
           })
         },
       },
