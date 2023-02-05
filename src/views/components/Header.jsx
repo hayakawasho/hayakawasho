@@ -5,7 +5,7 @@ import { css } from '@emotion/react'
 export const Header = _props => {
   return (
     <>
-      <header css={header}>
+      <header>
         <a href="/" css={logo}>
           hayakawasho
         </a>
@@ -14,7 +14,7 @@ export const Header = _props => {
             <a href="/" css={link}>
               <span className="inline-block overflow-hidden leading-[1]">
                 <span css={linkLabel} data-ref="menuLabel">
-                  Projects
+                  Index
                 </span>
               </span>
             </a>
@@ -34,31 +34,29 @@ export const Header = _props => {
   )
 }
 
-const header = css`
-  mix-blend-mode: difference;
-`
-
 const logo = css`
-  position: absolute;
+  position: fixed;
+  z-index: 99;
   top: 3.2rem;
   left: 2.4rem;
   display: flex;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   line-height: 1;
   letter-spacing: -0.02em;
-  font-weight: 3 00;
+  font-weight: 300;
 
   @media (min-width: 640px) {
   }
 `
 
 const links = css`
-  position: absolute;
+  position: fixed;
+  z-index: 99;
   top: 3.2rem;
   right: 2.4rem;
   text-align: right;
   display: flex;
-  gap: 2.4rem;
+  gap: 2rem;
 
   @media (min-width: 640px) {
     padding-top: 0;
@@ -69,7 +67,7 @@ const links = css`
 const link = css`
   display: inline-block;
   vertical-align: top;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   letter-spacing: -0.02em;
   font-weight: 300;
   overflow: hidden;

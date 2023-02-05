@@ -1,27 +1,28 @@
 import { Camera } from 'ogl'
 import type { OGLRenderingContext } from 'ogl'
+import { deg2rad } from '@/libs/math'
 
-export const createCamera = (gl: OGLRenderingContext, width: number, height: number) => {
-  const calc = (wh: number) => {
-    const fov = 60
-    const fovRad = fov * 0.5 * (Math.PI / 180)
-    const distance = (wh * 0.5) / Math.tan(fovRad)
+export const createCamera = (gl: OGLRenderingContext, w: number, h: number) => {
+  const FOV = 45
+
+  const calc = (h: number) => {
+    const fovRad = deg2rad(FOV * 0.5)
+    const dist = (h * 0.5) / Math.tan(fovRad)
 
     return {
-      fov,
-      distance,
+      dist,
     }
   }
 
-  const { fov, distance } = calc(height)
+  const { dist } = calc(h)
   const camera = new Camera(gl, {
-    fov,
-    aspect: width / height,
+    fov: FOV,
+    aspect: w / h,
     near: 0.1,
-    far: 1000,
+    far: 10000,
   })
 
-  camera.position.z = distance
+  camera.position.z = dist
 
   return {
     camera,

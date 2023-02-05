@@ -1,10 +1,11 @@
 import 'virtual:windi.css'
-import barba from '@barba/core'
 import About from '@/components/about'
-import { createApp, q, withSvelte } from 'lake'
+import barba from '@barba/core'
 import Cursor from '@/components/cursor'
-import type { IComponent, ComponentContext } from 'lake'
+import { createApp, q, withSvelte } from 'lake'
 import Gl from '@/components/gl'
+import type { IComponent, ComponentContext } from 'lake'
+import Home from '@/components/home'
 import Noop from '@/components/noop'
 import Observer from '@/components/observer/index.svelte'
 import Works from '@/components/works'
@@ -15,6 +16,7 @@ const table: Record<string, IComponent> = {
   Noop,
   Observer: withSvelte(Observer),
   Cursor,
+  Home,
   Works,
   WorksDetail,
   About,

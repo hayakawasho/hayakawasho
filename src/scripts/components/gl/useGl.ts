@@ -3,7 +3,7 @@ import { useTick, useWatch } from '@/libs/lake'
 import { createCamera, createRenderer } from '@/libs/ogl'
 import { viewportRef } from '@/states/viewport'
 
-export const useGlWorld = (canvas: HTMLCanvasElement, ww: number, wh: number) => {
+export const useGl = (canvas: HTMLCanvasElement, ww: number, wh: number) => {
   const dpr = Math.min(window.devicePixelRatio, 1.5)
 
   const { renderer } = createRenderer(canvas, ww, wh, dpr)
@@ -20,12 +20,11 @@ export const useGlWorld = (canvas: HTMLCanvasElement, ww: number, wh: number) =>
   useWatch(viewportRef, ({ width, height }) => {
     renderer.setSize(width, height)
 
-    const { fov, distance } = calc(height)
+    const { dist } = calc(height)
     camera.perspective({
       aspect: width / height,
-      fov,
     })
-    camera.position.z = distance
+    camera.position.z = dist
   })
 
   return {

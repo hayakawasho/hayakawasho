@@ -10,16 +10,17 @@ import vertex from './vert.glsl'
 
 type Props = Pick<Provides['GL_WORLD'], 'gl'> & {
   planesGroup: Transform
+  geometry: Plane
 }
 
 export default defineComponent<Props>({
-  setup(domImg: HTMLImageElement, { gl, planesGroup }) {
+  setup(domImg: HTMLImageElement, { gl, planesGroup, geometry }) {
     const state = {
       resizing: false,
       visible: false,
     }
 
-    const planesIndex = Number(domImg.dataset.index)
+    // const planesIndex = Number(domImg.dataset.index)
     const rect = domImg.getBoundingClientRect()
 
     const texture = new Texture(gl)
@@ -41,7 +42,6 @@ export default defineComponent<Props>({
       },
     }
 
-    const geometry = new Plane(gl)
     const program = new Program(gl, {
       vertex,
       fragment,
@@ -57,12 +57,17 @@ export default defineComponent<Props>({
 
     const plane = new ImagePlane(mesh, domImg)
 
-    const draw = (size: Size) => {
+    const drawPlane = (size: Size) => {
       plane.resize(size)
       plane.update()
     }
 
-    const { unwatch: _unwatch } = useIntersectionWatch(
+    useMount(() => {
+      const size = viewportGetters()
+      drawPlane(size)
+    })
+
+    const { unwatch: _ } = useIntersectionWatch(
       domImg,
       ([entry]) => {
         state.visible = entry.isIntersecting
@@ -71,11 +76,6 @@ export default defineComponent<Props>({
         rootMargin: '25% 0px',
       }
     )
-
-    useMount(() => {
-      const size = viewportGetters()
-      draw(size)
-    })
 
     useSmooth(() => {
       if (state.resizing || !state.visible) {
@@ -86,8 +86,12 @@ export default defineComponent<Props>({
 
     useWatch(viewportRef, size => {
       state.resizing = true
-      draw(size)
+      drawPlane(size)
       state.resizing = false
     })
+
+    return {
+      //
+    }
   },
 })

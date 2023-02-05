@@ -1,6 +1,6 @@
 import { defineComponent, useSlot, useDOMRef, useUnmount } from 'lake'
-import { Transform } from 'ogl'
-import Plane from './plane'
+import { Transform, Plane } from 'ogl'
+import ImagePlane from './plane'
 import type { Provides } from '@/const'
 
 type Props = Provides
@@ -12,9 +12,12 @@ export default defineComponent<Props>({
 
     const planesGroup = new Transform()
 
-    addChild(refs.plane, Plane, {
+    const geometry = new Plane(GL_WORLD.gl)
+
+    addChild(refs.plane, ImagePlane, {
       gl: GL_WORLD.gl,
       planesGroup,
+      geometry,
     })
 
     GL_WORLD.addScene(planesGroup)

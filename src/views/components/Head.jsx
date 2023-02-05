@@ -37,9 +37,19 @@ export const Head = props => {
       />
       <Global
         styles={css`
+          @font-face {
+            font-family: 'Melete';
+            src: url('/assets/Melete-UltraLight.otf') format('opentype'),
+              url('/assets/Melete-Regular.otf') format('opentype'),
+              url('/assets/Melete-Medium.otf') format('opentype'),
+              url('/assets/Melete-Light.otf') format('opentype'),
+              url('/assets/Melete-Bold.otf') format('opentype');
+          }
+
           :root {
             --font: Montserrat, 'YuGothic Medium', 'Yu Gothic', YuGothic, '游ゴシック',
               'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            --font-melete: 'Melete', sans-serif;
             --vh: 1vh;
             --color-text: #e3e3e3;
             --color-text-primary: #858585;
