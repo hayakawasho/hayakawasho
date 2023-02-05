@@ -1,4 +1,4 @@
-import { defineComponent, useIntersectionWatch, useMount } from 'lake'
+import { defineComponent, useIntersectionWatch } from 'lake'
 import type { Transform } from 'ogl'
 import { Mesh, Plane, Program, Texture } from 'ogl'
 import type { Provides, Size } from '@/const'
@@ -81,9 +81,9 @@ export default defineComponent<Props>({
       plane.update()
     })
 
-    useWatch(viewportRef, size => {
+    useWatch(viewportRef, ({ width, height }) => {
       state.resizing = true
-      drawPlane(size)
+      drawPlane({ width, height })
       state.resizing = false
     })
 

@@ -21,6 +21,7 @@ export const useGl = (canvas: HTMLCanvasElement, ww: number, wh: number) => {
     renderer.setSize(width, height)
 
     const { dist } = calc(height)
+
     camera.perspective({
       aspect: width / height,
     })

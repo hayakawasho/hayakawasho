@@ -15,7 +15,7 @@ export default defineComponent<Props>({
     const planesGroup = new Transform()
     const geometry = new Plane(gl)
 
-    addChild(refs.plane, ImagePlane, {
+    addChild(ImagePlane, refs.plane, {
       gl,
       planesGroup,
       geometry,
