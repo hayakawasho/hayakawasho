@@ -26,7 +26,7 @@ const table: Record<string, IComponent> = {
 document.addEventListener('DOMContentLoaded', () => {
   const { component, unmount } = createApp()
 
-  const glWorld = component(Gl)(document.getElementById('js-gl')!)
+  const glWorld = component(Gl)(document.getElementById('js-glWorld')!)
 
   const bootstrap = (scope: HTMLElement, reboot: Provides['REBOOT'] = false) => {
     return q('[data-component]', scope).reduce<ComponentContext[]>((acc, el) => {

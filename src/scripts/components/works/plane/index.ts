@@ -28,6 +28,8 @@ export default defineComponent<Props>({
     domImg.decode().then(() => {
       texture.image = domImg
       uniforms.uImageAspect.value = domImg.naturalWidth / domImg.naturalHeight
+
+      drawPlane(viewportGetters())
     })
 
     const uniforms = {
@@ -61,11 +63,6 @@ export default defineComponent<Props>({
       plane.resize(size)
       plane.update()
     }
-
-    useMount(() => {
-      const size = viewportGetters()
-      drawPlane(size)
-    })
 
     const { unwatch: _ } = useIntersectionWatch(
       domImg,

@@ -7,23 +7,24 @@ type Props = Provides
 
 export default defineComponent<Props>({
   setup(_, { GL_WORLD }) {
+    const { gl, addScene, removeScene } = GL_WORLD
+
     const { refs } = useDOMRef<{ plane: HTMLImageElement[] }>('plane')
     const { addChild } = useSlot()
 
     const planesGroup = new Transform()
-
-    const geometry = new Plane(GL_WORLD.gl)
+    const geometry = new Plane(gl)
 
     addChild(refs.plane, ImagePlane, {
-      gl: GL_WORLD.gl,
+      gl,
       planesGroup,
       geometry,
     })
 
-    GL_WORLD.addScene(planesGroup)
+    addScene(planesGroup)
 
     useUnmount(() => {
-      GL_WORLD.removeScene(planesGroup)
+      removeScene(planesGroup)
     })
   },
 })
