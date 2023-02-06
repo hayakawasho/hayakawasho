@@ -1,7 +1,8 @@
-import { defineComponent, useSlot, useDOMRef, useUnmount } from 'lake'
+import { defineComponent, useSlot, useDOMRef } from 'lake'
 import { Transform, Plane } from 'ogl'
 import ImagePlane from './plane'
 import type { Provides } from '@/const'
+import { useOnEnter, useOnLeave } from '@/libs/lake'
 
 type Props = Provides
 
@@ -23,7 +24,11 @@ export default defineComponent<Props>({
 
     addScene(planesGroup)
 
-    useUnmount(() => {
+    useOnEnter(() => {
+      //
+    })
+
+    useOnLeave(() => {
       removeScene(planesGroup)
     })
   },

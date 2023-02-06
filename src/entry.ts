@@ -1,17 +1,16 @@
 import 'virtual:windi.css'
 import About from '@/components/about'
 import Cursor from '@/components/cursor'
-import barba from '@barba/core'
-import Gl from '@/components/gl'
 import { createApp, q, withSvelte } from 'lake'
-import Home from '@/components/home'
+import Gl from '@/components/gl'
 import type { IComponent, ComponentContext } from 'lake'
+import Home from '@/components/home'
 import Noop from '@/components/noop'
 import Observer from '@/components/observer/index.svelte'
 import Works from '@/components/works'
 import WorksDetail from '@/components/works/[slug]'
 import type { Provides } from '@/const'
-import { TWEEN, EASE } from '@/libs'
+// import { TWEEN, EASE } from '@/libs'
 
 const table: Record<string, IComponent> = {
   Noop,
@@ -23,9 +22,9 @@ const table: Record<string, IComponent> = {
   About,
 } as const
 
-document.addEventListener('DOMContentLoaded', () => {
-  const { component, unmount } = createApp()
+const { component, unmount } = createApp()
 
+document.addEventListener('DOMContentLoaded', () => {
   const glWorld = component(Gl)(document.getElementById('js-glWorld')!)
 
   const bootstrap = (scope: HTMLElement, reboot: Provides['REBOOT'] = false) => {
@@ -46,49 +45,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }, [])
   }
 
-  barba.init({
-    schema: {
-      prefix: 'data-pjax',
-      wrapper: 'wrap',
-      container: 'view',
-    },
-    transitions: [
-      {
-        name: 'default',
-        sync: false,
-        once(_data) {
-          bootstrap(document.documentElement)
-        },
-        leave(data) {
-          return new Promise(resolve => {
-            const current = data.current.container
+  bootstrap(document.documentElement)
 
-            TWEEN.tween(current, 1, EASE.expoOut)
-              .opacity(0)
-              .onComplete(() => {
-                unmount(q('[data-component]', current))
-              })
-              .play()
+  // unmount(q('[data-component]', current))
 
-            setTimeout(() => {
-              resolve(true)
-            }, 500)
-          })
-        },
-        enter(data) {
-          const { namespace, container: next, url } = data.next
-
-          TWEEN.serial(
-            TWEEN.prop(next).opacity(0),
-            TWEEN.tween(next, 1, EASE.expoOut).opacity(1)
-          ).play()
-
-          bootstrap(next, {
-            namespace,
-            ...url,
-          })
-        },
-      },
-    ],
-  })
+  // bootstrap(next, {
+  //   namespace,
+  //   ...url,
+  // })
 })
+
+export { unmount }

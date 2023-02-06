@@ -1,7 +1,14 @@
 import { defineComponent } from 'lake'
+import { useOnEnter, useOnLeave } from '@/libs/lake'
 
 export default defineComponent({
-  setup(el) {
-    //
+  setup(_el) {
+    useOnEnter(() => {
+      //
+    })
+
+    useOnLeave(() => {
+      //
+    })
   },
 })
