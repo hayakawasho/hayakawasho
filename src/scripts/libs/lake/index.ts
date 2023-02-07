@@ -1,4 +1,4 @@
-export * from './useTick'
-export * from './useSmooth'
-export * from './useWatch'
+export * from './tick'
+export * from './scrolltween'
+export * from './watch'
 export * from './lifecycle'

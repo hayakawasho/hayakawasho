@@ -1,14 +1,17 @@
 import 'virtual:windi.css'
-import About from '@/components/about'
+import {
+  createApp,
+  q,
+  withSvelte,
+  type RefElement,
+  type IComponent,
+  type ComponentContext,
+} from 'lake'
 import Cursor from '@/components/cursor'
-import { createApp, q, withSvelte } from 'lake'
 import Gl from '@/components/gl'
-import type { IComponent, ComponentContext } from 'lake'
-import Home from '@/components/home'
 import Noop from '@/components/noop'
 import Observer from '@/components/observer/index.svelte'
-import Works from '@/components/works'
-import WorksDetail from '@/components/works/[slug]'
+import Scene from '@/components/scene'
 import type { Provides } from '@/const'
 // import { TWEEN, EASE } from '@/libs'
 
@@ -16,15 +19,12 @@ const table: Record<string, IComponent> = {
   Noop,
   Observer: withSvelte(Observer),
   Cursor,
-  Home,
-  Works,
-  WorksDetail,
-  About,
+  Scene,
 } as const
 
-const { component, unmount } = createApp()
-
 document.addEventListener('DOMContentLoaded', () => {
+  const { component, unmount } = createApp()
+
   const glWorld = component(Gl)(document.getElementById('js-glWorld')!)
 
   const bootstrap = (scope: HTMLElement, reboot: Provides['REBOOT'] = false) => {
@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
           mount(el, {
             REBOOT: reboot,
             GL_WORLD: glWorld.current,
+            UNSET: (scope: RefElement) => unmount(q('[data-component]', scope)),
           })
         )
       } catch (error) {
@@ -47,12 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   bootstrap(document.documentElement)
 
-  // unmount(q('[data-component]', current))
-
   // bootstrap(next, {
   //   namespace,
   //   ...url,
   // })
 })
-
-export { unmount }

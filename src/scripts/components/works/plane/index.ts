@@ -2,7 +2,7 @@ import { defineComponent, useIntersectionWatch } from 'lake'
 import type { Transform } from 'ogl'
 import { Mesh, Plane, Program, Texture } from 'ogl'
 import type { Provides, Size } from '@/const'
-import { useSmooth, useWatch } from '@/libs/lake'
+import { useScrollTween, useWatch } from '@/libs/lake'
 import { viewportRef, viewportGetters } from '@/states/viewport'
 import { ImagePlane } from './ImagePlane'
 import fragment from './frag.glsl'
@@ -74,7 +74,7 @@ export default defineComponent<Props>({
       }
     )
 
-    useSmooth(() => {
+    useScrollTween(() => {
       if (state.resizing || !state.visible) {
         return
       }

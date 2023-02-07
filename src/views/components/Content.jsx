@@ -5,7 +5,7 @@ import { css } from '@emotion/react'
 export const Content = props => {
   return (
     <div data-taxi>
-      <div css={view} data-taxi-view data-namespace={props.namespace}>
+      <div css={view} data-taxi-view={props.namespace}>
         {props.children}
       </div>
     </div>

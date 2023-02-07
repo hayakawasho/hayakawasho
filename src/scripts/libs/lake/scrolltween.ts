@@ -1,8 +1,10 @@
-import { useTick } from './useTick'
+import { useTick } from './tick'
 import { lerp } from '@/libs/math'
 import { scrollPosYGetters, scrollRunningGetters } from '@/states/scroll'
 
-export const useSmooth = (callback: (payload: { target: number; current: number }) => void) => {
+export const useScrollTween = (
+  callback: (payload: { target: number; current: number }) => void
+) => {
   let current = 0
 
   useTick(() => {
