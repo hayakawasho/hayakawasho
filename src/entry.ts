@@ -26,7 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const glWorld = component(Gl)(document.getElementById('js-glWorld')!)
 
   const bootstrap = (scope: HTMLElement, reboot: Provides['reboot'] = false) => {
-    return q('[data-component]', scope).reduce<ComponentContext[]>((acc, el) => {
+    const selector = reboot ? '[data-component]' : '[data-component]:not([data-no-reload])'
+    return q(selector, scope).reduce<ComponentContext[]>((acc, el) => {
       const name = el.dataset.component || 'Noop'
       try {
         const mount = component(table[`${name}`])

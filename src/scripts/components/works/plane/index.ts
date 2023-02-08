@@ -1,6 +1,6 @@
 import { defineComponent, useIntersectionWatch } from 'lake'
 import { Mesh, Plane, Program, Texture } from 'ogl'
-import type { Provides, Size } from '@/const'
+import type { Provides } from '@/const'
 import { useScrollTween, useWatch } from '@/libs/lake'
 import { ImagePlane } from './ImagePlane'
 import { viewportRef, viewportGetters } from '@/states/viewport'
@@ -13,8 +13,6 @@ type Props = Pick<Provides, 'glWorld'> & {
 
 export default defineComponent<Props>({
   setup(domImg: HTMLImageElement, { glWorld, geometry }) {
-    const { gl, addScene } = glWorld
-
     const state = {
       resizing: false,
       visible: false,
@@ -29,7 +27,8 @@ export default defineComponent<Props>({
       texture.image = domImg
       uniforms.uImageAspect.value = domImg.naturalWidth / domImg.naturalHeight
 
-      drawPlane(viewportGetters())
+      const size = viewportGetters()
+      drawPlane(size.width, size.height)
     })
 
     const uniforms = {
@@ -44,23 +43,23 @@ export default defineComponent<Props>({
       },
     }
 
-    const program = new Program(gl, {
+    const program = new Program(glWorld.gl, {
       vertex,
       fragment,
       uniforms,
     })
 
-    const mesh = new Mesh(gl, {
+    const mesh = new Mesh(glWorld.gl, {
       geometry,
       program,
     })
 
-    addScene(mesh)
+    glWorld.addScene(mesh)
 
     const plane = new ImagePlane(mesh, domImg)
 
-    const drawPlane = (size: Size) => {
-      plane.resize(size)
+    const drawPlane = (ww: number, wh: number) => {
+      plane.resize(ww, wh)
       plane.update()
     }
 
@@ -83,7 +82,7 @@ export default defineComponent<Props>({
 
     useWatch(viewportRef, ({ width, height }) => {
       state.resizing = true
-      drawPlane({ width, height })
+      drawPlane(width, height)
       state.resizing = false
     })
 
