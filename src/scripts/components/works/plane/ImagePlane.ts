@@ -1,38 +1,19 @@
 import type { Mesh } from 'ogl'
+import type { Cache } from './'
 
 export class ImagePlane {
-  #cache: {
-    ww: number
-    wh: number
-    rect: DOMRect
-  }
+  constructor(private mesh: Mesh) {}
 
-  constructor(private mesh: Mesh, private el: HTMLImageElement) {
-    this.#cache = {
-      ww: 0,
-      wh: 0,
-      rect: el.getBoundingClientRect(),
-    }
-  }
+  update = (update: Cache) => {
+    const offset = update.rect.top
+    const moveY = -update.currentY + offset
 
-  update = () => {
-    const { rect, ww, wh } = this.#cache
+    this.mesh.scale.x = update.rect.width
+    this.mesh.scale.y = update.rect.height
 
-    this.mesh.scale.x = rect.width
-    this.mesh.scale.y = rect.height
-
-    const x = -ww * 0.5 + rect.width * 0.5 + rect.left
-    const y = wh * 0.5 - rect.height * 0.5 - rect.top
+    const x = -update.ww * 0.5 + update.rect.width * 0.5 + update.rect.left
+    const y = update.wh * 0.5 - update.rect.height * 0.5 - moveY
 
     this.mesh.position.set(x, y, this.mesh.position.z)
-  }
-
-  resize = (ww: number, wh: number) => {
-    this.#cache = {
-      ...this.#cache,
-      rect: this.el.getBoundingClientRect(),
-      ww,
-      wh,
-    }
   }
 }

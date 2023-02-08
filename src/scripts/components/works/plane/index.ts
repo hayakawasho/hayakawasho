@@ -1,14 +1,22 @@
-import { defineComponent, useIntersectionWatch } from 'lake'
+import { defineComponent, useIntersectionWatch, ref } from 'lake'
 import { Mesh, Plane, Program, Texture } from 'ogl'
 import type { Provides } from '@/const'
 import { useScrollTween, useWatch } from '@/libs/lake'
 import { ImagePlane } from './ImagePlane'
+import { scrollPosYGetters } from '@/states/scroll'
 import { viewportRef, viewportGetters } from '@/states/viewport'
 import fragment from './frag.glsl'
 import vertex from './vert.glsl'
 
 type Props = Pick<Provides, 'glWorld'> & {
   geometry: Plane
+}
+
+export type Cache = {
+  ww: number
+  wh: number
+  rect: DOMRect
+  currentY: number
 }
 
 export default defineComponent<Props>({
@@ -18,8 +26,15 @@ export default defineComponent<Props>({
       visible: false,
     }
 
+    const { width: ww, height: wh } = viewportGetters()
+    const cache = ref<Cache>({
+      ww,
+      wh,
+      rect: domImg.getBoundingClientRect(),
+      currentY: scrollPosYGetters(),
+    })
+
     // const planesIndex = Number(domImg.dataset.index)
-    const rect = domImg.getBoundingClientRect()
 
     const texture = new Texture(glWorld.gl)
 
@@ -27,8 +42,7 @@ export default defineComponent<Props>({
       texture.image = domImg
       uniforms.uImageAspect.value = domImg.naturalWidth / domImg.naturalHeight
 
-      const size = viewportGetters()
-      drawPlane(size.width, size.height)
+      plane.update(cache.value)
     })
 
     const uniforms = {
@@ -39,7 +53,7 @@ export default defineComponent<Props>({
         value: 1,
       },
       uPlaneAspect: {
-        value: rect.width / rect.height,
+        value: cache.value.rect.width / cache.value.rect.height,
       },
     }
 
@@ -56,14 +70,9 @@ export default defineComponent<Props>({
 
     glWorld.addScene(mesh)
 
-    const plane = new ImagePlane(mesh, domImg)
+    const plane = new ImagePlane(mesh)
 
-    const drawPlane = (ww: number, wh: number) => {
-      plane.resize(ww, wh)
-      plane.update()
-    }
-
-    const { unwatch: _ } = useIntersectionWatch(
+    useIntersectionWatch(
       domImg,
       ([entry]) => {
         state.visible = entry.isIntersecting
@@ -73,16 +82,29 @@ export default defineComponent<Props>({
       }
     )
 
-    useScrollTween(() => {
+    useScrollTween(payload => {
       if (state.resizing || !state.visible) {
         return
       }
-      plane.update()
+
+      cache.value = {
+        ...cache.value,
+        currentY: payload.current,
+      }
+      plane.update(cache.value)
     })
 
     useWatch(viewportRef, ({ width, height }) => {
       state.resizing = true
-      drawPlane(width, height)
+
+      cache.value = {
+        ...cache.value,
+        rect: domImg.getBoundingClientRect(),
+        ww: width,
+        wh: height,
+      }
+      plane.update(cache.value)
+
       state.resizing = false
     })
 
