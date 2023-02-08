@@ -9,7 +9,7 @@ export const render = () => {
   ${r(
     <PageWithHeader header={<Header />}>
       <Content namespace="About">
-        <main data-component="Scene" data-namespace="About" css={wrap} className="pt-[11rem]">
+        <main data-component="About" data-namespace="About" css={wrap} className="pt-[11rem]">
           <h1 css={h1} className="mb-[4.5rem]">
             Hello
           </h1>

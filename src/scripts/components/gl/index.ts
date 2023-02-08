@@ -1,5 +1,6 @@
 import { defineComponent, useDOMRef } from 'lake'
-import { useStableFluid } from './fluid/useStableFluid'
+// import { useFluid } from './fluid/useFluid'
+// import { useMaskTrans } from './bending/useMaskTrans'
 import { useGl } from './useGl'
 
 export default defineComponent({
@@ -8,16 +9,15 @@ export default defineComponent({
     const { refs } = useDOMRef<{ canvas: HTMLCanvasElement }>('canvas')
 
     const { gl, addScene, ...rest } = useGl(refs.canvas, width, height)
-
-    useStableFluid({
-      gl,
-      addScene,
-    })
+    // const { up, down } = useMaskTrans({ gl, addScene })
+    // useFluid({ gl, addScene })
 
     return {
       gl,
       addScene,
       ...rest,
+      // up,
+      // down,
     } as const
   },
 })

@@ -4,14 +4,10 @@ import { css } from '@emotion/react'
 
 export const Content = props => {
   return (
-    <div data-taxi>
-      <div css={view} data-taxi-view={props.namespace}>
+    <div data-router-wrapper>
+      <div data-router-view={props.namespace} className="relative">
         {props.children}
       </div>
     </div>
   )
 }
-
-const view = css`
-  position: relative;
-`

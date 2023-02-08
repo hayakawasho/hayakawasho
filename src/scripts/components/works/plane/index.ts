@@ -1,20 +1,20 @@
 import { defineComponent, useIntersectionWatch } from 'lake'
-import type { Transform } from 'ogl'
 import { Mesh, Plane, Program, Texture } from 'ogl'
 import type { Provides, Size } from '@/const'
 import { useScrollTween, useWatch } from '@/libs/lake'
-import { viewportRef, viewportGetters } from '@/states/viewport'
 import { ImagePlane } from './ImagePlane'
+import { viewportRef, viewportGetters } from '@/states/viewport'
 import fragment from './frag.glsl'
 import vertex from './vert.glsl'
 
-type Props = Pick<Provides['GL_WORLD'], 'gl'> & {
-  planesGroup: Transform
+type Props = Pick<Provides, 'glWorld'> & {
   geometry: Plane
 }
 
 export default defineComponent<Props>({
-  setup(domImg: HTMLImageElement, { gl, planesGroup, geometry }) {
+  setup(domImg: HTMLImageElement, { glWorld, geometry }) {
+    const { gl, addScene } = glWorld
+
     const state = {
       resizing: false,
       visible: false,
@@ -23,7 +23,7 @@ export default defineComponent<Props>({
     // const planesIndex = Number(domImg.dataset.index)
     const rect = domImg.getBoundingClientRect()
 
-    const texture = new Texture(gl)
+    const texture = new Texture(glWorld.gl)
 
     domImg.decode().then(() => {
       texture.image = domImg
@@ -55,7 +55,7 @@ export default defineComponent<Props>({
       program,
     })
 
-    mesh.setParent(planesGroup)
+    addScene(mesh)
 
     const plane = new ImagePlane(mesh, domImg)
 

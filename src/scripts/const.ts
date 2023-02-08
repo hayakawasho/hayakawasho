@@ -1,16 +1,17 @@
 import type { OGLRenderingContext, Transform } from 'ogl'
 
 export type Provides = {
-  REBOOT:
+  reboot:
     | false
     | {
         namespace: string
       }
-  GL_WORLD: {
+  glWorld: {
     gl: OGLRenderingContext
     addScene: (scene: Transform) => void
     removeScene: (scene: Transform) => void
   }
+  unmount: () => void
 }
 
 export type Size = { width: number; height: number }

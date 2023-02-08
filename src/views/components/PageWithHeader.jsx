@@ -14,6 +14,7 @@ export const PageWithHeader = props => {
         <div
           className="fixed inset-0 w-screen h-screen pointer-events-none -z-1 invisible"
           data-component="Observer"
+          data-no-reload
           aria-hidden="true"
         ></div>
         <div id="js-glWorld" className="fixed inset-0 w-screen h-screen pointer-events-none">
