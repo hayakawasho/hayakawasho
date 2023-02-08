@@ -11,7 +11,7 @@ export type Provides = {
     addScene: (scene: Transform) => void
     removeScene: (scene: Transform) => void
   }
-  unmount: () => void
+  flush: () => void
 }
 
 export type Size = { width: number; height: number }

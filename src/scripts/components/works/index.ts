@@ -7,7 +7,7 @@ import { useOnEnter, useOnLeave } from '@/libs/lake'
 type Props = Provides
 
 export default defineComponent<Props>({
-  setup(_, { glWorld, unmount }) {
+  setup(_, { glWorld, flush }) {
     const { refs } = useDOMRef<{ plane: HTMLImageElement[] }>('plane')
     const { addChild } = useSlot()
 
@@ -21,7 +21,7 @@ export default defineComponent<Props>({
     //----------------------------------------------------------------
 
     useOnLeave(() => {
-      unmount()
+      flush()
     })
 
     useOnEnter(() => {
