@@ -50,8 +50,8 @@ const init = () => {
 
   component(Load)(document.documentElement, {
     boot: () => bootstrap(document.documentElement),
-    set: (scope: HTMLElement) => bootstrap(scope, true),
-    unset: (scope: HTMLElement) => unmount($(`[data-component]`, scope)),
+    reboot: (scope: HTMLElement) => bootstrap(scope, true),
+    cleanup: (scope: HTMLElement) => unmount($(`[data-component]`, scope)),
     glWorld: glWorld.current as Provides['glWorld'],
   })
 }

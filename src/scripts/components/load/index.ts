@@ -4,12 +4,12 @@ import type { Provides } from '@/const'
 
 type Props = {
   boot: () => void
-  set: (scope: HTMLElement) => void
-  unset: (scope: HTMLElement) => void
+  reboot: (scope: HTMLElement) => void
+  cleanup: (scope: HTMLElement) => void
 } & Provides['glWorld']
 
 export default defineComponent<Props>({
-  setup(_el, { boot, set, unset }) {
+  setup(_el, { boot, reboot, cleanup }) {
     boot()
 
     const load = new modularLoad({
@@ -20,13 +20,13 @@ export default defineComponent<Props>({
     })
 
     load.on('loading', (_transition: string, oldContainer: HTMLElement) => {
-      unset(oldContainer)
+      cleanup(oldContainer)
     })
 
     load.on(
       'loaded',
       (_transition: string, _oldContainer: HTMLElement, newContainer: HTMLElement) => {
-        set(newContainer)
+        reboot(newContainer)
       }
     )
   },
