@@ -9,7 +9,7 @@ export const render = () => {
   ${r(
     <PageWithHeader header={<Header />}>
       <Content namespace="About">
-        <main data-component="About" data-namespace="About" css={wrap} className="pt-[11rem]">
+        <main data-component="About" css={wrap} className="pt-[11rem]">
           <h1 css={h1} className="mb-[4.5rem]">
             Hello
           </h1>
@@ -34,7 +34,7 @@ const wrap = css`
 const h1 = css`
   font-size: 12rem;
   font-weight: 300;
-  font-family: var(--font-oswald);
+  font-family: var(--font-fjalla);
   letter-spacing: -0.06em;
   margin-left: -0.1em;
   line-height: 1;

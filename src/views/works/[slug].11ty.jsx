@@ -21,7 +21,7 @@ export const render = props => {
   ${r(
     <PageWithHeader header={<Header />}>
       <Content namespace="WorksDetail">
-        <main data-component="WorksDetail" data-namespace="WorksDetail"></main>
+        <main data-component="WorksDetail"></main>
       </Content>
     </PageWithHeader>
   )}`

@@ -1064,13 +1064,6 @@
   dependencies:
     commander "^2.15.1"
 
-"@dogstudio/highway@^2.2.1":
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/@dogstudio/highway/-/highway-2.2.1.tgz#bf33cb3a026e9362e18468043574363204c16fa8"
-  integrity sha512-/03I5fib34y22VGjYFy2y1U0LHPlodH/Ua+YHil6CRf1tcD8uCIHvSH2s2B9rc2I9hjEPTC9I3VfYBIYKiXLAg==
-  dependencies:
-    tiny-emitter "^2.1.0"
-
 "@emotion/babel-plugin@^11.10.5":
   version "11.10.5"
   resolved "https://registry.yarnpkg.com/@emotion/babel-plugin/-/babel-plugin-11.10.5.tgz#65fa6e1790ddc9e23cc22658a4c5dea423c55c3c"
@@ -2211,6 +2204,18 @@ bcp-47@1:
     is-alphabetical "^1.0.0"
     is-alphanumerical "^1.0.0"
     is-decimal "^1.0.0"
+
+bianco.dom-to-array@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/bianco.dom-to-array/-/bianco.dom-to-array-1.1.0.tgz#f8ebec7f8ffb26f7a2d0d0ce90551ebcb16f972d"
+  integrity sha512-IWUgplQRhJSZh+7PgD/my5+X27PXNUFdcHPosOYz39a/iFF8Wl9d0N/mOArdR7Zgr3J0Q9pKVk7nO6W+7XZwBg==
+
+bianco.query@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/bianco.query/-/bianco.query-1.1.4.tgz#f550c3e7a3478cf65412957a843dc7a64c5e06dd"
+  integrity sha512-jUu8l484ckacCBmxN0gYLZ4Ge5aMfReL+aYNiC81s37s8+l0+rn9pnQayEgQtMHGlnL8ejd+x5U2PKpo0rvQzw==
+  dependencies:
+    bianco.dom-to-array "^1.1.0"
 
 binary-extensions@^2.0.0:
   version "2.2.0"
@@ -5235,6 +5240,11 @@ mkdirp@^0.5.1:
   integrity sha512-FP+p8RB8OWpF3YZBCrP5gtADmtXApB5AMLn+vdyA+PyxCjrCs00mjyUozssO33cwDeT3wNGdLxJ5M//YqtHAJw==
   dependencies:
     minimist "^1.2.6"
+
+modularload@^1.2.8:
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/modularload/-/modularload-1.2.8.tgz#4cf6c0ca77c7ffca9340e621c47fd801b6050258"
+  integrity sha512-UKYB5nXTcv4DVkXJzwdp9vPw7QFfphkLc3Ka3MeFu9kw27SE/9MZivoHIvrtyUqa4Pt7Ss81h4siSI3dt+5xCQ==
 
 moo@^0.5.1:
   version "0.5.2"

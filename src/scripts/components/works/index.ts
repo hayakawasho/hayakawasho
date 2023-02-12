@@ -2,12 +2,11 @@ import { defineComponent, useSlot, useDOMRef } from 'lake'
 import { Plane } from 'ogl'
 import ImagePlane from './plane'
 import type { Provides } from '@/const'
-import { useOnEnter, useOnLeave } from '@/libs/lake'
 
 type Props = Provides
 
 export default defineComponent<Props>({
-  setup(_, { glWorld, flush }) {
+  setup(el, { glWorld }) {
     const { refs } = useDOMRef<{ plane: HTMLImageElement[] }>('plane')
     const { addChild } = useSlot()
 
@@ -16,16 +15,6 @@ export default defineComponent<Props>({
     addChild(ImagePlane, refs.plane, {
       glWorld,
       geometry,
-    })
-
-    //----------------------------------------------------------------
-
-    useOnLeave(() => {
-      flush()
-    })
-
-    useOnEnter(() => {
-      //
     })
   },
 })

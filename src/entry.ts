@@ -1,17 +1,19 @@
 import 'virtual:windi.css'
 import About from '@/components/about'
-import { createApp, q, withSvelte, type IComponent, type ComponentContext } from 'lake'
 import Cursor from '@/components/cursor'
+import $ from 'bianco.query'
 import Gl from '@/components/gl'
+import { createApp as factory, withSvelte, type IComponent, type ComponentContext } from 'lake'
 import Home from '@/components/home'
+import Load from '@/components/load'
 import Noop from '@/components/noop'
 import Observer from '@/components/observer/index.svelte'
 import Works from '@/components/works'
 import WorksDetail from '@/components/works/[slug]'
 import type { Provides } from '@/const'
 
-document.addEventListener('DOMContentLoaded', () => {
-  const { component, unmount } = createApp()
+const init = () => {
+  const { component, unmount } = factory()
 
   const table: Record<string, IComponent> = {
     Noop,
@@ -25,25 +27,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const glWorld = component(Gl)(document.getElementById('js-glWorld')!)
 
-  const bootstrap = (scope: HTMLElement, reboot: Provides['reboot'] = false) => {
-    const ignore = (reboot && ':not([data-reloadignore])') || ''
-    return q(`[data-component]${ignore}`, scope).reduce<ComponentContext[]>((acc, el) => {
-      const name = el.dataset.component || 'Noop'
-      try {
-        const mount = component(table[`${name}`])
-        acc.push(
-          mount(el, {
-            reboot,
-            glWorld: glWorld.current,
-            flush: () => unmount(q('[data-component]:not([data-reloadignore])')),
-          })
-        )
-      } catch (error) {
-        console.error(error)
-      }
-      return acc
-    }, [])
+  const bootstrap = (scope: HTMLElement, reload = false) => {
+    return $<HTMLElement | SVGElement>(`[data-component]`, scope).reduce<ComponentContext[]>(
+      (acc, el) => {
+        const name = el.dataset.component || 'Noop'
+        try {
+          const mount = component(table[`${name}`])
+          acc.push(
+            mount(el, {
+              reload,
+              glWorld: glWorld.current as Provides['glWorld'],
+            })
+          )
+        } catch (error) {
+          console.error(error)
+        }
+        return acc
+      },
+      []
+    )
   }
 
-  bootstrap(document.documentElement)
-})
+  component(Load)(document.documentElement, {
+    boot: () => bootstrap(document.documentElement),
+    set: (scope: HTMLElement) => bootstrap(scope, true),
+    unset: (scope: HTMLElement) => unmount($(`[data-component]`, scope)),
+    glWorld: glWorld.current as Provides['glWorld'],
+  })
+}
+
+if (document.readyState !== 'loading') {
+  init()
+} else {
+  document.addEventListener('DOMContentLoaded', init, {
+    once: true,
+  })
+}

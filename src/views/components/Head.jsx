@@ -32,7 +32,7 @@ export const Head = props => {
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
       <link
-        href="https://fonts.googleapis.com/css?family=Montserrat:100,300,400&display=swap"
+        href="https://fonts.googleapis.com/css?family=Montserrat:100,300,400&family=Fjalla+One&display=swap"
         rel="stylesheet"
       />
       <Global
@@ -50,6 +50,7 @@ export const Head = props => {
             --font: Montserrat, 'YuGothic Medium', 'Yu Gothic', YuGothic, '游ゴシック',
               'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
             --font-melete: 'Melete', sans-serif;
+            --font-fjalla: 'Fjalla One', sans-serif;
             --vh: 1vh;
             --color-text: #e3e3e3;
             --color-text-primary: #858585;

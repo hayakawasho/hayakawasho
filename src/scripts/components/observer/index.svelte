@@ -9,12 +9,12 @@
 
   const { rootRef } = getContext<Context$<Provides>>('$')
 
+  createResizeObserver(rootRef)
+
   const { onScroll } = createScrollHandler()
   useEvent(window as any, 'scroll', onScroll, {
     passive: true,
   })
-
-  createResizeObserver(rootRef)
 
   const { onMousemove } = createMouseHandler()
 </script>
