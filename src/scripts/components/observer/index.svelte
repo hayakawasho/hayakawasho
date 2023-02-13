@@ -1,7 +1,6 @@
 <script lang="ts">
   import { getContext } from 'svelte'
-  import { useEvent } from 'lake'
-  import type { Context$ } from 'lake'
+  import { useEvent, type Context$ } from 'lake'
   import type { Provides } from '@/const'
   import { createScrollHandler } from './createScrollHandler'
   import { createResizeObserver } from './createResizeObserver'

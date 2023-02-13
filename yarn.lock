@@ -4758,8 +4758,8 @@ kolorist@^1.6.0:
   integrity sha512-dLkz37Ab97HWMx9KTes3Tbi3D1ln9fCAy2zr2YVExJasDRPGRaKcoE4fycWNtnCAJfjFqe0cnY+f8KT2JePEXQ==
 
 "lake@https://github.com/hayakawasho/lake":
-  version "0.9.4"
-  resolved "https://github.com/hayakawasho/lake#d5fc655f860f1ac4578642df6b8a51e349841e5e"
+  version "0.9.6"
+  resolved "https://github.com/hayakawasho/lake#b792747971295d80c02b9eda2595e936260e10c8"
 
 language-subtag-registry@~0.3.2:
   version "0.3.22"

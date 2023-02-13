@@ -3,7 +3,7 @@ import About from '@/components/about'
 import Cursor from '@/components/cursor'
 import $ from 'bianco.query'
 import Gl from '@/components/gl'
-import { createApp as factory, withSvelte, type IComponent, type ComponentContext } from 'lake'
+import { factory, withSvelte, type IComponent, type ComponentContext } from 'lake'
 import Home from '@/components/home'
 import Load from '@/components/load'
 import Noop from '@/components/noop'
@@ -27,7 +27,7 @@ const init = () => {
 
   const glWorld = component(Gl)(document.getElementById('js-glWorld')!)
 
-  const bootstrap = (scope: HTMLElement, reload = false) => {
+  const bootstrap = (scope: HTMLElement, initialLoad = true) => {
     return $<HTMLElement | SVGElement>(`[data-component]`, scope).reduce<ComponentContext[]>(
       (acc, el) => {
         const name = el.dataset.component || 'Noop'
@@ -35,7 +35,7 @@ const init = () => {
           const mount = component(table[`${name}`])
           acc.push(
             mount(el, {
-              reload,
+              initialLoad,
               glWorld: glWorld.current as Provides['glWorld'],
             })
           )
@@ -48,9 +48,11 @@ const init = () => {
     )
   }
 
-  component(Load)(document.documentElement, {
-    boot: () => bootstrap(document.documentElement),
-    reboot: (scope: HTMLElement) => bootstrap(scope, true),
+  const html = document.documentElement
+
+  component(Load)(html, {
+    boot: () => bootstrap(html),
+    reboot: (scope: HTMLElement) => bootstrap(scope, false),
     cleanup: (scope: HTMLElement) => unmount($(`[data-component]`, scope)),
     glWorld: glWorld.current as Provides['glWorld'],
   })
