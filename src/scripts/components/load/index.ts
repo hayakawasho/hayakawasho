@@ -3,14 +3,14 @@ import modularLoad from 'modularload'
 import type { Provides } from '@/const'
 
 type Props = {
-  boot: () => void
-  reboot: (scope: HTMLElement) => void
+  componentDidMount: () => void
+  componentDidUpdate: (scope: HTMLElement) => void
   cleanup: (scope: HTMLElement) => void
 } & Provides['glWorld']
 
 export default defineComponent<Props>({
-  setup(_el, { boot, reboot, cleanup }) {
-    boot()
+  setup(_el, { componentDidMount, componentDidUpdate, cleanup }) {
+    componentDidMount()
 
     const load = new modularLoad({
       enterDelay: 300,
@@ -26,7 +26,7 @@ export default defineComponent<Props>({
     load.on(
       'loaded',
       (_transition: string, _oldContainer: HTMLElement, newContainer: HTMLElement) => {
-        reboot(newContainer)
+        componentDidUpdate(newContainer)
       }
     )
   },
