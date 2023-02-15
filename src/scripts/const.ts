@@ -6,6 +6,8 @@ export type Provides = {
     gl: OGLRenderingContext
     addScene: (scene: Transform) => void
     removeScene: (scene: Transform) => void
+    maskUp: () => void
+    maskDown: () => void
   }
 }
 

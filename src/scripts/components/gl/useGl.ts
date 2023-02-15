@@ -9,22 +9,20 @@ export const useGl = (canvas: HTMLCanvasElement, ww: number, wh: number) => {
   const { renderer } = createRenderer(canvas, ww, wh, dpr)
   const { gl } = renderer
 
-  const { camera, calc } = createCamera(gl, ww, wh)
+  const { camera, calc: calcDistance } = createCamera(gl, ww, wh)
 
   const scene = new Transform()
 
-  useTick(({ timestamp: _ }) => {
+  useTick(() => {
     renderer.render({ scene, camera })
   })
 
   useWatch(viewportRef, ({ width, height }) => {
     renderer.setSize(width, height)
 
-    const { dist } = calc(height)
+    const { dist } = calcDistance(height)
 
-    camera.perspective({
-      aspect: width / height,
-    })
+    camera.perspective({ aspect: width / height })
     camera.position.z = dist
   })
 

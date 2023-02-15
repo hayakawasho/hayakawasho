@@ -12,18 +12,18 @@ export default defineComponent<Props>({
   setup(_el, { componentDidMount, componentDidUpdate, cleanup }) {
     componentDidMount()
 
-    const load = new modularLoad({
+    const sceneLoader = new modularLoad({
       enterDelay: 300,
       transitions: {
         //
       },
     })
 
-    load.on('loading', (_transition: string, oldContainer: HTMLElement) => {
+    sceneLoader.on('loading', (_transition: string, oldContainer: HTMLElement) => {
       cleanup(oldContainer)
     })
 
-    load.on(
+    sceneLoader.on(
       'loaded',
       (_transition: string, _oldContainer: HTMLElement, newContainer: HTMLElement) => {
         componentDidUpdate(newContainer)

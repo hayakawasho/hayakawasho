@@ -5292,10 +5292,10 @@ nanoid@^3.3.4:
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.4.tgz#730b67e3cd09e2deacf03c027c81c9d9dbc5e8ab"
   integrity sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==
 
-nanostores@^0.7.1:
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/nanostores/-/nanostores-0.7.1.tgz#ed27fa3f9b1c2ab9b28f14373811e28b9d3fc5eb"
-  integrity sha512-7HenoVpZOjRudHCmAVWKloBTk3+Ozw49KuRWq/pNlEIIVS3x9dID+I5z3Rhjxl1muhHwv4dFhpT+0FebT9jvaA==
+nanostores@^0.7.3:
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/nanostores/-/nanostores-0.7.3.tgz#a9226e9be82b568bce04ac5a43aacb42aeb0a051"
+  integrity sha512-Y9vjY/amja27yjYxj/zlWh+gvXX6pSb8IeF2DK1vCNiYKlZclXbUrSE36gjd1F53+Avg5/bUzKuiej/v82HjPQ==
 
 napi-build-utils@^1.0.1:
   version "1.0.2"
@@ -5484,10 +5484,10 @@ object.values@^1.1.6:
     define-properties "^1.1.4"
     es-abstract "^1.20.4"
 
-ogl@^0.0.108:
-  version "0.0.108"
-  resolved "https://registry.yarnpkg.com/ogl/-/ogl-0.0.108.tgz#793b78e85a9b7fcc40ba826974db02a56fb81cfc"
-  integrity sha512-21/bNj9UiEh2N99TLdKVI4EavJtBA8ot//5OoMFbdHB7hvWAQ2Kd+2xTQsujvO+HT0inay2YdW2i6OUHFKxvxQ==
+ogl@^0.0.110:
+  version "0.0.110"
+  resolved "https://registry.yarnpkg.com/ogl/-/ogl-0.0.110.tgz#aa9e51c5d087529b8bf0c40ff9e3e8706d0d40ee"
+  integrity sha512-Zbqac6OfYx7ID1W9Q2DnjFkPGtRsWIXvIRAM3tPukqbc2Jl0iTEqvp3XC+sQPhcW35uavVRZFfT0nZGCPxJDwA==
 
 on-finished@~2.3.0:
   version "2.3.0"
@@ -7145,6 +7145,11 @@ typescript@^4.6.2, typescript@^4.9.4:
   version "4.9.4"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.4.tgz#a2a3d2756c079abda241d75f149df9d561091e78"
   integrity sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==
+
+typescript@^4.9.5:
+  version "4.9.5"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.5.tgz#095979f9bcc0d09da324d58d03ce8f8374cbe65a"
+  integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
 
 ua-parser-js@1.0.2:
   version "1.0.2"
