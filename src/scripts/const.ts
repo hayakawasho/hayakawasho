@@ -2,7 +2,7 @@ import type { OGLRenderingContext, Transform } from 'ogl'
 
 export type Provides = {
   initialLoad: boolean
-  glWorld: {
+  glContext: {
     gl: OGLRenderingContext
     addScene: (scene: Transform) => void
     removeScene: (scene: Transform) => void

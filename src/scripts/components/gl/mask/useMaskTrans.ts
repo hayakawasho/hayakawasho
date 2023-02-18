@@ -7,7 +7,7 @@ import { useWatch } from '@/libs/lake'
 import vertex from './vert.glsl'
 import { viewportRef } from '@/states/viewport'
 
-type Props = Pick<Provides['glWorld'], 'gl' | 'addScene'>
+type Props = Pick<Provides['glContext'], 'gl' | 'addScene'>
 
 export const useMaskTrans = ({ gl, addScene }: Props) => {
   const state = {

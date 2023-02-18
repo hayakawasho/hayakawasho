@@ -8,7 +8,7 @@ import { viewportRef, viewportGetters } from '@/states/viewport'
 import fragment from './frag.glsl'
 import vertex from './vert.glsl'
 
-type Props = Pick<Provides, 'glWorld'> & {
+type Props = Pick<Provides, 'glContext'> & {
   geometry: Plane
 }
 
@@ -20,7 +20,7 @@ export type Cache = {
 }
 
 export default defineComponent<Props>({
-  setup(domImg: HTMLImageElement, { glWorld, geometry }) {
+  setup(domImg: HTMLImageElement, { glContext, geometry }) {
     const state = {
       resizing: false,
       visible: false,
@@ -36,7 +36,7 @@ export default defineComponent<Props>({
 
     // const planesIndex = Number(domImg.dataset.index)
 
-    const texture = new Texture(glWorld.gl)
+    const texture = new Texture(glContext.gl)
 
     domImg.decode().then(() => {
       texture.image = domImg
@@ -57,18 +57,18 @@ export default defineComponent<Props>({
       },
     }
 
-    const program = new Program(glWorld.gl, {
+    const program = new Program(glContext.gl, {
       vertex,
       fragment,
       uniforms,
     })
 
-    const mesh = new Mesh(glWorld.gl, {
+    const mesh = new Mesh(glContext.gl, {
       geometry,
       program,
     })
 
-    glWorld.addScene(mesh)
+    glContext.addScene(mesh)
 
     const plane = new ImagePlane(mesh)
 
@@ -91,6 +91,7 @@ export default defineComponent<Props>({
         ...cache.value,
         currentY: payload.current,
       }
+
       plane.update(cache.value)
     })
 
@@ -102,7 +103,9 @@ export default defineComponent<Props>({
         rect: domImg.getBoundingClientRect(),
         ww: width,
         wh: height,
+        currentY: scrollPosYGetters(),
       }
+
       plane.update(cache.value)
 
       state.resizing = false

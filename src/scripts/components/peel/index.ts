@@ -4,7 +4,7 @@ import type { Provides } from '@/const'
 import { useScrollTween, useWatch } from '@/libs/lake'
 import { viewportRef } from '@/states/viewport'
 
-type Props = Pick<Provides['glWorld'], 'gl'>
+type Props = Pick<Provides['glContext'], 'gl'>
 
 export default defineComponent<Props>({
   setup(el: HTMLImageElement, { gl }) {

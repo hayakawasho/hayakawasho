@@ -6,14 +6,14 @@ import type { Provides } from '@/const'
 type Props = Provides
 
 export default defineComponent<Props>({
-  setup(el, { glWorld }) {
+  setup(el, { glContext }) {
     const { refs } = useDomRef<{ plane: HTMLImageElement[] }>('plane')
     const { addChild } = useSlot()
 
-    const geometry = new Plane(glWorld.gl)
+    const geometry = new Plane(glContext.gl)
 
     addChild(refs.plane, ImagePlane, {
-      glWorld,
+      glContext,
       geometry,
     })
   },

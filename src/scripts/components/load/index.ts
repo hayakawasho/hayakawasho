@@ -6,7 +6,7 @@ type Props = {
   componentDidMount: () => void
   componentDidUpdate: (scope: HTMLElement) => void
   cleanup: (scope: HTMLElement) => void
-} & Provides['glWorld']
+} & Provides['glContext']
 
 export default defineComponent<Props>({
   setup(_el, { componentDidMount, componentDidUpdate, cleanup }) {

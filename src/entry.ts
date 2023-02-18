@@ -3,7 +3,7 @@ import About from '@/components/about'
 import Cursor from '@/components/cursor'
 import $ from 'bianco.query'
 import Gl from '@/components/gl'
-import { factory, withSvelte, type IComponent, type ComponentContext } from 'lake'
+import factory, { withSvelte, type IComponent, type ComponentContext } from 'lake'
 import Home from '@/components/home'
 import Load from '@/components/load'
 import Noop from '@/components/noop'
@@ -34,7 +34,7 @@ const init = () => {
         acc.push(
           mount(el, {
             initialLoad,
-            glWorld: glWorld.current,
+            glContext: glWorld.current,
           })
         )
       } catch (error) {
@@ -50,7 +50,7 @@ const init = () => {
     componentDidMount: () => bootstrap(html),
     componentDidUpdate: (scope: HTMLElement) => bootstrap(scope, false),
     cleanup: (scope: HTMLElement) => unmount($(`[data-component]`, scope)),
-    glWorld: glWorld.current,
+    glContext: glWorld.current,
   })
 }
 
