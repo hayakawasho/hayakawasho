@@ -1,0 +1,66 @@
+{
+  "name": "lake",
+  "version": "0.9.8",
+  "main": "./dist/main.umd.js",
+  "module": "./dist/main.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/main.es.js",
+      "require": "./dist/main.umd.js"
+    }
+  },
+  "types": "./types/main.d.ts",
+  "files": [
+    "/dist",
+    "/types"
+  ],
+  "author": "hayakawasho",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hayakawasho/lake/issues"
+  },
+  "homepage": "https://github.com/hayakawasho/lake#readme",
+  "keywords": [
+    "component register",
+    "functional component",
+    "dom binding",
+    "svelte"
+  ],
+  "scripts": {
+    "prepare": "husky install",
+    "dev": "vite",
+    "build": "NODE_ENV=production tsc && vite build",
+    "watch": "vite build -w",
+    "serve": "vite preview",
+    "prettier:write": "prettier --write ./lib/**/*.ts",
+    "eslint": "eslint './lib/**/*.ts' -c .eslintrc.json --fix",
+    "format": "npm run prettier:write && npm run eslint"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.30.0",
+    "@sveltejs/vite-plugin-svelte": "2.0.2",
+    "@typescript-eslint/eslint-plugin": "5.52.0",
+    "@typescript-eslint/parser": "5.52.0",
+    "eslint": "8.34.0",
+    "eslint-config-prettier": "8.6.0",
+    "eslint-import-resolver-typescript": "3.5.3",
+    "eslint-plugin-import": "2.27.5",
+    "eslint-plugin-prettier": "4.2.1",
+    "husky": "8.0.3",
+    "lint-staged": "13.1.2",
+    "prettier": "2.8.4",
+    "svelte": "3.55.1",
+    "svelte-check": "3.0.3",
+    "svelte-preprocess": "5.0.1",
+    "typescript": "4.9.5",
+    "vite": "4.1.2"
+  },
+  "prepare": "husky install",
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "type": "module"
+}

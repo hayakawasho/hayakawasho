@@ -38,6 +38,7 @@ export default defineComponent<Props>({
 
     const texture = new Texture(glContext.gl)
 
+    domImg.crossOrigin = 'anonymous'
     domImg.decode().then(() => {
       texture.image = domImg
       uniforms.uImageAspect.value = domImg.naturalWidth / domImg.naturalHeight

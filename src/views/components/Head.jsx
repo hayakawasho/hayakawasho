@@ -80,7 +80,6 @@ export const Head = props => {
           }
 
           body {
-            color: var(--color-text);
             font-family: var(--font) !important;
             overflow-x: hidden;
             overflow-wrap: break-word;
@@ -88,6 +87,8 @@ export const Head = props => {
             -webkit-font-smoothing: subpixel-antialiased;
             -moz-osx-font-smoothing: unset;
             -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+            // color: var(--color-text);
+            // background-color: #f4f4f4ff;
 
             & ::-moz-selection {
               color: #fff;

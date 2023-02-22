@@ -8,3 +8,4 @@ _site/
 wp
 /windi.config.ts
 src/api
+/lib

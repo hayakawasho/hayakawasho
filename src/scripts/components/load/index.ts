@@ -13,7 +13,9 @@ export default defineComponent<Props>({
     componentDidMount()
 
     const sceneLoader = new modularLoad({
-      enterDelay: 300,
+      enterDelay: 0,
+      exitDelay: 0,
+      loadedDelay: 0,
       transitions: {
         //
       },

@@ -72,7 +72,7 @@
     "bianco.query": "^1.1.4",
     "cdate": "^0.0.4",
     "detect-gpu": "^5.0.9",
-    "lake": "https://github.com/hayakawasho/lake",
+    "lake": "./lib/lake",
     "lil-gui": "^0.16.1",
     "modularload": "^1.2.8",
     "nanostores": "^0.7.3",
@@ -83,7 +83,7 @@
   },
   "prepare": "husky install",
   "lint-staged": {
-    "*.{ts,svelte}": [
+    "./src/**/*.{ts,svelte}": [
       "eslint --fix",
       "prettier --write"
     ]

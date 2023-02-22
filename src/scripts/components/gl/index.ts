@@ -8,14 +8,12 @@ export default defineComponent({
     const { width, height } = el.getBoundingClientRect()
     const { refs } = useDomRef<{ canvas: HTMLCanvasElement }>('canvas')
 
-    const glContext = useGl(refs.canvas, width, height)
-
-    const { maskUp, maskDown } = useMaskTrans(glContext)
-
-    // useFluid(glContext)
+    const webgl = useGl(refs.canvas, width, height)
+    const { maskUp, maskDown } = useMaskTrans(webgl)
+    // useFluid(webgl)
 
     return {
-      ...glContext,
+      ...webgl,
       maskUp,
       maskDown,
     } as const
