@@ -1497,6 +1497,13 @@
     leven "3"
     whatwg-mimetype "2"
 
+"@netlify/functions@^1.3.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@netlify/functions/-/functions-1.4.0.tgz#027a2e5d54df5519ccbd14cf450231e97bbbf93a"
+  integrity sha512-gy7ULTIRroc2/jyFVGx1djCmmBMVisIwrvkqggq5B6iDcInRSy2Tpkm+V5C63hKJVkNRskKWtLQKm9ecCaQTjA==
+  dependencies:
+    is-promise "^4.0.0"
+
 "@nicolo-ribaudo/chokidar-2@2.1.8-no-fsevents.3":
   version "2.1.8-no-fsevents.3"
   resolved "https://registry.yarnpkg.com/@nicolo-ribaudo/chokidar-2/-/chokidar-2-2.1.8-no-fsevents.3.tgz#323d72dd25103d0c4fbdce89dadf574a787b1f9b"
@@ -1522,6 +1529,27 @@
   dependencies:
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
+
+"@prismicio/client@^7.0.0-alpha.0":
+  version "7.0.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/@prismicio/client/-/client-7.0.0-alpha.0.tgz#ea90e5f4614a0c4c7190f3f1c359c458a2853d0f"
+  integrity sha512-gofRJ4/EXN/U0fbEVZ/BJSMHjDW0tZbAlFTAYPb6poF3ZL0xc5wnZ50L7ZIMuIctb/kPqZZwSzk5EHK122RQUQ==
+  dependencies:
+    "@prismicio/richtext" "^2.1.1"
+    escape-html "^1.0.3"
+    imgix-url-builder "^0.0.3"
+
+"@prismicio/richtext@^2.1.1":
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/@prismicio/richtext/-/richtext-2.1.4.tgz#c79070542f395ce4bfb44e32dc82dfb5ef828c91"
+  integrity sha512-hyC8XItj+2yMmLGNjg9xGA/lRMO5UgbPF132VFrpZHzHhtIKvHN3iYxCZxnrEoPaTcT6JjA8vWyYLjmmB49bvw==
+  dependencies:
+    "@prismicio/types" "^0.2.7"
+
+"@prismicio/types@^0.2.7":
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/@prismicio/types/-/types-0.2.7.tgz#4091136fa198b366d3fefb49d1dd31d336522540"
+  integrity sha512-xHPBWg+lPcl8U97VB/2oYK3MJlQoVPZq91hbeQO8WRyvq+zgpNST3xFOTk8SkQpgoH6wd50AxGZELvPrpojajQ==
 
 "@rollup/pluginutils@^4.1.1":
   version "4.2.1"
@@ -2748,7 +2776,7 @@ damerau-levenshtein@^1.0.8:
   resolved "https://registry.yarnpkg.com/damerau-levenshtein/-/damerau-levenshtein-1.0.8.tgz#b43d286ccbd36bc5b2f7ed41caf2d0aba1f8a6e7"
   integrity sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==
 
-dayjs@^1.10.0:
+dayjs@^1.10.0, dayjs@^1.11.7:
   version "1.11.7"
   resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.7.tgz#4b296922642f70999544d1144a2c25730fce63e2"
   integrity sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==
@@ -2993,6 +3021,17 @@ electron-to-chromium@^1.4.251:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.284.tgz#61046d1e4cab3a25238f6bf7413795270f125592"
   integrity sha512-M8WEXFuKXMYMVr45fo8mq0wUrrJHheiKZf6BArTKk9ZBYCKJEOU5H8cdWgDT+qCVZf7Na4lVUaZsA+h6uA9+PA==
 
+eleventy-plugin-prismic@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/eleventy-plugin-prismic/-/eleventy-plugin-prismic-1.0.0.tgz#a61867e1875929eefc7a9fa9957733e045238339"
+  integrity sha512-MYDNEG98AxRY0fEHWq12N9dFl5lmg8wkZr2PsQbj+D+XXKaFM3Qfc1Je6E25o4A+NkaPiwed9f+kWnprprlhGQ==
+  dependencies:
+    "@netlify/functions" "^1.3.0"
+    "@prismicio/client" "^7.0.0-alpha.0"
+    dayjs "^1.11.7"
+    debug "^4.3.4"
+    node-fetch "^2.6.7"
+
 emoji-regex@^8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-8.0.0.tgz#e818fd69ce5ccfcb404594f842963bf53164cc37"
@@ -3231,7 +3270,7 @@ escalade@^3.1.1:
   resolved "https://registry.yarnpkg.com/escalade/-/escalade-3.1.1.tgz#d8cfdc7000965c5a0174b4a82eaa5c0552742e40"
   integrity sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==
 
-escape-html@~1.0.3:
+escape-html@^1.0.3, escape-html@~1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/escape-html/-/escape-html-1.0.3.tgz#0258eae4d3d0c0974de1c169188ef0051d1d1988"
   integrity sha512-NiSupZ4OeuGwr68lGIeym/ksIZMJodUGOSCZ/FSnTxcrekbvqrgdUxlJOMpijaKZVjAJrWrGs/6Jy8OMuyj9ow==
@@ -4249,6 +4288,11 @@ image-size@^1.0.1:
   dependencies:
     queue "6.0.2"
 
+imgix-url-builder@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/imgix-url-builder/-/imgix-url-builder-0.0.3.tgz#9f386de64cdd1363d352a7f6313fd7dacd8fb282"
+  integrity sha512-8Oc2Cn4+jF06sEfJcVPlWYfD2F6RjrwIMbk1xEzux8unoB5LsvFc/GL1BQ47HPaeE12ReX2nMUcjUslGYWLxHA==
+
 immutable@^3:
   version "3.8.2"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
@@ -4483,6 +4527,11 @@ is-promise@^2.0.0, is-promise@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/is-promise/-/is-promise-2.2.2.tgz#39ab959ccbf9a774cf079f7b40c7a26f763135f1"
   integrity sha512-+lP4/6lKUBfQjZ2pdxThZvLUAafmZb8OAxFb8XXtiQmS35INgr85hdOGoEs124ez1FCnZJt6jau/T+alh58QFQ==
+
+is-promise@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/is-promise/-/is-promise-4.0.0.tgz#42ff9f84206c1991d26debf520dd5c01042dd2f3"
+  integrity sha512-hvpoI6korhJMnej285dSg6nu1+e6uxs7zG3BYAm5byqDsgJNWwxzM6z6iZiAgQR4TJ30JmBTOwqZUw3WlyH3AQ==
 
 is-regex@^1.0.3, is-regex@^1.1.4:
   version "1.1.4"

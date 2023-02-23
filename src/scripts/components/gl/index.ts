@@ -9,7 +9,11 @@ export default defineComponent({
     const { refs } = useDomRef<{ canvas: HTMLCanvasElement }>('canvas')
 
     const webgl = useGl(refs.canvas, width, height)
-    const { maskUp, maskDown } = useMaskTrans(webgl)
+    const { maskUp, maskDown } = useMaskTrans({
+      ...webgl,
+      ww: width,
+      wh: height,
+    })
     // useFluid(webgl)
 
     return {

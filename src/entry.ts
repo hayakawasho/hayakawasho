@@ -6,6 +6,7 @@ import Gl from '@/components/gl'
 import factory, { withSvelte, type IComponent, type ComponentContext } from 'lake'
 import Home from '@/components/home'
 import Load from '@/components/load'
+import Menu from '@/components/menu'
 import Noop from '@/components/noop'
 import Observer from '@/components/observer/index.svelte'
 import Works from '@/components/works'
@@ -18,6 +19,7 @@ const init = () => {
     Noop,
     Observer: withSvelte(Observer),
     Cursor,
+    Menu,
     Home,
     Works,
     WorksDetail,
@@ -25,6 +27,7 @@ const init = () => {
   } as const
 
   const glWorld = component(Gl)(document.getElementById('js-glWorld')!)
+  const gMenu = component(Menu)(document.getElementById('js-menu')!)
 
   const bootstrap = (scope: HTMLElement, initialLoad = true) => {
     return $<HTMLElement>(`[data-component]`, scope).reduce<ComponentContext[]>((acc, el) => {
@@ -35,6 +38,7 @@ const init = () => {
           mount(el, {
             initialLoad,
             glContext: glWorld.current,
+            menuContext: gMenu.current,
           })
         )
       } catch (error) {

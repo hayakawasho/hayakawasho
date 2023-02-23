@@ -1,4 +1,4 @@
-import { defineComponent, useIntersectionWatch, ref } from 'lake'
+import { defineComponent, useIntersectionWatch, ref, useMount, useUnmount } from 'lake'
 import { Mesh, Plane, Program, Texture } from 'ogl'
 import type { Provides } from '@/const'
 import { useScrollTween, useWatch } from '@/libs/lake'
@@ -9,7 +9,7 @@ import fragment from './frag.glsl'
 import vertex from './vert.glsl'
 
 type Props = Pick<Provides, 'glContext'> & {
-  geometry: Plane
+  geo: Plane
 }
 
 export type Cache = {
@@ -20,7 +20,7 @@ export type Cache = {
 }
 
 export default defineComponent<Props>({
-  setup(domImg: HTMLImageElement, { glContext, geometry }) {
+  setup(domImg: HTMLImageElement, { glContext, geo }) {
     const state = {
       resizing: false,
       visible: false,
@@ -33,8 +33,6 @@ export default defineComponent<Props>({
       rect: domImg.getBoundingClientRect(),
       currentY: scrollPosYGetters(),
     })
-
-    // const planesIndex = Number(domImg.dataset.index)
 
     const texture = new Texture(glContext.gl)
 
@@ -65,11 +63,9 @@ export default defineComponent<Props>({
     })
 
     const mesh = new Mesh(glContext.gl, {
-      geometry,
+      geometry: geo,
       program,
     })
-
-    glContext.addScene(mesh)
 
     const plane = new ImagePlane(mesh)
 
@@ -79,7 +75,7 @@ export default defineComponent<Props>({
         state.visible = entry.isIntersecting
       },
       {
-        rootMargin: '25% 0px',
+        rootMargin: '25%',
       }
     )
 
@@ -110,6 +106,14 @@ export default defineComponent<Props>({
       plane.update(cache.value)
 
       state.resizing = false
+    })
+
+    useMount(() => {
+      glContext.addScene(mesh)
+    })
+
+    useUnmount(() => {
+      glContext.removeScene(mesh)
     })
 
     return {

@@ -1,26 +1,46 @@
+#define PI 3.14159265359
+
 precision highp float;
 
-uniform float uProgress;
-uniform float uPower;
+uniform float uAspectRatio;
+uniform float uTsDir;
+uniform float uPageFront;
+uniform float uPageBack;
+uniform float uPageBackAlpha;
+uniform vec2 uResWin;
+uniform vec2 uMoveUv;
+uniform vec2 uMaskSinRatio;
 
-uniform bool uOut;
+const float MSK_S_STR = 0.25;
+const vec2 DEF_WIN_S = vec2( 1440., 767. );
 
-vec4 transparent = vec4(0., 0., 0., 0.);
-vec4 black = vec4(0., 0., 0., 1.);
+float tsMsk( vec2 uv ) {
+  float mskSinStr = MSK_S_STR /  (uResWin.y / DEF_WIN_S.y);
+  float mskSinWinRt = (uResWin.x / (DEF_WIN_S.x));
 
-#pragma glslify: PI = require("../../../libs/glsl/pi.glsl")
+  float msk = uMoveUv.y;
+  float mskSin = sin(uv.x * PI) * uMaskSinRatio.x;
 
-varying vec2 vUv;
+  mskSin *= mskSinStr;
+  mskSin *= mskSinWinRt;
+  return mskSin += msk;
+}
 
 void main() {
-  vec2 uv = vUv;
+  vec2 res = uResWin;
 
-  uv.y -= ((sin(uv.x * PI) * uPower) * .25);
+  vec2 fUv = gl_FragCoord.xy / res;
+  float tsMskSin = tsMsk( fUv );
 
-  if (!uOut) uv.y = 1. - uv.y;
+  vec4 c;
+  vec4 cW = vec4( vec3(1.0),1.0);
+  vec4 cB = vec4(	vec3(0.0),1.0);
 
-  float t = smoothstep(uv.y - fwidth(uv.y), uv.y, uProgress);
-  vec4 color = mix(transparent, black, t);
+  vec4 cBk = mix( cB, cW, uPageBack );
+  vec4 cFr = mix( cB, cW, uPageFront);
 
-  gl_FragColor = color;
+  cBk.a = uPageBackAlpha;
+
+  c = mix( cBk, cFr, vec4( step( abs(uTsDir - fUv.y), tsMskSin ) ));
+  gl_FragColor = c;
 }
