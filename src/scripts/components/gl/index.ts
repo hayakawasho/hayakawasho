@@ -1,25 +1,17 @@
 import { defineComponent, useDomRef } from 'lake'
-// import { useFluid } from './fluid/useFluid'
-import { useMaskTrans } from './mask/useMaskTrans'
 import { useGl } from './useGl'
 
 export default defineComponent({
+  tagName: 'Gl',
   setup(el) {
+    const dpr = Math.min(window.devicePixelRatio, 1.5)
     const { width, height } = el.getBoundingClientRect()
     const { refs } = useDomRef<{ canvas: HTMLCanvasElement }>('canvas')
 
-    const webgl = useGl(refs.canvas, width, height)
-    const { maskUp, maskDown } = useMaskTrans({
-      ...webgl,
-      ww: width,
-      wh: height,
-    })
-    // useFluid(webgl)
+    const webgl = useGl(refs.canvas, width, height, dpr)
 
     return {
       ...webgl,
-      maskUp,
-      maskDown,
     } as const
   },
 })

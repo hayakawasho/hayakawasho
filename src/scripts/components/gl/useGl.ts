@@ -3,13 +3,11 @@ import { useTick, useWatch } from '@/libs/lake'
 import { createCamera, createRenderer } from '@/libs/ogl'
 import { viewportRef } from '@/states/viewport'
 
-export const useGl = (canvas: HTMLCanvasElement, ww: number, wh: number) => {
-  const dpr = Math.min(window.devicePixelRatio, 1.5)
-
+export const useGl = (canvas: HTMLCanvasElement, ww: number, wh: number, dpr: number) => {
   const { renderer } = createRenderer(canvas, ww, wh, dpr)
   const { gl } = renderer
 
-  const { camera, calc: calcDistance } = createCamera(gl, ww, wh)
+  const { camera, calcDistance } = createCamera(gl, ww, wh)
 
   const scene = new Transform()
 

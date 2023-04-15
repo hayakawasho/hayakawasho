@@ -16,7 +16,7 @@ export const useTick = (callback: (payload: { timestamp: number; timeRatio: numb
     }
 
     const dTime = now - then
-    const timeRatio = dTime / FPS_60_SEC
+    const timeRatio = Math.round((dTime / FPS_60_SEC) * 1000) * 0.001
 
     callback({
       timestamp,

@@ -20,8 +20,8 @@
     "format": "yarn prettier:write && yarn eslint"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^1.0.2",
-    "@11ty/eleventy-img": "^2.0.1",
+    "@11ty/eleventy": "^2.0.1",
+    "@11ty/eleventy-img": "^3.1.0",
     "@babel/cli": "^7.20.7",
     "@babel/core": "^7.20.12",
     "@babel/preset-env": "^7.20.2",
@@ -58,10 +58,10 @@
     "prettier-plugin-svelte": "^2.6.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "svelte": "^3.55.1",
+    "svelte": "^3.58.0",
     "svelte-preprocess": "^5.0.0",
-    "typescript": "^4.9.5",
-    "vite": "^4.0.4",
+    "typescript": "^5.0.4",
+    "vite": "^4.2.1",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-glslify": "^2.0.1",
     "vite-plugin-windicss": "^1.8.10",
@@ -69,18 +69,19 @@
   },
   "dependencies": {
     "@aspida/fetch": "^1.11.0",
-    "@studio-freight/lenis": "^0.2.28",
+    "@studio-freight/lenis": "^1.0.6",
     "bianco.query": "^1.1.4",
     "cdate": "^0.0.4",
     "detect-gpu": "^5.0.9",
+    "gsap": "^3.11.5",
     "lake": "./lib/lake",
     "lil-gui": "^0.16.1",
     "modularload": "^1.2.8",
     "nanostores": "^0.7.3",
-    "ogl": "^0.0.110",
+    "ogl": "^0.0.116",
     "remeda": "^1.3.0",
-    "ts-pattern": "^4.0.6",
-    "tween24": "^1.4.2"
+    "ress": "^5.0.2",
+    "ts-pattern": "^4.0.6"
   },
   "prepare": "husky install",
   "lint-staged": {

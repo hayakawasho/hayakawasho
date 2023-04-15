@@ -1,46 +1,30 @@
 import 'virtual:windi.css'
-import About from '@/components/about'
-import Cursor from '@/components/cursor'
-import $ from 'bianco.query'
-import Gl from '@/components/gl'
-import factory, { withSvelte, type IComponent, type ComponentContext } from 'lake'
-import Home from '@/components/home'
-import Load from '@/components/load'
-import Menu from '@/components/menu'
-import Noop from '@/components/noop'
-import Observer from '@/components/observer/index.svelte'
+import 'ress'
+import q from 'bianco.query'
+import factory, { withSvelte } from 'lake'
+import type { IComponent, ComponentContext } from 'lake'
+import Loader from '@/components/loader'
+import Noop from '@/components/noop.svelte'
+// import Observer from '@/components/observer'
 import Works from '@/components/works'
 import WorksDetail from '@/components/works/[slug]'
+import type { LoaderProps } from '@/const'
 
-const init = () => {
+function bootstrap() {
   const { component, unmount } = factory()
 
   const table: Record<string, IComponent> = {
-    Noop,
-    Observer: withSvelte(Observer),
-    Cursor,
-    Menu,
-    Home,
+    Noop: withSvelte(Noop, ''),
     Works,
     WorksDetail,
-    About,
   } as const
 
-  const glWorld = component(Gl)(document.getElementById('js-glWorld')!)
-  const gMenu = component(Menu)(document.getElementById('js-menu')!)
-
-  const bootstrap = (scope: HTMLElement, initialLoad = true) => {
-    return $<HTMLElement>(`[data-component]`, scope).reduce<ComponentContext[]>((acc, el) => {
+  const mountComponents = (scope: HTMLElement, props: Record<string, unknown>) => {
+    return q<HTMLElement>(`[data-component]`, scope).reduce<ComponentContext[]>((acc, el) => {
       const name = el.dataset.component || 'Noop'
       try {
         const mount = component(table[`${name}`])
-        acc.push(
-          mount(el, {
-            initialLoad,
-            glContext: glWorld.current,
-            menuContext: gMenu.current,
-          })
-        )
+        acc.push(mount(el, props))
       } catch (error) {
         console.error(error)
       }
@@ -50,16 +34,27 @@ const init = () => {
 
   const html = document.documentElement
 
-  component(Load)(html, {
-    componentDidMount: () => bootstrap(html),
-    componentDidUpdate: (scope: HTMLElement) => bootstrap(scope, false),
-    cleanup: (scope: HTMLElement) => unmount($(`[data-component]`, scope)),
-    glContext: glWorld.current,
+  component(Loader)(html, {
+    onCreated: (provides?: Parameters<LoaderProps['onCreated']>[0]) =>
+      mountComponents(html, {
+        ...provides,
+        initialLoad: true,
+      }),
+    onUpdated: (
+      scope: Parameters<LoaderProps['onUpdated']>[0],
+      provides: Parameters<LoaderProps['onUpdated']>[1]
+    ) =>
+      mountComponents(scope, {
+        ...provides,
+        initialLoad: false,
+      }),
+    onCleanup: (scope: Parameters<LoaderProps['onCleanup']>[0]) =>
+      unmount(q(`[data-component]`, scope)),
   })
 }
 
 if (document.readyState !== 'loading') {
-  init()
+  bootstrap()
 } else {
-  document.addEventListener('DOMContentLoaded', init)
+  document.addEventListener('DOMContentLoaded', bootstrap, false)
 }
