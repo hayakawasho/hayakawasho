@@ -1,7 +1,7 @@
 import { resolve } from "path";
 import { defineConfig } from "vite";
 // import glslify from 'vite-plugin-glslify'
-import { svelte } from "@sveltejs/vite-plugin-svelte";
+// import { svelte } from "@sveltejs/vite-plugin-svelte";
 import preprocess from "svelte-preprocess";
 import viteCompression from "vite-plugin-compression";
 import WindiCSS from "vite-plugin-windicss";
@@ -12,7 +12,7 @@ const isDev = process.env.NODE_ENV !== "production";
 export default defineConfig({
   resolve: {
     alias: {
-      "@": resolve(__dirname, "src/scripts"),
+      "@": resolve(__dirname, "src"),
     },
   },
   server: {
@@ -22,10 +22,10 @@ export default defineConfig({
   },
   plugins: [
     // glslify(),
-    svelte({
-      emitCss: false,
-      preprocess: preprocess(),
-    }),
+    // svelte({
+    //   emitCss: false,
+    //   preprocess: preprocess(),
+    // }),
     viteCompression(),
     WindiCSS(),
   ],

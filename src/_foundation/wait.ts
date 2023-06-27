@@ -1,7 +1,7 @@
-import { gsap } from 'gsap'
+import { gsap } from "gsap";
 
 export const sleep = (time: number): Promise<void> => {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     gsap.to(
       {
         val: 0,
@@ -11,10 +11,10 @@ export const sleep = (time: number): Promise<void> => {
         onComplete: resolve,
         val: 1,
       }
-    )
-  })
-}
+    );
+  });
+};
 
 export const nextTick = (): Promise<void> => {
-  return new Promise(resolve => gsap.ticker.add(() => resolve(), true))
-}
+  return new Promise((resolve) => gsap.ticker.add(() => resolve(), true));
+};

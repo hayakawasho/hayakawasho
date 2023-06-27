@@ -1,4 +1,4 @@
-import { Renderer } from 'ogl'
+import { Renderer } from "ogl";
 
 export const createRenderer = (
   canvas: HTMLCanvasElement,
@@ -12,12 +12,12 @@ export const createRenderer = (
     canvas,
 
     dpr,
-  })
+  });
 
-  renderer.setSize(width, height)
-  renderer.gl.clearColor(0, 0, 0, 0)
+  renderer.setSize(width, height);
+  renderer.gl.clearColor(0, 0, 0, 0);
 
   return {
     renderer,
-  }
-}
+  };
+};
