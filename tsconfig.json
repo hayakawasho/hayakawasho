@@ -19,7 +19,7 @@
     "downlevelIteration": true,
     "useDefineForClassFields": true,
     "paths": {
-      "@/*": ["src/scripts/*"]
+      "@/*": ["src/*"]
     },
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
@@ -33,6 +33,6 @@
     "checkJs": true
   },
   "include": ["src/**/*", "@types"],
-  "exclude": ["node_modules/*", "static/*", "src/api/**/*", "./lib"],
+  "exclude": ["node_modules/*", "static/*", "./lib"],
   "extends": "@tsconfig/svelte/tsconfig.json"
 }

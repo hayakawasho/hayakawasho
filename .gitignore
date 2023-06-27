@@ -11,4 +11,5 @@ _site
 
 tmp
 
-/transpiled
+/_transpiled
+/_bk

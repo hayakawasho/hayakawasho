@@ -1,60 +1,62 @@
-import 'virtual:windi.css'
-import 'ress'
-import q from 'bianco.query'
-import factory, { withSvelte } from 'lake'
-import type { IComponent, ComponentContext } from 'lake'
-import Loader from '@/components/loader'
-import Noop from '@/components/noop.svelte'
-// import Observer from '@/components/observer'
-import Works from '@/components/works'
-import WorksDetail from '@/components/works/[slug]'
-import type { LoaderProps } from '@/const'
+import "virtual:windi.css";
+import "ress";
+import { create } from "lake";
+import Home from "@/_components/home";
+import Loader from "@/_components/loader";
+// import Noop from '@/_components/noop.svelte'
+import type { IComponent, ComponentContext } from "lake";
 
-function bootstrap() {
-  const { component, unmount } = factory()
+const bootstrap = () => {
+  const { component, unmount } = create();
 
   const table: Record<string, IComponent> = {
-    Noop: withSvelte(Noop, ''),
-    Works,
-    WorksDetail,
-  } as const
+    Home,
+    // Noop: withSvelte(Noop),
+  } as const;
 
-  const mountComponents = (scope: HTMLElement, props: Record<string, unknown>) => {
-    return q<HTMLElement>(`[data-component]`, scope).reduce<ComponentContext[]>((acc, el) => {
-      const name = el.dataset.component || 'Noop'
+  const mountComponents = (
+    scope: HTMLElement,
+    props: Record<string, unknown>
+  ) => {
+    return Array.from(
+      scope.querySelectorAll<HTMLElement>(`[data-component]`)
+    ).reduce<ComponentContext[]>((acc, el) => {
+      const name = el.dataset.component || "Noop";
       try {
-        const mount = component(table[`${name}`])
-        acc.push(mount(el, props))
+        const mount = component(table[`${name}`]);
+        acc.push(mount(el, props));
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
-      return acc
-    }, [])
-  }
+      return acc;
+    }, []);
+  };
 
-  const html = document.documentElement
+  const html = document.documentElement;
 
   component(Loader)(html, {
-    onCreated: (provides?: Parameters<LoaderProps['onCreated']>[0]) =>
-      mountComponents(html, {
-        ...provides,
+    onCleanup: (scope: HTMLElement) => {
+      return unmount(
+        Array.from(scope.querySelectorAll<HTMLElement>(`[data-component]`))
+      );
+    },
+    onCreated: (context?: Record<string, unknown>) => {
+      return mountComponents(html, {
+        ...context,
         initialLoad: true,
-      }),
-    onUpdated: (
-      scope: Parameters<LoaderProps['onUpdated']>[0],
-      provides: Parameters<LoaderProps['onUpdated']>[1]
-    ) =>
-      mountComponents(scope, {
-        ...provides,
+      });
+    },
+    onUpdated: (scope: HTMLElement, context: Record<string, unknown>) => {
+      return mountComponents(scope, {
+        ...context,
         initialLoad: false,
-      }),
-    onCleanup: (scope: Parameters<LoaderProps['onCleanup']>[0]) =>
-      unmount(q(`[data-component]`, scope)),
-  })
-}
+      });
+    },
+  });
+};
 
-if (document.readyState !== 'loading') {
-  bootstrap()
+if (document.readyState !== "loading") {
+  bootstrap();
 } else {
-  document.addEventListener('DOMContentLoaded', bootstrap, false)
+  document.addEventListener("DOMContentLoaded", bootstrap, false);
 }

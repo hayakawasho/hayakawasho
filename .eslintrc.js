@@ -4,33 +4,76 @@ module.exports = {
     node: true,
   },
   settings: {
-    'import/resolver': {
+    "import/resolver": {
       typescript: {
-        project: './tsconfig.json',
+        project: "./tsconfig.json",
       },
     },
-    'svelte3/typescript': true,
   },
   extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
-    'plugin:jsx-a11y/recommended',
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jsx-a11y/recommended",
+    "prettier",
+    "plugin:jsx-a11y/recommended",
+    "prettier",
+    "plugin:svelte/recommended",
   ],
-  parser: '@typescript-eslint/parser',
+  parser: "@typescript-eslint/parser",
   parserOptions: {
-    sourceType: 'module',
-    project: './tsconfig.json',
+    sourceType: "module",
+    project: "./tsconfig.json",
+    extraFileExtensions: [".svelte"],
   },
-  plugins: ['@typescript-eslint', 'import', 'prettier', 'svelte3', 'jsx-a11y'],
+  plugins: [
+    "react",
+    "@typescript-eslint",
+    "import",
+    "sort-keys-fix",
+    "typescript-sort-keys",
+  ],
   overrides: [
     {
-      files: ['**/*.svelte'],
-      processor: 'svelte3/svelte3',
+      files: ["*.svelte"],
+      parser: "svelte-eslint-parser",
+      // Parse the `<script>` in `.svelte` as TypeScript by adding the following configuration.
+      parserOptions: {
+        parser: "@typescript-eslint/parser",
+      },
     },
+    // ...
   ],
   rules: {
-    'import/order': [2, { alphabetize: { order: 'asc' } }],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        varsIgnorePattern: "^_",
+        args: "none",
+        caughtErrors: "none",
+        ignoreRestSiblings: true,
+        argsIgnorePattern: "^_",
+      },
+    ],
+    "import/order": [
+      "error",
+      {
+        groups: [
+          "builtin",
+          "external",
+          "internal",
+          ["parent", "sibling"],
+          "object",
+          "type",
+          "index",
+        ],
+        "newlines-between": "never",
+        pathGroupsExcludedImportTypes: ["builtin"],
+        alphabetize: { order: "asc", caseInsensitive: true },
+      },
+    ],
+    "import/no-duplicates": "error",
+    "react/jsx-sort-props": "error",
+    "sort-keys-fix/sort-keys-fix": "error",
   },
-}
+};

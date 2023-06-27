@@ -1,11 +1,16 @@
-.gitignore
-vendors/**/*
-static/
-src/__generated__
-_site/
-/.eslintrc.js
-/vite.config.ts
-wp
-/windi.config.ts
-src/api
-/lib
+_site
+/_transpiled
+/_bk
+
+
+# Node dependencies
+/node_modules/
+# System files
+*.log
+.DS_Store
+.cache
+
+.env
+.node-version
+
+tmp

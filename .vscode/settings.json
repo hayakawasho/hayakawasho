@@ -1,8 +1,0 @@
-{
-  "emmet.includeLanguages": {
-    "nunjucks": "html"
-  },
-  "editor.quickSuggestions": {
-    "strings": true
-  }
-}
