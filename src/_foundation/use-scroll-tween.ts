@@ -1,5 +1,5 @@
 import { scrollPositionRef } from "@/_states/scroll";
-import { useWatch } from "./watch";
+import { useWatch } from "./use-watch";
 
 export const useScrollTween = (
   callback: (payload: { currentY: number }) => void

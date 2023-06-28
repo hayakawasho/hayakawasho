@@ -12,7 +12,7 @@
     "build": "NODE_ENV=production run-s clean build:*",
     "type-check": "tsc",
     "fix:prettier": "prettier --write ./src/**/*.{ts,tsx,svelte}",
-    "fix:eslint": "eslint './src/**/*.{ts,tsx,svelte}' -c .eslintrc.js --fix",
+    "fix:eslint": "eslint './src/**/*.{ts,tsx,svelte}' -c .eslintrc.json --fix",
     "fix": "run-s fix:*"
   },
   "devDependencies": {
@@ -32,6 +32,7 @@
     "@types/eslint": "^8.2.0",
     "@types/eslint-plugin-prettier": "^3.1.0",
     "@types/node": "^16.11.9",
+    "@types/normalize-wheel": "^1.0.1",
     "@types/ogl": "npm:ogl-types",
     "@types/prettier": "^2.4.2",
     "@types/react": "17.0.2",
@@ -39,7 +40,6 @@
     "@typescript-eslint/eslint-plugin": "^5.19.0",
     "@typescript-eslint/parser": "^5.19.0",
     "autoprefixer": "^10.4.0",
-    "eleventy-plugin-prismic": "^1.0.0",
     "eslint": "^8.3.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-import-resolver-typescript": "^2.5.0",
@@ -59,7 +59,7 @@
     "react-dom": "17.0.2",
     "svelte": "^4.0.0",
     "svelte-preprocess": "^5.0.4",
-    "typescript": "^5.1.3",
+    "typescript": "^5.0.4",
     "vite": "^4.3.9",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-windicss": "^1.9.0",
@@ -72,6 +72,7 @@
     "lake": "./lib/lake",
     "lil-gui": "^0.16.1",
     "nanostores": "^0.9.2",
+    "normalize-wheel": "^1.0.1",
     "ogl": "^0.0.116",
     "remeda": "^1.3.0",
     "ress": "^5.0.2",
@@ -80,5 +81,6 @@
   "browserslist": [
     "defaults",
     "not IE 11"
-  ]
+  ],
+  "type": "module"
 }

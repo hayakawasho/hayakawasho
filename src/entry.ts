@@ -1,9 +1,9 @@
 import "virtual:windi.css";
 import "ress";
-import { create } from "lake";
+import { create, withSvelte } from "lake";
 import Home from "@/_components/home";
 import Loader from "@/_components/loader";
-// import Noop from '@/_components/noop.svelte'
+import Noop from "@/_components/noop.svelte";
 import type { IComponent, ComponentContext } from "lake";
 
 const bootstrap = () => {
@@ -11,7 +11,7 @@ const bootstrap = () => {
 
   const table: Record<string, IComponent> = {
     Home,
-    // Noop: withSvelte(Noop),
+    Noop: withSvelte(Noop),
   } as const;
 
   const mountComponents = (
@@ -36,18 +36,18 @@ const bootstrap = () => {
 
   component(Loader)(html, {
     onCleanup: (scope: HTMLElement) => {
-      return unmount(
+      unmount(
         Array.from(scope.querySelectorAll<HTMLElement>(`[data-component]`))
       );
     },
     onCreated: (context?: Record<string, unknown>) => {
-      return mountComponents(html, {
+      mountComponents(html, {
         ...context,
         initialLoad: true,
       });
     },
     onUpdated: (scope: HTMLElement, context: Record<string, unknown>) => {
-      return mountComponents(scope, {
+      mountComponents(scope, {
         ...context,
         initialLoad: false,
       });

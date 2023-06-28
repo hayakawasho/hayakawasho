@@ -1,8 +1,8 @@
 import { resolve } from "path";
 import { defineConfig } from "vite";
 // import glslify from 'vite-plugin-glslify'
-// import { svelte } from "@sveltejs/vite-plugin-svelte";
-import preprocess from "svelte-preprocess";
+import { svelte } from "@sveltejs/vite-plugin-svelte";
+// import preprocess from "svelte-preprocess";
 import viteCompression from "vite-plugin-compression";
 import WindiCSS from "vite-plugin-windicss";
 
@@ -22,10 +22,7 @@ export default defineConfig({
   },
   plugins: [
     // glslify(),
-    // svelte({
-    //   emitCss: false,
-    //   preprocess: preprocess(),
-    // }),
+    svelte({}),
     viteCompression(),
     WindiCSS(),
   ],

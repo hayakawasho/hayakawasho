@@ -15,8 +15,20 @@ module.exports = class {
       <PageWithHeader header={<Header />}>
         <Content>
           <main data-component="Home">
-            <div css={intro}></div>
-            <div css={projects}></div>
+            <div css={intro}>
+              <div></div>
+            </div>
+            <div css={projects}>
+              <div css={project}>
+                <div>
+                  <img alt="" src="" />
+                </div>
+                <div>
+                  <h3>a</h3>
+                  <p></p>
+                </div>
+              </div>
+            </div>
           </main>
         </Content>
       </PageWithHeader>
@@ -27,3 +39,5 @@ module.exports = class {
 const intro = css``;
 
 const projects = css``;
+
+const project = css``;

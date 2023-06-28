@@ -1,36 +1,41 @@
-import { Transform } from 'ogl'
-import { useTick, useWatch } from '@/_lake'
-import { createCamera, createRenderer } from '@/_ogl'
-import { viewportRef } from '@/_states/'
+import { Transform } from "ogl";
+import { useTick, useWatch } from "@/_foundation";
+import { createCamera, createRenderer } from "@/_ogl";
+import { viewportRef } from "@/_states/viewport";
 
-export const useGl = (canvas: HTMLCanvasElement, ww: number, wh: number, dpr: number) => {
-  const { renderer } = createRenderer(canvas, ww, wh, dpr)
-  const { gl } = renderer
+export const useGl = (
+  canvas: HTMLCanvasElement,
+  ww: number,
+  wh: number,
+  dpr: number
+) => {
+  const { renderer } = createRenderer(canvas, ww, wh, dpr);
+  const { gl } = renderer;
 
-  const { camera, calcDistance } = createCamera(gl, ww, wh)
+  const { camera, calcDistance } = createCamera(gl, ww, wh);
 
-  const scene = new Transform()
+  const scene = new Transform();
 
   useTick(() => {
-    renderer.render({ camera, scene })
-  })
+    renderer.render({ camera, scene });
+  });
 
   useWatch(viewportRef, ({ width, height }) => {
-    renderer.setSize(width, height)
+    renderer.setSize(width, height);
 
-    const { dist } = calcDistance(height)
+    const { dist } = calcDistance(height);
 
-    camera.perspective({ aspect: width / height })
-    camera.position.z = dist
-  })
+    camera.perspective({ aspect: width / height });
+    camera.position.z = dist;
+  });
 
   return {
     addScene: (child: Transform) => {
-      scene.addChild(child)
+      scene.addChild(child);
     },
     gl,
     removeScene: (child: Transform) => {
-      scene.removeChild(child)
+      scene.removeChild(child);
     },
-  }
-}
+  };
+};
