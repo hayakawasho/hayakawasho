@@ -1,18 +1,17 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import { Global, css } from "@emotion/react";
+import type { FC } from "react";
 
-const SITE_TITLE = " | FRONTEND ENGINEER";
-const DESCRIPTION = "FRONTEND ENGINEER SHO HAYAKAWA 早川翔 portfolio site";
-const SITE_URL = "";
+const SITE_URL = "https://hayakawasho.com";
 
 const idDev = process.env.NODE_ENV !== "production";
 
-export const Head = (props) => {
-  const title = props.title + " | " + SITE_TITLE;
-  const description = props.description || DESCRIPTION;
-  const pagePath = props.pagePath;
-  const isHome = pagePath === "";
+export const Head: FC<{
+  // title: string;
+  // description: string;
+  // pagePath: string;
+}> = (_props) => {
+  const title = "Sho Hayakawa";
+  const description = "FRONTEND ENGINEER SHO HAYAKAWA 早川翔 portfolio site";
 
   return (
     <head>
@@ -22,10 +21,10 @@ export const Head = (props) => {
       <title>{title}</title>
       <meta content={description} name="description" />
       <meta content={title} property="og:title" />
-      <meta content={isHome ? "website" : "article"} property="og:type" />
+      <meta content="website" property="og:type" />
       <meta content={description} property="og:description" />
-      <meta content={SITE_URL + pagePath} property="og:url" />
-      <meta content={SITE_TITLE} property="og:site_name" />
+      <meta content={SITE_URL} property="og:url" />
+      <meta content={title} property="og:site_name" />
       <meta content={SITE_URL + "/ogp.jpg"} property="og:image" />
       <link href="/favicon.ico" rel="icon" />
       {!idDev && <link as="style" href="/assets/entry.css" rel="preload" />}
@@ -36,30 +35,23 @@ export const Head = (props) => {
         rel="preconnect"
       />
       <link
-        href="https://fonts.googleapis.com/css?family=Montserrat:100,300,400&family=Fjalla+One&display=swap"
+        href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400&display=swap"
         rel="stylesheet"
       />
       <Global
         styles={css`
-          @font-face {
-            font-family: "Melete";
-            src: url("/assets/Melete-UltraLight.otf") format("opentype"),
-              url("/assets/Melete-Regular.otf") format("opentype"),
-              url("/assets/Melete-Medium.otf") format("opentype"),
-              url("/assets/Melete-Light.otf") format("opentype"),
-              url("/assets/Melete-Bold.otf") format("opentype");
-          }
-
           :root {
             --font: Montserrat, "YuGothic Medium", "Yu Gothic", YuGothic,
               "游ゴシック", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo,
               sans-serif;
-            --font-melete: "Melete", sans-serif;
-            --font-fjalla: "Fjalla One", sans-serif;
+
             --vh: 1vh;
-            --color-text: #e3e3e3;
-            --color-text-primary: #858585;
-            --color-theme: #1793a9;
+
+            --grid: calc(1 / 12 * 100vw);
+            --gap: calc(30 / 750 * 100vw);
+
+            --color-text: #fff6e5;
+            --color-bg: #111;
           }
 
           *,
@@ -87,15 +79,15 @@ export const Head = (props) => {
           }
 
           body {
-            font-family: var(--font) !important;
+            font-family: var(--font);
             overflow-x: hidden;
             overflow-wrap: break-word;
             -webkit-text-size-adjust: 100%;
             -webkit-font-smoothing: subpixel-antialiased;
             -moz-osx-font-smoothing: unset;
             -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-            // color: var(--color-text);
-            // background-color: #f4f4f4ff;
+            color: var(--color-text);
+            background-color: var(--color-bg);
 
             & ::-moz-selection {
               color: #fff;
@@ -110,29 +102,6 @@ export const Head = (props) => {
             @media (min-resolution: 1.5dppx) {
               -webkit-font-smoothing: antialiased;
               -moz-osx-font-smoothing: grayscale;
-            }
-          }
-
-          dialog {
-            padding: 0;
-            margin: 0;
-            max-width: 100%;
-            height: 100%;
-            max-height: 100%;
-            padding: 0;
-            margin: 0;
-            overflow-y: auto;
-            background-color: transparent;
-            border: none;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-
-            &::-webkit-scrollbar {
-              display: none;
-            }
-
-            &::backdrop {
-              background-color: transparent;
             }
           }
 

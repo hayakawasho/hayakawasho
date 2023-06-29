@@ -1,7 +1,6 @@
 import { Transform } from "ogl";
-import { useTick, useWatch } from "@/_foundation";
-import { createCamera, createRenderer } from "@/_ogl";
-import { viewportRef } from "@/_states/viewport";
+import { useTick, useWindowSize } from "@/_foundation";
+import { createCamera, createRenderer } from "@/_gl";
 
 export const useGl = (
   canvas: HTMLCanvasElement,
@@ -20,22 +19,26 @@ export const useGl = (
     renderer.render({ camera, scene });
   });
 
-  useWatch(viewportRef, ({ width, height }) => {
-    renderer.setSize(width, height);
+  useWindowSize(({ ww, wh, aspect }) => {
+    renderer.setSize(ww, wh);
 
-    const { dist } = calcDistance(height);
+    const { dist } = calcDistance(wh);
 
-    camera.perspective({ aspect: width / height });
+    camera.perspective({ aspect });
     camera.position.z = dist;
   });
 
+  const addScene = (child: Transform) => {
+    scene.addChild(child);
+  };
+
+  const removeScene = (child: Transform) => {
+    scene.removeChild(child);
+  };
+
   return {
-    addScene: (child: Transform) => {
-      scene.addChild(child);
-    },
+    addScene,
     gl,
-    removeScene: (child: Transform) => {
-      scene.removeChild(child);
-    },
+    removeScene,
   };
 };

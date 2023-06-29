@@ -1,3 +1,3 @@
 export * from "./camera";
 export * from "./renderer";
-export * from "./shaderPass";
+export * from "./shader-pass";

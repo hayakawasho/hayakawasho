@@ -30,3 +30,8 @@ export const debounce = <T extends (...args: any[]) => unknown>(
     timeoutId = window.setTimeout(() => callback(...args), delay);
   };
 };
+
+export const searchParamsToString = (q: Record<string, any>) => {
+  const params = new URLSearchParams(q);
+  return params.toString();
+};
