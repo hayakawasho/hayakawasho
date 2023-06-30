@@ -1,9 +1,9 @@
 import { defineComponent, ref, useEvent } from "lake";
 import NormalizeWheel from "normalize-wheel";
-import { Tween, useWatch as _, useTick } from "@/_foundation";
+import { Tween, useTick } from "@/_foundation";
 import { lerp } from "@/_foundation/math";
-// import { scrollPositionMutators } from "@/states/scroll";
-// import { viewportRef, viewportGetters } from "@/states/viewport";
+import { scrollPosMutators } from "@/_states/scroll";
+import { useWindowSize } from "@/_states/window-size";
 
 type Cache = {
   el: HTMLElement;
@@ -19,12 +19,13 @@ type Cache = {
 const SELECTOR_CLASS = "[data-scroll-item]";
 
 export default defineComponent({
+  name: "scrollTween",
   setup(el) {
     const smoothItem = Array.from(
       el.querySelectorAll<HTMLElement>(SELECTOR_CLASS)
     );
 
-    const _window = window as any;
+    const _win = window as any;
 
     if (!smoothItem.length) {
       return;
@@ -39,15 +40,23 @@ export default defineComponent({
       scrollLimit: 0,
       startPos: 0,
       targetPos: 0,
-      // wh: viewportGetters().height,
-      wh: 0,
     };
+
+    const [_ww, wh] = useWindowSize(() => {
+      state.resizing = true;
+
+      cache.value = updateCache(cache.value);
+      state.scrollLimit = setScrollLimit();
+      state.targetPos = clampTarget(state.targetPos);
+
+      state.resizing = false;
+    });
 
     const getBounds = (el: HTMLElement, speed: number) => {
       const rect = el.getBoundingClientRect();
-      const center = state.wh * 0.5 - rect.height * 0.5;
+      const center = wh.value * 0.5 - rect.height * 0.5;
       const offset =
-        rect.top < state.wh
+        rect.top < wh.value
           ? 0
           : (rect.top - center) * speed - (rect.top - center);
       const top = rect.top + offset;
@@ -97,7 +106,7 @@ export default defineComponent({
 
     const setScrollLimit = () => {
       const { height } = el.getBoundingClientRect();
-      return height >= state.wh ? height - state.wh : height;
+      return height >= wh.value ? height - wh.value : height;
     };
 
     const clampTarget = (target: number) => {
@@ -112,7 +121,7 @@ export default defineComponent({
       const end = cache.bottom - translate;
 
       const THRESHOLD = 150;
-      const isVisible = start < THRESHOLD + state.wh && end > -THRESHOLD;
+      const isVisible = start < THRESHOLD + wh.value && end > -THRESHOLD;
 
       return {
         isVisible,
@@ -133,7 +142,7 @@ export default defineComponent({
     };
 
     useEvent(
-      _window,
+      _win,
       "touchstart",
       (e) => {
         if (!state.active) {
@@ -149,7 +158,7 @@ export default defineComponent({
       }
     );
 
-    useEvent(_window, "touchend", () => {
+    useEvent(_win, "touchend", () => {
       if (!state.dragging || !state.active) {
         return;
       }
@@ -158,7 +167,7 @@ export default defineComponent({
     });
 
     useEvent(
-      _window,
+      _win,
       "touchmove",
       (e) => {
         if (!state.dragging || !state.active) {
@@ -175,7 +184,7 @@ export default defineComponent({
     );
 
     useEvent(
-      _window,
+      _win,
       "wheel",
       (e) => {
         if (!state.active) {
@@ -204,26 +213,9 @@ export default defineComponent({
         state.currentPos = 0;
       }
 
-      // scrollPositionMutators({ y: state.currentPos });
+      scrollPosMutators({ y: state.currentPos });
       transformElms(cache.value);
     });
-
-    // useWatch(viewportRef, (payload) => {
-    //   state.resizing = true;
-    //
-    //   state.wh = payload.height;
-    //   cache.value = updateCache(cache.value);
-    //   state.scrollLimit = setScrollLimit();
-    //   state.targetPos = clampTarget(state.targetPos);
-    //
-    //   state.resizing = false;
-    // });
-
-    const moveTo = (value: number) => {
-      Tween.tween(state, 0.8, "power2.inOut", {
-        targetPos: value,
-      });
-    };
 
     //----------------------------------------------------------------
 
@@ -243,6 +235,12 @@ export default defineComponent({
       state.active = false;
     };
 
+    const moveTo = (value: number) => {
+      Tween.tween(state, 0.8, "power2.inOut", {
+        targetPos: value,
+      });
+    };
+
     const scrollTo = (href: string) => {
       if (href === "#top") {
         moveTo(0);
@@ -256,8 +254,8 @@ export default defineComponent({
         const offset = top + state.currentPos;
 
         moveTo(offset);
-      } catch (error) {
-        console.error(error);
+      } catch (e) {
+        console.error(e);
       }
     };
 
@@ -273,5 +271,4 @@ export default defineComponent({
       update,
     };
   },
-  tagName: "SpScroll",
 });

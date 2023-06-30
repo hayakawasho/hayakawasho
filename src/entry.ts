@@ -10,8 +10,8 @@ const bootstrap = () => {
   const { component, unmount } = create();
 
   const table: Record<string, IComponent> = {
-    Home,
-    Noop: withSvelte(Noop),
+    home: Home,
+    noop: withSvelte(Noop, "noop"),
   } as const;
 
   const mountComponents = (
@@ -21,12 +21,12 @@ const bootstrap = () => {
     return Array.from(
       scope.querySelectorAll<HTMLElement>(`[data-component]`)
     ).reduce<ComponentContext[]>((acc, el) => {
-      const name = el.dataset.component || "Noop";
+      const name = el.dataset.component || "noop";
       try {
         const mount = component(table[`${name}`]);
         acc.push(mount(el, props));
-      } catch (error) {
-        console.error(error);
+      } catch (e) {
+        console.error(e);
       }
       return acc;
     }, []);

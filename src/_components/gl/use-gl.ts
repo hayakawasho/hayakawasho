@@ -1,31 +1,34 @@
 import { Transform } from "ogl";
-import { useTick, useWindowSize } from "@/_foundation";
+import { useTick } from "@/_foundation";
 import { createCamera, createRenderer } from "@/_gl";
+import { useWindowSize } from "@/_states/window-size";
 
-export const useGl = (
-  canvas: HTMLCanvasElement,
-  ww: number,
-  wh: number,
-  dpr: number
-) => {
-  const { renderer } = createRenderer(canvas, ww, wh, dpr);
-  const { gl } = renderer;
+export const useGl = (canvas: HTMLCanvasElement, dpr: number) => {
+  const [ww, wh] = useWindowSize(({ aspect }) => {
+    onResize(aspect);
+  });
 
-  const { camera, calcDistance } = createCamera(gl, ww, wh);
+  const { renderer } = createRenderer(canvas, ww.value, wh.value, dpr);
+
+  const { camera, calcDistance } = createCamera(
+    renderer.gl,
+    ww.value,
+    wh.value
+  );
 
   const scene = new Transform();
 
-  useTick(() => {
-    renderer.render({ camera, scene });
-  });
+  const onResize = (aspect: number) => {
+    renderer.setSize(ww.value, wh.value);
 
-  useWindowSize(({ ww, wh, aspect }) => {
-    renderer.setSize(ww, wh);
-
-    const { dist } = calcDistance(wh);
+    const { dist } = calcDistance(wh.value);
 
     camera.perspective({ aspect });
     camera.position.z = dist;
+  };
+
+  useTick(() => {
+    renderer.render({ camera, scene });
   });
 
   const addScene = (child: Transform) => {
@@ -38,7 +41,7 @@ export const useGl = (
 
   return {
     addScene,
-    gl,
+    gl: renderer.gl,
     removeScene,
   };
 };

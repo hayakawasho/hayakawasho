@@ -1,21 +1,23 @@
-import { ref } from "lake";
+import { useUnmount } from "lake";
 import { map } from "nanostores";
-import type { Point } from "@/_foundation";
 
-const pos = map<Point>({
-  x: 0,
+const pos = map<{
+  y: number;
+}>({
   y: 0,
 });
 
-export const scrollPositionGetters = () => pos.get();
+export const useScrollTween = (callback: (payload: { y: number }) => void) => {
+  const unbind = pos.listen(({ y }) => {
+    callback({
+      y,
+    });
+  });
 
-export const scrollPositionMutators = (update: { x?: number; y?: number }) => {
-  const prev = pos.get();
-
-  pos.set({
-    ...prev,
-    ...update,
+  useUnmount(() => {
+    unbind();
   });
 };
 
-export const scrollPositionRef = ref(pos);
+export const scrollPosMutators = (update: { y: number }) =>
+  pos.set({ y: update.y });

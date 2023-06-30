@@ -1,13 +1,16 @@
 import { getGPUTier } from "detect-gpu";
-import { defineComponent, useDomRef as _, useSlot as __, useMount } from "lake";
-import { wideQuery } from "@/_foundation";
-// import Gl from '../gl'
+import { defineComponent, useDomRef, useSlot, useMount } from "lake";
+import { wideQuery, debounce } from "@/_foundation";
+import { windowSizeMutators } from "@/_states/window-size";
+import GlWorld from "../gl";
+import ScrollTween from "../scroll-tween";
 import type { GlobalContext } from "@/_foundation";
 
-// type Refs = {
-//   main: HTMLElement;
-//   glWorld: HTMLElement;
-// };
+type Refs = {
+  main: HTMLElement;
+  glWorld: HTMLElement;
+  windowSizeWatcher: HTMLElement;
+};
 
 type Props = {
   onCreated: (props?: Omit<GlobalContext, "initialLoad">) => void;
@@ -19,9 +22,10 @@ type Props = {
 };
 
 export default defineComponent({
+  name: "loader",
   setup(_el, { onCreated }: Props) {
-    // const { addChild } = useSlot()
-    // const { refs } = useDomRef<Refs>('glWorld', 'main')
+    const { addChild } = useSlot();
+    const { refs } = useDomRef<Refs>("glWorld", "main", "windowSizeWatcher");
 
     const env: GlobalContext["env"] = {
       gpuTier: undefined,
@@ -30,16 +34,26 @@ export default defineComponent({
 
     getGPUTier().then((res) => (env.gpuTier = res));
 
-    // const [gl] = addChild(refs.glWorld, Gl)
+    const [scrollContext] = addChild(refs.main, ScrollTween, { env });
+    const [glContext] = addChild(refs.glWorld, GlWorld);
 
     const provides = {
       env,
-      glContext: undefined,
+      glContext: glContext.current,
     };
 
+    const ro = new ResizeObserver(
+      debounce(([entry]) => {
+        const { width, height } = entry.contentRect;
+        windowSizeMutators({ height, width });
+      }, 200)
+    );
+
     useMount(() => {
-      onCreated(provides as any);
+      ro.observe(refs.windowSizeWatcher);
+
+      scrollContext.current!.update();
+      onCreated(provides);
     });
   },
-  tagName: "Loader",
 });

@@ -105,6 +105,18 @@ export const Head: FC<{
             }
           }
 
+          html {
+            position: fixed;
+            overflow: hidden;
+          }
+
+          html,
+          body {
+            width: 100%;
+            height: 100%;
+            overscroll-behavior-y: none;
+          }
+
           :any-link {
             color: inherit;
             text-decoration: none;

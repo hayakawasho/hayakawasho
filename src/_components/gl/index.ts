@@ -1,17 +1,12 @@
-import { defineComponent, useDomRef } from 'lake'
-import { useGl } from './use-gl'
+import { defineComponent, useDomRef } from "lake";
+import { useGl } from "./use-gl";
 
 export default defineComponent({
+  name: "glWorld",
   setup(el) {
-    const dpr = Math.min(window.devicePixelRatio, 1.5)
-    const { width, height } = el.getBoundingClientRect()
-    const { refs } = useDomRef<{ canvas: HTMLCanvasElement }>('canvas')
+    const dpr = Math.min(window.devicePixelRatio, 1.5);
+    const { refs } = useDomRef<{ canvas: HTMLCanvasElement }>("canvas");
 
-    const webgl = useGl(refs.canvas, width, height, dpr)
-
-    return {
-      ...webgl,
-    }
+    return useGl(refs.canvas, dpr);
   },
-  tagName: 'Gl',
-})
+});

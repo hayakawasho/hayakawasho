@@ -2,15 +2,13 @@ import { ref, readonly, useUnmount } from "lake";
 import { map } from "nanostores";
 import type { Size } from "@/_foundation";
 
-const { innerWidth, innerHeight } = window;
-
 const viewport = map<Size>({
-  height: innerHeight,
-  width: innerWidth,
+  height: window.innerHeight,
+  width: window.innerWidth,
 });
 
 export const useWindowSize = (
-  callback: (payload: { ww: number; wh: number; aspect: number }) => void
+  callback: (payload: { aspect: number }) => void
 ) => {
   const { width, height } = viewport.get();
 
@@ -24,8 +22,6 @@ export const useWindowSize = (
 
     callback({
       aspect,
-      wh: height,
-      ww: width,
     });
 
     state.ww.value = width;
@@ -36,8 +32,7 @@ export const useWindowSize = (
     unbind();
   });
 
-  return {
-    wh: readonly(state.wh),
-    ww: readonly(state.ww),
-  };
+  return [readonly(state.ww), readonly(state.wh)] as const;
 };
+
+export const windowSizeMutators = (update: Size) => viewport.set(update);
