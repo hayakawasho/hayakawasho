@@ -10,7 +10,7 @@ import { useScrollTween } from "@/_states/scroll";
 import { useWindowSize } from "@/_states/window-size";
 import fragment from "./frag.glsl";
 import vertex from "./vert.glsl";
-import type { GlobalContext } from "@/_foundation";
+import type { GlobalContext } from "@/_foundation/type";
 
 type Props = Pick<GlobalContext, "glContext">;
 
@@ -109,7 +109,6 @@ export default defineComponent({
         wh: wh.value,
         ww: ww.value,
       };
-
       plane.update(cache.value);
 
       state.resizing = false;
@@ -124,7 +123,6 @@ export default defineComponent({
         ...cache.value,
         currentY: y,
       };
-
       plane.update(cache.value);
     });
 

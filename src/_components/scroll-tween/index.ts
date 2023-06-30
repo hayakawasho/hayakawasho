@@ -1,7 +1,8 @@
 import { defineComponent, ref, useEvent } from "lake";
 import NormalizeWheel from "normalize-wheel";
-import { Tween, useTick } from "@/_foundation";
+import { useTick } from "@/_foundation/hooks";
 import { lerp } from "@/_foundation/math";
+import { Tween } from "@/_foundation/tween";
 import { scrollPosMutators } from "@/_states/scroll";
 import { useWindowSize } from "@/_states/window-size";
 

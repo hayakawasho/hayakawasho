@@ -1,7 +1,7 @@
 import { defineComponent, useSlot, useDomRef } from "lake";
 import Intro from "./intro";
 import ImagePlane from "../image-plane";
-import type { GlobalContext } from "@/_foundation";
+import type { GlobalContext } from "@/_foundation/type";
 
 export default defineComponent({
   name: "home",

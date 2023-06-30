@@ -1,5 +1,5 @@
 import { defineComponent, useDomRef, useMount, useUnmount } from "lake";
-import { useTick } from "@/_foundation";
+import { useTick } from "@/_foundation/hooks";
 
 export default defineComponent({
   name: "home.intro",
@@ -8,7 +8,9 @@ export default defineComponent({
       "introCanvas"
     );
 
-    useTick(({ timestamp }) => {
+    console.log(refs.introCanvas);
+
+    useTick(() => {
       //
     });
 

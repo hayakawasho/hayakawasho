@@ -1,10 +1,11 @@
 import { getGPUTier } from "detect-gpu";
 import { defineComponent, useDomRef, useSlot, useMount } from "lake";
-import { wideQuery, debounce } from "@/_foundation";
+import { wideQuery } from "@/_foundation/env";
+import { debounce } from "@/_foundation/utils";
 import { windowSizeMutators } from "@/_states/window-size";
 import GlWorld from "../gl";
 import ScrollTween from "../scroll-tween";
-import type { GlobalContext } from "@/_foundation";
+import type { GlobalContext } from "@/_foundation/type";
 
 type Refs = {
   main: HTMLElement;

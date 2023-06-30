@@ -1,5 +1,5 @@
 import { Transform } from "ogl";
-import { useTick } from "@/_foundation";
+import { useTick } from "@/_foundation/hooks";
 import { createCamera, createRenderer } from "@/_gl";
 import { useWindowSize } from "@/_states/window-size";
 

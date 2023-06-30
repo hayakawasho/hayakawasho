@@ -33,7 +33,7 @@ const responseToAPIResponse = <T>(data: T, res: Response): APIResponse<T> => {
   };
 };
 
-export const apiClient = {
+export const api = {
   delete<T extends APISchema>(
     url: string,
     { headers }: APIRequestConfig<T, "DELETE">

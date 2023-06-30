@@ -3,7 +3,7 @@ import { useGl } from "./use-gl";
 
 export default defineComponent({
   name: "glWorld",
-  setup(el) {
+  setup(_) {
     const dpr = Math.min(window.devicePixelRatio, 1.5);
     const { refs } = useDomRef<{ canvas: HTMLCanvasElement }>("canvas");
 
