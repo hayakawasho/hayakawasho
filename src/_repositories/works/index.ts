@@ -17,8 +17,20 @@ const convertBookFromDB = (rawItem: any): WorkMetadata => {
   } as const;
 };
 
+const API_ENDPOINT = "https://hayakawasho.microcms.io/api/v1";
+
 export class WorksRepository {
-  constructor(private _apiKey: string, private _endpoint: string) {}
+  private constructor(private _apiKey: string) {}
+
+  static create(apiKey: string) {
+    try {
+      return new WorksRepository(apiKey);
+    } catch (error) {
+      throw new Error("NO API_KEY", {
+        cause: error,
+      });
+    }
+  }
 
   findList = async (
     q: WorksAPISchema["GET"]["request"]["params"]
@@ -27,7 +39,7 @@ export class WorksRepository {
     totalCount: number;
   }> => {
     const { data } = await api.get<WorksAPISchema>(
-      `${this._endpoint}/works?${searchParamsToString(q)}`,
+      `${API_ENDPOINT}/works?${searchParamsToString(q)}`,
       {
         headers: {
           "Content-Type": "application/json",

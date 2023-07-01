@@ -9,7 +9,7 @@ export const data = {
   pagination: {
     addAllPagesToCollections: false,
     alias: "posts",
-    data: "cms.home",
+    data: "cms.index",
     size: 5,
   },
 };

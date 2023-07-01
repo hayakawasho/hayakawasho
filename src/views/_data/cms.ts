@@ -4,14 +4,11 @@ import { WorksRepository } from "@/_repositories/works";
 dotenv.config();
 
 const fetchWorks = async () => {
-  const repo = new WorksRepository(
-    process.env.API_KEY!,
-    process.env.API_ENDPOINT!
-  );
-  const res = await repo.findList({});
+  const { findList } = WorksRepository.create(process.env.API_KEY!);
+  const res = await findList({});
 
   return {
-    home: res.works,
+    index: res.works,
   };
 };
 
