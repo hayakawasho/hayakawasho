@@ -2,6 +2,7 @@ import "virtual:windi.css";
 import "ress";
 import { create, withSvelte } from "lake";
 import Home from "@/_components/home";
+import Works from "@/_components/works";
 import Loader from "@/_components/loader";
 import Noop from "@/_components/noop.svelte";
 import type { IComponent, ComponentContext } from "lake";
@@ -12,6 +13,7 @@ const bootstrap = () => {
   const table: Record<string, IComponent> = {
     home: Home,
     noop: withSvelte(Noop, "noop"),
+    works: Works,
   } as const;
 
   const mountComponents = (

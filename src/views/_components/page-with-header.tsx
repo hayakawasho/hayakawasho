@@ -18,6 +18,8 @@ export const PageWithHeader: FC<{
           css={svh}
           data-ref="windowSizeWatcher"
         ></div>
+        {header}
+        {children}
         <div
           aria-hidden="true"
           className="fixed inset-0 w-screen h-screen pointer-events-none z-10"
@@ -25,8 +27,6 @@ export const PageWithHeader: FC<{
         >
           <canvas className="w-screen h-screen" data-ref="canvas"></canvas>
         </div>
-        {header}
-        {children}
         <script
           defer
           src="https://polyfill.io/v3/polyfill.min.js?features=MediaQueryList.prototype.addEventListener%2CMediaQueryList.prototype.removeEventListener%2CString.prototype.padStart%2CIntersectionObserver%2CResizeObserver"

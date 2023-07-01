@@ -18,7 +18,6 @@ export const data = {
 
 export const render = (props: any) => {
   const post: WorkMetadata = props.post;
-
   const page = props.pagination.page;
   const nextPost: WorkMetadata =
     page.last.id === post.id ? { ...page.first } : { ...page.next };
@@ -27,7 +26,7 @@ export const render = (props: any) => {
   ${r(
     <PageWithHeader header={<Header />}>
       <Content>
-        <main data-component="">
+        <main data-component="works">
           <div css={head} data-scroll-item>
             <h1>{post.title}</h1>
           </div>
@@ -42,25 +41,24 @@ export const render = (props: any) => {
               spW={post.eyecatch.width}
             />
           </div>
-          <div css={cases} data-scroll-item>
-            <ul>
-              {post.cases.map((i, index) => {
-                return (
-                  <li className="mb-[2.5rem]" key={index}>
-                    <ResponsiveImage
-                      alt=""
-                      pcH={i.height}
-                      pcSrc={`${i.src}?auto=compress,format`}
-                      pcW={i.width}
-                      spH={i.height}
-                      spSrc={`${i.src}?auto=compress,format&fit=crop&w=750`}
-                      spW={i.width}
-                    />
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+          <ul css={screenshots} data-scroll-item>
+            {post.screenshots.map((i, index) => {
+              return (
+                <li className="mb-[2rem] sm:mb-[4rem]" key={index}>
+                  <ResponsiveImage
+                    alt=""
+                    pcH={i.height}
+                    pcSrc={`${i.src}?auto=compress,format`}
+                    pcW={i.width}
+                    spH={i.height}
+                    spSrc={`${i.src}?auto=compress,format&fit=crop&w=750`}
+                    spW={i.width}
+                  />
+                </li>
+              );
+            })}
+          </ul>
+          <div css={next} data-scroll-item></div>
         </main>
       </Content>
     </PageWithHeader>
@@ -71,7 +69,16 @@ const head = css`
   height: 132vw;
 `;
 
-const cases = css`
-  padding-left: calc(var(--gap) * 2);
-  padding-right: calc(var(--gap) * 2);
+const screenshots = css`
+  width: calc(100% - (var(--grid) * 2));
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (min-width: 640px) {
+    width: calc(var(--grid) * 6);
+  }
+`;
+
+const next = css`
+  height: 100vh;
 `;

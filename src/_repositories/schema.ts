@@ -21,13 +21,13 @@ type RawDBResponse<T> = {
   limit: number;
 };
 
+// WIP
 type RawWorkResponse = {
   title: string;
   eyecatch: {
-    src?: string;
+    url?: string;
     width?: number;
     height?: number;
-    aspect?: number;
   };
 };
 

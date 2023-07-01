@@ -37,9 +37,8 @@ export const Head: FC<{
       <Global
         styles={css`
           :root {
-            --font: Montserrat, "YuGothic Medium", "Yu Gothic", YuGothic,
-              "游ゴシック", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo,
-              sans-serif;
+            --font: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
+              "Hiragino Sans", Meiryo, sans-serif;
 
             --vh: 1vh;
 

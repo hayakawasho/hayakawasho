@@ -22,9 +22,9 @@ export const render = (props: any) => {
     <PageWithHeader header={<Header />}>
       <Content>
         <main className="h-full" data-component="home">
-          <div css={intro} data-ref="intro" data-scroll-item>
+          <div css={intro} data-scroll-item>
             <h1 className="sr-only">Sho Hayakawa Developer</h1>
-            <div className="sizefull relative">
+            <div className="sizefull relative" data-ref="artwork">
               <div
                 className="inset-0 absolute"
                 css={intro__frame}
@@ -65,7 +65,9 @@ export const render = (props: any) => {
                     />
                   </a>
                   <div css={project__body}>
-                    <h3 css={heading}>{post.title}</h3>
+                    <h3 className="font-montserrat" css={heading}>
+                      {post.title}
+                    </h3>
                     <p className="mt-[.5em] | sm:mt-0" css={text}>
                       {post.kind}
                     </p>
@@ -153,6 +155,7 @@ const heading = css`
 const text = css`
   font-size: 1.1rem;
   line-height: 1.1;
+  letter-spacing: 0.02em;
   opacity: 0.3;
 
   @media (min-width: 640px) {

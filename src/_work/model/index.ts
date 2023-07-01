@@ -10,7 +10,7 @@ export type WorkMetadata = {
   eyecatch: Image;
   title: string;
   kind: string;
-  cases: Image[];
+  screenshots: Image[];
 };
 
 export class Work extends Model<WorkMetadata> {

@@ -1,20 +1,18 @@
 import { defineComponent, useSlot, useDomRef } from "lake";
 import Artwork from "./artwork";
-import ImagePlane from "../image-plane";
+import ImagePlane from "./image-plane";
 import type { GlobalContext } from "@/_foundation/type";
 
 export default defineComponent({
   name: "home",
-  setup(_el, props: GlobalContext) {
-    const { glContext } = props;
-
+  setup(_el, { glContext }: GlobalContext) {
+    const { addChild } = useSlot();
     const { refs } = useDomRef<{
       plane: HTMLImageElement[];
-      intro: HTMLElement;
-    }>("plane", "intro");
-    const { addChild } = useSlot();
+      artwork: HTMLElement;
+    }>("plane", "artwork");
 
-    addChild(refs.intro, Artwork);
+    addChild(refs.artwork, Artwork);
     addChild(refs.plane, ImagePlane, {
       glContext,
     });

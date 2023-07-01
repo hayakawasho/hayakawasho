@@ -6,11 +6,6 @@ import type { WorkMetadata } from "@/_work/model";
 
 const convertBookFromDB = (rawItem: any): WorkMetadata => {
   return {
-    cases: rawItem.gallery.map((i: any) => ({
-      height: i.height,
-      src: i.url,
-      width: i.width,
-    })),
     eyecatch: {
       height: rawItem.eyecatch.height,
       src: rawItem.eyecatch.url,
@@ -18,6 +13,11 @@ const convertBookFromDB = (rawItem: any): WorkMetadata => {
     },
     id: rawItem.id,
     kind: rawItem.kinds[0],
+    screenshots: rawItem.screenshots.map((i: any) => ({
+      height: i.height,
+      src: i.url,
+      width: i.width,
+    })),
     title: rawItem.title,
   } as const;
 };
@@ -41,7 +41,6 @@ export class WorksRepository {
     q: WorksAPISchema["GET"]["request"]["params"]
   ): Promise<{
     works: WorkMetadata[];
-    totalCount: number;
   }> => {
     const { data } = await api.get<WorksAPISchema>(
       `${API_ENDPOINT}/works?${searchParamsToString(q)}`,
@@ -54,7 +53,6 @@ export class WorksRepository {
     );
 
     return {
-      totalCount: data.totalCount,
       works: data.contents.map((item) => {
         return Work.create(convertBookFromDB(item)).toJSON();
       }),

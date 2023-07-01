@@ -3,7 +3,7 @@ import { defineComponent, useDomRef, useSlot, useMount } from "lake";
 import { wideQuery } from "@/_foundation/env";
 import { debounce } from "@/_foundation/utils";
 import { windowSizeMutators } from "@/_states/window-size";
-import GlWorld from "../gl";
+import GlWorld from "../glworld";
 import ScrollTween from "../scroll-tween";
 import type { GlobalContext } from "@/_foundation/type";
 
