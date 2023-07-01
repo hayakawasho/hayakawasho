@@ -139,10 +139,10 @@ const project__body = css`
 `;
 
 const heading = css`
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   font-weight: 200;
-  letter-spacing: 0.1em;
-  line-height: 1.05;
+  letter-spacing: 0.06em;
+  line-height: 1.1;
 
   @media (min-width: 640px) {
     font-size: 3.6rem;
@@ -151,8 +151,8 @@ const heading = css`
 `;
 
 const text = css`
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1.1rem;
+  line-height: 1.1;
   opacity: 0.3;
 
   @media (min-width: 640px) {

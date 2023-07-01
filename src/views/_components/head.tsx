@@ -29,13 +29,9 @@ export const Head: FC<{
       <link href="/favicon.ico" rel="icon" />
       {!idDev && <link as="style" href="/assets/entry.css" rel="preload" />}
       <link href="https://fonts.googleapis.com" rel="preconnect" />
+      <link crossOrigin="" href="https://fonts.gstatic.com" rel="preconnect" />
       <link
-        crossOrigin="true"
-        href="https://fonts.gstatic.com"
-        rel="preconnect"
-      />
-      <link
-        href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400&display=swap"
         rel="stylesheet"
       />
       <Global
@@ -79,7 +75,7 @@ export const Head: FC<{
           }
 
           body {
-            font-family: var(--font);
+            font-family: var(--font) !important;
             overflow-x: hidden;
             overflow-wrap: break-word;
             -webkit-text-size-adjust: 100%;
