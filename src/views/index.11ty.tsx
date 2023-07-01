@@ -95,7 +95,7 @@ const project__eyecatch = css`
 
   @media (min-width: 640px) {
     aspect-ratio: unset;
-    width: calc(var(--grid) * 5);
+    width: calc(var(--grid) * 5 + var(--gap));
   }
 
   & > img {
