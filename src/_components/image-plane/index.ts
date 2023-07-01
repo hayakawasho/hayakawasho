@@ -39,7 +39,7 @@ class ImagePlane {
 }
 
 export default defineComponent({
-  name: "ImagePlane",
+  name: "plane",
   setup(domImg: HTMLImageElement, { glContext }: Props) {
     const state = {
       resizing: false,

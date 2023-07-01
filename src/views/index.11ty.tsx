@@ -21,13 +21,20 @@ export const render = (props: any) => {
   ${r(
     <PageWithHeader header={<Header />}>
       <Content>
-        <main data-component="home">
+        <main className="h-full" data-component="home">
           <div css={intro} data-ref="intro" data-scroll-item>
             <h1 className="sr-only">Sho Hayakawa Developer</h1>
-            <canvas
-              className="inset-0 w-full h-full pointer-events-none absolute"
-              data-ref="introCanvas"
-            ></canvas>
+            <div className="sizefull relative">
+              <div
+                className="inset-0 absolute"
+                css={intro__frame}
+                role="presentation"
+              ></div>
+              <canvas
+                className="inset-0 w-full h-full pointer-events-none absolute"
+                data-ref="artworkCanvas"
+              ></canvas>
+            </div>
           </div>
           <div className="mt-[8rem] | sm:mt-[12rem]" css={projects}>
             <h2 className="sr-only">PROJECTS</h2>
@@ -35,27 +42,28 @@ export const render = (props: any) => {
               return (
                 <div
                   className={`mb-[8rem] | sm:mb-[12rem] ${
-                    (index + 1) % 2 === 0 ? "flex-row-reverse" : ""
+                    (index + 1) % 2 === 0 ? "sm:flex-row-reverse" : ""
                   }`}
                   css={project}
                   data-scroll-item
                   key={post.id}
                 >
-                  <figure
+                  <a
                     className="mb-[2rem] | sm:mb-0"
                     css={project__eyecatch}
+                    href={`./works/${post.id}/`}
                   >
                     <img
                       alt=""
                       data-pc-src={`${post.eyecatch.src}?auto=compress,format`}
                       data-ref="plane"
                       data-sp-src={`${post.eyecatch.src}?auto=compress,format&fit=crop&w=750&h=750`}
+                      decoding="async"
                       height={post.eyecatch.height}
-                      loading="lazy"
                       src={`${post.eyecatch.src}?auto=compress,format`}
                       width={post.eyecatch.width}
                     />
-                  </figure>
+                  </a>
                   <div css={project__body}>
                     <h3 css={heading}>{post.title}</h3>
                     <p className="mt-[.5em] | sm:mt-0" css={text}>
@@ -77,6 +85,16 @@ const intro = css`
   height: 100svh;
   overflow: hidden;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+`;
+
+const intro__frame = css`
+  border: 1px solid var(--color-bg);
+  pointer-events: none;
+  background-color: #fff;
 `;
 
 const projects = css`
@@ -91,6 +109,7 @@ const project = css`
 `;
 
 const project__eyecatch = css`
+  display: block;
   aspect-ratio: 1 / 1;
 
   @media (min-width: 640px) {
@@ -109,6 +128,7 @@ const project__eyecatch = css`
 
 const project__body = css`
   text-align: center;
+  backface-visibility: hidden;
 
   @media (min-width: 640px) {
     display: flex;

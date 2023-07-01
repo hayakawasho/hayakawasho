@@ -6,6 +6,11 @@ import type { WorkMetadata } from "@/_work/model";
 
 const convertBookFromDB = (rawItem: any): WorkMetadata => {
   return {
+    cases: rawItem.gallery.map((i: any) => ({
+      height: i.height,
+      src: i.url,
+      width: i.width,
+    })),
     eyecatch: {
       height: rawItem.eyecatch.height,
       src: rawItem.eyecatch.url,

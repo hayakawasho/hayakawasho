@@ -6,6 +6,7 @@ const idDev = process.env.NODE_ENV !== "production";
 
 export const PageWithHeader: FC<{
   header: ReactNode;
+  children: ReactNode;
 }> = ({ header, children, ...props }) => {
   return (
     <html lang="ja">

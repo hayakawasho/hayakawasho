@@ -1,5 +1,5 @@
 import { defineComponent, useSlot, useDomRef } from "lake";
-import Intro from "./intro";
+import Artwork from "./artwork";
 import ImagePlane from "../image-plane";
 import type { GlobalContext } from "@/_foundation/type";
 
@@ -14,7 +14,7 @@ export default defineComponent({
     }>("plane", "intro");
     const { addChild } = useSlot();
 
-    addChild(refs.intro, Intro);
+    addChild(refs.intro, Artwork);
     addChild(refs.plane, ImagePlane, {
       glContext,
     });

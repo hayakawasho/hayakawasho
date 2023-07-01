@@ -55,7 +55,7 @@ export default defineComponent({
 
     const getBounds = (el: HTMLElement, speed: number) => {
       const rect = el.getBoundingClientRect();
-      const center = wh.value * 0.5 - rect.height * 0.5;
+      const center = wh.value / 2 - rect.height / 2;
       const offset =
         rect.top < wh.value
           ? 0
@@ -74,7 +74,6 @@ export default defineComponent({
       smoothItem.reduce<Cache[]>((acc, el) => {
         const speed = Number(el.dataset.speed) || 1;
         const { top, bottom, offset } = getBounds(el, speed);
-        // TODO: parent
 
         acc.push({
           bottom,
@@ -245,7 +244,6 @@ export default defineComponent({
     const scrollTo = (href: string) => {
       if (href === "#top") {
         moveTo(0);
-
         return;
       }
 
