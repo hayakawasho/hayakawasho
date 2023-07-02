@@ -31,7 +31,7 @@ export const Head: FC<{
       <link href="https://fonts.googleapis.com" rel="preconnect" />
       <link crossOrigin="" href="https://fonts.gstatic.com" rel="preconnect" />
       <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;500&display=swap"
         rel="stylesheet"
       />
       <Global
@@ -46,8 +46,9 @@ export const Head: FC<{
           }
 
           :root {
-            --font: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
-              "Hiragino Sans", Meiryo, sans-serif;
+            --font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+              "Segoe UI", Roboto, "Helvetica Neue", Arial,
+              "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
             --font-en: "Melete", sans-serif;
 
             --vh: 1vh;

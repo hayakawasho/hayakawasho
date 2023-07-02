@@ -1,16 +1,16 @@
 import { css } from "@emotion/react";
-import type { FC, ReactNode } from "react";
 import { renderToStaticMarkup as r } from "react-dom/server";
-import { Header } from "../_components/header";
-import { Content } from "../_components/page-content";
-import { PageWithHeader } from "../_components/page-with-header";
-import { ResponsiveImage } from "../_components/responsive-image";
 import {
   selectDatetime,
   selectLaunch,
   selectUrl,
 } from "@/_work/model/selector";
+import { Header } from "../_components/header";
+import { Content } from "../_components/page-content";
+import { PageWithHeader } from "../_components/page-with-header";
+import { ResponsiveImage } from "../_components/responsive-image";
 import type { WorkMetadata } from "@/_work/model";
+import type { FC, ReactNode } from "react";
 
 export const data = {
   pagination: {
@@ -29,7 +29,7 @@ const Info: FC<{
 }> = ({ className = "", ...props }) => {
   return (
     <dl className={className}>
-      <dt css={infoHeading} className="font-montserrat mb-[0.6em]">
+      <dt className="mb-[0.6em]" css={infoHeading}>
         {props.heading}
       </dt>
       <dd css={infoText}>{props.text}</dd>
@@ -49,7 +49,7 @@ export const render = (props: any) => {
       <Content>
         <main data-component="works">
           <div css={head} data-scroll-item>
-            <h1 css={heading} className="">
+            <h1 className="" css={heading}>
               {post.title}
             </h1>
             <div css={head__info}>
@@ -66,8 +66,9 @@ export const render = (props: any) => {
                   className="mt-[2.4rem]"
                   heading="URL"
                   text={
-                    <a target="_blank" href={post.url}>
+                    <a href={post.url} target="_blank">
                       {selectUrl(post)}
+                      <span className="ml-[.5em]">↗</span>
                     </a>
                   }
                 ></Info>
@@ -109,13 +110,24 @@ export const render = (props: any) => {
   )}`;
 };
 
+const infoHeading = css`
+  font-size: 1.2rem;
+  line-height: 1.1;
+  letter-spacing: 0.06em;
+  opacity: 0.5;
+`;
+
+const infoText = css`
+  font-size: 1.2rem;
+  line-height: 1.1;
+  letter-spacing: 0.06em;
+`;
+
 const head = css`
   height: calc(100vh - (100vw * 0.56 / 2));
   height: calc(100svh - (100vw * 0.56 / 2));
-  display: flex;
-  align-items: center;
-  // justify-content: flex-end;
   position: relative;
+  overflow: hidden;
 
   @media (min-width: 640px) {
     height: 80vh;
@@ -128,26 +140,17 @@ const head__info = css`
   left: var(--grid);
 `;
 
-const infoHeading = css`
-  font-size: 1.2rem;
-  line-height: 1.1;
-  letter-spacing: 0.06em;
-  opacity: 0.5;
-`;
-
-const infoText = css`
-  font-size: 1.2rem;
-  line-height: 1.1;
-  letter-spacing: 0.12em;
-`;
-
 const heading = css`
   font-family: var(--font-en);
   font-size: 3.9rem;
-  letter-spacing: -0.3em;
-  // font-weight: 100;
+  letter-spacing: -0.4em;
   line-height: 1.1;
   opacity: 0.5;
+  margin-left: -0.2em;
+  position: absolute;
+  left: -0.1em;
+  top: 50%;
+  margin-top: -0.5em;
 `;
 
 const screenshots = css`

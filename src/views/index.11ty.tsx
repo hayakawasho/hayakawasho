@@ -144,7 +144,7 @@ const heading = css`
   font-family: var(--font-en);
   font-size: 1.8rem;
   font-weight: 200;
-  letter-spacing: -0.3em;
+  letter-spacing: -0.24em;
   line-height: 1.1;
 
   @media (min-width: 640px) {

@@ -13,13 +13,13 @@ const convertBookFromDB = (rawItem: any): WorkMetadata => {
     },
     id: rawItem.id,
     kind: rawItem.kinds[0],
+    launch: rawItem.launch,
     screenshots: rawItem.screenshots.map((i: any) => ({
       height: i.height,
       src: i.url,
       width: i.width,
     })),
     title: rawItem.title,
-    launch: rawItem.launch,
     url: rawItem.url,
   } as const;
 };

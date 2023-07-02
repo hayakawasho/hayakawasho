@@ -6,7 +6,7 @@ export const selectDatetime = (metadata: WorkMetadata) => {
 };
 
 export const selectLaunch = (metadata: WorkMetadata) => {
-  return dayjs(metadata.launch).format("MMMM, YYYY");
+  return dayjs(metadata.launch).format("MMMM YYYY");
 };
 
 export const selectUrl = (metadata: WorkMetadata) => {

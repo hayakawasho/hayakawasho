@@ -9,7 +9,7 @@ export default defineConfig({
   theme: {
     extend: {
       fontFamily: {
-        montserrat: ["Montserrat"],
+        //
       },
     },
   },
