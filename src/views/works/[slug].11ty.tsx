@@ -63,7 +63,7 @@ export const render = (props: any) => {
               ></Info>
               {post.url && (
                 <Info
-                  className="mt-[2.4rem]"
+                  className="mt-[2.4rem] sm:mt-0"
                   heading="URL"
                   text={
                     <a href={post.url} target="_blank">
@@ -75,7 +75,7 @@ export const render = (props: any) => {
               )}
             </div>
           </div>
-          <div className="mb-[8rem]" data-scroll-item>
+          <div className="mb-[8rem] sm:mb-[16rem]" data-scroll-item>
             <ResponsiveImage
               alt=""
               pcH={post.eyecatch.height}
@@ -89,7 +89,7 @@ export const render = (props: any) => {
           <ul css={screenshots} data-scroll-item>
             {post.screenshots.map((i, index) => {
               return (
-                <li className="mb-[2rem] sm:mb-[4rem]" key={index}>
+                <li className="mb-[2rem] sm:mb-[5rem]" key={index}>
                   <ResponsiveImage
                     alt=""
                     pcH={i.height}
@@ -115,12 +115,20 @@ const infoHeading = css`
   line-height: 1.1;
   letter-spacing: 0.06em;
   opacity: 0.5;
+
+  @media (min-width: 640px) {
+    font-size: 1.4rem;
+  }
 `;
 
 const infoText = css`
   font-size: 1.2rem;
   line-height: 1.1;
   letter-spacing: 0.06em;
+
+  @media (min-width: 640px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const head = css`
@@ -138,19 +146,35 @@ const head__info = css`
   position: absolute;
   bottom: 5rem;
   left: var(--grid);
+
+  @media (min-width: 640px) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    bottom: 8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    gap: calc(var(--gap) * 2);
+  }
 `;
 
 const heading = css`
   font-family: var(--font-en);
-  font-size: 3.8rem;
+  font-size: 4.6rem;
   letter-spacing: -0.4em;
   line-height: 1.1;
   opacity: 0.5;
   margin-left: -0.2em;
   position: absolute;
   left: -0.1em;
-  top: 50%;
-  margin-top: -0.5em;
+  top: 50vh;
+  top: 50svh;
+  margin-top: -1em;
+  white-space: nowrap;
+
+  @media (min-width: 640px) {
+    font-size: 8rem;
+  }
 `;
 
 const screenshots = css`
@@ -159,7 +183,7 @@ const screenshots = css`
   margin-right: auto;
 
   @media (min-width: 640px) {
-    width: calc(var(--grid) * 6);
+    width: calc(var(--grid) * 8);
   }
 `;
 

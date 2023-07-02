@@ -97,12 +97,12 @@ export const Head: FC<{
 
             & ::-moz-selection {
               color: #fff;
-              background: #101010;
+              background: #1e1e1e;
             }
 
             & ::selection {
               color: #fff;
-              background: #101010;
+              background: #1e1e1e;
             }
 
             @media (min-resolution: 1.5dppx) {
