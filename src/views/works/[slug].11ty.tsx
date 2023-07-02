@@ -49,9 +49,11 @@ export const render = (props: any) => {
       <Content>
         <main data-component="works">
           <div css={head} data-scroll-item>
-            <h1 className="" css={heading}>
-              {post.title}
-            </h1>
+            <div css={head__hgroup}>
+              <h1 className="" css={heading}>
+                {post.title}
+              </h1>
+            </div>
             <div css={head__info}>
               <Info
                 heading="DATE"
@@ -103,7 +105,14 @@ export const render = (props: any) => {
               );
             })}
           </ul>
-          <div css={next} data-scroll-item></div>
+          <aside css={next} data-scroll-item>
+            <a href={`../${nextPost.id}/`} css={next__hgroup}>
+              <p css={sub}></p>
+              <h2 className="" css={heading}>
+                NEXT PROJECT
+              </h2>
+            </a>
+          </aside>
         </main>
       </Content>
     </PageWithHeader>
@@ -142,6 +151,26 @@ const head = css`
   }
 `;
 
+const head__hgroup = css`
+  position: absolute;
+  top: 50vh;
+  top: 50svh;
+  width: 100%;
+`;
+
+const next = css`
+  height: 100vh;
+  height: 100svh;
+  position: relative;
+`;
+
+const next__hgroup = css`
+  position: absolute;
+  left: -0.1em;
+  top: 50vh;
+  top: 50svh;
+`;
+
 const head__info = css`
   position: absolute;
   bottom: 5rem;
@@ -164,11 +193,7 @@ const heading = css`
   letter-spacing: -0.4em;
   line-height: 1.1;
   opacity: 0.5;
-  margin-left: -0.2em;
-  position: absolute;
-  left: -0.1em;
-  top: 50vh;
-  top: 50svh;
+  margin-left: -0.3em;
   margin-top: -1em;
   white-space: nowrap;
 
@@ -177,17 +202,16 @@ const heading = css`
   }
 `;
 
+const sub = css`
+  text-align: center;
+`;
+
 const screenshots = css`
-  width: calc(100% - (var(--grid) * 2));
+  width: calc((var(--grid) * 10));
   margin-left: auto;
   margin-right: auto;
 
   @media (min-width: 640px) {
     width: calc(var(--grid) * 8);
   }
-`;
-
-const next = css`
-  height: 100vh;
-  height: 100svh;
 `;
