@@ -60,7 +60,7 @@ export const render = (props: any) => {
                       data-sp-src={`${post.eyecatch.src}?auto=compress,format&fit=crop&w=750&h=750`}
                       decoding="async"
                       height={post.eyecatch.height}
-                      src={`${post.eyecatch.src}?auto=compress,format`}
+                      src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
                       width={post.eyecatch.width}
                     />
                   </a>
@@ -100,7 +100,13 @@ const intro__frame = css`
 `;
 
 const projects = css`
-  padding: 0 var(--grid);
+  width: calc(var(--grid) * 10);
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (min-width: 640px) {
+    width: calc(var(--grid) * 9);
+  }
 `;
 
 const project = css`
@@ -115,7 +121,7 @@ const project__eyecatch = css`
   aspect-ratio: 1 / 1;
 
   @media (min-width: 640px) {
-    aspect-ratio: unset;
+    aspect-ratio: auto;
     width: calc(var(--grid) * 5 + var(--gap));
   }
 
@@ -133,6 +139,7 @@ const project__body = css`
   backface-visibility: hidden;
 
   @media (min-width: 640px) {
+    width: calc(var(--grid) * 5 - var(--gap) * 2);
     display: flex;
     flex-direction: column-reverse;
     gap: 1.5rem;
@@ -148,8 +155,9 @@ const heading = css`
   line-height: 1.1;
 
   @media (min-width: 640px) {
-    font-size: 3.6rem;
+    font-size: 3rem;
     margin-bottom: -0.1em;
+    margin-left: -0.3em;
   }
 `;
 
@@ -160,6 +168,6 @@ const text = css`
   opacity: 0.3;
 
   @media (min-width: 640px) {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
 `;
