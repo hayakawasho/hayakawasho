@@ -65,7 +65,7 @@ export const render = (props: any) => {
                     />
                   </a>
                   <div css={project__body}>
-                    <h3 className="font-montserrat" css={heading}>
+                    <h3 className="" css={heading}>
                       {post.title}
                     </h3>
                     <p className="mt-[.5em] | sm:mt-0" css={text}>
@@ -141,9 +141,10 @@ const project__body = css`
 `;
 
 const heading = css`
-  font-size: 2.2rem;
+  font-family: var(--font-en);
+  font-size: 1.8rem;
   font-weight: 200;
-  letter-spacing: 0.06em;
+  letter-spacing: -0.3em;
   line-height: 1.1;
 
   @media (min-width: 640px) {

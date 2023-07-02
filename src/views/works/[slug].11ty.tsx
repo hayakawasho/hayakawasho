@@ -29,7 +29,7 @@ const Info: FC<{
 }> = ({ className = "", ...props }) => {
   return (
     <dl className={className}>
-      <dt css={infoHeading} className="font-montserrat mb-[0.5em]">
+      <dt css={infoHeading} className="font-montserrat mb-[0.6em]">
         {props.heading}
       </dt>
       <dd css={infoText}>{props.text}</dd>
@@ -49,12 +49,11 @@ export const render = (props: any) => {
       <Content>
         <main data-component="works">
           <div css={head} data-scroll-item>
-            <h1 css={heading} className="font-montserrat">
+            <h1 css={heading} className="">
               {post.title}
             </h1>
             <div css={head__info}>
               <Info
-                className="mb-[2rem]"
                 heading="DATE"
                 text={
                   <time dateTime={selectDatetime(post)}>
@@ -64,6 +63,7 @@ export const render = (props: any) => {
               ></Info>
               {post.url && (
                 <Info
+                  className="mt-[2.4rem]"
                   heading="URL"
                   text={
                     <a target="_blank" href={post.url}>
@@ -114,7 +114,7 @@ const head = css`
   height: calc(100svh - (100vw * 0.56 / 2));
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  // justify-content: flex-end;
   position: relative;
 
   @media (min-width: 640px) {
@@ -124,7 +124,7 @@ const head = css`
 
 const head__info = css`
   position: absolute;
-  bottom: 4rem;
+  bottom: 5rem;
   left: var(--grid);
 `;
 
@@ -142,12 +142,12 @@ const infoText = css`
 `;
 
 const heading = css`
-  font-size: 7rem;
-  letter-spacing: -0.025em;
-  font-weight: 100;
+  font-family: var(--font-en);
+  font-size: 3.9rem;
+  letter-spacing: -0.3em;
+  // font-weight: 100;
   line-height: 1.1;
-  opacity: 0.3;
-  white-space: nowrap;
+  opacity: 0.5;
 `;
 
 const screenshots = css`

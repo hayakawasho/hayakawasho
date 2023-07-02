@@ -36,9 +36,19 @@ export const Head: FC<{
       />
       <Global
         styles={css`
+          @font-face {
+            font-family: "Melete";
+            src: url("/assets/Melete-UltraLight.otf") format("opentype"),
+              url("/assets/Melete-Regular.otf") format("opentype"),
+              url("/assets/Melete-Medium.otf") format("opentype"),
+              url("/assets/Melete-Light.otf") format("opentype"),
+              url("/assets/Melete-Bold.otf") format("opentype");
+          }
+
           :root {
             --font: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
               "Hiragino Sans", Meiryo, sans-serif;
+            --font-en: "Melete", sans-serif;
 
             --vh: 1vh;
 
