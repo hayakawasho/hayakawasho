@@ -19,6 +19,8 @@ const convertBookFromDB = (rawItem: any): WorkMetadata => {
       width: i.width,
     })),
     title: rawItem.title,
+    launch: rawItem.launch,
+    url: rawItem.url,
   } as const;
 };
 

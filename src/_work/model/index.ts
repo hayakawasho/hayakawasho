@@ -11,6 +11,8 @@ export type WorkMetadata = {
   title: string;
   kind: string;
   screenshots: Image[];
+  url: string;
+  launch: Date;
 };
 
 export class Work extends Model<WorkMetadata> {

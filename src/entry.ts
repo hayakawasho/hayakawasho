@@ -2,9 +2,9 @@ import "virtual:windi.css";
 import "ress";
 import { create, withSvelte } from "lake";
 import Home from "@/_components/home";
-import Works from "@/_components/works";
 import Loader from "@/_components/loader";
 import Noop from "@/_components/noop.svelte";
+import Works from "@/_components/works";
 import type { IComponent, ComponentContext } from "lake";
 
 const bootstrap = () => {
