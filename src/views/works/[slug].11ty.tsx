@@ -111,7 +111,7 @@ export const render = (props: any) => {
 };
 
 const infoHeading = css`
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   line-height: 1.1;
   letter-spacing: 0.06em;
   opacity: 0.5;
@@ -142,7 +142,7 @@ const head__info = css`
 
 const heading = css`
   font-family: var(--font-en);
-  font-size: 3.9rem;
+  font-size: 3.8rem;
   letter-spacing: -0.4em;
   line-height: 1.1;
   opacity: 0.5;
@@ -165,4 +165,5 @@ const screenshots = css`
 
 const next = css`
   height: 100vh;
+  height: 100svh;
 `;
