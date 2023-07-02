@@ -111,6 +111,7 @@ export const render = (props: any) => {
 
 const head = css`
   height: calc(100vh - (100vw * 0.56 / 2));
+  height: calc(100svh - (100vw * 0.56 / 2));
   display: flex;
   align-items: center;
   justify-content: flex-end;
