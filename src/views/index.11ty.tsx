@@ -51,7 +51,7 @@ export const render = (props: any) => {
                   <a
                     className="mb-[2rem] | sm:mb-0"
                     css={project__eyecatch}
-                    href={`./works/${post.id}/`}
+                    href={`./projects/${post.id}/`}
                   >
                     <img
                       alt=""

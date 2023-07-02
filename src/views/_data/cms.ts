@@ -5,10 +5,16 @@ dotenv.config();
 
 const fetchWorks = async () => {
   const { findList } = WorksRepository.create(process.env.API_KEY!);
-  const res = await findList({});
+  const [indexResponse, projectsResponse] = await Promise.all([
+    findList({}),
+    findList({
+      orders: "-launch",
+    }),
+  ]);
 
   return {
-    index: res.works,
+    index: indexResponse.works,
+    projects: projectsResponse.works,
   };
 };
 

@@ -16,10 +16,10 @@ export const data = {
   pagination: {
     addAllPagesToCollections: true,
     alias: "post",
-    data: "cms.index",
+    data: "cms.projects",
     size: 1,
   },
-  permalink: (context: any) => `works/${context.post.id}/index.html`,
+  permalink: (context: any) => `projects/${context.post.id}/index.html`,
 };
 
 const Info: FC<{
@@ -47,7 +47,7 @@ export const render = (props: any) => {
   ${r(
     <PageWithHeader header={<Header />}>
       <Content>
-        <main data-component="works">
+        <main data-component="project">
           <div css={head} data-scroll-item>
             <div css={head__hgroup}>
               <h1 className="" css={heading}>

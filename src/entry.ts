@@ -4,7 +4,7 @@ import { create, withSvelte } from "lake";
 import Home from "@/_components/home";
 import Loader from "@/_components/loader";
 import Noop from "@/_components/noop.svelte";
-import Works from "@/_components/works";
+import Project from "@/_components/project";
 import type { IComponent, ComponentContext } from "lake";
 
 const bootstrap = () => {
@@ -13,7 +13,7 @@ const bootstrap = () => {
   const table: Record<string, IComponent> = {
     home: Home,
     noop: withSvelte(Noop, "noop"),
-    works: Works,
+    project: Project,
   } as const;
 
   const mountComponents = (
