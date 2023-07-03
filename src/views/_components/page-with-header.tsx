@@ -32,7 +32,7 @@ export const PageWithHeader: FC<{
           src="https://polyfill.io/v3/polyfill.min.js?features=MediaQueryList.prototype.addEventListener%2CMediaQueryList.prototype.removeEventListener%2CString.prototype.padStart%2CIntersectionObserver%2CResizeObserver"
         />
         {idDev && (
-          <script src="http://192.168.10.103:3000/src/entry.ts" type="module" />
+          <script src="http://localhost:3000/src/entry.ts" type="module" />
         )}
         {!idDev && <script src="/assets/entry.js" type="module" />}
       </body>

@@ -68,7 +68,7 @@ export const render = (props: any) => {
                     <h3 className="" css={heading}>
                       {post.title}
                     </h3>
-                    <p className="mt-[.5em] | sm:mt-0" css={text}>
+                    <p className="mt-[.6em] | sm:mt-0" css={text}>
                       {post.kind}
                     </p>
                   </div>
