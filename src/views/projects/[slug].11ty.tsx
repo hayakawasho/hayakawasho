@@ -77,7 +77,7 @@ export const render = (props: any) => {
               )}
             </div>
           </div>
-          <div className="mb-[8rem] sm:mb-[16rem]" data-scroll-item>
+          <div className="mb-[8rem] sm:mb-[20rem]" data-scroll-item>
             <img
               alt=""
               data-src={`${post.eyecatch.src}?auto=compress,format`}
@@ -91,7 +91,7 @@ export const render = (props: any) => {
           <ul css={screenshots} data-scroll-item>
             {post.screenshots.map((i, index) => {
               return (
-                <li className="mb-[2rem] sm:mb-[5rem]" key={index}>
+                <li className="mb-[2rem] sm:mb-[6rem]" key={index}>
                   <img
                     alt=""
                     data-src={`${i.src}?auto=compress,format`}
@@ -133,8 +133,8 @@ const head = css`
   overflow: hidden;
 
   @media (min-width: 640px) {
-    height: 85vh;
-    height: 85svh;
+    height: 90vh;
+    height: 90svh;
   }
 `;
 
@@ -203,7 +203,7 @@ const screenshots = css`
   margin-right: auto;
 
   @media (min-width: 640px) {
-    width: calc(var(--grid) * 8);
+    width: calc(var(--grid) * 9);
   }
 `;
 
@@ -226,7 +226,7 @@ const next__img = css`
 
   @media (min-width: 640px) {
     aspect-ratio: auto;
-    width: calc(var(--grid) * 4);
+    width: calc(var(--grid) * 5);
   }
 
   & > img {
