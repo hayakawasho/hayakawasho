@@ -1,10 +1,10 @@
 import "virtual:windi.css";
 import "ress";
 import { create, withSvelte } from "lake";
-import Home from "@/_components/home";
-import Loader from "@/_components/loader";
-import Noop from "@/_components/noop.svelte";
-import Project from "@/_components/project";
+import Home from "./_components/home";
+import Load from "./_components/load";
+import Noop from "./_components/noop.svelte";
+import Project from "./_components/project";
 import type { IComponent, ComponentContext } from "lake";
 
 const bootstrap = () => {
@@ -36,7 +36,7 @@ const bootstrap = () => {
 
   const html = document.documentElement;
 
-  component(Loader)(html, {
+  component(Load)(html, {
     onCleanup: (scope: HTMLElement) => {
       unmount(
         Array.from(scope.querySelectorAll<HTMLElement>(`[data-component]`))

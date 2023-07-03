@@ -7,12 +7,6 @@ import GlWorld from "../glworld";
 import ScrollTween from "../scroll-tween";
 import type { GlobalContext } from "@/_foundation/type";
 
-type Refs = {
-  main: HTMLElement;
-  glWorld: HTMLElement;
-  windowSizeWatcher: HTMLElement;
-};
-
 type Props = {
   onCreated: (props?: Omit<GlobalContext, "initialLoad">) => void;
   onUpdated: (
@@ -26,7 +20,12 @@ export default defineComponent({
   name: "loader",
   setup(_el, { onCreated }: Props) {
     const { addChild } = useSlot();
-    const { refs } = useDomRef<Refs>("glWorld", "main", "windowSizeWatcher");
+    const { refs } = useDomRef<{
+      main: HTMLElement;
+      glWorld: HTMLElement;
+      windowSizeWatcher: HTMLElement;
+      backto: HTMLElement;
+    }>("glWorld", "main", "windowSizeWatcher");
 
     const env: GlobalContext["env"] = {
       gpuTier: undefined,
@@ -35,7 +34,9 @@ export default defineComponent({
 
     getGPUTier().then((res) => (env.gpuTier = res));
 
-    const [scrollContext] = addChild(refs.main, ScrollTween, { env });
+    const [scrollContext] = addChild(refs.main, ScrollTween, {
+      env,
+    });
     const [glContext] = addChild(refs.glWorld, GlWorld);
 
     const provides = {

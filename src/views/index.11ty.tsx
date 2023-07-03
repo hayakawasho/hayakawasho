@@ -55,9 +55,9 @@ export const render = (props: any) => {
                   >
                     <img
                       alt=""
-                      data-pc-src={`${post.eyecatch.src}?auto=compress,format`}
+                      data-src={`${post.eyecatch.src}?auto=compress,format`}
+                      data-src-sp={`${post.eyecatch.src}?auto=compress,format&fit=crop&w=750&h=750`}
                       data-ref="plane"
-                      data-sp-src={`${post.eyecatch.src}?auto=compress,format&fit=crop&w=750&h=750`}
                       decoding="async"
                       height={post.eyecatch.height}
                       src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
