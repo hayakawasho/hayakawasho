@@ -50,7 +50,7 @@ export const render = (props: any) => {
         <main data-component="project">
           <div css={head} data-scroll-item>
             <div css={head__hgroup}>
-              <h1 className="" css={heading} data-ref="h1" data-h1={post.title}>
+              <h1 className="" css={heading} data-h1={post.title} data-ref="h1">
                 {post.title}
               </h1>
             </div>
@@ -94,13 +94,13 @@ export const render = (props: any) => {
                 <li className="mb-[2rem] sm:mb-[6rem]" key={index}>
                   <img
                     alt=""
+                    data-ref="screenshot"
                     data-src={`${i.src}?auto=compress,format`}
                     data-src-sp={`${i.src}?auto=compress,format&w=750`}
                     decoding="async"
                     height={i.height}
                     src={`${i.src}?auto=compress,format`}
                     width={i.width}
-                    data-ref="screenshot"
                   />
                 </li>
               );
@@ -108,7 +108,7 @@ export const render = (props: any) => {
           </ul>
           <aside css={next} data-scroll-item>
             <figure css={next__img}>
-              <a href={`../${nextPost.id}/`} className="inset-0 absolute"></a>
+              <a className="inset-0 absolute" href={`../${nextPost.id}/`}></a>
               <img
                 alt=""
                 data-src={`${nextPost.eyecatch.src}?auto=compress,format&w=750`}

@@ -52,6 +52,7 @@
     "eslint-plugin-sort-keys-fix": "^1.1.2",
     "eslint-plugin-svelte": "^2.31.1",
     "eslint-plugin-typescript-sort-keys": "^2.3.0",
+    "glslify": "^7.1.1",
     "markuplint": "^3.2.0",
     "npm-run-all": "^4.1.5",
     "outdent": "^0.8.0",
@@ -64,13 +65,14 @@
     "typescript": "^5.0.4",
     "vite": "^4.3.9",
     "vite-plugin-compression": "^0.5.1",
-    "vite-plugin-glsl": "^1.1.2",
+    "vite-plugin-glslify": "^2.0.2",
     "vite-plugin-windicss": "^1.9.0",
     "windicss": "^3.5.6"
   },
   "dependencies": {
     "@studio-freight/lenis": "^1.0.6",
     "detect-gpu": "^5.0.30",
+    "glsl-noise": "^0.0.0",
     "gsap": "^3.12.1",
     "lake": "./lib/lake",
     "lil-gui": "^0.16.1",

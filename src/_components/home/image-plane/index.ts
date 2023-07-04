@@ -8,8 +8,8 @@ import {
 import { Mesh, Plane, Program, Texture } from "ogl";
 import { useScrollTween } from "@/_states/scroll";
 import { useWindowSize } from "@/_states/window-size";
-import fragment from "./frag.glsl";
-import vertex from "./vert.glsl";
+import fragment from "./fragment.frag";
+import vertex from "./vertex.vert";
 import type { GlobalContext } from "@/_foundation/type";
 
 type Props = Pick<GlobalContext, "glContext">;

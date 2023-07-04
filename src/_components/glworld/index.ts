@@ -1,7 +1,7 @@
 import { defineComponent, useDomRef } from "lake";
-import { Transform } from "ogl";
+import { Transform, Renderer } from "ogl";
 import { useTick } from "@/_foundation/hooks";
-import { createCamera, createRenderer } from "@/_gl";
+import { createCamera } from "@/_gl";
 import { useWindowSize } from "@/_states/window-size";
 
 export default defineComponent({
@@ -12,12 +12,13 @@ export default defineComponent({
     const { refs } = useDomRef<{ canvas: HTMLCanvasElement }>("canvas");
     const rect = el.getBoundingClientRect();
 
-    const { renderer } = createRenderer(
-      refs.canvas,
-      rect.width,
-      rect.height,
-      dpr
-    );
+    const renderer = new Renderer({
+      alpha: true,
+      canvas: refs.canvas,
+      dpr,
+      height: rect.height,
+      width: rect.width,
+    });
 
     const { camera, calcDistance } = createCamera(
       renderer.gl,

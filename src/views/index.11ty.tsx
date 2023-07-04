@@ -10,7 +10,7 @@ export const data = {
     addAllPagesToCollections: false,
     alias: "posts",
     data: "cms.index",
-    size: 5,
+    size: 10,
   },
 };
 
@@ -36,12 +36,12 @@ export const render = (props: any) => {
               ></canvas>
             </div>
           </div>
-          <div className="mt-[8rem] | sm:mt-[12rem]" css={projects}>
+          <div className="mt-[8rem] | sm:mt-[10rem]" css={projects}>
             <h2 className="sr-only">PROJECTS</h2>
             {posts.map((post, index) => {
               return (
                 <div
-                  className={`mb-[8rem] | sm:mb-[12rem] ${
+                  className={`mb-[8rem] | sm:mb-[10rem] ${
                     (index + 1) % 2 === 0 ? "sm:flex-row-reverse" : ""
                   }`}
                   css={project}
@@ -49,29 +49,28 @@ export const render = (props: any) => {
                   key={post.id}
                 >
                   <a
-                    className="mb-[2rem] | sm:mb-0"
+                    className=""
                     css={project__eyecatch}
                     href={`./projects/${post.id}/`}
                   >
                     <img
                       alt=""
+                      data-ref="plane"
                       data-src={`${post.eyecatch.src}?auto=compress,format`}
                       data-src-sp={`${post.eyecatch.src}?auto=compress,format&fit=crop&w=750&h=750`}
-                      data-ref="plane"
                       decoding="async"
                       height={post.eyecatch.height}
                       src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
                       width={post.eyecatch.width}
                     />
                   </a>
-                  <div css={project__body}>
-                    <h3 className="" css={heading}>
-                      {post.title}
-                    </h3>
-                    <p className="mt-[.6em] | sm:mt-0" css={text}>
-                      {post.kind}
-                    </p>
-                  </div>
+                  {
+                    <div className="u-sp" css={project__body}>
+                      <h3 className="mt-[.8em]" css={heading}>
+                        {post.title} — {post.kind}
+                      </h3>
+                    </div>
+                  }
                 </div>
               );
             })}
@@ -90,11 +89,11 @@ const intro = css`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem;
+  padding: 0.4rem;
 `;
 
 const intro__frame = css`
-  border: 1px solid var(--color-bg);
+  // border: 1px solid var(--color-bg);
   pointer-events: none;
   background-color: #fff;
 `;
@@ -135,7 +134,7 @@ const project__eyecatch = css`
 `;
 
 const project__body = css`
-  text-align: center;
+  // text-align: center;
   backface-visibility: hidden;
 
   @media (min-width: 640px) {
@@ -149,9 +148,9 @@ const project__body = css`
 
 const heading = css`
   font-family: var(--font-en);
-  font-size: 1.8rem;
-  font-weight: 200;
-  letter-spacing: -0.24em;
+  font-size: 1.1rem;
+  font-weight: 300;
+  letter-spacing: 0.06em;
   line-height: 1.1;
 
   @media (min-width: 640px) {
@@ -161,13 +160,13 @@ const heading = css`
   }
 `;
 
-const text = css`
-  font-size: 1.1rem;
-  line-height: 1.1;
-  letter-spacing: 0.02em;
-  opacity: 0.3;
-
-  @media (min-width: 640px) {
-    font-size: 1.3rem;
-  }
-`;
+// const text = css`
+//   font-size: 1rem;
+//   line-height: 1.1;
+//   letter-spacing: 0.02em;
+//   opacity: 0.3;
+//
+//   @media (min-width: 640px) {
+//     font-size: 1.3rem;
+//   }
+// `;
