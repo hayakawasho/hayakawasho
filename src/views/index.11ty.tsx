@@ -66,7 +66,7 @@ export const render = (props: any) => {
                   </a>
                   {
                     <div className="u-sp" css={project__body}>
-                      <h3 className="mt-[.8em]" css={heading}>
+                      <h3 className="mt-[1em]" css={heading}>
                         {post.title} — {post.kind}
                       </h3>
                     </div>
@@ -104,7 +104,7 @@ const projects = css`
   margin-right: auto;
 
   @media (min-width: 640px) {
-    width: calc(var(--grid) * 9);
+    width: 100%;
   }
 `;
 
@@ -121,20 +121,19 @@ const project__eyecatch = css`
 
   @media (min-width: 640px) {
     aspect-ratio: auto;
-    width: calc(var(--grid) * 5 + var(--gap));
+    width: calc(var(--grid) * 8);
   }
 
   & > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0;
-    visibility: hidden;
+    // opacity: 0;
+    // visibility: hidden;
   }
 `;
 
 const project__body = css`
-  // text-align: center;
   backface-visibility: hidden;
 
   @media (min-width: 640px) {
@@ -148,10 +147,12 @@ const project__body = css`
 
 const heading = css`
   font-family: var(--font-en);
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 300;
   letter-spacing: 0.06em;
   line-height: 1.1;
+  opacity: 0.7;
+  text-align: right;
 
   @media (min-width: 640px) {
     font-size: 3rem;
