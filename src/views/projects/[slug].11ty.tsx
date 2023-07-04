@@ -8,7 +8,7 @@ import {
 import { Header } from "../_components/header";
 import { Content } from "../_components/page-content";
 import { PageWithHeader } from "../_components/page-with-header";
-// import { ResponsiveImage } from "../_components/responsive-image";
+import { ResponsiveImage } from "../_components/responsive-image";
 import type { WorkMetadata } from "@/_work/model";
 import type { FC, ReactNode } from "react";
 
@@ -83,21 +83,17 @@ export const render = (props: any) => {
             data-ref="eyecatch"
             data-scroll-item
           >
-            <img
+            <ResponsiveImage
               alt=""
-              data-src={`${post.eyecatch.src}?auto=compress,format`}
-              data-src-sp={`${post.eyecatch.src}?auto=compress,format&w=750`}
-              decoding="async"
-              height={post.eyecatch.height}
-              src={`${post.eyecatch.src}?auto=compress,format`}
-              width={post.eyecatch.width}
+              pcH={post.eyecatch.height}
+              pcSrc={`${post.eyecatch.src}?auto=compress,format`}
+              pcW={post.eyecatch.width}
+              spH={post.eyecatch.height}
+              spSrc={`${post.eyecatch.src}?auto=compress,format&w=750`}
+              spW={post.eyecatch.width}
             />
           </div>
-          <ul
-            className="mb-[8rem] sm:mb-[20rem]"
-            css={screenshots}
-            data-scroll-item
-          >
+          <ul className="" css={screenshots} data-scroll-item>
             {post.screenshots.map((i, index) => {
               return (
                 <li className="mb-[2rem] sm:mb-[6rem]" key={index}>
@@ -116,12 +112,12 @@ export const render = (props: any) => {
             })}
           </ul>
           <aside css={next} data-scroll-item>
-            <figure css={next__img}>
+            <div css={next__img}>
               <a className="inset-0 absolute" href={`../${nextPost.id}/`}>
-                <span className="sr-only">{nextPost.title}</span>
+                <span className="sr-only">NEXT PROJECT</span>
               </a>
               <img
-                alt=""
+                alt={nextPost.title}
                 data-src={`${nextPost.eyecatch.src}?auto=compress,format&w=750`}
                 data-src-sp={`${nextPost.eyecatch.src}?auto=compress,format&w=750`}
                 decoding="async"
@@ -129,7 +125,7 @@ export const render = (props: any) => {
                 src={`${nextPost.eyecatch.src}?auto=compress,format&sat=-100`}
                 width={nextPost.eyecatch.width}
               />
-            </figure>
+            </div>
           </aside>
         </main>
       </Content>
@@ -213,8 +209,6 @@ const eyecatch = css`
   overflow: hidden;
 
   & > img {
-    margin: -2rem 0;
-
     @media (min-width: 640px) {
       margin: -6rem 0;
     }

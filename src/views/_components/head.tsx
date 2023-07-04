@@ -1,8 +1,7 @@
 import { Global, css } from "@emotion/react";
 import type { FC } from "react";
 
-const SITE_URL = "https://hayakawasho.com";
-
+const SITE_URL = "https://hayakawasho.dev";
 const idDev = process.env.NODE_ENV !== "production";
 
 export const Head: FC<{
@@ -10,7 +9,7 @@ export const Head: FC<{
   // description: string;
   // pagePath: string;
 }> = (_props) => {
-  const title = "Sho Hayakawa";
+  const title = "SHO HAYAKAWA";
   const description = "FRONTEND ENGINEER SHO HAYAKAWA 早川翔 portfolio site";
 
   return (
