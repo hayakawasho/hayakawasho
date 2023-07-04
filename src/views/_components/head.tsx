@@ -31,25 +31,16 @@ export const Head: FC<{
       <link href="https://fonts.googleapis.com" rel="preconnect" />
       <link crossOrigin="" href="https://fonts.gstatic.com" rel="preconnect" />
       <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Hind:wght@300;600&display=swap"
         rel="stylesheet"
       />
       <Global
         styles={css`
-          // @font-face {
-          //   font-family: "Melete";
-          //   src: url("/assets/Melete-UltraLight.otf") format("opentype"),
-          //     url("/assets/Melete-Regular.otf") format("opentype"),
-          //     url("/assets/Melete-Medium.otf") format("opentype"),
-          //     url("/assets/Melete-Light.otf") format("opentype"),
-          //     url("/assets/Melete-Bold.otf") format("opentype");
-          // }
-
           :root {
             --font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-              "Segoe UI", Roboto, "Inter", , Arial, "Hiragino Kaku Gothic ProN",
-              "Hiragino Sans", Meiryo, sans-serif;
-            --font-en: "Inter", sans-serif;
+              "Inter", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans",
+              Meiryo, sans-serif;
+            --font-en: "Hind", sans-serif;
 
             --vh: 1vh;
 

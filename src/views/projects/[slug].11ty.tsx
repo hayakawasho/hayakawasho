@@ -77,7 +77,12 @@ export const render = (props: any) => {
               )}
             </div>
           </div>
-          <div className="mb-[8rem] sm:mb-[20rem]" data-scroll-item>
+          <div
+            className="mb-[8rem] sm:mb-[20rem]"
+            css={eyecatch}
+            data-ref="eyecatch"
+            data-scroll-item
+          >
             <img
               alt=""
               data-src={`${post.eyecatch.src}?auto=compress,format`}
@@ -88,7 +93,11 @@ export const render = (props: any) => {
               width={post.eyecatch.width}
             />
           </div>
-          <ul css={screenshots} data-scroll-item>
+          <ul
+            className="mb-[8rem] sm:mb-[20rem]"
+            css={screenshots}
+            data-scroll-item
+          >
             {post.screenshots.map((i, index) => {
               return (
                 <li className="mb-[2rem] sm:mb-[6rem]" key={index}>
@@ -108,7 +117,9 @@ export const render = (props: any) => {
           </ul>
           <aside css={next} data-scroll-item>
             <figure css={next__img}>
-              <a className="inset-0 absolute" href={`../${nextPost.id}/`}></a>
+              <a className="inset-0 absolute" href={`../${nextPost.id}/`}>
+                <span className="sr-only">{nextPost.title}</span>
+              </a>
               <img
                 alt=""
                 data-src={`${nextPost.eyecatch.src}?auto=compress,format&w=750`}
@@ -147,16 +158,15 @@ const head__hgroup = css`
 
 const heading = css`
   font-family: var(--font-en);
-  font-size: 4.6rem;
-  letter-spacing: -0.24em;
+  font-size: 5.6rem;
+  letter-spacing: 0.16em;
   line-height: 1.1;
-  opacity: 0.5;
-  margin-left: -0.3em;
   margin-top: -1em;
   white-space: nowrap;
+  font-weight: 600;
 
   @media (min-width: 640px) {
-    font-size: 8rem;
+    font-size: 9rem;
   }
 `;
 
@@ -181,6 +191,7 @@ const infoHeading = css`
   line-height: 1.1;
   letter-spacing: 0.06em;
   opacity: 0.5;
+  font-weight: 300;
 
   @media (min-width: 640px) {
     font-size: 1.4rem;
@@ -191,9 +202,22 @@ const infoText = css`
   font-size: 1.2rem;
   line-height: 1.1;
   letter-spacing: 0.06em;
+  font-weight: 300;
 
   @media (min-width: 640px) {
     font-size: 1.5rem;
+  }
+`;
+
+const eyecatch = css`
+  overflow: hidden;
+
+  & > img {
+    margin: -2rem 0;
+
+    @media (min-width: 640px) {
+      margin: -6rem 0;
+    }
   }
 `;
 

@@ -9,9 +9,8 @@ export default defineComponent({
     const { refs } = useDomRef<{
       h1: HTMLElement;
       screenshot: HTMLImageElement[];
-    }>("h1", "screenshot");
-
-    console.log(refs.screenshot);
+      eyecatch: HTMLElement;
+    }>("h1", "screenshot", "eyecatch");
 
     addChild(refs.h1, H1, {
       glContext,

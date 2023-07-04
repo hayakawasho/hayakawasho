@@ -7,7 +7,15 @@ import Noop from "./_components/noop.svelte";
 import Project from "./_components/project";
 import type { IComponent, ComponentContext } from "lake";
 
-const bootstrap = () => {
+const bootstrap = (run: () => void) => {
+  if (document.readyState !== "loading") {
+    run();
+    return;
+  }
+  document.addEventListener("DOMContentLoaded", run, false);
+};
+
+bootstrap(() => {
   const { component, unmount } = create();
 
   const table: Record<string, IComponent> = {
@@ -38,30 +46,17 @@ const bootstrap = () => {
 
   component(Load)(html, {
     onCleanup: (scope: HTMLElement) => {
-      unmount(
-        Array.from(scope.querySelectorAll<HTMLElement>(`[data-component]`))
-      );
+      const targets = scope.querySelectorAll<HTMLElement>(`[data-component]`);
+      unmount(Array.from(targets));
     },
     onCreated: (context?: Record<string, unknown>) => {
-      mountComponents(html, {
-        ...context,
-        initialLoad: true,
-      });
+      mountComponents(html, { ...context, initialLoad: true });
     },
     onUpdated: (scope: HTMLElement, context: Record<string, unknown>) => {
-      mountComponents(scope, {
-        ...context,
-        initialLoad: false,
-      });
+      mountComponents(scope, { ...context, initialLoad: false });
     },
   });
-};
-
-if (document.readyState !== "loading") {
-  bootstrap();
-} else {
-  document.addEventListener("DOMContentLoaded", bootstrap, false);
-}
+});
 
 if (process.env.NODE_ENV === "development") {
   const Stats = await (
