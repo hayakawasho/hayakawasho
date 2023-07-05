@@ -67,7 +67,7 @@ export const render = (props: any) => {
                   {
                     <div className="u-sp" css={project__body}>
                       <h3 className="mt-[1em]" css={heading}>
-                        {post.title} — {post.kind}
+                        {post.title}
                       </h3>
                     </div>
                   }

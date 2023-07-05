@@ -5,6 +5,7 @@ import Home from "./_components/home";
 import Load from "./_components/load";
 import Noop from "./_components/noop.svelte";
 import Project from "./_components/project";
+import ToScroll from "./_components/to-scroll.svelte";
 import type { IComponent, ComponentContext } from "lake";
 
 const bootstrap = (run: () => void) => {
@@ -22,6 +23,7 @@ bootstrap(() => {
     home: Home,
     noop: withSvelte(Noop, "noop"),
     project: Project,
+    toScroll: withSvelte(ToScroll, "toScroll"),
   } as const;
 
   const mountComponents = (

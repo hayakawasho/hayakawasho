@@ -47,7 +47,7 @@ export const Head: FC<{
             --gap: calc(30 / 750 * 100vw);
 
             --color-text: #fff6e5;
-            --color-bg: #111;
+            --color-bg: #161616;
           }
 
           *,
