@@ -1,6 +1,7 @@
 import "virtual:windi.css";
 import "ress";
 import { create, withSvelte } from "lake";
+import BackTo from "./_components/backto.svelte";
 import Home from "./_components/home";
 import Load from "./_components/load";
 import Noop from "./_components/noop.svelte";
@@ -20,6 +21,7 @@ bootstrap(() => {
   const { component, unmount } = create();
 
   const table: Record<string, IComponent> = {
+    backTo: withSvelte(BackTo, "backTo"),
     home: Home,
     noop: withSvelte(Noop, "noop"),
     project: Project,

@@ -35,3 +35,7 @@ export const searchParamsToString = (q: Record<string, any>) => {
   const params = new URLSearchParams(q);
   return params.toString();
 };
+
+export const noop = () => {
+  //
+};

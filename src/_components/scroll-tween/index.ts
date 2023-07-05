@@ -28,9 +28,10 @@ export default defineComponent({
 
     const _win = window as any;
 
-    if (!smoothItem.length) {
-      return;
-    }
+    // TODO:
+    // if (!smoothItem.length) {
+    //   return;
+    // }
 
     const state = {
       active: true,
@@ -241,21 +242,9 @@ export default defineComponent({
       });
     };
 
-    const scrollTo = (href: string) => {
-      if (href === "#top") {
-        moveTo(0);
-        return;
-      }
-
-      try {
-        const target = document.querySelector(href)!;
-        const { top } = target.getBoundingClientRect();
-        const offset = top + state.currentPos;
-
-        moveTo(offset);
-      } catch (e) {
-        console.error(e);
-      }
+    const scrollTo = (y: number) => {
+      const value = state.scrollLimit > y ? y : state.scrollLimit;
+      moveTo(value);
     };
 
     const update = () => {

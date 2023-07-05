@@ -1,7 +1,7 @@
 import { resolve } from "path";
 import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
-// import preprocess from "svelte-preprocess";
+import preprocess from "svelte-preprocess";
 import viteCompression from "vite-plugin-compression";
 import WindiCSS from "vite-plugin-windicss";
 import { glslify } from "vite-plugin-glslify";
@@ -20,7 +20,14 @@ export default defineConfig({
     port: 3000,
     strictPort: true,
   },
-  plugins: [svelte({}), viteCompression(), WindiCSS(), glslify()],
+  plugins: [
+    svelte({
+      preprocess: preprocess(),
+    }),
+    viteCompression(),
+    WindiCSS(),
+    glslify(),
+  ],
   build: {
     outDir: "_site",
     sourcemap: isDev,

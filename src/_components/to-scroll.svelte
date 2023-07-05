@@ -1,11 +1,21 @@
 <script lang="ts">
-  import { Tween } from "@/_foundation/tween";
+  import { getContext } from "svelte";
+  import { Tween as _ } from "@/_foundation/tween";
+  import { noop } from "@/_foundation/utils";
+  import { useScrollTween } from "@/_states/scroll";
+  import { useWindowSize } from "@/_states/window-size";
+  import type { GlobalContext } from "@/_foundation/type";
+  import type { Context$ } from "lake";
 
-  console.log(Tween);
+  const { scrollContext } = getContext<Context$<GlobalContext>>("$");
+
+  const [_ww, wh] = useWindowSize(noop);
+  const [y] = useScrollTween(noop);
 </script>
 
 <button
   class="fixed bottom-0 left-1/2 h-[5rem] w-[6rem] flex items-center justify-center ml-[-3rem] pb-[2.4rem] z-20"
+  on:click={() => scrollContext.scrollTo(y.value + wh.value)}
 >
   <span class="label">Scroll</span>
   <span class="hr" />

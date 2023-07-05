@@ -42,6 +42,7 @@ export default defineComponent({
     const provides = {
       env,
       glContext: glContext.current,
+      scrollContext: scrollContext.current,
     };
 
     const ro = new ResizeObserver(

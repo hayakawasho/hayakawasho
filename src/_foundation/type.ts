@@ -14,6 +14,12 @@ export type GlobalContext = {
     addScene: (scene: Transform) => void;
     removeScene: (scene: Transform) => void;
   };
+  scrollContext: {
+    pause: () => void;
+    resume: () => void;
+    update: () => void;
+    scrollTo: (y: number) => void;
+  };
   env: {
     mq: "pc" | "sp";
     gpuTier?: TierResult;
