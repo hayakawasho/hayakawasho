@@ -128,8 +128,8 @@ const project__eyecatch = css`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    // opacity: 0;
-    // visibility: hidden;
+    opacity: 0;
+    visibility: hidden;
   }
 `;
 
@@ -160,14 +160,3 @@ const heading = css`
     margin-left: -0.3em;
   }
 `;
-
-// const text = css`
-//   font-size: 1rem;
-//   line-height: 1.1;
-//   letter-spacing: 0.02em;
-//   opacity: 0.3;
-//
-//   @media (min-width: 640px) {
-//     font-size: 1.3rem;
-//   }
-// `;
