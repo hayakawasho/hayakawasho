@@ -93,7 +93,7 @@ const gridLine = css`
   top: 0;
   width: 1px;
   height: 100%;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05);
   width: 1px;
   height: 100%;
 `;
