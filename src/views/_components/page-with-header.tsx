@@ -29,7 +29,7 @@ export const PageWithHeader: FC<{
         <div data-component="toScroll"></div>
         <div
           aria-hidden="true"
-          className="fixed inset-0 w-screen h-screen pointer-events-none z-10 opacity-0"
+          className="fixed inset-0 w-screen h-screen pointer-events-none z-10"
           data-ref="glWorld"
         >
           <canvas className="w-screen h-screen" data-ref="canvas"></canvas>
