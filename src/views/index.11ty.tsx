@@ -89,7 +89,7 @@ const intro = css`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.4rem;
+  // padding: 0.4rem;
 `;
 
 const intro__frame = css`

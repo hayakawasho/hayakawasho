@@ -19,7 +19,8 @@ export const PageWithHeader: FC<{
           data-ref="windowSizeWatcher"
         ></div>
         <div className="pointer-events-none" role="presentation">
-          <div css={mask}></div>
+          <div css={maskUpper}></div>
+          <div css={maskLower}></div>
           <div css={gridLeft}></div>
           <div css={gridMiddle}></div>
           <div css={gridRight}></div>
@@ -52,7 +53,25 @@ const svh = css`
   height: 100svh;
 `;
 
-const mask = css`
+const maskUpper = css`
+  display: block;
+  height: 6rem;
+  width: 100%;
+  position: fixed;
+  z-index: 11;
+  left: 0;
+  opacity: 1;
+  top: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(22, 22, 22, 0.6) 0%,
+    rgba(22, 22, 22, 0.25) 40%,
+    rgba(22, 22, 22, 0.05) 80%,
+    rgba(22, 22, 22, 0) 100%
+  );
+`;
+
+const maskLower = css`
   display: block;
   height: 6rem;
   width: 100%;
@@ -63,10 +82,10 @@ const mask = css`
   bottom: 0;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.5) 0%,
-    rgba(0, 0, 0, 0.25) 40%,
-    rgba(0, 0, 0, 0.05) 80%,
-    rgba(0, 0, 0, 0) 100%
+    rgba(22, 22, 22, 0.5) 0%,
+    rgba(22, 22, 22, 0.25) 40%,
+    rgba(22, 22, 22, 0.05) 80%,
+    rgba(22, 22, 22, 0) 100%
   );
 `;
 
