@@ -19,8 +19,7 @@ export const PageWithHeader: FC<{
           data-ref="windowSizeWatcher"
         ></div>
         <div className="pointer-events-none" role="presentation">
-          <div css={gradTop}></div>
-          <div css={gridBottom}></div>
+          <div css={mask}></div>
           <div css={gridLeft}></div>
           <div css={gridMiddle}></div>
           <div css={gridRight}></div>
@@ -53,7 +52,7 @@ const svh = css`
   height: 100svh;
 `;
 
-const grad = css`
+const mask = css`
   display: block;
   height: 6rem;
   width: 100%;
@@ -61,28 +60,11 @@ const grad = css`
   z-index: 11;
   left: 0;
   opacity: 1;
-`;
-
-const gradTop = css`
-  ${grad}
-  top: 0;
-  opacity: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(22, 22, 22, 0.5) 0%,
-    rgba(22, 22, 22, 0.2) 40%,
-    rgba(22, 22, 22, 0.1) 80%,
-    rgba(22, 22, 22, 0) 100%
-  );
-`;
-
-const gridBottom = css`
-  ${grad}
   bottom: 0;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.6) 0%,
-    rgba(0, 0, 0, 0.3) 40%,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.25) 40%,
     rgba(0, 0, 0, 0.05) 80%,
     rgba(0, 0, 0, 0) 100%
   );
