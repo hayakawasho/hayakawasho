@@ -1,8 +1,8 @@
 import { defineComponent } from "lake";
+import { useImagePlane } from "@/_glsl";
 import { useScrollTween } from "@/_states/scroll";
 import fragment from "./fragment.frag";
 import vertex from "./vertex.vert";
-import { useImagePlane } from "@/_glsl";
 // import { map } from "@/_foundation/math";
 import type { GlobalContext } from "@/_foundation/type";
 
@@ -12,22 +12,19 @@ export default defineComponent({
   name: "plane",
   setup(domImg: HTMLImageElement, { glContext }: Props) {
     const uniforms = {
-      uTime: {
-        value: 0,
-      },
-      uScale: {
+      u_scale: {
         value: 1,
       },
-      uVelo: {
+      u_velo: {
         value: 0,
       },
     };
 
     const { plane, state, cache } = useImagePlane({
       el: domImg,
+      fragment,
       glContext,
       uniforms,
-      fragment,
       vertex,
     });
 
@@ -43,16 +40,7 @@ export default defineComponent({
       plane.update(cache.value);
 
       const diff = (oldY - currentY) * 0.01;
-      uniforms.uVelo.value = diff;
-
-      // const scale = map(
-      //   currentY,
-      //   cache.value.rect.top - wh.value,
-      //   cache.value.rect.top + wh.value * 0.5,
-      //   0.85,
-      //   1.0
-      // );
-      // uniforms.uScale.value = scale;
+      uniforms.u_velo.value = diff;
     });
   },
 });

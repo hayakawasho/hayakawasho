@@ -1,30 +1,14 @@
 import { Global, css } from "@emotion/react";
-import type { FC } from "react";
+import type { FC, ReactNode } from "react";
 
-const SITE_URL = "https://hayakawasho.dev";
 const idDev = process.env.NODE_ENV !== "production";
 
 export const Head: FC<{
-  // title: string;
-  // description: string;
-  // pagePath: string;
-}> = (_props) => {
-  const title = "SHO HAYAKAWA";
-  const description = "FRONTEND ENGINEER SHO HAYAKAWA 早川翔 portfolio site";
-
+  seo: ReactNode;
+}> = ({ seo }) => {
   return (
     <head>
-      <meta charSet="utf-8" />
-      <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-      <meta content="telephone=no" name="format-detection" />
-      <title>{title}</title>
-      <meta content={description} name="description" />
-      <meta content={title} property="og:title" />
-      <meta content="website" property="og:type" />
-      <meta content={description} property="og:description" />
-      <meta content={SITE_URL} property="og:url" />
-      <meta content={title} property="og:site_name" />
-      <meta content={SITE_URL + "/ogp.jpg"} property="og:image" />
+      {seo}
       <link href="/favicon.ico" rel="icon" />
       {!idDev && <link as="style" href="/assets/entry.css" rel="preload" />}
       <link href="https://fonts.googleapis.com" rel="preconnect" />

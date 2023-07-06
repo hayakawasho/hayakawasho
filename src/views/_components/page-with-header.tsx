@@ -5,12 +5,13 @@ import type { FC, ReactNode } from "react";
 const idDev = process.env.NODE_ENV !== "production";
 
 export const PageWithHeader: FC<{
+  seo: ReactNode;
   header: ReactNode;
   children: ReactNode;
-}> = ({ header, children, ...props }) => {
+}> = ({ header, children, seo }) => {
   return (
     <html lang="ja">
-      <Head {...props} />
+      <Head seo={seo} />
       <body>
         <div
           aria-hidden="true"

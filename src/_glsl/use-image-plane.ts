@@ -1,7 +1,7 @@
 import { useIntersectionWatch, ref, useMount, useUnmount } from "lake";
 import { Mesh, Plane, Program, Texture, Vec2 } from "ogl";
-import { useWindowSize } from "@/_states/window-size";
 import { noop } from "@/_foundation/utils";
+import { useWindowSize } from "@/_states/window-size";
 import type { GlobalContext } from "@/_foundation/type";
 
 type Cache = {
@@ -46,7 +46,7 @@ export const useImagePlane = ({ el, glContext, ...props }: Props) => {
   el.decode().then(() => {
     texture.image = el;
 
-    uniforms.uImageSize.value.set(
+    uniforms.u_image_size.value.set(
       cache.value.rect.width,
       cache.value.rect.height
     );
@@ -56,14 +56,14 @@ export const useImagePlane = ({ el, glContext, ...props }: Props) => {
 
   const uniforms = {
     ...props.uniforms,
-    uTexture: {
-      value: texture,
+    u_image_size: {
+      value: new Vec2(0, 0),
     },
-    uMeshSize: {
+    u_mesh_size: {
       value: new Vec2(ww.value, wh.value),
     },
-    uImageSize: {
-      value: new Vec2(0, 0),
+    u_texture: {
+      value: texture,
     },
   };
 
@@ -115,9 +115,9 @@ export const useImagePlane = ({ el, glContext, ...props }: Props) => {
   });
 
   return {
+    cache,
     plane,
     state,
-    cache,
   };
 };
 

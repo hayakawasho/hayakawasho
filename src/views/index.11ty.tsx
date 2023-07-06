@@ -3,6 +3,7 @@ import { renderToStaticMarkup as r } from "react-dom/server";
 import { Header } from "./_components/header";
 import { Content } from "./_components/page-content";
 import { PageWithHeader } from "./_components/page-with-header";
+import { Seo } from "./_components/seo";
 import type { WorkMetadata } from "@/_work/model";
 
 export const data = {
@@ -19,7 +20,7 @@ export const render = (props: any) => {
 
   return `<!DOCTYPE html>
   ${r(
-    <PageWithHeader header={<Header />}>
+    <PageWithHeader header={<Header />} seo={<Seo permalink="" title="" />}>
       <Content>
         <main className="h-full" data-component="home">
           <div css={intro} data-scroll-item>

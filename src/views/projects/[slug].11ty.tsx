@@ -9,6 +9,7 @@ import { Header } from "../_components/header";
 import { Content } from "../_components/page-content";
 import { PageWithHeader } from "../_components/page-with-header";
 import { ResponsiveImage } from "../_components/responsive-image";
+import { Seo } from "../_components/seo";
 import type { WorkMetadata } from "@/_work/model";
 import type { FC, ReactNode } from "react";
 
@@ -29,7 +30,7 @@ const Info: FC<{
 }> = ({ className = "", ...props }) => {
   return (
     <dl className={className}>
-      <dt className="mb-[0.6em]" css={infoHeading}>
+      <dt className="mb-[1em]" css={infoHeading}>
         {props.heading}
       </dt>
       <dd css={infoText}>{props.text}</dd>
@@ -45,7 +46,10 @@ export const render = (props: any) => {
 
   return `<!DOCTYPE html>
   ${r(
-    <PageWithHeader header={<Header />}>
+    <PageWithHeader
+      header={<Header />}
+      seo={<Seo permalink={`/projects/${post.id}/`} title={post.title} />}
+    >
       <Content>
         <main data-component="project">
           <div css={head} data-scroll-item>
@@ -183,7 +187,7 @@ const head__info = css`
 `;
 
 const infoHeading = css`
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.1;
   letter-spacing: 0.06em;
   opacity: 0.5;

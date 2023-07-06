@@ -1,11 +1,11 @@
 import { defineComponent, ref, useEvent } from "lake";
 import NormalizeWheel from "normalize-wheel";
+import { clamp } from "remeda";
 import { useTick } from "@/_foundation/hooks";
 import { lerp } from "@/_foundation/math";
 import { Tween } from "@/_foundation/tween";
 import { scrollPosMutators } from "@/_states/scroll";
 import { useWindowSize } from "@/_states/window-size";
-import { clamp } from "remeda";
 
 type Cache = {
   el: HTMLElement;
@@ -26,8 +26,6 @@ export default defineComponent({
     const smoothItem = Array.from(
       el.querySelectorAll<HTMLElement>(SELECTOR_CLASS)
     );
-
-    const _win = window as any;
 
     // TODO:
     // if (!smoothItem.length) {
@@ -113,8 +111,8 @@ export default defineComponent({
 
     const clampTarget = (target: number) => {
       return clamp(target, {
-        min: -0,
         max: state.scrollLimit,
+        min: -0,
       });
     };
 
@@ -145,6 +143,8 @@ export default defineComponent({
         }
       });
     };
+
+    const _win = window as any;
 
     useEvent(
       _win,
