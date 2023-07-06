@@ -2,13 +2,7 @@ import type { TierResult } from "detect-gpu";
 import type { OGLRenderingContext, Transform } from "ogl";
 
 export type GlobalContext = {
-  initialLoad: boolean;
-  // scrollContext: {
-  //   resume: () => void
-  //   pause: () => void
-  //   update: () => void
-  //   scrollTo: (href: string) => void
-  // }
+  initialMount: boolean;
   glContext: {
     gl: OGLRenderingContext;
     addScene: (scene: Transform) => void;

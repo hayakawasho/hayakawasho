@@ -8,10 +8,10 @@ import ScrollTween from "../scroll-tween";
 import type { GlobalContext } from "@/_foundation/type";
 
 type Props = {
-  onCreated: (props?: Omit<GlobalContext, "initialLoad">) => void;
+  onCreated: (props?: Omit<GlobalContext, "initialMount">) => void;
   onUpdated: (
     scope: HTMLElement,
-    props?: Omit<GlobalContext, "initialLoad">
+    props?: Omit<GlobalContext, "initialMount">
   ) => void;
   onCleanup: (scope: HTMLElement) => void;
 };

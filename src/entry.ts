@@ -9,12 +9,12 @@ import Project from "./_components/project";
 import ToScroll from "./_components/to-scroll.svelte";
 import type { IComponent, ComponentContext } from "lake";
 
-const bootstrap = (run: () => void) => {
+const bootstrap = (setup: () => void) => {
   if (document.readyState !== "loading") {
-    run();
+    setup();
     return;
   }
-  document.addEventListener("DOMContentLoaded", run, false);
+  document.addEventListener("DOMContentLoaded", setup, false);
 };
 
 bootstrap(() => {
@@ -54,10 +54,10 @@ bootstrap(() => {
       unmount(Array.from(targets));
     },
     onCreated: (context?: Record<string, unknown>) => {
-      mountComponents(html, { ...context, initialLoad: true });
+      mountComponents(html, { ...context, initialMount: true });
     },
     onUpdated: (scope: HTMLElement, context: Record<string, unknown>) => {
-      mountComponents(scope, { ...context, initialLoad: false });
+      mountComponents(scope, { ...context, initialMount: false });
     },
   });
 });

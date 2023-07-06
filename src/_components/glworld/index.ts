@@ -1,7 +1,6 @@
 import { defineComponent, useDomRef } from "lake";
-import { Transform, Renderer } from "ogl";
+import { Transform, Renderer, Camera } from "ogl";
 import { useTick } from "@/_foundation/hooks";
-import { createCamera } from "@/_gl";
 import { useWindowSize } from "@/_states/window-size";
 
 export default defineComponent({
@@ -20,25 +19,36 @@ export default defineComponent({
       width: rect.width,
     });
 
-    const { camera, calcDistance } = createCamera(
-      renderer.gl,
-      rect.width,
-      rect.height
-    );
+    const gl = renderer.gl;
+
+    const fov = 60;
+    const fovRad = (fov / 2) * (Math.PI / 180);
+    const calcDistance = (h: number) => h / 2 / Math.tan(fovRad);
+
+    const camera = new Camera(gl, {
+      aspect: rect.width / rect.height,
+      far: 1000,
+      fov,
+      near: 0.1,
+    });
+    camera.position.z = calcDistance(rect.height);
 
     const scene = new Transform();
 
     const [ww, wh] = useWindowSize(({ aspect }) => {
       renderer.setSize(ww.value, wh.value);
 
-      const { dist } = calcDistance(wh.value);
-
-      camera.perspective({ aspect });
-      camera.position.z = dist;
+      camera.perspective({
+        aspect,
+      });
+      camera.position.z = calcDistance(wh.value);
     });
 
     useTick(() => {
-      renderer.render({ camera, scene });
+      renderer.render({
+        camera,
+        scene,
+      });
     });
 
     const addScene = (child: Transform) => {

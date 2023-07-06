@@ -7,14 +7,20 @@ const pos = map<{
   y: 0,
 });
 
-export const useScrollTween = (callback: (payload: { y: number }) => void) => {
+export const useScrollTween = (
+  callback: (payload: { currentY: number; oldY: number }) => void
+) => {
   const { y } = pos.get();
   const currentY = ref(y);
 
   const unbind = pos.listen(({ y }) => {
+    const oldY = currentY.value;
+
     callback({
-      y,
+      currentY: y,
+      oldY,
     });
+
     currentY.value = y;
   });
 

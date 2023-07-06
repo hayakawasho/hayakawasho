@@ -5,6 +5,7 @@ import { lerp } from "@/_foundation/math";
 import { Tween } from "@/_foundation/tween";
 import { scrollPosMutators } from "@/_states/scroll";
 import { useWindowSize } from "@/_states/window-size";
+import { clamp } from "remeda";
 
 type Cache = {
   el: HTMLElement;
@@ -111,7 +112,10 @@ export default defineComponent({
     };
 
     const clampTarget = (target: number) => {
-      return Math.min(Math.max(target, -0), state.scrollLimit);
+      return clamp(target, {
+        min: -0,
+        max: state.scrollLimit,
+      });
     };
 
     const isVisible = (cache: Cache) => {
@@ -243,7 +247,9 @@ export default defineComponent({
     };
 
     const scrollTo = (y: number) => {
-      const value = state.scrollLimit > y ? y : state.scrollLimit;
+      const value = clamp(y, {
+        max: state.scrollLimit,
+      });
       moveTo(value);
     };
 
