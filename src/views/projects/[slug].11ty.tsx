@@ -117,9 +117,6 @@ export const render = (props: any) => {
           </ul>
           <aside css={next} data-scroll-item>
             <div css={next__img}>
-              <a className="inset-0 absolute" href={`../${nextPost.id}/`}>
-                <span className="sr-only">NEXT PROJECT</span>
-              </a>
               <img
                 alt={nextPost.title}
                 data-src={`${nextPost.eyecatch.src}?auto=compress,format&w=750`}
@@ -128,7 +125,11 @@ export const render = (props: any) => {
                 height={nextPost.eyecatch.height}
                 src={`${nextPost.eyecatch.src}?auto=compress,format&sat=-100`}
                 width={nextPost.eyecatch.width}
+                className="sizefit object-cover opacity-80"
               />
+              <a className="inset-0 absolute" href={`../${nextPost.id}/`}>
+                <span className="sr-only">NEXT PROJECT</span>
+              </a>
             </div>
           </aside>
         </main>
@@ -247,18 +248,12 @@ const next__img = css`
   z-index: 1;
   aspect-ratio: 1 / 1;
   width: calc(var(--grid) * 6);
-  opacity: 0.8;
   backface-visibility: hidden;
+  background-color: var(--color-bg);
 
   @media (min-width: 640px) {
     aspect-ratio: auto;
     width: calc(var(--grid) * 5);
-  }
-
-  & > img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
   }
 `;
 

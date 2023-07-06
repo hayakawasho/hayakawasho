@@ -25,7 +25,7 @@ export const render = (props: any) => {
         <main className="h-full" data-component="home">
           <div css={intro} data-scroll-item>
             <h1 className="sr-only">Sho Hayakawa Developer</h1>
-            <div className="sizefull relative" data-ref="artwork">
+            <div className="sizefit relative" data-ref="artwork">
               <div
                 className="inset-0 absolute"
                 css={intro__frame}
