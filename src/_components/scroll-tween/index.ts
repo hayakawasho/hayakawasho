@@ -5,6 +5,7 @@ import { useTick } from "@/_foundation/hooks";
 import { lerp } from "@/_foundation/math";
 import { Tween } from "@/_foundation/tween";
 import { scrollPosMutators } from "@/_states/scroll";
+import { noop } from "@/_foundation/utils";
 import { useWindowSize } from "@/_states/window-size";
 
 type Cache = {
@@ -43,15 +44,7 @@ export default defineComponent({
       targetPos: 0,
     };
 
-    const [_ww, wh] = useWindowSize(() => {
-      state.resizing = true;
-
-      cache.value = updateCache(cache.value);
-      state.scrollLimit = setScrollLimit();
-      state.targetPos = clampTarget(state.targetPos);
-
-      state.resizing = false;
-    });
+    const [_ww, wh] = useWindowSize(noop);
 
     const getBounds = (el: HTMLElement, speed: number) => {
       const rect = el.getBoundingClientRect();
@@ -220,6 +213,16 @@ export default defineComponent({
 
       scrollPosMutators({ y: state.currentPos });
       transformElms(cache.value);
+    });
+
+    useWindowSize(() => {
+      state.resizing = true;
+
+      cache.value = updateCache(cache.value);
+      state.scrollLimit = setScrollLimit();
+      state.targetPos = clampTarget(state.targetPos);
+
+      state.resizing = false;
     });
 
     //----------------------------------------------------------------

@@ -32,9 +32,8 @@ bootstrap(() => {
     scope: HTMLElement,
     props: Record<string, unknown>
   ) => {
-    return Array.from(
-      scope.querySelectorAll<HTMLElement>(`[data-component]`)
-    ).reduce<ComponentContext[]>((acc, el) => {
+    const targets = scope.querySelectorAll<HTMLElement>(`[data-component]`);
+    return Array.from(targets).reduce<ComponentContext[]>((acc, el) => {
       const name = el.dataset.component || "noop";
       try {
         const mount = component(table[`${name}`]);

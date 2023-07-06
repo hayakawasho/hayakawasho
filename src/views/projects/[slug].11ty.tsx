@@ -174,6 +174,7 @@ const head__info = css`
   position: absolute;
   bottom: 5rem;
   left: var(--grid);
+  backface-visibility: hidden;
 
   @media (min-width: 640px) {
     display: flex;
@@ -211,6 +212,7 @@ const infoText = css`
 
 const eyecatch = css`
   overflow: hidden;
+  backface-visibility: hidden;
 
   & > img {
     @media (min-width: 640px) {
@@ -223,6 +225,7 @@ const screenshots = css`
   width: calc((var(--grid) * 10));
   margin-left: auto;
   margin-right: auto;
+  backface-visibility: hidden;
 
   @media (min-width: 640px) {
     width: calc(var(--grid) * 9);
@@ -244,7 +247,8 @@ const next__img = css`
   z-index: 1;
   aspect-ratio: 1 / 1;
   width: calc(var(--grid) * 6);
-  opacity: 0.7;
+  opacity: 0.8;
+  backface-visibility: hidden;
 
   @media (min-width: 640px) {
     aspect-ratio: auto;

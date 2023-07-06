@@ -119,6 +119,7 @@ const project = css`
 const project__eyecatch = css`
   display: block;
   aspect-ratio: 1 / 1;
+  background-color: var(--color-bg);
 
   @media (min-width: 640px) {
     aspect-ratio: auto;
@@ -154,6 +155,7 @@ const heading = css`
   line-height: 1.1;
   opacity: 0.7;
   text-align: right;
+  backface-visibility: hidden;
 
   @media (min-width: 640px) {
     font-size: 3rem;
