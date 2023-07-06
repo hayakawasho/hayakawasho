@@ -30,6 +30,5 @@ void main() {
     texture.b = texture2D(u_texture, texScale).b;
   }
 
-  texture.a = 0.8;
   gl_FragColor = texture;
 }

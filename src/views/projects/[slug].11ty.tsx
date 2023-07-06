@@ -125,7 +125,7 @@ export const render = (props: any) => {
                 height={nextPost.eyecatch.height}
                 src={`${nextPost.eyecatch.src}?auto=compress,format&sat=-100`}
                 width={nextPost.eyecatch.width}
-                className="sizefit object-cover opacity-80"
+                className="sizefit object-cover"
               />
               <a className="inset-0 absolute" href={`../${nextPost.id}/`}>
                 <span className="sr-only">NEXT PROJECT</span>
