@@ -12,8 +12,9 @@ import type { GlobalContext } from "@/_foundation/type";
 
 export default defineComponent({
   name: "home",
-  setup(_el, { glContext, initialMount }: GlobalContext) {
+  setup(el, { glContext, initialMount, env }: GlobalContext) {
     const { addChild } = useSlot();
+
     const { refs } = useDomRef<{
       plane: HTMLImageElement[];
       artwork: HTMLElement;
@@ -23,6 +24,7 @@ export default defineComponent({
     // addChild(refs.artwork, Artwork);
     addChild(refs.plane, ImagePlane, {
       glContext,
+      env,
     });
 
     useMount(() => {
@@ -40,12 +42,8 @@ export default defineComponent({
 
     useUnmount(() => {
       Tween.parallel(
-        Tween.tween(refs.artwork, 0.6, "power3.inOut", {
+        Tween.tween(el, 0.6, "power3.inOut", {
           alpha: 0,
-        }),
-        Tween.tween(refs.name, 1.2, "expo.out", {
-          y: "-110%",
-          delay: 0.1,
         })
       );
     });

@@ -55,15 +55,11 @@ export const render = (props: any) => {
                     href={`./projects/${post.id}/`}
                     data-load="home2project"
                   >
-                    <img
-                      alt=""
+                    <div
+                      className="sizefit opacity-0 invisible"
                       data-ref="plane"
-                      data-src={`${post.eyecatch.src}?auto=compress,format`}
-                      data-src-sp={`${post.eyecatch.src}?auto=compress,format&fit=crop&w=750&h=750`}
-                      decoding="async"
-                      height={post.eyecatch.height}
-                      src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
-                      width={post.eyecatch.width}
+                      data-src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
+                      data-src-sp={`${post.eyecatch.src}?auto=compress,format&fit=crop&w=750&h=750&sat=-100`}
                     />
                   </a>
                   {
@@ -126,14 +122,6 @@ const project__eyecatch = css`
   @media (min-width: 640px) {
     aspect-ratio: auto;
     width: calc(var(--grid) * 8);
-  }
-
-  & > img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    visibility: hidden;
   }
 `;
 

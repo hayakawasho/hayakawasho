@@ -23,13 +23,11 @@ type Cache = {
   wh: number;
 };
 
-type Props = {} & Pick<GlobalContext, "glContext">;
+type Props = {} & Pick<GlobalContext, "glContext" | "env">;
 
 export default defineComponent({
   name: "plane",
-  setup(el: HTMLImageElement, { glContext }: Props) {
-    const { gl, addScene, removeScene } = glContext;
-
+  setup(el: HTMLImageElement, { glContext, env }: Props) {
     const [ww, wh] = useWindowSize(noop);
 
     const cache = ref<Cache>({
@@ -39,25 +37,28 @@ export default defineComponent({
       ww: ww.value,
     });
 
-    const rect = el.getBoundingClientRect();
-
     const state = {
       resizing: false,
       visible: false,
     };
 
-    const texture = new Texture(gl);
+    const texture = new Texture(glContext.gl);
+
+    const src = {
+      pc: el.dataset.src!,
+      sp: el.dataset.srcSp!,
+    };
 
     const img = new Image();
     img.crossOrigin = "anonymous";
-    img.onload = () => {
+    img.src = src[env.mq];
+    img.decode().then(() => {
       texture.image = img;
-    };
-    img.src = el.src;
+    });
 
     const uniforms = {
       u_image_size: {
-        value: new Vec2(rect.width, rect.height),
+        value: new Vec2(0, 0),
       },
       u_mesh_size: {
         value: new Vec2(ww.value, wh.value),
@@ -76,19 +77,19 @@ export default defineComponent({
       },
     };
 
-    const geometry = new Plane(gl);
-    const program = new Program(gl, {
+    const geometry = new Plane(glContext.gl);
+    const program = new Program(glContext.gl, {
       fragment,
       uniforms,
       vertex,
     });
 
-    const mesh = new Mesh(gl, {
+    const mesh = new Mesh(glContext.gl, {
       geometry,
       program,
     });
 
-    const plane = new ImagePlane(mesh);
+    const imagePlane = new ImagePlane(mesh);
 
     useIntersectionWatch(
       el,
@@ -109,21 +110,22 @@ export default defineComponent({
         ...cache.value,
         currentY,
       };
-      plane.update(cache.value);
+
+      imagePlane.update(cache.value);
 
       const diff = (oldY - currentY) * 0.01;
       uniforms.u_velo.value = diff;
     });
 
     useMount(() => {
-      addScene(mesh);
+      glContext.addScene(mesh);
     });
 
     useUnmount(() => {
       Tween.tween(uniforms.u_alpha, 0.6, "power2.inOut", {
         value: 0,
         onComplete: () => {
-          removeScene(mesh);
+          glContext.removeScene(mesh);
         },
       });
     });

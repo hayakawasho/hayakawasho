@@ -13,7 +13,7 @@ import type { GlobalContext } from "@/_foundation/type";
 
 export default defineComponent({
   name: "project",
-  setup(_el, { glContext, initialMount }: GlobalContext) {
+  setup(el, { glContext, initialMount }: GlobalContext) {
     const { addChild } = useSlot();
     const { refs } = useDomRef<{
       h1: HTMLElement;
@@ -74,14 +74,9 @@ export default defineComponent({
 
     useUnmount(() => {
       Tween.parallel(
-        Tween.tween(
-          [refs.next, refs.eyecatch, refs.infoHeading, refs.infoText],
-          0.6,
-          "power3.inOut",
-          {
-            alpha: 0,
-          }
-        ),
+        Tween.tween(el, 0.6, "power3.inOut", {
+          alpha: 0,
+        }),
         Tween.tween(refs.h1, 0.45, "power3.inOut", {
           alpha: 0,
         }),
