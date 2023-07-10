@@ -1,11 +1,11 @@
-import { defineComponent, ref, useEvent } from "lake";
+import { defineComponent, ref, useEvent, useMount } from "lake";
 import NormalizeWheel from "normalize-wheel";
 import { clamp } from "remeda";
 import { useTick } from "@/_foundation/hooks";
 import { lerp } from "@/_foundation/math";
 import { Tween } from "@/_foundation/tween";
-import { scrollPosMutators } from "@/_states/scroll";
 import { noop } from "@/_foundation/utils";
+import { scrollPosMutators } from "@/_states/scroll";
 import { useWindowSize } from "@/_states/window-size";
 
 type Cache = {
@@ -24,24 +24,16 @@ const SELECTOR_CLASS = "[data-scroll-item]";
 export default defineComponent({
   name: "scrollTween",
   setup(el) {
-    const smoothItem = Array.from(
-      el.querySelectorAll<HTMLElement>(SELECTOR_CLASS)
-    );
-
-    // TODO:
-    // if (!smoothItem.length) {
-    //   return;
-    // }
-
     const state = {
       active: true,
       currentPos: 0,
       dragging: false,
       position: 0,
-      resizing: true,
+      resizing: false,
       scrollLimit: 0,
       startPos: 0,
       targetPos: 0,
+      container: el,
     };
 
     const [_ww, wh] = useWindowSize(noop);
@@ -63,8 +55,8 @@ export default defineComponent({
       };
     };
 
-    const cache = ref(
-      smoothItem.reduce<Cache[]>((acc, el) => {
+    const createCache = (targets: HTMLElement[]) => {
+      return targets.reduce<Cache[]>((acc, el) => {
         const speed = Number(el.dataset.speed) || 1;
         const { top, bottom, offset } = getBounds(el, speed);
 
@@ -81,8 +73,19 @@ export default defineComponent({
         el.style.transform = "translate3d(0, 0, 0)";
 
         return acc;
-      }, [])
+      }, []);
+    };
+
+    const smoothItem = Array.from(
+      el.querySelectorAll<HTMLElement>(SELECTOR_CLASS)
     );
+
+    // TODO:
+    // if (!smoothItem.length) {
+    //   return;
+    // }
+
+    const cache = ref(createCache(smoothItem));
 
     const updateCache = (cache: Cache[]) => {
       return cache.map((item) => {
@@ -98,7 +101,7 @@ export default defineComponent({
     };
 
     const setScrollLimit = () => {
-      const { height } = el.getBoundingClientRect();
+      const { height } = state.container.getBoundingClientRect();
       return height >= wh.value ? height - wh.value : height;
     };
 
@@ -225,15 +228,17 @@ export default defineComponent({
       state.resizing = false;
     });
 
-    //----------------------------------------------------------------
-
-    Object.assign(el.style, {
-      left: 0,
-      overflow: "hidden",
-      position: "fixed",
-      top: 0,
-      width: "100%",
+    useMount(() => {
+      Object.assign(el.style, {
+        left: 0,
+        overflow: "hidden",
+        position: "fixed",
+        top: 0,
+        width: "100%",
+      });
     });
+
+    //----------------------------------------------------------------
 
     const resume = () => {
       state.active = true;
@@ -256,15 +261,26 @@ export default defineComponent({
       moveTo(value);
     };
 
-    const update = () => {
-      cache.value = updateCache(cache.value);
+    // Update instance
+    const update = (container: HTMLElement) => {
+      const smoothItem = Array.from(
+        container.querySelectorAll<HTMLElement>(SELECTOR_CLASS)
+      );
+      state.container = container;
+      cache.value = createCache(smoothItem);
       state.scrollLimit = setScrollLimit();
+    };
+
+    const set = (value: number) => {
+      state.targetPos = value;
+      state.currentPos = value;
     };
 
     return {
       pause,
       resume,
       scrollTo,
+      set,
       update,
     };
   },

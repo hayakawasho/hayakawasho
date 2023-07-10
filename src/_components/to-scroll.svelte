@@ -1,33 +1,75 @@
 <script lang="ts">
   import { getContext } from "svelte";
-  import { Tween as _ } from "@/_foundation/tween";
+  import { useMount } from "lake";
+  import { Tween } from "@/_foundation/tween";
   import { noop } from "@/_foundation/utils";
   import { useScrollTween } from "@/_states/scroll";
   import { useWindowSize } from "@/_states/window-size";
   import type { GlobalContext } from "@/_foundation/type";
   import type { Context$ } from "lake";
 
-  const { scrollContext } = getContext<Context$<GlobalContext>>("$");
+  const { scrollContext, initialMount } =
+    getContext<Context$<GlobalContext>>("$");
 
   const [_ww, wh] = useWindowSize(noop);
   const [y] = useScrollTween(noop);
+
+  let wrapRef: HTMLElement;
+
+  useMount(() => {
+    if (initialMount) {
+      Tween.serial(
+        Tween.wait(0.5),
+        Tween.tween(wrapRef, 1.6, "expo.out", {
+          y: "0%",
+        })
+      );
+    }
+  });
 </script>
 
 <button
-  class="fixed bottom-0 left-1/2 h-[5rem] w-[6rem] flex items-center justify-center ml-[-3rem] pb-[2.4rem] z-20"
+  class="toScroll"
   on:click={() => scrollContext.scrollTo(y.value + wh.value)}
+  bind:this={wrapRef}
 >
   <span class="label">Scroll</span>
   <span class="hr" />
 </button>
 
-<style>
+<style lang="postcss">
+  .toScroll {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    height: 5rem;
+    width: 6rem;
+    margin-left: -3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    padding-bottom: 2.4rem;
+    transform: translateY(100%);
+
+    @media (min-width: 640px) {
+      height: 10rem;
+      width: 8rem;
+      margin-left: -4rem;
+      padding-bottom: 3.2rem;
+    }
+  }
+
   .label {
     font-family: var(--font-en);
     font-weight: 600;
     letter-spacing: 0.01em;
     font-size: 1.2rem;
     padding-bottom: 0.8em;
+
+    @media (min-width: 640px) {
+      font-size: 2.2rem;
+    }
   }
 
   .hr {
@@ -40,5 +82,11 @@
     margin-left: -1.5rem;
     background-color: currentColor;
     height: 2px;
+
+    @media (min-width: 640px) {
+      top: 5rem;
+      width: 5.4rem;
+      margin-left: -2.7rem;
+    }
   }
 </style>

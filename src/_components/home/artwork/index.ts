@@ -9,12 +9,14 @@ import {
 import { Transform, Renderer, Camera } from "ogl";
 import { useTick } from "@/_foundation/hooks";
 import { useWindowSize } from "@/_states/window-size";
-import Sketch from "./sketch01";
+// import Sketch from "./sketch01";
+// import Sketch from "./sketch02";
 
 export default defineComponent({
   name: "artwork",
   setup(el) {
-    const dpr = Math.min(window.devicePixelRatio, 1.5);
+    // const dpr = Math.min(window.devicePixelRatio, 1.5);
+    const dpr = 0.25;
 
     const isVisible = ref(false);
 
@@ -80,10 +82,10 @@ export default defineComponent({
       });
     });
 
-    addChild(el, Sketch, {
-      gl,
-      isVisible: readonly(isVisible),
-      scene,
-    });
+    // addChild(el, Sketch, {
+    //   gl,
+    //   isVisible: readonly(isVisible),
+    //   scene,
+    // });
   },
 });

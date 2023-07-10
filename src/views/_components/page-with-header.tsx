@@ -56,7 +56,7 @@ const svh = css`
 
 const maskUpper = css`
   display: block;
-  height: 6rem;
+  height: 7rem;
   width: 100%;
   position: fixed;
   z-index: 11;
@@ -65,16 +65,20 @@ const maskUpper = css`
   top: 0;
   background: linear-gradient(
     to bottom,
-    rgba(22, 22, 22, 0.6) 0%,
-    rgba(22, 22, 22, 0.25) 40%,
-    rgba(22, 22, 22, 0.05) 80%,
+    rgba(22, 22, 22, 0.32) 0%,
+    rgba(22, 22, 22, 0.16) 40%,
+    rgba(22, 22, 22, 0.04) 80%,
     rgba(22, 22, 22, 0) 100%
   );
+
+  @media (min-width: 640px) {
+    height: 14rem;
+  }
 `;
 
 const maskLower = css`
   display: block;
-  height: 6rem;
+  height: 7rem;
   width: 100%;
   position: fixed;
   z-index: 11;
@@ -83,11 +87,15 @@ const maskLower = css`
   bottom: 0;
   background: linear-gradient(
     to top,
-    rgba(22, 22, 22, 0.5) 0%,
-    rgba(22, 22, 22, 0.25) 40%,
-    rgba(22, 22, 22, 0.05) 80%,
+    rgba(22, 22, 22, 0.32) 0%,
+    rgba(22, 22, 22, 0.16) 40%,
+    rgba(22, 22, 22, 0.04) 80%,
     rgba(22, 22, 22, 0) 100%
   );
+
+  @media (min-width: 640px) {
+    height: 14rem;
+  }
 `;
 
 const gridLine = css`
@@ -98,6 +106,7 @@ const gridLine = css`
   background: rgba(255, 255, 255, 0.05);
   width: 1px;
   height: 100%;
+  transform: translateX(-50%);
 `;
 
 const gridLeft = css`

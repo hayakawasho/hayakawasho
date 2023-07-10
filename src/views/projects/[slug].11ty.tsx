@@ -31,9 +31,15 @@ const Info: FC<{
   return (
     <dl className={className}>
       <dt className="mb-[1em]" css={infoHeading}>
-        {props.heading}
+        <span className="inline-block" data-ref="infoHeading">
+          {props.heading}
+        </span>
       </dt>
-      <dd css={infoText}>{props.text}</dd>
+      <dd css={infoText}>
+        <span className="inline-block" data-ref="infoText">
+          {props.text}
+        </span>
+      </dd>
     </dl>
   );
 };
@@ -50,12 +56,14 @@ export const render = (props: any) => {
       header={<Header />}
       seo={<Seo permalink={`/projects/${post.id}/`} title={post.title} />}
     >
-      <Content>
+      <Content namespace="project">
         <main data-component="project">
           <div css={head} data-scroll-item>
             <div css={head__hgroup}>
-              <h1 className="" css={heading} data-h1={post.title} data-ref="h1">
-                {post.title}
+              <h1 css={heading} data-h1={post.title}>
+                <span className="inline-block" data-ref="h1">
+                  {post.title}
+                </span>
               </h1>
             </div>
             <div css={head__info}>
@@ -103,6 +111,7 @@ export const render = (props: any) => {
                 <li className="mb-[2rem] sm:mb-[6rem]" key={index}>
                   <img
                     alt=""
+                    className="pointer-events-none"
                     data-ref="screenshot"
                     data-src={`${i.src}?auto=compress,format`}
                     data-src-sp={`${i.src}?auto=compress,format&w=750`}
@@ -116,18 +125,22 @@ export const render = (props: any) => {
             })}
           </ul>
           <aside css={next} data-scroll-item>
-            <div css={next__img}>
+            <div css={next__img} data-ref="next">
               <img
                 alt={nextPost.title}
+                className="sizefit object-cover"
                 data-src={`${nextPost.eyecatch.src}?auto=compress,format&w=750`}
                 data-src-sp={`${nextPost.eyecatch.src}?auto=compress,format&w=750`}
                 decoding="async"
                 height={nextPost.eyecatch.height}
                 src={`${nextPost.eyecatch.src}?auto=compress,format&sat=-100`}
                 width={nextPost.eyecatch.width}
-                className="sizefit object-cover"
               />
-              <a className="inset-0 absolute" href={`../${nextPost.id}/`}>
+              <a
+                className="inset-0 absolute"
+                href={`../${nextPost.id}/`}
+                data-load="project2project"
+              >
                 <span className="sr-only">NEXT PROJECT</span>
               </a>
             </div>
@@ -159,12 +172,14 @@ const head__hgroup = css`
 
 const heading = css`
   font-family: var(--font-en);
-  font-size: 5.6rem;
+  font-size: 5rem;
   letter-spacing: 0.16em;
   line-height: 1.1;
   margin-top: -1em;
   white-space: nowrap;
   font-weight: 600;
+  position: relative;
+  overflow: hidden;
 
   @media (min-width: 640px) {
     font-size: 9rem;
@@ -194,6 +209,7 @@ const infoHeading = css`
   letter-spacing: 0.06em;
   opacity: 0.5;
   font-weight: 300;
+  overflow: hidden;
 
   @media (min-width: 640px) {
     font-size: 1.4rem;
@@ -205,6 +221,7 @@ const infoText = css`
   line-height: 1.1;
   letter-spacing: 0.06em;
   font-weight: 300;
+  overflow: hidden;
 
   @media (min-width: 640px) {
     font-size: 1.5rem;

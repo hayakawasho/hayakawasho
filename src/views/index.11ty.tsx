@@ -21,7 +21,7 @@ export const render = (props: any) => {
   return `<!DOCTYPE html>
   ${r(
     <PageWithHeader header={<Header />} seo={<Seo permalink="" title="" />}>
-      <Content>
+      <Content namespace="home">
         <main className="h-full" data-component="home">
           <div css={intro} data-scroll-item>
             <h1 className="sr-only">Sho Hayakawa Developer</h1>
@@ -53,6 +53,7 @@ export const render = (props: any) => {
                     className=""
                     css={project__eyecatch}
                     href={`./projects/${post.id}/`}
+                    data-load="home2project"
                   >
                     <img
                       alt=""
@@ -68,7 +69,9 @@ export const render = (props: any) => {
                   {
                     <div className="u-sp" css={project__body}>
                       <h3 className="mt-[1em]" css={heading}>
-                        {post.title}
+                        <span className="inline-block" data-ref="name">
+                          {post.title}
+                        </span>
                       </h3>
                     </div>
                   }
@@ -119,7 +122,6 @@ const project = css`
 const project__eyecatch = css`
   display: block;
   aspect-ratio: 1 / 1;
-  background-color: var(--color-bg);
 
   @media (min-width: 640px) {
     aspect-ratio: auto;
@@ -156,6 +158,7 @@ const heading = css`
   opacity: 0.7;
   text-align: right;
   backface-visibility: hidden;
+  overflow: hidden;
 
   @media (min-width: 640px) {
     font-size: 3rem;

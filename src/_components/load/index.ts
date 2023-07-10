@@ -1,5 +1,6 @@
 import { getGPUTier } from "detect-gpu";
 import { defineComponent, useDomRef, useSlot, useMount } from "lake";
+import modularLoad from "modularload";
 import { wideQuery } from "@/_foundation/env";
 import { debounce } from "@/_foundation/utils";
 import { windowSizeMutators } from "@/_states/window-size";
@@ -18,7 +19,7 @@ type Props = {
 
 export default defineComponent({
   name: "loader",
-  setup(_el, { onCreated }: Props) {
+  setup(_el, { onCreated, onUpdated, onCleanup }: Props) {
     const { addChild } = useSlot();
     const { refs } = useDomRef<{
       main: HTMLElement;
@@ -45,6 +46,21 @@ export default defineComponent({
       scrollContext: scrollContext.current,
     };
 
+    const load = new modularLoad({
+      enterDelay: 550,
+      transitions: {
+        home2project: {
+          enterDelay: 550,
+        },
+        project2home: {
+          enterDelay: 350,
+        },
+        project2project: {
+          enterDelay: 450,
+        },
+      },
+    });
+
     const ro = new ResizeObserver(
       debounce(([entry]) => {
         const { width, height } = entry.contentRect;
@@ -52,10 +68,36 @@ export default defineComponent({
       }, 200)
     );
 
+    //----------------------------------------------------------------
+
+    load.on("loading", (_transition: string, oldContainer: HTMLElement) => {
+      onCleanup(oldContainer);
+    });
+
+    //----------------------------------------------------------------
+
+    load.on(
+      "loaded",
+      (
+        _transition: string,
+        _oldContainer: HTMLElement,
+        newContainer: HTMLElement
+      ) => {
+        const namespace = newContainer.dataset.loadContainer!;
+
+        document.body.dataset.page = namespace;
+
+        scrollContext.current.update(newContainer);
+        scrollContext.current.set(0);
+
+        onUpdated(newContainer, provides);
+      }
+    );
+
+    //----------------------------------------------------------------
+
     useMount(() => {
       ro.observe(refs.windowSizeWatcher);
-
-      scrollContext.current!.update();
       onCreated(provides);
     });
   },

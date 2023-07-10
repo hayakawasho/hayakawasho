@@ -11,8 +11,9 @@ export type GlobalContext = {
   scrollContext: {
     pause: () => void;
     resume: () => void;
-    update: () => void;
+    update: (container: HTMLElement) => void;
     scrollTo: (y: number) => void;
+    set: (value: number) => void;
   };
   env: {
     mq: "pc" | "sp";
