@@ -59,7 +59,7 @@ export const render = (props: any) => {
                       className="sizefit opacity-0"
                       data-ref="plane"
                       data-src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
-                      data-src-sp={`${post.eyecatch.src}?auto=compress,format&fit=crop&w=750&h=750&sat=-100`}
+                      data-src-sp={`${post.eyecatch.src}?auto=compress,format&w=750&sat=-100`}
                     />
                   </a>
                   {
