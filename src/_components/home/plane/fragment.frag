@@ -17,7 +17,7 @@ void main() {
   vec2 texCenter = vec2(0.5);
   vec2 texUv = cover(u_mesh_size, u_image_size, uv);
   vec2 texScale = (texUv - texCenter) * u_scale + texCenter;
-  vec4 texture = texture2D(u_texture, texScale);
+  vec4 texture = texture2D(u_texture, texUv);
 
   texScale.y += 0.15 * u_velo;
 
@@ -30,8 +30,6 @@ void main() {
   if(uv.y < 1.) {
     texture.b = texture2D(u_texture, texScale).b;
   }
-
-  texture.a = u_alpha;
 
   gl_FragColor = texture;
 }

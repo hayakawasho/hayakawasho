@@ -56,7 +56,7 @@ export const render = (props: any) => {
                     data-load="home2project"
                   >
                     <div
-                      className="sizefit opacity-0 invisible"
+                      className="sizefit opacity-0"
                       data-ref="plane"
                       data-src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
                       data-src-sp={`${post.eyecatch.src}?auto=compress,format&fit=crop&w=750&h=750&sat=-100`}
@@ -89,11 +89,9 @@ const intro = css`
   display: flex;
   align-items: center;
   justify-content: center;
-  // padding: 0.4rem;
 `;
 
 const intro__frame = css`
-  // border: 1px solid var(--color-bg);
   pointer-events: none;
   background-color: #fff;
 `;
@@ -120,7 +118,7 @@ const project__eyecatch = css`
   aspect-ratio: 1 / 1;
 
   @media (min-width: 640px) {
-    aspect-ratio: auto;
+    aspect-ratio: 16 / 9;
     width: calc(var(--grid) * 8);
   }
 `;

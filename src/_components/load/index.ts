@@ -71,6 +71,7 @@ export default defineComponent({
     //----------------------------------------------------------------
 
     load.on("loading", (_transition: string, oldContainer: HTMLElement) => {
+      scrollContext.current.pause();
       onCleanup(oldContainer);
     });
 
@@ -84,11 +85,11 @@ export default defineComponent({
         newContainer: HTMLElement
       ) => {
         const namespace = newContainer.dataset.loadContainer!;
-
         document.body.dataset.page = namespace;
 
         scrollContext.current.update(newContainer);
         scrollContext.current.set(0);
+        scrollContext.current.resume();
 
         onUpdated(newContainer, provides);
       }

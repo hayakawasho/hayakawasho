@@ -107,18 +107,17 @@ export const render = (props: any) => {
           </div>
           <ul className="" css={screenshots} data-scroll-item>
             {post.screenshots.map((i, index) => {
+              const aspect = i.width / i.height;
               return (
                 <li className="mb-[2rem] sm:mb-[6rem]" key={index}>
-                  <img
-                    alt=""
-                    className="pointer-events-none"
+                  <div
+                    className={`pointer-events-none opacity-0`}
                     data-ref="screenshot"
                     data-src={`${i.src}?auto=compress,format`}
                     data-src-sp={`${i.src}?auto=compress,format&w=750`}
-                    decoding="async"
-                    height={i.height}
-                    src={`${i.src}?auto=compress,format`}
-                    width={i.width}
+                    style={{
+                      aspectRatio: aspect + "",
+                    }}
                   />
                 </li>
               );

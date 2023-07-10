@@ -9,15 +9,16 @@ export class ImagePlane {
     ww: number;
     wh: number;
   }) => {
-    const offset = update.rect.top;
-    const moveY = -update.currentY + offset;
+    const { rect, currentY, wh, ww } = update;
+    const { top, width, height, left } = rect;
 
-    this.mesh.scale.x = update.rect.width;
-    this.mesh.scale.y = update.rect.height;
+    this.mesh.scale.set(width, height);
 
-    const x = -update.ww / 2 + update.rect.width / 2 + update.rect.left;
-    const y = update.wh / 2 - update.rect.height / 2 - moveY;
+    const pos = {
+      x: left + width / 2 + -(ww / 2),
+      y: top + height / 2 + -(wh / 2),
+    };
 
-    this.mesh.position.set(x, y, this.mesh.position.z);
+    this.mesh.position.y = currentY - pos.y;
   };
 }

@@ -66,18 +66,6 @@ export default defineComponent({
       u_texture: {
         value: texture,
       },
-      u_velo: {
-        value: 0,
-      },
-      u_alpha: {
-        value: 1.0,
-      },
-      u_scale: {
-        value: 1.0,
-      },
-      u_time: {
-        value: 0,
-      },
     };
 
     const geometry = new Plane(glContext.gl);
@@ -104,7 +92,7 @@ export default defineComponent({
       }
     );
 
-    useScrollTween(({ currentY, oldY }) => {
+    useScrollTween(({ currentY }) => {
       if (state.resizing || !state.visible) {
         return;
       }
@@ -115,9 +103,6 @@ export default defineComponent({
       };
 
       imagePlane.update(cache.value);
-
-      const diff = oldY - currentY;
-      uniforms.u_velo.value = diff * 0.01;
     });
 
     useMount(() => {
@@ -126,12 +111,6 @@ export default defineComponent({
 
     useUnmount(() => {
       glContext.removeScene(mesh);
-      // Tween.tween(uniforms.u_alpha, 0.6, "power2.inOut", {
-      //   value: 0,
-      //   onComplete: () => {
-      //     glContext.removeScene(mesh);
-      //   },
-      // });
     });
   },
 });
