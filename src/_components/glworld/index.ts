@@ -6,7 +6,7 @@ import { useWindowSize } from "@/_states/window-size";
 export default defineComponent({
   name: "glWorld",
   setup(el) {
-    const dpr = Math.min(window.devicePixelRatio, 1.5);
+    const dpr = Math.min(window.devicePixelRatio, 2);
 
     const { refs } = useDomRef<{ canvas: HTMLCanvasElement }>("canvas");
     const rect = el.getBoundingClientRect();
