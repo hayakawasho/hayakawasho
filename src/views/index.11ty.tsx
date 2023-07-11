@@ -37,40 +37,48 @@ export const render = (props: any) => {
               ></canvas>
             </div>
           </div>
-          <div className="mt-[8rem] | sm:mt-[10rem]" css={projects}>
+          <div className="mt-[8rem] | sm:mt-[16rem]" css={projects}>
             <h2 className="sr-only">PROJECTS</h2>
             {posts.map((post, index) => {
               return (
                 <div
-                  className={`mb-[8rem] | sm:mb-[10rem] ${
+                  className={`mb-[8rem] | ${
                     (index + 1) % 2 === 0 ? "sm:flex-row-reverse" : ""
                   }`}
                   css={project}
                   data-scroll-item
                   key={post.id}
                 >
-                  <a
-                    className=""
-                    css={project__eyecatch}
-                    href={`./projects/${post.id}/`}
-                    data-load="home2project"
-                  >
-                    <div
-                      className="sizefit opacity-0"
-                      data-ref="plane"
-                      data-src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
-                      data-src-sp={`${post.eyecatch.src}?auto=compress,format&w=750&sat=-100`}
-                    />
-                  </a>
-                  {
-                    <div className="u-sp" css={project__body}>
-                      <h3 className="mt-[1em]" css={heading}>
-                        <span className="inline-block" data-ref="name">
-                          {post.title}
-                        </span>
-                      </h3>
-                    </div>
-                  }
+                  <div css={project__g}>
+                    <a
+                      css={project__eyecatch}
+                      href={`./projects/${post.id}/`}
+                      data-load="home2project"
+                    >
+                      <div
+                        className="sizefit opacity-0"
+                        data-ref="plane"
+                        data-src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
+                        data-src-sp={`${post.eyecatch.src}?auto=compress,format&w=750&sat=-100`}
+                      />
+                    </a>
+                    {
+                      <div className="" css={project__body}>
+                        <h3
+                          className={`mt-[1em] ${
+                            (index + 1) % 2 === 0
+                              ? "sm:text-left"
+                              : "sm:text-right"
+                          }`}
+                          css={heading}
+                        >
+                          <span className="inline-block" data-ref="name">
+                            {post.title}
+                          </span>
+                        </h3>
+                      </div>
+                    }
+                  </div>
                 </div>
               );
             })}
@@ -111,6 +119,21 @@ const project = css`
     display: flex;
     gap: var(--gap);
   }
+
+  &:last-child {
+    @media (min-width: 640px) {
+      margin-bottom: 16rem;
+    }
+  }
+`;
+
+const project__g = css`
+  display: block;
+
+  @media (min-width: 640px) {
+    width: calc(var(--grid) * 6);
+    padding: 0 var(--gap);
+  }
 `;
 
 const project__eyecatch = css`
@@ -119,20 +142,11 @@ const project__eyecatch = css`
 
   @media (min-width: 640px) {
     aspect-ratio: 16 / 9;
-    width: calc(var(--grid) * 8);
   }
 `;
 
 const project__body = css`
   backface-visibility: hidden;
-
-  @media (min-width: 640px) {
-    width: calc(var(--grid) * 5 - var(--gap) * 2);
-    display: flex;
-    flex-direction: column-reverse;
-    gap: 1.5rem;
-    text-align: left;
-  }
 `;
 
 const heading = css`
@@ -142,13 +156,10 @@ const heading = css`
   letter-spacing: 0.06em;
   line-height: 1.1;
   opacity: 0.7;
-  text-align: right;
   backface-visibility: hidden;
   overflow: hidden;
 
   @media (min-width: 640px) {
-    font-size: 3rem;
-    margin-bottom: -0.1em;
-    margin-left: -0.3em;
+    font-size: 1.3rem;
   }
 `;

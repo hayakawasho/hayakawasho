@@ -19,6 +19,6 @@ export class ImagePlane {
       y: top + height / 2 + -(wh / 2),
     };
 
-    this.mesh.position.y = currentY - pos.y;
+    this.mesh.position.set(pos.x, currentY - pos.y, this.mesh.position.z);
   };
 }

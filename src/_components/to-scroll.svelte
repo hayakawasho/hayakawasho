@@ -49,14 +49,14 @@
     align-items: center;
     justify-content: center;
     z-index: 20;
-    padding-bottom: 2.4rem;
+    padding-bottom: 2rem;
     transform: translateY(100%);
 
     @media (min-width: 640px) {
-      height: 10rem;
-      width: 8rem;
-      margin-left: -4rem;
-      padding-bottom: 3.2rem;
+      height: 8rem;
+      width: 6rem;
+      margin-left: -3rem;
+      padding-bottom: 4rem;
     }
   }
 
@@ -68,7 +68,7 @@
     padding-bottom: 0.8em;
 
     @media (min-width: 640px) {
-      font-size: 2.2rem;
+      font-size: 1.8rem;
     }
   }
 
@@ -77,16 +77,16 @@
     display: block;
     width: 3rem;
     position: absolute;
-    top: 2.2rem;
+    top: 2rem;
     left: 50%;
     margin-left: -1.5rem;
     background-color: currentColor;
     height: 2px;
 
     @media (min-width: 640px) {
-      top: 5rem;
-      width: 5.4rem;
-      margin-left: -2.7rem;
+      top: 2.8rem;
+      width: 4.4rem;
+      margin-left: -2.2rem;
     }
   }
 </style>

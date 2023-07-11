@@ -171,14 +171,15 @@ const head__hgroup = css`
 
 const heading = css`
   font-family: var(--font-en);
-  font-size: 5rem;
+  font-size: 4.2rem;
   letter-spacing: 0.16em;
-  line-height: 1.1;
+  line-height: 0.9;
   margin-top: -1em;
-  white-space: nowrap;
   font-weight: 600;
   position: relative;
   overflow: hidden;
+  // word-break: break-word;
+  white-space: nowrap;
 
   @media (min-width: 640px) {
     font-size: 9rem;
@@ -245,7 +246,7 @@ const screenshots = css`
   backface-visibility: hidden;
 
   @media (min-width: 640px) {
-    width: calc(var(--grid) * 9);
+    width: calc(var(--grid) * 8);
   }
 `;
 
