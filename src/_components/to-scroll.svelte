@@ -11,7 +11,7 @@
   const { scrollContext, initialMount } =
     getContext<Context$<GlobalContext>>("$");
 
-  const [_ww, wh] = useWindowSize(noop);
+  const [_ww, wh] = useWindowSize();
   const [y] = useScrollTween(noop);
 
   let wrapRef: HTMLElement;

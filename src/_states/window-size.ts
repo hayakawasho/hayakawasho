@@ -1,5 +1,6 @@
 import { ref, readonly, useUnmount } from "lake";
 import { map } from "nanostores";
+import { noop } from "@/_foundation/utils";
 import type { Size } from "@/_foundation/type";
 
 const viewport = map<Size>({
@@ -8,7 +9,7 @@ const viewport = map<Size>({
 });
 
 export const useWindowSize = (
-  callback: (payload: { aspect: number }) => void
+  callback: (payload: { aspect: number }) => void = noop
 ) => {
   const { width, height } = viewport.get();
 

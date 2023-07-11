@@ -46,10 +46,10 @@ export default defineComponent({
         }),
         Tween.prop(refs.h1, {
           alpha: 0,
-          y: "80%",
+          y: "140%",
         }),
         Tween.prop([refs.infoHeading, refs.infoText], {
-          y: "110%",
+          y: "140%",
         }),
         Tween.wait(0.1),
         Tween.parallel(
@@ -57,18 +57,18 @@ export default defineComponent({
             alpha: 1,
           }),
           Tween.tween(refs.infoHeading, 1.1, "expo.out", {
-            stagger: 0.1,
+            stagger: 0.07,
             y: "0%",
           }),
           Tween.tween(refs.infoText, 1.1, "expo.out", {
             delay: 0.16,
-            stagger: 0.1,
+            stagger: 0.07,
             y: "0%",
           }),
           Tween.tween(refs.h1, 0.45, "power2.inOut", {
             alpha: 1,
           }),
-          Tween.tween(refs.h1, 1.25, "expo.out", {
+          Tween.tween(refs.h1, 1.4, "power3.out", {
             delay: 0.1,
             y: "0%",
           })
@@ -85,7 +85,7 @@ export default defineComponent({
           alpha: 0,
         }),
         Tween.tween(refs.h1, 1.05, "expo.out", {
-          y: "-80%",
+          y: "-140%",
         })
       );
     });

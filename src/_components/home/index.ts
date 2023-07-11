@@ -5,7 +5,7 @@ import {
   useMount,
   useUnmount,
 } from "lake";
-// import Artwork from "./artwork";
+import Artwork from "./artwork";
 import { Tween } from "@/_foundation/tween";
 import ImagePlane from "./plane";
 import type { GlobalContext } from "@/_foundation/type";
@@ -21,7 +21,7 @@ export default defineComponent({
       name: HTMLElement[];
     }>("plane", "artwork", "name");
 
-    // addChild(refs.artwork, Artwork);
+    addChild(refs.artwork, Artwork);
     addChild(refs.plane, ImagePlane, {
       glContext,
       mq: env.mq,

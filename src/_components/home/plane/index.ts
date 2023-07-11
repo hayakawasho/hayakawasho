@@ -6,7 +6,6 @@ import {
   useIntersectionWatch,
 } from "lake";
 import { Texture, Vec2, Mesh, Program, Plane } from "ogl";
-import { noop } from "@/_foundation/utils";
 // import { Tween } from "@/_foundation/tween";
 import { ImagePlane } from "@/_glsl";
 import { useScrollTween } from "@/_states/scroll";
@@ -29,7 +28,7 @@ type Props = {
 export default defineComponent({
   name: "plane",
   setup(el: HTMLImageElement, { glContext, mq }: Props) {
-    const [ww, wh] = useWindowSize(noop);
+    const [ww, wh] = useWindowSize();
 
     const cache = ref<Cache>({
       currentY: 0,

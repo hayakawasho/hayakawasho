@@ -4,7 +4,6 @@ import { clamp } from "remeda";
 import { useTick } from "@/_foundation/hooks";
 import { lerp } from "@/_foundation/math";
 import { Tween } from "@/_foundation/tween";
-import { noop } from "@/_foundation/utils";
 import { scrollPosMutators } from "@/_states/scroll";
 import { useWindowSize } from "@/_states/window-size";
 
@@ -36,7 +35,7 @@ export default defineComponent({
       targetPos: 0,
     };
 
-    const [_ww, wh] = useWindowSize(noop);
+    const [_ww, wh] = useWindowSize();
 
     const getBounds = (el: HTMLElement, speed: number) => {
       const rect = el.getBoundingClientRect();

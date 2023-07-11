@@ -173,8 +173,8 @@ const head__hgroup = css`
 const heading = css`
   font-family: var(--font-en);
   font-size: 4.2rem;
-  letter-spacing: 0.16em;
-  line-height: 0.9;
+  letter-spacing: 0.12em;
+  line-height: 1;
   margin-top: -1em;
   font-weight: 600;
   position: relative;
