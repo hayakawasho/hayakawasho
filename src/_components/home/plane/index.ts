@@ -22,11 +22,13 @@ type Cache = {
   wh: number;
 };
 
-type Props = {} & Pick<GlobalContext, "glContext" | "env">;
+type Props = {
+  mq: "pc" | "sp";
+} & Pick<GlobalContext, "glContext">;
 
 export default defineComponent({
   name: "plane",
-  setup(el: HTMLImageElement, { glContext, env }: Props) {
+  setup(el: HTMLImageElement, { glContext, mq }: Props) {
     const [ww, wh] = useWindowSize(noop);
 
     const cache = ref<Cache>({
@@ -50,32 +52,32 @@ export default defineComponent({
 
     const img = new Image();
     img.crossOrigin = "anonymous";
-    img.src = src[env.mq];
+    img.src = src[mq];
     img.decode().then(() => {
       texture.image = img;
       uniforms.u_image_size.value.set(img.naturalWidth, img.naturalHeight);
     });
 
     const uniforms = {
+      u_alpha: {
+        value: 1.0,
+      },
       u_image_size: {
         value: new Vec2(0, 0),
       },
       u_mesh_size: {
         value: new Vec2(cache.value.rect.width, cache.value.rect.height),
       },
-      u_texture: {
-        value: texture,
-      },
-      u_velo: {
-        value: 0,
-      },
-      u_alpha: {
-        value: 1.0,
-      },
       u_scale: {
         value: 1.0,
       },
+      u_texture: {
+        value: texture,
+      },
       u_time: {
+        value: 0,
+      },
+      u_velo: {
         value: 0,
       },
     };
@@ -105,7 +107,7 @@ export default defineComponent({
     );
 
     useScrollTween(({ currentY, oldY }) => {
-      if (state.resizing || !state.visible) {
+      if (state.resizing || !state.visible || currentY === oldY) {
         return;
       }
 

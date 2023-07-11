@@ -52,8 +52,8 @@ export const render = (props: any) => {
                   <div css={project__g}>
                     <a
                       css={project__eyecatch}
+                      // data-load="home2project"
                       href={`./projects/${post.id}/`}
-                      data-load="home2project"
                     >
                       <div
                         className="sizefit opacity-0"

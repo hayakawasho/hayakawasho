@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { getContext } from "svelte";
   import { useMount } from "lake";
+  import { getContext } from "svelte";
   import { Tween } from "@/_foundation/tween";
   import { noop } from "@/_foundation/utils";
   import { useScrollTween } from "@/_states/scroll";

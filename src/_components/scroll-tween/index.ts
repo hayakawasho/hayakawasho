@@ -26,6 +26,7 @@ export default defineComponent({
   setup(el) {
     const state = {
       active: true,
+      container: el,
       currentPos: 0,
       dragging: false,
       position: 0,
@@ -33,7 +34,6 @@ export default defineComponent({
       scrollLimit: 0,
       startPos: 0,
       targetPos: 0,
-      container: el,
     };
 
     const [_ww, wh] = useWindowSize(noop);
@@ -229,13 +229,14 @@ export default defineComponent({
     });
 
     useMount(() => {
-      Object.assign(el.style, {
-        left: 0,
-        overflow: "hidden",
-        position: "fixed",
-        top: 0,
-        width: "100%",
-      });
+      // MEMO: 別途定義済み
+      // Object.assign(el.style, {
+      //   left: 0,
+      //   overflow: "hidden",
+      //   position: "fixed",
+      //   top: 0,
+      //   width: "100%",
+      // });
     });
 
     //----------------------------------------------------------------

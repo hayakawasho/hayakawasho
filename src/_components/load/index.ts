@@ -47,19 +47,19 @@ export default defineComponent({
     };
 
     const load = new modularLoad({
-      enterDelay: 550,
-      transitions: {
-        home2project: {
-          enterDelay: 550,
-        },
-        project2home: {
-          enterDelay: 350,
-        },
-        project2project: {
-          enterDelay: 450,
-        },
-      },
-    });
+      enterDelay: 500,
+      // transitions: {
+      //   home2project: {
+      //     enterDelay: 550,
+      //   },
+      //   project2home: {
+      //     enterDelay: 350,
+      //   },
+      //   project2project: {
+      //     enterDelay: 450,
+      //   },
+      // },
+    }); // ;
 
     const ro = new ResizeObserver(
       debounce(([entry]) => {

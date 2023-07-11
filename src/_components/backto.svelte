@@ -4,11 +4,7 @@
   console.log(Tween);
 </script>
 
-<a
-  href="/"
-  class="fixed top-[2rem] left-1/2 w-[2rem] h-[2rem] ml-[-1rem] z-20"
-  data-load="project2home"
->
+<a href="/" class="fixed top-[2rem] left-1/2 w-[2rem] h-[2rem] ml-[-1rem] z-20">
   <span />
   <span />
 </a>

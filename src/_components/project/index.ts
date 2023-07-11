@@ -5,10 +5,10 @@ import {
   useMount,
   useUnmount,
 } from "lake";
+import { Tween } from "@/_foundation/tween";
 import Eyecatch from "./eyecatch";
 // import H1 from "./h1";
 import Screenshot from "./screenshot";
-import { Tween } from "@/_foundation/tween";
 import type { GlobalContext } from "@/_foundation/type";
 
 export default defineComponent({
@@ -27,10 +27,12 @@ export default defineComponent({
     // addChild(refs.h1, H1, {
     //   glContext,
     // });
-    addChild(refs.eyecatch, Eyecatch);
+    addChild(refs.eyecatch, Eyecatch, {
+      mq: env.mq,
+    });
     addChild(refs.screenshot, Screenshot, {
       glContext,
-      env,
+      mq: env.mq,
     });
 
     useMount(() => {
@@ -43,8 +45,8 @@ export default defineComponent({
           alpha: 0,
         }),
         Tween.prop(refs.h1, {
-          y: "80%",
           alpha: 0,
+          y: "80%",
         }),
         Tween.prop([refs.infoHeading, refs.infoText], {
           y: "110%",
@@ -59,16 +61,16 @@ export default defineComponent({
             y: "0%",
           }),
           Tween.tween(refs.infoText, 1.1, "expo.out", {
+            delay: 0.16,
             stagger: 0.1,
             y: "0%",
-            delay: 0.16,
           }),
           Tween.tween(refs.h1, 0.45, "power2.inOut", {
             alpha: 1,
           }),
           Tween.tween(refs.h1, 1.25, "expo.out", {
-            y: "0%",
             delay: 0.1,
+            y: "0%",
           })
         )
       );

@@ -97,6 +97,7 @@ export const render = (props: any) => {
           >
             <ResponsiveImage
               alt=""
+              className={`sm:my-[-60px]`}
               pcH={post.eyecatch.height}
               pcSrc={`${post.eyecatch.src}?auto=compress,format`}
               pcW={post.eyecatch.width}
@@ -137,8 +138,8 @@ export const render = (props: any) => {
               />
               <a
                 className="inset-0 absolute"
+                // data-load="project2project"
                 href={`../${nextPost.id}/`}
-                data-load="project2project"
               >
                 <span className="sr-only">NEXT PROJECT</span>
               </a>
@@ -231,12 +232,6 @@ const infoText = css`
 const eyecatch = css`
   overflow: hidden;
   backface-visibility: hidden;
-
-  & > img {
-    @media (min-width: 640px) {
-      margin: -6rem 0;
-    }
-  }
 `;
 
 const screenshots = css`

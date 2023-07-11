@@ -6,8 +6,8 @@ import {
   useUnmount,
 } from "lake";
 // import Artwork from "./artwork";
-import ImagePlane from "./plane";
 import { Tween } from "@/_foundation/tween";
+import ImagePlane from "./plane";
 import type { GlobalContext } from "@/_foundation/type";
 
 export default defineComponent({
@@ -24,7 +24,7 @@ export default defineComponent({
     // addChild(refs.artwork, Artwork);
     addChild(refs.plane, ImagePlane, {
       glContext,
-      env,
+      mq: env.mq,
     });
 
     useMount(() => {
@@ -42,7 +42,7 @@ export default defineComponent({
 
     useUnmount(() => {
       Tween.parallel(
-        Tween.tween(el, 0.6, "power3.inOut", {
+        Tween.tween(el, 0.55, "power3.inOut", {
           alpha: 0,
         })
       );
