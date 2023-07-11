@@ -65,7 +65,7 @@ export const render = (props: any) => {
                     {
                       <div className="" css={project__body}>
                         <h3
-                          className={`mt-[1em] ${
+                          className={`mt-[1em] text-right | ${
                             (index + 1) % 2 === 0
                               ? "sm:text-left"
                               : "sm:text-right"
