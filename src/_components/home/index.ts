@@ -5,14 +5,14 @@ import {
   useMount,
   useUnmount,
 } from "lake";
-import Artwork from "./artwork";
 import { Tween } from "@/_foundation/tween";
+import Artwork from "./artwork";
 import ImagePlane from "./plane";
 import type { GlobalContext } from "@/_foundation/type";
 
 export default defineComponent({
   name: "home",
-  setup(el, { glContext, initialMount, env }: GlobalContext) {
+  setup(el, { glContext, once, env }: GlobalContext) {
     const { addChild } = useSlot();
 
     const { refs } = useDomRef<{
@@ -28,7 +28,7 @@ export default defineComponent({
     });
 
     useMount(() => {
-      if (initialMount) {
+      if (once) {
         return;
       }
 

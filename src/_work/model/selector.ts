@@ -12,3 +12,10 @@ export const selectLaunch = (metadata: WorkMetadata) => {
 export const selectUrl = (metadata: WorkMetadata) => {
   return metadata.url.replace(/^(https?:\/\/)?(www\.)?|\/$/g, "");
 };
+
+export const selectStacks = (metadata: WorkMetadata) => {
+  const stacks = metadata.stacks;
+  stacks.unshift(metadata.kind);
+
+  return stacks.join(", ");
+};

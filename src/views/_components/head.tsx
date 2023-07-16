@@ -11,10 +11,8 @@ export const Head: FC<{
       {seo}
       <link href="/favicon.ico" rel="icon" />
       {!idDev && <link as="style" href="/assets/entry.css" rel="preload" />}
-      <link href="https://fonts.googleapis.com" rel="preconnect" />
-      <link crossOrigin="" href="https://fonts.gstatic.com" rel="preconnect" />
       <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Hind:wght@300;600&display=swap"
+        href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap"
         rel="stylesheet"
       />
       <Global
@@ -23,7 +21,7 @@ export const Head: FC<{
             --font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
               "Inter", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans",
               Meiryo, sans-serif;
-            --font-en: "Hind", sans-serif;
+            --font-en: "Satoshi", sans-serif;
 
             --vh: 1vh;
 

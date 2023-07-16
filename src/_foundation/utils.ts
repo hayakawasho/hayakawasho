@@ -39,3 +39,12 @@ export const searchParamsToString = (q: Record<string, any>) => {
 export const noop = () => {
   //
 };
+
+export const loadImage = (src: string, callback: () => void) => {
+  const img = new Image();
+  img.crossOrigin = "anonymous";
+  img.src = src;
+  img.decode().then(callback);
+
+  return img;
+};

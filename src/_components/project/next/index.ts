@@ -22,13 +22,9 @@ type Cache = {
   wh: number;
 };
 
-type Props = {
-  mq: "pc" | "sp";
-} & Pick<GlobalContext, "glContext">;
-
 export default defineComponent({
-  name: "plane",
-  setup(el: HTMLImageElement, { glContext, mq }: Props) {
+  name: "project.next",
+  setup(el: HTMLImageElement, { glContext, env }: GlobalContext) {
     const [ww, wh] = useWindowSize();
 
     const cache = ref<Cache>({
@@ -50,7 +46,7 @@ export default defineComponent({
       sp: el.dataset.srcSp!,
     };
 
-    const img = loadImage(src[mq], () => {
+    const img = loadImage(src[env.mq], () => {
       texture.image = img;
       uniforms.u_image_size.value.set(img.naturalWidth, img.naturalHeight);
 
@@ -58,26 +54,14 @@ export default defineComponent({
     });
 
     const uniforms = {
-      u_alpha: {
-        value: 1.0,
-      },
       u_image_size: {
         value: new Vec2(0, 0),
       },
       u_mesh_size: {
         value: new Vec2(cache.value.rect.width, cache.value.rect.height),
       },
-      u_scale: {
-        value: 1.0,
-      },
       u_texture: {
         value: texture,
-      },
-      u_time: {
-        value: 0,
-      },
-      u_velo: {
-        value: 0,
       },
     };
 
@@ -116,9 +100,6 @@ export default defineComponent({
       };
 
       imagePlane.update(cache.value);
-
-      const diff = oldY - currentY;
-      uniforms.u_velo.value = diff * 0.01;
     });
 
     useMount(() => {
@@ -127,12 +108,6 @@ export default defineComponent({
 
     useUnmount(() => {
       glContext.removeScene(mesh);
-      // Tween.tween(uniforms.u_alpha, 0.6, "power2.inOut", {
-      //   value: 0,
-      //   onComplete: () => {
-      //     glContext.removeScene(mesh);
-      //   },
-      // });
     });
   },
 });

@@ -23,7 +23,7 @@ export const render = (props: any) => {
     <PageWithHeader header={<Header />} seo={<Seo permalink="" title="" />}>
       <Content namespace="home">
         <main className="h-full" data-component="home">
-          <div css={intro} data-scroll-item>
+          <div className="" css={intro} data-scroll-item>
             <h1 className="sr-only">Sho Hayakawa Developer</h1>
             <div className="sizefit relative" data-ref="artwork">
               <div
@@ -154,7 +154,6 @@ const heading = css`
   font-size: 1.2rem;
   font-weight: 300;
   letter-spacing: 0.06em;
-  line-height: 1.1;
   opacity: 0.7;
   backface-visibility: hidden;
   overflow: hidden;

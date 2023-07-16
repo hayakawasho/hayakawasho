@@ -1,14 +1,15 @@
 import { defineComponent, useIntersectionWatch, ref } from "lake";
 import { useScrollTween } from "@/_states/scroll";
 import { useWindowSize } from "@/_states/window-size";
+import type { GlobalContext } from "@/_foundation/type";
 
 export default defineComponent({
   name: "project.eyecatch",
-  setup(el, { mq }: { mq: "pc" | "sp" }) {
+  setup(el, { env }: GlobalContext) {
     const $img = el.querySelector("img")!;
     const isVisible = ref(false);
 
-    if (mq === "sp") {
+    if (env.mq === "sp") {
       return;
     }
 

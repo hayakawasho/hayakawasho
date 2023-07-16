@@ -25,6 +25,7 @@ export const PageWithHeader: FC<{
           <div css={gridLeft}></div>
           <div css={gridMiddle}></div>
           <div css={gridRight}></div>
+          <div css={radius}></div>
         </div>
         {header}
         {children}
@@ -107,6 +108,7 @@ const gridLine = css`
   width: 1px;
   height: 100%;
   transform: translateX(-50%);
+  z-index: 2;
 `;
 
 const gridLeft = css`
@@ -131,4 +133,16 @@ const gridRight = css`
     right: auto;
     left: 75%;
   }
+`;
+
+const radius = css`
+  position: fixed;
+  top: -6px;
+  left: -6px;
+  width: calc(100vw + 12px);
+  height: calc(100svh + 12px);
+  pointer-events: none;
+  z-index: 100;
+  border: 10px solid var(--color-bg);
+  border-radius: 20px;
 `;

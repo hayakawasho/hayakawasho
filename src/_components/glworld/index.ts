@@ -2,11 +2,19 @@ import { defineComponent, useDomRef } from "lake";
 import { Transform, Renderer, Camera } from "ogl";
 import { useTick } from "@/_foundation/hooks";
 import { useWindowSize } from "@/_states/window-size";
+import type { GlobalContext } from "@/_foundation/type";
+
+type Props = {} & Pick<GlobalContext, "env">;
+
+const MAX_DPR = {
+  pc: 1.5,
+  sp: 2,
+};
 
 export default defineComponent({
   name: "glWorld",
-  setup(el) {
-    const dpr = Math.min(window.devicePixelRatio, 2);
+  setup(el, { env }: Props) {
+    const dpr = Math.min(window.devicePixelRatio, MAX_DPR[env.mq]);
 
     const { refs } = useDomRef<{ canvas: HTMLCanvasElement }>("canvas");
     const rect = el.getBoundingClientRect();

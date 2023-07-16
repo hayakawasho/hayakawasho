@@ -19,6 +19,7 @@ const convertBookFromDB = (rawItem: any): WorkMetadata => {
       src: i.url,
       width: i.width,
     })),
+    stacks: rawItem.stacks,
     title: rawItem.title,
     url: rawItem.url,
   } as const;

@@ -8,8 +8,7 @@
   import type { GlobalContext } from "@/_foundation/type";
   import type { Context$ } from "lake";
 
-  const { scrollContext, initialMount } =
-    getContext<Context$<GlobalContext>>("$");
+  const { scrollContext, once } = getContext<Context$<GlobalContext>>("$");
 
   const [_ww, wh] = useWindowSize();
   const [y] = useScrollTween(noop);
@@ -17,7 +16,7 @@
   let wrapRef: HTMLElement;
 
   useMount(() => {
-    if (initialMount) {
+    if (once) {
       Tween.serial(
         Tween.wait(0.5),
         Tween.tween(wrapRef, 1.6, "expo.out", {

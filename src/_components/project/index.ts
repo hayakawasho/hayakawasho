@@ -7,14 +7,15 @@ import {
 } from "lake";
 import { Tween } from "@/_foundation/tween";
 import Eyecatch from "./eyecatch";
-// import H1 from "./h1";
+import NextEyecatch from "./next";
 import Screenshot from "./screenshot";
 import type { GlobalContext } from "@/_foundation/type";
 
 export default defineComponent({
   name: "project",
-  setup(el, { glContext, initialMount, env }: GlobalContext) {
+  setup(el, context: GlobalContext) {
     const { addChild } = useSlot();
+
     const { refs } = useDomRef<{
       h1: HTMLElement;
       screenshot: HTMLImageElement[];
@@ -22,21 +23,23 @@ export default defineComponent({
       infoHeading: HTMLElement | HTMLElement[];
       infoText: HTMLElement | HTMLElement[];
       next: HTMLElement;
-    }>("h1", "screenshot", "eyecatch", "infoHeading", "infoText", "next");
+      nextImage: HTMLImageElement;
+    }>(
+      "h1",
+      "screenshot",
+      "eyecatch",
+      "infoHeading",
+      "infoText",
+      "next",
+      "nextImage"
+    );
 
-    // addChild(refs.h1, H1, {
-    //   glContext,
-    // });
-    addChild(refs.eyecatch, Eyecatch, {
-      mq: env.mq,
-    });
-    addChild(refs.screenshot, Screenshot, {
-      glContext,
-      mq: env.mq,
-    });
+    addChild(refs.eyecatch, Eyecatch, context);
+    addChild(refs.screenshot, Screenshot, context);
+    addChild(refs.nextImage, NextEyecatch, context);
 
     useMount(() => {
-      if (initialMount) {
+      if (context.once) {
         return;
       }
 

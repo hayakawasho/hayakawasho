@@ -9,11 +9,8 @@ import ScrollTween from "../scroll-tween";
 import type { GlobalContext } from "@/_foundation/type";
 
 type Props = {
-  onCreated: (props?: Omit<GlobalContext, "initialMount">) => void;
-  onUpdated: (
-    scope: HTMLElement,
-    props?: Omit<GlobalContext, "initialMount">
-  ) => void;
+  onCreated: (props?: Omit<GlobalContext, "once">) => void;
+  onUpdated: (scope: HTMLElement, props?: Omit<GlobalContext, "once">) => void;
   onCleanup: (scope: HTMLElement) => void;
 };
 
@@ -38,7 +35,9 @@ export default defineComponent({
     const [scrollContext] = addChild(refs.main, ScrollTween, {
       env,
     });
-    const [glContext] = addChild(refs.glWorld, GlWorld);
+    const [glContext] = addChild(refs.glWorld, GlWorld, {
+      env,
+    });
 
     const provides = {
       env,

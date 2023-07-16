@@ -10,6 +10,7 @@ export type WorkMetadata = {
   eyecatch: Image;
   title: string;
   kind: string;
+  stacks: string[];
   screenshots: Image[];
   url: string;
   launch: Date;

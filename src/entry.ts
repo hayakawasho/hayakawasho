@@ -53,10 +53,16 @@ bootstrap(() => {
       unmount(Array.from(targets));
     },
     onCreated: (context?: Record<string, unknown>) => {
-      mountComponents(html, { ...context, initialMount: true });
+      mountComponents(html, {
+        ...context,
+        once: true,
+      });
     },
     onUpdated: (scope: HTMLElement, context: Record<string, unknown>) => {
-      mountComponents(scope, { ...context, initialMount: false });
+      mountComponents(scope, {
+        ...context,
+        once: false,
+      });
     },
   });
 });

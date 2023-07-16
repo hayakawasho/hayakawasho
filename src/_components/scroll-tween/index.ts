@@ -23,8 +23,16 @@ const SELECTOR_CLASS = "[data-scroll-item]";
 export default defineComponent({
   name: "scrollTween",
   setup(el) {
+    const smoothItem = Array.from(
+      el.querySelectorAll<HTMLElement>(SELECTOR_CLASS)
+    );
+
+    if (!smoothItem.length) {
+      throw new Error(`NO ${SELECTOR_CLASS}`);
+    }
+
     const state = {
-      active: true,
+      active: false,
       container: el,
       currentPos: 0,
       dragging: false,
@@ -74,15 +82,6 @@ export default defineComponent({
         return acc;
       }, []);
     };
-
-    const smoothItem = Array.from(
-      el.querySelectorAll<HTMLElement>(SELECTOR_CLASS)
-    );
-
-    // TODO:
-    // if (!smoothItem.length) {
-    //   return;
-    // }
 
     const cache = ref(createCache(smoothItem));
 
@@ -213,7 +212,9 @@ export default defineComponent({
         state.currentPos = 0;
       }
 
-      scrollPosMutators({ y: state.currentPos });
+      scrollPosMutators({
+        y: state.currentPos,
+      });
       transformElms(cache.value);
     });
 
@@ -228,6 +229,7 @@ export default defineComponent({
     });
 
     useMount(() => {
+      state.active = true;
       // MEMO: 別途定義済み
       // Object.assign(el.style, {
       //   left: 0,
