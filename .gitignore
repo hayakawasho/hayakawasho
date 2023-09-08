@@ -1,15 +1,3 @@
-_site
-# Node dependencies
-node_modules
-# System files
-*.log
 .DS_Store
-.cache
-
 .env
-.node-version
-
-tmp
-
-/_transpiled
-/_bk
+.env.bak

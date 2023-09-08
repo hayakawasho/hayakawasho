@@ -1,0 +1,15 @@
+services:
+  node:
+    tty: true
+    build: .
+    volumes:
+      - ./workspace/:/home/app
+      - node_modules_volume:/home/app/node_modules
+    environment:
+      - LOCAL_IP_ADDR=${LOCAL_IP_ADDR}
+    ports:
+      - 3000:3000
+      - 8080:8080
+
+volumes:
+  node_modules_volume:
