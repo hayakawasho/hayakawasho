@@ -15,7 +15,7 @@ export const Head: FC<{
       <link href="https://fonts.gstatic.com" rel="dns-prefetch preconnect" />
       <link
         as="style"
-        href="https://fonts.googleapis.com/css2?family=Jost:wght@400&family=Fjalla+One&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Jost:wght@400&display=swap"
         onLoad={`this.onload = null; this.rel='stylesheet';` as any}
         rel="stylesheet"
       />
@@ -37,7 +37,7 @@ const base = css`
   :root {
     --font: "Jost", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
       Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-    --font-en: "Fjalla One", sans-serif;
+    --font-en: "Moneta", sans-serif;
 
     --vh: 1vh;
 
@@ -123,6 +123,16 @@ const base = css`
     max-width: 100%;
     height: auto;
     vertical-align: middle;
+  }
+
+  @font-face {
+    font-family: "Moneta";
+    src: local("Moneta Light"), local("Moneta-Light"),
+      url("/assets/Moneta-Light.woff2") format("woff2"),
+      url("/assets/Moneta-Light.woff") format("woff");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
   }
 `;
 

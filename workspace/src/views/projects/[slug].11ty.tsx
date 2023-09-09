@@ -1,6 +1,10 @@
 import { css } from "@emotion/react";
 import { renderToStaticMarkup as r } from "react-dom/server";
-import { selectDatetime, selectYear } from "@/_work/model/selector";
+import {
+  selectDatetime,
+  selectLaunch,
+  selectUrl,
+} from "@/_work/model/selector";
 import { Body } from "../_components/body";
 import { Header } from "../_components/header";
 import { PageWithHeader } from "../_components/page-with-header";
@@ -60,6 +64,38 @@ export const render = (props: any) => {
                 <span className="inline-block leading-[1]">{post.title}</span>
               </h1>
 
+              <div css={intro__infoWrap}>
+                <div css={intro__info}>
+                  <dl css={info}>
+                    <dt>(CATEGORY)</dt>
+                    <dd>{post.category}</dd>
+                  </dl>
+                  <dl css={info}>
+                    <dt>(DATE)</dt>
+                    <dd>
+                      <time dateTime={selectDatetime(post)}>
+                        {selectLaunch(post)}
+                      </time>
+                    </dd>
+                  </dl>
+                  {post.url && (
+                    <dl css={info}>
+                      <dt>(URL)</dt>
+                      <dd>
+                        {selectUrl(post)} <span className="text-[80%]">↗</span>
+                      </dd>
+                    </dl>
+                  )}
+                </div>
+                {post.stacks.length > 0 && (
+                  <ul css={intro__tags}>
+                    {post.stacks.map((stack, i) => (
+                      <li key={i}>{stack}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+
               <div css={intro__prevNext}>
                 <a css={iconPrev} href={`../${prevPost.id}/`}>
                   <Svg name="icon-arrow_right" />
@@ -67,10 +103,6 @@ export const render = (props: any) => {
                 <a css={iconNext} href={`../${nextPost.id}/`}>
                   <Svg name="icon-arrow_right" />
                 </a>
-              </div>
-              <div css={intro__info}>
-                <span>{post.category}, </span>
-                <time dateTime={selectDatetime(post)}>{selectYear(post)}</time>
               </div>
             </div>
           </div>
@@ -134,7 +166,8 @@ const intro = css`
 `;
 
 const intro__g = css`
-  height: 132vw;
+  // height: 132vw;
+  min-height: 132vw;
   position: relative;
   overflow: hidden;
 
@@ -144,17 +177,14 @@ const intro__g = css`
 `;
 
 const intro__heading = css`
-  overflow: hidden;
-  position: absolute;
-  top: 50%;
-  z-index: 10;
-  text-align: center;
   width: 100%;
-  padding: 0 var(--gap);
-  font-size: 4rem;
+  font-size: 5.4rem;
+  font-weight: 300;
   font-family: var(--font-en);
-  letter-spacing: 0.12em;
-  margin-top: -1em;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  padding-top: 8rem;
+  overflow: hidden;
 
   @media (min-width: 640px) {
     font-size: 9.6rem;
@@ -162,31 +192,47 @@ const intro__heading = css`
   }
 `;
 
-const intro__info = css`
-  position: absolute;
-  left: 50%;
-  bottom: 4.5rem;
-  font-size: 1.1rem;
-  opacity: 0.5;
-  transform: translateX(-50%);
+const intro__infoWrap = css`
+  padding: 0 var(--grid);
+  padding-top: 10.6667vw;
+  padding-bottom: 6.6667vw;
+  display: flex;
+`;
 
-  @media (min-width: 640px) {
-    transform: translateZ(0);
-    left: calc(var(--grid) - var(--gap) * 0.5);
-    bottom: 7rem;
-    font-size: 1.5rem;
-    width: auto;
+const intro__info = css`
+  width: 42.6667vw;
+  display: flex;
+  flex-direction: column;
+  gap: 3.2vw;
+`;
+
+const info = css`
+  font-size: 1.1rem;
+
+  & > dt {
+    opacity: 0.5;
   }
+
+  & > dd {
+    font-size: 1.2rem;
+  }
+`;
+
+const intro__tags = css`
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+  line-height: 1;
+  margin-top: 0.3em;
 `;
 
 const intro__prevNext = css`
   position: absolute;
-  left: 0;
+  right: var(--grid);
   bottom: 3rem;
   display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding: 0 var(--grid);
+  gap: 2rem;
 
   @media (min-width: 640px) {
     width: auto;
@@ -223,7 +269,7 @@ const iconNext = css`
 
 const intro__indexNumber = css`
   position: absolute;
-  top: 4rem;
+  top: 3rem;
   right: var(--grid);
   font-size: 1.2rem;
   overflow: hidden;
