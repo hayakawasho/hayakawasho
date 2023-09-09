@@ -68,11 +68,11 @@ export const render = (props: any) => {
                 <div css={intro__info}>
                   <dl css={info}>
                     <dt>(CATEGORY)</dt>
-                    <dd>{post.category}</dd>
+                    <dd className="uppercase">{post.category}</dd>
                   </dl>
                   <dl css={info}>
                     <dt>(DATE)</dt>
-                    <dd>
+                    <dd className="uppercase">
                       <time dateTime={selectDatetime(post)}>
                         {selectLaunch(post)}
                       </time>
@@ -81,7 +81,7 @@ export const render = (props: any) => {
                   {post.url && (
                     <dl css={info}>
                       <dt>(URL)</dt>
-                      <dd>
+                      <dd className="_url">
                         {selectUrl(post)} <span className="text-[80%]">↗</span>
                       </dd>
                     </dl>
@@ -197,10 +197,11 @@ const intro__infoWrap = css`
   padding-top: 10.6667vw;
   padding-bottom: 6.6667vw;
   display: flex;
+  align-items: flex-start;
 `;
 
 const intro__info = css`
-  width: 42.6667vw;
+  width: calc(var(--grid) * 5);
   display: flex;
   flex-direction: column;
   gap: 3.2vw;
@@ -213,8 +214,8 @@ const info = css`
     opacity: 0.5;
   }
 
-  & > dd {
-    font-size: 1.2rem;
+  ._url {
+    font-size: 110%;
   }
 `;
 
@@ -226,6 +227,9 @@ const intro__tags = css`
   flex-direction: column;
   gap: 0.6em;
   margin-top: 0.3em;
+  padding-left: 0.6em;
+  padding-bottom: 0.8em;
+  border-left: 1px solid;
 `;
 
 const intro__prevNext = css`

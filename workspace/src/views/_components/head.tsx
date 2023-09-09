@@ -13,15 +13,15 @@ export const Head: FC<{
       {!idDev && <link as="style" href="/assets/entry.css" rel="preload" />}
       <link
         as="font"
-        type="font/woff2"
         href="/assets/Moneta-Light.woff2"
         rel="preload"
+        type="font/woff2"
       />
       <link
         as="font"
-        type="font/woff"
         href="/assets/Moneta-Light.woff"
         rel="preload"
+        type="font/woff"
       />
       <link href="https://fonts.googleapis.com" rel="dns-prefetch preconnect" />
       <link href="https://fonts.gstatic.com" rel="dns-prefetch preconnect" />
