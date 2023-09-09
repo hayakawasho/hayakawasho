@@ -21,4 +21,5 @@ const svg = css`
   position: absolute;
   top: 0;
   left: 0;
+  fill: currentColor;
 `;

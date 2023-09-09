@@ -152,17 +152,15 @@ const intro__heading = css`
   text-align: center;
   width: 100%;
   padding: 0 var(--gap);
-  font-size: 4rem;
+  font-size: 5.4rem;
   font-family: var(--font-en);
-  font-size: 4rem;
-  font-weight: 600;
-  letter-spacing: 0;
+  letter-spacing: 0.12em;
   margin-top: -1em;
+  white-space: nowrap;
 
   @media (min-width: 640px) {
     font-size: 9.6rem;
     white-space: nowrap;
-    letter-spacing: 0;
   }
 `;
 
@@ -199,7 +197,7 @@ const intro__prevNext = css`
 `;
 
 const iconPrev = css`
-  fill: #fff;
+  color: currentColor;
   display: block;
   width: 1.6rem;
   height: 4.6rem;
@@ -214,7 +212,7 @@ const iconPrev = css`
 `;
 
 const iconNext = css`
-  fill: #fff;
+  color: currentColor;
   display: block;
   width: 1.6rem;
   height: 4.6rem;

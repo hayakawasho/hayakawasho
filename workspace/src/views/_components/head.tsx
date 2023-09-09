@@ -16,13 +16,7 @@ export const Head: FC<{
       <link
         rel="stylesheet"
         as="style"
-        href="https://fonts.googleapis.com/css2?family=Jost:wght@100;300;400;500;600;700&display=swap"
-        onLoad={`this.onload = null; this.rel='stylesheet';` as any}
-      />
-      <link
-        rel="stylesheet"
-        as="style"
-        href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Jost:wght@400&family=Fjalla+One&display=swap"
         onLoad={`this.onload = null; this.rel='stylesheet';` as any}
       />
       <Global styles={base} />
@@ -43,7 +37,7 @@ const base = css`
   :root {
     --font: "Jost", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
       Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-    --font-en: "Satoshi", sans-serif;
+    --font-en: "Fjalla One", sans-serif;
 
     --vh: 1vh;
 
@@ -88,13 +82,13 @@ const base = css`
     background-color: var(--color-bg);
 
     & ::-moz-selection {
-      color: #1e1e1e;
-      background: #fff;
+      color: var(--color-bg);
+      background: var(--color-text);
     }
 
     & ::selection {
-      color: #1e1e1e;
-      background: #fff;
+      color: var(--color-bg);
+      background: var(--color-text);
     }
 
     @media (min-resolution: 1.5dppx) {
