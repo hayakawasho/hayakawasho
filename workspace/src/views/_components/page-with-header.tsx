@@ -14,6 +14,20 @@ export const PageWithHeader: FC<{
     <html lang="ja">
       <Head seo={seo} />
       <body>
+        <svg
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            width: 0,
+            height: 0,
+            overflow: "hidden",
+          }}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <symbol id="icon-arrow_right" viewBox="0 0 63 32">
+            <path d="M45.926 31.443q-0.557-0.557-0.557-1.393t0.557-1.393l10.646-10.646h-54.592q-0.805 0-1.393-0.588t-0.588-1.393 0.588-1.393 1.393-0.588h54.654l-10.646-10.646q-0.619-0.557-0.619-1.393t0.619-1.393q0.557-0.619 1.393-0.619t1.393 0.619l14.050 13.988q0.557 0.557 0.557 1.393t-0.557 1.393l-14.112 14.050q-0.557 0.557-1.393 0.557t-1.393-0.557z"></path>
+          </symbol>
+        </svg>
         <div
           aria-hidden="true"
           className="fixed inset-0 w-screen pointer-events-none -z-1 invisible"
@@ -142,13 +156,13 @@ const gridRight = css`
 
 const radius = css`
   position: fixed;
-  top: -7px;
-  left: -7px;
-  width: calc(100vw + 14px);
-  height: calc(100vh + 14px);
-  height: calc(100svh + 14px);
+  top: -0.7rem;
+  left: -0.7rem;
+  width: calc(100vw + 1.4rem);
+  height: calc(100vh + 1.4rem);
+  height: calc(100svh + 1.4rem);
   pointer-events: none;
   z-index: 100;
-  border: 10px solid var(--color-bg);
-  border-radius: 24px;
+  border: 1rem solid var(--color-bg);
+  border-radius: 2.2rem;
 `;

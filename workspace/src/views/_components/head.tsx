@@ -88,13 +88,13 @@ const base = css`
     background-color: var(--color-bg);
 
     & ::-moz-selection {
-      color: #fff;
-      background: #1e1e1e;
+      color: #1e1e1e;
+      background: #fff;
     }
 
     & ::selection {
-      color: #fff;
-      background: #1e1e1e;
+      color: #1e1e1e;
+      background: #fff;
     }
 
     @media (min-resolution: 1.5dppx) {

@@ -9,7 +9,7 @@ export type WorkMetadata = {
   id: string;
   eyecatch: Image;
   title: string;
-  kind: string;
+  category: string;
   stacks: string[];
   screenshots: Image[];
   url: string;

@@ -12,7 +12,7 @@ const convertBookFromDB = (rawItem: any): WorkMetadata => {
       width: rawItem.eyecatch.width,
     },
     id: rawItem.id,
-    kind: rawItem.kinds[0],
+    category: rawItem.category[0],
     launch: rawItem.launch,
     screenshots: rawItem.screenshots.map((i: any) => ({
       height: i.height,
