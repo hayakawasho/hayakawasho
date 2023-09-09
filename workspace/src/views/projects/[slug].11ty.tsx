@@ -1,8 +1,8 @@
 import { css } from "@emotion/react";
 import { renderToStaticMarkup as r } from "react-dom/server";
 import { selectDatetime, selectYear } from "@/_work/model/selector";
-import { Header } from "../_components/header";
 import { Body } from "../_components/body";
+import { Header } from "../_components/header";
 import { PageWithHeader } from "../_components/page-with-header";
 import { ResponsiveImage } from "../_components/responsive-image";
 import { Seo } from "../_components/seo";
@@ -40,9 +40,9 @@ export const render = (props: any) => {
       <Body namespace="project">
         <main data-component="project">
           <div css={intro} data-scroll-item>
-            <div css={intro__g} className="">
-              <div css={intro__num}>
-                <span data-ref="now" className="inline-block">
+            <div className="" css={intro__g}>
+              <div css={intro__indexNumber}>
+                <span className="inline-block" data-ref="now">
                   {now}
                 </span>
                 <span
@@ -51,7 +51,7 @@ export const render = (props: any) => {
                 >
                   —
                 </span>
-                <span data-ref="max" className="inline-block">
+                <span className="inline-block" data-ref="max">
                   {max}
                 </span>
               </div>
@@ -61,14 +61,14 @@ export const render = (props: any) => {
               </h1>
 
               <div css={intro__prevNext}>
-                <a href={`../${prevPost.id}/`} css={iconPrev}>
+                <a css={iconPrev} href={`../${prevPost.id}/`}>
                   <Svg name="icon-arrow_right" />
                 </a>
-                <a href={`../${nextPost.id}/`} css={iconNext}>
+                <a css={iconNext} href={`../${nextPost.id}/`}>
                   <Svg name="icon-arrow_right" />
                 </a>
               </div>
-              <div css={intro__date}>
+              <div css={intro__info}>
                 <span>{post.category}, </span>
                 <time dateTime={selectDatetime(post)}>{selectYear(post)}</time>
               </div>
@@ -101,8 +101,8 @@ export const render = (props: any) => {
                   <img
                     className={`pointer-events-none`}
                     data-ref="screenshot"
-                    src={`${i.src}?auto=compress,format`}
                     data-src-sp={`${i.src}?auto=compress,format&w=750`}
+                    src={`${i.src}?auto=compress,format`}
                     style={{
                       aspectRatio: aspect + "",
                     }}
@@ -113,15 +113,14 @@ export const render = (props: any) => {
           </ul>
 
           <aside css={nextKv} data-scroll-item>
-            <a css={nextKv__img} data-ref="next" href={`../${nextPost.id}/`}>
+            <a css={nextKv__link} data-ref="next" href={`../${nextPost.id}/`}>
+              <div css={nextSubTitle}>Next Project</div>
               <div
                 className={`pointer-events-none opacity-0 h-full`}
                 data-ref="nextImage"
                 data-src={`${nextPost.eyecatch.src}?auto=compress,format&sat=-100`}
                 data-src-sp={`${nextPost.eyecatch.src}?auto=compress,format&w=1200&sat=-100`}
-              >
-                <h3 className="sr-only">NEXT PROJECT</h3>
-              </div>
+              ></div>
             </a>
           </aside>
         </main>
@@ -152,11 +151,10 @@ const intro__heading = css`
   text-align: center;
   width: 100%;
   padding: 0 var(--gap);
-  font-size: 5.4rem;
+  font-size: 4rem;
   font-family: var(--font-en);
   letter-spacing: 0.12em;
   margin-top: -1em;
-  white-space: nowrap;
 
   @media (min-width: 640px) {
     font-size: 9.6rem;
@@ -164,7 +162,7 @@ const intro__heading = css`
   }
 `;
 
-const intro__date = css`
+const intro__info = css`
   position: absolute;
   left: 50%;
   bottom: 4.5rem;
@@ -183,25 +181,28 @@ const intro__date = css`
 
 const intro__prevNext = css`
   position: absolute;
-  right: var(--grid);
+  left: 0;
   bottom: 3rem;
   display: flex;
-  gap: var(--gap);
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 var(--grid);
 
   @media (min-width: 640px) {
+    width: auto;
     flex-direction: column-reverse;
     gap: 1rem;
+    left: auto;
     right: calc(var(--grid) - var(--gap) * 0.5);
     bottom: 7rem;
   }
 `;
 
-const iconPrev = css`
+const prevNext = css`
   color: currentColor;
   display: block;
   width: 1.6rem;
   height: 4.6rem;
-  transform: rotateZ(-180deg);
   position: relative;
   z-index: 2;
 
@@ -211,20 +212,16 @@ const iconPrev = css`
   }
 `;
 
-const iconNext = css`
-  color: currentColor;
-  display: block;
-  width: 1.6rem;
-  height: 4.6rem;
-  position: relative;
-
-  @media (min-width: 640px) {
-    width: 2rem;
-    height: 2.4rem;
-  }
+const iconPrev = css`
+  ${prevNext}
+  transform: rotateZ(-180deg);
 `;
 
-const intro__num = css`
+const iconNext = css`
+  ${prevNext}
+`;
+
+const intro__indexNumber = css`
   position: absolute;
   top: 4rem;
   right: var(--grid);
@@ -237,6 +234,8 @@ const intro__num = css`
     font-size: 1.4rem;
   }
 `;
+
+//----------------------------------------------------------------
 
 const eyecatch = css`
   overflow: hidden;
@@ -254,26 +253,44 @@ const screenshots = css`
   }
 `;
 
+//----------------------------------------------------------------
+
 const nextKv = css`
-  height: 100vh;
-  height: 100svh;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  // height: 100vh;
+  // height: 100svh;
+  // position: relative;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  // overflow: hidden;
+  padding: 0 var(--gap);
 `;
 
-const nextKv__img = css`
-  position: absolute;
-  z-index: 1;
-  aspect-ratio: 1 / 1;
-  width: calc(var(--grid) * 6);
-  backface-visibility: hidden;
-  background-color: var(--color-bg);
+const nextKv__link = css`
+  display: block;
+  position: relative;
+  padding-top: 2rem;
+  padding-bottom: 6rem;
+  margin-top: 6rem;
+  border-top: 1px solid;
+`;
+
+const nextSubTitle = css`
+  font-size: 1.1rem;
+  opacity: 0.5;
 
   @media (min-width: 640px) {
-    // aspect-ratio: auto;
-    width: calc(var(--grid) * 5);
+    font-size: 1.5rem;
+  }
+`;
+
+const nextTitle = css`
+  font-size: 4rem;
+  font-family: var(--font-en);
+  letter-spacing: 0.12em;
+
+  @media (min-width: 640px) {
+    font-size: 9.6rem;
+    white-space: nowrap;
   }
 `;

@@ -11,21 +11,21 @@ export const Head: FC<{
       {seo}
       <link href="/favicon.ico" rel="icon" />
       {!idDev && <link as="style" href="/assets/entry.css" rel="preload" />}
-      <link rel="dns-prefetch preconnect" href="https://fonts.googleapis.com" />
-      <link rel="dns-prefetch preconnect" href="https://fonts.gstatic.com" />
+      <link href="https://fonts.googleapis.com" rel="dns-prefetch preconnect" />
+      <link href="https://fonts.gstatic.com" rel="dns-prefetch preconnect" />
       <link
-        rel="stylesheet"
         as="style"
         href="https://fonts.googleapis.com/css2?family=Jost:wght@400&family=Fjalla+One&display=swap"
         onLoad={`this.onload = null; this.rel='stylesheet';` as any}
+        rel="stylesheet"
       />
       <Global styles={base} />
       {!idDev && (
         <link
-          rel="stylesheet"
           as="style"
           href="/assets/entry.css"
           onLoad={`this.onload = null; this.rel='stylesheet';` as any}
+          rel="stylesheet"
         />
       )}
       <Global styles={utilities} />

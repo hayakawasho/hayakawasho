@@ -20,8 +20,8 @@ export default defineComponent({
     }>("plane");
 
     addChild(refs.plane, Index, {
-      glContext,
       env,
+      glContext,
     });
 
     useMount(() => {

@@ -17,10 +17,10 @@ export const PageWithHeader: FC<{
         <svg
           aria-hidden="true"
           style={{
-            position: "absolute",
-            width: 0,
             height: 0,
             overflow: "hidden",
+            position: "absolute",
+            width: 0,
           }}
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -34,12 +34,12 @@ export const PageWithHeader: FC<{
           css={svh}
           data-ref="windowSizeWatcher"
         ></div>
-        <div role="presentation" css={maskUpper}></div>
-        <div role="presentation" css={maskLower}></div>
-        <div role="presentation" css={gridLeft}></div>
-        <div role="presentation" css={gridMiddle}></div>
-        <div role="presentation" css={gridRight}></div>
-        <div role="presentation" css={radius}></div>
+        <div css={maskUpper} role="presentation"></div>
+        <div css={maskLower} role="presentation"></div>
+        <div css={gridLeft} role="presentation"></div>
+        <div css={gridMiddle} role="presentation"></div>
+        <div css={gridRight} role="presentation"></div>
+        <div css={radius} role="presentation"></div>
         {header}
         {children}
         <div data-component=""></div>

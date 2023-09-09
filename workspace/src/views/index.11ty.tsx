@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import { renderToStaticMarkup as r } from "react-dom/server";
-import { Header } from "./_components/header";
 import { Body } from "./_components/body";
+import { Header } from "./_components/header";
 import { PageWithHeader } from "./_components/page-with-header";
 import { Seo } from "./_components/seo";
 import type { WorkMetadata } from "@/_work/model";

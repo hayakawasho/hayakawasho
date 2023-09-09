@@ -6,13 +6,13 @@ import type { WorkMetadata } from "@/_work/model";
 
 const convertBookFromDB = (rawItem: any): WorkMetadata => {
   return {
+    category: rawItem.category[0],
     eyecatch: {
       height: rawItem.eyecatch.height,
       src: rawItem.eyecatch.url,
       width: rawItem.eyecatch.width,
     },
     id: rawItem.id,
-    category: rawItem.category[0],
     launch: rawItem.launch,
     screenshots: rawItem.screenshots.map((i: any) => ({
       height: i.height,
@@ -57,10 +57,10 @@ export class WorksRepository {
     );
 
     return {
+      totalCount: data.totalCount,
       works: data.contents.map((item) => {
         return Work.create(convertBookFromDB(item)).toJSON();
       }),
-      totalCount: data.totalCount,
     };
   };
 }
