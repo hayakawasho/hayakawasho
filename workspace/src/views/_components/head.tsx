@@ -11,6 +11,18 @@ export const Head: FC<{
       {seo}
       <link href="/favicon.ico" rel="icon" />
       {!idDev && <link as="style" href="/assets/entry.css" rel="preload" />}
+      <link
+        as="font"
+        type="font/woff2"
+        href="/assets/Moneta-Light.woff2"
+        rel="preload"
+      />
+      <link
+        as="font"
+        type="font/woff"
+        href="/assets/Moneta-Light.woff"
+        rel="preload"
+      />
       <link href="https://fonts.googleapis.com" rel="dns-prefetch preconnect" />
       <link href="https://fonts.gstatic.com" rel="dns-prefetch preconnect" />
       <link

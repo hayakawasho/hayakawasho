@@ -220,10 +220,11 @@ const info = css`
 
 const intro__tags = css`
   font-size: 1.1rem;
+  letter-spacing: 0.03em;
+  line-height: 1;
   display: flex;
   flex-direction: column;
   gap: 0.6em;
-  line-height: 1;
   margin-top: 0.3em;
 `;
 
