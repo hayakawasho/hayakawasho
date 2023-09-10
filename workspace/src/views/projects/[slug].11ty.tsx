@@ -174,7 +174,19 @@ export const render = (props: any) => {
 
           <aside css={nextKv} data-scroll-item>
             <a css={nextKv__link} data-ref="next" href={`../${nextPost.id}/`}>
-              <div css={nextSubTitle}>Next Project</div>
+              <ResponsiveImage
+                alt=""
+                css={nextKv__img}
+                pcH={nextPost.eyecatch.height}
+                pcSrc={`${nextPost.eyecatch.src}?auto=compress,format`}
+                pcW={nextPost.eyecatch.width}
+                spH={nextPost.eyecatch.height}
+                spSrc={`${nextPost.eyecatch.src}?auto=compress,format&w=1200`}
+                spW={nextPost.eyecatch.width}
+              />
+              <div css={nextSubTitle} className="sr-only">
+                Next Project
+              </div>
               <div
                 className={`pointer-events-none opacity-0 h-full`}
                 data-ref="nextImage"
@@ -253,18 +265,17 @@ const info = css`
 `;
 
 const intro__stacks = css`
-  padding-top: 0.2em;
+  // padding-top: 0.2em;
   padding-left: 0.6em;
-  padding-bottom: 0.6em;
+  padding-bottom: 0.3em;
   position: relative;
 `;
 
 const intro__stacksItems = css`
   font-size: 1.1rem;
-  line-height: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25em;
+  line-height: 1.4;
+  position: relative;
+  top: -0.2em;
 
   > li {
     backface-visibility: hidden;
@@ -328,23 +339,30 @@ const screenshots = css`
 //----------------------------------------------------------------
 
 const nextKv = css`
-  // height: 100vh;
-  // height: 100svh;
-  // position: relative;
-  // display: flex;
-  // align-items: center;
-  // justify-content: center;
-  // overflow: hidden;
+  height: 100vh;
+  height: 100svh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
   padding: 0 var(--gap);
 `;
 
 const nextKv__link = css`
   display: block;
   position: relative;
-  padding-top: 2rem;
-  padding-bottom: 6rem;
-  margin-top: 6rem;
-  border-top: 1px solid;
+  width: calc(var(--grid) * 7);
+`;
+
+const nextKv__img = css`
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+
+  @media (min-width: 640px) {
+    aspect-ratio: auto;
+  }
 `;
 
 const nextSubTitle = css`
