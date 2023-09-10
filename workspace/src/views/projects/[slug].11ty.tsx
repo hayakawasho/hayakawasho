@@ -157,7 +157,7 @@ export const render = (props: any) => {
             {post.screenshots.map((i, index) => {
               const aspect = i.width / i.height;
               return (
-                <li className="mb-[6rem] sm:mb-[14rem]" key={index}>
+                <li className="" key={index}>
                   <img
                     className={`pointer-events-none`}
                     data-ref="screenshot"
@@ -178,10 +178,10 @@ export const render = (props: any) => {
                 alt=""
                 css={nextKv__img}
                 pcH={nextPost.eyecatch.height}
-                pcSrc={`${nextPost.eyecatch.src}?auto=compress,format`}
+                pcSrc={`${nextPost.eyecatch.src}?auto=compress,format&sat=-100`}
                 pcW={nextPost.eyecatch.width}
                 spH={nextPost.eyecatch.height}
-                spSrc={`${nextPost.eyecatch.src}?auto=compress,format&w=1200`}
+                spSrc={`${nextPost.eyecatch.src}?auto=compress,format&w=1200&sat=-100`}
                 spW={nextPost.eyecatch.width}
               />
               <div css={nextSubTitle} className="sr-only">
@@ -330,9 +330,13 @@ const screenshots = css`
   margin-left: auto;
   margin-right: auto;
   backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
 
   @media (min-width: 640px) {
     width: calc(var(--grid) * 8);
+    gap: 14rem;
   }
 `;
 
