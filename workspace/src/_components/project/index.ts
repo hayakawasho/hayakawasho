@@ -93,13 +93,13 @@ export default defineComponent({
           Tween.tween(refs.dash, 1.1, "expo.out", {
             scaleX: 1,
           }),
-          Tween.tween(refs.infoText, 1.6, "expo.out", {
+          Tween.tween(refs.infoText, 1.85, "expo.out", {
             y: "0%",
-            stagger: 0.075,
+            stagger: 0.05,
           }),
-          Tween.tween(refs.stack, 1.6, "expo.out", {
+          Tween.tween(refs.stack, 1.85, "expo.out", {
             y: "0%",
-            stagger: 0.075,
+            stagger: 0.05,
             onComplete: () => {
               Tween.prop(
                 [

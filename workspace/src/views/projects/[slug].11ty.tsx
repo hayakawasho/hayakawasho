@@ -265,17 +265,17 @@ const info = css`
 `;
 
 const intro__stacks = css`
-  // padding-top: 0.2em;
   padding-left: 0.6em;
-  padding-bottom: 0.3em;
+  padding-bottom: 0.6em;
   position: relative;
 `;
 
 const intro__stacksItems = css`
   font-size: 1.1rem;
-  line-height: 1.4;
-  position: relative;
-  top: -0.2em;
+  line-height: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
 
   > li {
     backface-visibility: hidden;
