@@ -50,7 +50,7 @@ export const render = (props: any) => {
                   {now}
                 </span>
                 <span
-                  className="relative top-[-1px] inline-block mx-[.5em]"
+                  className="relative top-[-1px] inline-block mx-[.4em]"
                   data-ref="dash"
                 >
                   —
@@ -82,7 +82,10 @@ export const render = (props: any) => {
                     <dl css={info}>
                       <dt>(URL)</dt>
                       <dd className="_url">
-                        {selectUrl(post)} <span className="text-[80%]">↗</span>
+                        <a href={post.url} target="_blank">
+                          {selectUrl(post)}{" "}
+                          <span className="text-[80%]">↗</span>
+                        </a>
                       </dd>
                     </dl>
                   )}
@@ -94,15 +97,6 @@ export const render = (props: any) => {
                     ))}
                   </ul>
                 )}
-              </div>
-
-              <div css={intro__prevNext}>
-                <a css={iconPrev} href={`../${prevPost.id}/`}>
-                  <Svg name="icon-arrow_right" />
-                </a>
-                <a css={iconNext} href={`../${nextPost.id}/`}>
-                  <Svg name="icon-arrow_right" />
-                </a>
               </div>
             </div>
           </div>
@@ -178,7 +172,7 @@ const intro__g = css`
 
 const intro__heading = css`
   width: 100%;
-  font-size: 5.4rem;
+  font-size: 6.4rem;
   font-weight: 300;
   font-family: var(--font-en);
   letter-spacing: 0.1em;
@@ -221,62 +215,21 @@ const info = css`
 
 const intro__tags = css`
   font-size: 1.1rem;
-  letter-spacing: 0.03em;
   line-height: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.6em;
-  margin-top: 0.3em;
-  padding-left: 0.6em;
-  padding-bottom: 0.8em;
+  gap: 0.25em;
+  margin-top: 0.2em;
+  padding-left: 0.5em;
+  padding-bottom: 0.6em;
   border-left: 1px solid;
-`;
-
-const intro__prevNext = css`
-  position: absolute;
-  right: var(--grid);
-  bottom: 3rem;
-  display: flex;
-  gap: 2rem;
-
-  @media (min-width: 640px) {
-    width: auto;
-    flex-direction: column-reverse;
-    gap: 1rem;
-    left: auto;
-    right: calc(var(--grid) - var(--gap) * 0.5);
-    bottom: 7rem;
-  }
-`;
-
-const prevNext = css`
-  color: currentColor;
-  display: block;
-  width: 1.6rem;
-  height: 4.6rem;
-  position: relative;
-  z-index: 2;
-
-  @media (min-width: 640px) {
-    width: 2rem;
-    height: 2.4rem;
-  }
-`;
-
-const iconPrev = css`
-  ${prevNext}
-  transform: rotateZ(-180deg);
-`;
-
-const iconNext = css`
-  ${prevNext}
 `;
 
 const intro__indexNumber = css`
   position: absolute;
   top: 3rem;
   right: var(--grid);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   overflow: hidden;
 
   @media (min-width: 640px) {
