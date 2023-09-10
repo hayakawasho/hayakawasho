@@ -90,11 +90,14 @@ export const render = (props: any) => {
                   )}
                 </div>
                 {post.stacks.length > 0 && (
-                  <ul css={intro__tags}>
-                    {post.stacks.map((stack, i) => (
-                      <li key={i}>{stack}</li>
-                    ))}
-                  </ul>
+                  <div css={intro__stacks}>
+                    <ul css={intro__stacksItems}>
+                      {post.stacks.map((stack, i) => (
+                        <li key={i}>{stack}</li>
+                      ))}
+                    </ul>
+                    <div css={intro__stacks__hr} role="presentation"></div>
+                  </div>
                 )}
               </div>
             </div>
@@ -108,7 +111,7 @@ export const render = (props: any) => {
           >
             <ResponsiveImage
               alt=""
-              className={`w-full`}
+              css={eyecatch__img}
               pcH={post.eyecatch.height}
               pcSrc={`${post.eyecatch.src}?auto=compress,format`}
               pcW={post.eyecatch.width}
@@ -159,7 +162,6 @@ const intro = css`
 `;
 
 const intro__g = css`
-  // height: 132vw;
   min-height: 132vw;
   position: relative;
   overflow: hidden;
@@ -171,10 +173,10 @@ const intro__g = css`
 
 const intro__heading = css`
   width: 100%;
-  font-size: 6.4rem;
+  font-size: 6rem;
   font-weight: 300;
   font-family: var(--font-en);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.06em;
   white-space: nowrap;
   padding-top: 8rem;
   overflow: hidden;
@@ -212,16 +214,30 @@ const info = css`
   }
 `;
 
-const intro__tags = css`
+const intro__stacks = css`
+  padding-top: 0.2em;
+  padding-left: 0.6em;
+  padding-bottom: 0.6em;
+  position: relative;
+`;
+
+const intro__stacksItems = css`
   font-size: 1.1rem;
   line-height: 1;
   display: flex;
   flex-direction: column;
   gap: 0.25em;
-  margin-top: 0.2em;
-  padding-left: 0.5em;
-  padding-bottom: 0.6em;
-  border-left: 1px solid;
+`;
+
+const intro__stacks__hr = css`
+  width: 1px;
+  height: 100%;
+  background-color: currentColor;
+  position: absolute;
+  top: 0;
+  left: 0;
+  scale: 0.5 1;
+  translate: -50%;
 `;
 
 const intro__indexNumber = css`
@@ -243,6 +259,16 @@ const intro__indexNumber = css`
 const eyecatch = css`
   overflow: hidden;
   backface-visibility: hidden;
+`;
+
+const eyecatch__img = css`
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 3 / 2;
+
+  @media (min-width: 640px) {
+    aspect-ratio: auto;
+  }
 `;
 
 const screenshots = css`
