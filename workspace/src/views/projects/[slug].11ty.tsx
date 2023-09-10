@@ -27,10 +27,9 @@ export const render = (props: any) => {
   const post: WorkMetadata = props.post;
 
   const { page } = props.pagination;
-  const { last, first, next, previous } = page;
+  const { last, first, next } = page;
 
   const nextPost: WorkMetadata = last.id === post.id ? first : next;
-  const prevPost: WorkMetadata = first.id === post.id ? last : previous;
 
   const max = props.pagination.links.length;
   const now = props.pagination.pageNumber + 1;
