@@ -10,7 +10,6 @@ import { Header } from "../_components/header";
 import { PageWithHeader } from "../_components/page-with-header";
 import { ResponsiveImage } from "../_components/responsive-image";
 import { Seo } from "../_components/seo";
-import { Svg } from "../_components/svg";
 import type { WorkMetadata } from "@/_work/model";
 
 export const data = {
@@ -66,24 +65,49 @@ export const render = (props: any) => {
               <div css={intro__infoWrap}>
                 <div css={intro__info}>
                   <dl css={info}>
-                    <dt>(CATEGORY)</dt>
-                    <dd className="uppercase">{post.category}</dd>
+                    <dt className="overflow-hidden">
+                      <span className="inline-block" data-ref="infoText">
+                        (CATEGORY)
+                      </span>
+                    </dt>
+                    <dd className="uppercase overflow-hidden">
+                      <span className="inline-block" data-ref="infoText">
+                        {post.category}
+                      </span>
+                    </dd>
                   </dl>
                   <dl css={info}>
-                    <dt>(DATE)</dt>
-                    <dd className="uppercase">
-                      <time dateTime={selectDatetime(post)}>
+                    <dt className="overflow-hidden">
+                      <span className="inline-block" data-ref="infoText">
+                        (DATE)
+                      </span>
+                    </dt>
+                    <dd className="uppercase overflow-hidden">
+                      <time
+                        dateTime={selectDatetime(post)}
+                        className="inline-block"
+                        data-ref="infoText"
+                      >
                         {selectLaunch(post)}
                       </time>
                     </dd>
                   </dl>
                   {post.url && (
                     <dl css={info}>
-                      <dt>(URL)</dt>
-                      <dd className="_url">
-                        <a href={post.url} target="_blank">
+                      <dt className="overflow-hidden">
+                        <span className="inline-block" data-ref="infoText">
+                          (URL)
+                        </span>
+                      </dt>
+                      <dd className="_url | overflow-hidden">
+                        <a
+                          href={post.url}
+                          target="_blank"
+                          className="inline-block"
+                          data-ref="infoText"
+                        >
                           {selectUrl(post)}{" "}
-                          <span className="text-[80%]">↗</span>
+                          <span className="text-[90%]">↗</span>
                         </a>
                       </dd>
                     </dl>
@@ -93,10 +117,18 @@ export const render = (props: any) => {
                   <div css={intro__stacks}>
                     <ul css={intro__stacksItems}>
                       {post.stacks.map((stack, i) => (
-                        <li key={i}>{stack}</li>
+                        <li className="overflow-hidden" key={i}>
+                          <span className="inline-block" data-ref="stack">
+                            {stack}
+                          </span>
+                        </li>
                       ))}
                     </ul>
-                    <div css={intro__stacks__hr} role="presentation"></div>
+                    <div
+                      css={intro__stacks__hr}
+                      role="presentation"
+                      data-ref="infoLine"
+                    />
                   </div>
                 )}
               </div>
@@ -167,6 +199,7 @@ const intro__g = css`
   overflow: hidden;
 
   @media (min-width: 640px) {
+    min-height: auto;
     height: 100vh;
   }
 `;
@@ -199,7 +232,7 @@ const intro__info = css`
   width: calc(var(--grid) * 5);
   display: flex;
   flex-direction: column;
-  gap: 3.2vw;
+  gap: 1.2rem;
 `;
 
 const info = css`
@@ -207,6 +240,11 @@ const info = css`
 
   & > dt {
     opacity: 0.5;
+    backface-visibility: hidden;
+  }
+
+  & > dd {
+    backface-visibility: hidden;
   }
 
   ._url {
@@ -227,6 +265,10 @@ const intro__stacksItems = css`
   display: flex;
   flex-direction: column;
   gap: 0.25em;
+
+  > li {
+    backface-visibility: hidden;
+  }
 `;
 
 const intro__stacks__hr = css`
@@ -236,8 +278,9 @@ const intro__stacks__hr = css`
   position: absolute;
   top: 0;
   left: 0;
-  scale: 0.5 1;
   translate: -50%;
+  transform-origin: top center;
+  display: block;
 `;
 
 const intro__indexNumber = css`
