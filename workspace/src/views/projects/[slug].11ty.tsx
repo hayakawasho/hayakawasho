@@ -367,7 +367,7 @@ const eyecatch__img = css`
 `;
 
 const screenshots = css`
-  width: calc((var(--grid) * 9));
+  width: calc((var(--grid) * 10));
   margin-left: auto;
   margin-right: auto;
   backface-visibility: hidden;
