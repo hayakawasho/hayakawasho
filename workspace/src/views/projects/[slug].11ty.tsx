@@ -223,21 +223,32 @@ const intro__heading = css`
   font-family: var(--font-en);
   letter-spacing: 0.06em;
   white-space: nowrap;
-  padding-top: 8rem;
+  padding-top: 11rem;
   overflow: hidden;
 
   @media (min-width: 640px) {
     font-size: 9.6rem;
     white-space: nowrap;
+    position: absolute;
+    top: 50%;
+    padding: 0;
+    margin-top: -1em;
   }
 `;
 
 const intro__infoWrap = css`
   padding: 0 var(--grid);
-  padding-top: 10.6667vw;
+  padding-top: 6rem;
   padding-bottom: 6.6667vw;
   display: flex;
   align-items: flex-start;
+
+  @media (min-width: 640px) {
+    flex-direction: column;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
 `;
 
 const intro__info = css`
@@ -245,10 +256,18 @@ const intro__info = css`
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
+
+  @media (min-width: 640px) {
+    width: calc(var(--grid) * 2);
+  }
 `;
 
 const info = css`
   font-size: 1.1rem;
+
+  @media (min-width: 640px) {
+    font-size: 1.4rem;
+  }
 
   & > dt {
     opacity: 0.5;
@@ -268,6 +287,14 @@ const intro__stacks = css`
   padding-left: 0.6em;
   padding-bottom: 0.6em;
   position: relative;
+
+  @media (min-width: 640px) {
+    width: calc(var(--grid) * 2);
+    padding-left: 0;
+    padding-bottom: 0;
+    padding-top: 3rem;
+    margin-top: 4rem;
+  }
 `;
 
 const intro__stacksItems = css`
@@ -276,6 +303,10 @@ const intro__stacksItems = css`
   display: flex;
   flex-direction: column;
   gap: 0.3em;
+
+  @media (min-width: 640px) {
+    font-size: 1.4rem;
+  }
 
   > li {
     backface-visibility: hidden;
@@ -292,6 +323,12 @@ const intro__stacks__hr = css`
   translate: -50%;
   transform-origin: top center;
   display: block;
+
+  @media (min-width: 640px) {
+    width: 1.5rem;
+    height: 1px;
+    translate: 0;
+  }
 `;
 
 const intro__indexNumber = css`

@@ -92,6 +92,16 @@ const maskUpper = css`
   @media (min-width: 640px) {
     height: 14rem;
   }
+
+  @media (prefers-color-scheme: dark) {
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.32) 0%,
+      rgba(255, 255, 255, 0.16) 40%,
+      rgba(255, 255, 255, 0.04) 80%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
 `;
 
 const maskLower = css`
@@ -114,6 +124,16 @@ const maskLower = css`
 
   @media (min-width: 640px) {
     height: 14rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.32) 0%,
+      rgba(255, 255, 255, 0.16) 40%,
+      rgba(255, 255, 255, 0.04) 80%,
+      rgba(255, 255, 255, 0) 100%
+    );
   }
 `;
 

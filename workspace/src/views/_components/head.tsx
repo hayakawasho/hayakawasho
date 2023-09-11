@@ -58,6 +58,11 @@ const base = css`
 
     --color-text: #fff6e5;
     --color-bg: #161616;
+
+    @media (prefers-color-scheme: dark) {
+      --color-text: #161616;
+      --color-bg: #fff;
+    }
   }
 
   *,
