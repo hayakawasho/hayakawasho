@@ -1,12 +1,12 @@
 import { defineComponent, ref, useEvent, useMount } from "lake";
 import NormalizeWheel from "normalize-wheel";
 import { clamp } from "remeda";
-import { gsap } from "gsap";
 import { useTick } from "@/_foundation/hooks";
 import { lerp } from "@/_foundation/math";
 import { Tween } from "@/_foundation/tween";
 import { scrollPosMutators } from "@/_states/scroll";
 import { useWindowSize } from "@/_states/window-size";
+import type { AppContext } from "@/_foundation/type";
 
 type Cache = {
   el: HTMLElement;
@@ -31,7 +31,7 @@ const FIXED_STYLE = {
 
 export default defineComponent({
   name: "scrollTweenContainer",
-  setup(el) {
+  setup(el, { env }: Pick<AppContext, "env">) {
     const smoothItem = Array.from(
       el.querySelectorAll<HTMLElement>(SELECTOR_CLASS)
     );
@@ -205,12 +205,17 @@ export default defineComponent({
       }
     );
 
+    const t = {
+      pc: 1 - 0.15,
+      sp: 1 - 0.1,
+    } as const;
+
     useTick(({ timeRatio }) => {
       if (!state.active || !state.scrollLimit) {
         return;
       }
 
-      const EASE = 1 - (1 - 0.1) ** timeRatio;
+      const EASE = 1 - t[env.mq] ** timeRatio;
       const easeVal = lerp(state.currentPos, state.targetPos, EASE);
       state.currentPos = easeVal;
 
@@ -243,6 +248,16 @@ export default defineComponent({
       pause: () => {
         state.active = false;
       },
+      reInit: (container: HTMLElement) => {
+        Object.assign(container.style, FIXED_STYLE);
+
+        const smoothItem = Array.from(
+          container.querySelectorAll<HTMLElement>(SELECTOR_CLASS)
+        );
+        state.container = container;
+        cache.value = createCache(smoothItem);
+        state.scrollLimit = setScrollLimit();
+      },
       resume: () => {
         state.active = true;
       },
@@ -257,16 +272,6 @@ export default defineComponent({
       set: (value: number) => {
         state.targetPos = value;
         state.currentPos = value;
-      },
-      reInit: (container: HTMLElement) => {
-        Object.assign(container.style, FIXED_STYLE);
-
-        const smoothItem = Array.from(
-          container.querySelectorAll<HTMLElement>(SELECTOR_CLASS)
-        );
-        state.container = container;
-        cache.value = createCache(smoothItem);
-        state.scrollLimit = setScrollLimit();
       },
     };
   },

@@ -230,7 +230,7 @@ const intro__heading = css`
   overflow: hidden;
 
   @media (min-width: 640px) {
-    font-size: 9.6rem;
+    font-size: 11.2rem;
     white-space: nowrap;
     position: absolute;
     top: 50%;
@@ -297,7 +297,7 @@ const intro__stacks = css`
     padding-left: 0;
     padding-bottom: 0;
     padding-top: 3rem;
-    margin-top: 4rem;
+    margin-top: 2rem;
   }
 `;
 
@@ -325,7 +325,7 @@ const intro__stacks__hr = css`
   top: 0;
   left: 0;
   translate: -50%;
-  transform-origin: top center;
+  transform-origin: top left;
   display: block;
 
   @media (min-width: 640px) {
