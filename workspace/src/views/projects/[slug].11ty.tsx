@@ -59,7 +59,9 @@ export const render = (props: any) => {
               </div>
 
               <h1 css={intro__heading}>
-                <span className="inline-block leading-[1]">{post.title}</span>
+                <span className="inline-block leading-[1]">
+                  {post.title} / {post.title} / {post.title}
+                </span>
               </h1>
 
               <div css={intro__infoWrap}>
