@@ -57,10 +57,10 @@ const base = css`
     --gap: calc(30 / 750 * 100vw);
 
     --color-text: #161616;
-    --color-bg: #dbd6d0;
+    --color-bg: #dbdad9;
 
     @media (prefers-color-scheme: dark) {
-      --color-text: #dbd6d0;
+      --color-text: #fff6e5;
       --color-bg: #161616;
     }
   }

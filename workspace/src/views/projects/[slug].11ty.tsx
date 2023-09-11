@@ -215,6 +215,7 @@ const intro__g = css`
   @media (min-width: 640px) {
     min-height: auto;
     height: 100vh;
+    height: 100svh;
   }
 `;
 
@@ -376,6 +377,7 @@ const screenshots = css`
 
   @media (min-width: 640px) {
     width: calc(var(--grid) * 8);
+    max-width: 1280px;
     gap: 14rem;
   }
 `;
@@ -397,6 +399,11 @@ const nextKv__link = css`
   display: block;
   position: relative;
   width: calc(var(--grid) * 7);
+
+  @media (min-width: 640px) {
+    width: calc(var(--grid) * 4);
+    max-width: 640px;
+  }
 `;
 
 const nextKv__img = css`
@@ -405,7 +412,7 @@ const nextKv__img = css`
   aspect-ratio: 1 / 1;
 
   @media (min-width: 640px) {
-    aspect-ratio: auto;
+    // aspect-ratio: auto;
   }
 `;
 

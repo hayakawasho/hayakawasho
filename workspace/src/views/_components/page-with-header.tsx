@@ -81,6 +81,13 @@ const maskUpper = css`
   left: 0;
   opacity: 1;
   top: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(219, 218, 217, 0.32) 0%,
+    rgba(219, 218, 217, 0.16) 40%,
+    rgba(219, 218, 217, 0.04) 80%,
+    rgba(219, 218, 217, 0) 100%
+  );
 
   @media (min-width: 640px) {
     height: 14rem;
@@ -107,6 +114,13 @@ const maskLower = css`
   left: 0;
   opacity: 1;
   bottom: 0;
+  background: linear-gradient(
+    to top,
+    rgba(219, 218, 217, 0.32) 0%,
+    rgba(219, 218, 217, 0.16) 40%,
+    rgba(219, 218, 217, 0.04) 80%,
+    rgba(219, 218, 217, 0) 100%
+  );
 
   @media (min-width: 640px) {
     height: 14rem;
