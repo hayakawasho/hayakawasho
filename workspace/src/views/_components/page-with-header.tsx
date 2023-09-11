@@ -81,13 +81,6 @@ const maskUpper = css`
   left: 0;
   opacity: 1;
   top: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(22, 22, 22, 0.32) 0%,
-    rgba(22, 22, 22, 0.16) 40%,
-    rgba(22, 22, 22, 0.04) 80%,
-    rgba(22, 22, 22, 0) 100%
-  );
 
   @media (min-width: 640px) {
     height: 14rem;
@@ -96,10 +89,10 @@ const maskUpper = css`
   @media (prefers-color-scheme: dark) {
     background: linear-gradient(
       to bottom,
-      rgba(255, 255, 255, 0.32) 0%,
-      rgba(255, 255, 255, 0.16) 40%,
-      rgba(255, 255, 255, 0.04) 80%,
-      rgba(255, 255, 255, 0) 100%
+      rgba(22, 22, 22, 0.32) 0%,
+      rgba(22, 22, 22, 0.16) 40%,
+      rgba(22, 22, 22, 0.04) 80%,
+      rgba(22, 22, 22, 0) 100%
     );
   }
 `;
@@ -114,13 +107,6 @@ const maskLower = css`
   left: 0;
   opacity: 1;
   bottom: 0;
-  background: linear-gradient(
-    to top,
-    rgba(22, 22, 22, 0.32) 0%,
-    rgba(22, 22, 22, 0.16) 40%,
-    rgba(22, 22, 22, 0.04) 80%,
-    rgba(22, 22, 22, 0) 100%
-  );
 
   @media (min-width: 640px) {
     height: 14rem;
@@ -128,11 +114,11 @@ const maskLower = css`
 
   @media (prefers-color-scheme: dark) {
     background: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.32) 0%,
-      rgba(255, 255, 255, 0.16) 40%,
-      rgba(255, 255, 255, 0.04) 80%,
-      rgba(255, 255, 255, 0) 100%
+      to top,
+      rgba(22, 22, 22, 0.32) 0%,
+      rgba(22, 22, 22, 0.16) 40%,
+      rgba(22, 22, 22, 0.04) 80%,
+      rgba(22, 22, 22, 0) 100%
     );
   }
 `;
@@ -143,11 +129,15 @@ const gridLine = css`
   top: 0;
   width: 1px;
   height: 100%;
-  background: rgba(255, 255, 255, 0.05);
   width: 1px;
   height: 100%;
   transform: translateX(-50%);
   z-index: 2;
+  background: rgba(0, 0, 0, 0.03);
+
+  @media (prefers-color-scheme: dark) {
+    background: rgba(255, 255, 255, 0.05);
+  }
 `;
 
 const gridLeft = css`

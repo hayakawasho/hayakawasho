@@ -56,12 +56,12 @@ const base = css`
     --grid: calc(1 / 12 * 100vw);
     --gap: calc(30 / 750 * 100vw);
 
-    --color-text: #fff6e5;
-    --color-bg: #161616;
+    --color-text: #161616;
+    --color-bg: #dbd6d0;
 
     @media (prefers-color-scheme: dark) {
-      --color-text: #161616;
-      --color-bg: #fff;
+      --color-text: #dbd6d0;
+      --color-bg: #161616;
     }
   }
 

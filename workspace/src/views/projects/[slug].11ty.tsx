@@ -223,7 +223,7 @@ const intro__heading = css`
   font-family: var(--font-en);
   letter-spacing: 0.06em;
   white-space: nowrap;
-  padding-top: 11rem;
+  padding-top: 10rem;
   overflow: hidden;
 
   @media (min-width: 640px) {
@@ -238,7 +238,7 @@ const intro__heading = css`
 
 const intro__infoWrap = css`
   padding: 0 var(--grid);
-  padding-top: 6rem;
+  padding-top: 4.8rem;
   padding-bottom: 6.6667vw;
   display: flex;
   align-items: flex-start;
@@ -248,6 +248,7 @@ const intro__infoWrap = css`
     position: absolute;
     bottom: 0;
     right: 0;
+    padding: 0 var(--grid) 6rem 0;
   }
 `;
 
@@ -270,7 +271,7 @@ const info = css`
   }
 
   & > dt {
-    opacity: 0.5;
+    opacity: 0.4;
     backface-visibility: hidden;
   }
 
