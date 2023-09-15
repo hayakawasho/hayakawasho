@@ -8,7 +8,7 @@ import {
 import { Texture, Vec2, Mesh, Program, Plane } from "ogl";
 // import { Tween } from "@/_foundation/tween";
 import { loadImage } from "@/_foundation/utils";
-import { ImgPlane } from "@/_glsl";
+import { ImagePlane } from "@/_glsl";
 import { useScrollTween } from "@/_states/scroll";
 import { useWindowSize } from "@/_states/window-size";
 import fragment from "./fragment.frag";
@@ -28,25 +28,23 @@ export default defineComponent({
     el: HTMLImageElement,
     { glContext, env }: Pick<AppContext, "glContext" | "env">
   ) {
-    const [ww, wh] = useWindowSize();
-
     const cache = ref<Cache>({
       currentY: 0,
       rect: el.getBoundingClientRect(),
-      wh: wh.value,
-      ww: ww.value,
+      wh: 0,
+      ww: 0,
     });
 
     const state = {
-      resizing: false,
-      visible: false,
-      ty: 0,
       cy: 0,
       diff: 0,
       dragging: false,
       max: {
         y: 0,
       },
+      resizing: false,
+      ty: 0,
+      visible: false,
     };
 
     const src = {
@@ -54,14 +52,26 @@ export default defineComponent({
       sp: el.dataset.srcSp!,
     };
 
+    const imageeSize = {
+      w: Number(el.dataset.w)!,
+      h: Number(el.dataset.h)!,
+    };
+
     const texture = new Texture(glContext.gl);
+
+    loadImage(src[env.mq]).then((img) => {
+      texture.image = img;
+    });
 
     const uniforms = {
       u_alpha: {
         value: 1.0,
       },
+      u_diff: {
+        value: 0,
+      },
       u_image_size: {
-        value: new Vec2(0, 0),
+        value: new Vec2(imageeSize.w, imageeSize.h),
       },
       u_mesh_size: {
         value: new Vec2(cache.value.rect.width, cache.value.rect.height),
@@ -78,9 +88,6 @@ export default defineComponent({
       u_velo: {
         value: 0,
       },
-      u_diff: {
-        value: 0,
-      },
     };
 
     const geometry = new Plane(glContext.gl);
@@ -95,14 +102,7 @@ export default defineComponent({
       program,
     });
 
-    const imgPlane = new ImgPlane(mesh, el);
-
-    texture.image = loadImage(src[env.mq], () => {
-      const { naturalWidth, naturalHeight } = texture.image as HTMLImageElement;
-      uniforms.u_image_size.value.set(naturalWidth, naturalHeight);
-
-      // imgPlane.updatePos();
-    });
+    const imagePlane = new ImagePlane(mesh, el);
 
     useIntersectionWatch(
       el,
@@ -114,18 +114,17 @@ export default defineComponent({
       }
     );
 
-    useWindowSize(() => {
-      state.resizing = true;
-
-      imgPlane.resize(ww.value, wh.value);
-
-      state.resizing = false;
+    useScrollTween(({ currentY }) => {
+      if (state.resizing) {
+        return;
+      }
+      imagePlane.updatePos(currentY);
     });
 
-    useScrollTween(({ currentY, oldY }) => {
-      const diff = currentY - oldY;
-
-      // imgPlane.updatePos();
+    useWindowSize(({ ww, wh }) => {
+      state.resizing = true;
+      imagePlane.resize(ww, wh);
+      state.resizing = false;
     });
 
     useMount(() => {
@@ -137,116 +136,3 @@ export default defineComponent({
     });
   },
 });
-
-/**
- *
- *
-console.clear()
-
-let ww = window.innerWidth
-let wh = window.innerHeight
-
-const isFirefox = navigator.userAgent.indexOf('Firefox') > -1
-const isWindows = navigator.appVersion.indexOf("Win") != -1
-
-const mouseMultiplier = .6
-const firefoxMultiplier = 20
-
-const multipliers = {
-	mouse: isWindows ? mouseMultiplier * 2 : mouseMultiplier,
-	firefox: isWindows ? firefoxMultiplier * 2 : firefoxMultiplier
-}
-
-class Core {
-
-	constructor() {
-		this.tx = 0
-		this.ty = 0
-		this.cx = 0
-		this.cy = 0
-
-		this.diff = 0
-
-		this.wheel = { x: 0, y: 0 }
-		this.on = { x: 0, y: 0 }
-		this.max = { x: 0, y: 0 }
-
-		this.isDragging = false
-
-		this.tl = gsap.timeline({ paused: true })
-
-		this.el = document.querySelector('.js-grid')
-
-		// GL specifics
-		this.scene = new THREE.Scene()
-
-		this.camera = new THREE.OrthographicCamera(
-			ww / -2, ww / 2, wh / 2, wh / -2, 1, 1000
-		)
-		this.camera.lookAt(this.scene.position)
-		this.camera.position.z = 1
-
-
-		this.addPlanes()
-		this.addEvents()
-		this.resize()
-	}
-
-
-	tick = () => {
-		const xDiff = this.tx - this.cx
-		const yDiff = this.ty - this.cy
-
-		this.cx += xDiff * 0.085
-		this.cx = Math.round(this.cx * 100) / 100
-
-		this.cy += yDiff * 0.085
-		this.cy = Math.round(this.cy * 100) / 100
-
-		this.diff = Math.max(
-			Math.abs(yDiff * 0.0001),
-			Math.abs(xDiff * 0.0001)
-		)
-
-		this.planes.length
-			&& this.planes.forEach(plane =>
-				plane.update(this.cx, this.cy, this.max, this.diff))
-
-		this.renderer.render(this.scene, this.camera)
-	}
-
-	onWheel = (e) => {
-		const { mouse, firefox } = multipliers
-
-        this.wheel.x = e.wheelDeltaX || e.deltaX * -1
-		this.wheel.y = e.wheelDeltaY || e.deltaY * -1
-
-        if (isFirefox && e.deltaMode === 1) {
-            this.wheel.x *= firefox
-			this.wheel.y *= firefox
-        }
-
-        this.wheel.y *= mouse
-		this.wheel.x *= mouse
-
-		this.tx += this.wheel.x
-		this.ty -= this.wheel.y
-	}
-
-	resize = () => {
-		ww = window.innerHeight
-		wh = window.innerWidth
-
-		const { bottom, right } = this.el.getBoundingClientRect()
-
-		this.max.x = right
-		this.max.y = bottom
-	}
-}
-
-const loader = new THREE.TextureLoader()
-
-
-new Core()
-
-*/

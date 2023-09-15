@@ -40,15 +40,14 @@ export const noop = () => {
   //
 };
 
-export const loadImage = (
-  src: string,
-  callback: (payload: { img: HTMLImageElement }) => void
-) => {
-  const img = new Image();
-  img.crossOrigin = "anonymous";
-  img.src = src;
+export const loadImage = (src: string) => {
+  return new Promise<HTMLImageElement>((resolve) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.src = src;
 
-  img.decode().then(() => callback({ img }));
-
-  return img;
+    img.decode().then(() => {
+      return resolve(img);
+    });
+  });
 };

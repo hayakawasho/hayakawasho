@@ -74,7 +74,7 @@
     "detect-gpu": "^5.0.30",
     "glsl-noise": "^0.0.0",
     "gsap": "^3.12.1",
-    "lake": "./lib/lake",
+    "lake": "file:lib/lake",
     "lil-gui": "^0.16.1",
     "modularload": "^1.2.8",
     "nanostores": "^0.9.2",

@@ -20,7 +20,6 @@ type Cache = {
 };
 
 const SELECTOR_CLASS = "[data-scroll-item]";
-const _WIN = window as any;
 const FIXED_STYLE = {
   left: 0,
   overflow: "hidden",
@@ -148,7 +147,7 @@ export default defineComponent({
     };
 
     useEvent(
-      _WIN,
+      window as any,
       "touchstart",
       (e) => {
         if (!state.active) {
@@ -164,7 +163,7 @@ export default defineComponent({
       }
     );
 
-    useEvent(_WIN, "touchend", () => {
+    useEvent(window as any, "touchend", () => {
       if (!state.dragging || !state.active) {
         return;
       }
@@ -172,7 +171,7 @@ export default defineComponent({
     });
 
     useEvent(
-      _WIN,
+      window as any,
       "touchmove",
       (e) => {
         if (!state.dragging || !state.active) {
@@ -189,7 +188,7 @@ export default defineComponent({
     );
 
     useEvent(
-      _WIN,
+      window as any,
       "wheel",
       (e) => {
         if (!state.active) {

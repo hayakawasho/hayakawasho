@@ -60,7 +60,7 @@ export const render = (props: any) => {
 
               <h1 css={intro__heading}>
                 <span className="inline-block leading-[1]">
-                  {post.title} / {post.title} / {post.title}
+                  {post.title}/{post.title}/{post.title}
                 </span>
               </h1>
 
@@ -137,64 +137,56 @@ export const render = (props: any) => {
             </div>
           </div>
 
-          <div
-            className="mb-[10rem] sm:mb-[20rem]"
-            css={eyecatch}
-            data-ref="eyecatch"
-            data-scroll-item
-          >
-            <ResponsiveImage
-              alt=""
-              css={eyecatch__img}
-              pcH={post.eyecatch.height}
-              pcSrc={`${post.eyecatch.src}?auto=compress,format`}
-              pcW={post.eyecatch.width}
-              spH={post.eyecatch.height}
-              spSrc={`${post.eyecatch.src}?auto=compress,format&w=1200`}
-              spW={post.eyecatch.width}
-            />
-          </div>
-
-          <ul className="" css={screenshots} data-scroll-item>
-            {post.screenshots.map((i, index) => {
-              const aspect = i.width / i.height;
-              return (
-                <li className="" key={index}>
-                  <img
-                    className={`pointer-events-none`}
-                    data-ref="screenshot"
-                    data-src-sp={`${i.src}?auto=compress,format&w=750`}
-                    src={`${i.src}?auto=compress,format`}
-                    style={{
-                      aspectRatio: aspect + "",
-                    }}
-                  />
-                </li>
-              );
-            })}
-          </ul>
-
-          <aside css={nextKv} data-scroll-item>
-            <a css={nextKv__link} data-ref="next" href={`../${nextPost.id}/`}>
+          <div data-scroll-item>
+            <div
+              className="mb-[10rem] sm:mb-[20rem]"
+              css={eyecatch}
+              data-ref="eyecatch"
+            >
               <ResponsiveImage
                 alt=""
-                css={nextKv__img}
-                pcH={nextPost.eyecatch.height}
-                pcSrc={`${nextPost.eyecatch.src}?auto=compress,format&sat=-100`}
-                pcW={nextPost.eyecatch.width}
-                spH={nextPost.eyecatch.height}
-                spSrc={`${nextPost.eyecatch.src}?auto=compress,format&w=1200&sat=-100`}
-                spW={nextPost.eyecatch.width}
+                css={eyecatch__img}
+                pcH={post.eyecatch.height}
+                pcSrc={`${post.eyecatch.src}?auto=compress,format`}
+                pcW={post.eyecatch.width}
+                spH={post.eyecatch.height}
+                spSrc={`${post.eyecatch.src}?auto=compress,format&w=1200`}
+                spW={post.eyecatch.width}
               />
-              <div css={nextSubTitle} className="sr-only">
-                Next Project
+            </div>
+
+            <ul className="" css={screenshots}>
+              {post.screenshots.map((i, index) => {
+                const aspect = i.width / i.height;
+                return (
+                  <li className="" key={index}>
+                    <img
+                      className={`pointer-events-none`}
+                      data-ref="screenshot"
+                      data-src-sp={`${i.src}?auto=compress,format&w=750`}
+                      src={`${i.src}?auto=compress,format`}
+                      style={{
+                        aspectRatio: aspect + "",
+                      }}
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          <aside css={nextProject} data-scroll-item>
+            <a
+              css={nextProject__wrap}
+              href={`../${nextPost.id}/`}
+              data-ref="next"
+            >
+              <div className="relative">
+                <h3 css={nextProject__heading}>
+                  <span className="inline-block leading-[1]">Next Project</span>
+                </h3>
+                <h4 css={nextProject__sub}>({nextPost.title})</h4>
               </div>
-              <div
-                className={`pointer-events-none opacity-0 h-full`}
-                data-ref="nextImage"
-                data-src={`${nextPost.eyecatch.src}?auto=compress,format&sat=-100`}
-                data-src-sp={`${nextPost.eyecatch.src}?auto=compress,format&w=1200&sat=-100`}
-              ></div>
             </a>
           </aside>
         </main>
@@ -208,7 +200,7 @@ const intro = css`
 `;
 
 const intro__g = css`
-  min-height: 132vw;
+  min-height: 125vw;
   position: relative;
   overflow: hidden;
 
@@ -224,7 +216,7 @@ const intro__heading = css`
   font-size: 6rem;
   font-weight: 300;
   font-family: var(--font-en);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   white-space: nowrap;
   padding-top: 10rem;
   overflow: hidden;
@@ -373,7 +365,7 @@ const screenshots = css`
   backface-visibility: hidden;
   display: flex;
   flex-direction: column;
-  gap: 6rem;
+  gap: 5rem;
 
   @media (min-width: 640px) {
     width: calc(var(--grid) * 8);
@@ -384,54 +376,44 @@ const screenshots = css`
 
 //----------------------------------------------------------------
 
-const nextKv = css`
+const nextProject = css`
+  position: relative;
+`;
+
+const nextProject__wrap = css`
+  position: relative;
   height: 100vh;
-  height: 100svh;
-  position: relative;
+  padding: 10rem 0;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  overflow: hidden;
-  padding: 0 var(--gap);
-`;
-
-const nextKv__link = css`
-  display: block;
-  position: relative;
-  width: calc(var(--grid) * 7);
+  align-items: center;
 
   @media (min-width: 640px) {
-    width: calc(var(--grid) * 4);
-    max-width: 640px;
+    padding-top: 15rem;
+    padding-bottom: 15rem;
   }
 `;
 
-const nextKv__img = css`
-  width: 100%;
-  object-fit: cover;
-  aspect-ratio: 1 / 1;
+const nextProject__heading = css`
+  font-size: 6rem;
+  font-weight: 300;
+  font-family: var(--font-en);
+  letter-spacing: 0.04em;
+  line-height: 1;
 
   @media (min-width: 640px) {
-    // aspect-ratio: auto;
+    font-size: 6.4rem;
   }
 `;
 
-const nextSubTitle = css`
-  font-size: 1.1rem;
+const nextProject__sub = css`
+  font-size: 1rem;
+  text-align: left;
+  font-weight: 300;
   opacity: 0.5;
 
   @media (min-width: 640px) {
     font-size: 1.5rem;
-  }
-`;
-
-const nextTitle = css`
-  font-size: 4rem;
-  font-family: var(--font-en);
-  letter-spacing: 0.12em;
-
-  @media (min-width: 640px) {
-    font-size: 9.6rem;
-    white-space: nowrap;
   }
 `;

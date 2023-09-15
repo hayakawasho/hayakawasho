@@ -39,7 +39,7 @@ export const PageWithHeader: FC<{
         <div css={gridLeft} role="presentation"></div>
         <div css={gridMiddle} role="presentation"></div>
         <div css={gridRight} role="presentation"></div>
-        <div css={radius} role="presentation"></div>
+        <div css={bg} role="presentation"></div>
         {header}
         {children}
         <div data-component=""></div>
@@ -83,24 +83,14 @@ const maskUpper = css`
   top: 0;
   background: linear-gradient(
     to bottom,
-    rgba(219, 218, 217, 0.32) 0%,
-    rgba(219, 218, 217, 0.16) 40%,
-    rgba(219, 218, 217, 0.04) 80%,
-    rgba(219, 218, 217, 0) 100%
+    rgba(22, 22, 22, 0.32) 0%,
+    rgba(22, 22, 22, 0.16) 40%,
+    rgba(22, 22, 22, 0.04) 80%,
+    rgba(22, 22, 22, 0) 100%
   );
 
   @media (min-width: 640px) {
     height: 14rem;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    background: linear-gradient(
-      to bottom,
-      rgba(22, 22, 22, 0.32) 0%,
-      rgba(22, 22, 22, 0.16) 40%,
-      rgba(22, 22, 22, 0.04) 80%,
-      rgba(22, 22, 22, 0) 100%
-    );
   }
 `;
 
@@ -116,24 +106,14 @@ const maskLower = css`
   bottom: 0;
   background: linear-gradient(
     to top,
-    rgba(219, 218, 217, 0.32) 0%,
-    rgba(219, 218, 217, 0.16) 40%,
-    rgba(219, 218, 217, 0.04) 80%,
-    rgba(219, 218, 217, 0) 100%
+    rgba(22, 22, 22, 0.32) 0%,
+    rgba(22, 22, 22, 0.16) 40%,
+    rgba(22, 22, 22, 0.04) 80%,
+    rgba(22, 22, 22, 0) 100%
   );
 
   @media (min-width: 640px) {
     height: 14rem;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    background: linear-gradient(
-      to top,
-      rgba(22, 22, 22, 0.32) 0%,
-      rgba(22, 22, 22, 0.16) 40%,
-      rgba(22, 22, 22, 0.04) 80%,
-      rgba(22, 22, 22, 0) 100%
-    );
   }
 `;
 
@@ -147,10 +127,10 @@ const gridLine = css`
   height: 100%;
   transform: translateX(-50%);
   z-index: 2;
-  background: rgba(0, 0, 0, 0.03);
+  background: rgba(255, 255, 255, 0.05);
 
   @media (prefers-color-scheme: dark) {
-    background: rgba(255, 255, 255, 0.05);
+    // background: rgba(0, 0, 0, 0.05);
   }
 `;
 
@@ -178,15 +158,21 @@ const gridRight = css`
   }
 `;
 
-const radius = css`
+const bg = css`
   position: fixed;
-  top: -0.7rem;
-  left: -0.7rem;
-  width: calc(100vw + 1.4rem);
-  height: calc(100vh + 1.4rem);
-  height: calc(100svh + 1.4rem);
   pointer-events: none;
-  z-index: 100;
-  border: 1rem solid var(--color-bg);
-  border-radius: 2.2rem;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-bg);
+  // background: linear-gradient(0deg, #dbdad9, #ffffff);
+  // top: -0.7rem;
+  // left: -0.7rem;
+  // width: calc(100vw + 1.4rem);
+  // height: calc(100vh + 1.4rem);
+  // height: calc(100svh + 1.4rem);
+  // z-index: 100;
+  // border: 1rem solid var(--color-bg);
+  // border-radius: 2.2rem;
 `;

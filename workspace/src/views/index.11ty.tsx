@@ -23,26 +23,39 @@ export const render = (props: any) => {
     <PageWithHeader header={<Header />} seo={<Seo permalink="" title="" />}>
       <Body namespace="home">
         <main className="h-full" data-component="home">
+          <div data-scroll-item></div>
           <h1 className="sr-only">SHO HAYAKAWA PORTFOLIO</h1>
-          <div data-scroll-item>
+          <div css={wrap}>
             <div className="" css={projects}>
               {posts.map((post, _index) => {
                 return (
-                  <div className={`mb-[2rem]`} css={project} key={post.id}>
-                    <div css={project__g}>
-                      <a
-                        css={project__eyecatch}
-                        href={`./projects/${post.id}/`}
-                      >
-                        <img
-                          alt={post.title}
-                          className="sizefit opacity-0"
-                          data-ref="plane"
-                          data-src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
-                          data-src-sp={`${post.eyecatch.src}?auto=compress,format&w=750&sat=-100`}
-                        ></img>
-                      </a>
-                    </div>
+                  <div css={project} key={post.id}>
+                    <a css={project__eyecatch} href={`./projects/${post.id}/`}>
+                      <figure
+                        className="w-full h-full"
+                        data-ref="plane"
+                        data-src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
+                        data-src-sp={`${post.eyecatch.src}?auto=compress,format&w=750&sat=-100`}
+                        data-w={post.eyecatch.width}
+                        data-h={post.eyecatch.height}
+                      />
+                    </a>
+                  </div>
+                );
+              })}
+              {posts.map((post, _index) => {
+                return (
+                  <div css={project} key={post.id}>
+                    <a css={project__eyecatch} href={`./projects/${post.id}/`}>
+                      <figure
+                        className="w-full h-full"
+                        data-ref="plane"
+                        data-src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
+                        data-src-sp={`${post.eyecatch.src}?auto=compress,format&w=750&sat=-100`}
+                        data-w={post.eyecatch.width}
+                        data-h={post.eyecatch.height}
+                      />
+                    </a>
                   </div>
                 );
               })}
@@ -54,43 +67,38 @@ export const render = (props: any) => {
   )}`;
 };
 
+const wrap = css`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+`;
+
 const projects = css`
-  width: calc(var(--grid) * 7);
-  margin-left: auto;
-  margin-right: auto;
+  position: absolute;
+  top: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: calc(100% + var(--grid) * 10);
+  left: calc(var(--grid) * -5);
 
   @media (min-width: 640px) {
-    width: 100%;
+    grid-template-columns: repeat(5, 1fr);
+    width: calc(100% + var(--grid) * 3);
+    left: calc(var(--grid) * -1.5);
   }
 `;
 
 const project = css`
-  @media (min-width: 640px) {
-    display: flex;
-    gap: var(--gap);
-  }
-
-  &:last-child {
-    @media (min-width: 640px) {
-      margin-bottom: 16rem;
-    }
-  }
-`;
-
-const project__g = css`
-  display: block;
-
-  @media (min-width: 640px) {
-    width: calc(var(--grid) * 6);
-    padding: 0 var(--gap);
-  }
+  position: relative;
+  padding-top: 125%;
 `;
 
 const project__eyecatch = css`
+  position: absolute;
+  inset: 0.6rem;
   display: block;
-  aspect-ratio: 1 / 1;
 
   @media (min-width: 640px) {
-    aspect-ratio: 16 / 9;
+    inset: 1rem;
   }
 `;
