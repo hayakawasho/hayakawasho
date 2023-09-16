@@ -386,8 +386,8 @@ const screenshots = css`
 //----------------------------------------------------------------
 
 const dummy = css`
-  height: 130vh;
-  height: 130svh;
+  height: 101vh;
+  height: 101svh;
 
   @media (min-width: 640px) {
     height: 150vh;
