@@ -146,6 +146,16 @@ const base = css`
     font-style: normal;
     font-display: swap;
   }
+
+  @font-face {
+    font-family: "Moneta";
+    src: local("Moneta Regular"), local("Moneta-Regular"),
+      url("/assets/Moneta-Regular.woff2") format("woff2"),
+      url("/assets/Moneta-Regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
 `;
 
 const utilities = css`

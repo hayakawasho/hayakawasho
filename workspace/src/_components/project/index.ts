@@ -8,9 +8,23 @@ import {
 // import { SplitText } from "@/_foundation/split-text";
 import { Tween } from "@/_foundation/tween";
 import Eyecatch from "./eyecatch";
-import NextEyecatch from "./next";
+import NextProject from "./next";
 // import Screenshot from "./screenshot";
 import type { AppContext } from "@/_foundation/type";
+
+type Refs = {
+  now: HTMLElement;
+  max: HTMLElement;
+  dash: HTMLElement;
+  // h1: HTMLElement;
+  screenshot: HTMLImageElement[];
+  eyecatch: HTMLElement;
+  infoText: HTMLElement[];
+  infoLine: HTMLElement;
+  stack: HTMLElement | HTMLElement[];
+  next: HTMLElement;
+  start: HTMLElement;
+};
 
 export default defineComponent({
   name: "project",
@@ -18,19 +32,7 @@ export default defineComponent({
     const { env, once } = context;
     const { addChild } = useSlot();
 
-    const { refs } = useDomRef<{
-      now: HTMLElement;
-      max: HTMLElement;
-      dash: HTMLElement;
-      // h1: HTMLElement;
-      screenshot: HTMLImageElement[];
-      eyecatch: HTMLElement;
-      infoText: HTMLElement[];
-      infoLine: HTMLElement;
-      stack: HTMLElement | HTMLElement[];
-      next: HTMLElement;
-      nextImage: HTMLImageElement;
-    }>(
+    const { refs } = useDomRef<Refs>(
       "now",
       "max",
       "dash",
@@ -41,12 +43,12 @@ export default defineComponent({
       "infoLine",
       "stack",
       "next",
-      "nextImage"
+      "start"
     );
 
     addChild(refs.eyecatch, Eyecatch, context);
     // addChild(refs.screenshot, Screenshot, context);
-    addChild(refs.nextImage, NextEyecatch, context);
+    addChild(refs.next, NextProject, context);
 
     useMount(() => {
       if (once) {

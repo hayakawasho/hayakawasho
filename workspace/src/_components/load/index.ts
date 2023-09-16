@@ -14,17 +14,19 @@ type Props = {
   onCleanup: (scope: HTMLElement) => void;
 };
 
+type Refs = {
+  main: HTMLElement;
+  glWorld: HTMLElement;
+  windowSizeWatcher: HTMLElement;
+  backto: HTMLElement;
+};
+
 export default defineComponent({
   name: "load",
   setup(_el, { onCreated, onUpdated, onCleanup }: Props) {
     const { addChild } = useSlot();
 
-    const { refs } = useDomRef<{
-      main: HTMLElement;
-      glWorld: HTMLElement;
-      windowSizeWatcher: HTMLElement;
-      backto: HTMLElement;
-    }>("glWorld", "main", "windowSizeWatcher");
+    const { refs } = useDomRef<Refs>("glWorld", "main", "windowSizeWatcher");
 
     const env: AppContext["env"] = {
       gpuTier: undefined,

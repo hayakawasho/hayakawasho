@@ -34,12 +34,12 @@ export const PageWithHeader: FC<{
           css={svh}
           data-ref="windowSizeWatcher"
         ></div>
+        <div css={bg} role="presentation"></div>
         <div css={maskUpper} role="presentation"></div>
         <div css={maskLower} role="presentation"></div>
         <div css={gridLeft} role="presentation"></div>
         <div css={gridMiddle} role="presentation"></div>
         <div css={gridRight} role="presentation"></div>
-        <div css={bg} role="presentation"></div>
         {header}
         {children}
         <div data-component=""></div>
@@ -126,7 +126,7 @@ const gridLine = css`
   width: 1px;
   height: 100%;
   transform: translateX(-50%);
-  z-index: 2;
+  // z-index: 2;
   background: rgba(255, 255, 255, 0.05);
 
   @media (prefers-color-scheme: dark) {

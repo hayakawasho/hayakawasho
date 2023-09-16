@@ -164,10 +164,11 @@ export const render = (props: any) => {
                       className={`pointer-events-none`}
                       data-ref="screenshot"
                       data-src-sp={`${i.src}?auto=compress,format&w=750`}
+                      data-src={`${i.src}?auto=compress,format`}
+                      data-w={i.width}
+                      data-h={i.height}
                       src={`${i.src}?auto=compress,format`}
-                      style={{
-                        aspectRatio: aspect + "",
-                      }}
+                      style={{ aspectRatio: aspect + "" }}
                     />
                   </li>
                 );
@@ -175,19 +176,26 @@ export const render = (props: any) => {
             </ul>
           </div>
 
-          <aside css={nextProject} data-scroll-item>
-            <a
-              css={nextProject__wrap}
-              href={`../${nextPost.id}/`}
-              data-ref="next"
-            >
-              <div className="relative">
-                <h3 css={nextProject__heading}>
-                  <span className="inline-block leading-[1]">Next Project</span>
-                </h3>
-                <h4 css={nextProject__sub}>({nextPost.title})</h4>
+          <aside data-ref="next">
+            <div css={dummy} data-scroll-item data-ref="end"></div>
+            <div css={nextProject}>
+              <div className="overflow-hidden">
+                <a
+                  css={nextProject__hgroup}
+                  href={`../${nextPost.id}/`}
+                  data-ref="nextHGroup"
+                >
+                  <h3 css={nextProject__heading}>
+                    <span className="inline-block leading-[1]">
+                      Next Project
+                    </span>
+                  </h3>
+                  <h4 css={nextProject__sub} className="sr-only">
+                    ({nextPost.title})
+                  </h4>
+                </a>
               </div>
-            </a>
+            </div>
           </aside>
         </main>
       </Body>
@@ -213,7 +221,7 @@ const intro__g = css`
 
 const intro__heading = css`
   width: 100%;
-  font-size: 6rem;
+  font-size: 5.6rem;
   font-weight: 300;
   font-family: var(--font-en);
   letter-spacing: 0.04em;
@@ -222,7 +230,7 @@ const intro__heading = css`
   overflow: hidden;
 
   @media (min-width: 640px) {
-    font-size: 11.2rem;
+    font-size: 10.4rem;
     white-space: nowrap;
     position: absolute;
     top: 50%;
@@ -283,6 +291,7 @@ const intro__stacks = css`
   padding-left: 0.6em;
   padding-bottom: 0.6em;
   position: relative;
+  margin-top: 0.2rem;
 
   @media (min-width: 640px) {
     width: calc(var(--grid) * 2);
@@ -376,18 +385,24 @@ const screenshots = css`
 
 //----------------------------------------------------------------
 
-const nextProject = css`
-  position: relative;
+const dummy = css`
+  height: 130vh;
+  height: 130svh;
+
+  @media (min-width: 640px) {
+    height: 150vh;
+    height: 150svh;
+  }
 `;
 
-const nextProject__wrap = css`
-  position: relative;
-  height: 100vh;
-  padding: 10rem 0;
+const nextProject = css`
+  position: fixed;
+  inset: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  pointer-events: none;
 
   @media (min-width: 640px) {
     padding-top: 15rem;
@@ -395,22 +410,27 @@ const nextProject__wrap = css`
   }
 `;
 
+const nextProject__hgroup = css`
+  display: inline-block;
+  transform: translateY(100%);
+  pointer-events: auto;
+`;
+
 const nextProject__heading = css`
-  font-size: 6rem;
-  font-weight: 300;
+  font-size: 5.6rem;
   font-family: var(--font-en);
   letter-spacing: 0.04em;
   line-height: 1;
 
   @media (min-width: 640px) {
-    font-size: 6.4rem;
+    font-size: 10.4rem;
   }
 `;
 
 const nextProject__sub = css`
-  font-size: 1rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
   text-align: left;
-  font-weight: 300;
   opacity: 0.5;
 
   @media (min-width: 640px) {
