@@ -71,7 +71,7 @@ const svh = css`
   height: 100svh;
 `;
 
-const maskUpper = css`
+const mask = css`
   pointer-events: none;
   display: block;
   height: 7rem;
@@ -79,7 +79,15 @@ const maskUpper = css`
   position: fixed;
   z-index: 11;
   left: 0;
-  opacity: 1;
+  opacity: 0.5;
+
+  @media (min-width: 640px) {
+    height: 14rem;
+  }
+`;
+
+const maskUpper = css`
+  ${mask}
   top: 0;
   background: linear-gradient(
     to bottom,
@@ -88,21 +96,10 @@ const maskUpper = css`
     rgba(22, 22, 22, 0.04) 80%,
     rgba(22, 22, 22, 0) 100%
   );
-
-  @media (min-width: 640px) {
-    height: 14rem;
-  }
 `;
 
 const maskLower = css`
-  pointer-events: none;
-  display: block;
-  height: 7rem;
-  width: 100%;
-  position: fixed;
-  z-index: 11;
-  left: 0;
-  opacity: 1;
+  ${mask}
   bottom: 0;
   background: linear-gradient(
     to top,
@@ -111,10 +108,6 @@ const maskLower = css`
     rgba(22, 22, 22, 0.04) 80%,
     rgba(22, 22, 22, 0) 100%
   );
-
-  @media (min-width: 640px) {
-    height: 14rem;
-  }
 `;
 
 const gridLine = css`
@@ -128,6 +121,7 @@ const gridLine = css`
   transform: translateX(-50%);
   // z-index: 2;
   background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.04);
 
   @media (prefers-color-scheme: dark) {
     // background: rgba(0, 0, 0, 0.05);
@@ -165,14 +159,6 @@ const bg = css`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--color-bg);
-  // background: linear-gradient(0deg, #dbdad9, #ffffff);
-  // top: -0.7rem;
-  // left: -0.7rem;
-  // width: calc(100vw + 1.4rem);
-  // height: calc(100vh + 1.4rem);
-  // height: calc(100svh + 1.4rem);
-  // z-index: 100;
-  // border: 1rem solid var(--color-bg);
-  // border-radius: 2.2rem;
+  background: var(--color-bg);
+  background: linear-gradient(0deg, var(--color-bg), #ffffff);
 `;

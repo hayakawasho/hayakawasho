@@ -179,7 +179,7 @@ export const render = (props: any) => {
           <aside data-ref="next">
             <div css={dummy} data-scroll-item data-ref="end"></div>
             <div css={nextProject}>
-              <div className="overflow-hidden">
+              <div className="overflow-hidden mt-[-5.6rem]">
                 <a
                   css={nextProject__hgroup}
                   href={`../${nextPost.id}/`}
@@ -190,7 +190,7 @@ export const render = (props: any) => {
                       Next Project
                     </span>
                   </h3>
-                  <h4 css={nextProject__sub} className="sr-only">
+                  <h4 css={nextProject__sub} className="">
                     ({nextPost.title})
                   </h4>
                 </a>
@@ -224,7 +224,7 @@ const intro__heading = css`
   font-size: 5.6rem;
   font-weight: 300;
   font-family: var(--font-en);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
   white-space: nowrap;
   padding-top: 10rem;
   overflow: hidden;
@@ -251,7 +251,7 @@ const intro__infoWrap = css`
     position: absolute;
     bottom: 0;
     right: 0;
-    padding: 0 var(--grid) 6rem 0;
+    padding: 0 var(--grid) 7rem 0;
   }
 `;
 
@@ -274,7 +274,7 @@ const info = css`
   }
 
   & > dt {
-    opacity: 0.4;
+    opacity: 0.5;
     backface-visibility: hidden;
   }
 
@@ -432,8 +432,10 @@ const nextProject__sub = css`
   letter-spacing: 0.04em;
   text-align: left;
   opacity: 0.5;
+  margin-top: -0.6em;
 
   @media (min-width: 640px) {
     font-size: 1.5rem;
+    margin-top: -0.8em;
   }
 `;

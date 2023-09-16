@@ -31,7 +31,7 @@ export default defineComponent({
       const y = map(
         currentY + wh.value,
         startPos + wh.value * 0.6,
-        endPos,
+        endPos - wh.value * 0.01,
         0,
         100
       );

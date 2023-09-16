@@ -17,12 +17,6 @@ export const Head: FC<{
         rel="preload"
         type="font/woff2"
       />
-      <link
-        as="font"
-        href="/assets/Moneta-Light.woff"
-        rel="preload"
-        type="font/woff"
-      />
       <link href="https://fonts.googleapis.com" rel="dns-prefetch preconnect" />
       <link href="https://fonts.gstatic.com" rel="dns-prefetch preconnect" />
       <link
@@ -56,8 +50,10 @@ const base = css`
     --grid: calc(1 / 12 * 100vw);
     --gap: calc(30 / 750 * 100vw);
 
-    --color-text: #fff6e5;
-    --color-bg: #161616;
+    // --color-text: #fff6e5;
+    // --color-bg: #161616;
+    --color-text: #607f72;
+    --color-bg: #f2f2f2;
   }
 
   *,
@@ -140,22 +136,54 @@ const base = css`
   @font-face {
     font-family: "Moneta";
     src: local("Moneta Light"), local("Moneta-Light"),
-      url("/assets/Moneta-Light.woff2") format("woff2"),
-      url("/assets/Moneta-Light.woff") format("woff");
+      url("/assets/Moneta-Light.woff2") format("woff2");
     font-weight: 300;
     font-style: normal;
     font-display: swap;
   }
 
+  /*
   @font-face {
     font-family: "Moneta";
     src: local("Moneta Regular"), local("Moneta-Regular"),
-      url("/assets/Moneta-Regular.woff2") format("woff2"),
-      url("/assets/Moneta-Regular.woff") format("woff");
+      url("/assets/Moneta-Regular.woff2") format("woff2");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
   }
+
+  @font-face {
+    font-family: "Audrey";
+    font-display: swap;
+    src: url("/assets/audrey-normal.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Audrey";
+    font-display: swap;
+    src: url("/assets/audrey-medium.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: sch;
+    src: url(/assets/SchnyderL-Light.a5e8909.woff2) format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "s";
+    src: url(/assets/sh.woff2) format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  */
 `;
 
 const utilities = css`
