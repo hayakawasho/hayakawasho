@@ -160,5 +160,5 @@ const bg = css`
   width: 100%;
   height: 100%;
   background: var(--color-bg);
-  background: linear-gradient(0deg, var(--color-bg), #ffffff);
+  background: linear-gradient(0deg, #ffffff, var(--color-bg));
 `;

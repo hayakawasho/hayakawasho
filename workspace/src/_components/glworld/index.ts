@@ -4,73 +4,73 @@ import { useTick } from "@/_foundation/hooks";
 import { useWindowSize } from "@/_states/window-size";
 import type { AppContext } from "@/_foundation/type";
 
-type Props = {} & Pick<AppContext, "env">;
-
-const MAX_DPR = {
+const dpr = {
   pc: 1.5,
   sp: 2,
 };
 
+const fov = 60;
+const fovRad = (fov / 2) * (Math.PI / 180);
+const calcDistance = (h: number) => h / 2 / Math.tan(fovRad);
+
 export default defineComponent({
   name: "glWorld",
-  setup(el, { env }: Props) {
-    const dpr = Math.min(window.devicePixelRatio, MAX_DPR[env.mq]);
-
+  setup(el, { env }: Pick<AppContext, "env">) {
     const { refs } = useDomRef<{ canvas: HTMLCanvasElement }>("canvas");
-    const rect = el.getBoundingClientRect();
+    const { height, width } = el.getBoundingClientRect();
+
+    const state = {
+      resizing: false,
+    };
 
     const renderer = new Renderer({
       alpha: true,
       canvas: refs.canvas,
-      dpr,
-      height: rect.height,
-      width: rect.width,
+      dpr: Math.min(window.devicePixelRatio, dpr[env.mq]),
+      height,
+      width,
     });
 
     const gl = renderer.gl;
 
-    const fov = 60;
-    const fovRad = (fov / 2) * (Math.PI / 180);
-    const calcDistance = (h: number) => h / 2 / Math.tan(fovRad);
-
     const camera = new Camera(gl, {
-      aspect: rect.width / rect.height,
+      aspect: width / height,
       far: 1000,
       fov,
       near: 0.1,
     });
-    camera.position.z = calcDistance(rect.height);
+
+    camera.position.z = calcDistance(height);
 
     const scene = new Transform();
 
-    const [ww, wh] = useWindowSize(({ aspect }) => {
-      renderer.setSize(ww.value, wh.value);
-
-      camera.perspective({
-        aspect,
-      });
-      camera.position.z = calcDistance(wh.value);
+    useWindowSize(({ aspect, wh, ww }) => {
+      state.resizing = true;
+      renderer.setSize(ww, wh);
+      camera.perspective({ aspect });
+      camera.position.z = calcDistance(wh);
+      state.resizing = false;
     });
 
     useTick(() => {
+      if (state.resizing) {
+        return;
+      }
+
       renderer.render({
         camera,
         scene,
       });
     });
 
-    const addScene = (child: Transform) => {
-      scene.addChild(child);
-    };
-
-    const removeScene = (child: Transform) => {
-      scene.removeChild(child);
-    };
-
     return {
-      addScene,
+      addScene: (child: Transform) => {
+        scene.addChild(child);
+      },
       gl: renderer.gl,
-      removeScene,
+      removeScene: (child: Transform) => {
+        scene.removeChild(child);
+      },
     };
   },
 });

@@ -1,6 +1,6 @@
 import { defineComponent, useIntersectionWatch, ref, useDomRef } from "lake";
-import { Tween } from "@/_foundation/tween";
 import { map } from "@/_foundation/math";
+import { Tween } from "@/_foundation/tween";
 import { useScrollTween } from "@/_states/scroll";
 import { useWindowSize } from "@/_states/window-size";
 import type { AppContext } from "@/_foundation/type";
@@ -19,7 +19,7 @@ export default defineComponent({
       isVisible.value = entry.isIntersecting;
     });
 
-    const [_ww, wh] = useWindowSize();
+    const [_, wh] = useWindowSize();
 
     const { top: startPos, bottom: endPos } = refs.end.getBoundingClientRect();
 
@@ -28,16 +28,16 @@ export default defineComponent({
         return;
       }
 
-      const y = map(
+      const opacity = map(
         currentY + wh.value,
         startPos + wh.value * 0.6,
         endPos - wh.value * 0.01,
         0,
-        100
+        1
       );
 
       Tween.prop(refs.nextHGroup, {
-        y: -y + 100 + "%",
+        opacity,
       });
     });
   },

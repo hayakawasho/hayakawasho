@@ -31,13 +31,17 @@ export const render = (props: any) => {
                 return (
                   <div css={project} key={post.id}>
                     <a css={project__eyecatch} href={`./projects/${post.id}/`}>
-                      <figure
-                        className="w-full h-full"
+                      <img
+                        alt={post.title}
+                        className="w-full h-full invisible"
+                        data-h={post.eyecatch.height}
                         data-ref="plane"
                         data-src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
                         data-src-sp={`${post.eyecatch.src}?auto=compress,format&w=750&sat=-100`}
                         data-w={post.eyecatch.width}
-                        data-h={post.eyecatch.height}
+                        height={post.eyecatch.height}
+                        src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
+                        width={post.eyecatch.width}
                       />
                     </a>
                   </div>
@@ -47,13 +51,17 @@ export const render = (props: any) => {
                 return (
                   <div css={project} key={post.id}>
                     <a css={project__eyecatch} href={`./projects/${post.id}/`}>
-                      <figure
-                        className="w-full h-full"
+                      <img
+                        alt={post.title}
+                        className="w-full h-full invisible"
+                        data-h={post.eyecatch.height}
                         data-ref="plane"
                         data-src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
                         data-src-sp={`${post.eyecatch.src}?auto=compress,format&w=750&sat=-100`}
                         data-w={post.eyecatch.width}
-                        data-h={post.eyecatch.height}
+                        height={post.eyecatch.height}
+                        src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
+                        width={post.eyecatch.width}
                       />
                     </a>
                   </div>

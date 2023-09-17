@@ -23,8 +23,8 @@ export const useWindowSize = (
 
     callback({
       aspect,
-      ww: width,
       wh: height,
+      ww: width,
     });
 
     state.ww.value = width;

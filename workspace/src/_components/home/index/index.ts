@@ -2,7 +2,6 @@ import {
   defineComponent,
   useMount,
   useUnmount,
-  ref,
   useIntersectionWatch,
 } from "lake";
 import { Texture, Vec2, Mesh, Program, Plane } from "ogl";
@@ -15,25 +14,13 @@ import fragment from "./fragment.frag";
 import vertex from "./vertex.vert";
 import type { AppContext } from "@/_foundation/type";
 
-type Cache = {
-  rect: DOMRect;
-  currentY: number;
-  ww: number;
-  wh: number;
-};
-
 export default defineComponent({
   name: "home.index",
   setup(
     el: HTMLImageElement,
     { glContext, env }: Pick<AppContext, "glContext" | "env">
   ) {
-    const cache = ref<Cache>({
-      currentY: 0,
-      rect: el.getBoundingClientRect(),
-      wh: 0,
-      ww: 0,
-    });
+    const { gl } = glContext;
 
     const state = {
       cy: 0,
@@ -52,17 +39,13 @@ export default defineComponent({
       sp: el.dataset.srcSp!,
     };
 
-    const imageeSize = {
-      w: Number(el.dataset.w)!,
-      h: Number(el.dataset.h)!,
-    };
-
-    const texture = new Texture(glContext.gl);
+    const texture = new Texture(gl);
 
     loadImage(src[env.mq]).then((img) => {
       texture.image = img;
     });
 
+    const { width, height } = el.getBoundingClientRect();
     const uniforms = {
       u_alpha: {
         value: 1.0,
@@ -71,10 +54,10 @@ export default defineComponent({
         value: 0,
       },
       u_image_size: {
-        value: new Vec2(imageeSize.w, imageeSize.h),
+        value: new Vec2(Number(el.dataset.w), Number(el.dataset.h)),
       },
       u_mesh_size: {
-        value: new Vec2(cache.value.rect.width, cache.value.rect.height),
+        value: new Vec2(width, height),
       },
       u_scale: {
         value: 1.0,
@@ -90,14 +73,14 @@ export default defineComponent({
       },
     };
 
-    const geometry = new Plane(glContext.gl);
-    const program = new Program(glContext.gl, {
+    const geometry = new Plane(gl);
+    const program = new Program(gl, {
       fragment,
       uniforms,
       vertex,
     });
 
-    const mesh = new Mesh(glContext.gl, {
+    const mesh = new Mesh(gl, {
       geometry,
       program,
     });
@@ -114,20 +97,21 @@ export default defineComponent({
       }
     );
 
-    useScrollTween(({ currentY }) => {
-      if (state.resizing) {
-        return;
-      }
-      imagePlane.updatePos(currentY);
-    });
-
-    useWindowSize(({ ww, wh }) => {
+    const [ww, wh] = useWindowSize(({ ww, wh }) => {
       state.resizing = true;
       imagePlane.resize(ww, wh);
       state.resizing = false;
     });
 
+    useScrollTween(({ currentY, oldY }) => {
+      if (state.resizing || !state.visible || currentY === oldY) {
+        return;
+      }
+      imagePlane.updatePos(currentY);
+    });
+
     useMount(() => {
+      imagePlane.resize(ww.value, wh.value);
       glContext.addScene(mesh);
     });
 

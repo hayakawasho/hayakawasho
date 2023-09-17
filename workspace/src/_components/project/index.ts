@@ -9,7 +9,7 @@ import {
 import { Tween } from "@/_foundation/tween";
 import Eyecatch from "./eyecatch";
 import NextProject from "./next";
-// import Screenshot from "./screenshot";
+import Screenshot from "./screenshot";
 import type { AppContext } from "@/_foundation/type";
 
 type Refs = {
@@ -47,7 +47,7 @@ export default defineComponent({
     );
 
     addChild(refs.eyecatch, Eyecatch, context);
-    // addChild(refs.screenshot, Screenshot, context);
+    addChild(refs.screenshot, Screenshot, context);
     addChild(refs.next, NextProject, context);
 
     useMount(() => {
@@ -56,28 +56,28 @@ export default defineComponent({
       }
 
       Tween.prop(refs.now, {
-        x: "-110%",
         willChange: "transform",
+        x: "-110%",
       });
       Tween.prop(refs.dash, {
         scaleX: 0,
         willChange: "transform",
       });
       Tween.prop(refs.max, {
-        x: "110%",
         willChange: "transform",
+        x: "110%",
       });
       Tween.prop([refs.infoText, refs.stack], {
-        y: "110%",
         willChange: "transform",
+        y: "110%",
       });
 
       switch (env.mq) {
         case "pc":
           Tween.serial(
             Tween.prop(refs.infoLine, {
-              scaleX: 0,
               opacity: 0,
+              scaleX: 0,
               willChange: "transform,opacity",
             }),
             Tween.wait(0.1),
@@ -89,13 +89,13 @@ export default defineComponent({
                 scaleX: 1,
               }),
               Tween.tween([refs.infoText, refs.stack], 1.85, "expo.out", {
-                y: "0%",
                 stagger: 0.05,
+                y: "0%",
               }),
               Tween.tween(refs.infoLine, 0.75, "expo.out", {
-                scaleX: 1,
-                opacity: 1,
                 delay: 1,
+                opacity: 1,
+                scaleX: 1,
               })
             ),
             Tween.immediate(() => {
@@ -118,8 +118,8 @@ export default defineComponent({
         case "sp":
           Tween.serial(
             Tween.prop(refs.infoLine, {
-              scaleY: 0,
               opacity: 0,
+              scaleY: 0,
               willChange: "transform,opacity",
             }),
             Tween.wait(0.1),
@@ -131,16 +131,16 @@ export default defineComponent({
                 scaleX: 1,
               }),
               Tween.tween(refs.infoText, 1.85, "expo.out", {
-                y: "0%",
                 stagger: 0.05,
+                y: "0%",
               }),
               Tween.tween(refs.stack, 1.85, "expo.out", {
-                y: "0%",
                 stagger: 0.05,
+                y: "0%",
               }),
               Tween.tween(refs.infoLine, 1.2, "expo.out", {
-                scaleY: 1,
                 opacity: 1,
+                scaleY: 1,
               })
             ),
             Tween.immediate(() => {

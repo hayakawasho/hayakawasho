@@ -86,9 +86,9 @@ export const render = (props: any) => {
                     </dt>
                     <dd className="uppercase overflow-hidden">
                       <time
-                        dateTime={selectDatetime(post)}
                         className="inline-block"
                         data-ref="infoText"
+                        dateTime={selectDatetime(post)}
                       >
                         {selectLaunch(post)}
                       </time>
@@ -103,10 +103,10 @@ export const render = (props: any) => {
                       </dt>
                       <dd className="_url | overflow-hidden">
                         <a
-                          href={post.url}
-                          target="_blank"
                           className="inline-block"
                           data-ref="infoText"
+                          href={post.url}
+                          target="_blank"
                         >
                           {selectUrl(post)}{" "}
                           <span className="text-[90%]">↗</span>
@@ -128,8 +128,8 @@ export const render = (props: any) => {
                     </ul>
                     <div
                       css={intro__stacks__hr}
-                      role="presentation"
                       data-ref="infoLine"
+                      role="presentation"
                     />
                   </div>
                 )}
@@ -157,18 +157,19 @@ export const render = (props: any) => {
 
             <ul className="" css={screenshots}>
               {post.screenshots.map((i, index) => {
-                const aspect = i.width / i.height;
                 return (
                   <li className="" key={index}>
                     <img
-                      className={`pointer-events-none`}
-                      data-ref="screenshot"
-                      data-src-sp={`${i.src}?auto=compress,format&w=750`}
-                      data-src={`${i.src}?auto=compress,format`}
-                      data-w={i.width}
+                      alt=""
+                      className={`pointer-events-none invisible`}
                       data-h={i.height}
+                      data-ref="screenshot"
+                      data-src={`${i.src}?auto=compress,format`}
+                      data-src-sp={`${i.src}?auto=compress,format&w=750`}
+                      data-w={i.width}
+                      height={i.height}
                       src={`${i.src}?auto=compress,format`}
-                      style={{ aspectRatio: aspect + "" }}
+                      width={i.width}
                     />
                   </li>
                 );
@@ -177,20 +178,20 @@ export const render = (props: any) => {
           </div>
 
           <aside data-ref="next">
-            <div css={dummy} data-scroll-item data-ref="end"></div>
+            <div css={dummy} data-ref="end" data-scroll-item></div>
             <div css={nextProject}>
-              <div className="overflow-hidden mt-[-5.6rem]">
+              <div className="overflow-hidden">
                 <a
                   css={nextProject__hgroup}
-                  href={`../${nextPost.id}/`}
                   data-ref="nextHGroup"
+                  href={`../${nextPost.id}/`}
                 >
                   <h3 css={nextProject__heading}>
                     <span className="inline-block leading-[1]">
                       Next Project
                     </span>
                   </h3>
-                  <h4 css={nextProject__sub} className="">
+                  <h4 className="" css={nextProject__sub}>
                     ({nextPost.title})
                   </h4>
                 </a>
@@ -375,6 +376,7 @@ const screenshots = css`
   display: flex;
   flex-direction: column;
   gap: 5rem;
+  margin-bottom: 5rem;
 
   @media (min-width: 640px) {
     width: calc(var(--grid) * 8);
@@ -390,8 +392,8 @@ const dummy = css`
   height: 101svh;
 
   @media (min-width: 640px) {
-    height: 150vh;
-    height: 150svh;
+    height: 125vh;
+    height: 125svh;
   }
 `;
 
@@ -412,8 +414,8 @@ const nextProject = css`
 
 const nextProject__hgroup = css`
   display: inline-block;
-  transform: translateY(100%);
   pointer-events: auto;
+  opacity: 0;
 `;
 
 const nextProject__heading = css`
@@ -433,9 +435,11 @@ const nextProject__sub = css`
   text-align: left;
   opacity: 0.5;
   margin-top: -0.6em;
+  margin-left: 0.3em;
 
   @media (min-width: 640px) {
     font-size: 1.5rem;
     margin-top: -0.8em;
+    margin-left: 0.4em;
   }
 `;
