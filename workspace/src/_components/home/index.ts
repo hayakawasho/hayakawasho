@@ -7,22 +7,18 @@ import {
 } from "lake";
 import { Tween } from "@/_foundation/tween";
 // import Artwork from "./artwork";
-import Index from "./index/index";
+import Grid from "./grid";
 import type { AppContext } from "@/_foundation/type";
 
 export default defineComponent({
   name: "home",
-  setup(el, { glContext, once, env }: AppContext) {
+  setup(el, context: AppContext) {
+    const { once } = context;
+
     const { addChild } = useSlot();
+    const { refs } = useDomRef<{ grid: HTMLElement }>("grid");
 
-    const { refs } = useDomRef<{
-      plane: HTMLImageElement[];
-    }>("plane");
-
-    addChild(refs.plane, Index, {
-      env,
-      glContext,
-    });
+    addChild(refs.grid, Grid, context);
 
     useMount(() => {
       if (once) {

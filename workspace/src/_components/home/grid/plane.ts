@@ -1,3 +1,4 @@
+import { gsap } from "gsap";
 import {
   defineComponent,
   useMount,
@@ -5,21 +6,23 @@ import {
   useIntersectionWatch,
 } from "lake";
 import { Texture, Vec2, Mesh, Program, Plane } from "ogl";
-// import { Tween } from "@/_foundation/tween";
+import { useTick } from "@/_foundation/hooks";
 import { loadImage } from "@/_foundation/utils";
 import { ImagePlane } from "@/_glsl";
-import { useScrollTween } from "@/_states/scroll";
 import { useWindowSize } from "@/_states/window-size";
 import fragment from "./fragment.frag";
 import vertex from "./vertex.vert";
 import type { AppContext } from "@/_foundation/type";
+import type { ReadonlyRef } from "lake";
+
+type Props = {
+  maxY: ReadonlyRef<number>;
+  currentPosY: ReadonlyRef<number>;
+} & Pick<AppContext, "glContext" | "env">;
 
 export default defineComponent({
   name: "home.index",
-  setup(
-    el: HTMLImageElement,
-    { glContext, env }: Pick<AppContext, "glContext" | "env">
-  ) {
+  setup(el: HTMLImageElement, { glContext, env, maxY, currentPosY }: Props) {
     const { gl } = glContext;
 
     const state = {
@@ -103,11 +106,12 @@ export default defineComponent({
       state.resizing = false;
     });
 
-    useScrollTween(({ currentY, oldY }) => {
-      if (state.resizing || !state.visible || currentY === oldY) {
+    useTick(() => {
+      if (state.resizing) {
         return;
       }
-      imagePlane.updatePos(currentY);
+      const posY = gsap.utils.wrap(0, maxY.value, currentPosY.value);
+      imagePlane.updatePos(posY);
     });
 
     useMount(() => {

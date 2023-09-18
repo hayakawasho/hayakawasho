@@ -26,7 +26,7 @@ export const render = (props: any) => {
           <div data-scroll-item></div>
           <h1 className="sr-only">SHO HAYAKAWA PORTFOLIO</h1>
           <div css={wrap}>
-            <div className="" css={projects}>
+            <div className="" css={projects} data-ref="grid">
               {posts.map((post, _index) => {
                 return (
                   <div css={project} key={post.id}>
@@ -104,6 +104,7 @@ const project = css`
 const project__eyecatch = css`
   position: absolute;
   inset: 0.6rem;
+
   display: block;
 
   @media (min-width: 640px) {
