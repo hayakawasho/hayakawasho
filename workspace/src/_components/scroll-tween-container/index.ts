@@ -20,13 +20,6 @@ type Cache = {
 };
 
 const SELECTOR_CLASS = "[data-scroll-item]";
-const FIXED_STYLE = {
-  left: 0,
-  overflow: "hidden",
-  position: "fixed",
-  top: 0,
-  width: "100%",
-};
 
 export default defineComponent({
   name: "scrollTweenContainer",
@@ -204,6 +197,14 @@ export default defineComponent({
       }
     );
 
+    useWindowSize(() => {
+      state.resizing = true;
+      cache.value = updateCache(cache.value);
+      state.scrollLimit = setScrollLimit();
+      state.targetPos = clampTarget(state.targetPos);
+      state.resizing = false;
+    });
+
     const t = {
       pc: 1 - 0.15,
       sp: 1 - 0.1,
@@ -228,19 +229,8 @@ export default defineComponent({
       transformElms(cache.value);
     });
 
-    useWindowSize(() => {
-      state.resizing = true;
-
-      cache.value = updateCache(cache.value);
-      state.scrollLimit = setScrollLimit();
-      state.targetPos = clampTarget(state.targetPos);
-
-      state.resizing = false;
-    });
-
     useMount(() => {
       state.active = true;
-      Object.assign(el.style, FIXED_STYLE);
     });
 
     return {
@@ -248,8 +238,6 @@ export default defineComponent({
         state.active = false;
       },
       reInit: (container: HTMLElement) => {
-        Object.assign(container.style, FIXED_STYLE);
-
         const smoothItem = Array.from(
           container.querySelectorAll<HTMLElement>(SELECTOR_CLASS)
         );

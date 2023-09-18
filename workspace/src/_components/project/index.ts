@@ -16,7 +16,7 @@ type Refs = {
   now: HTMLElement;
   max: HTMLElement;
   dash: HTMLElement;
-  // h1: HTMLElement;
+  h1: HTMLElement;
   screenshot: HTMLImageElement[];
   eyecatch: HTMLElement;
   infoText: HTMLElement[];
@@ -36,7 +36,7 @@ export default defineComponent({
       "now",
       "max",
       "dash",
-      // "h1",
+      "h1",
       "screenshot",
       "eyecatch",
       "infoText",

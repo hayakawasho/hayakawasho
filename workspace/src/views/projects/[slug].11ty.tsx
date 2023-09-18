@@ -58,7 +58,7 @@ export const render = (props: any) => {
                 </span>
               </div>
 
-              <h1 css={intro__heading}>
+              <h1 css={intro__heading} data-ref="h1">
                 <span className="inline-block leading-[1]">
                   {post.title}/{post.title}/{post.title}
                 </span>
@@ -179,23 +179,19 @@ export const render = (props: any) => {
 
           <aside data-ref="next">
             <div css={dummy} data-ref="end" data-scroll-item></div>
-            <div css={nextProject}>
-              <div className="overflow-hidden">
-                <a
-                  css={nextProject__hgroup}
-                  data-ref="nextHGroup"
-                  href={`../${nextPost.id}/`}
-                >
-                  <h3 css={nextProject__heading}>
-                    <span className="inline-block leading-[1]">
-                      Next Project
-                    </span>
-                  </h3>
-                  <h4 className="" css={nextProject__sub}>
-                    ({nextPost.title})
-                  </h4>
-                </a>
-              </div>
+            <div css={nextProject} data-ref="nextProject">
+              <a
+                css={nextProject__hgroup}
+                data-ref="nextHGroup"
+                href={`../${nextPost.id}/`}
+              >
+                <h3 css={nextProject__heading}>
+                  <span className="inline-block leading-[1]">Next Project</span>
+                </h3>
+                <h4 className="" css={nextProject__sub}>
+                  ({nextPost.title})
+                </h4>
+              </a>
             </div>
           </aside>
         </main>
@@ -405,6 +401,10 @@ const nextProject = css`
   justify-content: center;
   align-items: center;
   pointer-events: none;
+  background-color: #161616;
+  z-index: 100;
+  opacity: 0;
+  perspective: 1000px;
 
   @media (min-width: 640px) {
     padding-top: 15rem;
@@ -415,7 +415,7 @@ const nextProject = css`
 const nextProject__hgroup = css`
   display: inline-block;
   pointer-events: auto;
-  opacity: 0;
+  color: #fff;
 `;
 
 const nextProject__heading = css`

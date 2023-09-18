@@ -5,15 +5,18 @@ import { useScrollTween } from "@/_states/scroll";
 import { useWindowSize } from "@/_states/window-size";
 import type { AppContext } from "@/_foundation/type";
 
+type Refs = {
+  nextProject: HTMLElement;
+  nextHGroup: HTMLElement;
+  end: HTMLElement;
+};
+
 export default defineComponent({
   name: "project.next",
   setup(_el, _context: AppContext) {
     const isVisible = ref(false);
 
-    const { refs } = useDomRef<{
-      nextHGroup: HTMLElement;
-      end: HTMLElement;
-    }>("nextHGroup", "end");
+    const { refs } = useDomRef<Refs>("nextHGroup", "end", "nextProject");
 
     useIntersectionWatch(refs.end, ([entry]) => {
       isVisible.value = entry.isIntersecting;
@@ -21,24 +24,30 @@ export default defineComponent({
 
     const [_, wh] = useWindowSize();
 
-    const { top: startPos, bottom: endPos } = refs.end.getBoundingClientRect();
+    const { top, bottom } = refs.end.getBoundingClientRect();
 
     useScrollTween(({ currentY }) => {
       if (!isVisible.value) {
         return;
       }
 
-      const opacity = map(
-        currentY + wh.value,
-        startPos + wh.value * 0.6,
-        endPos - wh.value * 0.01,
-        0,
-        1
-      );
+      const startPos = top + wh.value * 0.5;
+      const endPos = bottom;
+      const range = currentY + wh.value;
 
-      Tween.prop(refs.nextHGroup, {
-        opacity,
-      });
+      const opacity = map(range, startPos, endPos, 0, 1);
+      const y = map(range, startPos, endPos, 0, 25) - 25;
+      const z = -map(range, startPos, endPos, 0, 50);
+
+      Tween.parallel(
+        Tween.prop(refs.nextProject, {
+          opacity,
+        }),
+        Tween.prop(refs.nextHGroup, {
+          y,
+          z,
+        })
+      );
     });
   },
 });

@@ -37,13 +37,8 @@ export default defineComponent({
       env.gpuTier = result;
     });
 
-    const [scrollContext] = addChild(refs.main, ScrollTweenContainer, {
-      env,
-    });
-
-    const [glContext] = addChild(refs.glWorld, GlWorld, {
-      env,
-    });
+    const [scrollContext] = addChild(refs.main, ScrollTweenContainer, { env });
+    const [glContext] = addChild(refs.glWorld, GlWorld, { env });
 
     const load = new modularLoad({
       enterDelay: 500,
