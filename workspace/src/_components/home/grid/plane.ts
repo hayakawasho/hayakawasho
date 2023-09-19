@@ -116,7 +116,7 @@ export default defineComponent({
       const y = gsap.utils.wrap(0, maxY.value, currentPosY.value * speed);
       imagePlane.updatePos(y);
 
-      uniforms.u_velo.value = diff.value * 0.015;
+      uniforms.u_velo.value = diff.value * 0.01 * speed;
     });
 
     useMount(() => {
