@@ -11,7 +11,7 @@ export const data = {
     addAllPagesToCollections: false,
     alias: "posts",
     data: "cms.index",
-    size: 10,
+    size: 9,
   },
 };
 
@@ -27,7 +27,7 @@ export const render = (props: any) => {
           <h1 className="sr-only">SHO HAYAKAWA PORTFOLIO</h1>
           <div css={wrap}>
             <div className="" css={projects} data-ref="grid">
-              {posts.map((post, _index) => {
+              {posts.map((post, index) => {
                 return (
                   <div css={project} key={post.id}>
                     <a css={project__eyecatch} href={`./projects/${post.id}/`}>
@@ -35,6 +35,7 @@ export const render = (props: any) => {
                         alt={post.title}
                         className="w-full h-full invisible"
                         data-h={post.eyecatch.height}
+                        data-index={index + 1}
                         data-ref="plane"
                         data-src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
                         data-src-sp={`${post.eyecatch.src}?auto=compress,format&w=750&sat=-100`}
@@ -47,7 +48,7 @@ export const render = (props: any) => {
                   </div>
                 );
               })}
-              {posts.map((post, _index) => {
+              {posts.map((post, index) => {
                 return (
                   <div css={project} key={post.id}>
                     <a css={project__eyecatch} href={`./projects/${post.id}/`}>
@@ -55,6 +56,7 @@ export const render = (props: any) => {
                         alt={post.title}
                         className="w-full h-full invisible"
                         data-h={post.eyecatch.height}
+                        data-index={index + 1}
                         data-ref="plane"
                         data-src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
                         data-src-sp={`${post.eyecatch.src}?auto=compress,format&w=750&sat=-100`}
@@ -103,7 +105,7 @@ const project = css`
 
 const project__eyecatch = css`
   position: absolute;
-  inset: 0.6rem;
+  inset: 0.5rem;
 
   display: block;
 

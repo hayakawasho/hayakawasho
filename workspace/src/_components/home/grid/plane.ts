@@ -15,27 +15,29 @@ import vertex from "./vertex.vert";
 import type { AppContext } from "@/_foundation/type";
 import type { ReadonlyRef } from "lake";
 
-type Props = {
+type Props = Pick<AppContext, "glContext" | "env"> & {
   maxY: ReadonlyRef<number>;
   currentPosY: ReadonlyRef<number>;
-} & Pick<AppContext, "glContext" | "env">;
+  diff: ReadonlyRef<number>;
+};
 
 export default defineComponent({
-  name: "home.index",
-  setup(el: HTMLImageElement, { glContext, env, maxY, currentPosY }: Props) {
+  name: "home.plane",
+  setup(el: HTMLImageElement, context: Props) {
+    const { glContext, env, maxY, currentPosY, diff } = context;
     const { gl } = glContext;
 
     const state = {
-      cy: 0,
-      diff: 0,
-      dragging: false,
-      max: {
-        y: 0,
-      },
       resizing: false,
-      ty: 0,
       visible: false,
     };
+
+    const index = Number(el.dataset.index);
+    const speed = {
+      1: 0.9,
+      2: 1,
+      0: 0.9,
+    }[index % 3]!;
 
     const src = {
       pc: el.dataset.src!,
@@ -110,8 +112,11 @@ export default defineComponent({
       if (state.resizing) {
         return;
       }
-      const posY = gsap.utils.wrap(0, maxY.value, currentPosY.value);
-      imagePlane.updatePos(posY);
+
+      const y = gsap.utils.wrap(0, maxY.value, currentPosY.value * speed);
+      imagePlane.updatePos(y);
+
+      uniforms.u_velo.value = diff.value * 0.015;
     });
 
     useMount(() => {

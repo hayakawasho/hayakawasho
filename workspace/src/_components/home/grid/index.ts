@@ -24,12 +24,11 @@ export default defineComponent({
     const { height } = el.getBoundingClientRect();
     const maxY = ref(height / 2);
     const currentPosY = ref(0);
+    const diff = ref(0);
 
     const state = {
       dragging: false,
       position: 0,
-      resizing: false,
-      scrollLimit: 0,
       startPos: 0,
       targetPos: 0,
     };
@@ -38,8 +37,8 @@ export default defineComponent({
       window as any,
       "wheel",
       (e) => {
-        const normalizeWheel = NormalizeWheel(e);
-        state.targetPos += normalizeWheel.pixelY;
+        const { pixelY } = NormalizeWheel(e);
+        state.targetPos += pixelY;
       },
       {
         passive: true,
@@ -87,24 +86,29 @@ export default defineComponent({
       maxY.value = el.getBoundingClientRect().height / 2;
     });
 
-    const t = {
-      pc: 1 - 0.15,
-      sp: 1 - 0.1,
+    const EASE = {
+      pc: 0.15,
+      sp: 0.1,
     } as const;
 
     useTick(({ timeRatio }) => {
-      const EASE = 1 - t[env.mq] ** timeRatio;
-      const easeVal = lerp(currentPosY.value, state.targetPos, EASE);
+      const oldY = currentPosY.value;
+
+      const p = 1 - (1 - EASE[env.mq]) ** timeRatio;
+      const easeVal = lerp(currentPosY.value, state.targetPos, p);
       currentPosY.value = easeVal;
 
       if (currentPosY.value < 0.01) {
         currentPosY.value = 0;
       }
+
+      diff.value = oldY - currentPosY.value;
     });
 
     addChild(refs.plane, Plane, {
       ...context,
       currentPosY: readonly(currentPosY),
+      diff: readonly(diff),
       maxY: readonly(maxY),
     });
   },

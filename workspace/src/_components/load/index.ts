@@ -25,7 +25,6 @@ export default defineComponent({
   name: "load",
   setup(_el, { onCreated, onUpdated, onCleanup }: Props) {
     const { addChild } = useSlot();
-
     const { refs } = useDomRef<Refs>("glWorld", "main", "windowSizeWatcher");
 
     const env: AppContext["env"] = {
@@ -40,18 +39,27 @@ export default defineComponent({
     const [scrollContext] = addChild(refs.main, ScrollTweenContainer, { env });
     const [glContext] = addChild(refs.glWorld, GlWorld, { env });
 
+    const ro = new ResizeObserver(
+      debounce(([entry]) => {
+        const { width, height } = entry.contentRect;
+        windowSizeMutators({
+          height,
+          width,
+        });
+      }, 200)
+    );
+
+    const provides = {
+      env,
+      glContext: glContext.current,
+      scrollContext: scrollContext.current,
+    } as const;
+
     const load = new modularLoad({
       enterDelay: 500,
       // transitions: {
       // },
     });
-
-    const ro = new ResizeObserver(
-      debounce(([entry]) => {
-        const { width, height } = entry.contentRect;
-        windowSizeMutators({ height, width });
-      }, 200)
-    );
 
     //----------------------------------------------------------------
 
@@ -76,11 +84,7 @@ export default defineComponent({
         scrollContext.current.set(0);
         scrollContext.current.resume();
 
-        onUpdated(newContainer, {
-          env,
-          glContext: glContext.current,
-          scrollContext: scrollContext.current,
-        });
+        onUpdated(newContainer, provides);
       }
     );
 
@@ -88,12 +92,7 @@ export default defineComponent({
 
     useMount(() => {
       ro.observe(refs.windowSizeWatcher);
-
-      onCreated({
-        env,
-        glContext: glContext.current,
-        scrollContext: scrollContext.current,
-      });
+      onCreated(provides);
     });
   },
 });

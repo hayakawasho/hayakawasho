@@ -1,25 +1,25 @@
-import { defineComponent, ref, useEvent, useMount } from "lake";
+import { defineComponent, ref, useMount, useEvent } from "lake";
 import NormalizeWheel from "normalize-wheel";
 import { clamp } from "remeda";
 import { useTick } from "@/_foundation/hooks";
 import { lerp } from "@/_foundation/math";
 import { Tween } from "@/_foundation/tween";
+import { qsa } from "@/_foundation/utils";
 import { scrollPosMutators } from "@/_states/scroll";
 import { useWindowSize } from "@/_states/window-size";
 import { useHandleCache } from "./use-handle-cache";
 import type { Cache } from "./use-handle-cache";
 import type { AppContext } from "@/_foundation/type";
 
+const _window = window as any;
 const SELECTOR_CLASS = "[data-scroll-item]";
 
 export default defineComponent({
   name: "scrollTweenContainer",
   setup(el, { env }: Pick<AppContext, "env">) {
-    const smoothItem = Array.from(
-      el.querySelectorAll<HTMLElement>(SELECTOR_CLASS)
-    );
+    const $item = qsa<HTMLElement>(SELECTOR_CLASS, el);
 
-    if (!smoothItem.length) {
+    if (!$item.length) {
       throw new Error(`NO ${SELECTOR_CLASS}`);
     }
 
@@ -36,20 +36,13 @@ export default defineComponent({
     };
 
     const { createCache, updateCache } = useHandleCache();
-    const cache = ref(createCache(smoothItem));
+    const cache = ref(createCache($item));
 
-    const [_ww, wh] = useWindowSize();
+    const [_, wh] = useWindowSize();
 
     const setScrollLimit = () => {
       const { height } = state.container.getBoundingClientRect();
       return height >= wh.value ? height - wh.value : height;
-    };
-
-    const clampTarget = (target: number) => {
-      return clamp(target, {
-        max: state.scrollLimit,
-        min: -0,
-      });
     };
 
     const isVisible = (cache: Cache) => {
@@ -81,7 +74,7 @@ export default defineComponent({
     };
 
     useEvent(
-      window as any,
+      _window,
       "touchstart",
       (e) => {
         if (!state.active) {
@@ -97,15 +90,16 @@ export default defineComponent({
       }
     );
 
-    useEvent(window as any, "touchend", () => {
+    useEvent(_window, "touchend", () => {
       if (!state.dragging || !state.active) {
         return;
       }
+
       state.dragging = false;
     });
 
     useEvent(
-      window as any,
+      _window,
       "touchmove",
       (e) => {
         if (!state.dragging || !state.active) {
@@ -114,7 +108,11 @@ export default defineComponent({
 
         const y = e.touches[0].clientY;
         const distance = (state.startPos - y) * 2;
-        state.targetPos = clampTarget(state.position + distance);
+
+        state.targetPos = clamp(state.position + distance, {
+          max: state.scrollLimit,
+          min: -0,
+        });
       },
       {
         passive: true,
@@ -122,16 +120,20 @@ export default defineComponent({
     );
 
     useEvent(
-      window as any,
+      _window,
       "wheel",
       (e) => {
         if (!state.active) {
           return;
         }
 
-        const normalizeWheel = NormalizeWheel(e);
-        state.targetPos += normalizeWheel.pixelY;
-        state.targetPos = clampTarget(state.targetPos);
+        const { pixelY } = NormalizeWheel(e);
+        state.targetPos += pixelY;
+
+        state.targetPos = clamp(state.targetPos, {
+          max: state.scrollLimit,
+          min: -0,
+        });
       },
       {
         passive: true,
@@ -140,15 +142,21 @@ export default defineComponent({
 
     useWindowSize(() => {
       state.resizing = true;
+
       cache.value = updateCache(cache.value);
       state.scrollLimit = setScrollLimit();
-      state.targetPos = clampTarget(state.targetPos);
+
+      state.targetPos = clamp(state.targetPos, {
+        max: state.scrollLimit,
+        min: -0,
+      });
+
       state.resizing = false;
     });
 
-    const t = {
-      pc: 1 - 0.15,
-      sp: 1 - 0.1,
+    const EASE = {
+      pc: 0.15,
+      sp: 0.1,
     } as const;
 
     useTick(({ timeRatio }) => {
@@ -156,17 +164,15 @@ export default defineComponent({
         return;
       }
 
-      const EASE = 1 - t[env.mq] ** timeRatio;
-      const easeVal = lerp(state.currentPos, state.targetPos, EASE);
+      const p = 1 - (1 - EASE[env.mq]) ** timeRatio;
+      const easeVal = lerp(state.currentPos, state.targetPos, p);
       state.currentPos = easeVal;
 
       if (state.currentPos < 0.01) {
         state.currentPos = 0;
       }
 
-      scrollPosMutators({
-        y: state.currentPos,
-      });
+      scrollPosMutators({ y: state.currentPos });
       transformElms(cache.value);
     });
 
@@ -179,22 +185,24 @@ export default defineComponent({
         state.active = false;
       },
       reInit: (container: HTMLElement) => {
-        const smoothItem = Array.from(
-          container.querySelectorAll<HTMLElement>(SELECTOR_CLASS)
-        );
+        const $item = qsa<HTMLElement>(SELECTOR_CLASS, container);
+
+        if (!$item.length) {
+          throw new Error(`NO ${SELECTOR_CLASS}`);
+        }
+
         state.container = container;
-        cache.value = createCache(smoothItem);
+        cache.value = createCache($item);
         state.scrollLimit = setScrollLimit();
       },
       resume: () => {
         state.active = true;
       },
       scrollTo: (y: number) => {
-        const value = clamp(y, {
-          max: state.scrollLimit,
-        });
         Tween.tween(state, 0.8, "power2.inOut", {
-          targetPos: value,
+          targetPos: clamp(y, {
+            max: state.scrollLimit,
+          }),
         });
       },
       set: (value: number) => {

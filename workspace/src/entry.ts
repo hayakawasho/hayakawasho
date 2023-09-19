@@ -1,6 +1,7 @@
 import "virtual:windi.css";
 import "ress";
 import { create, withSvelte } from "lake";
+import { qsa } from "@/_foundation/utils";
 import Home from "./_components/home";
 import Load from "./_components/load";
 import Noop from "./_components/noop.svelte";
@@ -12,6 +13,7 @@ const bootstrap = (setup: () => void) => {
     setup();
     return;
   }
+
   document.addEventListener("DOMContentLoaded", setup, false);
 };
 
@@ -28,8 +30,9 @@ bootstrap(() => {
     scope: HTMLElement,
     props: Record<string, unknown>
   ) => {
-    const targets = scope.querySelectorAll<HTMLElement>(`[data-component]`);
-    return Array.from(targets).reduce<ComponentContext[]>((acc, el) => {
+    return qsa<HTMLElement>("[data-component]", scope).reduce<
+      ComponentContext[]
+    >((acc, el) => {
       const name = el.dataset.component || "noop";
       try {
         const mount = component(table[`${name}`]);
@@ -45,8 +48,7 @@ bootstrap(() => {
 
   component(Load)(html, {
     onCleanup: (scope: HTMLElement) => {
-      const targets = scope.querySelectorAll<HTMLElement>(`[data-component]`);
-      unmount(Array.from(targets));
+      unmount(qsa<HTMLElement>("[data-component]", scope));
     },
     onCreated: (context?: Record<string, unknown>) => {
       mountComponents(html, {

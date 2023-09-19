@@ -1,4 +1,5 @@
 import { gsap } from "gsap";
+import type { RefElement } from "lake";
 
 export const sleep = (time: number): Promise<void> => {
   return new Promise((resolve) => {
@@ -51,3 +52,6 @@ export const loadImage = (src: string) => {
     });
   });
 };
+
+export const qsa = <T extends RefElement>(q: string, scope?: RefElement): T[] =>
+  Array.from((scope ?? document).querySelectorAll(q));
