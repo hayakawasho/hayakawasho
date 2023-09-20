@@ -39,8 +39,8 @@ export const render = (props: any) => {
                         data-h={post.eyecatch.height}
                         data-index={index + 1}
                         data-ref="plane"
-                        data-src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
-                        data-src-sp={`${post.eyecatch.src}?auto=compress,format&w=750&sat=-100`}
+                        data-src={`${post.eyecatch.src}?auto=compress,format`}
+                        data-src-sp={`${post.eyecatch.src}?auto=compress,format&w=750`}
                         data-w={post.eyecatch.width}
                         height={post.eyecatch.height}
                         src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
@@ -60,8 +60,8 @@ export const render = (props: any) => {
                         data-h={post.eyecatch.height}
                         data-index={index + 1 + PER_PAGE}
                         data-ref="plane"
-                        data-src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
-                        data-src-sp={`${post.eyecatch.src}?auto=compress,format&w=750&sat=-100`}
+                        data-src={`${post.eyecatch.src}?auto=compress,format`}
+                        data-src-sp={`${post.eyecatch.src}?auto=compress,format&w=750`}
                         data-w={post.eyecatch.width}
                         height={post.eyecatch.height}
                         src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
@@ -81,8 +81,8 @@ export const render = (props: any) => {
                         data-h={post.eyecatch.height}
                         data-index={index + 1 + PER_PAGE * 2}
                         data-ref="plane"
-                        data-src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
-                        data-src-sp={`${post.eyecatch.src}?auto=compress,format&w=750&sat=-100`}
+                        data-src={`${post.eyecatch.src}?auto=compress,format`}
+                        data-src-sp={`${post.eyecatch.src}?auto=compress,format&w=750`}
                         data-w={post.eyecatch.width}
                         height={post.eyecatch.height}
                         src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
@@ -102,8 +102,8 @@ export const render = (props: any) => {
                         data-h={post.eyecatch.height}
                         data-index={index + 1 + PER_PAGE * 3}
                         data-ref="plane"
-                        data-src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
-                        data-src-sp={`${post.eyecatch.src}?auto=compress,format&w=750&sat=-100`}
+                        data-src={`${post.eyecatch.src}?auto=compress,format`}
+                        data-src-sp={`${post.eyecatch.src}?auto=compress,format&w=750`}
                         data-w={post.eyecatch.width}
                         height={post.eyecatch.height}
                         src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
@@ -123,8 +123,8 @@ export const render = (props: any) => {
                         data-h={post.eyecatch.height}
                         data-index={index + 1 + PER_PAGE * 4}
                         data-ref="plane"
-                        data-src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
-                        data-src-sp={`${post.eyecatch.src}?auto=compress,format&w=750&sat=-100`}
+                        data-src={`${post.eyecatch.src}?auto=compress,format`}
+                        data-src-sp={`${post.eyecatch.src}?auto=compress,format&w=750`}
                         data-w={post.eyecatch.width}
                         height={post.eyecatch.height}
                         src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
@@ -144,8 +144,8 @@ export const render = (props: any) => {
                         data-h={post.eyecatch.height}
                         data-index={index + 1 + PER_PAGE * 5}
                         data-ref="plane"
-                        data-src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
-                        data-src-sp={`${post.eyecatch.src}?auto=compress,format&w=750&sat=-100`}
+                        data-src={`${post.eyecatch.src}?auto=compress,format`}
+                        data-src-sp={`${post.eyecatch.src}?auto=compress,format&w=750`}
                         data-w={post.eyecatch.width}
                         height={post.eyecatch.height}
                         src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
@@ -187,17 +187,22 @@ const projects = css`
 const project = css`
   position: relative;
   padding-top: 100%;
+  pointer-events: none;
 
   @media (min-width: 640px) {
     // padding-top: 125%;
+  }
+
+  &:nth-child(2n) {
+    pointer-events: auto;
   }
 `;
 
 const project__eyecatch = css`
   position: absolute;
   inset: 0.5rem;
-
   display: block;
+  pointer-events: none;
 
   @media (min-width: 640px) {
     inset: 1rem;
