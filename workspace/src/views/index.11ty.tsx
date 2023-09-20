@@ -168,8 +168,8 @@ const projects = css`
   top: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: calc(100% + var(--grid) * 10);
-  left: calc(var(--grid) * -5);
+  width: calc(100% + var(--grid) * 11);
+  left: calc(var(--grid) * -5.5);
 
   @media (min-width: 640px) {
     grid-template-columns: repeat(4, 1fr);
@@ -189,7 +189,7 @@ const project = css`
 
 const project__eyecatch = css`
   position: absolute;
-  inset: 1rem;
+  inset: 2rem;
   display: block;
 
   @media (min-width: 640px) {
