@@ -42,7 +42,7 @@ export const render = (props: any) => {
                         data-src={post.eyecatch.src}
                         data-w={post.eyecatch.width}
                         height={post.eyecatch.height}
-                        src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
+                        src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
                         width={post.eyecatch.width}
                       />
                     </a>
@@ -62,7 +62,7 @@ export const render = (props: any) => {
                         data-src={post.eyecatch.src}
                         data-w={post.eyecatch.width}
                         height={post.eyecatch.height}
-                        src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
+                        src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
                         width={post.eyecatch.width}
                       />
                     </a>
@@ -82,7 +82,7 @@ export const render = (props: any) => {
                         data-src={post.eyecatch.src}
                         data-w={post.eyecatch.width}
                         height={post.eyecatch.height}
-                        src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
+                        src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
                         width={post.eyecatch.width}
                       />
                     </a>
@@ -102,7 +102,7 @@ export const render = (props: any) => {
                         data-src={post.eyecatch.src}
                         data-w={post.eyecatch.width}
                         height={post.eyecatch.height}
-                        src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
+                        src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
                         width={post.eyecatch.width}
                       />
                     </a>
@@ -122,7 +122,7 @@ export const render = (props: any) => {
                         data-src={post.eyecatch.src}
                         data-w={post.eyecatch.width}
                         height={post.eyecatch.height}
-                        src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
+                        src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
                         width={post.eyecatch.width}
                       />
                     </a>
@@ -142,7 +142,7 @@ export const render = (props: any) => {
                         data-src={post.eyecatch.src}
                         data-w={post.eyecatch.width}
                         height={post.eyecatch.height}
-                        src={`${post.eyecatch.src}?auto=compress,format&sat=-100`}
+                        src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
                         width={post.eyecatch.width}
                       />
                     </a>
