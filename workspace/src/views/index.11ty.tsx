@@ -168,8 +168,8 @@ const projects = css`
   top: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: calc(100% + var(--grid) * 11);
-  left: calc(var(--grid) * -5.5);
+  width: calc(100% + var(--grid) * 12);
+  left: calc(var(--grid) * -6);
 
   @media (min-width: 640px) {
     grid-template-columns: repeat(4, 1fr);
