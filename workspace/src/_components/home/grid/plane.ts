@@ -52,7 +52,10 @@ export default defineComponent({
       },
     };
 
-    const texture = new Texture(gl);
+    const texture = new Texture(gl, {
+      generateMipmaps: false,
+      minFilter: gl.LINEAR,
+    });
 
     loadImage(state[env.mq].src).then((img) => {
       texture.image = img;
@@ -75,19 +78,20 @@ export default defineComponent({
       u_texture: {
         value: texture,
       },
-      u_time: {
-        value: 0,
-      },
       u_velo: {
         value: 0,
       },
     };
 
-    const geometry = new Plane(gl);
+    const geometry = new Plane(gl, {
+      widthSegments: 25,
+      heightSegments: 25,
+    });
     const program = new Program(gl, {
       fragment,
       uniforms,
       vertex,
+      depthTest: false,
     });
 
     const mesh = new Mesh(gl, {
@@ -123,10 +127,10 @@ export default defineComponent({
         maxY.value,
         posY.value * state[env.mq].speed
       );
+
       imagePlane.updatePos(y);
 
-      uniforms.u_velo.value = diff.value * 0.014 * state[env.mq].speed;
-      uniforms.u_diff.value = Math.abs(diff.value * 0.0005);
+      uniforms.u_velo.value = diff.value * 0.02 * state[env.mq].speed;
     });
 
     useMount(() => {

@@ -79,7 +79,7 @@ const mask = css`
   position: fixed;
   z-index: 11;
   left: 0;
-  opacity: 0.5;
+  opacity: 0.7;
 
   @media (min-width: 640px) {
     height: 14rem;

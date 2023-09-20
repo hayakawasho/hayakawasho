@@ -5,6 +5,7 @@ precision mediump float;
 uniform sampler2D u_texture;
 uniform vec2 u_mesh_size;
 uniform vec2 u_image_size;
+
 uniform float u_velo;
 uniform float u_scale;
 
@@ -14,9 +15,9 @@ void main() {
   vec2 uv = vUv;
 
   vec2 texCenter = vec2(0.5);
-  vec2 uvCover = cover(u_mesh_size, u_image_size, uv);
-  vec2 texScale = (uvCover - texCenter) * u_scale + texCenter;
-  vec4 texture = texture2D(u_texture, uvCover);
+  vec2 texUv = cover(u_mesh_size, u_image_size, uv);
+  vec2 texScale = (texUv - texCenter) * u_scale + texCenter;
+  vec4 texture = texture2D(u_texture, texUv);
 
   texScale.y += 0.15 * u_velo;
 

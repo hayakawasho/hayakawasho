@@ -10,8 +10,11 @@ const dpr = {
 };
 
 const fov = 60;
-const fovRad = (fov / 2) * (Math.PI / 180);
-const calcDistance = (h: number) => h / 2 / Math.tan(fovRad);
+const calcCamDistance = (h: number) => {
+  const vFov = (fov * Math.PI) / 180;
+  const fovRad = vFov * 0.5;
+  return (h * 0.5) / Math.tan(fovRad);
+};
 
 export default defineComponent({
   name: "glWorld",
@@ -35,12 +38,12 @@ export default defineComponent({
 
     const camera = new Camera(gl, {
       aspect: width / height,
-      far: 1000,
+      far: 10000,
       fov,
       near: 0.1,
     });
 
-    camera.position.z = calcDistance(height);
+    camera.position.z = calcCamDistance(height);
 
     const scene = new Transform();
 
@@ -48,7 +51,7 @@ export default defineComponent({
       state.resizing = true;
       renderer.setSize(ww, wh);
       camera.perspective({ aspect });
-      camera.position.z = calcDistance(wh);
+      camera.position.z = calcCamDistance(wh);
       state.resizing = false;
     });
 
