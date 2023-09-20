@@ -401,7 +401,7 @@ const nextProject = css`
   justify-content: center;
   align-items: center;
   pointer-events: none;
-  background-color: #161616;
+  background-color: #041f1e;
   z-index: 100;
   opacity: 0;
   perspective: 1000px;

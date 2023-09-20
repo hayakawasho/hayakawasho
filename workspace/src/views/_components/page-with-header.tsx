@@ -121,7 +121,7 @@ const gridLine = css`
   transform: translateX(-50%);
   // z-index: 2;
   background: rgba(255, 255, 255, 0.05);
-  background: rgba(0, 0, 0, 0.04);
+  background: rgba(0, 0, 0, 0.05);
 
   @media (prefers-color-scheme: dark) {
     // background: rgba(0, 0, 0, 0.05);

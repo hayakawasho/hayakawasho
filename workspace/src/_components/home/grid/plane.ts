@@ -28,21 +28,31 @@ export default defineComponent({
     const { gl } = glContext;
 
     const index = Number(el.dataset.index);
+    const src = el.dataset.src!;
+
     const state = {
       resizing: false,
       visible: false,
       pc: {
-        src: el.dataset.src!,
+        src: {
+          1: src + "?auto=compress,format",
+          2: src + "?auto=compress,format",
+          3: src + "?auto=compress,format",
+          0: src + "?auto=compress,format",
+        }[index % 3]!,
         speed: {
           1: 1,
-          2: 1,
-          3: 1,
-          4: 1,
-          0: 1,
-        }[index % 5]!,
+          2: 0.92,
+          3: 0.86,
+          0: 0.78,
+        }[index % 4]!,
       },
       sp: {
-        src: el.dataset.srcSp!,
+        src: {
+          1: src + "?auto=compress,format&w=750&sat=-100",
+          2: src + "?auto=compress,format&w=750",
+          0: src + "?auto=compress,format&w=750&sat=-100",
+        }[index % 3]!,
         speed: {
           1: 0.9,
           2: 1,
