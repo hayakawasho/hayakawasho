@@ -187,22 +187,16 @@ const projects = css`
 const project = css`
   position: relative;
   padding-top: 100%;
-  pointer-events: none;
 
   @media (min-width: 640px) {
     // padding-top: 125%;
-  }
-
-  &:nth-child(2n) {
-    pointer-events: auto;
   }
 `;
 
 const project__eyecatch = css`
   position: absolute;
-  inset: 0.5rem;
+  inset: 0.8rem;
   display: block;
-  pointer-events: none;
 
   @media (min-width: 640px) {
     inset: 1rem;

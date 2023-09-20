@@ -88,7 +88,7 @@ export default defineComponent({
 
     const EASE = {
       pc: 0.15,
-      sp: 0.1,
+      sp: 0.09,
     } as const;
 
     useTick(({ timeRatio }) => {
