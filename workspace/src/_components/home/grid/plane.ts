@@ -34,12 +34,7 @@ export default defineComponent({
       resizing: false,
       visible: false,
       pc: {
-        src: {
-          1: src + "?auto=compress,format",
-          2: src + "?auto=compress,format",
-          3: src + "?auto=compress,format",
-          0: src + "?auto=compress,format",
-        }[index % 3]!,
+        src: src + "?auto=compress,format",
         speed: {
           1: 1,
           2: 0.92,
@@ -48,11 +43,7 @@ export default defineComponent({
         }[index % 4]!,
       },
       sp: {
-        src: {
-          1: src + "?auto=compress,format&w=750&sat=-100",
-          2: src + "?auto=compress,format&w=750",
-          0: src + "?auto=compress,format&w=750&sat=-100",
-        }[index % 3]!,
+        src: src + "?auto=compress,format&w=750",
         speed: {
           1: 0.9,
           2: 1,
