@@ -27,26 +27,33 @@ export default defineComponent({
     const { glContext, env, maxY, posY, diff } = context;
     const { gl } = glContext;
 
+    const index = Number(el.dataset.index);
     const state = {
       resizing: false,
       visible: false,
-    };
-
-    const index = Number(el.dataset.index);
-    const speed = {
-      1: 0.9,
-      2: 1,
-      0: 0.9,
-    }[index % 3]!;
-
-    const src = {
-      pc: el.dataset.src!,
-      sp: el.dataset.srcSp!,
+      pc: {
+        src: el.dataset.src!,
+        speed: {
+          1: 1,
+          2: 1,
+          3: 1,
+          4: 1,
+          0: 1,
+        }[index % 5]!,
+      },
+      sp: {
+        src: el.dataset.srcSp!,
+        speed: {
+          1: 0.9,
+          2: 1,
+          0: 0.9,
+        }[index % 3]!,
+      },
     };
 
     const texture = new Texture(gl);
 
-    loadImage(src[env.mq]).then((img) => {
+    loadImage(state[env.mq].src).then((img) => {
       texture.image = img;
     });
 
@@ -110,10 +117,14 @@ export default defineComponent({
         return;
       }
 
-      const y = gsap.utils.wrap(0, maxY.value, posY.value * speed);
+      const y = gsap.utils.wrap(
+        0,
+        maxY.value,
+        posY.value * state[env.mq].speed
+      );
       imagePlane.updatePos(y);
 
-      uniforms.u_velo.value = diff.value * 0.012 * speed;
+      uniforms.u_velo.value = diff.value * 0.014 * state[env.mq].speed;
       uniforms.u_diff.value = Math.abs(diff.value * 0.0005);
     });
 

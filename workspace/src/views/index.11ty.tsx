@@ -92,20 +92,24 @@ const projects = css`
   left: calc(var(--grid) * -5);
 
   @media (min-width: 640px) {
-    grid-template-columns: repeat(5, 1fr);
-    width: calc(100% + var(--grid) * 3);
-    left: calc(var(--grid) * -1.5);
+    grid-template-columns: repeat(4, 1fr);
+    width: calc(100% + var(--grid) * 4);
+    left: calc(var(--grid) * -2);
   }
 `;
 
 const project = css`
   position: relative;
-  padding-top: 125%;
+  padding-top: 100%;
+
+  @media (min-width: 640px) {
+    padding-top: 125%;
+  }
 `;
 
 const project__eyecatch = css`
   position: absolute;
-  inset: 0.6rem;
+  inset: 0.5rem;
 
   display: block;
 
