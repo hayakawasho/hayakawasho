@@ -19,13 +19,13 @@ void main() {
   vec2 texScale = (texUv - texCenter) * u_scale + texCenter;
   vec4 texture = texture2D(u_texture, texUv);
 
-  texScale.y += 0.15 * u_velo;
+  texScale.y += 0.6 * u_velo;
 
   if(uv.y < 1.) {
     texture.g = texture2D(u_texture, texScale).g;
   }
 
-  texScale.y += 0.10 * u_velo;
+  texScale.y += 0.4 * u_velo;
 
   if(uv.y < 1.) {
     texture.b = texture2D(u_texture, texScale).b;

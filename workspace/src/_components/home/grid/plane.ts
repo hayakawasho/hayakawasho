@@ -130,7 +130,7 @@ export default defineComponent({
 
       imagePlane.updatePos(y);
 
-      uniforms.u_velo.value = diff.value * 0.02 * state[env.mq].speed;
+      uniforms.u_velo.value = diff.value * 0.005 * state[env.mq].speed;
     });
 
     useMount(() => {

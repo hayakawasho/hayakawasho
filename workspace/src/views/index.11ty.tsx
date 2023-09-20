@@ -189,7 +189,7 @@ const project = css`
 
 const project__eyecatch = css`
   position: absolute;
-  inset: 2rem;
+  inset: 1.5rem;
   display: block;
 
   @media (min-width: 640px) {
