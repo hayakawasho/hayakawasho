@@ -105,7 +105,7 @@ const project = css`
 
 const project__eyecatch = css`
   position: absolute;
-  inset: 0.5rem;
+  inset: 0.6rem;
 
   display: block;
 

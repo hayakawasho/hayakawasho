@@ -17,14 +17,14 @@ import type { ReadonlyRef } from "lake";
 
 type Props = Pick<AppContext, "glContext" | "env"> & {
   maxY: ReadonlyRef<number>;
-  currentPosY: ReadonlyRef<number>;
+  posY: ReadonlyRef<number>;
   diff: ReadonlyRef<number>;
 };
 
 export default defineComponent({
   name: "home.plane",
   setup(el: HTMLImageElement, context: Props) {
-    const { glContext, env, maxY, currentPosY, diff } = context;
+    const { glContext, env, maxY, posY, diff } = context;
     const { gl } = glContext;
 
     const state = {
@@ -52,9 +52,6 @@ export default defineComponent({
 
     const { width, height } = el.getBoundingClientRect();
     const uniforms = {
-      u_alpha: {
-        value: 1.0,
-      },
       u_diff: {
         value: 0,
       },
@@ -113,10 +110,11 @@ export default defineComponent({
         return;
       }
 
-      const y = gsap.utils.wrap(0, maxY.value, currentPosY.value * speed);
+      const y = gsap.utils.wrap(0, maxY.value, posY.value * speed);
       imagePlane.updatePos(y);
 
-      uniforms.u_velo.value = diff.value * 0.01 * speed;
+      uniforms.u_velo.value = diff.value * 0.012 * speed;
+      uniforms.u_diff.value = Math.abs(diff.value * 0.0005);
     });
 
     useMount(() => {

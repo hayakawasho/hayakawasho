@@ -23,7 +23,7 @@ export default defineComponent({
 
     const { height } = el.getBoundingClientRect();
     const maxY = ref(height / 2);
-    const currentPosY = ref(0);
+    const posY = ref(0);
     const diff = ref(0);
 
     const state = {
@@ -50,7 +50,7 @@ export default defineComponent({
       "touchstart",
       (e) => {
         state.dragging = true;
-        state.position = currentPosY.value;
+        state.position = posY.value;
         state.startPos = e.touches[0].clientY;
       },
       {
@@ -92,22 +92,18 @@ export default defineComponent({
     } as const;
 
     useTick(({ timeRatio }) => {
-      const oldY = currentPosY.value;
+      const oldY = posY.value;
 
       const p = 1 - (1 - EASE[env.mq]) ** timeRatio;
-      const easeVal = lerp(currentPosY.value, state.targetPos, p);
-      currentPosY.value = easeVal;
+      const easeVal = lerp(posY.value, state.targetPos, p);
+      posY.value = easeVal;
 
-      if (currentPosY.value < 0.01) {
-        currentPosY.value = 0;
-      }
-
-      diff.value = oldY - currentPosY.value;
+      diff.value = oldY - posY.value;
     });
 
     addChild(refs.plane, Plane, {
       ...context,
-      currentPosY: readonly(currentPosY),
+      posY: readonly(posY),
       diff: readonly(diff),
       maxY: readonly(maxY),
     });

@@ -7,7 +7,6 @@ uniform vec2 u_mesh_size;
 uniform vec2 u_image_size;
 uniform float u_velo;
 uniform float u_scale;
-uniform float u_alpha;
 
 varying vec2 vUv;
 
