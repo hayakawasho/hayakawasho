@@ -141,49 +141,6 @@ const base = css`
     font-style: normal;
     font-display: swap;
   }
-
-  /*
-  @font-face {
-    font-family: "Moneta";
-    src: local("Moneta Regular"), local("Moneta-Regular"),
-      url("/assets/Moneta-Regular.woff2") format("woff2");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "Audrey";
-    font-display: swap;
-    src: url("/assets/audrey-normal.woff2") format("woff2");
-    font-weight: 400;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: "Audrey";
-    font-display: swap;
-    src: url("/assets/audrey-medium.woff2") format("woff2");
-    font-weight: 500;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: sch;
-    src: url(/assets/SchnyderL-Light.a5e8909.woff2) format("woff2");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "s";
-    src: url(/assets/sh.woff2) format("woff2");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-  */
 `;
 
 const utilities = css`

@@ -103,9 +103,9 @@ export default defineComponent({
 
     addChild(refs.plane, Plane, {
       ...context,
-      posY: readonly(posY),
       diff: readonly(diff),
       maxY: readonly(maxY),
+      posY: readonly(posY),
     });
   },
 });

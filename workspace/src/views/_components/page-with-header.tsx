@@ -79,7 +79,7 @@ const mask = css`
   position: fixed;
   z-index: 11;
   left: 0;
-  opacity: 0.7;
+  opacity: 0.8;
 
   @media (min-width: 640px) {
     height: 14rem;
@@ -160,5 +160,5 @@ const bg = css`
   width: 100%;
   height: 100%;
   background: var(--color-bg);
-  background: linear-gradient(0deg, #ffffff, var(--color-bg));
+  background: linear-gradient(0deg, #fff, var(--color-bg));
 `;

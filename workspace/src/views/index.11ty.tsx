@@ -27,12 +27,19 @@ export const render = (props: any) => {
         <main className="h-full" data-component="home">
           <div data-scroll-item></div>
           <h1 className="sr-only">SHO HAYAKAWA PORTFOLIO</h1>
+          <div css={projectsName}>
+            {posts.map((post) => (
+              <a key={post.id} href={`./projects/${post.id}/`}>
+                {post.title}
+              </a>
+            ))}
+          </div>
           <div css={wrap}>
             <div className="" css={projects} data-ref="grid">
               {posts.map((post, index) => {
                 return (
                   <div css={project} key={post.id}>
-                    <a css={project__eyecatch} href={`./projects/${post.id}/`}>
+                    <div css={project__eyecatch}>
                       <img
                         alt={post.title}
                         className="w-full h-full invisible"
@@ -45,14 +52,14 @@ export const render = (props: any) => {
                         src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
                         width={post.eyecatch.width}
                       />
-                    </a>
+                    </div>
                   </div>
                 );
               })}
               {posts.map((post, index) => {
                 return (
                   <div css={project} key={post.id}>
-                    <a css={project__eyecatch} href={`./projects/${post.id}/`}>
+                    <div css={project__eyecatch}>
                       <img
                         alt={post.title}
                         className="w-full h-full invisible"
@@ -65,14 +72,14 @@ export const render = (props: any) => {
                         src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
                         width={post.eyecatch.width}
                       />
-                    </a>
+                    </div>
                   </div>
                 );
               })}
               {posts.map((post, index) => {
                 return (
                   <div css={project} key={post.id}>
-                    <a css={project__eyecatch} href={`./projects/${post.id}/`}>
+                    <div css={project__eyecatch}>
                       <img
                         alt={post.title}
                         className="w-full h-full invisible"
@@ -85,14 +92,14 @@ export const render = (props: any) => {
                         src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
                         width={post.eyecatch.width}
                       />
-                    </a>
+                    </div>
                   </div>
                 );
               })}
               {posts.map((post, index) => {
                 return (
                   <div css={project} key={post.id}>
-                    <a css={project__eyecatch} href={`./projects/${post.id}/`}>
+                    <div css={project__eyecatch}>
                       <img
                         alt={post.title}
                         className="w-full h-full invisible"
@@ -105,14 +112,14 @@ export const render = (props: any) => {
                         src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
                         width={post.eyecatch.width}
                       />
-                    </a>
+                    </div>
                   </div>
                 );
               })}
               {posts.map((post, index) => {
                 return (
                   <div css={project} key={post.id}>
-                    <a css={project__eyecatch} href={`./projects/${post.id}/`}>
+                    <div css={project__eyecatch}>
                       <img
                         alt={post.title}
                         className="w-full h-full invisible"
@@ -125,14 +132,14 @@ export const render = (props: any) => {
                         src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
                         width={post.eyecatch.width}
                       />
-                    </a>
+                    </div>
                   </div>
                 );
               })}
               {posts.map((post, index) => {
                 return (
                   <div css={project} key={post.id}>
-                    <a css={project__eyecatch} href={`./projects/${post.id}/`}>
+                    <div css={project__eyecatch}>
                       <img
                         alt={post.title}
                         className="w-full h-full invisible"
@@ -145,7 +152,7 @@ export const render = (props: any) => {
                         src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
                         width={post.eyecatch.width}
                       />
-                    </a>
+                    </div>
                   </div>
                 );
               })}
@@ -156,6 +163,26 @@ export const render = (props: any) => {
     </PageWithHeader>
   )}`;
 };
+
+const projectsName = css`
+  position: fixed;
+  font-size: 1.6rem;
+  color: #fff;
+  font-size: 2rem;
+  z-index: 100;
+  mix-blend-mode: difference;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  > a {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+`;
 
 const wrap = css`
   position: fixed;

@@ -31,25 +31,25 @@ export default defineComponent({
     const src = el.dataset.src!;
 
     const state = {
-      resizing: false,
-      visible: false,
       pc: {
-        src: src + "?auto=compress,format",
         speed: {
+          0: 0.78,
           1: 1,
           2: 0.92,
           3: 0.86,
-          0: 0.78,
         }[index % 4]!,
+        src: src + "?auto=compress,format&sat=-100",
       },
+      resizing: false,
       sp: {
-        src: src + "?auto=compress,format&w=750",
         speed: {
+          0: 0.9,
           1: 0.9,
           2: 1,
-          0: 0.9,
         }[index % 3]!,
+        src: src + "?auto=compress,format&w=750&w=750&sat=-100",
       },
+      visible: false,
     };
 
     const texture = new Texture(gl, {
@@ -84,14 +84,14 @@ export default defineComponent({
     };
 
     const geometry = new Plane(gl, {
-      widthSegments: 25,
       heightSegments: 25,
+      widthSegments: 25,
     });
     const program = new Program(gl, {
+      depthTest: false,
       fragment,
       uniforms,
       vertex,
-      depthTest: false,
     });
 
     const mesh = new Mesh(gl, {
@@ -129,7 +129,6 @@ export default defineComponent({
       );
 
       imagePlane.updatePos(y);
-
       uniforms.u_velo.value = diff.value * 0.005 * state[env.mq].speed;
     });
 
