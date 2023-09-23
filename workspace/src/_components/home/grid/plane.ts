@@ -33,11 +33,10 @@ export default defineComponent({
     const state = {
       pc: {
         speed: {
-          0: 0.78,
-          1: 1,
-          2: 0.92,
-          3: 0.86,
-        }[index % 4]!,
+          0: 0.9,
+          1: 0.9,
+          2: 1,
+        }[index % 3]!,
         src: src + "?auto=compress,format&sat=-100",
       },
       resizing: false,
@@ -47,7 +46,7 @@ export default defineComponent({
           1: 0.9,
           2: 1,
         }[index % 3]!,
-        src: src + "?auto=compress,format&w=750&w=750&sat=-100",
+        src: src + "?auto=compress,format&w=750&sat=-100",
       },
       visible: false,
     };
@@ -63,8 +62,8 @@ export default defineComponent({
 
     const { width, height } = el.getBoundingClientRect();
     const uniforms = {
-      u_diff: {
-        value: 0,
+      u_alpha: {
+        value: 1.0,
       },
       u_image_size: {
         value: new Vec2(Number(el.dataset.w), Number(el.dataset.h)),

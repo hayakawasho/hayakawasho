@@ -16,22 +16,25 @@ import type { AppContext } from "@/_foundation/type";
 
 export default defineComponent({
   name: "project.screenshot",
-  setup(el: HTMLImageElement, { glContext, env }: AppContext) {
+  setup(el: HTMLImageElement, context: AppContext) {
+    const { glContext, env } = context;
     const { gl } = glContext;
 
+    const src = el.dataset.src!;
     const state = {
+      pc: {
+        src: src + "?auto=compress,format",
+      },
       resizing: false,
+      sp: {
+        src: src + "?auto=compress,format&w=750",
+      },
       visible: false,
-    };
-
-    const src = {
-      pc: el.dataset.src!,
-      sp: el.dataset.srcSp!,
     };
 
     const texture = new Texture(gl);
 
-    loadImage(src[env.mq]).then((img) => {
+    loadImage(state[env.mq].src).then((img) => {
       texture.image = img;
     });
 
@@ -39,9 +42,6 @@ export default defineComponent({
     const uniforms = {
       u_alpha: {
         value: 1.0,
-      },
-      u_diff: {
-        value: 0,
       },
       u_image_size: {
         value: new Vec2(Number(el.dataset.w), Number(el.dataset.h)),
@@ -55,9 +55,6 @@ export default defineComponent({
       u_texture: {
         value: texture,
       },
-      u_time: {
-        value: 0,
-      },
       u_velo: {
         value: 0,
       },
@@ -65,6 +62,7 @@ export default defineComponent({
 
     const geometry = new Plane(gl);
     const program = new Program(gl, {
+      depthTest: false,
       fragment,
       uniforms,
       vertex,

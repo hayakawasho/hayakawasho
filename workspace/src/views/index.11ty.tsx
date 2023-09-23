@@ -29,7 +29,7 @@ export const render = (props: any) => {
           <h1 className="sr-only">SHO HAYAKAWA PORTFOLIO</h1>
           <div css={projectsName}>
             {posts.map((post) => (
-              <a key={post.id} href={`./projects/${post.id}/`}>
+              <a href={`./projects/${post.id}/`} key={post.id}>
                 {post.title}
               </a>
             ))}
@@ -49,7 +49,8 @@ export const render = (props: any) => {
                         data-src={post.eyecatch.src}
                         data-w={post.eyecatch.width}
                         height={post.eyecatch.height}
-                        src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
+                        loading="lazy"
+                        src={`${post.eyecatch.src}?auto=compress,format&w=8`}
                         width={post.eyecatch.width}
                       />
                     </div>
@@ -69,7 +70,8 @@ export const render = (props: any) => {
                         data-src={post.eyecatch.src}
                         data-w={post.eyecatch.width}
                         height={post.eyecatch.height}
-                        src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
+                        loading="lazy"
+                        src={`${post.eyecatch.src}?auto=compress,format&w=8`}
                         width={post.eyecatch.width}
                       />
                     </div>
@@ -89,7 +91,8 @@ export const render = (props: any) => {
                         data-src={post.eyecatch.src}
                         data-w={post.eyecatch.width}
                         height={post.eyecatch.height}
-                        src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
+                        loading="lazy"
+                        src={`${post.eyecatch.src}?auto=compress,format&w=8`}
                         width={post.eyecatch.width}
                       />
                     </div>
@@ -109,7 +112,8 @@ export const render = (props: any) => {
                         data-src={post.eyecatch.src}
                         data-w={post.eyecatch.width}
                         height={post.eyecatch.height}
-                        src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
+                        loading="lazy"
+                        src={`${post.eyecatch.src}?auto=compress,format&w=8`}
                         width={post.eyecatch.width}
                       />
                     </div>
@@ -129,7 +133,8 @@ export const render = (props: any) => {
                         data-src={post.eyecatch.src}
                         data-w={post.eyecatch.width}
                         height={post.eyecatch.height}
-                        src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
+                        loading="lazy"
+                        src={`${post.eyecatch.src}?auto=compress,format&w=8`}
                         width={post.eyecatch.width}
                       />
                     </div>
@@ -149,7 +154,8 @@ export const render = (props: any) => {
                         data-src={post.eyecatch.src}
                         data-w={post.eyecatch.width}
                         height={post.eyecatch.height}
-                        src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
+                        loading="lazy"
+                        src={`${post.eyecatch.src}?auto=compress,format&w=8`}
                         width={post.eyecatch.width}
                       />
                     </div>
@@ -199,9 +205,9 @@ const projects = css`
   left: calc(var(--grid) * -5.5);
 
   @media (min-width: 640px) {
-    grid-template-columns: repeat(4, 1fr);
-    width: calc(100% + var(--grid) * 4);
-    left: calc(var(--grid) * -2);
+    // grid-template-columns: repeat(4, 1fr);
+    // width: calc(100% + var(--grid) * 4);
+    // left: calc(var(--grid) * -2);
   }
 `;
 
@@ -210,7 +216,7 @@ const project = css`
   padding-top: 100%;
 
   @media (min-width: 640px) {
-    padding-top: 120%;
+    padding-top: 56.25%;
   }
 `;
 

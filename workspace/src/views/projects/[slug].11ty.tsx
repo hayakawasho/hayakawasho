@@ -164,11 +164,11 @@ export const render = (props: any) => {
                       className={`pointer-events-none invisible`}
                       data-h={i.height}
                       data-ref="screenshot"
-                      data-src={`${i.src}?auto=compress,format`}
-                      data-src-sp={`${i.src}?auto=compress,format&w=750`}
+                      data-src={`${i.src}`}
                       data-w={i.width}
                       height={i.height}
-                      src={`${i.src}?auto=compress,format`}
+                      loading="lazy"
+                      src={`${i.src}?auto=compress,format&w=8`}
                       width={i.width}
                     />
                   </li>
