@@ -167,8 +167,6 @@ export const render = (props: any) => {
                       data-src={`${i.src}`}
                       data-w={i.width}
                       height={i.height}
-                      loading="lazy"
-                      src={`${i.src}?auto=compress,format&w=8`}
                       width={i.width}
                     />
                   </li>

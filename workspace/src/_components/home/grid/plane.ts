@@ -13,12 +13,14 @@ import { useWindowSize } from "@/_states/window-size";
 import fragment from "./fragment.frag";
 import vertex from "./vertex.vert";
 import type { AppContext } from "@/_foundation/type";
+// import type { RenderTarget } from "ogl";
 import type { ReadonlyRef } from "lake";
 
 type Props = Pick<AppContext, "glContext" | "env"> & {
   maxY: ReadonlyRef<number>;
   posY: ReadonlyRef<number>;
   diff: ReadonlyRef<number>;
+  // renderTarget: RenderTarget;
 };
 
 export default defineComponent({
@@ -27,25 +29,17 @@ export default defineComponent({
     const { glContext, env, maxY, posY, diff } = context;
     const { gl } = glContext;
 
-    const index = Number(el.dataset.index);
     const src = el.dataset.src!;
+    const speed = Number(el.dataset.speed);
 
     const state = {
       pc: {
-        speed: {
-          0: 0.9,
-          1: 0.9,
-          2: 1,
-        }[index % 3]!,
+        speed,
         src: src + "?auto=compress,format&sat=-100",
       },
       resizing: false,
       sp: {
-        speed: {
-          0: 0.9,
-          1: 0.9,
-          2: 1,
-        }[index % 3]!,
+        speed,
         src: src + "?auto=compress,format&w=750&sat=-100",
       },
       visible: false,

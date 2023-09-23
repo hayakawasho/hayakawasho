@@ -7,6 +7,7 @@ import {
   useEvent,
 } from "lake";
 import NormalizeWheel from "normalize-wheel";
+// import { RenderTarget } from "ogl";
 import { useTick } from "@/_foundation/hooks";
 import { lerp } from "@/_foundation/math";
 import { useWindowSize } from "@/_states/window-size";
@@ -22,13 +23,14 @@ export default defineComponent({
     const { refs } = useDomRef<{ plane: HTMLImageElement[] }>("plane");
 
     const { height } = el.getBoundingClientRect();
-    const maxY = ref(height / 2);
+    const maxY = ref(height * 0.5);
     const posY = ref(0);
     const diff = ref(0);
 
     const state = {
       dragging: false,
       position: 0,
+      resizing: false,
       startPos: 0,
       targetPos: 0,
     };
@@ -83,7 +85,9 @@ export default defineComponent({
     );
 
     useWindowSize(() => {
-      maxY.value = el.getBoundingClientRect().height / 2;
+      state.resizing = true;
+      maxY.value = el.getBoundingClientRect().height * 0.5;
+      state.resizing = false;
     });
 
     const EASE = {
@@ -92,6 +96,10 @@ export default defineComponent({
     } as const;
 
     useTick(({ timeRatio }) => {
+      if (state.resizing) {
+        return;
+      }
+
       const oldY = posY.value;
 
       const p = 1 - (1 - EASE[env.mq]) ** timeRatio;
@@ -101,11 +109,14 @@ export default defineComponent({
       diff.value = oldY - posY.value;
     });
 
+    // const renderTarget = new RenderTarget(context.glContext.gl);
+
     addChild(refs.plane, Plane, {
       ...context,
       diff: readonly(diff),
       maxY: readonly(maxY),
       posY: readonly(posY),
+      // renderTarget,
     });
   },
 });
