@@ -1,6 +1,5 @@
 import { css } from "@emotion/react";
 import { renderToStaticMarkup as r } from "react-dom/server";
-import { gsap } from "gsap";
 import { Body } from "./_components/body";
 import { Header } from "./_components/header";
 import { PageWithHeader } from "./_components/page-with-header";
@@ -179,6 +178,7 @@ const projects = css`
 const project = css`
   position: relative;
   padding-top: 100%;
+  content-visibility: hidden;
 
   @media (min-width: 640px) {
     padding-top: 62.5%;
