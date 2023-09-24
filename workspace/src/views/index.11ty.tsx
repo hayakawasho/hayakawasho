@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import { renderToStaticMarkup as r } from "react-dom/server";
+import { shuffle } from "@/_foundation/shuffle";
 import { Body } from "./_components/body";
 import { Header } from "./_components/header";
 import { PageWithHeader } from "./_components/page-with-header";
@@ -20,8 +21,8 @@ export const data = {
 export const render = (props: any) => {
   const posts = props.posts as WorkMetadata[];
 
-  const start = posts;
-  const end = posts;
+  const start = shuffle(posts);
+  const end = shuffle(posts);
 
   return `<!DOCTYPE html>
   ${r(
@@ -178,7 +179,6 @@ const projects = css`
 const project = css`
   position: relative;
   padding-top: 100%;
-  content-visibility: hidden;
 
   @media (min-width: 640px) {
     padding-top: 62.5%;

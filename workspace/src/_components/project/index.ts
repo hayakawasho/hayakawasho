@@ -29,7 +29,7 @@ type Refs = {
 export default defineComponent({
   name: "project",
   setup(el, context: AppContext) {
-    const { env, once } = context;
+    const { once } = context;
     const { addChild } = useSlot();
 
     const { refs } = useDomRef<Refs>(
@@ -72,97 +72,49 @@ export default defineComponent({
         y: "110%",
       });
 
-      switch (env.mq) {
-        case "pc":
-          Tween.serial(
-            Tween.prop(refs.infoLine, {
-              opacity: 0,
-              scaleX: 0,
-              willChange: "transform,opacity",
-            }),
-            Tween.wait(0.1),
-            Tween.parallel(
-              Tween.tween([refs.now, refs.max], 0.75, "power2.out", {
-                x: "0%",
-              }),
-              Tween.tween(refs.dash, 1.1, "expo.out", {
-                scaleX: 1,
-              }),
-              Tween.tween([refs.infoText, refs.stack], 1.85, "expo.out", {
-                stagger: 0.05,
-                y: "0%",
-              }),
-              Tween.tween(refs.infoLine, 0.75, "expo.out", {
-                delay: 1,
-                opacity: 1,
-                scaleX: 1,
-              })
-            ),
-            Tween.immediate(() => {
-              Tween.prop(
-                [
-                  refs.now,
-                  refs.max,
-                  refs.dash,
-                  refs.infoText,
-                  refs.stack,
-                  refs.infoLine,
-                ],
-                {
-                  clearProps: "will-change",
-                }
-              );
-            })
+      Tween.serial(
+        Tween.prop(refs.infoLine, {
+          opacity: 0,
+          scaleY: 0,
+          willChange: "transform,opacity",
+        }),
+        Tween.wait(0.1),
+        Tween.parallel(
+          Tween.tween([refs.now, refs.max], 0.75, "power2.out", {
+            x: "0%",
+          }),
+          Tween.tween(refs.dash, 1.1, "expo.out", {
+            scaleX: 1,
+          }),
+          Tween.tween(refs.infoText, 1.85, "expo.out", {
+            stagger: 0.05,
+            y: "0%",
+          }),
+          Tween.tween(refs.stack, 1.85, "expo.out", {
+            stagger: 0.05,
+            y: "0%",
+          }),
+          Tween.tween(refs.infoLine, 1.2, "expo.out", {
+            opacity: 1,
+            scaleY: 1,
+          })
+        ),
+        Tween.immediate(() => {
+          Tween.prop(
+            [
+              refs.now,
+              refs.max,
+              refs.dash,
+              refs.infoText,
+              refs.stack,
+              refs.infoLine,
+            ],
+            {
+              clearProps: "will-change",
+            }
           );
-          break;
-        case "sp":
-          Tween.serial(
-            Tween.prop(refs.infoLine, {
-              opacity: 0,
-              scaleY: 0,
-              willChange: "transform,opacity",
-            }),
-            Tween.wait(0.1),
-            Tween.parallel(
-              Tween.tween([refs.now, refs.max], 0.75, "power2.out", {
-                x: "0%",
-              }),
-              Tween.tween(refs.dash, 1.1, "expo.out", {
-                scaleX: 1,
-              }),
-              Tween.tween(refs.infoText, 1.85, "expo.out", {
-                stagger: 0.05,
-                y: "0%",
-              }),
-              Tween.tween(refs.stack, 1.85, "expo.out", {
-                stagger: 0.05,
-                y: "0%",
-              }),
-              Tween.tween(refs.infoLine, 1.2, "expo.out", {
-                opacity: 1,
-                scaleY: 1,
-              })
-            ),
-            Tween.immediate(() => {
-              Tween.prop(
-                [
-                  refs.now,
-                  refs.max,
-                  refs.dash,
-                  refs.infoText,
-                  refs.stack,
-                  refs.infoLine,
-                ],
-                {
-                  clearProps: "will-change",
-                }
-              );
-            })
-          );
-          break;
-        default:
-          break;
-      }
+        })
+      );
     });
 
     useUnmount(() => {

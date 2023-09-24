@@ -155,7 +155,7 @@ export default defineComponent({
     });
 
     const EASE = {
-      pc: 0.15,
+      pc: 0.12,
       sp: 0.09,
     } as const;
 

@@ -59,9 +59,7 @@ export const render = (props: any) => {
               </div>
 
               <h1 css={intro__heading} data-ref="h1">
-                <span className="inline-block leading-[1]">
-                  {post.title}/{post.title}/{post.title}
-                </span>
+                <span className="inline-block leading-[1]">{post.title}</span>
               </h1>
 
               <div css={intro__infoWrap}>
@@ -225,12 +223,13 @@ const intro__heading = css`
   overflow: hidden;
 
   @media (min-width: 640px) {
-    font-size: 10.4rem;
+    font-size: 9rem;
     white-space: nowrap;
     position: absolute;
     top: 50%;
     padding: 0;
     margin-top: -1em;
+    text-align: center;
   }
 `;
 
@@ -242,11 +241,10 @@ const intro__infoWrap = css`
   align-items: flex-start;
 
   @media (min-width: 640px) {
-    flex-direction: column;
     position: absolute;
     bottom: 0;
-    right: 0;
-    padding: 0 var(--grid) 7rem 0;
+    left: calc(var(--grid) * 3);
+    padding: 0 0 8rem 0;
   }
 `;
 
@@ -289,11 +287,7 @@ const intro__stacks = css`
   margin-top: 0.2rem;
 
   @media (min-width: 640px) {
-    width: calc(var(--grid) * 2);
-    padding-left: 0;
-    padding-bottom: 0;
-    padding-top: 3rem;
-    margin-top: 2rem;
+    //
   }
 `;
 
@@ -325,22 +319,20 @@ const intro__stacks__hr = css`
   display: block;
 
   @media (min-width: 640px) {
-    width: 1.5rem;
-    height: 1px;
-    translate: 0;
+    //
   }
 `;
 
 const intro__indexNumber = css`
   position: absolute;
-  top: 3rem;
+  top: 4rem;
   right: var(--grid);
   font-size: 1.1rem;
   overflow: hidden;
 
   @media (min-width: 640px) {
     right: calc(var(--grid) - var(--gap) * 0.5);
-    top: 6rem;
+    top: 8rem;
     font-size: 1.4rem;
   }
 `;
@@ -423,7 +415,7 @@ const nextProject__heading = css`
   line-height: 1;
 
   @media (min-width: 640px) {
-    font-size: 10.4rem;
+    font-size: 9rem;
   }
 `;
 

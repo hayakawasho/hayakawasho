@@ -74,7 +74,7 @@ const svh = css`
 const mask = css`
   pointer-events: none;
   display: block;
-  height: 7rem;
+  height: 6rem;
   width: 100%;
   position: fixed;
   z-index: 11;
@@ -82,7 +82,7 @@ const mask = css`
   opacity: 0.7;
 
   @media (min-width: 640px) {
-    height: 14rem;
+    height: 12rem;
   }
 `;
 
