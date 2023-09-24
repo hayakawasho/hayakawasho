@@ -2,8 +2,11 @@ import { css } from "@emotion/react";
 import { renderToStaticMarkup as r } from "react-dom/server";
 import { Body } from "../_components/body";
 import { Header } from "../_components/header";
-import { Count } from "../_components/page/project/count";
+import { IndexNumber } from "../_components/page/project/index-number";
 import { InfoLabel, InfoUrl, InfoDate } from "../_components/page/project/info";
+import { NextProject } from "../_components/page/project/next";
+import { Screenshots } from "../_components/page/project/screenshots";
+import { Stacks } from "../_components/page/project/stacks";
 import { PageWithHeader } from "../_components/page-with-header";
 import { Seo } from "../_components/seo";
 import type { WorkMetadata } from "@/_work/model";
@@ -41,7 +44,7 @@ export const render = (props: any) => {
             <div css={intro}>
               <div css={intro__g}>
                 <div css={intro__indexNumber}>
-                  <Count max={max} now={now} />
+                  <IndexNumber max={max} now={now} />
                 </div>
                 <h1 css={intro__heading} data-ref="h1">
                   <span className="inline-block leading-[1]">{post.title}</span>
@@ -54,15 +57,7 @@ export const render = (props: any) => {
                   </div>
                   {post.stacks.length > 0 && (
                     <div css={intro__stacks}>
-                      <ul css={stacksItems}>
-                        {post.stacks.map((stack, i) => (
-                          <li className="overflow-hidden" key={i}>
-                            <span className="inline-block" data-ref="stack">
-                              {stack}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
+                      <Stacks post={post} />
                       <hr css={intro__stacks__hr} data-ref="infoLine" />
                     </div>
                   )}
@@ -83,42 +78,12 @@ export const render = (props: any) => {
           </div>
 
           <div data-scroll-item>
-            <ul className="" css={screenshots}>
-              {post.screenshots.map((i, index) => {
-                return (
-                  <li className="" key={index}>
-                    <img
-                      alt=""
-                      className={`pointer-events-none invisible`}
-                      data-h={i.height}
-                      data-ref="screenshot"
-                      data-src={`${i.src}`}
-                      data-w={i.width}
-                      height={i.height}
-                      width={i.width}
-                    />
-                  </li>
-                );
-              })}
-            </ul>
+            <Screenshots post={post} />
           </div>
 
           <aside data-ref="next">
             <div css={dummy} data-ref="end" data-scroll-item></div>
-            <div css={nextProject} data-ref="nextProject">
-              <a
-                css={nextProject__hgroup}
-                data-ref="nextHGroup"
-                href={`../${nextPost.id}/`}
-              >
-                <h2 css={nextProject__heading}>
-                  <span className="inline-block leading-[1]">Next Project</span>
-                </h2>
-                <h3 className="" css={nextProject__sub}>
-                  ({nextPost.title})
-                </h3>
-              </a>
-            </div>
+            <NextProject post={nextPost} />
           </aside>
         </main>
       </Body>
@@ -200,22 +165,6 @@ const intro__stacks = css`
   }
 `;
 
-const stacksItems = css`
-  font-size: 1.1rem;
-  line-height: 1.15;
-  display: flex;
-  flex-direction: column;
-  gap: 0.2em;
-
-  @media (min-width: 640px) {
-    font-size: 1.4rem;
-  }
-
-  > li {
-    backface-visibility: hidden;
-  }
-`;
-
 const intro__stacks__hr = css`
   width: 1px;
   height: 100%;
@@ -262,27 +211,6 @@ const eyecatchImg = css`
   }
 `;
 
-//----------------------------------------------------------------
-
-const screenshots = css`
-  width: calc((var(--grid) * 10));
-  margin-left: auto;
-  margin-right: auto;
-  backface-visibility: hidden;
-  display: flex;
-  flex-direction: column;
-  gap: 5rem;
-  margin-bottom: 5rem;
-
-  @media (min-width: 640px) {
-    width: calc(var(--grid) * 8);
-    max-width: 1280px;
-    gap: 14rem;
-  }
-`;
-
-//----------------------------------------------------------------
-
 const dummy = css`
   height: 101vh;
   height: 101svh;
@@ -290,57 +218,5 @@ const dummy = css`
   @media (min-width: 640px) {
     height: 125vh;
     height: 125svh;
-  }
-`;
-
-const nextProject = css`
-  position: fixed;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  pointer-events: none;
-  background-color: #041f1e;
-  z-index: 100;
-  opacity: 0;
-  perspective: 1000px;
-
-  @media (min-width: 640px) {
-    padding-top: 15rem;
-    padding-bottom: 15rem;
-  }
-`;
-
-const nextProject__hgroup = css`
-  display: inline-block;
-  pointer-events: auto;
-  color: #fff;
-`;
-
-const nextProject__heading = css`
-  font-size: 5.6rem;
-  font-family: var(--font-en);
-  letter-spacing: 0.04em;
-  line-height: 1;
-
-  @media (min-width: 640px) {
-    font-size: 9rem;
-    margin-top: -0.5em;
-  }
-`;
-
-const nextProject__sub = css`
-  font-size: 1.1rem;
-  letter-spacing: 0.04em;
-  text-align: left;
-  opacity: 0.5;
-  margin-top: -0.6em;
-  margin-left: 0.3em;
-
-  @media (min-width: 640px) {
-    font-size: 1.5rem;
-    margin-top: -0.8em;
-    margin-left: 0.4em;
   }
 `;

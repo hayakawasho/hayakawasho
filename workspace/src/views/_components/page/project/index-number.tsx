@@ -1,4 +1,4 @@
-export const Count = ({ now, max }: { now: string; max: string }) => {
+export const IndexNumber = ({ now, max }: { now: string; max: string }) => {
   return (
     <>
       <span className="inline-block" data-ref="now">
