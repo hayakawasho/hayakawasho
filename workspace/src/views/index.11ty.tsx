@@ -34,124 +34,28 @@ export const render = (props: any) => {
           <div css={wrap}>
             <div className="" css={projects} data-ref="grid">
               <div>
-                {start.map((post, _index) => {
-                  return (
-                    <div css={project} key={post.id}>
-                      <div css={project__eyecatch}>
-                        <img
-                          alt={post.title}
-                          className="w-full h-full invisible"
-                          data-h={post.eyecatch.height}
-                          data-ref="plane"
-                          data-speed={0.9}
-                          data-src={post.eyecatch.src}
-                          data-w={post.eyecatch.width}
-                          height={post.eyecatch.height}
-                          width={post.eyecatch.width}
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
-                {start.map((post, _index) => {
-                  return (
-                    <div css={project} key={post.id}>
-                      <div css={project__eyecatch}>
-                        <img
-                          alt={post.title}
-                          className="w-full h-full invisible"
-                          data-h={post.eyecatch.height}
-                          data-ref="plane"
-                          data-speed={0.9}
-                          data-src={post.eyecatch.src}
-                          data-w={post.eyecatch.width}
-                          height={post.eyecatch.height}
-                          width={post.eyecatch.width}
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
+                {start.map((post, _index) => (
+                  <Thumbnail key={post.id} post={post} speed={0.9} />
+                ))}
+                {start.map((post, _index) => (
+                  <Thumbnail key={post.id} post={post} speed={0.9} />
+                ))}
               </div>
               <div>
-                {posts.map((post, _index) => {
-                  return (
-                    <div css={project} key={post.id}>
-                      <div css={project__eyecatch}>
-                        <img
-                          alt={post.title}
-                          className="w-full h-full invisible"
-                          data-h={post.eyecatch.height}
-                          data-ref="plane"
-                          data-speed={1}
-                          data-src={post.eyecatch.src}
-                          data-w={post.eyecatch.width}
-                          height={post.eyecatch.height}
-                          width={post.eyecatch.width}
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
-                {posts.map((post, _index) => {
-                  return (
-                    <div css={project} key={post.id}>
-                      <div css={project__eyecatch}>
-                        <img
-                          alt={post.title}
-                          className="w-full h-full invisible"
-                          data-h={post.eyecatch.height}
-                          data-ref="plane"
-                          data-speed={1}
-                          data-src={post.eyecatch.src}
-                          data-w={post.eyecatch.width}
-                          height={post.eyecatch.height}
-                          width={post.eyecatch.width}
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
+                {posts.map((post, _index) => (
+                  <Thumbnail key={post.id} post={post} speed={1} />
+                ))}
+                {posts.map((post, _index) => (
+                  <Thumbnail key={post.id} post={post} speed={1} />
+                ))}
               </div>
               <div>
-                {end.map((post, _index) => {
-                  return (
-                    <div css={project} key={post.id}>
-                      <div css={project__eyecatch}>
-                        <img
-                          alt={post.title}
-                          className="w-full h-full invisible"
-                          data-h={post.eyecatch.height}
-                          data-ref="plane"
-                          data-speed={0.9}
-                          data-src={post.eyecatch.src}
-                          data-w={post.eyecatch.width}
-                          height={post.eyecatch.height}
-                          width={post.eyecatch.width}
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
-                {end.map((post, _index) => {
-                  return (
-                    <div css={project} key={post.id}>
-                      <div css={project__eyecatch}>
-                        <img
-                          alt={post.title}
-                          className="w-full h-full invisible"
-                          data-h={post.eyecatch.height}
-                          data-ref="plane"
-                          data-speed={0.9}
-                          data-src={post.eyecatch.src}
-                          data-w={post.eyecatch.width}
-                          height={post.eyecatch.height}
-                          width={post.eyecatch.width}
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
+                {end.map((post, _index) => (
+                  <Thumbnail key={post.id} post={post} speed={0.9} />
+                ))}
+                {end.map((post, _index) => (
+                  <Thumbnail key={post.id} post={post} speed={0.9} />
+                ))}
               </div>
             </div>
           </div>
@@ -159,6 +63,26 @@ export const render = (props: any) => {
       </Body>
     </PageWithHeader>
   )}`;
+};
+
+const Thumbnail = ({ post, speed }: { post: WorkMetadata; speed: number }) => {
+  return (
+    <div css={project}>
+      <div css={project__eyecatch}>
+        <img
+          alt={post.title}
+          className="w-full h-full invisible"
+          data-h={post.eyecatch.height}
+          data-ref="plane"
+          data-speed={speed}
+          data-src={post.eyecatch.src}
+          data-w={post.eyecatch.width}
+          height={post.eyecatch.height}
+          width={post.eyecatch.width}
+        />
+      </div>
+    </div>
+  );
 };
 
 const wrap = css`
@@ -170,10 +94,10 @@ const wrap = css`
 const projects = css`
   position: absolute;
   top: 0;
+  left: calc(var(--grid) * -5.5);
+  width: calc(100% + var(--grid) * 11);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: calc(100% + var(--grid) * 11);
-  left: calc(var(--grid) * -5.5);
 `;
 
 const project = css`

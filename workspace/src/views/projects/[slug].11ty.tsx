@@ -1,14 +1,10 @@
 import { css } from "@emotion/react";
 import { renderToStaticMarkup as r } from "react-dom/server";
-import {
-  selectDatetime,
-  selectLaunch,
-  selectUrl,
-} from "@/_work/model/selector";
 import { Body } from "../_components/body";
 import { Header } from "../_components/header";
+import { Count } from "../_components/page/project/count";
+import { InfoLabel, InfoUrl, InfoDate } from "../_components/page/project/info";
 import { PageWithHeader } from "../_components/page-with-header";
-import { ResponsiveImage } from "../_components/responsive-image";
 import { Seo } from "../_components/seo";
 import type { WorkMetadata } from "@/_work/model";
 
@@ -41,118 +37,52 @@ export const render = (props: any) => {
     >
       <Body namespace="project">
         <main data-component="project">
-          <div css={intro} data-scroll-item>
-            <div className="" css={intro__g}>
-              <div css={intro__indexNumber}>
-                <span className="inline-block" data-ref="now">
-                  {now}
-                </span>
-                <span
-                  className="relative top-[-1px] inline-block mx-[.4em]"
-                  data-ref="dash"
-                >
-                  —
-                </span>
-                <span className="inline-block" data-ref="max">
-                  {max}
-                </span>
-              </div>
-
-              <h1 css={intro__heading} data-ref="h1">
-                <span className="inline-block leading-[1]">{post.title}</span>
-              </h1>
-
-              <div css={intro__infoWrap}>
-                <div css={intro__info}>
-                  <dl css={info}>
-                    <dt className="overflow-hidden">
-                      <span className="inline-block" data-ref="infoText">
-                        (CATEGORY)
-                      </span>
-                    </dt>
-                    <dd className="uppercase overflow-hidden">
-                      <span className="inline-block" data-ref="infoText">
-                        {post.category}
-                      </span>
-                    </dd>
-                  </dl>
-                  <dl css={info}>
-                    <dt className="overflow-hidden">
-                      <span className="inline-block" data-ref="infoText">
-                        (DATE)
-                      </span>
-                    </dt>
-                    <dd className="uppercase overflow-hidden">
-                      <time
-                        className="inline-block"
-                        data-ref="infoText"
-                        dateTime={selectDatetime(post)}
-                      >
-                        {selectLaunch(post)}
-                      </time>
-                    </dd>
-                  </dl>
-                  {post.url && (
-                    <dl css={info}>
-                      <dt className="overflow-hidden">
-                        <span className="inline-block" data-ref="infoText">
-                          (URL)
-                        </span>
-                      </dt>
-                      <dd className="_url | overflow-hidden">
-                        <a
-                          className="inline-block"
-                          data-ref="infoText"
-                          href={post.url}
-                          target="_blank"
-                        >
-                          {selectUrl(post)}{" "}
-                          <span className="text-[90%]">↗</span>
-                        </a>
-                      </dd>
-                    </dl>
+          <div className="mb-[10rem] sm:mb-[20rem]" data-scroll-item>
+            <div css={intro}>
+              <div css={intro__g}>
+                <div css={intro__indexNumber}>
+                  <Count max={max} now={now} />
+                </div>
+                <h1 css={intro__heading} data-ref="h1">
+                  <span className="inline-block leading-[1]">{post.title}</span>
+                </h1>
+                <div css={intro__infoWrap}>
+                  <div css={intro__info}>
+                    <InfoLabel heading="(CATEGORY)" label={post.category} />
+                    <InfoDate post={post} />
+                    {post.url && <InfoUrl post={post} />}
+                  </div>
+                  {post.stacks.length > 0 && (
+                    <div css={intro__stacks}>
+                      <ul css={stacksItems}>
+                        {post.stacks.map((stack, i) => (
+                          <li className="overflow-hidden" key={i}>
+                            <span className="inline-block" data-ref="stack">
+                              {stack}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                      <hr css={intro__stacks__hr} data-ref="infoLine" />
+                    </div>
                   )}
                 </div>
-                {post.stacks.length > 0 && (
-                  <div css={intro__stacks}>
-                    <ul css={intro__stacksItems}>
-                      {post.stacks.map((stack, i) => (
-                        <li className="overflow-hidden" key={i}>
-                          <span className="inline-block" data-ref="stack">
-                            {stack}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                    <div
-                      css={intro__stacks__hr}
-                      data-ref="infoLine"
-                      role="presentation"
-                    />
-                  </div>
-                )}
               </div>
+            </div>
+
+            <div className="u-sp" css={intro__eyecatch} data-ref="eyecatch">
+              <img
+                alt=""
+                className="pointer-events-none"
+                css={eyecatchImg}
+                height={post.eyecatch.height}
+                src={`${post.eyecatch.src}?auto=compress,format&w=1200`}
+                width={post.eyecatch.width}
+              />
             </div>
           </div>
 
           <div data-scroll-item>
-            <div
-              className="mb-[10rem] sm:mb-[20rem]"
-              css={eyecatch}
-              data-ref="eyecatch"
-            >
-              <ResponsiveImage
-                alt=""
-                css={eyecatch__img}
-                pcH={post.eyecatch.height}
-                pcSrc={`${post.eyecatch.src}?auto=compress,format`}
-                pcW={post.eyecatch.width}
-                spH={post.eyecatch.height}
-                spSrc={`${post.eyecatch.src}?auto=compress,format&w=1200`}
-                spW={post.eyecatch.width}
-              />
-            </div>
-
             <ul className="" css={screenshots}>
               {post.screenshots.map((i, index) => {
                 return (
@@ -181,12 +111,12 @@ export const render = (props: any) => {
                 data-ref="nextHGroup"
                 href={`../${nextPost.id}/`}
               >
-                <h3 css={nextProject__heading}>
+                <h2 css={nextProject__heading}>
                   <span className="inline-block leading-[1]">Next Project</span>
-                </h3>
-                <h4 className="" css={nextProject__sub}>
+                </h2>
+                <h3 className="" css={nextProject__sub}>
                   ({nextPost.title})
-                </h4>
+                </h3>
               </a>
             </div>
           </aside>
@@ -259,27 +189,6 @@ const intro__info = css`
   }
 `;
 
-const info = css`
-  font-size: 1.1rem;
-
-  @media (min-width: 640px) {
-    font-size: 1.4rem;
-  }
-
-  & > dt {
-    opacity: 0.5;
-    backface-visibility: hidden;
-  }
-
-  & > dd {
-    backface-visibility: hidden;
-  }
-
-  ._url {
-    font-size: 110%;
-  }
-`;
-
 const intro__stacks = css`
   padding-left: 0.6em;
   padding-bottom: 0.6em;
@@ -291,7 +200,7 @@ const intro__stacks = css`
   }
 `;
 
-const intro__stacksItems = css`
+const stacksItems = css`
   font-size: 1.1rem;
   line-height: 1;
   display: flex;
@@ -317,6 +226,7 @@ const intro__stacks__hr = css`
   translate: -50%;
   transform-origin: top left;
   display: block;
+  border: 0;
 
   @media (min-width: 640px) {
     //
@@ -337,14 +247,12 @@ const intro__indexNumber = css`
   }
 `;
 
-//----------------------------------------------------------------
-
-const eyecatch = css`
+const intro__eyecatch = css`
   overflow: hidden;
   backface-visibility: hidden;
 `;
 
-const eyecatch__img = css`
+const eyecatchImg = css`
   width: 100%;
   object-fit: cover;
   aspect-ratio: 3 / 2;
@@ -353,6 +261,8 @@ const eyecatch__img = css`
     aspect-ratio: auto;
   }
 `;
+
+//----------------------------------------------------------------
 
 const screenshots = css`
   width: calc((var(--grid) * 10));
