@@ -158,7 +158,7 @@ const intro__heading = css`
     position: absolute;
     top: 50%;
     padding: 0;
-    margin-top: -1em;
+    margin-top: -1.5em;
     text-align: center;
   }
 `;
@@ -202,10 +202,10 @@ const intro__stacks = css`
 
 const stacksItems = css`
   font-size: 1.1rem;
-  line-height: 1;
+  line-height: 1.15;
   display: flex;
   flex-direction: column;
-  gap: 0.3em;
+  gap: 0.2em;
 
   @media (min-width: 640px) {
     font-size: 1.4rem;
@@ -326,6 +326,7 @@ const nextProject__heading = css`
 
   @media (min-width: 640px) {
     font-size: 9rem;
+    margin-top: -0.5em;
   }
 `;
 
