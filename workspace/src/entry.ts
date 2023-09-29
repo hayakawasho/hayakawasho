@@ -6,6 +6,7 @@ import Home from "./_components/home";
 import Load from "./_components/load";
 import Noop from "./_components/noop.svelte";
 import Project from "./_components/project";
+import Projects from "./_components/projects";
 import type { IComponent, ComponentContext } from "lake";
 
 const bootstrap = (setup: () => void) => {
@@ -24,6 +25,7 @@ bootstrap(() => {
     home: Home,
     noop: withSvelte(Noop, "noop"),
     project: Project,
+    projects: Projects,
   } as const;
 
   const mountComponents = (

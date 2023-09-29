@@ -7,22 +7,19 @@ import { PageWithHeader } from "./_components/page-with-header";
 import { Seo } from "./_components/seo";
 import type { WorkMetadata } from "@/_work/model";
 
-const PER_PAGE = 9;
+const PER_PAGE = 5;
 
 export const data = {
   pagination: {
     addAllPagesToCollections: false,
     alias: "posts",
-    data: "cms.index",
+    data: "cms.home",
     size: PER_PAGE,
   },
 };
 
 export const render = (props: any) => {
-  const posts = props.posts as WorkMetadata[];
-
-  const start = shuffle(posts);
-  const end = shuffle(posts);
+  const posts = shuffle(props.posts as WorkMetadata[]);
 
   return `<!DOCTYPE html>
   ${r(
@@ -32,32 +29,38 @@ export const render = (props: any) => {
           <div data-scroll-item></div>
           <h1 className="sr-only">SHO HAYAKAWA PORTFOLIO</h1>
           <div css={wrap}>
-            <div className="" css={projects} data-ref="grid">
-              <div>
-                {start.map((post, _index) => (
+            <ul className="" css={projects} data-ref="grid">
+              {posts.map((post, _index) => (
+                <li css={project}>
                   <Thumbnail key={post.id} post={post} speed={0.9} />
-                ))}
-                {start.map((post, _index) => (
+                </li>
+              ))}
+              {posts.map((post, _index) => (
+                <li css={project}>
                   <Thumbnail key={post.id} post={post} speed={0.9} />
-                ))}
-              </div>
-              <div>
-                {posts.map((post, _index) => (
-                  <Thumbnail key={post.id} post={post} speed={1} />
-                ))}
-                {posts.map((post, _index) => (
-                  <Thumbnail key={post.id} post={post} speed={1} />
-                ))}
-              </div>
-              <div>
-                {end.map((post, _index) => (
+                </li>
+              ))}
+              {posts.map((post, _index) => (
+                <li css={project}>
                   <Thumbnail key={post.id} post={post} speed={0.9} />
-                ))}
-                {end.map((post, _index) => (
+                </li>
+              ))}
+              {posts.map((post, _index) => (
+                <li css={project}>
                   <Thumbnail key={post.id} post={post} speed={0.9} />
-                ))}
-              </div>
-            </div>
+                </li>
+              ))}
+              {posts.map((post, _index) => (
+                <li css={project}>
+                  <Thumbnail key={post.id} post={post} speed={0.9} />
+                </li>
+              ))}
+              {posts.map((post, _index) => (
+                <li css={project}>
+                  <Thumbnail key={post.id} post={post} speed={0.9} />
+                </li>
+              ))}
+            </ul>
           </div>
         </main>
       </Body>
@@ -67,21 +70,19 @@ export const render = (props: any) => {
 
 const Thumbnail = ({ post, speed }: { post: WorkMetadata; speed: number }) => {
   return (
-    <div css={project}>
-      <div css={project__eyecatch}>
-        <img
-          alt={post.title}
-          className="w-full h-full invisible"
-          data-h={post.eyecatch.height}
-          data-ref="plane"
-          data-speed={speed}
-          data-src={post.eyecatch.src}
-          data-w={post.eyecatch.width}
-          height={post.eyecatch.height}
-          width={post.eyecatch.width}
-        />
-      </div>
-    </div>
+    <a css={project__eyecatch} href={`./projects/${post.id}/`}>
+      <img
+        alt={post.title}
+        className="w-full h-full invisible"
+        data-h={post.eyecatch.height}
+        data-ref="plane"
+        data-speed={speed}
+        data-src={post.eyecatch.src}
+        data-w={post.eyecatch.width}
+        height={post.eyecatch.height}
+        width={post.eyecatch.width}
+      />
+    </a>
   );
 };
 
@@ -94,10 +95,10 @@ const wrap = css`
 const projects = css`
   position: absolute;
   top: 0;
-  left: calc(var(--grid) * -5.5);
-  width: calc(100% + var(--grid) * 11);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  width: calc(100% + var(--grid) * 11);
+  left: calc(var(--grid) * -5.5);
 `;
 
 const project = css`
