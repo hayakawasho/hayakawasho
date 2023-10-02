@@ -30,34 +30,54 @@ export const render = (props: any) => {
           <h1 className="sr-only">SHO HAYAKAWA PORTFOLIO</h1>
           <div css={wrap}>
             <ul className="" css={projects} data-ref="grid">
-              {posts.map((post, _index) => (
+              {posts.map((post, index) => (
                 <li css={project}>
-                  <Thumbnail key={post.id} post={post} speed={0.9} />
+                  <Thumbnail index={index} key={post.id} post={post} />
                 </li>
               ))}
-              {posts.map((post, _index) => (
+              {posts.map((post, index) => (
                 <li css={project}>
-                  <Thumbnail key={post.id} post={post} speed={0.9} />
+                  <Thumbnail
+                    index={index + PER_PAGE}
+                    key={post.id}
+                    post={post}
+                  />
                 </li>
               ))}
-              {posts.map((post, _index) => (
+              {posts.map((post, index) => (
                 <li css={project}>
-                  <Thumbnail key={post.id} post={post} speed={0.9} />
+                  <Thumbnail
+                    index={index + PER_PAGE * 2}
+                    key={post.id}
+                    post={post}
+                  />
                 </li>
               ))}
-              {posts.map((post, _index) => (
+              {posts.map((post, index) => (
                 <li css={project}>
-                  <Thumbnail key={post.id} post={post} speed={0.9} />
+                  <Thumbnail
+                    index={index + PER_PAGE * 3}
+                    key={post.id}
+                    post={post}
+                  />
                 </li>
               ))}
-              {posts.map((post, _index) => (
+              {posts.map((post, index) => (
                 <li css={project}>
-                  <Thumbnail key={post.id} post={post} speed={0.9} />
+                  <Thumbnail
+                    index={index + PER_PAGE * 4}
+                    key={post.id}
+                    post={post}
+                  />
                 </li>
               ))}
-              {posts.map((post, _index) => (
+              {posts.map((post, index) => (
                 <li css={project}>
-                  <Thumbnail key={post.id} post={post} speed={0.9} />
+                  <Thumbnail
+                    index={index + PER_PAGE * 5}
+                    key={post.id}
+                    post={post}
+                  />
                 </li>
               ))}
             </ul>
@@ -68,7 +88,13 @@ export const render = (props: any) => {
   )}`;
 };
 
-const Thumbnail = ({ post, speed }: { post: WorkMetadata; speed: number }) => {
+const Thumbnail = ({ post, index }: { post: WorkMetadata; index: number }) => {
+  const speed = {
+    0: 0.9,
+    1: 1,
+    2: 0.9,
+  }[index % 3];
+
   return (
     <a css={project__eyecatch} href={`./projects/${post.id}/`}>
       <img
