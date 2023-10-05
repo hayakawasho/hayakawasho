@@ -2,9 +2,11 @@ import { css } from "@emotion/react";
 import { renderToStaticMarkup as r } from "react-dom/server";
 import { Body } from "../_components/body";
 import { Header } from "../_components/header";
-import { IndexNumber } from "../_components/page/project/index-number";
-import { InfoLabel, InfoUrl, InfoDate } from "../_components/page/project/info";
-import { NextProject } from "../_components/page/project/next";
+import {
+  InfoCategory,
+  InfoUrl,
+  InfoDate,
+} from "../_components/page/project/info";
 import { Screenshots } from "../_components/page/project/screenshots";
 import { Stacks } from "../_components/page/project/stacks";
 import { PageWithHeader } from "../_components/page-with-header";
@@ -44,28 +46,48 @@ export const render = (props: any) => {
             <div css={intro}>
               <div css={intro__g}>
                 <div css={intro__indexNumber}>
-                  <IndexNumber max={max} now={now} />
+                  <span className="inline-block" data-ref="now">
+                    {now}
+                  </span>
+                  <span
+                    className="relative top-[-1px] inline-block mx-[.4em]"
+                    data-ref="dash"
+                  >
+                    —
+                  </span>
+                  <span className="inline-block" data-ref="max">
+                    {max}
+                  </span>
                 </div>
-                <h1 css={intro__heading} data-ref="h1">
-                  <span className="inline-block leading-[1]">{post.title}</span>
-                </h1>
-                <div css={intro__infoWrap}>
-                  <div css={intro__info}>
-                    <InfoLabel heading="(CATEGORY)" label={post.category} />
+
+                <div css={intro__hgroup}>
+                  <p css={intro__sub}>
+                    <span className="inline-block uppercase">Projects/</span>
+                  </p>
+                  <h1 css={intro__heading} data-ref="h1">
+                    <span className="inline-block leading-[1]">
+                      {post.title}
+                    </span>
+                  </h1>
+                </div>
+
+                <div css={infoWrap}>
+                  <div css={info}>
+                    <InfoCategory post={post} />
                     <InfoDate post={post} />
                     {post.url && <InfoUrl post={post} />}
                   </div>
                   {post.stacks.length > 0 && (
-                    <div css={intro__stacks}>
+                    <div css={stacks}>
                       <Stacks post={post} />
-                      <hr css={intro__stacks__hr} data-ref="infoLine" />
+                      <hr css={stacks__hr} data-ref="infoLine" />
                     </div>
                   )}
                 </div>
               </div>
             </div>
 
-            <div className="u-sp" css={intro__eyecatch} data-ref="eyecatch">
+            <div className="pc:hidden" css={eyecatch} data-ref="eyecatch">
               <img
                 alt=""
                 className="pointer-events-none"
@@ -83,7 +105,22 @@ export const render = (props: any) => {
 
           <aside data-ref="next">
             <div css={dummy} data-ref="end" data-scroll-item></div>
-            <NextProject post={nextPost} />
+            <div css={nextProject} data-ref="nextProject">
+              <a
+                css={nextProject__hgroup}
+                data-ref="nextHGroup"
+                href={`../${nextPost.id}/`}
+              >
+                <p css={nextProject__heading}>
+                  <span className="inline-block uppercase">Next</span>
+                </p>
+                <h2 css={nextProject__name}>
+                  <span className="inline-block leading-[1]">
+                    {nextPost.title}
+                  </span>
+                </h2>
+              </a>
+            </div>
           </aside>
         </main>
       </Body>
@@ -107,28 +144,47 @@ const intro__g = css`
   }
 `;
 
-const intro__heading = css`
-  width: 100%;
-  font-size: 5.6rem;
-  font-weight: 300;
-  font-family: var(--font-en);
-  letter-spacing: 0.08em;
-  white-space: nowrap;
+const intro__hgroup = css`
   padding-top: 10rem;
-  overflow: hidden;
 
   @media (min-width: 640px) {
-    font-size: 9rem;
-    white-space: nowrap;
     position: absolute;
     top: 50%;
+    margin-top: -10rem;
     padding: 0;
-    margin-top: -1.5em;
-    text-align: center;
   }
 `;
 
-const intro__infoWrap = css`
+const intro__sub = css`
+  font-size: 4.1rem;
+  font-family: var(--font-en);
+  text-transform: uppercase;
+  line-height: 1;
+  text-align: center;
+
+  @media (min-width: 640px) {
+    font-size: 7.3rem;
+  }
+`;
+
+const intro__heading = css`
+  width: 100%;
+  font-size: 4.1rem;
+  font-weight: 500;
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin-top: -0.1em;
+  overflow: hidden;
+  text-align: center;
+
+  @media (min-width: 640px) {
+    font-size: 7.3rem;
+    // font-weight: 400;
+  }
+`;
+
+const infoWrap = css`
   padding: 0 var(--grid);
   padding-top: 4.8rem;
   padding-bottom: 6.6667vw;
@@ -143,7 +199,7 @@ const intro__infoWrap = css`
   }
 `;
 
-const intro__info = css`
+const info = css`
   width: calc(var(--grid) * 5);
   display: flex;
   flex-direction: column;
@@ -154,7 +210,7 @@ const intro__info = css`
   }
 `;
 
-const intro__stacks = css`
+const stacks = css`
   padding-left: 0.6em;
   padding-bottom: 0.6em;
   position: relative;
@@ -165,7 +221,7 @@ const intro__stacks = css`
   }
 `;
 
-const intro__stacks__hr = css`
+const stacks__hr = css`
   width: 1px;
   height: 100%;
   background-color: currentColor;
@@ -196,7 +252,9 @@ const intro__indexNumber = css`
   }
 `;
 
-const intro__eyecatch = css`
+//----------------------------------------------------------------
+
+const eyecatch = css`
   overflow: hidden;
   backface-visibility: hidden;
 `;
@@ -218,5 +276,58 @@ const dummy = css`
   @media (min-width: 640px) {
     height: 125vh;
     height: 125svh;
+  }
+`;
+
+//----------------------------------------------------------------
+
+const nextProject = css`
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  background-color: #041f1e;
+  z-index: 100;
+  opacity: 0;
+  perspective: 1000px;
+
+  @media (min-width: 640px) {
+    padding-top: 15rem;
+    padding-bottom: 15rem;
+  }
+`;
+
+const nextProject__hgroup = css`
+  display: inline-block;
+  pointer-events: auto;
+  color: #fff;
+`;
+
+const nextProject__heading = css`
+  font-size: 4.1rem;
+  font-family: var(--font-en);
+  line-height: 1;
+  text-align: center;
+  font-weight: 300;
+
+  @media (min-width: 640px) {
+    font-size: 7.3rem;
+    margin-top: -0.5em;
+  }
+`;
+
+const nextProject__name = css`
+  font-size: 4.1rem;
+  line-height: 1;
+  text-align: center;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+
+  @media (min-width: 640px) {
+    font-size: 7.3rem;
   }
 `;

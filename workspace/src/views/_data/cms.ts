@@ -7,8 +7,8 @@ const fetchWorks = async () => {
   const { findList } = WorksRepository.create(process.env.API_KEY!);
 
   const res = await Promise.all([
-    findList({ limit: 5 }),
-    findList({ limit: 100, orders: "-launch" }),
+    findList({}),
+    findList({ limit: 99, orders: "-launch" }),
   ]);
 
   return {

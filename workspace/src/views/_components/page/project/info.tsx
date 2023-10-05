@@ -6,23 +6,17 @@ import {
 } from "@/_work/model/selector";
 import type { WorkMetadata } from "@/_work/model";
 
-export const InfoLabel = ({
-  heading,
-  label,
-}: {
-  heading: string;
-  label: string;
-}) => {
+export const InfoCategory = ({ post }: { post: WorkMetadata }) => {
   return (
     <dl css={info}>
       <dt css={info__heading}>
-        <span className="inline-block" data-ref="infoText">
-          {heading}
+        <span className="inline-block uppercase" data-ref="infoText">
+          (Category)
         </span>
       </dt>
       <dd css={info__label}>
         <span className="inline-block" data-ref="infoText">
-          {label}
+          {post.category}
         </span>
       </dd>
     </dl>
@@ -33,8 +27,8 @@ export const InfoDate = ({ post }: { post: WorkMetadata }) => {
   return (
     <dl css={info}>
       <dt css={info__heading}>
-        <span className="inline-block" data-ref="infoText">
-          (DATE)
+        <span className="inline-block uppercase" data-ref="infoText">
+          (Date)
         </span>
       </dt>
       <dd className="uppercase" css={info__label}>
@@ -54,8 +48,8 @@ export const InfoUrl = ({ post }: { post: WorkMetadata }) => {
   return (
     <dl css={info}>
       <dt css={info__heading}>
-        <span className="inline-block" data-ref="infoText">
-          (URL)
+        <span className="inline-block uppercase" data-ref="infoText">
+          (Url)
         </span>
       </dt>
       <dd css={info__url}>

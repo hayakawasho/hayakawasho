@@ -7,7 +7,7 @@ import { PageWithHeader } from "./_components/page-with-header";
 import { Seo } from "./_components/seo";
 import type { WorkMetadata } from "@/_work/model";
 
-const PER_PAGE = 5;
+const PER_PAGE = 10;
 
 export const data = {
   pagination: {
@@ -31,53 +31,33 @@ export const render = (props: any) => {
           <div css={wrap}>
             <ul className="" css={projects} data-ref="grid">
               {posts.map((post, index) => (
-                <li css={project}>
-                  <Thumbnail index={index} key={post.id} post={post} />
+                <li css={project} key={post.id}>
+                  <Thumbnail index={index} post={post} />
                 </li>
               ))}
               {posts.map((post, index) => (
-                <li css={project}>
-                  <Thumbnail
-                    index={index + PER_PAGE}
-                    key={post.id}
-                    post={post}
-                  />
+                <li css={project} key={post.id}>
+                  <Thumbnail index={index + PER_PAGE} post={post} />
                 </li>
               ))}
               {posts.map((post, index) => (
-                <li css={project}>
-                  <Thumbnail
-                    index={index + PER_PAGE * 2}
-                    key={post.id}
-                    post={post}
-                  />
+                <li css={project} key={post.id}>
+                  <Thumbnail index={index + PER_PAGE * 2} post={post} />
                 </li>
               ))}
               {posts.map((post, index) => (
-                <li css={project}>
-                  <Thumbnail
-                    index={index + PER_PAGE * 3}
-                    key={post.id}
-                    post={post}
-                  />
+                <li css={project} key={post.id}>
+                  <Thumbnail index={index + PER_PAGE * 3} post={post} />
                 </li>
               ))}
               {posts.map((post, index) => (
-                <li css={project}>
-                  <Thumbnail
-                    index={index + PER_PAGE * 4}
-                    key={post.id}
-                    post={post}
-                  />
+                <li css={project} key={post.id}>
+                  <Thumbnail index={index + PER_PAGE * 4} post={post} />
                 </li>
               ))}
               {posts.map((post, index) => (
-                <li css={project}>
-                  <Thumbnail
-                    index={index + PER_PAGE * 5}
-                    key={post.id}
-                    post={post}
-                  />
+                <li css={project} key={post.id}>
+                  <Thumbnail index={index + PER_PAGE * 5} post={post} />
                 </li>
               ))}
             </ul>

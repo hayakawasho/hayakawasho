@@ -25,6 +25,12 @@ export const Head: FC<{
         onLoad={`this.onload = null; this.rel='stylesheet';` as any}
         rel="stylesheet"
       />
+      <link
+        as="style"
+        href="https://api.fontshare.com/css?f[]=satoshi@500&display=swap"
+        onLoad={`this.onload = null; this.rel='stylesheet';` as any}
+        rel="stylesheet"
+      />
       <Global styles={base} />
       {!idDev && (
         <link
@@ -34,7 +40,6 @@ export const Head: FC<{
           rel="stylesheet"
         />
       )}
-      <Global styles={utilities} />
     </head>
   );
 };
@@ -43,7 +48,8 @@ const base = css`
   :root {
     --font: "Jost", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
       Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-    --font-en: "Moneta", sans-serif;
+    --font-heading: "Satoshi", sans-serif;
+    --font-en: "Gallery Modern", serif;
 
     --vh: 1vh;
 
@@ -63,10 +69,18 @@ const base = css`
   }
 
   html {
-    font-size: calc(10 / 1280 * 100vw);
+    font-size: 10px;
 
-    @media (min-width: 1280px) {
-      font-size: calc(10px + (12 - 10) * ((100vw - 1280px) / (1680 - 1280)));
+    @media screen and (max-width: (1080px)) {
+      font-size: 9px;
+    }
+
+    @media screen and (max-width: (960px)) {
+      font-size: 8px;
+    }
+
+    @media screen and (max-width: (834px)) {
+      font-size: 7px;
     }
 
     @media (min-width: 1680px) {
@@ -74,7 +88,7 @@ const base = css`
     }
 
     @media (max-width: 639px) {
-      font-size: calc(10 / 375 * 100vw);
+      font-size: 10px;
     }
   }
 
@@ -141,18 +155,28 @@ const base = css`
     font-style: normal;
     font-display: swap;
   }
-`;
 
-const utilities = css`
-  .u-sp {
-    @media (min-width: 640px) {
-      display: none !important;
-    }
+  @font-face {
+    font-family: "Saol Display";
+    src: url("/assets/SaolDisplay-Light.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
   }
 
-  .u-pc {
-    @media (max-width: 639px) {
-      display: none !important;
-    }
+  @font-face {
+    font-family: "Saol Display";
+    src: url("/assets/SaolDisplay-LightItalic.woff2") format("woff2");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Gallery Modern";
+    src: url("/assets/gallerymodern-webfont.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
   }
 `;

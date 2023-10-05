@@ -1,5 +1,4 @@
 import { defineConfig } from "windicss/helpers";
-import plugin from "windicss/plugin";
 
 export default defineConfig({
   extract: {
@@ -7,27 +6,10 @@ export default defineConfig({
     exclude: ["node_modules/**/*", ".git/**/*"],
   },
   theme: {
-    extend: {
-      fontFamily: {
-        //
-      },
+    screens: {
+      sp: { max: "639px" },
+      pc: "640px",
     },
   },
-  plugins: [
-    plugin(({ addUtilities }) => {
-      addUtilities({
-        ".fit2parent": {
-          position: "absolute",
-          top: "0",
-          left: "0",
-          width: "100%",
-          height: "100%",
-        },
-        ".sizefit": {
-          width: "100%",
-          height: "100%",
-        },
-      });
-    }),
-  ],
+  plugins: [],
 });
