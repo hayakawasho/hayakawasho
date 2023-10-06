@@ -48,19 +48,19 @@ export const render = (props: any) => {
               <div css={intro__g}>
                 <div css={intro__indexNumber}>
                   <span
-                    className="inline-block tracking-[-0.05em]"
+                    className="inline-block tracking-[-0.02em]"
                     data-ref="now"
                   >
                     {zeroPadding(now)}
                   </span>
                   <span
-                    className="relative inline-block mx-[.8em]"
+                    className="relative inline-block mx-[.5em]"
                     data-ref="dash"
                   >
                     ー
                   </span>
                   <span
-                    className="inline-block  tracking-[-0.05em]"
+                    className="inline-block  tracking-[-0.02em]"
                     data-ref="max"
                   >
                     {zeroPadding(max)}
@@ -141,6 +141,7 @@ const sub = css`
   text-transform: uppercase;
   line-height: 1;
   text-align: center;
+  letter-spacing: 0.05em;
 
   @media (min-width: 640px) {
     font-size: 7.3rem;
@@ -155,7 +156,7 @@ const heading = css`
   font-family: var(--font-heading);
   letter-spacing: -0.02em;
   line-height: 1.25;
-  margin-top: -0.1em;
+  //margin-top: -0.1em;
   overflow: hidden;
   text-align: center;
 

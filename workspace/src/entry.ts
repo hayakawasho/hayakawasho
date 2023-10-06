@@ -9,16 +9,7 @@ import Project from "./_components/project";
 import Projects from "./_components/projects";
 import type { IComponent, ComponentContext } from "lake";
 
-const bootstrap = (setup: () => void) => {
-  if (document.readyState !== "loading") {
-    setup();
-    return;
-  }
-
-  document.addEventListener("DOMContentLoaded", setup, false);
-};
-
-bootstrap(() => {
+const init = () => {
   const { component, unmount } = create();
 
   const table: Record<string, IComponent> = {
@@ -65,7 +56,13 @@ bootstrap(() => {
       });
     },
   });
-});
+};
+
+if (document.readyState !== "loading") {
+  init();
+} else {
+  document.addEventListener("DOMContentLoaded", init);
+}
 
 if (process.env.NODE_ENV === "development") {
   const Stats = await (
