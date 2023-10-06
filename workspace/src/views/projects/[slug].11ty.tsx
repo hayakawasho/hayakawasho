@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import { renderToStaticMarkup as r } from "react-dom/server";
+import { zeroPadding } from "@/_foundation/utils";
 import { Body } from "../_components/body";
 import { Header } from "../_components/header";
 import {
@@ -47,7 +48,7 @@ export const render = (props: any) => {
               <div css={intro__g}>
                 <div css={intro__indexNumber}>
                   <span className="inline-block" data-ref="now">
-                    {now}
+                    {zeroPadding(now)}
                   </span>
                   <span
                     className="relative top-[-1px] inline-block mx-[.4em]"
@@ -56,22 +57,22 @@ export const render = (props: any) => {
                     —
                   </span>
                   <span className="inline-block" data-ref="max">
-                    {max}
+                    {zeroPadding(max)}
                   </span>
                 </div>
 
                 <div css={intro__hgroup}>
-                  <p css={intro__sub}>
+                  <p css={sub}>
                     <span className="inline-block uppercase">Projects/</span>
                   </p>
-                  <h1 css={intro__heading} data-ref="h1">
+                  <h1 css={heading} data-ref="h1">
                     <span className="inline-block leading-[1]">
                       {post.title}
                     </span>
                   </h1>
                 </div>
 
-                <div css={infoWrap}>
+                <div css={intro__info}>
                   <div css={info}>
                     <InfoCategory post={post} />
                     <InfoDate post={post} />
@@ -111,10 +112,10 @@ export const render = (props: any) => {
                 data-ref="nextHGroup"
                 href={`../${nextPost.id}/`}
               >
-                <p css={nextProject__heading}>
+                <p css={sub}>
                   <span className="inline-block uppercase">Next</span>
                 </p>
-                <h2 css={nextProject__name}>
+                <h2 css={heading}>
                   <span className="inline-block leading-[1]">
                     {nextPost.title}
                   </span>
@@ -128,34 +129,7 @@ export const render = (props: any) => {
   )}`;
 };
 
-const intro = css`
-  position: relative;
-`;
-
-const intro__g = css`
-  min-height: 125vw;
-  position: relative;
-  overflow: hidden;
-
-  @media (min-width: 640px) {
-    min-height: auto;
-    height: 100vh;
-    height: 100svh;
-  }
-`;
-
-const intro__hgroup = css`
-  padding-top: 10rem;
-
-  @media (min-width: 640px) {
-    position: absolute;
-    top: 50%;
-    margin-top: -10rem;
-    padding: 0;
-  }
-`;
-
-const intro__sub = css`
+const sub = css`
   font-size: 4.1rem;
   font-family: var(--font-en);
   text-transform: uppercase;
@@ -167,7 +141,7 @@ const intro__sub = css`
   }
 `;
 
-const intro__heading = css`
+const heading = css`
   width: 100%;
   font-size: 4.1rem;
   font-weight: 500;
@@ -180,14 +154,44 @@ const intro__heading = css`
 
   @media (min-width: 640px) {
     font-size: 7.3rem;
-    // font-weight: 400;
   }
 `;
 
-const infoWrap = css`
+const intro = css`
+  position: relative;
+`;
+
+const intro__g = css`
+  height: 90vh;
+  height: 90svh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (min-width: 640px) {
+    height: 100vh;
+    height: 100svh;
+  }
+`;
+
+const intro__hgroup = css`
+  margin-top: -10rem;
+
+  @media (min-width: 640px) {
+    position: absolute;
+    top: 50%;
+    margin-top: -10rem;
+    padding: 0;
+  }
+`;
+
+const intro__info = css`
+  position: absolute;
+  bottom: 6rem;
+  left: 0;
   padding: 0 var(--grid);
-  padding-top: 4.8rem;
-  padding-bottom: 6.6667vw;
   display: flex;
   align-items: flex-start;
 
@@ -304,30 +308,4 @@ const nextProject__hgroup = css`
   display: inline-block;
   pointer-events: auto;
   color: #fff;
-`;
-
-const nextProject__heading = css`
-  font-size: 4.1rem;
-  font-family: var(--font-en);
-  line-height: 1;
-  text-align: center;
-  font-weight: 300;
-
-  @media (min-width: 640px) {
-    font-size: 7.3rem;
-    margin-top: -0.5em;
-  }
-`;
-
-const nextProject__name = css`
-  font-size: 4.1rem;
-  line-height: 1;
-  text-align: center;
-  font-family: var(--font-heading);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-
-  @media (min-width: 640px) {
-    font-size: 7.3rem;
-  }
 `;

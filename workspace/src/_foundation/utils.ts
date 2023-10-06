@@ -1,6 +1,10 @@
 import { gsap } from "gsap";
 import type { RefElement } from "lake";
 
+export const zeroPadding = (num: number, p = 2) => {
+  return num.toString().padStart(p, "0");
+};
+
 export const sleep = (time: number): Promise<void> => {
   return new Promise((resolve) => {
     gsap.to(

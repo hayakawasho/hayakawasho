@@ -13,7 +13,7 @@ export const Head: FC<{
       {!idDev && <link as="style" href="/assets/entry.css" rel="preload" />}
       <link
         as="font"
-        href="/assets/Moneta-Light.woff2"
+        href="/assets/gallerymodern-webfont.woff2"
         rel="preload"
         type="font/woff2"
       />

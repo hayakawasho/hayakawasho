@@ -80,10 +80,10 @@ export default defineComponent({
         }),
         Tween.wait(0.1),
         Tween.parallel(
-          Tween.tween([refs.now, refs.max], 0.75, "power2.out", {
+          Tween.tween([refs.now, refs.max], 0.8, "power2.out", {
             x: "0%",
           }),
-          Tween.tween(refs.dash, 1.1, "expo.out", {
+          Tween.tween(refs.dash, 1.2, "expo.out", {
             scaleX: 1,
           }),
           Tween.tween(refs.infoText, 1.85, "expo.out", {
