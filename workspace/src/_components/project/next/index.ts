@@ -7,7 +7,7 @@ import type { AppContext } from "@/_foundation/type";
 
 type Refs = {
   nextProject: HTMLElement;
-  nextHGroup: HTMLElement;
+  nextLink: HTMLElement;
   end: HTMLElement;
 };
 
@@ -16,7 +16,7 @@ export default defineComponent({
   setup(_el, _context: AppContext) {
     const isVisible = ref(false);
 
-    const { refs } = useDomRef<Refs>("nextHGroup", "end", "nextProject");
+    const { refs } = useDomRef<Refs>("nextLink", "end", "nextProject");
 
     useIntersectionWatch(refs.end, ([entry]) => {
       isVisible.value = entry.isIntersecting;
@@ -43,7 +43,7 @@ export default defineComponent({
         Tween.prop(refs.nextProject, {
           opacity,
         }),
-        Tween.prop(refs.nextHGroup, {
+        Tween.prop(refs.nextLink, {
           y,
           z,
         })

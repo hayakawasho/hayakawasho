@@ -47,16 +47,22 @@ export const render = (props: any) => {
             <div css={intro}>
               <div css={intro__g}>
                 <div css={intro__indexNumber}>
-                  <span className="inline-block" data-ref="now">
+                  <span
+                    className="inline-block tracking-[-0.05em]"
+                    data-ref="now"
+                  >
                     {zeroPadding(now)}
                   </span>
                   <span
-                    className="relative top-[-1px] inline-block mx-[.4em]"
+                    className="relative inline-block mx-[.8em]"
                     data-ref="dash"
                   >
-                    —
+                    ー
                   </span>
-                  <span className="inline-block" data-ref="max">
+                  <span
+                    className="inline-block  tracking-[-0.05em]"
+                    data-ref="max"
+                  >
                     {zeroPadding(max)}
                   </span>
                 </div>
@@ -109,13 +115,13 @@ export const render = (props: any) => {
             <div css={nextProject} data-ref="nextProject">
               <a
                 css={nextProject__hgroup}
-                data-ref="nextHGroup"
+                data-ref="nextLink"
                 href={`../${nextPost.id}/`}
               >
-                <p css={sub}>
+                <p css={sub} className="!pc:text-center">
                   <span className="inline-block uppercase">Next</span>
                 </p>
-                <h2 css={heading}>
+                <h2 css={heading} className="!pc:text-center">
                   <span className="inline-block leading-[1]">
                     {nextPost.title}
                   </span>
@@ -138,6 +144,7 @@ const sub = css`
 
   @media (min-width: 640px) {
     font-size: 7.3rem;
+    text-align: left;
   }
 `;
 
@@ -154,6 +161,7 @@ const heading = css`
 
   @media (min-width: 640px) {
     font-size: 7.3rem;
+    text-align: left;
   }
 `;
 
@@ -178,12 +186,14 @@ const intro__g = css`
 
 const intro__hgroup = css`
   margin-top: -10rem;
+  perspective: 1000px;
 
   @media (min-width: 640px) {
     position: absolute;
     top: 50%;
     margin-top: -10rem;
     padding: 0;
+    width: 100%;
   }
 `;
 
@@ -294,6 +304,7 @@ const nextProject = css`
   align-items: center;
   pointer-events: none;
   background-color: #041f1e;
+  background-color: #161616;
   z-index: 100;
   opacity: 0;
   perspective: 1000px;

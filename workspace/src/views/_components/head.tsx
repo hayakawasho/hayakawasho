@@ -59,6 +59,7 @@ const base = css`
     // --color-text: #fff6e5;
     // --color-bg: #161616;
     --color-text: #607f72;
+    --color-text: #161616;
     --color-bg: #f2f2f2;
   }
 
@@ -71,24 +72,24 @@ const base = css`
   html {
     font-size: 10px;
 
-    @media screen and (max-width: (1080px)) {
+    @media screen and (max-width: 1080px) {
       font-size: 9px;
     }
 
-    @media screen and (max-width: (960px)) {
+    @media screen and (max-width: 960px) {
       font-size: 8px;
     }
 
-    @media screen and (max-width: (834px)) {
-      font-size: 7px;
+    @media screen and (max-width: 844px) {
+      font-size: 6px;
+    }
+
+    @media screen and (max-width: 639px) {
+      font-size: 10px;
     }
 
     @media (min-width: 1680px) {
       font-size: 12px;
-    }
-
-    @media (max-width: 639px) {
-      font-size: 10px;
     }
   }
 
@@ -145,31 +146,6 @@ const base = css`
     max-width: 100%;
     height: auto;
     vertical-align: middle;
-  }
-
-  @font-face {
-    font-family: "Moneta";
-    src: local("Moneta Light"), local("Moneta-Light"),
-      url("/assets/Moneta-Light.woff2") format("woff2");
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "Saol Display";
-    src: url("/assets/SaolDisplay-Light.woff2") format("woff2");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "Saol Display";
-    src: url("/assets/SaolDisplay-LightItalic.woff2") format("woff2");
-    font-weight: 400;
-    font-style: italic;
-    font-display: swap;
   }
 
   @font-face {
