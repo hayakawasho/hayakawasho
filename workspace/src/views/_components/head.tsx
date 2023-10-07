@@ -10,7 +10,21 @@ export const Head: FC<{
     <head>
       {seo}
       <link href="/favicon.ico" rel="icon" />
-      {!idDev && <link as="style" href="/assets/entry.css" rel="preload" />}
+      {!idDev && (
+        <>
+          <link
+            as="style"
+            rel="preload"
+            href="https://fonts.googleapis.com/css2?family=Jost:wght@400&display=swap"
+          />
+          <link
+            as="style"
+            rel="preload"
+            href="https://api.fontshare.com/css?f[]=satoshi@500&display=swap"
+          />
+          <link as="style" href="/assets/entry.css" rel="preload" />
+        </>
+      )}
       <link
         as="font"
         href="/assets/gallerymodern-webfont.woff2"
