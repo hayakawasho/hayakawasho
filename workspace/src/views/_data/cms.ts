@@ -16,8 +16,8 @@ const fetchWorks = async () => {
 
   return {
     home: res[0].works,
-    works: res[1].works,
     totalCount: res[1].totalCount,
+    works: res[1].works,
   };
 };
 
