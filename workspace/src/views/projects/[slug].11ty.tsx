@@ -68,10 +68,10 @@ export const render = (props: any) => {
                 </div>
 
                 <div css={intro__hgroup}>
-                  <p css={sub} className="">
+                  <p className="" css={sub}>
                     <span className="inline-block uppercase">Projects/</span>
                   </p>
-                  <h1 css={heading} data-ref="h1" className="">
+                  <h1 className="" css={heading} data-ref="h1">
                     <span className="inline-block leading-[1]">
                       {post.title}
                     </span>
@@ -115,13 +115,13 @@ export const render = (props: any) => {
             <div css={nextProject} data-ref="nextProject">
               <div
                 css={nextProject__hgroup}
-                data-ref="nextLink"
                 data-href={`../${nextPost.id}/`}
+                data-ref="nextLink"
               >
-                <p css={sub} className="!pc:text-center">
+                <p className="!pc:text-center" css={sub}>
                   <span className="inline-block uppercase">Next</span>
                 </p>
-                <h2 css={heading} className="!pc:text-center">
+                <h2 className="!pc:text-center" css={heading}>
                   <span className="inline-block leading-[1]">
                     {nextPost.title}
                   </span>
@@ -299,8 +299,7 @@ const nextProject = css`
   justify-content: center;
   align-items: center;
   pointer-events: none;
-  background-color: #041f1e;
-  background-color: #161616;
+  background-color: var(--color-text);
   z-index: 100;
   opacity: 0;
   perspective: 1000px;
@@ -314,5 +313,5 @@ const nextProject = css`
 const nextProject__hgroup = css`
   display: inline-block;
   pointer-events: auto;
-  color: #fff;
+  color: var(--color-bg);
 `;

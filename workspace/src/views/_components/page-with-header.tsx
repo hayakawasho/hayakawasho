@@ -119,12 +119,10 @@ const gridLine = css`
   width: 1px;
   height: 100%;
   transform: translateX(-50%);
-  // z-index: 2;
-  background: rgba(255, 255, 255, 0.05);
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(4, 31, 30, 0.06);
 
   @media (prefers-color-scheme: dark) {
-    // background: rgba(0, 0, 0, 0.05);
+    background: rgba(255, 246, 229, 0.06);
   }
 `;
 
@@ -159,6 +157,9 @@ const bg = css`
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--color-bg);
   background: linear-gradient(0deg, #fff, var(--color-bg));
+
+  @media (prefers-color-scheme: dark) {
+    background: var(--color-bg);
+  }
 `;

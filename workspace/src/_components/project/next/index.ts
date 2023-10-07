@@ -26,10 +26,10 @@ export default defineComponent({
     const [_, wh] = useWindowSize();
 
     const cache = {
-      top,
       bottom,
-      wh: wh.value,
       currentY: 0,
+      top,
+      wh: wh.value,
     };
 
     useScrollTween(({ currentY }) => {
