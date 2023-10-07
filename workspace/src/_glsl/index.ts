@@ -1,2 +1,2 @@
 export * from "./shader-pass";
-export * from "./plane";
+export * from "./image-plane";

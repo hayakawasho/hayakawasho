@@ -4,7 +4,7 @@ import { useWindowSize } from "@/_states/window-size";
 import type { AppContext } from "@/_foundation/type";
 
 export default defineComponent({
-  name: "project.eyecatch",
+  name: "eyecatch",
   setup(el, { env }: AppContext) {
     const $img = el.querySelector("img")!;
     const isVisible = ref(false);

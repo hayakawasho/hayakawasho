@@ -21,13 +21,13 @@ export const Head: FC<{
       <link href="https://fonts.gstatic.com" rel="dns-prefetch preconnect" />
       <link
         as="style"
-        rel="preload"
         href="https://fonts.googleapis.com/css2?family=Jost:wght@400&display=swap"
+        rel="preload"
       />
       <link
         as="style"
-        rel="preload"
         href="https://api.fontshare.com/css?f[]=satoshi@500&display=swap"
+        rel="preload"
       />
       <link
         as="style"

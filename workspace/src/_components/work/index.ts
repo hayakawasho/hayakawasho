@@ -27,7 +27,7 @@ type Refs = {
 };
 
 export default defineComponent({
-  name: "project",
+  name: "work",
   setup(el, context: AppContext) {
     const { once } = context;
     const { addChild } = useSlot();
@@ -55,24 +55,23 @@ export default defineComponent({
         return;
       }
 
-      Tween.prop(refs.now, {
-        willChange: "transform",
-        x: "-110%",
-      });
-      Tween.prop(refs.dash, {
-        scaleX: 0,
-        willChange: "transform",
-      });
-      Tween.prop(refs.max, {
-        willChange: "transform",
-        x: "110%",
-      });
-      Tween.prop([refs.infoText, refs.stack], {
-        willChange: "transform",
-        y: "110%",
-      });
-
       Tween.serial(
+        Tween.prop(refs.now, {
+          willChange: "transform",
+          x: "-110%",
+        }),
+        Tween.prop(refs.dash, {
+          scaleX: 0,
+          willChange: "transform",
+        }),
+        Tween.prop(refs.max, {
+          willChange: "transform",
+          x: "110%",
+        }),
+        Tween.prop([refs.infoText, refs.stack], {
+          willChange: "transform",
+          y: "110%",
+        }),
         Tween.prop(refs.infoLine, {
           opacity: 0,
           scaleY: 0,

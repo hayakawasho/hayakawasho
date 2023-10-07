@@ -4,16 +4,19 @@ import { WorksRepository } from "@/_repositories/works";
 dotenv.config();
 
 const fetchWorks = async () => {
-  const { findList } = WorksRepository.create(process.env.API_KEY!);
+  const repository = WorksRepository.create(process.env.API_KEY!);
 
   const res = await Promise.all([
-    findList({}),
-    findList({ limit: 99, orders: "-launch" }),
+    repository.findList({}),
+    repository.findList({
+      limit: 99,
+      orders: "-launch",
+    }),
   ]);
 
   return {
     home: res[0].works,
-    projects: res[1].works,
+    works: res[1].works,
     totalCount: res[1].totalCount,
   };
 };

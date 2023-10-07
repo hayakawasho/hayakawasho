@@ -14,7 +14,6 @@ export default defineComponent({
     const { once } = context;
 
     const { addChild } = useSlot();
-    const { refs } = useDomRef<{ cases: HTMLElement }>("cases");
 
     useMount(() => {
       if (once) {

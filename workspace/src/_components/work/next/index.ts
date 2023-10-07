@@ -12,7 +12,7 @@ type Refs = {
 };
 
 export default defineComponent({
-  name: "project.next",
+  name: "next",
   setup(_el, _context: AppContext) {
     const isVisible = ref(false);
 

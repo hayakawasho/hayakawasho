@@ -5,18 +5,18 @@ import { qsa } from "@/_foundation/utils";
 import Home from "./_components/home";
 import Load from "./_components/load";
 import Noop from "./_components/noop.svelte";
-import Project from "./_components/project";
-import Projects from "./_components/projects";
+import Work from "./_components/work";
+import Works from "./_components/works";
 import type { IComponent, ComponentContext } from "lake";
 
 const init = () => {
   const { component, unmount } = create();
 
   const table: Record<string, IComponent> = {
-    home: Home,
-    noop: withSvelte(Noop, "noop"),
-    project: Project,
-    projects: Projects,
+    Home,
+    Noop: withSvelte(Noop, "noop"),
+    Work,
+    Works,
   } as const;
 
   const mountComponents = (
@@ -26,7 +26,7 @@ const init = () => {
     return qsa<HTMLElement>("[data-component]", scope).reduce<
       ComponentContext[]
     >((acc, el) => {
-      const name = el.dataset.component || "noop";
+      const name = el.dataset.component || "Noop";
       try {
         const mount = component(table[`${name}`]);
         acc.push(mount(el, props));

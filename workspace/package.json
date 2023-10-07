@@ -1,12 +1,13 @@
 {
   "private": true,
+  "name": "my-app",
   "scripts": {
     "clean": "rimraf _site/* _transpiled/*",
     "dev:vite": "vite",
-    "dev:jsx": "babel ./src/views --watch --extensions '.js,.ts,.tsx' --out-dir _transpiled --copy-files",
+    "dev:jsx": "babel ./src/views --watch --extensions '.js,.jsx,.ts,.tsx' --out-dir _transpiled --copy-files",
     "dev:11ty": "node --require esbuild-register node_modules/.bin/eleventy --serve",
     "start": "NODE_ENV=development run-p dev:*",
-    "build:jsx": "babel ./src/views --extensions '.js,.ts,.tsx' --out-dir _transpiled --copy-files",
+    "build:jsx": "babel ./src/views --extensions '.js,.jsx,.ts,.tsx' --out-dir _transpiled --copy-files",
     "build:vite": "vite build",
     "build:11ty": "node --require esbuild-register node_modules/.bin/eleventy",
     "build": "NODE_ENV=production run-s clean build:*",

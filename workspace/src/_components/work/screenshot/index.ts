@@ -15,7 +15,7 @@ import vertex from "./vertex.vert";
 import type { AppContext } from "@/_foundation/type";
 
 export default defineComponent({
-  name: "project.screenshot",
+  name: "screenshot",
   setup(el: HTMLImageElement, context: AppContext) {
     const { glContext, env } = context;
     const { gl } = glContext;
