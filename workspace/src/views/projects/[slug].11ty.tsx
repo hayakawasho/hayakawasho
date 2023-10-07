@@ -258,7 +258,7 @@ const intro__indexNumber = css`
   @media (min-width: 640px) {
     right: calc(var(--grid) - var(--gap) * 0.5);
     top: 6rem;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
 `;
 

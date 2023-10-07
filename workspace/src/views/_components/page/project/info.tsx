@@ -70,7 +70,7 @@ const info = css`
   font-size: 1.1rem;
 
   @media (min-width: 640px) {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
 `;
 

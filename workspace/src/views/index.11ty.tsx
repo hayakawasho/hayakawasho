@@ -70,9 +70,9 @@ export const render = (props: any) => {
 
 const Thumbnail = ({ post, index }: { post: WorkMetadata; index: number }) => {
   const speed = {
-    0: 0.9,
-    1: 1,
-    2: 0.9,
+    0: 0.75,
+    1: 0.9,
+    2: 0.75,
   }[index % 3];
 
   return (
@@ -105,6 +105,11 @@ const projects = css`
   grid-template-columns: repeat(3, 1fr);
   width: calc(100% + var(--grid) * 11);
   left: calc(var(--grid) * -5.5);
+
+  @media (min-width: 640px) {
+    width: calc(100% + var(--grid) * 8);
+    left: calc(var(--grid) * -4);
+  }
 `;
 
 const project = css`
@@ -122,6 +127,6 @@ const project__eyecatch = css`
   display: block;
 
   @media (min-width: 640px) {
-    inset: 5rem;
+    inset: 6rem;
   }
 `;

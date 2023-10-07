@@ -23,7 +23,7 @@ const stacksItems = css`
   gap: 0.2em;
 
   @media (min-width: 640px) {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
 
   > li {
