@@ -80,7 +80,11 @@ const base = css`
       font-size: 8px;
     }
 
-    @media screen and (max-width: 844px) {
+    @media screen and (max-width: 854px) {
+      font-size: 7px;
+    }
+
+    @media screen and (max-width: 767px) {
       font-size: 6px;
     }
 

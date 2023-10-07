@@ -68,10 +68,10 @@ export const render = (props: any) => {
                 </div>
 
                 <div css={intro__hgroup}>
-                  <p css={sub}>
+                  <p css={sub} className="">
                     <span className="inline-block uppercase">Projects/</span>
                   </p>
-                  <h1 css={heading} data-ref="h1">
+                  <h1 css={heading} data-ref="h1" className="">
                     <span className="inline-block leading-[1]">
                       {post.title}
                     </span>
@@ -113,10 +113,10 @@ export const render = (props: any) => {
           <aside data-ref="next">
             <div css={dummy} data-ref="end" data-scroll-item></div>
             <div css={nextProject} data-ref="nextProject">
-              <a
+              <div
                 css={nextProject__hgroup}
                 data-ref="nextLink"
-                href={`../${nextPost.id}/`}
+                data-href={`../${nextPost.id}/`}
               >
                 <p css={sub} className="!pc:text-center">
                   <span className="inline-block uppercase">Next</span>
@@ -126,7 +126,7 @@ export const render = (props: any) => {
                     {nextPost.title}
                   </span>
                 </h2>
-              </a>
+              </div>
             </div>
           </aside>
         </main>
@@ -141,11 +141,10 @@ const sub = css`
   text-transform: uppercase;
   line-height: 1;
   text-align: center;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
 
   @media (min-width: 640px) {
-    font-size: 7.3rem;
-    text-align: left;
+    font-size: 8rem;
   }
 `;
 
@@ -156,13 +155,11 @@ const heading = css`
   font-family: var(--font-heading);
   letter-spacing: -0.02em;
   line-height: 1.25;
-  //margin-top: -0.1em;
   overflow: hidden;
   text-align: center;
 
   @media (min-width: 640px) {
-    font-size: 7.3rem;
-    text-align: left;
+    font-size: 8rem;
   }
 `;
 
@@ -186,15 +183,13 @@ const intro__g = css`
 `;
 
 const intro__hgroup = css`
-  margin-top: -10rem;
-  perspective: 1000px;
+  margin-top: -12rem;
 
   @media (min-width: 640px) {
     position: absolute;
     top: 50%;
-    margin-top: -10rem;
+    margin-top: -14rem;
     padding: 0;
-    width: 100%;
   }
 `;
 
@@ -208,9 +203,9 @@ const intro__info = css`
 
   @media (min-width: 640px) {
     position: absolute;
-    bottom: 0;
+    bottom: 6rem;
     left: calc(var(--grid) * 3);
-    padding: 0 0 8rem 0;
+    padding: 0;
   }
 `;
 
@@ -262,7 +257,7 @@ const intro__indexNumber = css`
 
   @media (min-width: 640px) {
     right: calc(var(--grid) - var(--gap) * 0.5);
-    top: 8rem;
+    top: 6rem;
     font-size: 1.4rem;
   }
 `;

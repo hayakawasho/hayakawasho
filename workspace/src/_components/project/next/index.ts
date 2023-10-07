@@ -22,22 +22,30 @@ export default defineComponent({
       isVisible.value = entry.isIntersecting;
     });
 
+    const { top, bottom } = refs.end.getBoundingClientRect();
     const [_, wh] = useWindowSize();
 
-    const { top, bottom } = refs.end.getBoundingClientRect();
+    const cache = {
+      top,
+      bottom,
+      wh: wh.value,
+      currentY: 0,
+    };
 
     useScrollTween(({ currentY }) => {
       if (!isVisible.value) {
         return;
       }
 
-      const startPos = top + wh.value * 0.5;
-      const endPos = bottom;
-      const range = currentY + wh.value;
+      cache.currentY = currentY;
+
+      const startPos = cache.top + cache.wh * 0.5;
+      const endPos = cache.bottom;
+      const range = currentY + cache.wh;
 
       const opacity = map(range, startPos, endPos, 0, 1);
       const y = map(range, startPos, endPos, 0, 25) - 25;
-      const z = -map(range, startPos, endPos, 0, 50);
+      const z = -map(range, startPos, endPos, 0, 50) + 50;
 
       Tween.parallel(
         Tween.prop(refs.nextProject, {
@@ -48,6 +56,14 @@ export default defineComponent({
           z,
         })
       );
+    });
+
+    useWindowSize(({ wh }) => {
+      const { top, bottom } = refs.end.getBoundingClientRect();
+
+      cache.top = cache.currentY + top;
+      cache.bottom = cache.currentY + bottom;
+      cache.wh = wh;
     });
   },
 });
