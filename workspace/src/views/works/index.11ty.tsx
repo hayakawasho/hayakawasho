@@ -29,7 +29,7 @@ export const render = (props: any) => {
     >
       <Body namespace="Works">
         <main className="h-full" data-component="Works">
-          <div data-scroll-item></div>
+          <div aria-hidden="true" data-scroll-item />
           <div css={styles.wrap}>
             <ul className="" css={styles.projects}>
               {posts.map((post) => (

@@ -33,16 +33,15 @@ export const PageWithHeader: FC<{
           className="fixed inset-0 w-screen pointer-events-none -z-1 invisible"
           css={svh}
           data-ref="windowSizeWatcher"
-        ></div>
-        <div css={bg} role="presentation"></div>
-        <div css={maskUpper} role="presentation"></div>
-        <div css={maskLower} role="presentation"></div>
-        <div css={gridLeft} role="presentation"></div>
-        <div css={gridMiddle} role="presentation"></div>
-        <div css={gridRight} role="presentation"></div>
+        />
+        <div css={bg} role="presentation" />
+        <div css={maskUpper} role="presentation" />
+        <div css={maskLower} role="presentation" />
+        <div css={gridLeft} role="presentation" />
+        <div css={gridMiddle} role="presentation" />
+        <div css={gridRight} role="presentation" />
         {header}
         {children}
-        <div data-component=""></div>
         <div
           aria-hidden="true"
           className="fixed inset-0 w-screen h-screen pointer-events-none z-10"
@@ -51,16 +50,17 @@ export const PageWithHeader: FC<{
           <canvas className="w-screen h-screen" data-ref="canvas"></canvas>
         </div>
         <script
-          defer
+          defer={true}
           src="https://polyfill.io/v3/polyfill.min.js?features=MediaQueryList.prototype.addEventListener%2CMediaQueryList.prototype.removeEventListener%2CString.prototype.padStart%2CIntersectionObserver%2CResizeObserver"
         />
         {idDev && (
           <script
+            defer={true}
             src={`http://${LOCAL_IP_ADDR}:3000/src/entry.ts`}
             type="module"
           />
         )}
-        {!idDev && <script src="/assets/entry.js" type="module" />}
+        {!idDev && <script defer={true} src="/assets/entry.js" type="module" />}
       </body>
     </html>
   );
@@ -91,10 +91,10 @@ const maskUpper = css`
   top: 0;
   background: linear-gradient(
     to bottom,
-    rgba(22, 22, 22, 0.32) 0%,
-    rgba(22, 22, 22, 0.16) 40%,
-    rgba(22, 22, 22, 0.04) 80%,
-    rgba(22, 22, 22, 0) 100%
+    rgba(4, 31, 30, 0.32) 0%,
+    rgba(4, 31, 30, 0.16) 40%,
+    rgba(4, 31, 30, 0.04) 80%,
+    rgba(4, 31, 30, 0) 100%
   );
 `;
 
@@ -103,10 +103,10 @@ const maskLower = css`
   bottom: 0;
   background: linear-gradient(
     to top,
-    rgba(22, 22, 22, 0.32) 0%,
-    rgba(22, 22, 22, 0.16) 40%,
-    rgba(22, 22, 22, 0.04) 80%,
-    rgba(22, 22, 22, 0) 100%
+    rgba(4, 31, 30, 0.32) 0%,
+    rgba(4, 31, 30, 0.16) 40%,
+    rgba(4, 31, 30, 0.04) 80%,
+    rgba(4, 31, 30, 0) 100%
   );
 `;
 
@@ -122,7 +122,7 @@ const gridLine = css`
   background: rgba(4, 31, 30, 0.06);
 
   @media (prefers-color-scheme: dark) {
-    background: rgba(255, 246, 229, 0.06);
+    background: rgba(255, 246, 229, 0.1);
   }
 `;
 

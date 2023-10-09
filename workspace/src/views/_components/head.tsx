@@ -71,7 +71,7 @@ const base = css`
 
     @media (prefers-color-scheme: dark) {
       --color-text: #fff6e5;
-      --color-bg: #1e1915;
+      --color-bg: #041f1e;
     }
   }
 

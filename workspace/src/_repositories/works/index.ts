@@ -4,7 +4,7 @@ import { Work } from "@/_work/model";
 import type { WorksAPISchema } from "../schema";
 import type { WorkMetadata } from "@/_work/model";
 
-const convertBookFromDB = (rawItem: any): WorkMetadata => {
+const convertWorkFromCMS = (rawItem: any): WorkMetadata => {
   return {
     category: rawItem.category[0],
     eyecatch: {
@@ -59,7 +59,7 @@ export class WorksRepository {
     return {
       totalCount: data.totalCount,
       works: data.contents.map((item) => {
-        return Work.create(convertBookFromDB(item)).toJSON();
+        return Work.create(convertWorkFromCMS(item)).toJSON();
       }),
     };
   };

@@ -41,7 +41,7 @@ export const render = (props: any) => {
     >
       <Body namespace="Work">
         <main data-component="Work">
-          <div className="mb-[10rem] sm:mb-[20rem]" data-scroll-item>
+          <div className="mb-[10rem] pc:mb-[20rem]" data-scroll-item>
             <div css={styles.intro}>
               <div css={styles.intro__g}>
                 <div css={styles.intro__indexNumber}>
@@ -66,9 +66,9 @@ export const render = (props: any) => {
                 </div>
 
                 <div css={styles.intro__hgroup}>
-                  <p className="" css={styles.sub}>
+                  <h2 className="" css={styles.sub}>
                     <span className="inline-block uppercase">Projects/</span>
-                  </p>
+                  </h2>
                   <h1 className="" css={styles.heading} data-ref="h1">
                     <span className="inline-block leading-[1]">
                       {post.title}
@@ -138,7 +138,12 @@ export const render = (props: any) => {
           </div>
 
           <aside data-ref="next">
-            <div css={styles.dummy} data-ref="end" data-scroll-item></div>
+            <div
+              aria-hidden="true"
+              css={styles.dummy}
+              data-ref="end"
+              data-scroll-item
+            />
             <div css={styles.next} data-ref="nextProject">
               <div
                 css={styles.next__hgroup}

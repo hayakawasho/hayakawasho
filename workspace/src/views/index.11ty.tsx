@@ -7,7 +7,7 @@ import { Seo } from "./_components/seo";
 import * as styles from "./index.css";
 import type { WorkMetadata } from "@/_work/model";
 
-const PER_PAGE = 5;
+const PER_PAGE = 10;
 
 export const data = {
   pagination: {
@@ -24,9 +24,9 @@ export const render = (props: any) => {
   return `<!DOCTYPE html>
   ${r(
     <PageWithHeader header={<Header />} seo={<Seo permalink="" title="" />}>
-      <Body namespace="home">
+      <Body namespace="Home">
         <main className="h-full" data-component="Home">
-          <div data-scroll-item></div>
+          <div aria-hidden="true" data-scroll-item />
           <h1 className="sr-only">SHO HAYAKAWA PORTFOLIO</h1>
           <div css={styles.wrap}>
             <ul className="" css={styles.projects} data-ref="grid">
