@@ -22,16 +22,6 @@ export const Head: FC<{
       <link
         as="style"
         href="https://fonts.googleapis.com/css2?family=Jost:wght@400&display=swap"
-        rel="preload"
-      />
-      <link
-        as="style"
-        href="https://api.fontshare.com/css?f[]=satoshi@500&display=swap"
-        rel="preload"
-      />
-      <link
-        as="style"
-        href="https://fonts.googleapis.com/css2?family=Jost:wght@400&display=swap"
         onLoad={`this.onload = null; this.rel='stylesheet';` as any}
         rel="stylesheet"
       />
