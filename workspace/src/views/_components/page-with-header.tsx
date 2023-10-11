@@ -91,10 +91,10 @@ const maskUpper = css`
   top: 0;
   background: linear-gradient(
     to bottom,
-    rgba(4, 31, 30, 0.32) 0%,
-    rgba(4, 31, 30, 0.16) 40%,
-    rgba(4, 31, 30, 0.04) 80%,
-    rgba(4, 31, 30, 0) 100%
+    rgba(22, 22, 22, 0.32) 0%,
+    rgba(22, 22, 22, 0.16) 40%,
+    rgba(22, 22, 22, 0.04) 80%,
+    rgba(22, 22, 22, 0) 100%
   );
 `;
 
@@ -103,10 +103,10 @@ const maskLower = css`
   bottom: 0;
   background: linear-gradient(
     to top,
-    rgba(4, 31, 30, 0.32) 0%,
-    rgba(4, 31, 30, 0.16) 40%,
-    rgba(4, 31, 30, 0.04) 80%,
-    rgba(4, 31, 30, 0) 100%
+    rgba(22, 22, 22, 0.32) 0%,
+    rgba(22, 22, 22, 0.16) 40%,
+    rgba(22, 22, 22, 0.04) 80%,
+    rgba(22, 22, 22, 0) 100%
   );
 `;
 
@@ -119,10 +119,10 @@ const gridLine = css`
   width: 1px;
   height: 100%;
   transform: translateX(-50%);
-  background: rgba(4, 31, 30, 0.06);
+  background: rgba(4, 31, 30, 0.07);
 
   @media (prefers-color-scheme: dark) {
-    background: rgba(255, 246, 229, 0.1);
+    background: rgba(255, 246, 229, 0.07);
   }
 `;
 

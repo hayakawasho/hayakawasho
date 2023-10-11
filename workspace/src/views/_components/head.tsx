@@ -8,29 +8,23 @@ export const Head: FC<{
 }> = ({ seo }) => {
   return (
     <head>
-      {seo}
-      <link href="/favicon.ico" rel="icon" />
       <link
         as="font"
         href="/assets/gallerymodern-webfont.woff2"
         rel="preload"
         type="font/woff2"
+        crossOrigin=""
       />
-      {!idDev && <link as="style" href="/assets/entry.css" rel="preload" />}
+      {!idDev && <link as="style" href="/assets/entry.css" rel="preload" onLoad={`this.onload=null;this.rel='stylesheet';` as any} />}
       <link href="https://fonts.googleapis.com" rel="dns-prefetch preconnect" />
       <link href="https://fonts.gstatic.com" rel="dns-prefetch preconnect" />
-      <link
-        as="style"
-        href="https://fonts.googleapis.com/css2?family=Jost:wght@400&display=swap"
-        onLoad={`this.onload = null; this.rel='stylesheet';` as any}
-        rel="stylesheet"
-      />
-      <link
-        as="style"
-        href="https://api.fontshare.com/css?f[]=satoshi@500&display=swap"
-        onLoad={`this.onload = null; this.rel='stylesheet';` as any}
-        rel="stylesheet"
-      />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400&display=swap" media="print" onLoad={`this.media='all'; this.onload=null;` as any}></link>
+      <link rel="stylesheet" href="https://api.fontshare.com/css?f[]=satoshi@500&display=swap" media="print" onLoad={`this.media='all'; this.onload=null;` as any}></link>
+      {seo}
+      <link href="/favicon.ico" rel="icon" />
+      <link as="style" href="https://fonts.googleapis.com/css2?family=Jost:wght@400&amp;display=swap" rel="stylesheet" />
+      <link as="style" href="https://api.fontshare.com/css?f[]=satoshi@500&amp;display=swap" rel="stylesheet" />
+
       <Global styles={base} />
       {!idDev && (
         <link
