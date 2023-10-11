@@ -12,7 +12,7 @@ import type { AppContext } from "@/_foundation/type";
 
 type Refs = {
   grid: HTMLElement;
-  gridItem: HTMLElement;
+  gridItem: HTMLElement[];
 };
 
 export default defineComponent({

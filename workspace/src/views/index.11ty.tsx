@@ -86,8 +86,8 @@ const Thumbnail = ({ post, index }: { post: WorkMetadata; index: number }) => {
         className="w-full h-full invisible"
         data-h={post.eyecatch.height}
         data-ref="plane"
-        data-src={post.eyecatch.src}
         data-speed={speed}
+        data-src={post.eyecatch.src}
         data-w={post.eyecatch.width}
         height={post.eyecatch.height}
         width={post.eyecatch.width}

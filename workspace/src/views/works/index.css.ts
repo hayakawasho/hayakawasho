@@ -7,16 +7,28 @@ export const wrap = css`
   height: 100%;
 `;
 
-export const projects = css`
-  position: absolute;
-  top: 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  width: calc(100% + var(--grid) * 11);
-  left: calc(var(--grid) * -5.5);
+export const li = css`
+  text-align: center;
+  padding-top: 2rem;
 
   @media ${mq.pc} {
-    width: calc(100% + var(--grid) * 8);
-    left: calc(var(--grid) * -4);
+    padding-top: 3.6rem;
+  }
+`;
+
+export const item = css`
+  backface-visibility: hidden;
+  display: inline-block;
+  width: 100%;
+  font-size: 4.2rem;
+  font-family: var(--font-en);
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  padding-left: var(--gap);
+
+  @media ${mq.pc} {
+    width: auto;
+    font-size: 12rem;
+    padding-left: 0;
   }
 `;

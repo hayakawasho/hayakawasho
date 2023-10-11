@@ -1,5 +1,4 @@
 import { renderToStaticMarkup as r } from "react-dom/server";
-import { shuffle } from "@/_foundation/shuffle";
 import * as styles from "./index.css";
 import { Body } from "../_components/body";
 import { Header } from "../_components/header";
@@ -19,7 +18,7 @@ export const data = {
 };
 
 export const render = (props: any) => {
-  const posts = shuffle(props.posts as WorkMetadata[]);
+  const posts = props.posts as WorkMetadata[];
 
   return `<!DOCTYPE html>
   ${r(
@@ -31,12 +30,29 @@ export const render = (props: any) => {
         <main className="h-full" data-component="Works">
           <div aria-hidden="true" data-scroll-item />
           <div css={styles.wrap}>
-            <ul className="" css={styles.projects}>
-              {posts.map((post) => (
-                <li key={post.id}>
-                  <div></div>
-                </li>
-              ))}
+            <ul data-ref="list">
+              {posts.map((post) => {
+                return (
+                  <li css={styles.li} key={post.id}>
+                    <a css={styles.item} data-ref="item" href={`./${post.id}/`}>
+                      <span className="inline-block leading-[.9]">
+                        {post.title}
+                      </span>
+                    </a>
+                  </li>
+                );
+              })}
+              {posts.map((post) => {
+                return (
+                  <li css={styles.li} key={post.id}>
+                    <a css={styles.item} data-ref="item" href={`./${post.id}/`}>
+                      <span className="inline-block leading-[.9]">
+                        {post.title}
+                      </span>
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </main>

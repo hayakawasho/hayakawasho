@@ -15,8 +15,8 @@ export default defineComponent({
   name: "Next",
   setup(_el, _context: AppContext) {
     const state = {
-      visible: false,
       resize: false,
+      visible: false,
     };
 
     const { refs } = useDomRef<Refs>("nextLink", "end", "nextProject");

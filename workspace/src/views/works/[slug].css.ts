@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import { mq } from "@/_foundation/mq";
 
 export const sub = css`
-  font-size: 4.1rem;
+  font-size: 4.2rem;
   font-family: var(--font-en);
   text-transform: uppercase;
   line-height: 1;
@@ -10,7 +10,7 @@ export const sub = css`
   letter-spacing: 0.02em;
 
   @media ${mq.pc} {
-    font-size: 8rem;
+    font-size: 9.8rem;
   }
 `;
 
@@ -25,7 +25,7 @@ export const heading = css`
   text-align: center;
 
   @media ${mq.pc} {
-    font-size: 8rem;
+    font-size: 9.4rem;
   }
 `;
 
