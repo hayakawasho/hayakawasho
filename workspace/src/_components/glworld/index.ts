@@ -9,15 +9,8 @@ const dpr = {
   sp: 2,
 };
 
-const fov = 60;
-const calcCamDistance = (h: number) => {
-  const vFov = (fov * Math.PI) / 180;
-  const fovRad = vFov * 0.5;
-  return (h * 0.5) / Math.tan(fovRad);
-};
-
 export default defineComponent({
-  name: "glWorld",
+  name: "GlWorld",
   setup(el, { env }: Pick<AppContext, "env">) {
     const { refs } = useDomRef<{ canvas: HTMLCanvasElement }>("canvas");
     const { height, width } = el.getBoundingClientRect();
@@ -34,9 +27,14 @@ export default defineComponent({
       width,
     });
 
-    const gl = renderer.gl;
+    const fov = 60;
+    const calcCamDistance = (h: number) => {
+      const vFov = (fov * Math.PI) / 180;
+      const fovRad = vFov * 0.5;
+      return (h * 0.5) / Math.tan(fovRad);
+    };
 
-    const camera = new Camera(gl, {
+    const camera = new Camera(renderer.gl, {
       aspect: width / height,
       far: 10000,
       fov,
@@ -49,9 +47,11 @@ export default defineComponent({
 
     useWindowSize(({ aspect, wh, ww }) => {
       state.resizing = true;
+
       renderer.setSize(ww, wh);
       camera.perspective({ aspect });
       camera.position.z = calcCamDistance(wh);
+
       state.resizing = false;
     });
 
@@ -66,14 +66,18 @@ export default defineComponent({
       });
     });
 
+    const addScene = (child: Transform) => {
+      scene.addChild(child);
+    };
+
+    const removeScene = (child: Transform) => {
+      scene.removeChild(child);
+    };
+
     return {
-      addScene: (child: Transform) => {
-        scene.addChild(child);
-      },
+      addScene,
       gl: renderer.gl,
-      removeScene: (child: Transform) => {
-        scene.removeChild(child);
-      },
+      removeScene,
     };
   },
 });

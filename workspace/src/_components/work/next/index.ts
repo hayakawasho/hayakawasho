@@ -12,15 +12,24 @@ type Refs = {
 };
 
 export default defineComponent({
-  name: "next",
+  name: "Next",
   setup(_el, _context: AppContext) {
-    const isVisible = ref(false);
+    const state = {
+      visible: false,
+      resize: false,
+    };
 
     const { refs } = useDomRef<Refs>("nextLink", "end", "nextProject");
 
-    useIntersectionWatch(refs.end, ([entry]) => {
-      isVisible.value = entry.isIntersecting;
-    });
+    useIntersectionWatch(
+      refs.end,
+      ([entry]) => {
+        state.visible = entry.isIntersecting;
+      },
+      {
+        rootMargin: "25%",
+      }
+    );
 
     const { top, bottom } = refs.end.getBoundingClientRect();
     const [_, wh] = useWindowSize();
@@ -33,7 +42,7 @@ export default defineComponent({
     };
 
     useScrollTween(({ currentY }) => {
-      if (!isVisible.value) {
+      if (!state.visible || state.resize) {
         return;
       }
 
@@ -59,11 +68,15 @@ export default defineComponent({
     });
 
     useWindowSize(({ wh }) => {
+      state.resize = true;
+
       const { top, bottom } = refs.end.getBoundingClientRect();
 
       cache.top = cache.currentY + top;
       cache.bottom = cache.currentY + bottom;
       cache.wh = wh;
+
+      state.resize = false;
     });
   },
 });

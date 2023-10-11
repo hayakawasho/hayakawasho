@@ -27,7 +27,7 @@ export const render = (props: any) => {
       <Body namespace="Home">
         <main className="h-full" data-component="Home">
           <div aria-hidden="true" data-scroll-item />
-          <h1 className="sr-only">SHO HAYAKAWA PORTFOLIO</h1>
+          <h1 className="sr-only">Sho hayakawa's portfolio</h1>
           <div css={styles.wrap}>
             <ul className="" css={styles.projects} data-ref="grid">
               {posts.map((post, index) => (
@@ -76,14 +76,18 @@ const Thumbnail = ({ post, index }: { post: WorkMetadata; index: number }) => {
   }[index % 3];
 
   return (
-    <a css={styles.project__eyecatch} href={`./works/${post.id}/`}>
+    <a
+      css={styles.project__eyecatch}
+      data-ref="gridItem"
+      href={`./works/${post.id}/`}
+    >
       <img
         alt={post.title}
         className="w-full h-full invisible"
         data-h={post.eyecatch.height}
         data-ref="plane"
-        data-speed={speed}
         data-src={post.eyecatch.src}
+        data-speed={speed}
         data-w={post.eyecatch.width}
         height={post.eyecatch.height}
         width={post.eyecatch.width}

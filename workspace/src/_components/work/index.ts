@@ -27,7 +27,7 @@ type Refs = {
 };
 
 export default defineComponent({
-  name: "work",
+  name: "Work",
   setup(el, context: AppContext) {
     const { once } = context;
     const { addChild } = useSlot();

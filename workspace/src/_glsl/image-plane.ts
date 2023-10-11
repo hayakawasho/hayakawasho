@@ -17,7 +17,7 @@ export class ImagePlane {
     this.mesh.position.y = currentY - this.#pos.y;
   };
 
-  resize = (ww: number, wh: number) => {
+  onResize = (ww: number, wh: number) => {
     this.#rect = this.el.getBoundingClientRect();
     const { width, height, left, top } = this.#rect;
     const { u_mesh_size } = this.mesh.program.uniforms; // TODO: 型チェックしたい

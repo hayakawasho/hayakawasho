@@ -15,7 +15,7 @@ const _window = window as any;
 const SELECTOR_CLASS = "[data-scroll-item]";
 
 export default defineComponent({
-  name: "scrollTweenContainer",
+  name: "ScrollTweenContainer",
   setup(el, { env }: Pick<AppContext, "env">) {
     const $item = qsa<HTMLElement>(SELECTOR_CLASS, el);
 

@@ -6,19 +6,35 @@ import {
   useUnmount,
 } from "lake";
 import { Tween } from "@/_foundation/tween";
-// import Artwork from "./artwork";
-import Grid from "./grid";
+import GridItem from "./grid-item";
+import InfiniteScroll from "../infinite-scroll";
 import type { AppContext } from "@/_foundation/type";
 
+type Refs = {
+  grid: HTMLElement;
+  gridItem: HTMLElement;
+};
+
 export default defineComponent({
-  name: "home",
+  name: "Home",
   setup(el, context: AppContext) {
     const { once } = context;
 
     const { addChild } = useSlot();
-    const { refs } = useDomRef<{ grid: HTMLElement }>("grid");
+    const { refs } = useDomRef<Refs>("grid", "gridItem");
 
-    addChild(refs.grid, Grid, context);
+    const [infiniteScrollContext] = addChild(
+      refs.grid,
+      InfiniteScroll,
+      context
+    );
+
+    addChild(refs.gridItem, GridItem, {
+      ...context,
+      diff: infiniteScrollContext.current.diff,
+      maxY: infiniteScrollContext.current.maxY,
+      posY: infiniteScrollContext.current.posY,
+    });
 
     useMount(() => {
       if (once) {

@@ -8,6 +8,7 @@ uniform vec2 u_image_size;
 
 uniform float u_velo;
 uniform float u_scale;
+uniform float u_alpha;
 
 varying vec2 vUv;
 
@@ -31,5 +32,6 @@ void main() {
     texture.b = texture2D(u_texture, texScale).b;
   }
 
+  // texture.a = u_alpha;
   gl_FragColor = texture;
 }

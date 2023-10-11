@@ -15,7 +15,7 @@ import vertex from "./vertex.vert";
 import type { AppContext } from "@/_foundation/type";
 
 export default defineComponent({
-  name: "screenshot",
+  name: "Screenshot",
   setup(el: HTMLImageElement, context: AppContext) {
     const { glContext, env } = context;
     const { gl } = glContext;
@@ -87,7 +87,7 @@ export default defineComponent({
 
     const [ww, wh] = useWindowSize(({ ww, wh }) => {
       state.resizing = true;
-      imagePlane.resize(ww, wh);
+      imagePlane.onResize(ww, wh);
       state.resizing = false;
     });
 
@@ -99,7 +99,7 @@ export default defineComponent({
     });
 
     useMount(() => {
-      imagePlane.resize(ww.value, wh.value);
+      imagePlane.onResize(ww.value, wh.value);
       glContext.addScene(mesh);
     });
 

@@ -22,7 +22,7 @@ type Refs = {
 };
 
 export default defineComponent({
-  name: "load",
+  name: "Load",
   setup(_el, { onCreated, onUpdated, onCleanup }: Props) {
     const { addChild } = useSlot();
     const { refs } = useDomRef<Refs>("glWorld", "main", "windowSizeWatcher");
@@ -37,7 +37,7 @@ export default defineComponent({
     });
 
     const [scrollContext] = addChild(refs.main, ScrollTweenContainer, { env });
-    const [glContext] = addChild(refs.glWorld, GlWorld, { env });
+    const [glWorldContext] = addChild(refs.glWorld, GlWorld, { env });
 
     const ro = new ResizeObserver(
       debounce(([entry]) => {
@@ -51,7 +51,7 @@ export default defineComponent({
 
     const provides = {
       env,
-      glContext: glContext.current,
+      glContext: glWorldContext.current,
       scrollContext: scrollContext.current,
     } as const;
 

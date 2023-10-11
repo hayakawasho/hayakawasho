@@ -1,26 +1,14 @@
-import {
-  defineComponent,
-  useSlot,
-  useDomRef,
-  ref,
-  readonly,
-  useEvent,
-} from "lake";
+import { defineComponent, ref, readonly, useEvent } from "lake";
 import NormalizeWheel from "normalize-wheel";
-// import { RenderTarget } from "ogl";
 import { useTick } from "@/_foundation/hooks";
 import { lerp } from "@/_foundation/math";
 import { useWindowSize } from "@/_states/window-size";
-import Plane from "./plane";
 import type { AppContext } from "@/_foundation/type";
 
 export default defineComponent({
-  name: "home.grid",
+  name: "InfiniteScroll",
   setup(el, context: AppContext) {
     const { env } = context;
-
-    const { addChild } = useSlot();
-    const { refs } = useDomRef<{ plane: HTMLImageElement[] }>("plane");
 
     const { height } = el.getBoundingClientRect();
     const maxY = ref(height * 0.5);
@@ -64,6 +52,7 @@ export default defineComponent({
       if (!state.dragging) {
         return;
       }
+
       state.dragging = false;
     });
 
@@ -86,7 +75,9 @@ export default defineComponent({
 
     useWindowSize(() => {
       state.resizing = true;
+
       maxY.value = el.getBoundingClientRect().height * 0.5;
+
       state.resizing = false;
     });
 
@@ -101,22 +92,17 @@ export default defineComponent({
       }
 
       const oldY = posY.value;
-
       const p = 1 - (1 - EASE[env.mq]) ** timeRatio;
       const easeVal = lerp(posY.value, state.targetPos, p);
-      posY.value = easeVal;
 
+      posY.value = easeVal;
       diff.value = oldY - posY.value;
     });
 
-    // const renderTarget = new RenderTarget(context.glContext.gl);
-
-    addChild(refs.plane, Plane, {
-      ...context,
+    return {
       diff: readonly(diff),
       maxY: readonly(maxY),
       posY: readonly(posY),
-      // renderTarget,
-    });
+    };
   },
 });

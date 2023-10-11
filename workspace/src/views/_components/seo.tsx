@@ -2,14 +2,14 @@ import type { FC } from "react";
 
 const SITE_URL = "https://hayakawasho.dev";
 
-const siteTitle = "SHO HAYAKAWA";
-const description = "FRONTEND ENGINEER SHO HAYAKAWA 早川翔 portfolio site";
+const siteTitle = "Sho Hayakawa";
+const description = "Fronted Engineer Sho Hayakawa 早川翔 portfolio site";
 
 export const Seo: FC<{
   title: string;
   permalink: string;
 }> = (props) => {
-  const title = props.title ? siteTitle + " | " + props.title : siteTitle;
+  const title = props.title ? props.title + " - " + siteTitle : siteTitle;
 
   return (
     <>
