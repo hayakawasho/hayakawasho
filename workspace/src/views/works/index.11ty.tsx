@@ -30,10 +30,10 @@ export const render = (props: any) => {
         <main className="h-full" data-component="Works">
           <div aria-hidden="true" data-scroll-item />
           <div css={styles.wrap}>
-            <ul data-ref="list">
+            <ul css={styles.list} data-ref="list">
               {posts.map((post) => {
                 return (
-                  <li css={styles.li} key={post.id}>
+                  <li key={post.id}>
                     <a css={styles.item} data-ref="item" href={`./${post.id}/`}>
                       <span className="inline-block leading-[.9]">
                         {post.title}
@@ -44,7 +44,7 @@ export const render = (props: any) => {
               })}
               {posts.map((post) => {
                 return (
-                  <li css={styles.li} key={post.id}>
+                  <li key={post.id}>
                     <a css={styles.item} data-ref="item" href={`./${post.id}/`}>
                       <span className="inline-block leading-[.9]">
                         {post.title}

@@ -7,12 +7,16 @@ export const wrap = css`
   height: 100%;
 `;
 
-export const li = css`
-  text-align: center;
-  padding-top: 2rem;
+export const list = css`
+  & > li {
+    padding-top: 1.6rem;
+    padding-left: var(--grid);
 
-  @media ${mq.pc} {
-    padding-top: 3.6rem;
+    @media ${mq.pc} {
+      padding-top: 4.2rem;
+      padding-left: 0;
+      text-align: center;
+    }
   }
 `;
 
@@ -24,11 +28,10 @@ export const item = css`
   font-family: var(--font-en);
   letter-spacing: 0.02em;
   line-height: 1.1;
-  padding-left: var(--gap);
 
   @media ${mq.pc} {
     width: auto;
-    font-size: 12rem;
+    font-size: 9.8rem;
     padding-left: 0;
   }
 `;
