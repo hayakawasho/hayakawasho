@@ -35,7 +35,16 @@ export const render = (props: any) => {
                 return (
                   <li key={post.id}>
                     <a css={styles.item} data-ref="item" href={`./${post.id}/`}>
-                      <span className="inline-block leading-[.9]">
+                      <img
+                        alt=""
+                        className="pc:hidden"
+                        decoding="async"
+                        height={post.eyecatch.height}
+                        loading="lazy"
+                        src={post.eyecatch.src + "?auto=compress,format&w=100"}
+                        width={post.eyecatch.width}
+                      />
+                      <span className="inline-block leading-[.85]">
                         {post.title}
                       </span>
                     </a>
@@ -46,7 +55,16 @@ export const render = (props: any) => {
                 return (
                   <li key={post.id}>
                     <a css={styles.item} data-ref="item" href={`./${post.id}/`}>
-                      <span className="inline-block leading-[.9]">
+                      <img
+                        alt=""
+                        className="pc:hidden"
+                        decoding="async"
+                        height={post.eyecatch.height}
+                        loading="lazy"
+                        src={post.eyecatch.src + "?auto=compress,format&w=100"}
+                        width={post.eyecatch.width}
+                      />
+                      <span className="inline-block leading-[.85]">
                         {post.title}
                       </span>
                     </a>

@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import { mq } from "@/_foundation/mq";
 
 export const sub = css`
-  font-size: 4.2rem;
+  font-size: 4.3rem;
   font-family: var(--font-en);
   text-transform: uppercase;
   line-height: 1;
