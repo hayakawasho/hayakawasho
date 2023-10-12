@@ -1,4 +1,4 @@
-import { defineComponent, useIntersectionWatch, ref, useDomRef } from "lake";
+import { defineComponent, useIntersectionWatch, useDomRef } from "lake";
 import { map } from "@/_foundation/math";
 import { Tween } from "@/_foundation/tween";
 import { useScrollTween } from "@/_states/scroll";
