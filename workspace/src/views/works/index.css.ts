@@ -28,7 +28,7 @@ export const item = css`
   letter-spacing: 0.02em;
   display: grid;
   grid-template-columns: 0.8em 1fr;
-  gap: 1.5rem;
+  gap: 1.6rem;
 
   @media ${mq.pc} {
     display: inline-block;
@@ -39,9 +39,8 @@ export const item = css`
 `;
 
 export const item__thumb = css`
-  margin-right: 1.5rem;
-  width: 0.9em;
-  height: 0.9em;
+  width: 0.85em;
+  height: 0.85em;
   border-radius: 50%;
   overflow: hidden;
 `;
