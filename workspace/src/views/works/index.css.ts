@@ -10,7 +10,7 @@ export const wrap = css`
 export const list = css`
   & > li {
     padding: 1.5rem 0;
-    padding-left: calc(var(--gap) * 1);
+    padding-left: var(--gap);
 
     @media ${mq.pc} {
       padding: 3.4rem 0;
@@ -27,7 +27,8 @@ export const item = css`
   font-family: var(--font-en);
   letter-spacing: 0.02em;
   line-height: 1.1;
-  display: flex;
+  display: grid;
+  grid-template-columns: 0.8em 1fr;
   gap: 1.5rem;
 
   @media ${mq.pc} {
@@ -37,9 +38,10 @@ export const item = css`
     padding-left: 0;
   }
 
-  > img {
-    width: 3.4rem;
-    height: 3.4rem;
+  img {
+    margin-right: 1.5rem;
+    width: 0.8em;
+    height: 0.8em;
     border-radius: 50%;
     object-fit: cover;
   }

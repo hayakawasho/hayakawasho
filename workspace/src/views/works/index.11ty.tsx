@@ -44,7 +44,7 @@ export const render = (props: any) => {
                         src={post.eyecatch.src + "?auto=compress,format&w=100"}
                         width={post.eyecatch.width}
                       />
-                      <span className="inline-block leading-[.85]">
+                      <span className="inline-block leading-[.9]">
                         {post.title}
                       </span>
                     </a>
@@ -64,7 +64,7 @@ export const render = (props: any) => {
                         src={post.eyecatch.src + "?auto=compress,format&w=100"}
                         width={post.eyecatch.width}
                       />
-                      <span className="inline-block leading-[.85]">
+                      <span className="inline-block leading-[.9]">
                         {post.title}
                       </span>
                     </a>
