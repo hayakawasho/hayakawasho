@@ -36,10 +36,10 @@ export const render = (props: any) => {
                 return (
                   <li key={post.id}>
                     <a css={styles.item} data-ref="item" href={`./${post.id}/`}>
-                      <div css={styles.item__thumb}>
+                      <div css={styles.item__thumb} className="pc:hidden">
                         <img
                           alt=""
-                          className="w-full h-full object-cover pc:hidden"
+                          className="w-full h-full object-cover"
                           decoding="async"
                           height={post.eyecatch.height}
                           loading="lazy"
@@ -60,10 +60,10 @@ export const render = (props: any) => {
                 return (
                   <li key={post.id}>
                     <a css={styles.item} data-ref="item" href={`./${post.id}/`}>
-                      <div css={styles.item__thumb}>
+                      <div css={styles.item__thumb} className="pc:hidden">
                         <img
                           alt=""
-                          className="w-full h-full object-cover pc:hidden"
+                          className="w-full h-full object-cover"
                           decoding="async"
                           height={post.eyecatch.height}
                           loading="lazy"
