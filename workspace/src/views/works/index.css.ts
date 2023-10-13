@@ -43,4 +43,5 @@ export const item__thumb = css`
   height: 0.85em;
   border-radius: 50%;
   overflow: hidden;
+  margin-top: 0.05em;
 `;
