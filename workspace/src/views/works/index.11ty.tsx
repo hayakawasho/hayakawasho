@@ -35,11 +35,7 @@ export const render = (props: any) => {
               {posts.map((post) => {
                 return (
                   <li key={post.id}>
-                    <a
-                      css={styles.item}
-                      data-ref="item"
-                      href={`./${post.url}/`}
-                    >
+                    <a css={styles.item} data-ref="item" href={`./${post.id}/`}>
                       <div css={styles.item__thumb}>
                         <img
                           alt=""
@@ -53,7 +49,7 @@ export const render = (props: any) => {
                           width={post.eyecatch.width}
                         />
                       </div>
-                      <h2 className="inline-block leading-[.9]">
+                      <h2 className="inline-block leading-[1]">
                         <span className="overflow-hidden">{post.title}</span>
                       </h2>
                     </a>
@@ -63,11 +59,7 @@ export const render = (props: any) => {
               {posts.map((post) => {
                 return (
                   <li key={post.id}>
-                    <a
-                      css={styles.item}
-                      data-ref="item"
-                      href={`./${post.url}/`}
-                    >
+                    <a css={styles.item} data-ref="item" href={`./${post.id}/`}>
                       <div css={styles.item__thumb}>
                         <img
                           alt=""
@@ -81,7 +73,7 @@ export const render = (props: any) => {
                           width={post.eyecatch.width}
                         />
                       </div>
-                      <h2 className="inline-block leading-[.9]">
+                      <h2 className="inline-block leading-[1]">
                         <span className="overflow-hidden">{post.title}</span>
                       </h2>
                     </a>

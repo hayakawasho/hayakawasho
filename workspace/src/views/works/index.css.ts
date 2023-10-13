@@ -9,7 +9,7 @@ export const wrap = css`
 
 export const list = css`
   & > li {
-    padding: 1.6rem 0;
+    padding: 1.7rem 0;
     padding-left: var(--gap);
 
     @media ${mq.pc} {
