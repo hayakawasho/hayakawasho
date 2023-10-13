@@ -40,9 +40,8 @@ export const item = css`
 
 export const item__thumb = css`
   margin-right: 1.5rem;
-  margin-top: 0.05em;
-  width: 0.8em;
-  height: 0.8em;
+  width: 0.9em;
+  height: 0.9em;
   border-radius: 50%;
   overflow: hidden;
 `;
