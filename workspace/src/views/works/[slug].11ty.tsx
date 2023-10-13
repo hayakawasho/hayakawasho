@@ -33,11 +33,27 @@ export const render = (props: any) => {
   const max = props.pagination.links.length;
   const now = props.pagination.pageNumber + 1;
 
+  const PreloadAssets = () => {
+    return (
+      <link
+        as="image"
+        href={post.eyecatch.src + "?auto=compress,format&w=1200"}
+        rel="preload"
+      />
+    );
+  };
+
   return `<!DOCTYPE html>
   ${r(
     <PageWithHeader
       header={<Header />}
-      seo={<Seo permalink={`/works/${post.id}/`} title={post.title} />}
+      seo={
+        <Seo
+          permalink={`/works/${post.id}/`}
+          prepend={<PreloadAssets />}
+          title={post.title}
+        />
+      }
     >
       <Body namespace="Work">
         <main data-component="Work">

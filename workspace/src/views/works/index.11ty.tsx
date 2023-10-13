@@ -17,14 +17,31 @@ export const data = {
   },
 };
 
+const IMG_API = "?auto=compress,format&fit=crop&w=100&h=100";
+
 export const render = (props: any) => {
   const posts = props.posts as WorkMetadata[];
+
+  const PreloadAssets = () => (
+    <>
+      {posts.map((post) => (
+        <link
+          as="image"
+          href={post.eyecatch.src + IMG_API}
+          key={post.id}
+          rel="preload"
+        />
+      ))}
+    </>
+  );
 
   return `<!DOCTYPE html>
   ${r(
     <PageWithHeader
       header={<Header />}
-      seo={<Seo permalink="/works/" title="Works" />}
+      seo={
+        <Seo permalink="/works/" prepend={<PreloadAssets />} title="Works" />
+      }
     >
       <Body namespace="Works">
         <main className="h-full" data-component="Works">
@@ -36,17 +53,14 @@ export const render = (props: any) => {
                 return (
                   <li key={post.id}>
                     <a css={styles.item} data-ref="item" href={`./${post.id}/`}>
-                      <div css={styles.item__thumb} className="pc:hidden">
+                      <div className="pc:hidden" css={styles.item__thumb}>
                         <img
                           alt=""
-                          className="w-full h-full object-cover"
-                          decoding="async"
-                          height={post.eyecatch.height}
-                          loading="lazy"
-                          src={
-                            post.eyecatch.src + "?auto=compress,format&w=100"
-                          }
-                          width={post.eyecatch.width}
+                          className="w-full h-full"
+                          decoding="auto"
+                          height={100}
+                          src={post.eyecatch.src + IMG_API}
+                          width={100}
                         />
                       </div>
                       <h2 className="inline-block leading-[1]">
@@ -60,17 +74,15 @@ export const render = (props: any) => {
                 return (
                   <li key={post.id}>
                     <a css={styles.item} data-ref="item" href={`./${post.id}/`}>
-                      <div css={styles.item__thumb} className="pc:hidden">
+                      <div className="pc:hidden" css={styles.item__thumb}>
                         <img
                           alt=""
-                          className="w-full h-full object-cover"
-                          decoding="async"
-                          height={post.eyecatch.height}
+                          className="w-full h-full"
+                          decoding="auto"
+                          height={100}
                           loading="lazy"
-                          src={
-                            post.eyecatch.src + "?auto=compress,format&w=100"
-                          }
-                          width={post.eyecatch.width}
+                          src={post.eyecatch.src + IMG_API}
+                          width={100}
                         />
                       </div>
                       <h2 className="inline-block leading-[1]">

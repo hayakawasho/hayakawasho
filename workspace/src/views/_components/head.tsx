@@ -26,16 +26,16 @@ export const Head: FC<{
       <link href="https://fonts.googleapis.com" rel="dns-prefetch preconnect" />
       <link href="https://fonts.gstatic.com" rel="dns-prefetch preconnect" />
       <link
+        as="style"
         href="https://fonts.googleapis.com/css2?family=Jost:wght@400&display=swap"
-        media="print"
-        onLoad={`this.media='all'; this.onload=null;` as any}
-        rel="stylesheet"
+        onLoad={`this.onload=null;this.rel='stylesheet';` as any}
+        rel="preload"
       />
       <link
+        as="style"
         href="https://api.fontshare.com/css?f[]=satoshi@500&display=swap"
-        media="print"
-        onLoad={`this.media='all'; this.onload=null;` as any}
-        rel="stylesheet"
+        onLoad={`this.onload=null;this.rel='stylesheet';` as any}
+        rel="preload"
       />
       {seo}
       <link

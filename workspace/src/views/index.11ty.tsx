@@ -18,12 +18,30 @@ export const data = {
   },
 };
 
+const IMG_API = "?auto=compress,format";
+
 export const render = (props: any) => {
   const posts = shuffle(props.posts as WorkMetadata[]);
 
+  const PreloadAssets = () => (
+    <>
+      {posts.map((post) => (
+        <link
+          as="image"
+          href={post.eyecatch.src + IMG_API}
+          key={post.id}
+          rel="preload"
+        />
+      ))}
+    </>
+  );
+
   return `<!DOCTYPE html>
   ${r(
-    <PageWithHeader header={<Header />} seo={<Seo permalink="" title="" />}>
+    <PageWithHeader
+      header={<Header />}
+      seo={<Seo permalink="" prepend={<PreloadAssets />} title="" />}
+    >
       <Body namespace="Home">
         <main className="h-full" data-component="Home">
           <div aria-hidden="true" data-scroll-item />
