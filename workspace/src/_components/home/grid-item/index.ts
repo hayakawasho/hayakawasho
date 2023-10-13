@@ -42,7 +42,7 @@ export default defineComponent({
       resizing: false,
       sp: {
         speed,
-        src: src + "?auto=compress,format",
+        src: src + "?auto=compress,format&w=750",
       },
       visible: false,
     };

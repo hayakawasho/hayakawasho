@@ -1,4 +1,5 @@
 import { renderToStaticMarkup as r } from "react-dom/server";
+import { mq } from "@/_foundation/mq";
 import { shuffle } from "@/_foundation/shuffle";
 import { Body } from "./_components/body";
 import { Header } from "./_components/header";
@@ -30,6 +31,16 @@ export const render = (props: any) => {
           as="image"
           href={post.eyecatch.src + IMG_API}
           key={post.id}
+          media={mq.pc}
+          rel="preload"
+        />
+      ))}
+      {posts.map((post) => (
+        <link
+          as="image"
+          href={post.eyecatch.src + IMG_API + "&w=750"}
+          key={post.id}
+          media={mq.sp}
           rel="preload"
         />
       ))}

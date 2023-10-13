@@ -1,4 +1,5 @@
 import { renderToStaticMarkup as r } from "react-dom/server";
+import { mq } from "@/_foundation/mq";
 import * as styles from "./index.css";
 import { Body } from "../_components/body";
 import { Header } from "../_components/header";
@@ -29,6 +30,7 @@ export const render = (props: any) => {
           as="image"
           href={post.eyecatch.src + IMG_API}
           key={post.id}
+          media={mq.sp}
           rel="preload"
         />
       ))}
