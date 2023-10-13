@@ -23,27 +23,11 @@ const IMG_API = "?auto=compress,format&fit=crop&w=100&h=100";
 export const render = (props: any) => {
   const posts = props.posts as WorkMetadata[];
 
-  const PreloadAssets = () => (
-    <>
-      {posts.map((post) => (
-        <link
-          as="image"
-          href={post.eyecatch.src + IMG_API}
-          key={post.id}
-          media={mq.sp}
-          rel="preload"
-        />
-      ))}
-    </>
-  );
-
   return `<!DOCTYPE html>
   ${r(
     <PageWithHeader
       header={<Header />}
-      seo={
-        <Seo permalink="/works/" prepend={<PreloadAssets />} title="Works" />
-      }
+      seo={<Seo permalink="/works/" title="Works" />}
     >
       <Body namespace="Works">
         <main className="h-full" data-component="Works">
