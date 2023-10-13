@@ -26,7 +26,6 @@ export const item = css`
   font-size: 4.3rem;
   font-family: var(--font-en);
   letter-spacing: 0.02em;
-  line-height: 1.1;
   display: grid;
   grid-template-columns: 0.8em 1fr;
   gap: 1.5rem;
@@ -37,12 +36,13 @@ export const item = css`
     font-size: 9.8rem;
     padding-left: 0;
   }
+`;
 
-  img {
-    margin-right: 1.5rem;
-    width: 0.8em;
-    height: 0.8em;
-    border-radius: 50%;
-    object-fit: cover;
-  }
+export const item__thumb = css`
+  margin-right: 1.5rem;
+  margin-top: 0.05em;
+  width: 0.8em;
+  height: 0.8em;
+  border-radius: 50%;
+  overflow: hidden;
 `;
