@@ -73,11 +73,19 @@ export const render = (props: any) => {
               </div>
 
               <div css={styles.intro__hgroup}>
-                <h2 className="" css={styles.sub}>
-                  <span className="inline-block uppercase">Projects/</span>
-                </h2>
-                <h1 className="" css={styles.heading} data-ref="h1">
-                  <span className="inline-block leading-[1]">{post.title}</span>
+                <p className="overflow-hidden" css={styles.sub}>
+                  <span className="block uppercase" data-ref="text">
+                    Projects/
+                  </span>
+                </p>
+                <h1
+                  className="overflow-hidden"
+                  css={styles.heading}
+                  data-ref="h1"
+                >
+                  <span className="block leading-[1]" data-ref="text">
+                    {post.title}
+                  </span>
                 </h1>
               </div>
 

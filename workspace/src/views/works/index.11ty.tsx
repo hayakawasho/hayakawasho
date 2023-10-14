@@ -40,7 +40,7 @@ export const render = (props: any) => {
                     <div className="pc:hidden" css={styles.item__thumb}>
                       <img
                         alt=""
-                        className="w-full h-full"
+                        className="w-full h-full rounded-1/2 | js-item"
                         decoding="auto"
                         height={100}
                         src={post.eyecatch.src + IMG_API}
@@ -48,7 +48,9 @@ export const render = (props: any) => {
                       />
                     </div>
                     <h2 className="inline-block leading-[1]">
-                      <span className="overflow-hidden">{post.title}</span>
+                      <span className="block overflow-hidden" data-ref="text">
+                        <span className="block | js-item">{post.title}</span>
+                      </span>
                     </h2>
                   </a>
                 </li>
@@ -61,7 +63,7 @@ export const render = (props: any) => {
                     <div className="pc:hidden" css={styles.item__thumb}>
                       <img
                         alt=""
-                        className="w-full h-full"
+                        className="w-full h-full rounded-1/2 | js-item"
                         decoding="auto"
                         height={100}
                         loading="lazy"
@@ -70,7 +72,9 @@ export const render = (props: any) => {
                       />
                     </div>
                     <h2 className="inline-block leading-[1]">
-                      <span className="overflow-hidden">{post.title}</span>
+                      <span className="block overflow-hidden" data-ref="text">
+                        <span className="block | js-item">{post.title}</span>
+                      </span>
                     </h2>
                   </a>
                 </li>

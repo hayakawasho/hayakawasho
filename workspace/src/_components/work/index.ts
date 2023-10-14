@@ -16,6 +16,7 @@ type Refs = {
   now: HTMLElement;
   max: HTMLElement;
   dash: HTMLElement;
+  text: HTMLElement[];
   h1: HTMLElement;
   screenshot: HTMLImageElement[];
   eyecatch: HTMLElement;
@@ -23,7 +24,6 @@ type Refs = {
   infoLine: HTMLElement;
   stack: HTMLElement | HTMLElement[];
   next: HTMLElement;
-  start: HTMLElement;
 };
 
 export default defineComponent({
@@ -36,14 +36,14 @@ export default defineComponent({
       "now",
       "max",
       "dash",
+      "text",
       "h1",
       "screenshot",
       "eyecatch",
       "infoText",
       "infoLine",
       "stack",
-      "next",
-      "start"
+      "next"
     );
 
     addChild(refs.eyecatch, Eyecatch, context);
@@ -77,6 +77,10 @@ export default defineComponent({
           scaleY: 0,
           willChange: "transform,opacity",
         }),
+        Tween.prop(refs.text, {
+          willChange: "transform",
+          y: "1.2em",
+        }),
         Tween.wait(0.1),
         Tween.parallel(
           Tween.tween([refs.now, refs.max], 0.85, "power2.out", {
@@ -96,6 +100,10 @@ export default defineComponent({
           Tween.tween(refs.infoLine, 1.2, "expo.out", {
             opacity: 1,
             scaleY: 1,
+          }),
+          Tween.tween(refs.text, 1.3, "custom.out", {
+            stagger: 0.05,
+            y: "0%",
           })
         ),
         Tween.immediate(() => {
@@ -107,6 +115,7 @@ export default defineComponent({
               refs.infoText,
               refs.stack,
               refs.infoLine,
+              refs.text,
             ],
             {
               clearProps: "will-change",
@@ -118,6 +127,9 @@ export default defineComponent({
 
     useUnmount(() => {
       Tween.parallel(
+        Tween.tween(refs.text, 0.4, "custom.in", {
+          y: "-1.2em",
+        }),
         Tween.tween(el, 0.55, "power3.inOut", {
           alpha: 0,
         })

@@ -207,6 +207,5 @@ export const next = css`
 
 export const next__hgroup = css`
   display: inline-block;
-  pointer-events: auto;
   color: var(--color-bg);
 `;

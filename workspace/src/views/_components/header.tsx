@@ -30,7 +30,6 @@ const header = css`
 `;
 
 const header__nav = css`
-  pointer-events: auto;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
@@ -47,6 +46,7 @@ const header__nav = css`
 const navLink = css`
   display: inline-block;
   position: relative;
+  pointer-events: auto;
 
   &::before {
     content: "";
@@ -54,8 +54,8 @@ const navLink = css`
     top: 0.5em;
     left: -0.85em;
     display: block;
-    width: 0.3em;
-    height: 0.3em;
+    width: 0.35em;
+    height: 0.35em;
     background-color: currentColor;
     border-radius: 50%;
     opacity: 0;
