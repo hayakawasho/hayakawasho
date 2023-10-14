@@ -36,7 +36,7 @@ const header__nav = css`
   gap: 0.4rem;
   font-size: 1.1rem;
   text-transform: uppercase;
-  transform: translateY(calc(-100% + 1em));
+  transform: translateY(calc(-100% + 1.5em));
 
   @media ${mq.pc} {
     gap: 0.8rem;
@@ -54,8 +54,8 @@ const navLink = css`
     top: 0.5em;
     left: -0.85em;
     display: block;
-    width: 0.4em;
-    height: 0.4em;
+    width: 0.3em;
+    height: 0.3em;
     background-color: currentColor;
     border-radius: 50%;
     opacity: 0;
