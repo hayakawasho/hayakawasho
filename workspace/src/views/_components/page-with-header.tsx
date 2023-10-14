@@ -42,6 +42,7 @@ export const PageWithHeader: FC<{
         <div css={gridRight} role="presentation" />
         {header}
         {children}
+        <div data-component="ProgressUI" />
         <div
           aria-hidden="true"
           className="fixed inset-0 w-screen h-screen pointer-events-none z-10"

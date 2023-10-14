@@ -1,5 +1,4 @@
 import { renderToStaticMarkup as r } from "react-dom/server";
-import { mq } from "@/_foundation/mq";
 import * as styles from "./index.css";
 import { Body } from "../_components/body";
 import { Header } from "../_components/header";
@@ -58,7 +57,7 @@ export const render = (props: any) => {
               })}
               {posts.map((post) => {
                 return (
-                  <li key={post.id}>
+                  <li aria-hidden="true" key={post.id}>
                     <a css={styles.item} data-ref="item" href={`./${post.id}/`}>
                       <div className="pc:hidden" css={styles.item__thumb}>
                         <img

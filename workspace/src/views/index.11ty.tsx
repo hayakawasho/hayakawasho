@@ -3,6 +3,7 @@ import { mq } from "@/_foundation/mq";
 import { shuffle } from "@/_foundation/shuffle";
 import { Body } from "./_components/body";
 import { Header } from "./_components/header";
+import { ImagePreloader } from "./_components/image-preloader";
 import { PageWithHeader } from "./_components/page-with-header";
 import { Seo } from "./_components/seo";
 import * as styles from "./index.css";
@@ -24,34 +25,34 @@ const IMG_API = "?auto=compress,format";
 export const render = (props: any) => {
   const posts = shuffle(props.posts as WorkMetadata[]);
 
-  const PreloadAssets = () => (
-    <>
-      {posts.map((post) => (
-        <link
-          as="image"
-          href={post.eyecatch.src + IMG_API}
-          key={post.id}
-          media={mq.pc}
-          rel="preload"
-        />
-      ))}
-      {posts.map((post) => (
-        <link
-          as="image"
-          href={post.eyecatch.src + IMG_API + "&w=750"}
-          key={post.id}
-          media={mq.sp}
-          rel="preload"
-        />
-      ))}
-    </>
-  );
-
   return `<!DOCTYPE html>
   ${r(
     <PageWithHeader
       header={<Header />}
-      seo={<Seo permalink="" prepend={<PreloadAssets />} title="" />}
+      seo={
+        <Seo
+          permalink=""
+          prepend={
+            <>
+              {posts.map((post) => (
+                <ImagePreloader
+                  href={post.eyecatch.src + IMG_API}
+                  key={post.id}
+                  media={mq.pc}
+                />
+              ))}
+              {posts.map((post) => (
+                <ImagePreloader
+                  href={post.eyecatch.src + IMG_API}
+                  key={post.id}
+                  media={mq.sp}
+                />
+              ))}
+            </>
+          }
+          title=""
+        />
+      }
     >
       <Body namespace="Home">
         <main className="h-full" data-component="Home">
@@ -65,27 +66,27 @@ export const render = (props: any) => {
                 </li>
               ))}
               {posts.map((post, index) => (
-                <li css={styles.project} key={post.id}>
+                <li aria-hidden="true" css={styles.project} key={post.id}>
                   <Thumbnail index={index + PER_PAGE} post={post} />
                 </li>
               ))}
               {posts.map((post, index) => (
-                <li css={styles.project} key={post.id}>
+                <li aria-hidden="true" css={styles.project} key={post.id}>
                   <Thumbnail index={index + PER_PAGE * 2} post={post} />
                 </li>
               ))}
               {posts.map((post, index) => (
-                <li css={styles.project} key={post.id}>
+                <li aria-hidden="true" css={styles.project} key={post.id}>
                   <Thumbnail index={index + PER_PAGE * 3} post={post} />
                 </li>
               ))}
               {posts.map((post, index) => (
-                <li css={styles.project} key={post.id}>
+                <li aria-hidden="true" css={styles.project} key={post.id}>
                   <Thumbnail index={index + PER_PAGE * 4} post={post} />
                 </li>
               ))}
               {posts.map((post, index) => (
-                <li css={styles.project} key={post.id}>
+                <li aria-hidden="true" css={styles.project} key={post.id}>
                   <Thumbnail index={index + PER_PAGE * 5} post={post} />
                 </li>
               ))}

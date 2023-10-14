@@ -5,6 +5,7 @@ import { qsa } from "@/_foundation/utils";
 import Home from "./_components/home";
 import Load from "./_components/load";
 import Noop from "./_components/noop.svelte";
+import ProgressUI from "./_components/progress-ui.svelte";
 import Work from "./_components/work";
 import Works from "./_components/works";
 import type { IComponent, ComponentContext } from "lake";
@@ -14,7 +15,8 @@ const init = () => {
 
   const table: Record<string, IComponent> = {
     Home,
-    Noop: withSvelte(Noop, "noop"),
+    Noop: withSvelte(Noop, "Noop"),
+    ProgressUI: withSvelte(ProgressUI, "ProgressUI"),
     Work,
     Works,
   } as const;

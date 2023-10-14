@@ -3,6 +3,7 @@ import { zeroPadding } from "@/_foundation/utils";
 import * as styles from "./[slug].css";
 import { Body } from "../_components/body";
 import { Header } from "../_components/header";
+import { ImagePreloader } from "../_components/image-preloader";
 import {
   InfoCategory,
   InfoUrl,
@@ -24,6 +25,7 @@ export const data = {
 
 export const render = (props: any) => {
   const post: WorkMetadata = props.post;
+  const eyecatchSrc = post.eyecatch.src + "?auto=compress,format&w=1200";
 
   const { page } = props.pagination;
   const { last, first, next } = page;
@@ -33,16 +35,6 @@ export const render = (props: any) => {
   const max = props.pagination.links.length;
   const now = props.pagination.pageNumber + 1;
 
-  const PreloadAssets = () => {
-    return (
-      <link
-        as="image"
-        href={post.eyecatch.src + "?auto=compress,format&w=1200"}
-        rel="preload"
-      />
-    );
-  };
-
   return `<!DOCTYPE html>
   ${r(
     <PageWithHeader
@@ -50,7 +42,7 @@ export const render = (props: any) => {
       seo={
         <Seo
           permalink={`/works/${post.id}/`}
-          prepend={<PreloadAssets />}
+          prepend={<ImagePreloader href={eyecatchSrc} />}
           title={post.title}
         />
       }
@@ -126,7 +118,7 @@ export const render = (props: any) => {
                 className="pointer-events-none"
                 css={styles.eyecatchImg}
                 height={post.eyecatch.height}
-                src={`${post.eyecatch.src}?auto=compress,format&w=1200`}
+                src={eyecatchSrc}
                 width={post.eyecatch.width}
               />
             </div>
