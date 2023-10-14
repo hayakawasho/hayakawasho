@@ -9,11 +9,11 @@ export const wrap = css`
 
 export const list = css`
   & > li {
-    padding: 1.7rem 0;
+    padding: 1.6rem 0;
     padding-left: var(--gap);
 
     @media ${mq.pc} {
-      padding: 3.2rem 0;
+      padding: 4rem 0;
       text-align: center;
     }
   }
@@ -35,6 +35,7 @@ export const item = css`
     width: auto;
     font-size: 9.8rem;
     padding-left: 0;
+    line-height: 1;
   }
 `;
 

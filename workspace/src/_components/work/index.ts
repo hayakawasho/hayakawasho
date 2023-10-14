@@ -101,9 +101,9 @@ export default defineComponent({
             opacity: 1,
             scaleY: 1,
           }),
-          Tween.tween(refs.text, 1.3, "custom.out", {
-            stagger: 0.05,
-            y: "0%",
+          Tween.tween(refs.text, 1.2, "custom.out", {
+            stagger: 0.075,
+            y: "0em",
           })
         ),
         Tween.immediate(() => {
@@ -126,14 +126,9 @@ export default defineComponent({
     });
 
     useUnmount(() => {
-      Tween.parallel(
-        Tween.tween(refs.text, 0.4, "custom.in", {
-          y: "-1.2em",
-        }),
-        Tween.tween(el, 0.55, "power3.inOut", {
-          alpha: 0,
-        })
-      );
+      Tween.tween(el, 0.55, "power3.inOut", {
+        alpha: 0,
+      });
     });
   },
 });

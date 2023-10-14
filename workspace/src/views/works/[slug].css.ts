@@ -20,7 +20,7 @@ export const heading = css`
   font-weight: 500;
   font-family: var(--font-heading);
   letter-spacing: -0.02em;
-  line-height: 1.25;
+  line-height: 1;
   overflow: hidden;
   text-align: center;
 

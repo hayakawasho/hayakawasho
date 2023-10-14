@@ -79,11 +79,11 @@ export const render = (props: any) => {
                   </span>
                 </p>
                 <h1
-                  className="overflow-hidden"
+                  className="overflow-hidden mt-[.05em]"
                   css={styles.heading}
                   data-ref="h1"
                 >
-                  <span className="block leading-[1]" data-ref="text">
+                  <span className="block leading-[1.2]" data-ref="text">
                     {post.title}
                   </span>
                 </h1>
@@ -163,7 +163,7 @@ export const render = (props: any) => {
                 <span className="inline-block uppercase">Next</span>
               </p>
               <h2 className="!pc:text-center" css={styles.heading}>
-                <span className="inline-block leading-[1]">
+                <span className="inline-block leading-[1.2]">
                   {nextPost.title}
                 </span>
               </h2>

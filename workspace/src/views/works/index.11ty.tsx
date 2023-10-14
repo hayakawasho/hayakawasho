@@ -47,10 +47,8 @@ export const render = (props: any) => {
                         width={100}
                       />
                     </div>
-                    <h2 className="inline-block leading-[1]">
-                      <span className="block overflow-hidden" data-ref="text">
-                        <span className="block | js-item">{post.title}</span>
-                      </span>
+                    <h2 className="inline-block leading-[1.1] overflow-hidden pl-[0.05em]">
+                      <span className="block | js-item">{post.title}</span>
                     </h2>
                   </a>
                 </li>
@@ -71,10 +69,8 @@ export const render = (props: any) => {
                         width={100}
                       />
                     </div>
-                    <h2 className="inline-block leading-[1]">
-                      <span className="block overflow-hidden" data-ref="text">
-                        <span className="block | js-item">{post.title}</span>
-                      </span>
+                    <h2 className="inline-block leading-[1.1] overflow-hidden pl-[0.05em]">
+                      <span className="block | js-item">{post.title}</span>
                     </h2>
                   </a>
                 </li>

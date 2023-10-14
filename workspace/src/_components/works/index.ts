@@ -14,7 +14,6 @@ import type { AppContext } from "@/_foundation/type";
 type Refs = {
   list: HTMLElement;
   item: HTMLElement[];
-  text: HTMLElement[];
 };
 
 export default defineComponent({
@@ -23,10 +22,9 @@ export default defineComponent({
     const { once } = context;
 
     const { addChild } = useSlot();
-    const { refs } = useDomRef<Refs>("list", "item", "text");
+    const { refs } = useDomRef<Refs>("list", "item");
 
     const q = gsap.utils.selector(refs.list);
-    const itemsDom = q(".js-item");
 
     const [infiniteScrollContext] = addChild(
       refs.list,
@@ -46,18 +44,18 @@ export default defineComponent({
       }
 
       Tween.serial(
-        Tween.prop(itemsDom, {
+        Tween.prop(q(".js-item"), {
           willChange: "transform",
           y: "1.2em",
         }),
         Tween.wait(0.1),
         Tween.parallel(
-          Tween.tween(itemsDom, 1.3, "custom.out", {
-            y: "0%",
+          Tween.tween(q(".js-item"), 1.2, "custom.out", {
+            y: "0em",
           })
         ),
         Tween.immediate(() => {
-          Tween.prop([itemsDom], {
+          Tween.prop([q(".js-item")], {
             clearProps: "will-change",
           });
         })
@@ -65,16 +63,11 @@ export default defineComponent({
     });
 
     useUnmount(() => {
-      Tween.kill(itemsDom);
+      Tween.kill(q(".js-item"));
 
-      Tween.parallel(
-        Tween.tween(itemsDom, 0.4, "custom.in", {
-          y: "-1.2em",
-        }),
-        Tween.tween(el, 0.55, "power3.inOut", {
-          alpha: 0,
-        })
-      );
+      Tween.tween(q(".js-item"), 0.5, "custom.in", {
+        y: "-1.2em",
+      });
     });
   },
 });

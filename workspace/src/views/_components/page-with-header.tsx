@@ -43,7 +43,7 @@ export const PageWithHeader: FC<{
         <div css={gridRight} role="presentation" />
         {header}
         <div
-          className="w-full absolute top-0 left-0 overflow-hidden backface-hidden"
+          className="w-full absolute top-0 left-0 backface-hidden"
           data-load-container={namespace}
           data-ref="main"
           id="main"
