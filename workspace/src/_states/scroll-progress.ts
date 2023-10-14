@@ -14,7 +14,7 @@ export const useScrollProgress = () => {
   const onProgress = () => {};
 
   return {
-    onProgress,
     onMutate,
+    onProgress,
   } as const;
 };

@@ -6,14 +6,15 @@ const idDev = process.env.NODE_ENV !== "production";
 const LOCAL_IP_ADDR = process.env.LOCAL_IP_ADDR || "localhost";
 
 export const PageWithHeader: FC<{
+  namespace: string;
   seo: ReactNode;
   header: ReactNode;
   children: ReactNode;
-}> = ({ header, children, seo }) => {
+}> = ({ header, children, namespace, seo }) => {
   return (
     <html lang="ja">
       <Head seo={seo} />
-      <body>
+      <body data-page={namespace}>
         <svg
           aria-hidden="true"
           style={{
@@ -41,7 +42,14 @@ export const PageWithHeader: FC<{
         <div css={gridMiddle} role="presentation" />
         <div css={gridRight} role="presentation" />
         {header}
-        {children}
+        <div
+          className="w-full absolute top-0 left-0 overflow-hidden backface-hidden"
+          data-load-container={namespace}
+          data-ref="main"
+          id="main"
+        >
+          {children}
+        </div>
         <div data-component="ProgressUI" />
         <div
           aria-hidden="true"
@@ -80,7 +88,6 @@ const mask = css`
   position: fixed;
   z-index: 11;
   left: 0;
-  opacity: 0.7;
 
   @media (min-width: 640px) {
     height: 12rem;

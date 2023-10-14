@@ -4,11 +4,11 @@ import { mq } from "@/_foundation/mq";
 export const Header = () => {
   return (
     <header className="" css={header}>
-      <nav css={header__nav} className="">
-        <a href="/" className="">
+      <nav className="" css={header__nav}>
+        <a className="-home" css={navLink} href="/">
           Index
         </a>
-        <a href="/works/" className="">
+        <a className="-works" css={navLink} href="/works/">
           Works
         </a>
       </nav>
@@ -19,9 +19,8 @@ export const Header = () => {
 const header = css`
   position: fixed;
   top: 4rem;
+  left: 50%;
   display: flex;
-  justify-content: center;
-  width: 100%;
   z-index: 101;
   pointer-events: none;
 
@@ -34,12 +33,47 @@ const header__nav = css`
   pointer-events: auto;
   display: flex;
   flex-direction: column;
+  gap: 0.4rem;
   font-size: 1.1rem;
-  font-weight: 500;
-  margin-top: -1.5em;
   text-transform: uppercase;
+  transform: translateY(calc(-100% + 1em));
 
   @media ${mq.pc} {
+    gap: 0.8rem;
     font-size: 1.3rem;
+  }
+`;
+
+const navLink = css`
+  display: inline-block;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0.5em;
+    left: -0.85em;
+    display: block;
+    width: 0.4em;
+    height: 0.4em;
+    background-color: currentColor;
+    border-radius: 50%;
+    opacity: 0;
+  }
+
+  &.-home {
+    &::before {
+      [data-page="Home"] & {
+        opacity: 1;
+      }
+    }
+  }
+
+  &.-works {
+    &::before {
+      [data-page="Works"] & {
+        opacity: 1;
+      }
+    }
   }
 `;

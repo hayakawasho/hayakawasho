@@ -1,7 +1,6 @@
 import { renderToStaticMarkup as r } from "react-dom/server";
 import { mq } from "@/_foundation/mq";
 import { shuffle } from "@/_foundation/shuffle";
-import { Body } from "./_components/body";
 import { Header } from "./_components/header";
 import { ImagePreloader } from "./_components/image-preloader";
 import { PageWithHeader } from "./_components/page-with-header";
@@ -29,6 +28,7 @@ export const render = (props: any) => {
   ${r(
     <PageWithHeader
       header={<Header />}
+      namespace="Home"
       seo={
         <Seo
           permalink=""
@@ -54,46 +54,44 @@ export const render = (props: any) => {
         />
       }
     >
-      <Body namespace="Home">
-        <main className="h-full" data-component="Home">
-          <div aria-hidden="true" data-scroll-item />
-          <h1 className="sr-only">Sho hayakawa's portfolio</h1>
-          <div css={styles.wrap}>
-            <ul className="" css={styles.projects} data-ref="grid">
-              {posts.map((post, index) => (
-                <li css={styles.project} key={post.id}>
-                  <Thumbnail index={index} post={post} />
-                </li>
-              ))}
-              {posts.map((post, index) => (
-                <li aria-hidden="true" css={styles.project} key={post.id}>
-                  <Thumbnail index={index + PER_PAGE} post={post} />
-                </li>
-              ))}
-              {posts.map((post, index) => (
-                <li aria-hidden="true" css={styles.project} key={post.id}>
-                  <Thumbnail index={index + PER_PAGE * 2} post={post} />
-                </li>
-              ))}
-              {posts.map((post, index) => (
-                <li aria-hidden="true" css={styles.project} key={post.id}>
-                  <Thumbnail index={index + PER_PAGE * 3} post={post} />
-                </li>
-              ))}
-              {posts.map((post, index) => (
-                <li aria-hidden="true" css={styles.project} key={post.id}>
-                  <Thumbnail index={index + PER_PAGE * 4} post={post} />
-                </li>
-              ))}
-              {posts.map((post, index) => (
-                <li aria-hidden="true" css={styles.project} key={post.id}>
-                  <Thumbnail index={index + PER_PAGE * 5} post={post} />
-                </li>
-              ))}
-            </ul>
-          </div>
-        </main>
-      </Body>
+      <main className="h-full" data-component="Home">
+        <div aria-hidden="true" data-scroll-item />
+        <h1 className="sr-only">Sho hayakawa's portfolio</h1>
+        <div css={styles.wrap}>
+          <ul className="" css={styles.projects} data-ref="grid">
+            {posts.map((post, index) => (
+              <li css={styles.project} key={post.id}>
+                <Thumbnail index={index} post={post} />
+              </li>
+            ))}
+            {posts.map((post, index) => (
+              <li aria-hidden="true" css={styles.project} key={post.id}>
+                <Thumbnail index={index + PER_PAGE} post={post} />
+              </li>
+            ))}
+            {posts.map((post, index) => (
+              <li aria-hidden="true" css={styles.project} key={post.id}>
+                <Thumbnail index={index + PER_PAGE * 2} post={post} />
+              </li>
+            ))}
+            {posts.map((post, index) => (
+              <li aria-hidden="true" css={styles.project} key={post.id}>
+                <Thumbnail index={index + PER_PAGE * 3} post={post} />
+              </li>
+            ))}
+            {posts.map((post, index) => (
+              <li aria-hidden="true" css={styles.project} key={post.id}>
+                <Thumbnail index={index + PER_PAGE * 4} post={post} />
+              </li>
+            ))}
+            {posts.map((post, index) => (
+              <li aria-hidden="true" css={styles.project} key={post.id}>
+                <Thumbnail index={index + PER_PAGE * 5} post={post} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </main>
     </PageWithHeader>
   )}`;
 };
