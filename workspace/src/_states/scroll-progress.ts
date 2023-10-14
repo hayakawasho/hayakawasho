@@ -7,7 +7,7 @@ const progress = map<{
 });
 
 export const useScrollProgress = () => {
-  const onMutatote = (update: { value: number }) => {
+  const onMutate = (update: { value: number }) => {
     progress.set({ value: update.value });
   };
 
@@ -15,6 +15,6 @@ export const useScrollProgress = () => {
 
   return {
     onProgress,
-    onMutatote,
+    onMutate,
   } as const;
 };
