@@ -23,8 +23,7 @@ const header = css`
   justify-content: center;
   width: 100%;
   z-index: 101;
-  mix-blend-mode: difference;
-  color: var(--color-bg);
+  color: var(--color-text);
   pointer-events: none;
 
   @media ${mq.pc} {
