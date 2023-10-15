@@ -8,7 +8,7 @@ import { Seo } from "./_components/seo";
 import * as styles from "./index.css";
 import type { WorkMetadata } from "@/_work/model";
 
-const PER_PAGE = 5;
+const PER_PAGE = 10;
 
 export const data = {
   pagination: {
@@ -56,7 +56,7 @@ export const render = (props: any) => {
     >
       <main className="h-full" data-component="Home">
         <div aria-hidden="true" data-scroll-item />
-        <h1 className="sr-only">Sho hayakawa's portfolio</h1>
+        <h1 className="sr-only">Sho Hayakawa Portfolio</h1>
         <div css={styles.wrap}>
           <ul className="" css={styles.projects} data-ref="grid">
             {posts.map((post, index) => (

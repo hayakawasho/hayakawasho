@@ -5,7 +5,7 @@ import {
   useIntersectionWatch,
 } from "lake";
 import { Texture, Vec2, Mesh, Program, Plane } from "ogl";
-// import { Tween } from "@/_foundation/tween";
+import { Tween } from "@/_foundation/tween";
 import { loadImage } from "@/_foundation/utils";
 import { ImagePlane } from "@/_glsl";
 import { useScrollTween } from "@/_states/scroll";
@@ -104,7 +104,12 @@ export default defineComponent({
     });
 
     useUnmount(() => {
-      glContext.removeScene(mesh);
+      Tween.tween(uniforms.u_alpha, 0.55, "power3.inOut", {
+        value: 0,
+        onComplete: () => {
+          glContext.removeScene(mesh);
+        },
+      });
     });
   },
 });

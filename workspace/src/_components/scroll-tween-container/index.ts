@@ -92,10 +92,8 @@ export default defineComponent({
 
     useEvent(_window, "touchend", () => {
       if (!state.dragging || !state.active) {
-        return;
+        state.dragging = false;
       }
-
-      state.dragging = false;
     });
 
     useEvent(

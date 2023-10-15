@@ -1,11 +1,4 @@
-import {
-  defineComponent,
-  useSlot,
-  useDomRef,
-  useMount,
-  useUnmount,
-} from "lake";
-// import { Tween } from "@/_foundation/tween";
+import { defineComponent, useSlot, useDomRef } from "lake";
 import Item from "./item";
 import InfiniteScroll from "../infinite-scroll";
 import type { AppContext } from "@/_foundation/type";
@@ -18,8 +11,6 @@ type Refs = {
 export default defineComponent({
   name: "Works",
   setup(_el, context: AppContext) {
-    const { once } = context;
-
     const { addChild } = useSlot();
     const { refs } = useDomRef<Refs>("list", "item");
 
@@ -31,21 +22,7 @@ export default defineComponent({
 
     addChild(refs.item, Item, {
       ...context,
-      maxY: infiniteScrollContext.current.maxY,
-      posY: infiniteScrollContext.current.posY,
-      onUpdateHeight: infiniteScrollContext.current.onResize,
-    });
-
-    useMount(() => {
-      if (once) {
-        return;
-      }
-    });
-
-    useUnmount(() => {
-      // Tween.tween(el, 0.55, "power3.inOut", {
-      //   alpha: 0,
-      // });
+      infiniteScrollContext: infiniteScrollContext.current,
     });
   },
 });

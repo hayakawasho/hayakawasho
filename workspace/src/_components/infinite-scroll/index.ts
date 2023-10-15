@@ -1,4 +1,4 @@
-import { defineComponent, ref, readonly, useEvent } from "lake";
+import { defineComponent, ref, readonly, useEvent, useMount } from "lake";
 import NormalizeWheel from "normalize-wheel";
 import { useTick } from "@/_foundation/hooks";
 import { lerp } from "@/_foundation/math";
@@ -10,8 +10,7 @@ export default defineComponent({
   setup(el, context: AppContext) {
     const { env } = context;
 
-    const { height } = el.getBoundingClientRect();
-    const maxY = ref(height * 0.5);
+    const maxY = ref(0);
     const posY = ref(0);
     const diff = ref(0);
 
@@ -49,11 +48,9 @@ export default defineComponent({
     );
 
     useEvent(window as any, "touchend", () => {
-      if (!state.dragging) {
-        return;
+      if (state.dragging) {
+        state.dragging = false;
       }
-
-      state.dragging = false;
     });
 
     useEvent(
@@ -75,9 +72,7 @@ export default defineComponent({
 
     const onResize = () => {
       state.resizing = true;
-
       maxY.value = el.getBoundingClientRect().height * 0.5;
-
       state.resizing = false;
     };
 
@@ -101,6 +96,10 @@ export default defineComponent({
 
       posY.value = easeVal;
       diff.value = oldY - posY.value;
+    });
+
+    useMount(() => {
+      onResize();
     });
 
     return {
