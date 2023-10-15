@@ -33,6 +33,7 @@ export default defineComponent({
       ...context,
       maxY: infiniteScrollContext.current.maxY,
       posY: infiniteScrollContext.current.posY,
+      onUpdateHeight: infiniteScrollContext.current.onResize,
     });
 
     useMount(() => {

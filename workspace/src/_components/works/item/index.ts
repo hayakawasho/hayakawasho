@@ -9,12 +9,13 @@ import type { ReadonlyRef } from "lake";
 type Props = AppContext & {
   maxY: ReadonlyRef<number>;
   posY: ReadonlyRef<number>;
+  onUpdateHeight: () => void;
 };
 
 export default defineComponent({
   name: "Item",
   setup(el: HTMLElement, context: Props) {
-    const { once, maxY, posY } = context;
+    const { once, maxY, posY, onUpdateHeight } = context;
 
     const { refs } = useDomRef<{
       text: HTMLElement;
@@ -32,6 +33,8 @@ export default defineComponent({
       if (once) {
         return;
       }
+
+      onUpdateHeight();
 
       Tween.serial(
         Tween.prop([refs.img, words], {

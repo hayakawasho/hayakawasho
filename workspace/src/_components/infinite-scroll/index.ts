@@ -73,12 +73,16 @@ export default defineComponent({
       }
     );
 
-    useWindowSize(() => {
+    const onResize = () => {
       state.resizing = true;
 
       maxY.value = el.getBoundingClientRect().height * 0.5;
 
       state.resizing = false;
+    };
+
+    useWindowSize(() => {
+      onResize();
     });
 
     const EASE = {
@@ -103,6 +107,7 @@ export default defineComponent({
       diff: readonly(diff),
       maxY: readonly(maxY),
       posY: readonly(posY),
+      onResize,
     };
   },
 });

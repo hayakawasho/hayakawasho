@@ -104,8 +104,12 @@ export default defineComponent({
             opacity: 1,
             scaleY: 1,
           }),
-          Tween.tween([refs.sub, words], 1.1, "custom.out", {
-            stagger: 0.03,
+          Tween.tween(refs.sub, 1.1, "custom.out", {
+            y: "0em",
+          }),
+          Tween.tween(words, 1.1, "custom.out", {
+            delay: 0.05,
+            stagger: 0.035,
             y: "0em",
           })
         ),
