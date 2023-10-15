@@ -71,7 +71,7 @@ export default defineComponent({
             willChange: "transform,opacity",
           }),
           Tween.prop([refs.sub, words], {
-            willChange: "translate",
+            willChange: "transform",
             y: "1.2em",
           }),
           Tween.wait(0.1),

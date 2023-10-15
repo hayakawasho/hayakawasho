@@ -8,6 +8,7 @@ export const sub = css`
   line-height: 1;
   text-align: center;
   letter-spacing: 0.02em;
+  backface-visibility: hidden;
 
   @media ${mq.pc} {
     font-size: 9.8rem;
@@ -22,6 +23,7 @@ export const heading = css`
   letter-spacing: -0.02em;
   line-height: 1;
   text-align: center;
+  backface-visibility: hidden;
 
   @media ${mq.pc} {
     font-size: 9.4rem;
