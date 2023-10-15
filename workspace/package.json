@@ -73,6 +73,7 @@
     "detect-gpu": "^5.0.30",
     "glsl-noise": "^0.0.0",
     "gsap": "^3.12.1",
+    "htmx.org": "^1.9.6",
     "lake": "file:lib/lake",
     "lil-gui": "^0.16.1",
     "modularload": "^1.2.8",
@@ -81,6 +82,7 @@
     "ogl": "^1.0.1",
     "remeda": "^1.3.0",
     "ress": "^5.0.2",
+    "split-type": "^0.3.3",
     "ts-pattern": "^4.0.6"
   },
   "browserslist": [

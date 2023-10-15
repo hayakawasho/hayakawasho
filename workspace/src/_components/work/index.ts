@@ -5,7 +5,7 @@ import {
   useMount,
   useUnmount,
 } from "lake";
-// import { SplitText } from "@/_foundation/split-text";
+import { splitTextNode2Words } from "@/_foundation/split-text";
 import { Tween } from "@/_foundation/tween";
 import Eyecatch from "./eyecatch";
 import NextProject from "./next";
@@ -16,7 +16,7 @@ type Refs = {
   now: HTMLElement;
   max: HTMLElement;
   dash: HTMLElement;
-  text: HTMLElement[];
+  sub: HTMLElement;
   h1: HTMLElement;
   screenshot: HTMLImageElement[];
   eyecatch: HTMLElement;
@@ -30,13 +30,14 @@ export default defineComponent({
   name: "Work",
   setup(el, context: AppContext) {
     const { once } = context;
+
     const { addChild } = useSlot();
 
     const { refs } = useDomRef<Refs>(
       "now",
       "max",
       "dash",
-      "text",
+      "sub",
       "h1",
       "screenshot",
       "eyecatch",
@@ -45,6 +46,8 @@ export default defineComponent({
       "stack",
       "next"
     );
+
+    const { words } = splitTextNode2Words(refs.h1);
 
     addChild(refs.eyecatch, Eyecatch, context);
     addChild(refs.screenshot, Screenshot, context);
@@ -77,9 +80,10 @@ export default defineComponent({
           scaleY: 0,
           willChange: "transform,opacity",
         }),
-        Tween.prop(refs.text, {
+        Tween.prop([refs.sub, words], {
+          rotateX: -90,
           willChange: "transform",
-          y: "1.2em",
+          y: "1.1em",
         }),
         Tween.wait(0.1),
         Tween.parallel(
@@ -101,8 +105,9 @@ export default defineComponent({
             opacity: 1,
             scaleY: 1,
           }),
-          Tween.tween(refs.text, 1.2, "custom.out", {
-            stagger: 0.075,
+          Tween.tween([refs.sub, words], 2.1, "expo.out", {
+            rotateX: 0,
+            stagger: 0.05,
             y: "0em",
           })
         ),
@@ -115,7 +120,8 @@ export default defineComponent({
               refs.infoText,
               refs.stack,
               refs.infoLine,
-              refs.text,
+              refs.sub,
+              words,
             ],
             {
               clearProps: "will-change",
@@ -126,9 +132,14 @@ export default defineComponent({
     });
 
     useUnmount(() => {
-      Tween.tween(el, 0.55, "power3.inOut", {
-        alpha: 0,
-      });
+      Tween.parallel(
+        Tween.tween(el, 0.55, "power3.inOut", {
+          alpha: 0,
+        })
+        // Tween.tween(refs.text, 0.45, "custom.in", {
+        //   y: "-1.2em",
+        // })
+      );
     });
   },
 });

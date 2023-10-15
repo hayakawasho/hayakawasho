@@ -74,18 +74,16 @@ export const render = (props: any) => {
 
               <div css={styles.intro__hgroup}>
                 <p className="overflow-hidden" css={styles.sub}>
-                  <span className="block uppercase" data-ref="text">
+                  <span className="block uppercase" data-ref="sub">
                     Projects/
                   </span>
                 </p>
                 <h1
-                  className="overflow-hidden mt-[.05em]"
+                  className="overflow-hidden mt-[-.1em]"
                   css={styles.heading}
                   data-ref="h1"
                 >
-                  <span className="block leading-[1.2]" data-ref="text">
-                    {post.title}
-                  </span>
+                  <span className="block leading-[1.25]">{post.title}</span>
                 </h1>
               </div>
 
@@ -162,8 +160,8 @@ export const render = (props: any) => {
               <p className="!pc:text-center" css={styles.sub}>
                 <span className="inline-block uppercase">Next</span>
               </p>
-              <h2 className="!pc:text-center" css={styles.heading}>
-                <span className="inline-block leading-[1.2]">
+              <h2 className="!pc:text-center mt-[-.05em]" css={styles.heading}>
+                <span className="inline-block leading-[1.25]">
                   {nextPost.title}
                 </span>
               </h2>

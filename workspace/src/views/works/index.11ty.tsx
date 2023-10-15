@@ -40,15 +40,19 @@ export const render = (props: any) => {
                     <div className="pc:hidden" css={styles.item__thumb}>
                       <img
                         alt=""
-                        className="w-full h-full rounded-1/2 | js-item"
+                        className="w-full h-full rounded-1/2"
+                        data-ref="img"
                         decoding="auto"
                         height={100}
                         src={post.eyecatch.src + IMG_API}
                         width={100}
                       />
                     </div>
-                    <h2 className="inline-block leading-[1.1] overflow-hidden pl-[0.05em]">
-                      <span className="block | js-item">{post.title}</span>
+                    <h2
+                      className="inline-block leading-[1.15] overflow-hidden pl-[0.05em]"
+                      data-ref="text"
+                    >
+                      {post.title}
                     </h2>
                   </a>
                 </li>
@@ -61,7 +65,8 @@ export const render = (props: any) => {
                     <div className="pc:hidden" css={styles.item__thumb}>
                       <img
                         alt=""
-                        className="w-full h-full rounded-1/2 | js-item"
+                        className="w-full h-full rounded-1/2"
+                        data-ref="img"
                         decoding="auto"
                         height={100}
                         loading="lazy"
@@ -69,8 +74,11 @@ export const render = (props: any) => {
                         width={100}
                       />
                     </div>
-                    <h2 className="inline-block leading-[1.1] overflow-hidden pl-[0.05em]">
-                      <span className="block | js-item">{post.title}</span>
+                    <h2
+                      className="inline-block leading-[1.15] overflow-hidden pl-[0.05em]"
+                      data-ref="text"
+                    >
+                      {post.title}
                     </h2>
                   </a>
                 </li>
