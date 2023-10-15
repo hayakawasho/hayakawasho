@@ -21,7 +21,6 @@ export const heading = css`
   font-family: var(--font-heading);
   letter-spacing: -0.02em;
   line-height: 1;
-  overflow: hidden;
   text-align: center;
 
   @media ${mq.pc} {
