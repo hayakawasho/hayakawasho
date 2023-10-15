@@ -81,9 +81,8 @@ export default defineComponent({
           willChange: "transform,opacity",
         }),
         Tween.prop([refs.sub, words], {
-          rotateX: -90,
-          willChange: "transform",
-          y: "1.1em",
+          willChange: "translate",
+          y: "1.2em",
         }),
         Tween.wait(0.1),
         Tween.parallel(
@@ -105,9 +104,8 @@ export default defineComponent({
             opacity: 1,
             scaleY: 1,
           }),
-          Tween.tween([refs.sub, words], 2.1, "expo.out", {
-            rotateX: 0,
-            stagger: 0.05,
+          Tween.tween([refs.sub, words], 1.1, "custom.out", {
+            stagger: 0.03,
             y: "0em",
           })
         ),
@@ -135,10 +133,10 @@ export default defineComponent({
       Tween.parallel(
         Tween.tween(el, 0.55, "power3.inOut", {
           alpha: 0,
+        }),
+        Tween.tween([refs.sub, words], 0.5, "custom.in", {
+          y: "-1.2em",
         })
-        // Tween.tween(refs.text, 0.45, "custom.in", {
-        //   y: "-1.2em",
-        // })
       );
     });
   },

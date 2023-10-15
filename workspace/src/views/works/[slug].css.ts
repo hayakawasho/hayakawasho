@@ -8,7 +8,6 @@ export const sub = css`
   line-height: 1;
   text-align: center;
   letter-spacing: 0.02em;
-  perspective: 50vw;
 
   @media ${mq.pc} {
     font-size: 9.8rem;
@@ -24,10 +23,18 @@ export const heading = css`
   line-height: 1;
   overflow: hidden;
   text-align: center;
-  perspective: 50vw;
 
   @media ${mq.pc} {
     font-size: 9.4rem;
+  }
+
+  & ._l {
+    overflow: hidden;
+    line-height: 1.25;
+
+    & + ._l {
+      margin-top: -0.15em;
+    }
   }
 `;
 

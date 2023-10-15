@@ -59,12 +59,13 @@ const navLink = css`
     background-color: currentColor;
     border-radius: 50%;
     opacity: 0;
+    transition: 0.2s opacity;
   }
 
   &.-home {
     &::before {
       [data-page="Home"] & {
-        opacity: 1;
+        opacity: 1 !important;
       }
     }
   }
@@ -72,7 +73,7 @@ const navLink = css`
   &.-works {
     &::before {
       [data-page="Works"] & {
-        opacity: 1;
+        opacity: 1 !important;
       }
     }
   }

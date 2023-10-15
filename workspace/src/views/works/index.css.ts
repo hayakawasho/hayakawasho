@@ -9,7 +9,7 @@ export const wrap = css`
 
 export const list = css`
   & > li {
-    padding: 1.7rem 0;
+    padding: 1.5rem 0;
     padding-left: var(--gap);
 
     @media ${mq.pc} {
@@ -28,7 +28,7 @@ export const item = css`
   letter-spacing: 0.02em;
   display: grid;
   grid-template-columns: 0.8em 1fr;
-  gap: 1.6rem;
+  gap: 1.5rem;
 
   @media ${mq.pc} {
     display: inline-block;
@@ -37,11 +37,19 @@ export const item = css`
     padding-left: 0;
     line-height: 1;
   }
+
+  & ._l {
+    overflow: hidden;
+
+    & + ._l {
+      margin-top: -0.15em;
+    }
+  }
 `;
 
 export const item__thumb = css`
   width: 0.85em;
   height: 0.85em;
   overflow: hidden;
-  margin-top: 0.05em;
+  margin-top: 0.1em;
 `;

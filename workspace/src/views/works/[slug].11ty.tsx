@@ -83,7 +83,7 @@ export const render = (props: any) => {
                   css={styles.heading}
                   data-ref="h1"
                 >
-                  <span className="block leading-[1.25]">{post.title}</span>
+                  {post.title}
                 </h1>
               </div>
 
@@ -160,7 +160,7 @@ export const render = (props: any) => {
               <p className="!pc:text-center" css={styles.sub}>
                 <span className="inline-block uppercase">Next</span>
               </p>
-              <h2 className="!pc:text-center mt-[-.05em]" css={styles.heading}>
+              <h2 className="!pc:text-center mt-[-.15em]" css={styles.heading}>
                 <span className="inline-block leading-[1.25]">
                   {nextPost.title}
                 </span>

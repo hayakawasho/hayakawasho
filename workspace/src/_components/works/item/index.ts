@@ -41,7 +41,7 @@ export default defineComponent({
         Tween.wait(0.1),
         Tween.parallel(
           Tween.tween([refs.img, words], 1.1, "custom.out", {
-            stagger: 0.05,
+            stagger: 0.03,
             y: "0em",
           })
         ),
@@ -57,8 +57,7 @@ export default defineComponent({
       Tween.kill([refs.img, words]);
 
       Tween.parallel(
-        Tween.tween([refs.img, words], 0.45, "custom.in", {
-          stagger: 0.015,
+        Tween.tween([refs.img, words], 0.5, "custom.in", {
           y: "-1.2em",
         })
       );
