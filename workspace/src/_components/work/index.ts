@@ -1,10 +1,4 @@
-import {
-  defineComponent,
-  useDomRef,
-  useSlot,
-  useMount,
-  useUnmount,
-} from "lake";
+import { defineComponent, useDomRef, useSlot, useMount } from "lake";
 import { splitTextNode2Words } from "@/_foundation/split-text";
 import { Tween } from "@/_foundation/tween";
 import Eyecatch from "./eyecatch";
@@ -47,15 +41,28 @@ export default defineComponent({
       "next"
     );
 
-    const { words } = splitTextNode2Words(refs.h1);
-
     addChild(refs.eyecatch, Eyecatch, context);
     addChild(refs.screenshot, Screenshot, context);
     addChild(refs.next, NextProject, context);
 
     useMount(() => {
+      const { words } = splitTextNode2Words(refs.h1);
+
+      const onLeave = () => {
+        Tween.parallel(
+          Tween.tween(el, 0.55, "power3.inOut", {
+            alpha: 0,
+          }),
+          Tween.tween([refs.sub, words], 0.5, "custom.in", {
+            y: "-1.2em",
+          })
+        );
+      };
+
       if (once) {
-        return;
+        return () => {
+          onLeave();
+        };
       }
 
       Tween.serial(
@@ -109,7 +116,7 @@ export default defineComponent({
           }),
           Tween.tween(words, 1.1, "custom.out", {
             delay: 0.05,
-            stagger: 0.035,
+            stagger: 0.03,
             y: "0em",
           })
         ),
@@ -131,17 +138,10 @@ export default defineComponent({
           );
         })
       );
-    });
 
-    useUnmount(() => {
-      Tween.parallel(
-        Tween.tween(el, 0.55, "power3.inOut", {
-          alpha: 0,
-        }),
-        Tween.tween([refs.sub, words], 0.5, "custom.in", {
-          y: "-1.2em",
-        })
-      );
+      return () => {
+        onLeave();
+      };
     });
   },
 });

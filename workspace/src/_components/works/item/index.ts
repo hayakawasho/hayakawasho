@@ -22,16 +22,28 @@ export default defineComponent({
       img: HTMLImageElement;
     }>("text", "img");
 
-    const { words } = splitTextNode2Words(refs.text);
-
     useTick(() => {
       const y = gsap.utils.wrap(0, maxY.value, posY.value);
       el.style.transform = `translateY(${-y}px) translateZ(0)`;
     });
 
     useMount(() => {
+      const { words } = splitTextNode2Words(refs.text);
+
+      const onLeave = () => {
+        Tween.kill([refs.img, words]);
+
+        Tween.parallel(
+          Tween.tween([refs.img, words], 0.5, "custom.in", {
+            y: "-1.2em",
+          })
+        );
+      };
+
       if (once) {
-        return;
+        return () => {
+          onLeave();
+        };
       }
 
       onUpdateHeight();
@@ -54,16 +66,10 @@ export default defineComponent({
           });
         })
       );
-    });
 
-    useUnmount(() => {
-      Tween.kill([refs.img, words]);
-
-      Tween.parallel(
-        Tween.tween([refs.img, words], 0.5, "custom.in", {
-          y: "-1.2em",
-        })
-      );
+      return () => {
+        onLeave();
+      };
     });
   },
 });
