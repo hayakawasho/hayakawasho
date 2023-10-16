@@ -45,6 +45,7 @@ export default defineComponent({
 
     useWindowSize(() => {
       onSplitUpdate();
+      infiniteScrollContext.onResize();
     });
 
     useMount(() => {
