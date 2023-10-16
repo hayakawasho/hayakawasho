@@ -36,7 +36,7 @@ export default defineComponent({
 
     const camera = new Camera(renderer.gl, {
       aspect: width / height,
-      far: 10000,
+      far: 2000,
       fov,
       near: 0.1,
     });

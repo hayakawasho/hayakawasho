@@ -41,8 +41,12 @@ export default defineComponent({
           }),
           Tween.wait(0.1),
           Tween.parallel(
-            Tween.tween([refs.img, words], 1.1, "custom.out", {
-              stagger: 0.03,
+            Tween.tween(refs.img, 1.1, "custom.out", {
+              y: "0em",
+            }),
+            Tween.tween(words, 1.1, "custom.out", {
+              delay: 0.03,
+              stagger: 0.035,
               y: "0em",
             })
           ),

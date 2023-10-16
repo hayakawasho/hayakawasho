@@ -32,7 +32,11 @@ export default defineComponent({
       visible: false,
     };
 
-    const texture = new Texture(gl);
+    const texture = new Texture(gl, {
+      premultiplyAlpha: true,
+      generateMipmaps: false,
+      minFilter: gl.LINEAR,
+    });
 
     loadImage(state[env.mq].src).then((img) => {
       texture.image = img;
@@ -104,7 +108,7 @@ export default defineComponent({
     });
 
     useUnmount(() => {
-      Tween.tween(uniforms.u_alpha, 0.55, "power3.inOut", {
+      Tween.tween(uniforms.u_alpha, .55, "power3.inOut", {
         value: 0,
         onComplete: () => {
           glContext.removeScene(mesh);
