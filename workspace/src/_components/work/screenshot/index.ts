@@ -33,9 +33,9 @@ export default defineComponent({
     };
 
     const texture = new Texture(gl, {
-      premultiplyAlpha: true,
       generateMipmaps: false,
       minFilter: gl.LINEAR,
+      // premultiplyAlpha: true,
     });
 
     loadImage(state[env.mq].src).then((img) => {
@@ -108,11 +108,11 @@ export default defineComponent({
     });
 
     useUnmount(() => {
-      Tween.tween(uniforms.u_alpha, .55, "power3.inOut", {
-        value: 0,
+      Tween.tween(uniforms.u_alpha, 0.55, "power3.inOut", {
         onComplete: () => {
           glContext.removeScene(mesh);
         },
+        value: 0,
       });
     });
   },

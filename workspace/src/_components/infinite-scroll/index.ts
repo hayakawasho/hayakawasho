@@ -105,8 +105,8 @@ export default defineComponent({
     return {
       diff: readonly(diff),
       maxY: readonly(maxY),
-      posY: readonly(posY),
       onResize,
+      posY: readonly(posY),
     };
   },
 });

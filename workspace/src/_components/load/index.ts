@@ -56,7 +56,7 @@ export default defineComponent({
     } as const;
 
     const load = new modularLoad({
-      enterDelay: 500,
+      enterDelay: 501,
       // transitions: {
       // },
     });

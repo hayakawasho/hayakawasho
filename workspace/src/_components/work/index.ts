@@ -1,6 +1,7 @@
 import { defineComponent, useDomRef, useSlot, useMount } from "lake";
 import { splitTextNode2Words } from "@/_foundation/split-text";
 import { Tween } from "@/_foundation/tween";
+import { useWindowSize } from "@/_states/window-size";
 import Eyecatch from "./eyecatch";
 import NextProject from "./next";
 import Screenshot from "./screenshot";
@@ -44,9 +45,13 @@ export default defineComponent({
     addChild(refs.screenshot, Screenshot, context);
     addChild(refs.next, NextProject, context);
 
-    useMount(() => {
-      const { words } = splitTextNode2Words(refs.h1);
+    const { split, onSplitUpdate } = splitTextNode2Words(refs.h1);
 
+    useWindowSize(() => {
+      onSplitUpdate();
+    });
+
+    useMount(() => {
       if (!once) {
         Tween.serial(
           Tween.prop(refs.now, {
@@ -70,7 +75,7 @@ export default defineComponent({
             scaleY: 0,
             willChange: "transform,opacity",
           }),
-          Tween.prop([refs.sub, words], {
+          Tween.prop([refs.sub, split.words], {
             willChange: "transform",
             y: "1.2em",
           }),
@@ -97,8 +102,8 @@ export default defineComponent({
             Tween.tween(refs.sub, 1.1, "custom.out", {
               y: "0em",
             }),
-            Tween.tween(words, 1.1, "custom.out", {
-              delay: 0.07,
+            Tween.tween(split.words, 1.1, "custom.out", {
+              delay: 0.06,
               stagger: 0.03,
               y: "0em",
             })
@@ -113,7 +118,7 @@ export default defineComponent({
                 refs.stack,
                 refs.infoLine,
                 refs.sub,
-                words,
+                split.words,
               ],
               {
                 clearProps: "will-change",
@@ -128,7 +133,7 @@ export default defineComponent({
           Tween.tween(el, 0.55, "power3.inOut", {
             alpha: 0,
           }),
-          Tween.tween([refs.sub, words], 0.5, "custom.in", {
+          Tween.tween([refs.sub, split.words], 0.5, "custom.in", {
             y: "-1.2em",
           })
         );
