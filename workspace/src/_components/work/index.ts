@@ -99,7 +99,7 @@ export default defineComponent({
             }),
             Tween.tween(words, 1.1, "custom.out", {
               delay: 0.07,
-              stagger: 0.035,
+              stagger: 0.03,
               y: "0em",
             })
           ),
