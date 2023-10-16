@@ -1,4 +1,5 @@
 import { renderToStaticMarkup as r } from "react-dom/server";
+import { mq } from "@/_foundation/mq";
 import { zeroPadding } from "@/_foundation/utils";
 import * as styles from "./[slug].css";
 import { Header } from "../_components/header";
@@ -24,7 +25,7 @@ export const data = {
 
 export const render = (props: any) => {
   const post: WorkMetadata = props.post;
-  const eyecatchSrc = post.eyecatch.src + "?auto=compress,format&w=1200";
+  const eyecatchSrc = post.eyecatch.src + "?auto=compress,format&w=750";
 
   const { page } = props.pagination;
   const { last, first, next } = page;
@@ -42,7 +43,7 @@ export const render = (props: any) => {
       seo={
         <Seo
           permalink={`/works/${post.id}/`}
-          prepend={<ImagePreloader href={eyecatchSrc} />}
+          prepend={<ImagePreloader href={eyecatchSrc} media={mq.sp} />}
           title={post.title}
         />
       }
