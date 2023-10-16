@@ -32,6 +32,5 @@ void main() {
     texture.b = texture2D(u_texture, texScale).b;
   }
 
-  // texture.a = u_alpha;
-  gl_FragColor = texture;
+  gl_FragColor = vec4(texture.rgb, u_alpha);
 }

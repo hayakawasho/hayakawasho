@@ -19,14 +19,26 @@ type Refs = {
 export default defineComponent({
   name: "Item",
   setup(el: HTMLElement, context: Props) {
-    const { once, infiniteScrollContext } = context;
-    const { maxY, posY } = infiniteScrollContext;
+    const { once, infiniteScrollContext, env } = context;
+    const { maxY, posY, diff } = infiniteScrollContext;
 
     const { refs } = useDomRef<Refs>("text", "img");
 
+    const state = {
+      pc: {
+        speed: .9,
+      },
+      sp: {
+        speed: 1.75,
+      },
+    };
+
+
     useTick(() => {
+      const scale = 1 - diff.value * .0005 * state[env.mq].speed;
       const y = gsap.utils.wrap(0, maxY.value, posY.value);
-      el.style.transform = `translateY(${-y}px) translateZ(0)`;
+
+      el.style.transform = `translateY(${-y}px) translateZ(0) scale(${scale})`;
     });
 
     const { split, onSplitUpdate } = splitTextNode2Words(refs.text);

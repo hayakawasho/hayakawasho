@@ -50,6 +50,7 @@ export default defineComponent({
     const texture = new Texture(gl, {
       generateMipmaps: false,
       minFilter: gl.LINEAR,
+      // premultiplyAlpha: true,
     });
 
     loadImage(state[env.mq].src).then((img) => {
@@ -113,9 +114,7 @@ export default defineComponent({
 
     const [ww, wh] = useWindowSize(({ ww, wh }) => {
       state.resizing = true;
-
       imagePlane.onResize(ww, wh);
-
       state.resizing = false;
     });
 
