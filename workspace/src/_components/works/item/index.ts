@@ -1,14 +1,15 @@
-import { gsap } from "gsap";
 import { defineComponent, useMount, useDomRef } from "lake";
 import { useTick } from "@/_foundation/hooks";
 import { splitTextNode2Words } from "@/_foundation/split-text";
 import { Tween } from "@/_foundation/tween";
 import { useWindowSize } from "@/_states/window-size";
 import type InfiniteScroll from "../../infinite-scroll";
+import type Thumbnail from "../thumbnail";
 import type { AppContext } from "@/_foundation/type";
 
 type Props = AppContext & {
   infiniteScrollContext: ReturnType<(typeof InfiniteScroll)["setup"]>;
+  thumbnailContext: ReturnType<(typeof Thumbnail)["setup"]>;
 };
 
 type Refs = {
@@ -20,23 +21,24 @@ export default defineComponent({
   name: "Item",
   setup(el: HTMLElement, context: Props) {
     const { once, infiniteScrollContext, env } = context;
-    const { maxY, posY, diff } = infiniteScrollContext;
+    const { posY, diff } = infiniteScrollContext;
 
     const { refs } = useDomRef<Refs>("text", "img");
 
     const state = {
       pc: {
-        speed: .9,
+        speed: 0.9,
       },
       sp: {
-        speed: 1.75,
+        speed: 1,
       },
     };
 
+    // const [_, wh] = useWindowSize();
 
     useTick(() => {
-      const scale = 1 - diff.value * .0005 * state[env.mq].speed;
-      const y = gsap.utils.wrap(0, maxY.value, posY.value);
+      const scale = 1 - diff.value * 0.0005 * state[env.mq].speed;
+      const y = infiniteScrollContext.wrap(posY.value);
 
       el.style.transform = `translateY(${-y}px) translateZ(0) scale(${scale})`;
     });
