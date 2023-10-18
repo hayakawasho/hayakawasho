@@ -1,10 +1,4 @@
-import {
-  defineComponent,
-  useSlot,
-  useDomRef,
-  useMount,
-  useUnmount,
-} from "lake";
+import { defineComponent, useSlot, useDomRef, useMount } from "lake";
 import { Tween } from "@/_foundation/tween";
 import GridItem from "./grid-item";
 import InfiniteScroll from "../infinite-scroll";
@@ -31,23 +25,21 @@ export default defineComponent({
 
     addChild(refs.gridItem, GridItem, {
       ...context,
-      diff: infiniteScrollContext.current.diff,
-      maxY: infiniteScrollContext.current.maxY,
-      posY: infiniteScrollContext.current.posY,
+      infiniteScrollContext: infiniteScrollContext.current,
     });
 
     useMount(() => {
       if (once) {
         return;
       }
-    });
 
-    useUnmount(() => {
-      Tween.parallel(
-        Tween.tween(el, 0.55, "power3.inOut", {
-          alpha: 0,
-        })
-      );
+      return () => {
+        Tween.parallel(
+          Tween.tween(el, 0.55, "power3.inOut", {
+            alpha: 0,
+          })
+        );
+      };
     });
   },
 });

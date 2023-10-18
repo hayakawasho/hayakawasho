@@ -50,7 +50,7 @@ export const PageWithHeader: FC<{
         >
           {children}
         </div>
-        <div data-component="ProgressUI" />
+        <div data-component="ScrollProgressUI" />
         <div
           aria-hidden="true"
           className="fixed inset-0 w-screen h-screen pointer-events-none z-10"

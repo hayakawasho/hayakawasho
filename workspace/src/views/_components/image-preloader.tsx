@@ -4,5 +4,11 @@ export const ImagePreloader: FC<{
   href: string;
   media?: string;
 }> = (props) => (
-  <link as="image" href={props.href} media={props.media} rel="preload" />
+  <link
+    as="image"
+    href={props.href}
+    media={props.media}
+    rel="preload"
+    crossOrigin="anonymous"
+  />
 );

@@ -18,7 +18,6 @@ type Refs = {
   main: HTMLElement;
   glWorld: HTMLElement;
   windowSizeWatcher: HTMLElement;
-  backto: HTMLElement;
 };
 
 export default defineComponent({

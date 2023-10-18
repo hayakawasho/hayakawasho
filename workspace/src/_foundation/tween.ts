@@ -1,7 +1,9 @@
 import { gsap, Linear, Quad, Cubic, Quart, Quint, Expo } from "gsap";
 import { CustomEase } from "gsap/CustomEase";
 
-gsap.registerPlugin(CustomEase);
+{
+  gsap.registerPlugin(CustomEase);
+}
 
 const EASE = {
   "custom.in": CustomEase.create("in", ".4,0,.68,.06"),
@@ -26,7 +28,6 @@ const EASE = {
 
 type Tweens = (gsap.core.Tween | gsap.core.Timeline)[];
 
-console.log(CustomEase);
 class Tween {
   static serial(...tweens: Tweens) {
     const tl = gsap.timeline();

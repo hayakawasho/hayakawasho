@@ -5,7 +5,7 @@ import { qsa } from "@/_foundation/utils";
 import Home from "./_components/home";
 import Load from "./_components/load";
 import Noop from "./_components/noop.svelte";
-import ProgressUI from "./_components/progress-ui.svelte";
+import ScrollProgressUI from "./_components/scroll-progress-ui.svelte";
 import Work from "./_components/work";
 import Works from "./_components/works";
 import type { IComponent, ComponentContext } from "lake";
@@ -16,7 +16,7 @@ const init = () => {
   const table: Record<string, IComponent> = {
     Home,
     Noop: withSvelte(Noop, "Noop"),
-    ProgressUI: withSvelte(ProgressUI, "ProgressUI"),
+    ScrollProgressUI: withSvelte(ScrollProgressUI, "ScrollProgressUI"),
     Work,
     Works,
   } as const;
@@ -68,7 +68,7 @@ if (document.readyState !== "loading") {
 
 if (process.env.NODE_ENV === "development") {
   const Stats = await (
-    (await import("https://cdn.skypack.dev/stats.js")) as any
+    (await import("https://cdn.skypack.dev/stats.js.fps?dts")) as any
   ).default;
   const stats = new Stats();
   stats.showPanel(0);

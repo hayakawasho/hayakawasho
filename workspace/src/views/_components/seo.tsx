@@ -1,10 +1,8 @@
 import type { FC } from "react";
 
-// const SITE_URL = "https://hayakawasho.dev";
-const SITE_URL = "https://hykwsho.dev";
-
+const SITE_URL = "https://shohayakawa.dev";
 const siteTitle = "Sho Hayakawa";
-const description = "Fronted Engineer Sho Hayakawa 早川翔 portfolio site";
+const description = "Frontend Engineer Sho Hayakawa 早川翔 portfolio website";
 
 export const Seo: FC<{
   title: string;

@@ -1,3 +1,4 @@
+import { gsap } from "gsap";
 import { defineComponent, ref, readonly, useEvent, useMount } from "lake";
 import NormalizeWheel from "normalize-wheel";
 import { useTick } from "@/_foundation/hooks";
@@ -10,12 +11,12 @@ export default defineComponent({
   setup(el, context: AppContext) {
     const { env } = context;
 
-    const maxY = ref(0);
     const posY = ref(0);
     const diff = ref(0);
 
     const state = {
       dragging: false,
+      maxY: 0,
       position: 0,
       resizing: false,
       startPos: 0,
@@ -72,7 +73,7 @@ export default defineComponent({
 
     const onResize = () => {
       state.resizing = true;
-      maxY.value = el.getBoundingClientRect().height * 0.5;
+      state.maxY = el.getBoundingClientRect().height * 0.5;
       state.resizing = false;
     };
 
@@ -104,9 +105,11 @@ export default defineComponent({
 
     return {
       diff: readonly(diff),
-      maxY: readonly(maxY),
       onResize,
       posY: readonly(posY),
+      wrap: (cy: number) => {
+        return gsap.utils.wrap(0, state.maxY, cy);
+      },
     };
   },
 });

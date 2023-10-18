@@ -1,11 +1,4 @@
-import { gsap } from "gsap";
-import {
-  defineComponent,
-  useMount,
-  useUnmount,
-  useIntersectionWatch,
-  useDomRef,
-} from "lake";
+import { defineComponent, useMount, useDomRef } from "lake";
 import { Texture, Vec2, Mesh, Program, Plane } from "ogl";
 import { useTick } from "@/_foundation/hooks";
 // import { Tween } from "@/_foundation/tween";
@@ -14,43 +7,40 @@ import { ImagePlane } from "@/_glsl";
 import { useWindowSize } from "@/_states/window-size";
 import fragment from "./fragment.frag";
 import vertex from "./vertex.vert";
+import type InfiniteScroll from "../../infinite-scroll";
 import type { AppContext } from "@/_foundation/type";
-import type { ReadonlyRef } from "lake";
 
 type Props = Pick<AppContext, "glContext" | "env"> & {
-  maxY: ReadonlyRef<number>;
-  posY: ReadonlyRef<number>;
-  diff: ReadonlyRef<number>;
+  infiniteScrollContext: ReturnType<(typeof InfiniteScroll)["setup"]>;
 };
 
 export default defineComponent({
   name: "GridItem",
   setup(el: HTMLElement, context: Props) {
-    const { glContext, env, maxY, posY, diff } = context;
+    const { glContext, env, infiniteScrollContext } = context;
     const { gl } = glContext;
+    const { diff, posY } = infiniteScrollContext;
 
     const { refs } = useDomRef<{ plane: HTMLImageElement }>("plane");
 
-    const src = refs.plane.dataset.src!;
+    const imgSrc = refs.plane.dataset.src!;
     const speed = Number(refs.plane.dataset.speed);
 
     const state = {
       pc: {
         speed,
-        src: src + "?auto=compress,format",
+        src: imgSrc + "?auto=compress,format",
       },
       resizing: false,
       sp: {
         speed,
-        src: src + "?auto=compress,format&w=750",
+        src: imgSrc + "?auto=compress,format&w=750",
       },
-      visible: false,
     };
 
     const texture = new Texture(gl, {
       generateMipmaps: false,
       minFilter: gl.LINEAR,
-      // premultiplyAlpha: true,
     });
 
     loadImage(state[env.mq].src).then((img) => {
@@ -84,8 +74,8 @@ export default defineComponent({
     };
 
     const geometry = new Plane(gl, {
-      heightSegments: 25,
-      widthSegments: 25,
+      height: 1,
+      width: 1,
     });
 
     const program = new Program(gl, {
@@ -102,16 +92,6 @@ export default defineComponent({
 
     const imagePlane = new ImagePlane(mesh, el);
 
-    useIntersectionWatch(
-      el,
-      ([entry]) => {
-        state.visible = entry.isIntersecting;
-      },
-      {
-        rootMargin: "25%",
-      }
-    );
-
     const [ww, wh] = useWindowSize(({ ww, wh }) => {
       state.resizing = true;
       imagePlane.onResize(ww, wh);
@@ -123,11 +103,7 @@ export default defineComponent({
         return;
       }
 
-      const y = gsap.utils.wrap(
-        0,
-        maxY.value,
-        posY.value * state[env.mq].speed
-      );
+      const y = infiniteScrollContext.wrap(posY.value * state[env.mq].speed);
 
       el.style.transform = `translateY(${-y}px) translateZ(0)`;
       imagePlane.updatePos(y);
@@ -137,17 +113,10 @@ export default defineComponent({
     useMount(() => {
       imagePlane.onResize(ww.value, wh.value);
       glContext.addScene(mesh);
-    });
 
-    useUnmount(() => {
-      glContext.removeScene(mesh);
-
-      // Tween.tween(uniforms.u_alpha, 0.65, "expo.out", {
-      //   value: 0,
-      //   onComplete: () => {
-      //     glContext.removeScene(mesh);
-      //   },
-      // });
+      return () => {
+        glContext.removeScene(mesh);
+      };
     });
   },
 });
