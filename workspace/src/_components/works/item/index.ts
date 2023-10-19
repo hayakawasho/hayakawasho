@@ -3,12 +3,12 @@ import { useTick } from "@/_foundation/hooks";
 import { splitTextNode2Words } from "@/_foundation/split-text";
 import { Tween } from "@/_foundation/tween";
 import { useWindowSize } from "@/_states/window-size";
-import type InfiniteScroll from "../../infinite-scroll";
 import type Thumbnail from "../thumbnail";
+import type { useInfiniteScroll } from "@/_foundation/hooks";
 import type { AppContext } from "@/_foundation/type";
 
 type Props = AppContext & {
-  infiniteScrollContext: ReturnType<(typeof InfiniteScroll)["setup"]>;
+  infiniteScrollContext: ReturnType<typeof useInfiniteScroll>;
   thumbnailContext: ReturnType<(typeof Thumbnail)["setup"]>;
 };
 

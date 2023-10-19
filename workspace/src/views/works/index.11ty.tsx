@@ -5,14 +5,12 @@ import { PageWithHeader } from "../_components/page-with-header";
 import { Seo } from "../_components/seo";
 import type { WorkMetadata } from "@/_work/model";
 
-const PER_PAGE = 99;
-
 export const data = {
   pagination: {
     addAllPagesToCollections: false,
     alias: "posts",
     data: "cms.works",
-    size: PER_PAGE,
+    size: 99,
   },
 };
 
@@ -20,6 +18,12 @@ const IMG_API = "?auto=compress,format&fit=crop&w=100&h=100";
 
 export const render = (props: any) => {
   const posts = props.posts as WorkMetadata[];
+
+  const images = posts.reduce<string[]>((acc, post, i) => {
+    const src = post.eyecatch.src + "?auto=compress,format";
+    acc.push(i === 0 ? src : " " + src);
+    return acc;
+  }, []);
 
   return `<!DOCTYPE html>
   ${r(
@@ -32,7 +36,7 @@ export const render = (props: any) => {
         <div aria-hidden="true" data-scroll-item />
         <h1 className="sr-only">Works</h1>
         <div css={styles.wrap}>
-          <ul css={styles.list} data-ref="list">
+          <ul css={styles.list} data-images={images} data-ref="list">
             {posts.map((post) => {
               return (
                 <li key={post.id}>

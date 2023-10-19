@@ -7,11 +7,11 @@ import { ImagePlane } from "@/_glsl";
 import { useWindowSize } from "@/_states/window-size";
 import fragment from "./fragment.frag";
 import vertex from "./vertex.vert";
-import type InfiniteScroll from "../../infinite-scroll";
+import type { useInfiniteScroll } from "@/_foundation/hooks";
 import type { AppContext } from "@/_foundation/type";
 
 type Props = Pick<AppContext, "glContext" | "env"> & {
-  infiniteScrollContext: ReturnType<(typeof InfiniteScroll)["setup"]>;
+  infiniteScrollContext: ReturnType<typeof useInfiniteScroll>;
 };
 
 export default defineComponent({

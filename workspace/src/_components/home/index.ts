@@ -1,7 +1,7 @@
 import { defineComponent, useSlot, useDomRef, useMount } from "lake";
+import { useInfiniteScroll } from "@/_foundation/hooks";
 import { Tween } from "@/_foundation/tween";
 import GridItem from "./grid-item";
-import InfiniteScroll from "../infinite-scroll";
 import type { AppContext } from "@/_foundation/type";
 
 type Refs = {
@@ -17,15 +17,11 @@ export default defineComponent({
     const { addChild } = useSlot();
     const { refs } = useDomRef<Refs>("grid", "gridItem");
 
-    const [infiniteScrollContext] = addChild(
-      refs.grid,
-      InfiniteScroll,
-      context
-    );
+    const infiniteScrollContext = useInfiniteScroll(refs.grid, context.env.mq);
 
     addChild(refs.gridItem, GridItem, {
       ...context,
-      infiniteScrollContext: infiniteScrollContext.current,
+      infiniteScrollContext,
     });
 
     useMount(() => {
