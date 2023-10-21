@@ -11,7 +11,7 @@ const dpr = {
 
 export default defineComponent({
   name: "GlWorld",
-  setup(el, { env }: Pick<AppContext, "env">) {
+  setup(el, { mq }: Pick<AppContext, "mq">) {
     const { refs } = useDomRef<{ canvas: HTMLCanvasElement }>("canvas");
     const { height, width } = el.getBoundingClientRect();
 
@@ -22,7 +22,7 @@ export default defineComponent({
     const renderer = new Renderer({
       alpha: true,
       canvas: refs.canvas,
-      dpr: Math.min(window.devicePixelRatio, dpr[env.mq]),
+      dpr: Math.min(window.devicePixelRatio, dpr[mq.value]),
       height,
       width,
     });

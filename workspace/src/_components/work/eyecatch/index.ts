@@ -5,11 +5,11 @@ import type { AppContext } from "@/_foundation/type";
 
 export default defineComponent({
   name: "eyecatch",
-  setup(el, { env }: AppContext) {
+  setup(el, { mq }: AppContext) {
     const $img = el.querySelector("img")!;
     const isVisible = ref(false);
 
-    if (env.mq === "sp") {
+    if (mq.value === "sp") {
       return;
     }
 

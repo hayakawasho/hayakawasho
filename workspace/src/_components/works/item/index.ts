@@ -20,7 +20,7 @@ type Refs = {
 export default defineComponent({
   name: "Item",
   setup(el: HTMLElement, context: Props) {
-    const { once, infiniteScrollContext, env } = context;
+    const { once, infiniteScrollContext, mq, history } = context;
     const { posY, diff } = infiniteScrollContext;
 
     const { refs } = useDomRef<Refs>("text", "img");
@@ -37,7 +37,7 @@ export default defineComponent({
     // const [_, wh] = useWindowSize();
 
     useTick(() => {
-      const scale = 1 - diff.value * 0.0005 * state[env.mq].speed;
+      const scale = 1 - diff.value * 0.0005 * state[mq.value].speed;
       const y = infiniteScrollContext.wrap(posY.value);
 
       el.style.transform = `translateY(${-y}px) translateZ(0) scale(${scale})`;
@@ -51,7 +51,7 @@ export default defineComponent({
     });
 
     useMount(() => {
-      if (!once) {
+      if (!once && history.value !== "popstate") {
         infiniteScrollContext.onResize();
 
         Tween.serial(
@@ -75,6 +75,10 @@ export default defineComponent({
       }
 
       return () => {
+        if (history.value === "popstate") {
+          return;
+        }
+
         Tween.kill([refs.img, split.words]);
 
         Tween.tween([refs.img, split.words], 0.5, "custom.in", {

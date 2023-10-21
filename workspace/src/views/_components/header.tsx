@@ -64,6 +64,10 @@ const navLink = css`
   }
 
   &.-home {
+    [data-page="Home"] & {
+      pointer-events: none;
+    }
+
     &::before {
       [data-page="Home"] & {
         opacity: 1 !important;
@@ -72,6 +76,10 @@ const navLink = css`
   }
 
   &.-works {
+    [data-page="Works"] & {
+      pointer-events: none;
+    }
+
     &::before {
       [data-page="Works"] & {
         opacity: 1 !important;

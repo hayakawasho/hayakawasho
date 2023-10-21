@@ -17,7 +17,10 @@ export default defineComponent({
     const { addChild } = useSlot();
     const { refs } = useDomRef<Refs>("grid", "gridItem");
 
-    const infiniteScrollContext = useInfiniteScroll(refs.grid, context.env.mq);
+    const infiniteScrollContext = useInfiniteScroll(
+      refs.grid,
+      context.mq.value
+    );
 
     addChild(refs.gridItem, GridItem, {
       ...context,

@@ -3,7 +3,6 @@ import { mq } from "@/_foundation/mq";
 import { zeroPadding } from "@/_foundation/utils";
 import * as styles from "./[slug].css";
 import { Header } from "../_components/header";
-import { ImagePreloader } from "../_components/image-preloader";
 import {
   InfoCategory,
   InfoUrl,
@@ -11,6 +10,7 @@ import {
 } from "../_components/page/works/info";
 import { PageWithHeader } from "../_components/page-with-header";
 import { Seo } from "../_components/seo";
+import { ImagePreloader } from "../_components/ui/image-preloader";
 import type { WorkMetadata } from "@/_work/model";
 
 export const data = {

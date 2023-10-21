@@ -46,14 +46,13 @@ export const PageWithHeader: FC<{
           aria-live="polite"
           className="w-full absolute top-0 left-0 backface-hidden"
           data-ref="main"
-          id="main"
           hx-history-elt=""
+          id="main"
         >
           <div className="h-full" data-xhr={namespace}>
             {children}
           </div>
         </div>
-        <div data-component="IndexSwitchUI" />
         <div data-component="ScrollProgressUI" />
         <div
           aria-hidden="true"

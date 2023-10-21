@@ -17,7 +17,10 @@ export default defineComponent({
 
     const [thumbnailContext] = addChild(refs.list, Thumbnail, context);
 
-    const infiniteScrollContext = useInfiniteScroll(refs.list, context.env.mq);
+    const infiniteScrollContext = useInfiniteScroll(
+      refs.list,
+      context.mq.value
+    );
 
     addChild(refs.item, Item, {
       ...context,

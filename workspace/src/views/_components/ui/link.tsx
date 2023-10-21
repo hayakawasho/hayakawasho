@@ -13,8 +13,8 @@ export const Link: FC<{
       hx-get={to}
       hx-push-url="true"
       hx-select="[data-xhr]"
-      hx-target="#main"
       hx-swap={`${swap}`}
+      hx-target="#main"
     >
       {children}
     </a>

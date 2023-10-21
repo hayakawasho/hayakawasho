@@ -10,14 +10,14 @@ import vertex from "./vertex.vert";
 import type { useInfiniteScroll } from "@/_foundation/hooks";
 import type { AppContext } from "@/_foundation/type";
 
-type Props = Pick<AppContext, "glContext" | "env"> & {
+type Props = Pick<AppContext, "glContext" | "mq"> & {
   infiniteScrollContext: ReturnType<typeof useInfiniteScroll>;
 };
 
 export default defineComponent({
   name: "GridItem",
   setup(el: HTMLElement, context: Props) {
-    const { glContext, env, infiniteScrollContext } = context;
+    const { glContext, mq, infiniteScrollContext } = context;
     const { gl } = glContext;
     const { diff, posY } = infiniteScrollContext;
 
@@ -43,7 +43,7 @@ export default defineComponent({
       minFilter: gl.LINEAR,
     });
 
-    loadImage(state[env.mq].src).then((img) => {
+    loadImage(state[mq.value].src).then((img) => {
       texture.image = img;
     });
 
@@ -103,11 +103,11 @@ export default defineComponent({
         return;
       }
 
-      const y = infiniteScrollContext.wrap(posY.value * state[env.mq].speed);
+      const y = infiniteScrollContext.wrap(posY.value * state[mq.value].speed);
 
       el.style.transform = `translateY(${-y}px) translateZ(0)`;
       imagePlane.updatePos(y);
-      uniforms.u_velo.value = diff.value * 0.005 * state[env.mq].speed;
+      uniforms.u_velo.value = diff.value * 0.005 * state[mq.value].speed;
     });
 
     useMount(() => {

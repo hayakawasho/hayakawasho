@@ -12,8 +12,8 @@ type Props = AppContext;
 
 export default defineComponent({
   name: "Thumbnail",
-  setup(el: HTMLElement, context: Props) {
-    if (context.env.mq === "sp") {
+  setup(el: HTMLElement, { mq }: Props) {
+    if (mq.value === "sp") {
       return;
     }
 

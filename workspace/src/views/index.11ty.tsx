@@ -2,10 +2,10 @@ import { renderToStaticMarkup as r } from "react-dom/server";
 import { mq } from "@/_foundation/mq";
 import { shuffle } from "@/_foundation/shuffle";
 import { Header } from "./_components/header";
-import { Link } from "./_components/ui/link";
-import { ImagePreloader } from "./_components/image-preloader";
 import { PageWithHeader } from "./_components/page-with-header";
 import { Seo } from "./_components/seo";
+import { ImagePreloader } from "./_components/ui/image-preloader";
+import { Link } from "./_components/ui/link";
 import * as styles from "./index.css";
 import type { WorkMetadata } from "@/_work/model";
 

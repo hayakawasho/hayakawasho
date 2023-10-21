@@ -15,7 +15,7 @@ const SELECTOR_CLASS = "[data-scroll-item]";
 
 export default defineComponent({
   name: "ScrollTweenContainer",
-  setup(el, { env }: Pick<AppContext, "env">) {
+  setup(el, { mq }: Pick<AppContext, "mq">) {
     const $item = qsa<HTMLElement>(SELECTOR_CLASS, el);
 
     if (!$item.length) {
@@ -161,7 +161,7 @@ export default defineComponent({
         return;
       }
 
-      const p = 1 - (1 - EASE[env.mq]) ** timeRatio;
+      const p = 1 - (1 - EASE[mq.value]) ** timeRatio;
       const easeVal = lerp(state.currentPos, state.targetPos, p);
       state.currentPos = easeVal;
 

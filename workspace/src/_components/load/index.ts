@@ -1,12 +1,20 @@
 import { getGPUTier } from "detect-gpu";
 import htmx from "htmx.org";
-import { defineComponent, useDomRef, useSlot, useMount, ref } from "lake";
+import {
+  defineComponent,
+  useDomRef,
+  useSlot,
+  useMount,
+  ref,
+  readonly,
+} from "lake";
 import { wideQuery } from "@/_foundation/env";
 import { debounce } from "@/_foundation/utils";
 import { windowSizeMutators } from "@/_states/window-size";
 import GlWorld from "../glworld";
 import ScrollTweenContainer from "../scroll-tween-container";
 import type { AppContext } from "@/_foundation/type";
+import type { TierResult } from "detect-gpu";
 
 type Props = {
   onCreated: (props?: Omit<AppContext, "once">) => void;
@@ -26,17 +34,20 @@ export default defineComponent({
     const { addChild } = useSlot();
     const { refs } = useDomRef<Refs>("glWorld", "main", "windowSizeWatcher");
 
-    const env: AppContext["env"] = {
-      gpuTier: undefined,
-      mq: wideQuery.matches ? "pc" : "sp",
-    };
+    const history = ref<"pushstate" | "popstate">("pushstate");
+    const gpuTier = ref<TierResult | null>(null);
+    const mq = readonly(ref<"pc" | "sp">(wideQuery.matches ? "pc" : "sp"));
 
     getGPUTier().then((result) => {
-      env.gpuTier = result;
+      gpuTier.value = result;
     });
 
-    const [scrollContext] = addChild(refs.main, ScrollTweenContainer, { env });
-    const [glWorldContext] = addChild(refs.glWorld, GlWorld, { env });
+    const [scrollContext] = addChild(refs.main, ScrollTweenContainer, {
+      mq,
+    });
+    const [glWorldContext] = addChild(refs.glWorld, GlWorld, {
+      mq,
+    });
 
     const ro = new ResizeObserver(
       debounce(([entry]) => {
@@ -49,10 +60,12 @@ export default defineComponent({
     );
 
     const provides = {
-      env,
       glContext: glWorldContext.current,
+      gpuTier: readonly(gpuTier),
+      history: readonly(history),
+      mq,
       scrollContext: scrollContext.current,
-    } as const;
+    } as AppContext;
 
     useMount(() => {
       ro.observe(refs.windowSizeWatcher);
@@ -73,7 +86,7 @@ export default defineComponent({
     };
 
     const onEnter = (to: HTMLElement) => {
-      const namespace = to.dataset.xhr!;
+      const namespace = to.dataset.xhr;
       document.body.dataset.page = namespace;
 
       scrollContext.current.reInit(to);
@@ -84,6 +97,8 @@ export default defineComponent({
     };
 
     htmx.on("htmx:historyRestore", (e) => {
+      history.value = "popstate";
+
       onLeave(fromContainer.value);
 
       const { detail } = e as CustomEvent;
@@ -98,6 +113,10 @@ export default defineComponent({
       fromContainer.value = old;
     });
 
+    htmx.on("htmx:beforeSwap", () => {
+      history.value = "pushstate";
+    });
+
     htmx.on("htmx:afterSwap", (e) => {
       const { detail } = e as CustomEvent;
       const toContainer = htmx.find(detail.target, "[data-xhr]") as HTMLElement;
@@ -107,7 +126,6 @@ export default defineComponent({
     htmx.on("htmx:xhr:progress", (e) => {
       const { detail } = e as CustomEvent;
       const { loaded, total } = detail;
-
       const progress = (Math.floor((loaded / total) * 1000) / 1000) * 100;
       console.log(progress);
     });

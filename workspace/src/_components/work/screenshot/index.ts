@@ -12,7 +12,7 @@ import type { AppContext } from "@/_foundation/type";
 export default defineComponent({
   name: "Screenshot",
   setup(el: HTMLImageElement, context: AppContext) {
-    const { glContext, env } = context;
+    const { glContext, mq, history } = context;
     const { gl } = glContext;
 
     const src = el.dataset.src!;
@@ -33,7 +33,7 @@ export default defineComponent({
       // premultiplyAlpha: true,
     });
 
-    loadImage(state[env.mq].src).then((img) => {
+    loadImage(state[mq.value].src).then((img) => {
       texture.image = img;
     });
 
@@ -105,6 +105,11 @@ export default defineComponent({
       glContext.addScene(mesh);
 
       return () => {
+        if (history.value === "popstate") {
+          glContext.removeScene(mesh);
+          return;
+        }
+
         Tween.tween(uniforms.u_alpha, 0.55, "power3.inOut", {
           onComplete: () => {
             glContext.removeScene(mesh);
