@@ -77,11 +77,9 @@ export default defineComponent({
       return () => {
         Tween.kill([refs.img, split.words]);
 
-        Tween.parallel(
-          Tween.tween([refs.img, split.words], 0.5, "custom.in", {
-            y: "-1.2em",
-          })
-        );
+        Tween.tween([refs.img, split.words], 0.5, "custom.in", {
+          y: "-1.2em",
+        });
       };
     });
   },

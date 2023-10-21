@@ -3,6 +3,7 @@ import * as styles from "./index.css";
 import { Header } from "../_components/header";
 import { PageWithHeader } from "../_components/page-with-header";
 import { Seo } from "../_components/seo";
+import { Link } from "../_components/ui/link";
 import type { WorkMetadata } from "@/_work/model";
 
 export const data = {
@@ -40,7 +41,7 @@ export const render = (props: any) => {
             {posts.map((post) => {
               return (
                 <li key={post.id}>
-                  <a css={styles.item} data-ref="item" href={`./${post.id}/`}>
+                  <Link css={styles.item} data-ref="item" to={`./${post.id}/`}>
                     <div className="pc:hidden" css={styles.item__thumb}>
                       <img
                         alt=""
@@ -58,14 +59,14 @@ export const render = (props: any) => {
                     >
                       {post.title}
                     </h2>
-                  </a>
+                  </Link>
                 </li>
               );
             })}
             {posts.map((post) => {
               return (
                 <li aria-hidden="true" key={post.id}>
-                  <a css={styles.item} data-ref="item" href={`./${post.id}/`}>
+                  <Link css={styles.item} data-ref="item" to={`./${post.id}/`}>
                     <div className="pc:hidden" css={styles.item__thumb}>
                       <img
                         alt=""
@@ -84,7 +85,7 @@ export const render = (props: any) => {
                     >
                       {post.title}
                     </h2>
-                  </a>
+                  </Link>
                 </li>
               );
             })}

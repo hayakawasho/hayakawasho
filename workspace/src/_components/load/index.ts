@@ -1,6 +1,6 @@
 import { getGPUTier } from "detect-gpu";
-import { defineComponent, useDomRef, useSlot, useMount } from "lake";
-import modularLoad from "modularload";
+import htmx from "htmx.org";
+import { defineComponent, useDomRef, useSlot, useMount, ref } from "lake";
 import { wideQuery } from "@/_foundation/env";
 import { debounce } from "@/_foundation/utils";
 import { windowSizeMutators } from "@/_states/window-size";
@@ -54,44 +54,62 @@ export default defineComponent({
       scrollContext: scrollContext.current,
     } as const;
 
-    const load = new modularLoad({
-      enterDelay: 501,
-      // transitions: {
-      // },
-    });
-
-    //----------------------------------------------------------------
-
-    load.on("loading", (_transition: string, oldContainer: HTMLElement) => {
-      scrollContext.current.pause();
-      onCleanup(oldContainer);
-    });
-
-    //----------------------------------------------------------------
-
-    load.on(
-      "loaded",
-      (
-        _transition: string,
-        _oldContainer: HTMLElement,
-        newContainer: HTMLElement
-      ) => {
-        const namespace = newContainer.dataset.loadContainer!;
-        document.body.dataset.page = namespace;
-
-        scrollContext.current.reInit(newContainer);
-        scrollContext.current.set(0);
-        scrollContext.current.resume();
-
-        onUpdated(newContainer, provides);
-      }
-    );
-
-    //----------------------------------------------------------------
-
     useMount(() => {
       ro.observe(refs.windowSizeWatcher);
       onCreated(provides);
+    });
+
+    //----------------------------------------------------------------
+
+    htmx.config.historyCacheSize = 1;
+
+    const fromContainer = ref<HTMLElement>(
+      htmx.find(refs.main, "[data-xhr]") as HTMLElement
+    );
+
+    const onLeave = (from: HTMLElement) => {
+      scrollContext.current.onPause();
+      onCleanup(from);
+    };
+
+    const onEnter = (to: HTMLElement) => {
+      const namespace = to.dataset.xhr!;
+      document.body.dataset.page = namespace;
+
+      scrollContext.current.reInit(to);
+      scrollContext.current.set(0);
+      scrollContext.current.onPlay();
+
+      onUpdated(to, provides);
+    };
+
+    htmx.on("htmx:historyRestore", (e) => {
+      onLeave(fromContainer.value);
+
+      const { detail } = e as CustomEvent;
+      const toContainer = htmx.find(detail.elt, "[data-xhr]") as HTMLElement;
+      onEnter(toContainer);
+    });
+
+    htmx.on("htmx:beforeHistorySave", (e) => {
+      const { detail } = e as CustomEvent;
+      const old = htmx.find(detail.historyElt, "[data-xhr]") as HTMLElement;
+      onLeave(old);
+      fromContainer.value = old;
+    });
+
+    htmx.on("htmx:afterSwap", (e) => {
+      const { detail } = e as CustomEvent;
+      const toContainer = htmx.find(detail.target, "[data-xhr]") as HTMLElement;
+      onEnter(toContainer);
+    });
+
+    htmx.on("htmx:xhr:progress", (e) => {
+      const { detail } = e as CustomEvent;
+      const { loaded, total } = detail;
+
+      const progress = (Math.floor((loaded / total) * 1000) / 1000) * 100;
+      console.log(progress);
     });
   },
 });

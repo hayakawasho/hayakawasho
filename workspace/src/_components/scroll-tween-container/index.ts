@@ -11,7 +11,6 @@ import { useHandleCache } from "./use-handle-cache";
 import type { Cache } from "./use-handle-cache";
 import type { AppContext } from "@/_foundation/type";
 
-const _window = window as any;
 const SELECTOR_CLASS = "[data-scroll-item]";
 
 export default defineComponent({
@@ -74,7 +73,7 @@ export default defineComponent({
     };
 
     useEvent(
-      _window,
+      window as any,
       "touchstart",
       (e) => {
         if (!state.active) {
@@ -90,14 +89,14 @@ export default defineComponent({
       }
     );
 
-    useEvent(_window, "touchend", () => {
+    useEvent(window as any, "touchend", () => {
       if (!state.dragging || !state.active) {
         state.dragging = false;
       }
     });
 
     useEvent(
-      _window,
+      window as any,
       "touchmove",
       (e) => {
         if (!state.dragging || !state.active) {
@@ -118,7 +117,7 @@ export default defineComponent({
     );
 
     useEvent(
-      _window,
+      window as any,
       "wheel",
       (e) => {
         if (!state.active) {
@@ -174,39 +173,53 @@ export default defineComponent({
       transformElms(cache.value);
     });
 
-    useMount(() => {
+    //----------------------------------------------------------------
+
+    const onPlay = () => {
       state.active = true;
+    };
+
+    const onPause = () => {
+      state.active = false;
+    };
+
+    const reInit = (container: HTMLElement) => {
+      const $item = qsa<HTMLElement>(SELECTOR_CLASS, container);
+
+      if (!$item.length) {
+        throw new Error(`NO ${SELECTOR_CLASS}`);
+      }
+
+      state.container = container;
+      cache.value = createCache($item);
+      state.scrollLimit = setScrollLimit();
+    };
+
+    const scrollTo = (y: number) => {
+      Tween.tween(state, 0.8, "power2.inOut", {
+        targetPos: clamp(y, {
+          max: state.scrollLimit,
+        }),
+      });
+    };
+
+    const set = (value: number) => {
+      state.targetPos = value;
+      state.currentPos = value;
+    };
+
+    //----------------------------------------------------------------
+
+    useMount(() => {
+      onPlay();
     });
 
     return {
-      pause: () => {
-        state.active = false;
-      },
-      reInit: (container: HTMLElement) => {
-        const $item = qsa<HTMLElement>(SELECTOR_CLASS, container);
-
-        if (!$item.length) {
-          throw new Error(`NO ${SELECTOR_CLASS}`);
-        }
-
-        state.container = container;
-        cache.value = createCache($item);
-        state.scrollLimit = setScrollLimit();
-      },
-      resume: () => {
-        state.active = true;
-      },
-      scrollTo: (y: number) => {
-        Tween.tween(state, 0.8, "power2.inOut", {
-          targetPos: clamp(y, {
-            max: state.scrollLimit,
-          }),
-        });
-      },
-      set: (value: number) => {
-        state.targetPos = value;
-        state.currentPos = value;
-      },
+      onPause,
+      onPlay,
+      reInit,
+      scrollTo,
+      set,
     };
   },
 });

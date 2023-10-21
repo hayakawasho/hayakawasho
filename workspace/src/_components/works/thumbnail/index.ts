@@ -12,12 +12,18 @@ type Props = AppContext;
 
 export default defineComponent({
   name: "Thumbnail",
-  setup(_el: HTMLElement, _context: Props) {
-    const onMouseEnter = () => {
+  setup(el: HTMLElement, context: Props) {
+    if (context.env.mq === "sp") {
+      return;
+    }
+
+    const images = el.dataset.images!.split(", ");
+
+    const onMouseEnter = (e: MouseEvent) => {
       //
     };
 
-    const onMouseLeave = () => {
+    const onMouseLeave = (e: MouseEvent) => {
       //
     };
 

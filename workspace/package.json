@@ -69,14 +69,12 @@
     "windicss": "^3.5.6"
   },
   "dependencies": {
-    "@studio-freight/lenis": "^1.0.6",
     "detect-gpu": "^5.0.30",
     "glsl-noise": "^0.0.0",
     "gsap": "^3.12.1",
     "htmx.org": "^1.9.6",
     "lake": "file:lib/lake",
     "lil-gui": "^0.16.1",
-    "modularload": "^1.2.8",
     "nanostores": "^0.9.2",
     "normalize-wheel": "^1.0.1",
     "ogl": "^1.0.1",

@@ -43,13 +43,17 @@ export const PageWithHeader: FC<{
         <div css={gridRight} role="presentation" />
         {header}
         <div
+          aria-live="polite"
           className="w-full absolute top-0 left-0 backface-hidden"
-          data-load-container={namespace}
           data-ref="main"
           id="main"
+          hx-history-elt=""
         >
-          {children}
+          <div className="h-full" data-xhr={namespace}>
+            {children}
+          </div>
         </div>
+        <div data-component="IndexSwitchUI" />
         <div data-component="ScrollProgressUI" />
         <div
           aria-hidden="true"

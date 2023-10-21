@@ -1,16 +1,17 @@
 import { css } from "@emotion/react";
 import { mq } from "@/_foundation/mq";
+import { Link } from "../_components/ui/link";
 
 export const Header = () => {
   return (
     <header className="" css={header}>
       <nav className="" css={header__nav}>
-        <a className="-home" css={navLink} href="/">
+        <Link className="-home" css={navLink} to="/">
           Index
-        </a>
-        <a className="-works" css={navLink} href="/works/">
+        </Link>
+        <Link className="-works" css={navLink} to="/works/">
           Works
-        </a>
+        </Link>
       </nav>
     </header>
   );

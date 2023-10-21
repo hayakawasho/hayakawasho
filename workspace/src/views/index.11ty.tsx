@@ -2,6 +2,7 @@ import { renderToStaticMarkup as r } from "react-dom/server";
 import { mq } from "@/_foundation/mq";
 import { shuffle } from "@/_foundation/shuffle";
 import { Header } from "./_components/header";
+import { Link } from "./_components/ui/link";
 import { ImagePreloader } from "./_components/image-preloader";
 import { PageWithHeader } from "./_components/page-with-header";
 import { Seo } from "./_components/seo";
@@ -104,10 +105,10 @@ const Thumbnail = ({ post, index }: { post: WorkMetadata; index: number }) => {
   }[index % 3];
 
   return (
-    <a
+    <Link
       css={styles.project__eyecatch}
       data-ref="gridItem"
-      href={`./works/${post.id}/`}
+      to={`./works/${post.id}/`}
     >
       <img
         alt={post.title}
@@ -120,6 +121,6 @@ const Thumbnail = ({ post, index }: { post: WorkMetadata; index: number }) => {
         height={post.eyecatch.height}
         width={post.eyecatch.width}
       />
-    </a>
+    </Link>
   );
 };

@@ -1,20 +1,11 @@
 import type { TierResult } from "detect-gpu";
-import type { OGLRenderingContext, Transform } from "ogl";
+import type ScrollContext from "../_components/scroll-tween-container";
+import type GlContext from "../_components/glworld";
 
 export type AppContext = {
   once: boolean;
-  glContext: {
-    gl: OGLRenderingContext;
-    addScene: (scene: Transform) => void;
-    removeScene: (scene: Transform) => void;
-  };
-  scrollContext: {
-    pause: () => void;
-    reInit: (container: HTMLElement) => void;
-    resume: () => void;
-    scrollTo: (y: number) => void;
-    set: (value: number) => void;
-  };
+  glContext: ReturnType<(typeof GlContext)["setup"]>;
+  scrollContext: ReturnType<(typeof ScrollContext)["setup"]>;
   env: {
     mq: "pc" | "sp";
     gpuTier?: TierResult;
