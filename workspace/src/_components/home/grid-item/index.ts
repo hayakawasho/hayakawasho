@@ -10,14 +10,14 @@ import vertex from "./vertex.vert";
 import type { useInfiniteScroll } from "@/_foundation/hooks";
 import type { AppContext } from "@/_foundation/type";
 
-type Props = Pick<AppContext, "glContext" | "mq"> & {
+type Props = AppContext & {
   infiniteScrollContext: ReturnType<typeof useInfiniteScroll>;
 };
 
 export default defineComponent({
   name: "GridItem",
   setup(el: HTMLElement, context: Props) {
-    const { glContext, mq, infiniteScrollContext } = context;
+    const { glContext, mq, infiniteScrollContext, history } = context;
     const { gl } = glContext;
     const { diff, posY } = infiniteScrollContext;
 
@@ -115,6 +115,11 @@ export default defineComponent({
       glContext.addScene(mesh);
 
       return () => {
+        if (history.value === "popstate") {
+          glContext.removeScene(mesh);
+          return;
+        }
+
         glContext.removeScene(mesh);
       };
     });

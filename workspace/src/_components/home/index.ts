@@ -12,7 +12,7 @@ type Refs = {
 export default defineComponent({
   name: "Home",
   setup(el, context: AppContext) {
-    const { once } = context;
+    const { once, history } = context;
 
     const { addChild } = useSlot();
     const { refs } = useDomRef<Refs>("grid", "gridItem");
@@ -28,11 +28,15 @@ export default defineComponent({
     });
 
     useMount(() => {
-      if (once) {
+      if (!once && history.value === "pushstate") {
         return;
       }
 
       return () => {
+        if (history.value === "popstate") {
+          return;
+        }
+
         Tween.parallel(
           Tween.tween(el, 0.55, "power3.inOut", {
             alpha: 0,

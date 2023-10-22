@@ -1,12 +1,14 @@
-import { defineComponent, useDomRef } from "lake";
+import { getGPUTier } from "detect-gpu";
+import { defineComponent, useDomRef, ref } from "lake";
 import { Transform, Renderer, Camera } from "ogl";
 import { useTick } from "@/_foundation/hooks";
 import { useWindowSize } from "@/_states/window-size";
 import type { AppContext } from "@/_foundation/type";
+import type { TierResult } from "detect-gpu";
 
 const dpr = {
   pc: 1.5,
-  sp: 2,
+  sp: 1.5,
 };
 
 export default defineComponent({
@@ -14,6 +16,12 @@ export default defineComponent({
   setup(el, { mq }: Pick<AppContext, "mq">) {
     const { refs } = useDomRef<{ canvas: HTMLCanvasElement }>("canvas");
     const { height, width } = el.getBoundingClientRect();
+
+    const gpuTier = ref<TierResult | null>(null);
+
+    getGPUTier().then((result) => {
+      gpuTier.value = result;
+    });
 
     const state = {
       resizing: false,

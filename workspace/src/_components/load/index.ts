@@ -1,4 +1,3 @@
-import { getGPUTier } from "detect-gpu";
 import htmx from "htmx.org";
 import {
   defineComponent,
@@ -14,7 +13,6 @@ import { windowSizeMutators } from "@/_states/window-size";
 import GlWorld from "../glworld";
 import ScrollTweenContainer from "../scroll-tween-container";
 import type { AppContext } from "@/_foundation/type";
-import type { TierResult } from "detect-gpu";
 
 type Props = {
   onCreated: (props?: Omit<AppContext, "once">) => void;
@@ -35,12 +33,7 @@ export default defineComponent({
     const { refs } = useDomRef<Refs>("glWorld", "main", "windowSizeWatcher");
 
     const history = ref<"pushstate" | "popstate">("pushstate");
-    const gpuTier = ref<TierResult | null>(null);
     const mq = readonly(ref<"pc" | "sp">(wideQuery.matches ? "pc" : "sp"));
-
-    getGPUTier().then((result) => {
-      gpuTier.value = result;
-    });
 
     const [scrollContext] = addChild(refs.main, ScrollTweenContainer, {
       mq,
@@ -61,7 +54,6 @@ export default defineComponent({
 
     const provides = {
       glContext: glWorldContext.current,
-      gpuTier: readonly(gpuTier),
       history: readonly(history),
       mq,
       scrollContext: scrollContext.current,
@@ -126,7 +118,7 @@ export default defineComponent({
     htmx.on("htmx:xhr:progress", (e) => {
       const { detail } = e as CustomEvent;
       const { loaded, total } = detail;
-      const progress = (Math.floor((loaded / total) * 1000) / 1000) * 100;
+      const progress = Math.floor((loaded / total) * 1000) / 1000;
       console.log(progress);
     });
   },

@@ -51,7 +51,7 @@ export default defineComponent({
     });
 
     useMount(() => {
-      if (!once && history.value !== "popstate") {
+      if (!once && history.value === "pushstate") {
         infiniteScrollContext.onResize();
 
         Tween.serial(

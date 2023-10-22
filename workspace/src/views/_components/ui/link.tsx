@@ -5,7 +5,7 @@ export const Link: FC<{
   children: React.ReactNode;
   swap?: string;
   to: string;
-}> = ({ className, to, children, swap = "swap:501ms", ...props }) => {
+}> = ({ className, to, children, swap = "swap:551ms", ...props }) => {
   return (
     <a
       {...props}
