@@ -134,7 +134,7 @@ export const render = (props: any) => {
                     className={`pointer-events-none invisible`}
                     data-h={i.height}
                     data-ref="screenshot"
-                    data-src={`${i.src}`}
+                    data-src={`${i.src}?auto=compress,format&w=1200`}
                     data-w={i.width}
                     height={i.height}
                     width={i.width}

@@ -29,7 +29,7 @@ export default defineComponent({
     const state = {
       pc: {
         speed,
-        src: imgSrc + "?auto=compress,format",
+        src: imgSrc + "?auto=compress,format&w=1200",
       },
       resizing: false,
       sp: {
