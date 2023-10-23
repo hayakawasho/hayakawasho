@@ -35,12 +35,8 @@ export default defineComponent({
     const history = ref<"pushstate" | "popstate">("pushstate");
     const mq = readonly(ref<"pc" | "sp">(wideQuery.matches ? "pc" : "sp"));
 
-    const [scrollContext] = addChild(refs.main, ScrollTweenContainer, {
-      mq,
-    });
-    const [glWorldContext] = addChild(refs.glWorld, GlWorld, {
-      mq,
-    });
+    const [scrollContext] = addChild(refs.main, ScrollTweenContainer, { mq });
+    const [glWorldContext] = addChild(refs.glWorld, GlWorld, { mq });
 
     const ro = new ResizeObserver(
       debounce(([entry]) => {
@@ -66,12 +62,6 @@ export default defineComponent({
 
     //----------------------------------------------------------------
 
-    htmx.config.historyCacheSize = 1;
-
-    const fromContainer = ref<HTMLElement>(
-      htmx.find(refs.main, "[data-xhr]") as HTMLElement
-    );
-
     const onLeave = (from: HTMLElement) => {
       scrollContext.current.pause();
       onCleanup(from);
@@ -88,21 +78,30 @@ export default defineComponent({
       onUpdated(to, provides);
     };
 
+    const fromContainer = ref<HTMLElement>(
+      htmx.find(refs.main, "[data-xhr]") as HTMLElement
+    );
+
+    htmx.config.historyCacheSize = 1;
+
     htmx.on("htmx:historyRestore", (e) => {
       history.value = "popstate";
 
       onLeave(fromContainer.value);
 
       const { detail } = e as CustomEvent;
-      const toContainer = htmx.find(detail.elt, "[data-xhr]") as HTMLElement;
-      onEnter(toContainer);
+      const newContainer = htmx.find(detail.elt, "[data-xhr]") as HTMLElement;
+      onEnter(newContainer);
     });
 
     htmx.on("htmx:beforeHistorySave", (e) => {
       const { detail } = e as CustomEvent;
-      const old = htmx.find(detail.historyElt, "[data-xhr]") as HTMLElement;
-      onLeave(old);
-      fromContainer.value = old;
+      const oldContainer = htmx.find(
+        detail.historyElt,
+        "[data-xhr]"
+      ) as HTMLElement;
+      onLeave(oldContainer);
+      fromContainer.value = oldContainer;
     });
 
     htmx.on("htmx:beforeSwap", () => {
@@ -111,8 +110,11 @@ export default defineComponent({
 
     htmx.on("htmx:afterSwap", (e) => {
       const { detail } = e as CustomEvent;
-      const toContainer = htmx.find(detail.target, "[data-xhr]") as HTMLElement;
-      onEnter(toContainer);
+      const newContainer = htmx.find(
+        detail.target,
+        "[data-xhr]"
+      ) as HTMLElement;
+      onEnter(newContainer);
     });
 
     htmx.on("htmx:xhr:progress", (e) => {
