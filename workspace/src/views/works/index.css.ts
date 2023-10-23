@@ -13,8 +13,25 @@ export const list = css`
     padding-left: var(--gap);
 
     @media ${mq.pc} {
-      padding: 4rem 0;
+      padding: 3rem 0;
       text-align: center;
+    }
+  }
+`;
+
+export const item__title = css`
+  display: inline-block;
+  line-height: 1.15;
+  overflow: hidden;
+
+  @media (hover: hover) {
+    @media ${mq.pc} {
+      opacity: 0.7;
+      transition: opacity 0.6s cubic-bezier(0.32, 0.94, 0.6, 1);
+    }
+
+    &:hover {
+      opacity: 1;
     }
   }
 `;

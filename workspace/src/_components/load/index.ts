@@ -73,7 +73,7 @@ export default defineComponent({
     );
 
     const onLeave = (from: HTMLElement) => {
-      scrollContext.current.onPause();
+      scrollContext.current.pause();
       onCleanup(from);
     };
 
@@ -83,7 +83,7 @@ export default defineComponent({
 
       scrollContext.current.reInit(to);
       scrollContext.current.set(0);
-      scrollContext.current.onPlay();
+      scrollContext.current.resume();
 
       onUpdated(to, provides);
     };
@@ -117,8 +117,7 @@ export default defineComponent({
 
     htmx.on("htmx:xhr:progress", (e) => {
       const { detail } = e as CustomEvent;
-      const { loaded, total } = detail;
-      const progress = Math.floor((loaded / total) * 1000) / 1000;
+      const progress = Math.floor((detail.loaded / detail.total) * 1000) / 1000;
       console.log(progress);
     });
   },

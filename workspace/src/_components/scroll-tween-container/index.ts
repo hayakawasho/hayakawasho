@@ -16,9 +16,9 @@ const SELECTOR_CLASS = "[data-scroll-item]";
 export default defineComponent({
   name: "ScrollTweenContainer",
   setup(el, { mq }: Pick<AppContext, "mq">) {
-    const $item = qsa<HTMLElement>(SELECTOR_CLASS, el);
+    const elItems = qsa<HTMLElement>(SELECTOR_CLASS, el);
 
-    if (!$item.length) {
+    if (!elItems.length) {
       throw new Error(`NO ${SELECTOR_CLASS}`);
     }
 
@@ -35,7 +35,7 @@ export default defineComponent({
     };
 
     const { createCache, updateCache } = useHandleCache();
-    const cache = ref(createCache($item));
+    const cache = ref(createCache(elItems));
 
     const [_, wh] = useWindowSize();
 
@@ -175,11 +175,11 @@ export default defineComponent({
 
     //----------------------------------------------------------------
 
-    const onPlay = () => {
+    const resume = () => {
       state.active = true;
     };
 
-    const onPause = () => {
+    const pause = () => {
       state.active = false;
     };
 
@@ -211,12 +211,12 @@ export default defineComponent({
     //----------------------------------------------------------------
 
     useMount(() => {
-      onPlay();
+      resume();
     });
 
     return {
-      onPause,
-      onPlay,
+      pause,
+      resume,
       reInit,
       scrollTo,
       set,

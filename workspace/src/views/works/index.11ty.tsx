@@ -54,7 +54,8 @@ export const render = (props: any) => {
                       />
                     </div>
                     <h2
-                      className="inline-block leading-[1.15] overflow-hidden pl-[0.05em]"
+                      css={styles.item__title}
+                      className="pl-[0.05em]"
                       data-ref="text"
                     >
                       {post.title}
@@ -80,7 +81,8 @@ export const render = (props: any) => {
                       />
                     </div>
                     <h2
-                      className="inline-block leading-[1.15] overflow-hidden pl-[0.05em]"
+                      css={styles.item__title}
+                      className="pl-[0.05em]"
                       data-ref="text"
                     >
                       {post.title}
