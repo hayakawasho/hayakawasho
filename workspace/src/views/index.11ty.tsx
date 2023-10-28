@@ -61,7 +61,7 @@ export const render = (props: any) => {
         <Link
           css={styles.toProjects}
           data-ref="viewProjects"
-          swap="swap:1s"
+          swap="swap:.95s"
           to="./works/"
         >
           <span aria-hidden="true" className="_w" data-ref="w">
