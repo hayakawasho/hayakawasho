@@ -47,7 +47,7 @@ export default defineComponent({
         await nextTick();
 
         Tween.parallel(
-          Tween.tween(refs.w, 1.25, "power3.out", {
+          Tween.tween(refs.w, 1.15, "power3.out", {
             alpha: 0,
             stagger: 0.02,
           })

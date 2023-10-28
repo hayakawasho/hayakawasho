@@ -80,18 +80,6 @@ export const render = (props: any) => {
             {" "}
           </span>
           <span aria-hidden="true" className="_w" data-ref="w">
-            a
-          </span>
-          <span aria-hidden="true" className="_w" data-ref="w">
-            l
-          </span>
-          <span aria-hidden="true" className="_w" data-ref="w">
-            l
-          </span>
-          <span aria-hidden="true" className="_w" data-ref="w">
-            {" "}
-          </span>
-          <span aria-hidden="true" className="_w" data-ref="w">
             p
           </span>
           <span aria-hidden="true" className="_w" data-ref="w">
@@ -115,7 +103,7 @@ export const render = (props: any) => {
           <span aria-hidden="true" className="_w" data-ref="w">
             s
           </span>
-          <span className="sr-only">View all projects</span>
+          <span className="sr-only">View projects</span>
         </Link>
         <div css={styles.wrap}>
           <ul className="" css={styles.projects} data-ref="grid">
