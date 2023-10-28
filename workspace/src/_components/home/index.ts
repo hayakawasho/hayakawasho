@@ -13,8 +13,8 @@ type Refs = {
 
 export default defineComponent({
   name: "Home",
-  setup(el, context: AppContext) {
-    const { once, history } = context;
+  setup(_el, context: AppContext) {
+    const { history } = context;
 
     const { addChild } = useSlot();
     const { refs } = useDomRef<Refs>("grid", "gridItem", "viewProjects", "w");
@@ -30,8 +30,8 @@ export default defineComponent({
     });
 
     useMount(() => {
-      if (!once && history.value === "pushstate") {
-        return;
+      if (history.value === "pushstate") {
+        //
       }
 
       return () => {
@@ -40,9 +40,9 @@ export default defineComponent({
         }
 
         Tween.parallel(
-          Tween.tween(refs.w, 1.2, "power3.out", {
-            stagger: 0.02,
+          Tween.tween(refs.w, 1.25, "power3.out", {
             alpha: 0,
+            stagger: 0.02,
           })
         );
       };
