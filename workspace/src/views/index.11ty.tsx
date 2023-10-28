@@ -9,7 +9,7 @@ import { Link } from "./_components/ui/link";
 import * as styles from "./index.css";
 import type { WorkMetadata } from "@/_work/model";
 
-const PER_PAGE = 5;
+const PER_PAGE = 7;
 
 export const data = {
   pagination: {
@@ -146,9 +146,9 @@ export const render = (props: any) => {
 
 const Thumbnail = ({ post, index }: { post: WorkMetadata; index: number }) => {
   const speed = {
-    0: 0.75,
-    1: 0.9,
-    2: 0.75,
+    0: 0.8,
+    1: 1,
+    2: 0.8,
   }[index % 3];
 
   return (
