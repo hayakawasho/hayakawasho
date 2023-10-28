@@ -60,9 +60,9 @@ export const render = (props: any) => {
         <h1 className="sr-only">Sho Hayakawa Portfolio</h1>
         <Link
           css={styles.toProjects}
-          to="./works/"
           data-ref="viewProjects"
-          swap="swap:.9s"
+          swap="swap:1s"
+          to="./works/"
         >
           <span aria-hidden="true" className="_w" data-ref="w">
             V
