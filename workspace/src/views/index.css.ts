@@ -33,12 +33,12 @@ export const projects = css`
   top: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: calc(100% + var(--grid) * 11);
-  left: calc(var(--grid) * -5.5);
+  width: calc(100% + var(--grid) * 10);
+  left: calc(var(--grid) * -5);
 
   @media ${mq.pc} {
-    width: calc(100% + var(--grid) * 8);
-    left: calc(var(--grid) * -4);
+    width: calc(100% + var(--grid) * 5);
+    left: calc(var(--grid) * -2.5);
   }
 `;
 
@@ -57,6 +57,6 @@ export const project__eyecatch = css`
   display: block;
 
   @media ${mq.pc} {
-    inset: 6rem;
+    inset: 0.5rem;
   }
 `;

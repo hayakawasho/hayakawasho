@@ -13,7 +13,6 @@ export const list = css`
     padding-left: var(--gap);
 
     @media ${mq.pc} {
-      padding: 3rem 0;
       text-align: center;
       will-change: transform;
     }
@@ -28,8 +27,8 @@ export const item__title = css`
 
   @media (hover: hover) {
     @media ${mq.pc} {
-      opacity: 0.7;
-      transition: opacity 0.6s cubic-bezier(0.32, 0.94, 0.6, 1);
+      opacity: 0.6;
+      transition: opacity 0.65s cubic-bezier(0.32, 0.94, 0.6, 1);
     }
 
     &:hover {

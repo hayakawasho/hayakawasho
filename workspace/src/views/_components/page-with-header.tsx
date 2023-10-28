@@ -24,8 +24,8 @@ export const PageWithHeader: FC<{
           data-ref="windowSizeWatcher"
         />
         <div css={bg} role="presentation" />
-        <div css={maskUpper} role="presentation" />
-        <div css={maskLower} role="presentation" />
+        <div css={gradUpper} role="presentation" />
+        <div css={gradLower} role="presentation" />
         <div css={gridLeft} role="presentation" />
         <div css={gridMiddle} role="presentation" />
         <div css={gridRight} role="presentation" />
@@ -41,7 +41,10 @@ export const PageWithHeader: FC<{
             {children}
           </div>
         </div>
-        <div data-component="ScrollProgressUI" />
+        <div css={ui}>
+          <div data-component="ScrollProgressUI" />
+          <div className="hidden" data-component="Cursor" />
+        </div>
         <div
           aria-hidden="true"
           className="fixed inset-0 w-screen h-screen pointer-events-none z-10"
@@ -71,7 +74,7 @@ const svh = css`
   height: 100svh;
 `;
 
-const mask = css`
+const grad = css`
   pointer-events: none;
   display: block;
   height: 8rem;
@@ -85,8 +88,8 @@ const mask = css`
   }
 `;
 
-const maskUpper = css`
-  ${mask}
+const gradUpper = css`
+  ${grad}
   top: 0;
   background: linear-gradient(
     to bottom,
@@ -97,8 +100,8 @@ const maskUpper = css`
   );
 `;
 
-const maskLower = css`
-  ${mask}
+const gradLower = css`
+  ${grad}
   bottom: 0;
   background: linear-gradient(
     to top,
@@ -113,8 +116,6 @@ const gridLine = css`
   pointer-events: none;
   position: fixed;
   top: 0;
-  width: 1px;
-  height: 100%;
   width: 1px;
   height: 100%;
   transform: translateX(-50%);
@@ -149,16 +150,26 @@ const gridRight = css`
   }
 `;
 
-const bg = css`
+const screen = css`
   position: fixed;
-  pointer-events: none;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+`;
+
+const bg = css`
+  ${screen}
+  pointer-events: none;
   background: linear-gradient(0deg, #fff, var(--color-bg));
 
   @media (prefers-color-scheme: dark) {
     background: var(--color-bg);
   }
+`;
+
+const ui = css`
+  ${screen}
+  pointer-events: none;
+  z-index: 999;
 `;
