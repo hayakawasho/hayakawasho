@@ -2,6 +2,7 @@ import { defineComponent, useMount, useDomRef } from "lake";
 import { useTick } from "@/_foundation/hooks";
 import { splitTextNode2Words } from "@/_foundation/split-text";
 import { Tween } from "@/_foundation/tween";
+import { nextTick } from "@/_foundation/utils";
 import { useWindowSize } from "@/_states/window-size";
 import type { useInfiniteScroll } from "@/_foundation/hooks";
 import type { AppContext } from "@/_foundation/type";
@@ -72,12 +73,19 @@ export default defineComponent({
         );
       }
 
-      return () => {
+      return async () => {
         if (history.value === "popstate") {
           return;
         }
 
         Tween.kill([refs.img, split.words]);
+
+        Tween.prop([refs.img, split.words], {
+          willChange: "transform",
+        });
+
+        await nextTick();
+
         Tween.tween([refs.img, split.words], 0.5, "custom.in", {
           y: "-1.2em",
         });

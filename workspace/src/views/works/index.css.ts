@@ -15,6 +15,7 @@ export const list = css`
     @media ${mq.pc} {
       padding: 3rem 0;
       text-align: center;
+      will-change: transform;
     }
   }
 `;
@@ -23,6 +24,7 @@ export const item__title = css`
   display: inline-block;
   line-height: 1.15;
   overflow: hidden;
+  transform: translateZ(0);
 
   @media (hover: hover) {
     @media ${mq.pc} {
@@ -37,7 +39,6 @@ export const item__title = css`
 `;
 
 export const item = css`
-  backface-visibility: hidden;
   display: inline-block;
   width: 100%;
   font-size: 4.3rem;

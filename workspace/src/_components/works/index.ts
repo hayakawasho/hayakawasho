@@ -4,7 +4,7 @@ import Item from "./item";
 import type { AppContext } from "@/_foundation/type";
 
 type Refs = {
-  list: HTMLElement;
+  items: HTMLElement;
   item: HTMLElement[];
 };
 
@@ -12,10 +12,10 @@ export default defineComponent({
   name: "Works",
   setup(_el, context: AppContext) {
     const { addChild } = useSlot();
-    const { refs } = useDomRef<Refs>("list", "item");
+    const { refs } = useDomRef<Refs>("items", "item");
 
     const infiniteScrollContext = useInfiniteScroll(
-      refs.list,
+      refs.items,
       context.mq.value
     );
 

@@ -20,12 +20,6 @@ const IMG_API = "?auto=compress,format&fit=crop&w=100&h=100";
 export const render = (props: any) => {
   const posts = props.posts as WorkMetadata[];
 
-  const images = posts.reduce<string[]>((acc, post, i) => {
-    const src = post.eyecatch.src + "?auto=compress,format";
-    acc.push(i === 0 ? src : " " + src);
-    return acc;
-  }, []);
-
   return `<!DOCTYPE html>
   ${r(
     <PageWithHeader
@@ -37,11 +31,17 @@ export const render = (props: any) => {
         <div aria-hidden="true" data-scroll-item />
         <h1 className="sr-only">Works</h1>
         <div css={styles.wrap}>
-          <ul css={styles.list} data-images={images} data-ref="list">
+          <ul css={styles.list} data-ref="items">
             {posts.map((post) => {
               return (
-                <li key={post.id}>
-                  <Link css={styles.item} data-ref="item" to={`./${post.id}/`}>
+                <li
+                  data-h={post.eyecatch.height}
+                  data-img={post.eyecatch.src + "?auto=compress,format"}
+                  data-ref="item"
+                  data-w={post.eyecatch.width}
+                  key={post.id}
+                >
+                  <Link css={styles.item} to={`./${post.id}/`}>
                     <div className="pc:hidden" css={styles.item__thumb}>
                       <img
                         alt=""
@@ -66,8 +66,15 @@ export const render = (props: any) => {
             })}
             {posts.map((post) => {
               return (
-                <li aria-hidden="true" key={post.id}>
-                  <Link css={styles.item} data-ref="item" to={`./${post.id}/`}>
+                <li
+                  aria-hidden="true"
+                  data-h={post.eyecatch.height}
+                  data-img={post.eyecatch.src + "?auto=compress,format"}
+                  data-ref="item"
+                  data-w={post.eyecatch.width}
+                  key={post.id}
+                >
+                  <Link css={styles.item} to={`./${post.id}/`}>
                     <div className="pc:hidden" css={styles.item__thumb}>
                       <img
                         alt=""
