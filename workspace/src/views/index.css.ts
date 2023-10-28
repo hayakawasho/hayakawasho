@@ -7,6 +7,27 @@ export const wrap = css`
   height: 100%;
 `;
 
+export const toProjects = css`
+  position: fixed;
+  left: 50%;
+  bottom: 2.8rem;
+  z-index: 100;
+  font-size: 1.2rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 1.2rem 1.5rem;
+  color: #fff;
+  mix-blend-mode: difference;
+  transform: translateX(-50%) translateZ(0);
+  display: inline-block;
+  overflow: hidden;
+
+  @media ${mq.pc} {
+    font-size: 1.3rem;
+    bottom: 6rem;
+  }
+`;
+
 export const projects = css`
   position: absolute;
   top: 0;
@@ -32,7 +53,7 @@ export const project = css`
 
 export const project__eyecatch = css`
   position: absolute;
-  inset: 1.5rem;
+  inset: 0.2rem;
   display: block;
 
   @media ${mq.pc} {

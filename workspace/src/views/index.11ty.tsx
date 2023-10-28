@@ -58,6 +58,65 @@ export const render = (props: any) => {
       <main className="h-full" data-component="Home">
         <div aria-hidden="true" data-scroll-item />
         <h1 className="sr-only">Sho Hayakawa Portfolio</h1>
+        <Link
+          css={styles.toProjects}
+          to="./works/"
+          data-ref="viewProjects"
+          swap="swap:.9s"
+        >
+          <span aria-hidden="true" className="_w" data-ref="w">
+            V
+          </span>
+          <span aria-hidden="true" className="_w" data-ref="w">
+            i
+          </span>
+          <span aria-hidden="true" className="_w" data-ref="w">
+            e
+          </span>
+          <span aria-hidden="true" className="_w" data-ref="w">
+            w
+          </span>
+          <span aria-hidden="true" className="_w" data-ref="w">
+            {" "}
+          </span>
+          <span aria-hidden="true" className="_w" data-ref="w">
+            a
+          </span>
+          <span aria-hidden="true" className="_w" data-ref="w">
+            l
+          </span>
+          <span aria-hidden="true" className="_w" data-ref="w">
+            l
+          </span>
+          <span aria-hidden="true" className="_w" data-ref="w">
+            {" "}
+          </span>
+          <span aria-hidden="true" className="_w" data-ref="w">
+            p
+          </span>
+          <span aria-hidden="true" className="_w" data-ref="w">
+            r
+          </span>
+          <span aria-hidden="true" className="_w" data-ref="w">
+            o
+          </span>
+          <span aria-hidden="true" className="_w" data-ref="w">
+            j
+          </span>
+          <span aria-hidden="true" className="_w" data-ref="w">
+            e
+          </span>
+          <span aria-hidden="true" className="_w" data-ref="w">
+            c
+          </span>
+          <span aria-hidden="true" className="_w" data-ref="w">
+            t
+          </span>
+          <span aria-hidden="true" className="_w" data-ref="w">
+            s
+          </span>
+          <span className="sr-only">View all projects</span>
+        </Link>
         <div css={styles.wrap}>
           <ul className="" css={styles.projects} data-ref="grid">
             {posts.map((post, index) => (
@@ -105,11 +164,7 @@ const Thumbnail = ({ post, index }: { post: WorkMetadata; index: number }) => {
   }[index % 3];
 
   return (
-    <Link
-      css={styles.project__eyecatch}
-      data-ref="gridItem"
-      to={`./works/${post.id}/`}
-    >
+    <figure css={styles.project__eyecatch} data-ref="gridItem">
       <img
         alt={post.title}
         className="w-full h-full invisible"
@@ -121,6 +176,6 @@ const Thumbnail = ({ post, index }: { post: WorkMetadata; index: number }) => {
         height={post.eyecatch.height}
         width={post.eyecatch.width}
       />
-    </Link>
+    </figure>
   );
 };

@@ -105,7 +105,6 @@ export default defineComponent({
 
       const y = infiniteScrollContext.wrap(posY.value * state[mq.value].speed);
 
-      el.style.transform = `translateY(${-y}px) translateZ(0)`;
       imagePlane.updatePos(y);
       uniforms.u_velo.value = diff.value * 0.005 * state[mq.value].speed;
     });
