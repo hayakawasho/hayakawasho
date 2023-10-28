@@ -8,8 +8,7 @@ import type { AppContext } from "@/_foundation/type";
 type Refs = {
   grid: HTMLElement;
   gridItem: HTMLElement[];
-  viewProjects: HTMLElement;
-  w: HTMLElement[];
+  char: HTMLElement[];
 };
 
 export default defineComponent({
@@ -18,7 +17,7 @@ export default defineComponent({
     const { history } = context;
 
     const { addChild } = useSlot();
-    const { refs } = useDomRef<Refs>("grid", "gridItem", "viewProjects", "w");
+    const { refs } = useDomRef<Refs>("grid", "gridItem", "char");
 
     const infiniteScrollContext = useInfiniteScroll(
       refs.grid,
@@ -40,14 +39,14 @@ export default defineComponent({
           return;
         }
 
-        Tween.prop(refs.w, {
+        Tween.prop(refs.char, {
           willChange: "opacity",
         });
 
         await nextTick();
 
         Tween.parallel(
-          Tween.tween(refs.w, 1.15, "power3.out", {
+          Tween.tween(refs.char, 1.15, "power3.out", {
             alpha: 0,
             stagger: 0.02,
           })

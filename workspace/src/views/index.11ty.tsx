@@ -9,7 +9,7 @@ import { Link } from "./_components/ui/link";
 import * as styles from "./index.css";
 import type { WorkMetadata } from "@/_work/model";
 
-const PER_PAGE = 7;
+const PER_PAGE = 5;
 
 export const data = {
   pagination: {
@@ -21,6 +21,7 @@ export const data = {
 };
 
 const IMG_API = "?auto=compress,format";
+const VIEW_PROJECTS = "View projects";
 
 export const render = (props: any) => {
   const posts = shuffle(props.posts as WorkMetadata[]);
@@ -58,52 +59,13 @@ export const render = (props: any) => {
       <main className="h-full" data-component="Home">
         <div aria-hidden="true" data-scroll-item />
         <h1 className="sr-only">Sho Hayakawa Portfolio</h1>
-        <Link
-          css={styles.toProjects}
-          data-ref="viewProjects"
-          swap="swap:.95s"
-          to="./works/"
-        >
-          <span aria-hidden="true" className="_w" data-ref="w">
-            V
-          </span>
-          <span aria-hidden="true" className="_w" data-ref="w">
-            i
-          </span>
-          <span aria-hidden="true" className="_w" data-ref="w">
-            e
-          </span>
-          <span aria-hidden="true" className="_w" data-ref="w">
-            w
-          </span>
-          <span aria-hidden="true" className="_w" data-ref="w">
-            {" "}
-          </span>
-          <span aria-hidden="true" className="_w" data-ref="w">
-            p
-          </span>
-          <span aria-hidden="true" className="_w" data-ref="w">
-            r
-          </span>
-          <span aria-hidden="true" className="_w" data-ref="w">
-            o
-          </span>
-          <span aria-hidden="true" className="_w" data-ref="w">
-            j
-          </span>
-          <span aria-hidden="true" className="_w" data-ref="w">
-            e
-          </span>
-          <span aria-hidden="true" className="_w" data-ref="w">
-            c
-          </span>
-          <span aria-hidden="true" className="_w" data-ref="w">
-            t
-          </span>
-          <span aria-hidden="true" className="_w" data-ref="w">
-            s
-          </span>
-          <span className="sr-only">View projects</span>
+        <Link css={styles.toProjects} swap="swap:.95s" to="./works/">
+          {[...VIEW_PROJECTS].map((c) => (
+            <span aria-hidden="true" className="_c" data-ref="char">
+              {c}
+            </span>
+          ))}
+          <span className="sr-only">{VIEW_PROJECTS}</span>
         </Link>
         <div css={styles.wrap}>
           <ul className="" css={styles.projects} data-ref="grid">
