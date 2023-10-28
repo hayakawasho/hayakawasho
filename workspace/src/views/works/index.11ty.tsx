@@ -54,8 +54,8 @@ export const render = (props: any) => {
                       />
                     </div>
                     <h2
-                      css={styles.item__title}
                       className="pl-[0.05em]"
+                      css={styles.item__title}
                       data-ref="text"
                     >
                       {post.title}
@@ -81,8 +81,8 @@ export const render = (props: any) => {
                       />
                     </div>
                     <h2
-                      css={styles.item__title}
                       className="pl-[0.05em]"
+                      css={styles.item__title}
                       data-ref="text"
                     >
                       {post.title}

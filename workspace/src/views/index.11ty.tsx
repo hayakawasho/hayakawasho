@@ -9,7 +9,7 @@ import { Link } from "./_components/ui/link";
 import * as styles from "./index.css";
 import type { WorkMetadata } from "@/_work/model";
 
-const PER_PAGE = 10;
+const PER_PAGE = 5;
 
 export const data = {
   pagination: {

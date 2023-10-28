@@ -1,7 +1,6 @@
 import { defineComponent, useSlot, useDomRef } from "lake";
 import { useInfiniteScroll } from "@/_foundation/hooks";
 import Item from "./item";
-import Thumbnail from "./thumbnail";
 import type { AppContext } from "@/_foundation/type";
 
 type Refs = {
@@ -15,8 +14,6 @@ export default defineComponent({
     const { addChild } = useSlot();
     const { refs } = useDomRef<Refs>("list", "item");
 
-    const [thumbnailContext] = addChild(refs.list, Thumbnail, context);
-
     const infiniteScrollContext = useInfiniteScroll(
       refs.list,
       context.mq.value
@@ -25,7 +22,6 @@ export default defineComponent({
     addChild(refs.item, Item, {
       ...context,
       infiniteScrollContext,
-      thumbnailContext: thumbnailContext.current,
     });
   },
 });

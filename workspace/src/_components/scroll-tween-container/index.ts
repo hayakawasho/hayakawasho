@@ -216,8 +216,8 @@ export default defineComponent({
 
     return {
       pause,
-      resume,
       reInit,
+      resume,
       scrollTo,
       set,
     };

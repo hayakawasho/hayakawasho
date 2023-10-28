@@ -23,7 +23,7 @@ type Refs = {
 
 export default defineComponent({
   name: "Work",
-  setup(el, context: AppContext) {
+  setup(_el, context: AppContext) {
     const { once, history } = context;
 
     const { addChild } = useSlot();
@@ -134,9 +134,22 @@ export default defineComponent({
         }
 
         Tween.parallel(
-          Tween.tween(el, 0.55, "power3.inOut", {
-            alpha: 0,
-          }),
+          Tween.tween(
+            [
+              refs.dash,
+              refs.max,
+              refs.now,
+              refs.infoText,
+              refs.infoLine,
+              refs.eyecatch,
+              refs.stack,
+            ],
+            0.55,
+            "power3.inOut",
+            {
+              alpha: 0,
+            }
+          ),
           Tween.tween([refs.sub, split.words], 0.5, "custom.in", {
             y: "-1.2em",
           })

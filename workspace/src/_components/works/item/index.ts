@@ -3,13 +3,11 @@ import { useTick } from "@/_foundation/hooks";
 import { splitTextNode2Words } from "@/_foundation/split-text";
 import { Tween } from "@/_foundation/tween";
 import { useWindowSize } from "@/_states/window-size";
-import type Thumbnail from "../thumbnail";
 import type { useInfiniteScroll } from "@/_foundation/hooks";
 import type { AppContext } from "@/_foundation/type";
 
 type Props = AppContext & {
   infiniteScrollContext: ReturnType<typeof useInfiniteScroll>;
-  thumbnailContext: ReturnType<(typeof Thumbnail)["setup"]>;
 };
 
 type Refs = {
@@ -51,9 +49,9 @@ export default defineComponent({
     });
 
     useMount(() => {
-      if (!once && history.value === "pushstate") {
-        infiniteScrollContext.onResize();
+      infiniteScrollContext.onResize();
 
+      if (!once && history.value === "pushstate") {
         Tween.serial(
           Tween.prop([refs.img, split.words], {
             willChange: "transform",
@@ -80,7 +78,6 @@ export default defineComponent({
         }
 
         Tween.kill([refs.img, split.words]);
-
         Tween.tween([refs.img, split.words], 0.5, "custom.in", {
           y: "-1.2em",
         });
