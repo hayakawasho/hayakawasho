@@ -15,7 +15,8 @@ export const data = {
   },
 };
 
-const IMG_API = "?auto=compress,format&fit=crop&w=100&h=100";
+const IMG_API = "?auto=compress,format";
+const IMG_API_CROPPED = IMG_API + "&fit=crop&w=100&h=100";
 
 export const render = (props: any) => {
   const posts = props.posts as WorkMetadata[];
@@ -30,13 +31,13 @@ export const render = (props: any) => {
       <main className="h-full" data-component="Works">
         <div aria-hidden="true" data-scroll-item />
         <h1 className="sr-only">Works</h1>
-        <div css={styles.wrap}>
+        <div css={styles.screen}>
           <ul css={styles.list} data-ref="items">
             {posts.map((post) => {
               return (
                 <li
                   data-h={post.eyecatch.height}
-                  data-img={post.eyecatch.src + "?auto=compress,format"}
+                  data-img={post.eyecatch.src + IMG_API}
                   data-ref="item"
                   data-w={post.eyecatch.width}
                   key={post.id}
@@ -49,7 +50,7 @@ export const render = (props: any) => {
                         data-ref="img"
                         decoding="auto"
                         height={100}
-                        src={post.eyecatch.src + IMG_API}
+                        src={post.eyecatch.src + IMG_API_CROPPED}
                         width={100}
                       />
                     </div>
@@ -69,7 +70,7 @@ export const render = (props: any) => {
                 <li
                   aria-hidden="true"
                   data-h={post.eyecatch.height}
-                  data-img={post.eyecatch.src + "?auto=compress,format"}
+                  data-img={post.eyecatch.src + IMG_API}
                   data-ref="item"
                   data-w={post.eyecatch.width}
                   key={post.id}
@@ -83,7 +84,7 @@ export const render = (props: any) => {
                         decoding="auto"
                         height={100}
                         loading="lazy"
-                        src={post.eyecatch.src + IMG_API}
+                        src={post.eyecatch.src + IMG_API_CROPPED}
                         width={100}
                       />
                     </div>

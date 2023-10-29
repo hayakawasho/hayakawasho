@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import { mq } from "@/_foundation/mq";
 
-export const wrap = css`
+export const screen = css`
   position: fixed;
   width: 100%;
   height: 100%;
@@ -9,10 +9,11 @@ export const wrap = css`
 
 export const list = css`
   & > li {
-    padding: 1.5rem 0;
+    padding: 1.2rem 0;
     padding-left: var(--gap);
 
     @media ${mq.pc} {
+      padding: 1.6rem 0;
       text-align: center;
       will-change: transform;
     }
@@ -38,14 +39,13 @@ export const item__title = css`
 `;
 
 export const item = css`
-  display: inline-block;
+  display: grid;
+  grid-template-columns: 0.8em 1fr;
+  gap: 1.5rem;
   width: 100%;
   font-size: 4.3rem;
   font-family: var(--font-en);
   letter-spacing: 0.02em;
-  display: grid;
-  grid-template-columns: 0.8em 1fr;
-  gap: 1.5rem;
 
   @media ${mq.pc} {
     display: inline-block;

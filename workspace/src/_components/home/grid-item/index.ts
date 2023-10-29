@@ -7,12 +7,16 @@ import { ImagePlane } from "@/_glsl";
 import { useWindowSize } from "@/_states/window-size";
 import fragment from "./fragment.frag";
 import vertex from "./vertex.vert";
+// import fragment from "./cylinder.frag";
+// import vertex from "./cylinder.vert";
 import type { useInfiniteScroll } from "@/_foundation/hooks";
 import type { AppContext } from "@/_foundation/type";
 
 type Props = AppContext & {
   infiniteScrollContext: ReturnType<typeof useInfiniteScroll>;
 };
+
+const IMG_API = "?auto=compress,format";
 
 export default defineComponent({
   name: "GridItem",
@@ -29,12 +33,12 @@ export default defineComponent({
     const state = {
       pc: {
         speed,
-        src: imgSrc + "?auto=compress,format&w=1200",
+        src: imgSrc + IMG_API + "&w=1200",
       },
       resizing: false,
       sp: {
         speed,
-        src: imgSrc + "?auto=compress,format&w=750",
+        src: imgSrc + IMG_API + "&w=750",
       },
     };
 

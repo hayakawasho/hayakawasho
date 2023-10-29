@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import { mq } from "@/_foundation/mq";
 
-export const wrap = css`
+export const screen = css`
   position: fixed;
   width: 100%;
   height: 100%;

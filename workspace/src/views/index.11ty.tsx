@@ -67,7 +67,7 @@ export const render = (props: any) => {
           ))}
           <span className="sr-only">{VIEW_PROJECTS}</span>
         </Link>
-        <div css={styles.wrap}>
+        <div css={styles.screen}>
           <ul className="" css={styles.projects} data-ref="grid">
             {posts.map((post, index) => (
               <li css={styles.project} key={post.id}>
