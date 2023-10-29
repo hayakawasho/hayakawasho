@@ -30,12 +30,12 @@ export default defineComponent({
     });
 
     useMount(() => {
-      if (history.value === "pushstate") {
+      if (history.value === "push") {
         //
       }
 
       return async () => {
-        if (history.value === "popstate") {
+        if (history.value === "pop") {
           return;
         }
 

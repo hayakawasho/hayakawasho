@@ -51,7 +51,7 @@ export default defineComponent({
     useMount(() => {
       infiniteScrollContext.onResize();
 
-      if (!once && history.value === "pushstate") {
+      if (!once && history.value === "push") {
         Tween.serial(
           Tween.prop([refs.img, split.words], {
             willChange: "transform",
@@ -73,11 +73,11 @@ export default defineComponent({
       }
 
       return async () => {
-        if (history.value === "popstate") {
+        Tween.kill([refs.img, split.words]);
+
+        if (history.value === "pop") {
           return;
         }
-
-        Tween.kill([refs.img, split.words]);
 
         Tween.prop([refs.img, split.words], {
           willChange: "transform",

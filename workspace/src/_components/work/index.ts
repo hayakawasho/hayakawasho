@@ -52,7 +52,7 @@ export default defineComponent({
     });
 
     useMount(() => {
-      if (!once && history.value === "pushstate") {
+      if (!once && history.value === "push") {
         Tween.serial(
           Tween.prop(refs.now, {
             willChange: "transform",
@@ -129,7 +129,7 @@ export default defineComponent({
       }
 
       return () => {
-        if (history.value === "popstate") {
+        if (history.value === "pop") {
           return;
         }
 

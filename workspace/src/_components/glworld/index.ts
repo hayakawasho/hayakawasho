@@ -3,16 +3,10 @@ import { defineComponent, useDomRef } from "lake";
 import { Transform, Renderer, Camera } from "ogl";
 import { useTick } from "@/_foundation/hooks";
 import { useWindowSize } from "@/_states/window-size";
-import type { AppContext } from "@/_foundation/type";
-
-const dpr = {
-  pc: 1.5,
-  sp: 1.5,
-};
 
 export default defineComponent({
   name: "GlWorld",
-  setup(el, { mq }: Pick<AppContext, "mq">) {
+  setup(el) {
     const { refs } = useDomRef<{ canvas: HTMLCanvasElement }>("canvas");
     const { height, width } = el.getBoundingClientRect();
 
@@ -29,7 +23,7 @@ export default defineComponent({
     const renderer = new Renderer({
       alpha: true,
       canvas: refs.canvas,
-      dpr: Math.min(window.devicePixelRatio, dpr[mq.value]),
+      dpr: Math.min(window.devicePixelRatio, 1.5),
       height,
       width,
     });

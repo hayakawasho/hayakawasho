@@ -118,7 +118,7 @@ export default defineComponent({
       glContext.addScene(mesh);
 
       return () => {
-        if (history.value === "popstate") {
+        if (history.value === "pop") {
           glContext.removeScene(mesh);
           return;
         }

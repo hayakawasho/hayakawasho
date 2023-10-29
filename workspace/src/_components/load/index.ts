@@ -32,11 +32,11 @@ export default defineComponent({
     const { addChild } = useSlot();
     const { refs } = useDomRef<Refs>("glWorld", "main", "windowSizeWatcher");
 
-    const history = ref<"pushstate" | "popstate">("pushstate");
+    const history = ref<"push" | "pop">("push");
     const mq = readonly(ref<"pc" | "sp">(wideQuery.matches ? "pc" : "sp"));
 
     const [scrollContext] = addChild(refs.main, ScrollTweenContainer, { mq });
-    const [glWorldContext] = addChild(refs.glWorld, GlWorld, { mq });
+    const [glWorldContext] = addChild(refs.glWorld, GlWorld);
 
     const ro = new ResizeObserver(
       debounce(([entry]) => {
@@ -85,12 +85,13 @@ export default defineComponent({
     htmx.config.historyCacheSize = 1;
 
     htmx.on("htmx:historyRestore", (e) => {
-      history.value = "popstate";
+      history.value = "pop";
 
       onLeave(fromContainer.value);
 
       const { detail } = e as CustomEvent;
       const newContainer = htmx.find(detail.elt, "[data-xhr]") as HTMLElement;
+
       onEnter(newContainer);
     });
 
@@ -100,12 +101,14 @@ export default defineComponent({
         detail.historyElt,
         "[data-xhr]"
       ) as HTMLElement;
+
       onLeave(oldContainer);
+
       fromContainer.value = oldContainer;
     });
 
     htmx.on("htmx:beforeSwap", () => {
-      history.value = "pushstate";
+      history.value = "push";
     });
 
     htmx.on("htmx:afterSwap", (e) => {
@@ -114,6 +117,7 @@ export default defineComponent({
         detail.target,
         "[data-xhr]"
       ) as HTMLElement;
+
       onEnter(newContainer);
     });
 
