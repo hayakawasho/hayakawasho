@@ -52,10 +52,6 @@ export const PageWithHeader: FC<{
         >
           <canvas className="w-screen h-screen" data-ref="canvas"></canvas>
         </div>
-        <script
-          defer={true}
-          src="https://polyfill.io/v3/polyfill.min.js?version=3.111.0&flags=gated&features=fetch%2CMediaQueryList.prototype.addEventListener%2CResizeObserver%2CString.prototype.padStart"
-        />
         {idDev && (
           <script
             defer={true}
