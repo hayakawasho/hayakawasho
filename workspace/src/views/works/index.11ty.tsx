@@ -4,6 +4,7 @@ import { Header } from "../_components/header";
 import { PageWithHeader } from "../_components/page-with-header";
 import { Seo } from "../_components/seo";
 import { Link } from "../_components/ui/link";
+import { ResponsiveImage } from "../_components/ui/responsive-image";
 import type { WorkMetadata } from "@/_work/model";
 
 class Component {
@@ -55,32 +56,24 @@ class Component {
 const IMG_API = "?auto=compress,format";
 const IMG_API_CROPPED = IMG_API + "&fit=crop&w=100&h=100";
 
-const Item = ({
-  post,
-  loading,
-  ...props
-}: {
-  post: WorkMetadata;
-  loading?: "lazy" | "eager" | undefined;
-}) => {
+const Item = ({ post, ...props }: { post: WorkMetadata }) => {
   return (
     <li
       {...props}
-      data-image={post.eyecatch.src + IMG_API}
+      data-image={post.eyecatch.src + IMG_API + "&w=1440"}
       data-image-size={`[${post.eyecatch.width}, ${post.eyecatch.height}]`}
       data-ref="item"
     >
       <Link css={styles.item} to={`./${post.id}/`}>
         <div className="pc:hidden" css={styles.item__thumb}>
-          <img
+          <ResponsiveImage
             alt=""
             className="w-full h-full rounded-1/2"
             data-ref="img"
-            decoding="auto"
-            height={100}
-            loading={loading}
-            src={post.eyecatch.src + IMG_API_CROPPED}
-            width={100}
+            pcSize={[1, 1]}
+            pcSrc="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
+            spSize={[100, 100]}
+            spSrc={post.eyecatch.src + IMG_API_CROPPED}
           />
         </div>
         <h2 className="pl-[0.05em]" css={styles.item__title} data-ref="text">

@@ -1,36 +1,44 @@
 import { mq } from "@/_foundation/mq";
 
 type Props = {
-  pcSrc: string;
-  spSrc: string;
-  pcSize: [number | string, number | string];
-  spSize: [number | string, number | string];
-  className?: string;
   alt: string;
+  className?: string;
+  pcSrc: string;
+  pcSize: [number | string, number | string];
+  spSrc: string;
+  spSize: [number | string, number | string];
 };
 
-export function ResponsiveImage(props: Props) {
+export function ResponsiveImage({
+  alt,
+  className,
+  pcSize,
+  pcSrc,
+  spSize,
+  spSrc,
+  ...props
+}: Props) {
   return (
-    <picture>
+    <picture {...props}>
       <source
-        height={props.pcSize[1]}
+        height={pcSize[1]}
         media={mq.pc}
-        srcSet={props.pcSrc}
-        width={props.pcSize[0]}
+        srcSet={pcSrc}
+        width={pcSize[0]}
       />
       <source
-        height={props.spSize[1]}
+        height={spSize[1]}
         media={mq.sp}
-        srcSet={props.spSrc}
-        width={props.spSize[0]}
+        srcSet={spSrc}
+        width={spSize[0]}
       />
       <img
-        alt={props.alt}
-        className={props.className}
+        alt={alt}
+        className={className}
         decoding="auto"
-        height={props.spSize[1]}
-        src={props.spSrc}
-        width={props.spSize[0]}
+        height={spSize[1]}
+        src={spSrc}
+        width={spSize[0]}
       />
     </picture>
   );

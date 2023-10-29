@@ -171,6 +171,10 @@ const base = css`
     display: block;
   }
 
+  picture {
+    display: block;
+  }
+
   @font-face {
     font-family: "Gallery Modern";
     src: url("/assets/gallerymodern-webfont.woff2") format("woff2");

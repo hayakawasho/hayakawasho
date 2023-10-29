@@ -40,7 +40,7 @@ class Component {
               <>
                 {posts.map((post) => (
                   <ImagePreloader
-                    href={post.eyecatch.src + IMG_API}
+                    href={post.eyecatch.src + IMG_API + "&w=1440"}
                     key={post.id}
                     media={mq.pc}
                   />
