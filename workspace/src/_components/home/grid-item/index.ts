@@ -1,7 +1,7 @@
 import { defineComponent, useMount, useDomRef } from "lake";
 import { Texture, Vec2, Mesh, Program, Plane } from "ogl";
 import { useTick } from "@/_foundation/hooks";
-// import { Tween } from "@/_foundation/tween";
+import { Tween } from "@/_foundation/tween";
 import { loadImage } from "@/_foundation/utils";
 import { ImagePlane } from "@/_glsl";
 import { useWindowSize } from "@/_states/window-size";
@@ -123,7 +123,11 @@ export default defineComponent({
           return;
         }
 
-        glContext.removeScene(mesh);
+        Tween.serial(
+          Tween.wait(0.8, () => {
+            glContext.removeScene(mesh);
+          })
+        );
       };
     });
   },

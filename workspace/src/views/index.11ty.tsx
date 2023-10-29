@@ -10,101 +10,104 @@ import * as styles from "./index.css";
 import type { WorkMetadata } from "@/_work/model";
 
 const PER_PAGE = 5;
-
-export const data = {
-  pagination: {
-    addAllPagesToCollections: false,
-    alias: "posts",
-    data: "cms.home",
-    size: PER_PAGE,
-  },
-};
-
 const IMG_API = "?auto=compress,format";
 const VIEW_PROJECTS = "View projects";
 
-export const render = (props: any) => {
-  const posts = shuffle(props.posts as WorkMetadata[]);
+class Component {
+  data() {
+    return {
+      pagination: {
+        addAllPagesToCollections: false,
+        alias: "posts",
+        data: "cms.home",
+        size: PER_PAGE,
+      },
+    };
+  }
 
-  return `<!DOCTYPE html>
-  ${r(
-    <PageWithHeader
-      header={<Header />}
-      namespace="Home"
-      seo={
-        <Seo
-          permalink=""
-          prepend={
-            <>
-              {posts.map((post) => (
-                <ImagePreloader
-                  href={post.eyecatch.src + IMG_API}
-                  key={post.id}
-                  media={mq.pc}
-                />
+  render(props: any) {
+    const posts = shuffle(props.posts as WorkMetadata[]);
+
+    return `<!DOCTYPE html>
+    ${r(
+      <PageWithHeader
+        header={<Header />}
+        namespace="Home"
+        seo={
+          <Seo
+            permalink=""
+            prepend={
+              <>
+                {posts.map((post) => (
+                  <ImagePreloader
+                    href={post.eyecatch.src + IMG_API}
+                    key={post.id}
+                    media={mq.pc}
+                  />
+                ))}
+                {posts.map((post) => (
+                  <ImagePreloader
+                    href={post.eyecatch.src + IMG_API + "&w=750"}
+                    key={post.id}
+                    media={mq.sp}
+                  />
+                ))}
+              </>
+            }
+            title=""
+          />
+        }
+      >
+        <main className="h-full" data-component="Home">
+          <div aria-hidden="true" data-scroll-item />
+          <h1 className="sr-only">Sho Hayakawa Portfolio</h1>
+          <Link css={styles.toProjects} swap="swap:.95s" to="./works/">
+            {[...VIEW_PROJECTS].map((c) => (
+              <span aria-hidden="true" className="_c" data-ref="char">
+                {c}
+              </span>
+            ))}
+            <span className="sr-only">{VIEW_PROJECTS}</span>
+          </Link>
+          <div css={styles.screen}>
+            <ul className="" css={styles.projects} data-ref="grid">
+              {posts.map((post, index) => (
+                <li css={styles.project} key={post.id}>
+                  <Thumbnail index={index} post={post} />
+                </li>
               ))}
-              {posts.map((post) => (
-                <ImagePreloader
-                  href={post.eyecatch.src + IMG_API + "&w=750"}
-                  key={post.id}
-                  media={mq.sp}
-                />
+              {posts.map((post, index) => (
+                <li aria-hidden="true" css={styles.project} key={post.id}>
+                  <Thumbnail index={index + PER_PAGE} post={post} />
+                </li>
               ))}
-            </>
-          }
-          title=""
-        />
-      }
-    >
-      <main className="h-full" data-component="Home">
-        <div aria-hidden="true" data-scroll-item />
-        <h1 className="sr-only">Sho Hayakawa Portfolio</h1>
-        <Link css={styles.toProjects} swap="swap:.95s" to="./works/">
-          {[...VIEW_PROJECTS].map((c) => (
-            <span aria-hidden="true" className="_c" data-ref="char">
-              {c}
-            </span>
-          ))}
-          <span className="sr-only">{VIEW_PROJECTS}</span>
-        </Link>
-        <div css={styles.screen}>
-          <ul className="" css={styles.projects} data-ref="grid">
-            {posts.map((post, index) => (
-              <li css={styles.project} key={post.id}>
-                <Thumbnail index={index} post={post} />
-              </li>
-            ))}
-            {posts.map((post, index) => (
-              <li aria-hidden="true" css={styles.project} key={post.id}>
-                <Thumbnail index={index + PER_PAGE} post={post} />
-              </li>
-            ))}
-            {posts.map((post, index) => (
-              <li aria-hidden="true" css={styles.project} key={post.id}>
-                <Thumbnail index={index + PER_PAGE * 2} post={post} />
-              </li>
-            ))}
-            {posts.map((post, index) => (
-              <li aria-hidden="true" css={styles.project} key={post.id}>
-                <Thumbnail index={index + PER_PAGE * 3} post={post} />
-              </li>
-            ))}
-            {posts.map((post, index) => (
-              <li aria-hidden="true" css={styles.project} key={post.id}>
-                <Thumbnail index={index + PER_PAGE * 4} post={post} />
-              </li>
-            ))}
-            {posts.map((post, index) => (
-              <li aria-hidden="true" css={styles.project} key={post.id}>
-                <Thumbnail index={index + PER_PAGE * 5} post={post} />
-              </li>
-            ))}
-          </ul>
-        </div>
-      </main>
-    </PageWithHeader>
-  )}`;
-};
+              {posts.map((post, index) => (
+                <li aria-hidden="true" css={styles.project} key={post.id}>
+                  <Thumbnail index={index + PER_PAGE * 2} post={post} />
+                </li>
+              ))}
+              {posts.map((post, index) => (
+                <li aria-hidden="true" css={styles.project} key={post.id}>
+                  <Thumbnail index={index + PER_PAGE * 3} post={post} />
+                </li>
+              ))}
+              {posts.map((post, index) => (
+                <li aria-hidden="true" css={styles.project} key={post.id}>
+                  <Thumbnail index={index + PER_PAGE * 4} post={post} />
+                </li>
+              ))}
+              {posts.map((post, index) => (
+                <li aria-hidden="true" css={styles.project} key={post.id}>
+                  <Thumbnail index={index + PER_PAGE * 5} post={post} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </main>
+      </PageWithHeader>
+    )}`;
+  }
+}
 
 const Thumbnail = ({ post, index }: { post: WorkMetadata; index: number }) => {
   const speed = {
@@ -129,3 +132,5 @@ const Thumbnail = ({ post, index }: { post: WorkMetadata; index: number }) => {
     </figure>
   );
 };
+
+module.exports = Component;

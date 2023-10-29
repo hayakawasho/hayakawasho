@@ -4,6 +4,7 @@ import { splitTextNode2Words } from "@/_foundation/split-text";
 import { Tween } from "@/_foundation/tween";
 import { nextTick } from "@/_foundation/utils";
 import { useWindowSize } from "@/_states/window-size";
+import { useThumbnail } from "./use-thumbnail";
 import type { useInfiniteScroll } from "@/_foundation/hooks";
 import type { AppContext } from "@/_foundation/type";
 
@@ -24,19 +25,17 @@ export default defineComponent({
 
     const { refs } = useDomRef<Refs>("text", "img");
 
-    const state = {
-      pc: {
-        speed: 0.9,
-      },
-      sp: {
-        speed: 1,
-      },
+    if (mq.value === "pc") {
+      useThumbnail(el, context.glContext);
+    }
+
+    const SPEED = {
+      pc: 0.9,
+      sp: 1,
     };
 
-    // const [_, wh] = useWindowSize();
-
     useTick(() => {
-      const scale = 1 - diff.value * 0.0005 * state[mq.value].speed;
+      const scale = 1 - diff.value * 0.0005 * SPEED[mq.value];
       const y = infiniteScrollContext.wrap(posY.value);
 
       el.style.transform = `translateY(${-y}px) translateZ(0) scale(${scale})`;

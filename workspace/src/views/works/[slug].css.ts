@@ -187,6 +187,7 @@ export const screenshots = css`
 `;
 
 export const dummy = css`
+  position: relative;
   height: 101vh;
   height: 101svh;
 
