@@ -11,7 +11,7 @@ import {
 import { PageWithHeader } from "../_components/page-with-header";
 import { Seo } from "../_components/seo";
 import { ImagePreloader } from "../_components/ui/image-preloader";
-import { Link } from "../_components/ui/link";
+// import { Link } from "../_components/ui/link";
 import type { WorkMetadata } from "@/_work/model";
 
 class Component {
@@ -159,15 +159,7 @@ class Component {
               css={styles.dummy}
               data-ref="end"
               data-scroll-item
-            >
-              <Link
-                className="absolute bottom-0 w-[1px] h-[1px] block"
-                hx-trigger="intersect once"
-                to={`../${nextPost.id}/`}
-              >
-                {}
-              </Link>
-            </div>
+            />
             <div css={styles.next} data-ref="nextProject">
               <div
                 css={styles.next__hgroup}
