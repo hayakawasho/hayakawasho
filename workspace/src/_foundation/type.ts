@@ -10,6 +10,8 @@ export type AppContext = {
   scrollContext: ReturnType<(typeof ScrollContext)["setup"]>;
 };
 
+export type RouteName = "home" | "works" | "single";
+
 //----------------------------------------------------------------
 
 export type Size = {

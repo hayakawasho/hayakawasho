@@ -1,5 +1,5 @@
 import { defineComponent, useIntersectionWatch, ref } from "lake";
-import { useScrollTween } from "@/_states/scroll";
+import { useScrollPosY } from "@/_states/scroll";
 import { useWindowSize } from "@/_states/window-size";
 import type { AppContext } from "@/_foundation/type";
 
@@ -27,7 +27,7 @@ export default defineComponent({
       //
     });
 
-    useScrollTween(({ currentY, oldY }) => {
+    useScrollPosY(({ currentY, oldY }) => {
       if (!isVisible.value || currentY === oldY) {
         return;
       }

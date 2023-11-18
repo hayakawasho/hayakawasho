@@ -1,7 +1,7 @@
 import { defineComponent, useIntersectionWatch, useDomRef } from "lake";
 import { map } from "@/_foundation/math";
 import { Tween } from "@/_foundation/tween";
-import { useScrollTween } from "@/_states/scroll";
+import { useScrollPosY } from "@/_states/scroll";
 import { useWindowSize } from "@/_states/window-size";
 import type { AppContext } from "@/_foundation/type";
 
@@ -41,7 +41,7 @@ export default defineComponent({
       wh: wh.value,
     };
 
-    useScrollTween(({ currentY }) => {
+    useScrollPosY(({ currentY }) => {
       if (!state.visible || state.resize) {
         return;
       }

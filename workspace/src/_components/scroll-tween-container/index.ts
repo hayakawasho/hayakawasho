@@ -169,7 +169,7 @@ export default defineComponent({
         state.currentPos = 0;
       }
 
-      scrollPosMutators({ y: state.currentPos });
+      scrollPosMutators(state.currentPos);
       transformElms(cache.value);
     });
 

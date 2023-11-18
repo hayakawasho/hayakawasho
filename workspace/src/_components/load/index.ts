@@ -8,7 +8,7 @@ import {
   readonly,
 } from "lake";
 import { wideQuery } from "@/_foundation/env";
-import { debounce } from "@/_foundation/utils";
+import { useElementSize } from "@/_foundation/hooks";
 import { windowSizeMutators } from "@/_states/window-size";
 import GlWorld from "../glworld";
 import ScrollTweenContainer from "../scroll-tween-container";
@@ -38,15 +38,9 @@ export default defineComponent({
     const [scrollContext] = addChild(refs.main, ScrollTweenContainer, { mq });
     const [glWorldContext] = addChild(refs.glWorld, GlWorld);
 
-    const ro = new ResizeObserver(
-      debounce(([entry]) => {
-        const { width, height } = entry.contentRect;
-        windowSizeMutators({
-          height,
-          width,
-        });
-      }, 200)
-    );
+    useElementSize(refs.windowSizeWatcher, ({ width, height }) => {
+      windowSizeMutators({ height, width });
+    });
 
     const provides = {
       glContext: glWorldContext.current,
@@ -56,7 +50,6 @@ export default defineComponent({
     } as AppContext;
 
     useMount(() => {
-      ro.observe(refs.windowSizeWatcher);
       onCreated(provides);
     });
 

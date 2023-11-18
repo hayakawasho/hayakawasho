@@ -3,7 +3,7 @@ import { Texture, Vec2, Mesh, Program, Plane } from "ogl";
 import { Tween } from "@/_foundation/tween";
 import { loadImage } from "@/_foundation/utils";
 import { ImagePlane } from "@/_glsl";
-import { useScrollTween } from "@/_states/scroll";
+import { useScrollPosY } from "@/_states/scroll";
 import { useWindowSize } from "@/_states/window-size";
 import fragment from "./fragment.frag";
 import vertex from "./vertex.vert";
@@ -93,7 +93,7 @@ export default defineComponent({
       state.resizing = false;
     });
 
-    useScrollTween(({ currentY, oldY }) => {
+    useScrollPosY(({ currentY, oldY }) => {
       if (state.resizing || !state.visible || currentY === oldY) {
         return;
       }

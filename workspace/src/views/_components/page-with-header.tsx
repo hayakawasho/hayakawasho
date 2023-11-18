@@ -30,6 +30,7 @@ export const PageWithHeader: FC<{
         <div css={gridMiddle} role="presentation" />
         <div css={gridRight} role="presentation" />
         {header}
+        <div data-component="Scrollbar" />
         <div
           aria-live="polite"
           className="w-full absolute top-0 left-0 backface-hidden"
@@ -42,7 +43,6 @@ export const PageWithHeader: FC<{
           </div>
         </div>
         <div css={ui}>
-          <div data-component="ScrollProgressUI" />
           <div className="hidden" data-component="Cursor" />
         </div>
         <div

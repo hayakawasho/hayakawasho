@@ -1,22 +1,24 @@
 import "virtual:windi.css";
 import "ress";
 import { create, withSvelte } from "lake";
-import { qsa } from "@/_foundation/utils";
+import Cursor from "./_components/cursor.svelte";
 import Home from "./_components/home";
 import Load from "./_components/load";
 import Noop from "./_components/noop.svelte";
-import ScrollProgressUI from "./_components/scroll-progress-ui.svelte";
+import Scrollbar from "./_components/scrollbar.svelte";
 import Work from "./_components/work";
 import Works from "./_components/works";
+import { qsa } from "./_foundation/utils";
 import type { IComponent, ComponentContext } from "lake";
 
 const init = () => {
   const { component, unmount } = create();
 
   const table: Record<string, IComponent> = {
+    Cursor: withSvelte(Cursor, "Cursor"),
     Home,
     Noop: withSvelte(Noop, "Noop"),
-    ScrollProgressUI: withSvelte(ScrollProgressUI, "ScrollProgressUI"),
+    Scrollbar: withSvelte(Scrollbar, "Scrollbar"),
     Work,
     Works,
   } as const;

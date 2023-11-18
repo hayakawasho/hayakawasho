@@ -1,19 +1,21 @@
 import { useUnmount, ref, readonly } from "lake";
-import { map } from "nanostores";
+import { atom } from "nanostores";
+import { noop } from "@/_foundation/utils";
 
-const pos = map<{
-  y: number;
-}>({
-  y: 0,
-});
+const posY = atom(0);
+const isRunning = atom(false);
 
-export const useScrollTween = (
-  callback: (payload: { currentY: number; oldY: number }) => void
+export const useScrollPosY = (
+  callback: (payload: { currentY: number; oldY: number }) => void = noop
 ) => {
-  const { y } = pos.get();
-  const currentY = ref(y);
+  const currentY = ref(0);
+  const isScrolling = ref(false);
 
-  const unbind = pos.listen(({ y }) => {
+  const unbindScrolling = isRunning.listen((running) => {
+    isScrolling.value = running;
+  });
+
+  const unbindPosY = posY.listen((y) => {
     const oldY = currentY.value;
 
     callback({
@@ -25,11 +27,22 @@ export const useScrollTween = (
   });
 
   useUnmount(() => {
-    unbind();
+    unbindScrolling();
+    unbindPosY();
   });
 
-  return [readonly(currentY)] as const;
+  return [
+    readonly(currentY),
+    {
+      isScrolling: readonly(isScrolling),
+    },
+  ] as const;
 };
 
-export const scrollPosMutators = (update: { y: number }) =>
-  pos.set({ y: update.y });
+export const scrollPosMutators = (value: number) => {
+  posY.set(value);
+};
+
+export const isScrollingMutators = (value: boolean) => {
+  isRunning.set(value);
+};
