@@ -43,7 +43,7 @@ class Component {
     ${r(
       <PageWithHeader
         header={<Header />}
-        namespace="Work"
+        namespace="Single"
         seo={
           <Seo
             permalink={`/works/${post.id}/`}
@@ -52,7 +52,7 @@ class Component {
           />
         }
       >
-        <main data-component="Work">
+        <main data-component="Single">
           <div className="mb-[10rem] pc:mb-[20rem]" data-scroll-item>
             <div css={styles.intro}>
               <div css={styles.intro__g}>

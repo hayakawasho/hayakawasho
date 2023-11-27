@@ -9,7 +9,7 @@ export const screen = css`
 
 export const list = css`
   & > li {
-    padding: 1.2rem 0;
+    padding: 1.3rem 0;
     padding-left: var(--gap);
 
     @media ${mq.pc} {

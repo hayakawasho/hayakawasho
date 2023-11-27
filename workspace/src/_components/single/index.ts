@@ -22,7 +22,7 @@ type Refs = {
 };
 
 export default defineComponent({
-  name: "Work",
+  name: "Single",
   setup(_el, context: AppContext) {
     const { once, history } = context;
 
@@ -99,10 +99,10 @@ export default defineComponent({
               opacity: 1,
               scaleY: 1,
             }),
-            Tween.tween(refs.sub, 1.1, "custom.out", {
+            Tween.tween(refs.sub, 0.95, "custom.out", {
               y: "0em",
             }),
-            Tween.tween(split.words, 1.1, "custom.out", {
+            Tween.tween(split.words, 0.95, "custom.out", {
               delay: 0.06,
               stagger: 0.03,
               y: "0em",
@@ -150,7 +150,7 @@ export default defineComponent({
               alpha: 0,
             }
           ),
-          Tween.tween([refs.sub, split.words], 0.5, "custom.in", {
+          Tween.tween([refs.sub, split.words], 0.45, "custom.in", {
             y: "-1.2em",
           })
         );

@@ -33,19 +33,20 @@ export default defineComponent({
     const { refs } = useDomRef<Refs>("glWorld", "main", "windowSizeWatcher");
 
     const history = ref<"push" | "pop">("push");
-    const mq = readonly(ref<"pc" | "sp">(wideQuery.matches ? "pc" : "sp"));
 
-    const [scrollContext] = addChild(refs.main, ScrollTweenContainer, { mq });
-    const [glWorldContext] = addChild(refs.glWorld, GlWorld);
+    const mediaQuery = ref<"pc" | "sp">(wideQuery.matches ? "pc" : "sp");
+    const readonlyMediaQuery = readonly(mediaQuery);
 
-    useElementSize(refs.windowSizeWatcher, ({ width, height }) => {
-      windowSizeMutators({ height, width });
+    const [scrollContext] = addChild(refs.main, ScrollTweenContainer, {
+      mq: readonlyMediaQuery,
     });
+
+    const [glWorldContext] = addChild(refs.glWorld, GlWorld);
 
     const provides = {
       glContext: glWorldContext.current,
       history: readonly(history),
-      mq,
+      mq: readonlyMediaQuery,
       scrollContext: scrollContext.current,
     } as AppContext;
 
@@ -71,32 +72,24 @@ export default defineComponent({
       onUpdated(to, provides);
     };
 
-    const fromContainer = ref<HTMLElement>(
-      htmx.find(refs.main, "[data-xhr]") as HTMLElement
-    );
+    const xhr = "[data-xhr]";
+    const fromContainer = ref(htmx.find(refs.main, xhr) as HTMLElement);
 
     htmx.config.historyCacheSize = 1;
 
     htmx.on("htmx:historyRestore", (e) => {
       history.value = "pop";
-
       onLeave(fromContainer.value);
 
       const { detail } = e as CustomEvent;
-      const newContainer = htmx.find(detail.elt, "[data-xhr]") as HTMLElement;
-
+      const newContainer = htmx.find(detail.elt, xhr) as HTMLElement;
       onEnter(newContainer);
     });
 
     htmx.on("htmx:beforeHistorySave", (e) => {
       const { detail } = e as CustomEvent;
-      const oldContainer = htmx.find(
-        detail.historyElt,
-        "[data-xhr]"
-      ) as HTMLElement;
-
+      const oldContainer = htmx.find(detail.historyElt, xhr) as HTMLElement;
       onLeave(oldContainer);
-
       fromContainer.value = oldContainer;
     });
 
@@ -106,18 +99,25 @@ export default defineComponent({
 
     htmx.on("htmx:afterSwap", (e) => {
       const { detail } = e as CustomEvent;
-      const newContainer = htmx.find(
-        detail.target,
-        "[data-xhr]"
-      ) as HTMLElement;
-
+      const newContainer = htmx.find(detail.target, xhr) as HTMLElement;
       onEnter(newContainer);
     });
 
     htmx.on("htmx:xhr:progress", (e) => {
       const { detail } = e as CustomEvent;
-      const progress = Math.floor((detail.loaded / detail.total) * 1000) / 1000;
-      console.log(progress);
+      const loadProgress =
+        Math.floor((detail.loaded / detail.total) * 1000) / 1000;
+
+      console.log(loadProgress);
+    });
+
+    //----------------------------------------------------------------
+
+    useElementSize(refs.windowSizeWatcher, ({ width, height }) => {
+      windowSizeMutators({
+        height,
+        width,
+      });
     });
   },
 });

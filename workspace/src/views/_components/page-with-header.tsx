@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { mq } from "@/_foundation/mq";
 import { Head } from "./head";
 import { Svgsprite } from "./svgsprite";
 import type { FC, ReactNode } from "react";
@@ -42,15 +43,16 @@ export const PageWithHeader: FC<{
             {children}
           </div>
         </div>
-        <div css={ui}>
-          <div className="hidden" data-component="Cursor" />
-        </div>
+        <div css={scrollbar} data-component="Scrollbar" />
         <div
           aria-hidden="true"
           className="fixed inset-0 w-screen h-screen pointer-events-none z-10"
           data-ref="glWorld"
         >
           <canvas className="w-screen h-screen" data-ref="canvas"></canvas>
+        </div>
+        <div css={ui}>
+          <div className="hidden" data-component="Cursor" />
         </div>
         {idDev && (
           <script
@@ -168,4 +170,16 @@ const ui = css`
   ${screen}
   pointer-events: none;
   z-index: 999;
+`;
+
+const scrollbar = css`
+  position: fixed;
+  top: 50vh;
+  right: 3.2rem;
+  z-index: 99;
+  pointer-events: none;
+
+  @media ${mq.pc} {
+    right: 4rem;
+  }
 `;

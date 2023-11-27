@@ -6,7 +6,7 @@ import type { AppContext } from "@/_foundation/type";
 export default defineComponent({
   name: "eyecatch",
   setup(el, { mq }: AppContext) {
-    const $img = el.querySelector("img")!;
+    const elImg = el.querySelector("img")!;
     const isVisible = ref(false);
 
     if (mq.value === "sp") {
@@ -31,7 +31,8 @@ export default defineComponent({
       if (!isVisible.value || currentY === oldY) {
         return;
       }
-      $img.style.transform = `translateY(${currentY * 0.06}px) translateZ(0)`;
+
+      elImg.style.transform = `translateY(${currentY * 0.06}px) translateZ(0)`;
     });
   },
 });

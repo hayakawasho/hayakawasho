@@ -38,12 +38,7 @@ class Component {
                 <Item key={post.id} post={post} />
               ))}
               {posts.map((post) => (
-                <Item
-                  aria-hidden="true"
-                  key={post.id}
-                  loading="lazy"
-                  post={post}
-                />
+                <Item aria-hidden="true" key={post.id} post={post} />
               ))}
             </ul>
           </div>

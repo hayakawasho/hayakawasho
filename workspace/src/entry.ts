@@ -6,7 +6,7 @@ import Home from "./_components/home";
 import Load from "./_components/load";
 import Noop from "./_components/noop.svelte";
 import Scrollbar from "./_components/scrollbar.svelte";
-import Work from "./_components/work";
+import Single from "./_components/single";
 import Works from "./_components/works";
 import { qsa } from "./_foundation/utils";
 import type { IComponent, ComponentContext } from "lake";
@@ -19,7 +19,7 @@ const init = () => {
     Home,
     Noop: withSvelte(Noop, "Noop"),
     Scrollbar: withSvelte(Scrollbar, "Scrollbar"),
-    Work,
+    Single,
     Works,
   } as const;
 
