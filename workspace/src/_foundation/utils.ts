@@ -1,12 +1,12 @@
-import { gsap } from "gsap";
-import type { RefElement } from "lake";
+import { gsap } from 'gsap';
+import type { RefElement } from 'lake';
 
 export const zeroPadding = (num: number, p = 2) => {
-  return num.toString().padStart(p, "0");
+  return num.toString().padStart(p, '0');
 };
 
 export const sleep = (time: number): Promise<void> => {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     gsap.to(
       {
         val: 0,
@@ -21,7 +21,7 @@ export const sleep = (time: number): Promise<void> => {
 };
 
 export const nextTick = (): Promise<void> => {
-  return new Promise((resolve) => gsap.ticker.add(() => resolve(), true));
+  return new Promise(resolve => gsap.ticker.add(() => resolve(), true));
 };
 
 export const debounce = <T extends (...args: any[]) => unknown>(
@@ -46,9 +46,9 @@ export const noop = () => {
 };
 
 export const loadImage = (src: string) => {
-  return new Promise<HTMLImageElement>((resolve) => {
+  return new Promise<HTMLImageElement>(resolve => {
     const img = new Image();
-    img.crossOrigin = "anonymous";
+    img.crossOrigin = 'anonymous';
     img.src = src;
 
     img.decode().then(() => {

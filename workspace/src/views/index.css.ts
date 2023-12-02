@@ -1,5 +1,5 @@
-import { css } from "@emotion/react";
-import { mq } from "@/_foundation/mq";
+import { css } from '@emotion/react';
+import { mq } from '@/_foundation/mq';
 
 export const screen = css`
   position: fixed;
@@ -53,10 +53,10 @@ export const project = css`
 
 export const project__eyecatch = css`
   position: absolute;
-  inset: 0.2rem;
+  inset: 0.15rem;
   display: block;
 
   @media ${mq.pc} {
-    inset: 0.5rem;
+    inset: 0.3rem;
   }
 `;

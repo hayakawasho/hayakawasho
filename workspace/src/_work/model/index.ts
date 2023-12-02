@@ -1,5 +1,5 @@
-import { Model } from "../../_foundation/model";
-import type { Size } from "@/_foundation/type";
+import { Model } from '@/_foundation/model';
+import type { Size } from '@/_foundation/type';
 
 type Image = {
   src: string;

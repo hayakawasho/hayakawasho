@@ -1,10 +1,10 @@
-import { css } from "@emotion/react";
-import type { FC } from "react";
+import { css } from '@emotion/react';
+import type { FC } from 'react';
 
 export const Svg: FC<{
   name: string;
   className?: string;
-}> = (props) => {
+}> = props => {
   return (
     <>
       <svg className={props.className} css={svg}>

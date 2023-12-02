@@ -1,21 +1,21 @@
-import { defineComponent, ref, useMount, useEvent } from "lake";
-import NormalizeWheel from "normalize-wheel";
-import { clamp } from "remeda";
-import { useTick } from "@/_foundation/hooks";
-import { lerp } from "@/_foundation/math";
-import { Tween } from "@/_foundation/tween";
-import { qsa } from "@/_foundation/utils";
-import { scrollPosMutators } from "@/_states/scroll";
-import { useWindowSize } from "@/_states/window-size";
-import { useHandleCache } from "./use-handle-cache";
-import type { Cache } from "./use-handle-cache";
-import type { AppContext } from "@/_foundation/type";
+import { defineComponent, ref, useMount, useEvent } from 'lake';
+import NormalizeWheel from 'normalize-wheel';
+import { clamp } from 'remeda';
+import { useTick } from '@/_foundation/hooks';
+import { lerp } from '@/_foundation/math';
+import { Tween } from '@/_foundation/tween';
+import { qsa } from '@/_foundation/utils';
+import { scrollPosMutators } from '@/_states/scroll';
+import { useWindowSize } from '@/_states/window-size';
+import { useHandleCache } from './use-handle-cache';
+import type { Cache } from './use-handle-cache';
+import type { AppContext } from '@/_foundation/type';
 
-const SELECTOR_CLASS = "[data-scroll-item]";
+const SELECTOR_CLASS = '[data-scroll-item]';
 
 export default defineComponent({
-  name: "ScrollTweenContainer",
-  setup(el, { mq }: Pick<AppContext, "mq">) {
+  name: 'ScrollTweenContainer',
+  setup(el, { mq }: Pick<AppContext, 'mq'>) {
     const elItems = qsa<HTMLElement>(SELECTOR_CLASS, el);
 
     if (!elItems.length) {
@@ -61,7 +61,7 @@ export default defineComponent({
     };
 
     const transformElms = (cache: Cache[]) => {
-      cache.forEach((item) => {
+      cache.forEach(item => {
         const { isVisible: visibleOr, transform } = isVisible(item);
 
         if (visibleOr || state.resizing || !item.out) {
@@ -74,8 +74,8 @@ export default defineComponent({
 
     useEvent(
       window as any,
-      "touchstart",
-      (e) => {
+      'touchstart',
+      e => {
         if (!state.active) {
           return;
         }
@@ -89,7 +89,7 @@ export default defineComponent({
       }
     );
 
-    useEvent(window as any, "touchend", () => {
+    useEvent(window as any, 'touchend', () => {
       if (!state.dragging || !state.active) {
         state.dragging = false;
       }
@@ -97,8 +97,8 @@ export default defineComponent({
 
     useEvent(
       window as any,
-      "touchmove",
-      (e) => {
+      'touchmove',
+      e => {
         if (!state.dragging || !state.active) {
           return;
         }
@@ -118,8 +118,8 @@ export default defineComponent({
 
     useEvent(
       window as any,
-      "wheel",
-      (e) => {
+      'wheel',
+      e => {
         if (!state.active) {
           return;
         }
@@ -196,7 +196,7 @@ export default defineComponent({
     };
 
     const scrollTo = (y: number) => {
-      Tween.tween(state, 0.8, "power2.inOut", {
+      Tween.tween(state, 0.8, 'power2.inOut', {
         targetPos: clamp(y, {
           max: state.scrollLimit,
         }),

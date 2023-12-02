@@ -1,5 +1,5 @@
-import type { Point } from "@/_foundation/type";
-import type { Mesh } from "ogl";
+import type { Point } from '@/_foundation/type';
+import type { Mesh } from 'ogl';
 
 export class ImagePlane {
   #rect: DOMRect;

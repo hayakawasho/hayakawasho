@@ -1,9 +1,9 @@
-import { defineComponent, useIntersectionWatch, useDomRef } from "lake";
-import { map } from "@/_foundation/math";
-import { Tween } from "@/_foundation/tween";
-import { useScrollPosY } from "@/_states/scroll";
-import { useWindowSize } from "@/_states/window-size";
-import type { AppContext } from "@/_foundation/type";
+import { defineComponent, useIntersectionWatch, useDomRef } from 'lake';
+import { map } from '@/_foundation/math';
+import { Tween } from '@/_foundation/tween';
+import { useScrollPosY } from '@/_states/scroll';
+import { useWindowSize } from '@/_states/window-size';
+import type { AppContext } from '@/_foundation/type';
 
 type Refs = {
   nextProject: HTMLElement;
@@ -12,14 +12,14 @@ type Refs = {
 };
 
 export default defineComponent({
-  name: "Next",
+  name: 'Next',
   setup(_el, _context: AppContext) {
     const state = {
       resize: false,
       visible: false,
     };
 
-    const { refs } = useDomRef<Refs>("nextLink", "end", "nextProject");
+    const { refs } = useDomRef<Refs>('nextLink', 'end', 'nextProject');
 
     useIntersectionWatch(
       refs.end,
@@ -27,7 +27,7 @@ export default defineComponent({
         state.visible = entry.isIntersecting;
       },
       {
-        rootMargin: "25%",
+        rootMargin: '25%',
       }
     );
 

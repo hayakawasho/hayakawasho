@@ -1,5 +1,5 @@
-import { Mesh, Plane, Program } from "ogl";
-import type { OGLRenderingContext } from "ogl";
+import { Mesh, Plane, Program } from 'ogl';
+import type { OGLRenderingContext } from 'ogl';
 
 export const createShaderPass = (
   gl: OGLRenderingContext,

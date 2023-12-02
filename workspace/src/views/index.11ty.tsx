@@ -1,25 +1,24 @@
-import { renderToStaticMarkup as r } from "react-dom/server";
-import { mq } from "@/_foundation/mq";
-import { shuffle } from "@/_foundation/shuffle";
-import { Header } from "./_components/header";
-import { PageWithHeader } from "./_components/page-with-header";
-import { Seo } from "./_components/seo";
-import { ImagePreloader } from "./_components/ui/image-preloader";
-import { Link } from "./_components/ui/link";
-import * as styles from "./index.css";
-import type { WorkMetadata } from "@/_work/model";
+import { renderToStaticMarkup as r } from 'react-dom/server';
+import { mq } from '@/_foundation/mq';
+import { shuffle } from '@/_foundation/shuffle';
+import { Header } from './_components/layout/header';
+import { PageWithHeader } from './_components/layout/page-with-header';
+import { Seo } from './_components/layout/seo';
+import { Link } from './_components/ui/link';
+import * as styles from './index.css';
+import type { WorkMetadata } from '@/_work/model';
 
 const PER_PAGE = 5;
-const IMG_API = "?auto=compress,format";
-const VIEW_PROJECTS = "View projects";
+const IMG_API = '?auto=compress,format';
+const VIEW_PROJECTS = 'View projects';
 
 class Component {
   data() {
     return {
       pagination: {
         addAllPagesToCollections: false,
-        alias: "posts",
-        data: "cms.home",
+        alias: 'posts',
+        data: 'cms.home',
         size: PER_PAGE,
       },
     };
@@ -38,17 +37,21 @@ class Component {
             permalink=""
             prepend={
               <>
-                {posts.map((post) => (
-                  <ImagePreloader
-                    href={post.eyecatch.src + IMG_API + "&w=1440"}
+                {posts.map(post => (
+                  <link
+                    as="image"
+                    href={post.eyecatch.src + IMG_API + '&w=1440'}
                     key={post.id}
+                    rel="preload"
                     media={mq.pc}
                   />
                 ))}
-                {posts.map((post) => (
-                  <ImagePreloader
-                    href={post.eyecatch.src + IMG_API + "&w=750"}
+                {posts.map(post => (
+                  <link
+                    as="image"
+                    href={post.eyecatch.src + IMG_API + '&w=750'}
                     key={post.id}
+                    rel="preload"
                     media={mq.sp}
                   />
                 ))}
@@ -62,7 +65,7 @@ class Component {
           <div aria-hidden="true" data-scroll-item />
           <h1 className="sr-only">Sho Hayakawa Portfolio</h1>
           <Link css={styles.toProjects} swap="swap:.95s" to="./works/">
-            {[...VIEW_PROJECTS].map((c) => (
+            {[...VIEW_PROJECTS].map(c => (
               <span aria-hidden="true" className="_c" data-ref="char">
                 {c}
               </span>

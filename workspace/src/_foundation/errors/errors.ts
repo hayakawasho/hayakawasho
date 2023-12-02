@@ -1,5 +1,5 @@
 export class HTTPError extends Error {
-  override readonly name = "HTTPError" as const;
+  override readonly name = 'HTTPError' as const;
 
   readonly http: {
     status: number;

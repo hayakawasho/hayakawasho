@@ -1,6 +1,6 @@
-import { useUnmount, ref, readonly } from "lake";
-import { atom } from "nanostores";
-import { noop } from "@/_foundation/utils";
+import { useUnmount, ref, readonly } from 'lake';
+import { atom } from 'nanostores';
+import { noop } from '@/_foundation/utils';
 
 const posY = atom(0);
 const isRunning = atom(false);
@@ -11,11 +11,11 @@ export const useScrollPosY = (
   const currentY = ref(0);
   const isScrolling = ref(false);
 
-  const unbindScrolling = isRunning.listen((running) => {
+  const unbindScrolling = isRunning.listen(running => {
     isScrolling.value = running;
   });
 
-  const unbindPosY = posY.listen((y) => {
+  const unbindPosY = posY.listen(y => {
     const oldY = currentY.value;
 
     callback({

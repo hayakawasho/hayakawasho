@@ -1,10 +1,6 @@
-import { css } from "@emotion/react";
-import {
-  selectDatetime,
-  selectLaunch,
-  selectUrl,
-} from "@/_work/model/selector";
-import type { WorkMetadata } from "@/_work/model";
+import { css } from '@emotion/react';
+import { selectDatetime, selectLaunch, selectUrl } from '@/_work/model/selector';
+import type { WorkMetadata } from '@/_work/model';
 
 export const InfoCategory = ({ post }: { post: WorkMetadata }) => {
   return (
@@ -32,11 +28,7 @@ export const InfoDate = ({ post }: { post: WorkMetadata }) => {
         </span>
       </dt>
       <dd className="uppercase" css={info__label}>
-        <time
-          className="inline-block"
-          data-ref="infoText"
-          dateTime={selectDatetime(post)}
-        >
+        <time className="inline-block" data-ref="infoText" dateTime={selectDatetime(post)}>
           {selectLaunch(post)}
         </time>
       </dd>
@@ -53,12 +45,7 @@ export const InfoUrl = ({ post }: { post: WorkMetadata }) => {
         </span>
       </dt>
       <dd css={info__url}>
-        <a
-          className="inline-block"
-          data-ref="infoText"
-          href={post.url}
-          target="_blank"
-        >
+        <a className="inline-block" data-ref="infoText" href={post.url} target="_blank">
           {selectUrl(post)} <span className="text-[90%]">↗</span>
         </a>
       </dd>

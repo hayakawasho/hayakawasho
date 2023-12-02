@@ -1,16 +1,16 @@
-import { defineComponent, useMount, useIntersectionWatch } from "lake";
-import { Texture, Vec2, Mesh, Program, Plane } from "ogl";
-import { Tween } from "@/_foundation/tween";
-import { loadImage } from "@/_foundation/utils";
-import { ImagePlane } from "@/_glsl";
-import { useScrollPosY } from "@/_states/scroll";
-import { useWindowSize } from "@/_states/window-size";
-import fragment from "./fragment.frag";
-import vertex from "./vertex.vert";
-import type { AppContext } from "@/_foundation/type";
+import { defineComponent, useMount, useIntersectionWatch } from 'lake';
+import { Texture, Vec2, Mesh, Program, Plane } from 'ogl';
+import { Tween } from '@/_foundation/tween';
+import { loadImage } from '@/_foundation/utils';
+import { ImagePlane } from '@/_glsl';
+import { useScrollPosY } from '@/_states/scroll';
+import { useWindowSize } from '@/_states/window-size';
+import fragment from './fragment.frag';
+import vertex from './vertex.vert';
+import type { AppContext } from '@/_foundation/type';
 
 export default defineComponent({
-  name: "Screenshot",
+  name: 'Screenshot',
   setup(el: HTMLImageElement, context: AppContext) {
     const { glContext, mq, history } = context;
     const { gl } = glContext;
@@ -18,11 +18,11 @@ export default defineComponent({
     const src = el.dataset.src!;
     const state = {
       pc: {
-        src: src + "?auto=compress,format",
+        src: src + '?auto=compress,format',
       },
       resizing: false,
       sp: {
-        src: src + "?auto=compress,format&w=750",
+        src: src + '?auto=compress,format&w=750',
       },
       visible: false,
     };
@@ -33,7 +33,7 @@ export default defineComponent({
       // premultiplyAlpha: true,
     });
 
-    loadImage(state[mq.value].src).then((img) => {
+    loadImage(state[mq.value].src).then(img => {
       texture.image = img;
     });
 
@@ -83,7 +83,7 @@ export default defineComponent({
         state.visible = entry.isIntersecting;
       },
       {
-        rootMargin: "25%",
+        rootMargin: '25%',
       }
     );
 
@@ -105,12 +105,12 @@ export default defineComponent({
       glContext.addScene(mesh);
 
       return () => {
-        if (history.value === "pop") {
+        if (history.value === 'pop') {
           glContext.removeScene(mesh);
           return;
         }
 
-        Tween.tween(uniforms.u_alpha, 0.55, "power3.inOut", {
+        Tween.tween(uniforms.u_alpha, 0.55, 'power3.inOut', {
           onComplete: () => {
             glContext.removeScene(mesh);
           },

@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { FC } from 'react';
 
 export const Svgsprite: FC = () => {
   return (
@@ -6,8 +6,8 @@ export const Svgsprite: FC = () => {
       aria-hidden="true"
       style={{
         height: 0,
-        overflow: "hidden",
-        position: "absolute",
+        overflow: 'hidden',
+        position: 'absolute',
         width: 0,
       }}
       xmlns="http://www.w3.org/2000/svg"

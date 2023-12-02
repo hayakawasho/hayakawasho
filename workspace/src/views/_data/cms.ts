@@ -1,5 +1,5 @@
-import dotenv from "dotenv";
-import { WorksRepository } from "@/_repositories/works";
+import dotenv from 'dotenv';
+import { WorksRepository } from '@/_repositories/works';
 
 dotenv.config();
 
@@ -10,7 +10,7 @@ const fetchWorks = async () => {
     repository.findList({}),
     repository.findList({
       limit: 99,
-      orders: "-launch",
+      orders: '-launch',
     }),
   ]);
 

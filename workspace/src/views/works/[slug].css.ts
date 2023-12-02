@@ -1,5 +1,5 @@
-import { css } from "@emotion/react";
-import { mq } from "@/_foundation/mq";
+import { css } from '@emotion/react';
+import { mq } from '@/_foundation/mq';
 
 export const sub = css`
   font-size: 4.3rem;

@@ -1,4 +1,4 @@
-import { useWindowSize } from "@/_states/window-size";
+import { useWindowSize } from '@/_states/window-size';
 
 export type Cache = {
   el: HTMLElement;
@@ -17,10 +17,7 @@ export const useHandleCache = () => {
   const getBounds = (el: HTMLElement, speed: number) => {
     const rect = el.getBoundingClientRect();
     const center = wh.value / 2 - rect.height / 2;
-    const offset =
-      rect.top < wh.value
-        ? 0
-        : (rect.top - center) * speed - (rect.top - center);
+    const offset = rect.top < wh.value ? 0 : (rect.top - center) * speed - (rect.top - center);
     const top = rect.top + offset;
     const bottom = rect.bottom + offset;
 
@@ -46,14 +43,14 @@ export const useHandleCache = () => {
         transform: 0,
       });
 
-      el.style.transform = "translate3d(0, 0, 0)";
+      el.style.transform = 'translate3d(0, 0, 0)';
 
       return acc;
     }, []);
   };
 
   const updateCache = (cache: Cache[]) => {
-    return cache.map((item) => {
+    return cache.map(item => {
       const { top, bottom, offset } = getBounds(item.el, item.speed);
 
       return {

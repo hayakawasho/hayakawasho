@@ -1,15 +1,15 @@
-import type { FC } from "react";
+import type { FC } from 'react';
 
-const SITE_URL = "https://shohayakawa.dev";
-const siteTitle = "Sho Hayakawa";
-const description = "Frontend Engineer Sho Hayakawa 早川翔 portfolio website";
+const SITE_URL = 'https://shohayakawa.dev';
+const siteTitle = 'Sho Hayakawa';
+const description = 'Frontend Engineer Sho Hayakawa 早川翔 portfolio website';
 
 export const Seo: FC<{
   title: string;
   permalink: string;
   prepend?: React.ReactNode;
-}> = (props) => {
-  const title = props.title ? props.title + " - " + siteTitle : siteTitle;
+}> = props => {
+  const title = props.title ? props.title + ' - ' + siteTitle : siteTitle;
 
   return (
     <>
@@ -20,14 +20,11 @@ export const Seo: FC<{
       <title>{title}</title>
       <meta content={description} name="description" />
       <meta content={title} property="og:title" />
-      <meta
-        content={props.permalink ? "article" : "website"}
-        property="og:type"
-      />
+      <meta content={props.permalink ? 'article' : 'website'} property="og:type" />
       <meta content={description} property="og:description" />
       <meta content={SITE_URL + props.permalink} property="og:url" />
       <meta content={siteTitle} property="og:site_name" />
-      <meta content={SITE_URL + "/ogp.jpg"} property="og:image" />
+      <meta content={SITE_URL + '/ogp.jpg'} property="og:image" />
     </>
   );
 };

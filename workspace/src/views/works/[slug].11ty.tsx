@@ -1,26 +1,21 @@
-import { renderToStaticMarkup as r } from "react-dom/server";
-import { mq } from "@/_foundation/mq";
-import { zeroPadding } from "@/_foundation/utils";
-import * as styles from "./[slug].css";
-import { Header } from "../_components/header";
-import {
-  InfoCategory,
-  InfoUrl,
-  InfoDate,
-} from "../_components/page/works/info";
-import { PageWithHeader } from "../_components/page-with-header";
-import { Seo } from "../_components/seo";
-import { ImagePreloader } from "../_components/ui/image-preloader";
+import { renderToStaticMarkup as r } from 'react-dom/server';
+import { mq } from '@/_foundation/mq';
+import { zeroPadding } from '@/_foundation/utils';
+import * as styles from './[slug].css';
+import { Header } from '../_components/layout/header';
+import { PageWithHeader } from '../_components/layout/page-with-header';
+import { Seo } from '../_components/layout/seo';
+import { InfoCategory, InfoUrl, InfoDate } from '../_components/page/works/info';
 // import { Link } from "../_components/ui/link";
-import type { WorkMetadata } from "@/_work/model";
+import type { WorkMetadata } from '@/_work/model';
 
 class Component {
   data() {
     return {
       pagination: {
         addAllPagesToCollections: true,
-        alias: "post",
-        data: "cms.works",
+        alias: 'post',
+        data: 'cms.works',
         size: 1,
       },
       permalink: (context: any) => `works/${context.post.id}/index.html`,
@@ -29,7 +24,7 @@ class Component {
 
   render(props: any) {
     const post: WorkMetadata = props.post;
-    const eyecatchSrc = post.eyecatch.src + "?auto=compress,format&w=750";
+    const eyecatch = post.eyecatch.src + '?auto=compress,format&w=750';
 
     const { page } = props.pagination;
     const { last, first, next } = page;
@@ -47,7 +42,7 @@ class Component {
         seo={
           <Seo
             permalink={`/works/${post.id}/`}
-            prepend={<ImagePreloader href={eyecatchSrc} media={mq.sp} />}
+            prepend={<link as="image" href={eyecatch} rel="preload" media={mq.sp} />}
             title={post.title}
           />
         }
@@ -57,22 +52,13 @@ class Component {
             <div css={styles.intro}>
               <div css={styles.intro__g}>
                 <div css={styles.intro__indexNumber}>
-                  <span
-                    className="inline-block tracking-[-0.02em]"
-                    data-ref="now"
-                  >
+                  <span className="inline-block tracking-[-0.02em]" data-ref="now">
                     {zeroPadding(now)}
                   </span>
-                  <span
-                    className="relative inline-block mx-[.5em]"
-                    data-ref="dash"
-                  >
+                  <span className="relative inline-block mx-[.5em]" data-ref="dash">
                     ー
                   </span>
-                  <span
-                    className="inline-block  tracking-[-0.02em]"
-                    data-ref="max"
-                  >
+                  <span className="inline-block  tracking-[-0.02em]" data-ref="max">
                     {zeroPadding(max)}
                   </span>
                 </div>
@@ -83,11 +69,7 @@ class Component {
                       Projects/
                     </span>
                   </p>
-                  <h1
-                    className="overflow-hidden mt-[-.1em]"
-                    css={styles.heading}
-                    data-ref="h1"
-                  >
+                  <h1 className="overflow-hidden mt-[-.1em]" css={styles.heading} data-ref="h1">
                     {post.title}
                   </h1>
                 </div>
@@ -116,17 +98,13 @@ class Component {
               </div>
             </div>
 
-            <div
-              className="pc:hidden"
-              css={styles.eyecatch}
-              data-ref="eyecatch"
-            >
+            <div className="pc:hidden" css={styles.eyecatch} data-ref="eyecatch">
               <img
                 alt=""
                 className="pointer-events-none"
                 css={styles.eyecatchImg}
                 height={post.eyecatch.height}
-                src={eyecatchSrc}
+                src={eyecatch}
                 width={post.eyecatch.width}
               />
             </div>
@@ -154,25 +132,13 @@ class Component {
           </div>
 
           <aside data-ref="next">
-            <div
-              aria-hidden="true"
-              css={styles.dummy}
-              data-ref="end"
-              data-scroll-item
-            />
+            <div aria-hidden="true" css={styles.dummy} data-ref="end" data-scroll-item />
             <div css={styles.next} data-ref="nextProject">
-              <div
-                css={styles.next__hgroup}
-                data-href={`../${nextPost.id}/`}
-                data-ref="nextLink"
-              >
+              <div css={styles.next__hgroup} data-href={`../${nextPost.id}/`} data-ref="nextLink">
                 <p className="!pc:text-center" css={styles.sub}>
                   <span className="inline-block uppercase">Next</span>
                 </p>
-                <h2
-                  className="!pc:text-center mt-[-.05em]"
-                  css={styles.heading}
-                >
+                <h2 className="!pc:text-center mt-[-.05em]" css={styles.heading}>
                   {nextPost.title}
                 </h2>
               </div>

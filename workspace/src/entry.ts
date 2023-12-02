@@ -1,36 +1,31 @@
-import "virtual:windi.css";
-import "ress";
-import { create, withSvelte } from "lake";
-import Cursor from "./_components/cursor.svelte";
-import Home from "./_components/home";
-import Load from "./_components/load";
-import Noop from "./_components/noop.svelte";
-import Scrollbar from "./_components/scrollbar.svelte";
-import Single from "./_components/single";
-import Works from "./_components/works";
-import { qsa } from "./_foundation/utils";
-import type { IComponent, ComponentContext } from "lake";
+import 'virtual:windi.css';
+import 'ress';
+import { create, withSvelte } from 'lake';
+import Cursor from './_components/cursor.svelte';
+import Home from './_components/home';
+import Load from './_components/load';
+import Noop from './_components/noop.svelte';
+import Scrollbar from './_components/scrollbar.svelte';
+import Single from './_components/single';
+import Works from './_components/works';
+import { qsa } from './_foundation/utils';
+import type { IComponent, ComponentContext } from 'lake';
 
 const init = () => {
   const { component, unmount } = create();
 
   const table: Record<string, IComponent> = {
-    Cursor: withSvelte(Cursor, "Cursor"),
+    Cursor: withSvelte(Cursor, 'Cursor'),
     Home,
-    Noop: withSvelte(Noop, "Noop"),
-    Scrollbar: withSvelte(Scrollbar, "Scrollbar"),
+    Noop: withSvelte(Noop, 'Noop'),
+    Scrollbar: withSvelte(Scrollbar, 'Scrollbar'),
     Single,
     Works,
   } as const;
 
-  const mountComponents = (
-    scope: HTMLElement,
-    props: Record<string, unknown>
-  ) => {
-    return qsa<HTMLElement>("[data-component]", scope).reduce<
-      ComponentContext[]
-    >((acc, el) => {
-      const name = el.dataset.component || "Noop";
+  const mountComponents = (scope: HTMLElement, props: Record<string, unknown>) => {
+    return qsa<HTMLElement>('[data-component]', scope).reduce<ComponentContext[]>((acc, el) => {
+      const name = el.dataset.component || 'Noop';
       try {
         const mount = component(table[`${name}`]);
         acc.push(mount(el, props));
@@ -45,7 +40,7 @@ const init = () => {
 
   component(Load)(html, {
     onCleanup: (scope: HTMLElement) => {
-      unmount(qsa<HTMLElement>("[data-component]", scope));
+      unmount(qsa<HTMLElement>('[data-component]', scope));
     },
     onCreated: (context?: Record<string, unknown>) => {
       mountComponents(html, {
@@ -62,16 +57,14 @@ const init = () => {
   });
 };
 
-if (document.readyState !== "loading") {
+if (document.readyState !== 'loading') {
   init();
 } else {
-  document.addEventListener("DOMContentLoaded", init);
+  document.addEventListener('DOMContentLoaded', init);
 }
 
-if (process.env.NODE_ENV === "development") {
-  const Stats = await (
-    (await import("https://cdn.skypack.dev/stats.js.fps?dts")) as any
-  ).default;
+if (process.env.NODE_ENV === 'development') {
+  const Stats = await ((await import('https://cdn.skypack.dev/stats.js.fps?dts')) as any).default;
   const stats = new Stats();
   stats.showPanel(0);
 

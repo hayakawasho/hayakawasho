@@ -1,11 +1,8 @@
-import { css } from "@emotion/react";
-import { mq } from "@/_foundation/mq";
-import { Head } from "./head";
-import { Svgsprite } from "./svgsprite";
-import type { FC, ReactNode } from "react";
-
-const idDev = process.env.NODE_ENV !== "production";
-const LOCAL_IP_ADDR = process.env.LOCAL_IP_ADDR || "localhost";
+import { css } from '@emotion/react';
+import { mq } from '@/_foundation/mq';
+import { Head } from './head';
+import { Svgsprite } from './svgsprite';
+import type { FC, ReactNode } from 'react';
 
 export const PageWithHeader: FC<{
   namespace: string;
@@ -52,16 +49,8 @@ export const PageWithHeader: FC<{
           <canvas className="w-screen h-screen" data-ref="canvas"></canvas>
         </div>
         <div css={ui}>
-          <div className="hidden" data-component="Cursor" />
+          <div className="sp:hidden" data-component="Cursor" />
         </div>
-        {idDev && (
-          <script
-            defer={true}
-            src={`http://${LOCAL_IP_ADDR}:3000/src/entry.ts`}
-            type="module"
-          />
-        )}
-        {!idDev && <script defer={true} src="/assets/entry.js" type="module" />}
       </body>
     </html>
   );

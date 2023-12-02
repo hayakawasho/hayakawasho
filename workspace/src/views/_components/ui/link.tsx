@@ -1,11 +1,11 @@
-import type { FC } from "react";
+import type { FC } from 'react';
 
 export const Link: FC<{
   className?: string;
   children: React.ReactNode;
   swap?: string;
   to: string;
-}> = ({ className = "", to, children, swap = "swap:520ms", ...props }) => {
+}> = ({ className = '', to, children, swap = 'swap:0.5s', ...props }) => {
   return (
     <a
       {...props}

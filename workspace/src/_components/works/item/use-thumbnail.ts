@@ -1,17 +1,14 @@
-import { useMount, useEvent } from "lake";
-import { Texture, Vec2, Mesh, Program, Plane } from "ogl";
+import { useMount, useEvent } from 'lake';
+import { Texture, Vec2, Mesh, Program, Plane } from 'ogl';
 // import { useTick } from "@/_foundation/hooks";
 // import { Tween } from "@/_foundation/tween";
-import { loadImage } from "@/_foundation/utils";
-import { useWindowSize } from "@/_states/window-size";
-import fragment from "./fragment.frag";
-import vertex from "./vertex.vert";
-import type { AppContext } from "@/_foundation/type";
+import { loadImage } from '@/_foundation/utils';
+import { useWindowSize } from '@/_states/window-size';
+import fragment from './fragment.frag';
+import vertex from './vertex.vert';
+import type { AppContext } from '@/_foundation/type';
 
-export const useThumbnail = (
-  el: HTMLElement,
-  glContext: AppContext["glContext"]
-) => {
+export const useThumbnail = (el: HTMLElement, glContext: AppContext['glContext']) => {
   const { gl } = glContext;
 
   const imageSrc = el.dataset.image!;
@@ -25,7 +22,7 @@ export const useThumbnail = (
     width: 16,
   });
 
-  loadImage(imageSrc).then((img) => {
+  loadImage(imageSrc).then(img => {
     texture.image = img;
   });
 
@@ -76,11 +73,11 @@ export const useThumbnail = (
     program,
   });
 
-  useEvent(el, "mouseenter", () => {
+  useEvent(el, 'mouseenter', () => {
     //
   });
 
-  useEvent(el, "mouseleave", () => {
+  useEvent(el, 'mouseleave', () => {
     //
   });
 

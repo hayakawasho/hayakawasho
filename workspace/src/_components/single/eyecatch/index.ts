@@ -1,15 +1,15 @@
-import { defineComponent, useIntersectionWatch, ref } from "lake";
-import { useScrollPosY } from "@/_states/scroll";
-import { useWindowSize } from "@/_states/window-size";
-import type { AppContext } from "@/_foundation/type";
+import { defineComponent, useIntersectionWatch, ref } from 'lake';
+import { useScrollPosY } from '@/_states/scroll';
+import { useWindowSize } from '@/_states/window-size';
+import type { AppContext } from '@/_foundation/type';
 
 export default defineComponent({
-  name: "eyecatch",
+  name: 'eyecatch',
   setup(el, { mq }: AppContext) {
-    const elImg = el.querySelector("img")!;
+    const elImg = el.querySelector('img')!;
     const isVisible = ref(false);
 
-    if (mq.value === "sp") {
+    if (mq.value === 'sp') {
       return;
     }
 
@@ -19,7 +19,7 @@ export default defineComponent({
         isVisible.value = entry.isIntersecting;
       },
       {
-        rootMargin: "25%",
+        rootMargin: '25%',
       }
     );
 

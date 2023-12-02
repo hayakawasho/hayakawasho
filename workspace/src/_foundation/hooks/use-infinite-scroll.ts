@@ -1,11 +1,11 @@
-import { gsap } from "gsap";
-import { ref, readonly, useEvent, useMount } from "lake";
-import NormalizeWheel from "normalize-wheel";
-import { useTick } from "@/_foundation/hooks";
-import { lerp } from "@/_foundation/math";
-import { useWindowSize } from "@/_states/window-size";
+import { gsap } from 'gsap';
+import { ref, readonly, useEvent, useMount } from 'lake';
+import NormalizeWheel from 'normalize-wheel';
+import { useTick } from '@/_foundation/hooks';
+import { lerp } from '@/_foundation/math';
+import { useWindowSize } from '@/_states/window-size';
 
-export const useInfiniteScroll = (container: HTMLElement, mq: "pc" | "sp") => {
+export const useInfiniteScroll = (container: HTMLElement, mq: 'pc' | 'sp') => {
   const posY = ref(0);
   const diff = ref(0);
 
@@ -20,8 +20,8 @@ export const useInfiniteScroll = (container: HTMLElement, mq: "pc" | "sp") => {
 
   useEvent(
     window as any,
-    "wheel",
-    (e) => {
+    'wheel',
+    e => {
       const { pixelY } = NormalizeWheel(e);
       state.targetPos += pixelY;
     },
@@ -32,8 +32,8 @@ export const useInfiniteScroll = (container: HTMLElement, mq: "pc" | "sp") => {
 
   useEvent(
     window as any,
-    "touchstart",
-    (e) => {
+    'touchstart',
+    e => {
       state.dragging = true;
       state.position = posY.value;
       state.startPos = e.touches[0].clientY;
@@ -43,7 +43,7 @@ export const useInfiniteScroll = (container: HTMLElement, mq: "pc" | "sp") => {
     }
   );
 
-  useEvent(window as any, "touchend", () => {
+  useEvent(window as any, 'touchend', () => {
     if (state.dragging) {
       state.dragging = false;
     }
@@ -51,8 +51,8 @@ export const useInfiniteScroll = (container: HTMLElement, mq: "pc" | "sp") => {
 
   useEvent(
     window as any,
-    "touchmove",
-    (e) => {
+    'touchmove',
+    e => {
       if (!state.dragging) {
         return;
       }

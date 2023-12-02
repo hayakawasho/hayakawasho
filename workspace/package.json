@@ -81,6 +81,7 @@
     "remeda": "^1.3.0",
     "ress": "^5.0.2",
     "split-type": "^0.3.3",
+    "three": "^0.159.0",
     "ts-pattern": "^4.0.6"
   },
   "browserslist": [

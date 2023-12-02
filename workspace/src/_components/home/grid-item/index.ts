@@ -1,31 +1,31 @@
-import { defineComponent, useMount, useDomRef } from "lake";
-import { Texture, Vec2, Mesh, Program, Plane } from "ogl";
-import { useTick } from "@/_foundation/hooks";
-import { Tween } from "@/_foundation/tween";
-import { loadImage } from "@/_foundation/utils";
-import { ImagePlane } from "@/_glsl";
-import { useWindowSize } from "@/_states/window-size";
-import fragment from "./fragment.frag";
-import vertex from "./vertex.vert";
+import { defineComponent, useMount, useDomRef } from 'lake';
+import { Texture, Vec2, Mesh, Program, Plane } from 'ogl';
+import { useTick } from '@/_foundation/hooks';
+import { Tween } from '@/_foundation/tween';
+import { loadImage } from '@/_foundation/utils';
+import { ImagePlane } from '@/_glsl';
+import { useWindowSize } from '@/_states/window-size';
+import fragment from './fragment.frag';
+import vertex from './vertex.vert';
 // import fragment from "./cylinder.frag";
 // import vertex from "./cylinder.vert";
-import type { useInfiniteScroll } from "@/_foundation/hooks";
-import type { AppContext } from "@/_foundation/type";
+import type { useInfiniteScroll } from '@/_foundation/hooks';
+import type { AppContext } from '@/_foundation/type';
 
 type Props = AppContext & {
   infiniteScrollContext: ReturnType<typeof useInfiniteScroll>;
 };
 
-const IMG_API = "?auto=compress,format";
+const IMG_API = '?auto=compress,format';
 
 export default defineComponent({
-  name: "GridItem",
+  name: 'GridItem',
   setup(el: HTMLElement, context: Props) {
     const { glContext, mq, infiniteScrollContext, history } = context;
     const { gl } = glContext;
     const { diff, posY } = infiniteScrollContext;
 
-    const { refs } = useDomRef<{ plane: HTMLImageElement }>("plane");
+    const { refs } = useDomRef<{ plane: HTMLImageElement }>('plane');
 
     const imgSrc = refs.plane.dataset.src!;
     const speed = Number(refs.plane.dataset.speed);
@@ -33,12 +33,12 @@ export default defineComponent({
     const state = {
       pc: {
         speed,
-        src: imgSrc + IMG_API + "&w=1440",
+        src: imgSrc + IMG_API + '&w=1440',
       },
       resizing: false,
       sp: {
         speed,
-        src: imgSrc + IMG_API + "&w=750",
+        src: imgSrc + IMG_API + '&w=750',
       },
     };
 
@@ -47,7 +47,7 @@ export default defineComponent({
       minFilter: gl.LINEAR,
     });
 
-    loadImage(state[mq.value].src).then((img) => {
+    loadImage(state[mq.value].src).then(img => {
       texture.image = img;
     });
 
@@ -58,10 +58,7 @@ export default defineComponent({
         value: 1,
       },
       u_image_size: {
-        value: new Vec2(
-          Number(refs.plane.dataset.w),
-          Number(refs.plane.dataset.h)
-        ),
+        value: new Vec2(Number(refs.plane.dataset.w), Number(refs.plane.dataset.h)),
       },
       u_mesh_size: {
         value: new Vec2(width, height),
@@ -118,7 +115,7 @@ export default defineComponent({
       glContext.addScene(mesh);
 
       return () => {
-        if (history.value === "pop") {
+        if (history.value === 'pop') {
           glContext.removeScene(mesh);
           return;
         }

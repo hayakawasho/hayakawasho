@@ -1,7 +1,7 @@
-import { useUnmount } from "lake";
-import { map } from "nanostores";
-import { noop } from "@/_foundation/utils";
-import { useWindowSize } from "@/_states/window-size";
+import { useUnmount } from 'lake';
+import { map } from 'nanostores';
+import { noop } from '@/_foundation/utils';
+import { useWindowSize } from '@/_states/window-size';
 
 const progress = map<{
   now: number;

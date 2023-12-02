@@ -1,7 +1,8 @@
-import { Global, css } from "@emotion/react";
-import type { FC, ReactNode } from "react";
+import { Global, css } from '@emotion/react';
+import type { FC, ReactNode } from 'react';
 
-const idDev = process.env.NODE_ENV !== "production";
+const idDev = process.env.NODE_ENV !== 'production';
+const LOCAL_IP_ADDR = process.env.LOCAL_IP_ADDR || 'localhost';
 
 export const Head: FC<{
   seo: ReactNode;
@@ -57,16 +58,20 @@ export const Head: FC<{
           rel="stylesheet"
         />
       )}
+      {idDev && (
+        <script defer={true} src={`http://${LOCAL_IP_ADDR}:3000/src/entry.ts`} type="module" />
+      )}
+      {!idDev && <script defer={true} src="/assets/entry.js" type="module" />}
     </head>
   );
 };
 
 const base = css`
   :root {
-    --font: "Jost", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-      Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-    --font-heading: "Satoshi", sans-serif;
-    --font-en: "Gallery Modern", serif;
+    --font: 'Jost', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Arial,
+      'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    --font-heading: 'Satoshi', sans-serif;
+    --font-en: 'Gallery Modern', serif;
 
     --vh: 1vh;
 
@@ -160,6 +165,12 @@ const base = css`
     text-decoration: none;
   }
 
+  // :focus-visible {
+  //   @media not (hover: hover) {
+  //     outline-style: none;
+  //   }
+  // }
+
   ol,
   ul {
     list-style: none;
@@ -175,9 +186,18 @@ const base = css`
     display: block;
   }
 
+  summary {
+    display: block;
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
   @font-face {
-    font-family: "Gallery Modern";
-    src: url("/assets/gallerymodern-webfont.woff2") format("woff2");
+    font-family: 'Gallery Modern';
+    src: url('/assets/gallerymodern-webfont.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
     font-display: swap;

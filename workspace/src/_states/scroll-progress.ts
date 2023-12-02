@@ -1,4 +1,4 @@
-import { map } from "nanostores";
+import { map } from 'nanostores';
 
 const progress = map<{
   value: number;

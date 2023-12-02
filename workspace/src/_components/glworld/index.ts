@@ -1,16 +1,16 @@
-import { getGPUTier } from "detect-gpu";
-import { defineComponent, useDomRef } from "lake";
-import { Transform, Renderer, Camera } from "ogl";
-import { useTick } from "@/_foundation/hooks";
-import { useWindowSize } from "@/_states/window-size";
+import { getGPUTier } from 'detect-gpu';
+import { defineComponent, useDomRef } from 'lake';
+import { Transform, Renderer, Camera } from 'ogl';
+import { useTick } from '@/_foundation/hooks';
+import { useWindowSize } from '@/_states/window-size';
 
 export default defineComponent({
-  name: "GlWorld",
+  name: 'GlWorld',
   setup(el) {
-    const { refs } = useDomRef<{ canvas: HTMLCanvasElement }>("canvas");
+    const { refs } = useDomRef<{ canvas: HTMLCanvasElement }>('canvas');
     const { height, width } = el.getBoundingClientRect();
 
-    getGPUTier().then((result) => {
+    getGPUTier().then(result => {
       if (result.tier === 1) {
         renderer.dpr = 1;
       }

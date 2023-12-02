@@ -1,4 +1,4 @@
-import { mq } from "@/_foundation/mq";
+import { mq } from '@/_foundation/mq';
 
 type Props = {
   alt: string;
@@ -9,29 +9,11 @@ type Props = {
   spSize: [number | string, number | string];
 };
 
-export function ResponsiveImage({
-  alt,
-  className,
-  pcSize,
-  pcSrc,
-  spSize,
-  spSrc,
-  ...props
-}: Props) {
+export function ResponsiveImage({ alt, className, pcSize, pcSrc, spSize, spSrc, ...props }: Props) {
   return (
     <picture {...props}>
-      <source
-        height={pcSize[1]}
-        media={mq.pc}
-        srcSet={pcSrc}
-        width={pcSize[0]}
-      />
-      <source
-        height={spSize[1]}
-        media={mq.sp}
-        srcSet={spSrc}
-        width={spSize[0]}
-      />
+      <source height={pcSize[1]} media={mq.pc} srcSet={pcSrc} width={pcSize[0]} />
+      <source height={spSize[1]} media={mq.sp} srcSet={spSrc} width={spSize[0]} />
       <img
         alt={alt}
         className={className}

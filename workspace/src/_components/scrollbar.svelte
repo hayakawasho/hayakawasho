@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { useScrollbarProgress } from "@/_states/scrollbar-progress";
+  import { useScrollbarProgress } from '@/_states/scrollbar-progress';
 
   let progressY = 0;
   let valueNow = 0;
