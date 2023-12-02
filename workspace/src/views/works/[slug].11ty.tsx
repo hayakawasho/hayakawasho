@@ -42,7 +42,7 @@ class Component {
         seo={
           <Seo
             permalink={`/works/${post.id}/`}
-            prepend={<link as="image" href={eyecatch} rel="preload" media={mq.sp} />}
+            prepend={<link as="image" href={eyecatch} media={mq.sp} rel="preload" />}
             title={post.title}
           />
         }

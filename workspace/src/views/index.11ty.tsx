@@ -42,8 +42,8 @@ class Component {
                     as="image"
                     href={post.eyecatch.src + IMG_API + '&w=1440'}
                     key={post.id}
-                    rel="preload"
                     media={mq.pc}
+                    rel="preload"
                   />
                 ))}
                 {posts.map(post => (
@@ -51,8 +51,8 @@ class Component {
                     as="image"
                     href={post.eyecatch.src + IMG_API + '&w=750'}
                     key={post.id}
-                    rel="preload"
                     media={mq.sp}
+                    rel="preload"
                   />
                 ))}
               </>

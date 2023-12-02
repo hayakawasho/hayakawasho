@@ -14,8 +14,8 @@ void main() {
   vec2 uv = vUv;
 
   vec2 texUv = cover(u_mesh_size, u_image_size, uv);
-  vec4 texture = texture2D(u_texture, texUv);
-  texture.a = u_alpha;
+  vec4 tex = texture2D(u_texture, texUv);
+  tex.a = u_alpha;
 
-  gl_FragColor = texture;
+  gl_FragColor = tex;
 }

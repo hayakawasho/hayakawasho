@@ -1,6 +1,6 @@
 import { getGPUTier } from 'detect-gpu';
 import { defineComponent, useDomRef } from 'lake';
-import { Transform, Renderer, Camera } from 'ogl';
+import { WebGLRenderer, PerspectiveCamera, Scene } from 'three';
 import { useTick } from '@/_foundation/hooks';
 import { useWindowSize } from '@/_states/window-size';
 
@@ -10,48 +10,47 @@ export default defineComponent({
     const { refs } = useDomRef<{ canvas: HTMLCanvasElement }>('canvas');
     const { height, width } = el.getBoundingClientRect();
 
-    getGPUTier().then(result => {
-      if (result.tier === 1) {
-        renderer.dpr = 1;
-      }
-    });
-
     const state = {
       resizing: false,
     };
 
-    const renderer = new Renderer({
+    const renderer = new WebGLRenderer({
       alpha: true,
       canvas: refs.canvas,
-      dpr: Math.min(window.devicePixelRatio, 1.5),
-      height,
-      width,
     });
 
-    const fov = 60;
+    renderer.setClearColor(0x000000, 0);
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+
+    getGPUTier().then(result => {
+      if (result.tier === 1) {
+        renderer.setPixelRatio(1);
+      }
+    });
+
+    const FOV = 60;
     const calcCamDistance = (h: number) => {
-      const vFov = (fov * Math.PI) / 180;
+      const vFov = (FOV * Math.PI) / 180;
       const fovRad = vFov * 0.5;
       return (h * 0.5) / Math.tan(fovRad);
     };
 
-    const camera = new Camera(renderer.gl, {
-      aspect: width / height,
-      far: 2000,
-      fov,
-      near: 0.1,
-    });
-
+    const camera = new PerspectiveCamera(FOV, width / height, 0.1, 2000);
+    camera.position.z = calcCamDistance(height);
     camera.position.z = calcCamDistance(height);
 
-    const scene = new Transform();
+    const scene = new Scene();
+    const addScene = (child: THREE.Mesh) => scene.add(child);
+    const removeScene = (child: THREE.Mesh) => scene.remove(child);
 
     useWindowSize(({ aspect, wh, ww }) => {
       state.resizing = true;
 
       renderer.setSize(ww, wh);
-      camera.perspective({ aspect });
+      camera.aspect = aspect;
       camera.position.z = calcCamDistance(wh);
+      camera.updateProjectionMatrix();
 
       state.resizing = false;
     });
@@ -60,24 +59,11 @@ export default defineComponent({
       if (state.resizing) {
         return;
       }
-
-      renderer.render({
-        camera,
-        scene,
-      });
+      renderer.render(scene, camera);
     });
-
-    const addScene = (child: Transform) => {
-      scene.addChild(child);
-    };
-
-    const removeScene = (child: Transform) => {
-      scene.removeChild(child);
-    };
 
     return {
       addScene,
-      gl: renderer.gl,
       removeScene,
     };
   },

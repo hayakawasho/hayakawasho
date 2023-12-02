@@ -1,8 +1,14 @@
 import { defineComponent, useMount, useDomRef } from 'lake';
-import { Texture, Vec2, Mesh, Program, Plane } from 'ogl';
+import {
+  Vector2,
+  Mesh,
+  PlaneBufferGeometry,
+  ShaderMaterial,
+  TextureLoader,
+  LinearFilter,
+} from 'three';
 import { useTick } from '@/_foundation/hooks';
 import { Tween } from '@/_foundation/tween';
-import { loadImage } from '@/_foundation/utils';
 import { ImagePlane } from '@/_glsl';
 import { useWindowSize } from '@/_states/window-size';
 import fragment from './fragment.frag';
@@ -18,11 +24,13 @@ type Props = AppContext & {
 
 const IMG_API = '?auto=compress,format';
 
+const loader = new TextureLoader();
+loader.crossOrigin = 'anonymous';
+
 export default defineComponent({
   name: 'GridItem',
   setup(el: HTMLElement, context: Props) {
     const { glContext, mq, infiniteScrollContext, history } = context;
-    const { gl } = glContext;
     const { diff, posY } = infiniteScrollContext;
 
     const { refs } = useDomRef<{ plane: HTMLImageElement }>('plane');
@@ -42,13 +50,9 @@ export default defineComponent({
       },
     };
 
-    const texture = new Texture(gl, {
-      generateMipmaps: false,
-      minFilter: gl.LINEAR,
-    });
-
-    loadImage(state[mq.value].src).then(img => {
-      texture.image = img;
+    const texture = loader.load(state[mq.value].src, texture => {
+      texture.minFilter = LinearFilter;
+      texture.generateMipmaps = false;
     });
 
     const { width, height } = refs.plane.getBoundingClientRect();
@@ -58,10 +62,10 @@ export default defineComponent({
         value: 1,
       },
       u_image_size: {
-        value: new Vec2(Number(refs.plane.dataset.w), Number(refs.plane.dataset.h)),
+        value: new Vector2(Number(refs.plane.dataset.w), Number(refs.plane.dataset.h)),
       },
       u_mesh_size: {
-        value: new Vec2(width, height),
+        value: new Vector2(width, height),
       },
       u_scale: {
         value: 1.0,
@@ -74,23 +78,15 @@ export default defineComponent({
       },
     };
 
-    const geometry = new Plane(gl, {
-      height: 1,
-      width: 1,
-    });
+    const geometry = new PlaneBufferGeometry(1, 1);
 
-    const program = new Program(gl, {
-      depthTest: false,
-      fragment,
+    const material = new ShaderMaterial({
+      fragmentShader: fragment,
       uniforms,
-      vertex,
+      vertexShader: vertex,
     });
 
-    const mesh = new Mesh(gl, {
-      geometry,
-      program,
-    });
-
+    const mesh = new Mesh(geometry, material);
     const imagePlane = new ImagePlane(mesh, el);
 
     const [ww, wh] = useWindowSize(({ ww, wh }) => {
