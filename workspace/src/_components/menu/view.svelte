@@ -35,7 +35,7 @@
     class="menuLink"
     href="/works/"
   >
-    View All Projects
+    View all projects
   </a>
 </div>
 
@@ -51,11 +51,6 @@
     height: var(--h);
     transform: translateX(-50%);
     z-index: 99;
-    color: #fff;
-    border-radius: calc((var(--h) / 2));
-    clip-path: inset(0 0 0 0 round calc((var(--h) / 2)));
-    background: rgba(0,0,0,.2);
-    backdrop-filter: blur(6px);
 
     @media (min-width: 640px) {
       --w: 18rem;
@@ -77,11 +72,11 @@
     width: 100%;
     text-align: center;
     white-space: nowrap;
-    font-family: var(--font-heading);
-    letter-spacing: -0.02em;
+    color: #fff;
+    filter: drop-shadow(0 0 10px rgba(0,0,0,.4));
 
     @media (min-width: 640px) {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
     }
   }
 </style>

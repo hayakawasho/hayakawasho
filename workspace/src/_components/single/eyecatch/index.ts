@@ -1,4 +1,4 @@
-import { defineComponent, useIntersectionWatch, ref } from 'lake';
+import { defineComponent, ref } from 'lake';
 import { useScrollPosY } from '@/_states/scroll';
 import { useWindowSize } from '@/_states/window-size';
 import type { AppContext } from '@/_foundation/type';
@@ -12,16 +12,6 @@ export default defineComponent({
     if (mq.value === 'sp') {
       return;
     }
-
-    useIntersectionWatch(
-      el,
-      ([entry]) => {
-        isVisible.value = entry.isIntersecting;
-      },
-      {
-        rootMargin: '25%',
-      }
-    );
 
     const [_] = useWindowSize(() => {
       //

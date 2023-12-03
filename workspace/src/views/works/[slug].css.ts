@@ -144,7 +144,7 @@ export const stacks__hr = css`
 export const intro__indexNumber = css`
   position: absolute;
   top: 4rem;
-  right: var(--grid);
+  left: var(--grid);
   font-size: 1.1rem;
   overflow: hidden;
 

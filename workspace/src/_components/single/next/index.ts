@@ -1,4 +1,4 @@
-import { defineComponent, useIntersectionWatch, useDomRef } from 'lake';
+import { defineComponent, useDomRef } from 'lake';
 import { map } from '@/_foundation/math';
 import { Tween } from '@/_foundation/tween';
 import { useScrollPosY } from '@/_states/scroll';
@@ -20,16 +20,6 @@ export default defineComponent({
     };
 
     const { refs } = useDomRef<Refs>('nextLink', 'end', 'nextProject');
-
-    useIntersectionWatch(
-      refs.end,
-      ([entry]) => {
-        state.visible = entry.isIntersecting;
-      },
-      {
-        rootMargin: '25%',
-      }
-    );
 
     const { top, bottom } = refs.end.getBoundingClientRect();
     const [_, wh] = useWindowSize();

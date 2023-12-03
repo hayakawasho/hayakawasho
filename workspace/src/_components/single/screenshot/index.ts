@@ -1,4 +1,4 @@
-import { defineComponent, useMount, useIntersectionWatch } from 'lake';
+import { defineComponent, useMount } from 'lake';
 import {
   Vector2,
   Mesh,
@@ -72,16 +72,6 @@ export default defineComponent({
     const mesh = new Mesh(geometry, material);
     const plane = new ImagePlane(mesh, el);
 
-    useIntersectionWatch(
-      el,
-      ([entry]) => {
-        state.visible = entry.isIntersecting;
-      },
-      {
-        rootMargin: '25%',
-      }
-    );
-
     const [ww, wh] = useWindowSize(({ ww, wh }) => {
       state.resizing = true;
       plane.resize(ww, wh);
@@ -89,7 +79,7 @@ export default defineComponent({
     });
 
     useScrollPosY(({ currentY, oldY }) => {
-      if (state.resizing || !state.visible || currentY === oldY) {
+      if (state.resizing || currentY === oldY) {
         return;
       }
 

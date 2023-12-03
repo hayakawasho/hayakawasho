@@ -45,8 +45,8 @@ export default defineComponent({
 
     const state = {
       src: {
-        pc: imgSrc + IMG_API + '&w=1440',
-        sp: imgSrc + IMG_API + '&w=750',
+        pc: imgSrc + IMG_API + '&w=1440&sat=-100',
+        sp: imgSrc + IMG_API + '&w=750&sat=-100',
       },
       speed,
       resizing: false,

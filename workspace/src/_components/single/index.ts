@@ -99,10 +99,10 @@ export default defineComponent({
               opacity: 1,
               scaleY: 1,
             }),
-            Tween.tween(refs.sub, 1.05, 'custom.out', {
+            Tween.tween(refs.sub, 1.25, 'custom.out', {
               y: '0em',
             }),
-            Tween.tween(split.words, 1.05, 'custom.out', {
+            Tween.tween(split.words, 1.25, 'custom.out', {
               delay: 0.05,
               stagger: 0.03,
               y: '0em',
