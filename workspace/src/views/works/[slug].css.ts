@@ -34,7 +34,7 @@ export const heading = css`
     line-height: 1.25;
 
     & + ._l {
-      margin-top: -0.15em;
+      margin-top: -0.2em;
     }
   }
 `;

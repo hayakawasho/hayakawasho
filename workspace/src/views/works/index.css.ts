@@ -9,31 +9,13 @@ export const screen = css`
 
 export const list = css`
   & > li {
-    padding: 1.2rem 0;
+    padding: 1rem 0;
     padding-left: var(--gap);
 
     @media ${mq.pc} {
-      padding: 1.6rem 0;
+      padding: 0;
       text-align: center;
       will-change: transform;
-    }
-  }
-`;
-
-export const item__title = css`
-  display: inline-block;
-  line-height: 1.15;
-  overflow: hidden;
-  transform: translateZ(0);
-
-  @media (hover: hover) {
-    @media ${mq.pc} {
-      opacity: 0.7;
-      transition: opacity 0.65s cubic-bezier(0.32, 0.94, 0.6, 1);
-    }
-
-    &:hover {
-      opacity: 1;
     }
   }
 `;
@@ -51,17 +33,36 @@ export const item = css`
     display: inline-block;
     width: auto;
     font-size: 9.8rem;
+    padding-top: 0.1em;
     padding-left: 0;
     line-height: 1;
+  }
+
+  @media (hover: hover) {
+    @media ${mq.pc} {
+      opacity: 0.7;
+      transition: opacity 0.65s cubic-bezier(0.32, 0.94, 0.6, 1);
+    }
+
+    &:hover {
+      opacity: 1;
+    }
   }
 
   & ._l {
     overflow: hidden;
 
     & + ._l {
-      margin-top: -0.15em;
+      margin-top: -0.2em;
     }
   }
+`;
+
+export const item__title = css`
+  display: inline-block;
+  line-height: 1.15;
+  overflow: hidden;
+  transform: translateZ(0);
 `;
 
 export const item__thumb = css`
