@@ -37,8 +37,8 @@ export const projects = css`
   left: calc(var(--grid) * -5);
 
   @media ${mq.pc} {
-    width: calc(100% + var(--grid) * 5);
-    left: calc(var(--grid) * -2.5);
+    width: calc(100% + var(--grid) * 3);
+    left: calc(var(--grid) * -1.5);
   }
 `;
 
@@ -53,7 +53,7 @@ export const project = css`
 
 export const project__eyecatch = css`
   position: absolute;
-  inset: 0.15rem;
+  inset: 0.2rem;
   display: block;
 
   @media ${mq.pc} {

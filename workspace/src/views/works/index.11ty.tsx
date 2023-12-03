@@ -25,8 +25,8 @@ class Component {
     return `<!DOCTYPE html>
     ${r(
       <PageWithHeader
-        header={<Header />}
-        namespace="Works"
+        header={<Header current="works" />}
+        namespace="works"
         seo={<Seo permalink="/works/" title="Works" />}
       >
         <main className="h-full" data-component="Works">

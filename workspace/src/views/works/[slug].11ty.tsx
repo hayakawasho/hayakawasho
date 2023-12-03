@@ -37,12 +37,20 @@ class Component {
     return `<!DOCTYPE html>
     ${r(
       <PageWithHeader
-        header={<Header />}
-        namespace="Single"
+        header={<Header current="single" />}
+        namespace="single"
         seo={
           <Seo
             permalink={`/works/${post.id}/`}
-            prepend={<link as="image" href={eyecatch} media={mq.sp} rel="preload" />}
+            prepend={
+              <link
+                as="image"
+                crossOrigin="anonymous"
+                href={eyecatch}
+                media={mq.sp}
+                rel="preload"
+              />
+            }
             title={post.title}
           />
         }

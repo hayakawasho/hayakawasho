@@ -3,9 +3,10 @@ import { defineComponent, useDomRef, useSlot, useMount, ref, readonly } from 'la
 import { wideQuery } from '@/_foundation/env';
 import { useElementSize } from '@/_foundation/hooks';
 import { windowSizeMutators } from '@/_states/window-size';
+import { routeMutators } from '@/_states/route';
 import GlWorld from '../glworld';
 import ScrollTweenContainer from '../scroll-tween-container';
-import type { AppContext } from '@/_foundation/type';
+import type { AppContext, RouteName } from '@/_foundation/type';
 
 type Props = {
   onCreated: (props?: Omit<AppContext, 'once'>) => void;
@@ -55,7 +56,7 @@ export default defineComponent({
     };
 
     const onEnter = (to: HTMLElement) => {
-      const namespace = to.dataset.xhr;
+      const namespace = to.dataset.xhr as RouteName;
       document.body.dataset.page = namespace;
 
       scrollContext.current.reInit(to);
@@ -63,6 +64,10 @@ export default defineComponent({
       scrollContext.current.resume();
 
       onUpdated(to, provides);
+
+      routeMutators({
+        name: namespace,
+      });
     };
 
     const xhr = '[data-xhr]';

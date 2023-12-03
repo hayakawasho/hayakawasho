@@ -28,7 +28,7 @@ export const item__title = css`
 
   @media (hover: hover) {
     @media ${mq.pc} {
-      opacity: 0.6;
+      opacity: 0.7;
       transition: opacity 0.65s cubic-bezier(0.32, 0.94, 0.6, 1);
     }
 

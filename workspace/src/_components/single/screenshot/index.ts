@@ -6,7 +6,7 @@ import {
   ShaderMaterial,
   TextureLoader,
   LinearFilter,
-} from 'three';
+} from '@/_foundation/three';
 import { Tween } from '@/_foundation/tween';
 import { ImagePlane } from '@/_glsl';
 import { useScrollPosY } from '@/_states/scroll';
@@ -22,26 +22,24 @@ export default defineComponent({
   name: 'Screenshot',
   setup(el: HTMLImageElement, context: AppContext) {
     const { glContext, mq, history } = context;
-    const { gl } = glContext;
 
     const src = el.dataset.src!;
     const state = {
-      pc: {
-        src: src + '?auto=compress,format',
+      src: {
+        pc: src + '?auto=compress,format',
+        sp: src + '?auto=compress,format&w=750',
       },
       resizing: false,
-      sp: {
-        src: src + '?auto=compress,format&w=750',
-      },
       visible: false,
     };
 
-    const texture = loader.load(state[mq.value].src, texture => {
+    const texture = loader.load(state.src[mq.value], texture => {
       texture.minFilter = LinearFilter;
       texture.generateMipmaps = false;
     });
 
     const { width, height } = el.getBoundingClientRect();
+
     const uniforms = {
       u_alpha: {
         value: 1.0,
@@ -72,7 +70,7 @@ export default defineComponent({
     });
 
     const mesh = new Mesh(geometry, material);
-    const imagePlane = new ImagePlane(mesh, el);
+    const plane = new ImagePlane(mesh, el);
 
     useIntersectionWatch(
       el,
@@ -86,7 +84,7 @@ export default defineComponent({
 
     const [ww, wh] = useWindowSize(({ ww, wh }) => {
       state.resizing = true;
-      imagePlane.onResize(ww, wh);
+      plane.resize(ww, wh);
       state.resizing = false;
     });
 
@@ -94,16 +92,18 @@ export default defineComponent({
       if (state.resizing || !state.visible || currentY === oldY) {
         return;
       }
-      imagePlane.updatePos(currentY);
+
+      plane.updateY(currentY);
     });
 
     useMount(() => {
-      imagePlane.onResize(ww.value, wh.value);
+      plane.resize(ww.value, wh.value);
       glContext.addScene(mesh);
 
       return () => {
         if (history.value === 'pop') {
           glContext.removeScene(mesh);
+
           return;
         }
 

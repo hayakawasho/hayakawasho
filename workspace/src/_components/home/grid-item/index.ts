@@ -6,7 +6,7 @@ import {
   ShaderMaterial,
   TextureLoader,
   LinearFilter,
-} from 'three';
+} from '@/_foundation/three';
 import { useTick } from '@/_foundation/hooks';
 import { Tween } from '@/_foundation/tween';
 import { ImagePlane } from '@/_glsl';
@@ -27,30 +27,32 @@ const IMG_API = '?auto=compress,format';
 const loader = new TextureLoader();
 loader.crossOrigin = 'anonymous';
 
+type Refs = {
+  plane: HTMLImageElement;
+  link: HTMLAnchorElement;
+};
+
 export default defineComponent({
   name: 'GridItem',
   setup(el: HTMLElement, context: Props) {
     const { glContext, mq, infiniteScrollContext, history } = context;
     const { diff, posY } = infiniteScrollContext;
 
-    const { refs } = useDomRef<{ plane: HTMLImageElement }>('plane');
+    const { refs } = useDomRef<Refs>('plane', 'link');
 
     const imgSrc = refs.plane.dataset.src!;
     const speed = Number(refs.plane.dataset.speed);
 
     const state = {
-      pc: {
-        speed,
-        src: imgSrc + IMG_API + '&w=1440',
+      src: {
+        pc: imgSrc + IMG_API + '&w=1440',
+        sp: imgSrc + IMG_API + '&w=750',
       },
+      speed,
       resizing: false,
-      sp: {
-        speed,
-        src: imgSrc + IMG_API + '&w=750',
-      },
     };
 
-    const texture = loader.load(state[mq.value].src, texture => {
+    const texture = loader.load(state.src[mq.value], texture => {
       texture.minFilter = LinearFilter;
       texture.generateMipmaps = false;
     });
@@ -87,11 +89,11 @@ export default defineComponent({
     });
 
     const mesh = new Mesh(geometry, material);
-    const imagePlane = new ImagePlane(mesh, el);
+    const plane = new ImagePlane(mesh, el);
 
     const [ww, wh] = useWindowSize(({ ww, wh }) => {
       state.resizing = true;
-      imagePlane.onResize(ww, wh);
+      plane.resize(ww, wh);
       state.resizing = false;
     });
 
@@ -100,24 +102,29 @@ export default defineComponent({
         return;
       }
 
-      const y = infiniteScrollContext.wrap(posY.value * state[mq.value].speed);
+      const y = infiniteScrollContext.wrap(posY.value * state.speed);
+      plane.updateY(y);
+      refs.link.style.transform = `translateY(${-y}px) translateZ(0)`;
 
-      imagePlane.updatePos(y);
-      uniforms.u_velo.value = diff.value * 0.005 * state[mq.value].speed;
+      uniforms.u_velo.value = diff.value * 0.005 * state.speed;
     });
 
     useMount(() => {
-      imagePlane.onResize(ww.value, wh.value);
+      plane.resize(ww.value, wh.value);
       glContext.addScene(mesh);
 
       return () => {
         if (history.value === 'pop') {
           glContext.removeScene(mesh);
+
           return;
         }
 
         Tween.serial(
-          Tween.wait(0.8, () => {
+          // Tween.tween(uniforms.u_alpha, 0.55, 'power3.inOut', {
+          //   value: 0,
+          // }),
+          Tween.wait(0.5, () => {
             glContext.removeScene(mesh);
           })
         );

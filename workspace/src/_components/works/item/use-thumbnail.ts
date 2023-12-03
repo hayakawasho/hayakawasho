@@ -6,7 +6,7 @@ import {
   ShaderMaterial,
   TextureLoader,
   LinearFilter,
-} from 'three';
+} from '@/_foundation/three';
 // import { useTick } from "@/_foundation/hooks";
 // import { Tween } from "@/_foundation/tween";
 import { useWindowSize } from '@/_states/window-size';

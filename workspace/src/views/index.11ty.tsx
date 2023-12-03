@@ -8,9 +8,8 @@ import { Link } from './_components/ui/link';
 import * as styles from './index.css';
 import type { WorkMetadata } from '@/_work/model';
 
-const PER_PAGE = 5;
+const PER_PAGE = 7;
 const IMG_API = '?auto=compress,format';
-const VIEW_PROJECTS = 'View projects';
 
 class Component {
   data() {
@@ -30,8 +29,8 @@ class Component {
     return `<!DOCTYPE html>
     ${r(
       <PageWithHeader
-        header={<Header />}
-        namespace="Home"
+        header={<Header current="home" />}
+        namespace="home"
         seo={
           <Seo
             permalink=""
@@ -40,6 +39,7 @@ class Component {
                 {posts.map(post => (
                   <link
                     as="image"
+                    crossOrigin="anonymous"
                     href={post.eyecatch.src + IMG_API + '&w=1440'}
                     key={post.id}
                     media={mq.pc}
@@ -49,6 +49,7 @@ class Component {
                 {posts.map(post => (
                   <link
                     as="image"
+                    crossOrigin="anonymous"
                     href={post.eyecatch.src + IMG_API + '&w=750'}
                     key={post.id}
                     media={mq.sp}
@@ -64,14 +65,16 @@ class Component {
         <main className="h-full" data-component="Home">
           <div aria-hidden="true" data-scroll-item />
           <h1 className="sr-only">Sho Hayakawa Portfolio</h1>
-          <Link css={styles.toProjects} swap="swap:.95s" to="./works/">
-            {[...VIEW_PROJECTS].map(c => (
-              <span aria-hidden="true" className="_c" data-ref="char">
-                {c}
-              </span>
-            ))}
-            <span className="sr-only">{VIEW_PROJECTS}</span>
-          </Link>
+          {
+            // <Link css={styles.toProjects} swap="swap:.95s" to="./works/">
+            //   {[...VIEW_PROJECTS].map(c => (
+            //     <span aria-hidden="true" className="_c" data-ref="char">
+            //       {c}
+            //     </span>
+            //   ))}
+            //   <span className="sr-only">{VIEW_PROJECTS}</span>
+            // </Link>
+          }
           <div css={styles.screen}>
             <ul className="" css={styles.projects} data-ref="grid">
               {posts.map((post, index) => (
@@ -120,9 +123,9 @@ const Thumbnail = ({ post, index }: { post: WorkMetadata; index: number }) => {
   }[index % 3];
 
   return (
-    <figure css={styles.project__eyecatch} data-ref="gridItem">
+    <div css={styles.project__eyecatch} data-ref="gridItem">
       <img
-        alt={post.title}
+        alt=""
         className="w-full h-full invisible"
         data-h={post.eyecatch.height}
         data-ref="plane"
@@ -132,7 +135,10 @@ const Thumbnail = ({ post, index }: { post: WorkMetadata; index: number }) => {
         height={post.eyecatch.height}
         width={post.eyecatch.width}
       />
-    </figure>
+      <Link className="absolute inset-0 block" to={`/works/${post.id}/`} data-ref="link">
+        <span className="sr-only">{post.title}</span>
+      </Link>
+    </div>
   );
 };
 

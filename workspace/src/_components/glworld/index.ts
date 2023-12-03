@@ -1,8 +1,9 @@
 import { getGPUTier } from 'detect-gpu';
 import { defineComponent, useDomRef } from 'lake';
-import { WebGLRenderer, PerspectiveCamera, Scene } from 'three';
+import { WebGLRenderer, PerspectiveCamera, Scene } from '@/_foundation/three';
 import { useTick } from '@/_foundation/hooks';
 import { useWindowSize } from '@/_states/window-size';
+import type { Mesh } from '@/_foundation/three';
 
 export default defineComponent({
   name: 'GlWorld',
@@ -41,8 +42,8 @@ export default defineComponent({
     camera.position.z = calcCamDistance(height);
 
     const scene = new Scene();
-    const addScene = (child: THREE.Mesh) => scene.add(child);
-    const removeScene = (child: THREE.Mesh) => scene.remove(child);
+    const addScene = (child: Mesh) => scene.add(child);
+    const removeScene = (child: Mesh) => scene.remove(child);
 
     useWindowSize(({ aspect, wh, ww }) => {
       state.resizing = true;

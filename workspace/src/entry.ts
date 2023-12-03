@@ -4,6 +4,7 @@ import { create, withSvelte } from 'lake';
 import Cursor from './_components/cursor.svelte';
 import Home from './_components/home';
 import Load from './_components/load';
+import NavMenu from './_components/menu';
 import Noop from './_components/noop.svelte';
 import Scrollbar from './_components/scrollbar.svelte';
 import Single from './_components/single';
@@ -17,6 +18,7 @@ const init = () => {
   const table: Record<string, IComponent> = {
     Cursor: withSvelte(Cursor, 'Cursor'),
     Home,
+    NavMenu,
     Noop: withSvelte(Noop, 'Noop'),
     Scrollbar: withSvelte(Scrollbar, 'Scrollbar'),
     Single,

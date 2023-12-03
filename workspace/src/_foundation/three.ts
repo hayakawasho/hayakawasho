@@ -1,0 +1,17 @@
+export { WebGLRenderer } from 'three/src/renderers/WebGLRenderer';
+export { Scene } from 'three/src/scenes/Scene';
+export { Mesh } from 'three/src/objects/Mesh';
+export * from 'three/src/geometries/Geometries';
+export * from 'three/src/materials/Materials';
+export { TextureLoader } from 'three/src/loaders/TextureLoader';
+export { LoadingManager } from 'three/src/loaders/LoadingManager';
+export { FontLoader } from 'three/src/loaders/FontLoader';
+export { Cache } from 'three/src/loaders/Cache';
+export { PerspectiveCamera } from 'three/src/cameras/PerspectiveCamera';
+export { BufferGeometry } from 'three/src/core/BufferGeometry';
+export * from 'three/src/core/BufferAttribute';
+// export { _Math } from 'three/src/math/Math';
+export { Vector2 } from 'three/src/math/Vector2';
+export { Vector3 } from 'three/src/math/Vector3';
+export { Color } from 'three/src/math/Color';
+export * from 'three/src/constants';

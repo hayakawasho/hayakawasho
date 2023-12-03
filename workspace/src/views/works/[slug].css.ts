@@ -93,17 +93,17 @@ export const info = css`
 
   @media ${mq.pc} {
     width: calc(var(--grid) * 2);
+    gap: 1.4rem;
   }
 `;
 
 export const stacks = css`
   padding-left: 0.6em;
-  padding-bottom: 0.6em;
+  padding-bottom: 0.5em;
   position: relative;
   margin-top: 0.2rem;
 
   @media ${mq.pc} {
-    //
   }
 `;
 
@@ -116,6 +116,7 @@ export const stacksItems = css`
 
   @media ${mq.pc} {
     font-size: 1.3rem;
+    gap: 0.3rem;
   }
 
   > li {
@@ -148,7 +149,7 @@ export const intro__indexNumber = css`
   overflow: hidden;
 
   @media ${mq.pc} {
-    right: calc(var(--grid) - var(--gap) * 0.5);
+    left: calc(var(--grid) - var(--gap) * 0.5);
     top: 6rem;
     font-size: 1.3rem;
   }
