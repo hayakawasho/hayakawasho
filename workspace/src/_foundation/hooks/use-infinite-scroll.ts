@@ -100,10 +100,8 @@ export const useInfiniteScroll = (container: HTMLElement, mq: 'pc' | 'sp') => {
 
   return {
     diff: readonly(diff),
-    onResize,
     posY: readonly(posY),
-    wrap: (cy: number) => {
-      return gsap.utils.wrap(0, state.maxY, cy);
-    },
+    resize: onResize,
+    wrap: (cy: number) => gsap.utils.wrap(0, state.maxY, cy),
   };
 };

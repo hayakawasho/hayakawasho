@@ -1,6 +1,7 @@
 import 'virtual:windi.css';
 import 'ress';
 import { create, withSvelte } from 'lake';
+import Archives from './_components/archives';
 import Cursor from './_components/cursor.svelte';
 import Home from './_components/home';
 import Load from './_components/load';
@@ -16,6 +17,7 @@ const init = () => {
   const { component, unmount } = create();
 
   const table: Record<string, IComponent> = {
+    Archives,
     Cursor: withSvelte(Cursor, 'Cursor'),
     Home,
     NavMenu,

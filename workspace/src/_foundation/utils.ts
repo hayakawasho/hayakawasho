@@ -20,7 +20,7 @@ export const sleep = (time: number): Promise<void> => {
   });
 };
 
-export const nextTick = (): Promise<void> => {
+export const waitFrame = (): Promise<void> => {
   return new Promise(resolve => gsap.ticker.add(() => resolve(), true));
 };
 

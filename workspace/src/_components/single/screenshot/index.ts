@@ -1,4 +1,4 @@
-import { defineComponent, useMount } from 'lake';
+import { defineComponent, useMount, ref } from 'lake';
 import {
   Vector2,
   Mesh,
@@ -24,16 +24,14 @@ export default defineComponent({
     const { glContext, mq, history } = context;
 
     const src = el.dataset.src!;
-    const state = {
-      src: {
-        pc: src + '?auto=compress,format',
-        sp: src + '?auto=compress,format&w=750',
-      },
-      resizing: false,
-      visible: false,
+    const texSrc = {
+      pc: src + '?auto=compress,format',
+      sp: src + '?auto=compress,format&w=750',
     };
 
-    const texture = loader.load(state.src[mq.value], texture => {
+    const isResizing = ref(false);
+
+    const texture = loader.load(texSrc[mq.value], texture => {
       texture.minFilter = LinearFilter;
       texture.generateMipmaps = false;
     });
@@ -73,13 +71,13 @@ export default defineComponent({
     const plane = new ImagePlane(mesh, el);
 
     const [ww, wh] = useWindowSize(({ ww, wh }) => {
-      state.resizing = true;
+      isResizing.value = true;
       plane.resize(ww, wh);
-      state.resizing = false;
+      isResizing.value = false;
     });
 
     useScrollPosY(({ currentY, oldY }) => {
-      if (state.resizing || currentY === oldY) {
+      if (isResizing.value || currentY === oldY) {
         return;
       }
 

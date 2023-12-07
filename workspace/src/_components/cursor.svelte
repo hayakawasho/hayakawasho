@@ -11,19 +11,19 @@
     y: 0,
   };
 
-  let lastX = -100
-  let lastY = -100
-  let diffX = 0
-  let diffY = 0
+  let lastX = -100;
+  let lastY = -100;
+  let diffX = 0;
+  let diffY = 0;
 
   const calcAngle = (x: number, y: number) => {
-    return 180 * Math.atan2(y, x) / Math.PI
-  }
+    return (180 * Math.atan2(y, x)) / Math.PI;
+  };
 
   const calcSqueeze = (x: number, y: number) => {
     const val = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-    return Math.min(val / 200, .55)
-  }
+    return Math.min(val / 200, 0.55);
+  };
 
   const onMousemove = (e: MouseEvent) => {
     clearTimeout(timer);
@@ -54,20 +54,18 @@
     lastY = lerp(lastY, state.y, easeVal);
   });
 
-  $: diffX = lastX - state.x
-  $: diffY = lastY - state.y
+  $: diffX = lastX - state.x;
+  $: diffY = lastY - state.y;
 </script>
 
 <svelte:body on:mousemove|passive={onMousemove} />
 
-<div
-  class="cursor"
-  style="transform: translate3d({lastX}px, {lastY}px, 0px);"
->
+<div class="cursor" style="transform: translate3d({lastX}px, {lastY}px, 0px);">
   <div class="cursor__inner">
     <span
       class="cursor__circle absolute inset-0"
-      style="transform: rotate({calcAngle(diffX, diffY)}deg) scale({1 + calcSqueeze(diffX, diffY)}, {1 - calcSqueeze(diffX, diffY)}) translateZ(0)"
+      style="transform: rotate({calcAngle(diffX, diffY)}deg) scale({1 +
+        calcSqueeze(diffX, diffY)}, {1 - calcSqueeze(diffX, diffY)}) translateZ(0)"
     />
   </div>
   <span class="cursor__hold absolute inset-0">

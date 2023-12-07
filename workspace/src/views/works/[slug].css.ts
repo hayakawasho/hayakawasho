@@ -144,12 +144,12 @@ export const stacks__hr = css`
 export const intro__indexNumber = css`
   position: absolute;
   top: 4rem;
-  left: var(--grid);
+  right: var(--grid);
   font-size: 1.1rem;
   overflow: hidden;
 
   @media ${mq.pc} {
-    left: calc(var(--grid) - var(--gap) * 0.5);
+    right: calc(var(--grid) - var(--gap) * 0.5);
     top: 6rem;
     font-size: 1.3rem;
   }

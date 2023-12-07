@@ -1,4 +1,4 @@
-import { defineComponent, useMount, useDomRef } from 'lake';
+import { defineComponent, useMount, useDomRef, ref } from 'lake';
 import { useTick } from '@/_foundation/hooks';
 import { splitTextNode2Words } from '@/_foundation/split-text';
 import { Tween } from '@/_foundation/tween';
@@ -29,12 +29,18 @@ export default defineComponent({
       useThumbnail(el, context.glContext);
     }
 
+    const isResizing = ref(false);
+
     const SPEED = {
       pc: 0.9,
       sp: 1,
     };
 
     useTick(() => {
+      if (isResizing.value) {
+        return;
+      }
+
       const scale = 1 - diff.value * 0.0005 * SPEED[mq.value];
       const y = infiniteScrollContext.wrap(posY.value);
 
@@ -44,13 +50,15 @@ export default defineComponent({
     const { split, onSplitUpdate } = splitTextNode2Words(refs.text);
 
     useWindowSize(() => {
+      isResizing.value = true;
+
       onSplitUpdate();
-      infiniteScrollContext.onResize();
+      infiniteScrollContext.resize();
+
+      isResizing.value = false;
     });
 
     useMount(() => {
-      infiniteScrollContext.onResize();
-
       if (!once && history.value === 'push') {
         Tween.serial(
           Tween.prop([refs.img, split.words], {

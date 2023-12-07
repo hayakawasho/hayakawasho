@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { getContext } from "svelte";
-  import { useRoute } from "@/_states/route";
-  import type { AppContext, RouteName } from "@/_foundation/type";
-  import type { Context$ } from "lake";
+  import { getContext } from 'svelte';
+  import { useRoute } from '@/_states/route';
+  import type { AppContext, RouteName } from '@/_foundation/type';
+  import type { Context$ } from 'lake';
 
   const { mq, ...context } = getContext<
     Context$<
@@ -10,7 +10,7 @@
         current: RouteName;
       }
     >
-  >("$");
+  >('$');
 
   let current = context.current;
 
@@ -20,22 +20,19 @@
 
   const linkProps = (to: string) => {
     return {
-      ["hx-get"]: to,
-      ["hx-push-url"]: true,
-      ["hx-select"]: "[data-xhr]",
-      ["hx-swap"]: "swap:.5s",
-      ["hx-target"]: "#main",
+      ['hx-get']: to,
+      ['hx-push-url']: true,
+      ['hx-select']: '[data-xhr]',
+      ['hx-swap']: 'swap:.5s',
+      ['hx-target']: '#main',
     };
   };
 </script>
 
 <div class="menuLinkWrap" aria-hidden={current !== 'home'}>
-  <a
-    {...linkProps("/works/")}
-    class="menuLink"
-    href="/works/"
-  >
+  <a {...linkProps('/works/')} class="menuLink" href="/works/">
     View all projects
+    <span class="text-[90%] ml-[.4em] mt-[.2em] transform rotate-90">↗</span>
   </a>
 </div>
 
@@ -58,7 +55,7 @@
       bottom: 6rem;
     }
 
-    &[aria-hidden="true"] {
+    &[aria-hidden='true'] {
       visibility: hidden;
     }
   }
@@ -73,7 +70,7 @@
     text-align: center;
     white-space: nowrap;
     color: #fff;
-    filter: drop-shadow(0 0 10px rgba(0,0,0,.4));
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.4));
 
     @media (min-width: 640px) {
       font-size: 1.3rem;

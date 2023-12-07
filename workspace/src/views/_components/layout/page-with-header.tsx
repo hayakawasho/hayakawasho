@@ -65,37 +65,72 @@ const grad = css`
   pointer-events: none;
   display: block;
   height: 8rem;
+  height: 33vh;
   width: 100%;
   position: fixed;
   z-index: 11;
   left: 0;
+  opacity: 0.4;
 
   @media (min-width: 640px) {
     height: 12rem;
+    height: 25vh;
   }
 `;
 
 const gradUpper = css`
   ${grad}
   top: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(22, 22, 22, 0.32) 0%,
-    rgba(22, 22, 22, 0.16) 40%,
-    rgba(22, 22, 22, 0.04) 80%,
-    rgba(22, 22, 22, 0) 100%
+  // background: linear-gradient(
+  //   to bottom,
+  //   rgba(22, 22, 22, 0.32) 0%,
+  //   rgba(22, 22, 22, 0.16) 40%,
+  //   rgba(22, 22, 22, 0.04) 80%,
+  //   rgba(22, 22, 22, 0) 100%
+  // );
+
+  background-image: linear-gradient(
+    hsla(0, 0%, 0%, 0.5),
+    hsla(0, 0%, 0%, 0.49016) 1.17%,
+    hsla(0, 0%, 0%, 0.46296) 4.49%,
+    hsla(0, 0%, 0%, 0.42188) 9.72%,
+    hsla(0, 0%, 0%, 0.37037) 16.59%,
+    hsla(0, 0%, 0%, 0.31192) 24.86%,
+    hsla(0, 0%, 0%, 0.25) 34.25%,
+    hsla(0, 0%, 0%, 0.18808) 44.52%,
+    hsla(0, 0%, 0%, 0.12963) 55.41%,
+    hsla(0, 0%, 0%, 0.07813) 66.66%,
+    hsla(0, 0%, 0%, 0.03704) 78.01%,
+    hsla(0, 0%, 0%, 0.00984) 89.21%,
+    hsla(0, 0%, 0%, 0)
   );
 `;
 
 const gradLower = css`
   ${grad}
   bottom: 0;
-  background: linear-gradient(
-    to top,
-    rgba(22, 22, 22, 0.32) 0%,
-    rgba(22, 22, 22, 0.16) 40%,
-    rgba(22, 22, 22, 0.04) 80%,
-    rgba(22, 22, 22, 0) 100%
+  // background: linear-gradient(
+  //   to top,
+  //   rgba(22, 22, 22, 0.32) 0%,
+  //   rgba(22, 22, 22, 0.16) 40%,
+  //   rgba(22, 22, 22, 0.04) 80%,
+  //   rgba(22, 22, 22, 0) 100%
+  // );
+
+  background-image: linear-gradient(
+    hsla(0, 0%, 0%, 0),
+    hsla(0, 0%, 0%, 0.00984) 10.79%,
+    hsla(0, 0%, 0%, 0.03704) 21.99%,
+    hsla(0, 0%, 0%, 0.07813) 33.34%,
+    hsla(0, 0%, 0%, 0.12963) 44.59%,
+    hsla(0, 0%, 0%, 0.18808) 55.48%,
+    hsla(0, 0%, 0%, 0.25) 65.75%,
+    hsla(0, 0%, 0%, 0.31192) 75.14%,
+    hsla(0, 0%, 0%, 0.37037) 83.41%,
+    hsla(0, 0%, 0%, 0.42188) 90.28%,
+    hsla(0, 0%, 0%, 0.46296) 95.51%,
+    hsla(0, 0%, 0%, 0.49016) 98.83%,
+    hsla(0, 0%, 0%, 0.5)
   );
 `;
 
