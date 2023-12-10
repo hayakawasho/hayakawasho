@@ -11,6 +11,7 @@ export const list = css`
   & > li {
     padding: 1rem 0;
     padding-left: var(--gap);
+    perspective: 1000px;
 
     @media ${mq.pc} {
       padding: 0;

@@ -2,6 +2,7 @@ import { defineComponent, ref, useMount, useEvent } from 'lake';
 import NormalizeWheel from 'normalize-wheel';
 import { clamp } from 'remeda';
 import { useTick } from '@/_foundation/hooks';
+import { useScrollTween } from '@/_foundation/hooks/use-scroll-tween';
 import { lerp } from '@/_foundation/math';
 import { Tween } from '@/_foundation/tween';
 import { qsa } from '@/_foundation/utils';
@@ -22,9 +23,17 @@ export default defineComponent({
       throw new Error(`NO ${SELECTOR_CLASS}`);
     }
 
+    const refContainer = ref(el);
+
+    const EASE = {
+      pc: 0.1,
+      sp: 0.09,
+    } as const;
+
+    const scrollTweenContext = useScrollTween(EASE[mq.value]);
+
     const state = {
       active: false,
-      container: el,
       currentPos: 0,
       dragging: false,
       position: 0,
@@ -40,7 +49,7 @@ export default defineComponent({
     const [_, wh] = useWindowSize();
 
     const setScrollLimit = () => {
-      const { height } = state.container.getBoundingClientRect();
+      const { height } = refContainer.value.getBoundingClientRect();
       return height >= wh.value ? height - wh.value : height;
     };
 
@@ -126,11 +135,7 @@ export default defineComponent({
 
         const { pixelY } = NormalizeWheel(e);
         state.targetPos += pixelY;
-
-        state.targetPos = clamp(state.targetPos, {
-          max: state.scrollLimit,
-          min: -0,
-        });
+        state.targetPos = clamp(state.targetPos, { max: state.scrollLimit, min: -0 });
       },
       {
         passive: true,
@@ -150,11 +155,6 @@ export default defineComponent({
 
       state.resizing = false;
     });
-
-    const EASE = {
-      pc: 0.1,
-      sp: 0.09,
-    } as const;
 
     useTick(({ timeRatio }) => {
       if (!state.active || !state.scrollLimit) {
@@ -190,7 +190,7 @@ export default defineComponent({
         throw new Error(`NO ${SELECTOR_CLASS}`);
       }
 
-      state.container = container;
+      refContainer.value = container;
       cache.value = createCache($item);
       state.scrollLimit = setScrollLimit();
     };

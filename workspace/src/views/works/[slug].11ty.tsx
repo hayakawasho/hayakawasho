@@ -6,7 +6,7 @@ import { Header } from '../_components/layout/header';
 import { PageWithHeader } from '../_components/layout/page-with-header';
 import { Seo } from '../_components/layout/seo';
 import { InfoCategory, InfoUrl, InfoDate } from '../_components/page/works/info';
-// import { Link } from "../_components/ui/link";
+import { Link } from '../_components/ui/link';
 import type { WorkMetadata } from '@/_work/model';
 
 class Component {
@@ -24,7 +24,7 @@ class Component {
 
   render(props: any) {
     const post: WorkMetadata = props.post;
-    const eyecatch = post.eyecatch.src + '?auto=compress,format&w=750';
+    const eyecatch = post.eyecatch.src + '?auto=compress,format';
 
     const { page } = props.pagination;
     const { last, first, next } = page;
@@ -43,19 +43,43 @@ class Component {
           <Seo
             permalink={`/works/${post.id}/`}
             prepend={
-              <link
-                as="image"
-                crossOrigin="anonymous"
-                href={eyecatch}
-                media={mq.sp}
-                rel="preload"
-              />
+              <>
+                <link
+                  as="image"
+                  crossOrigin="anonymous"
+                  href={eyecatch + '&w=750'}
+                  media={mq.sp}
+                  rel="preload"
+                />
+                <link
+                  as="image"
+                  crossOrigin="anonymous"
+                  href={eyecatch + '&w=1440'}
+                  media={mq.pc}
+                  rel="preload"
+                />
+              </>
             }
             title={post.title}
           />
         }
       >
         <main data-component="Single">
+          <Link css={styles.back} data-ref="back" to="../">
+            {[...'Back'].map((c, index) => (
+              <span
+                aria-hidden="true"
+                className="inline-block relative overflow-hidden"
+                key={index}
+              >
+                <span className="inline-block" data-ref="c">
+                  <span className="inline-block relative">{c}</span>
+                  <span className="inline-block absolute top-[100%] left-0">{c}</span>
+                </span>
+              </span>
+            ))}
+            <span className="sr-only">Back</span>
+          </Link>
           <div className="mb-[10rem] pc:mb-[20rem]" data-scroll-item>
             <div css={styles.intro}>
               <div css={styles.intro__g}>
@@ -106,13 +130,20 @@ class Component {
               </div>
             </div>
 
-            <div className="pc:hidden" css={styles.eyecatch} data-ref="eyecatch">
+            <div
+              className="pc:hidden"
+              css={styles.eyecatch}
+              data-h={post.eyecatch.height}
+              data-ref="eyecatch"
+              data-src={eyecatch + '&w=1440'}
+              data-w={post.eyecatch.width}
+            >
               <img
                 alt=""
                 className="pointer-events-none"
                 css={styles.eyecatchImg}
                 height={post.eyecatch.height}
-                src={eyecatch}
+                src={eyecatch + '&w=750'}
                 width={post.eyecatch.width}
               />
             </div>

@@ -7,7 +7,7 @@ import {
   TextureLoader,
   LinearFilter,
 } from '@/_foundation/three';
-import { Tween } from '@/_foundation/tween';
+// import { Tween } from '@/_foundation/tween';
 import { ImagePlane } from '@/_glsl';
 import { useScrollPosY } from '@/_states/scroll';
 import { useWindowSize } from '@/_states/window-size';
@@ -22,6 +22,7 @@ export default defineComponent({
   name: 'Screenshot',
   setup(el: HTMLImageElement, context: AppContext) {
     const { glContext, mq, history } = context;
+    const gl = glContext.glFront;
 
     const src = el.dataset.src!;
     const texSrc = {
@@ -60,7 +61,6 @@ export default defineComponent({
     };
 
     const geometry = new PlaneBufferGeometry(1, 1);
-
     const material = new ShaderMaterial({
       fragmentShader: fragment,
       uniforms,
@@ -80,27 +80,20 @@ export default defineComponent({
       if (isResizing.value || currentY === oldY) {
         return;
       }
-
       plane.updateY(currentY);
     });
 
     useMount(() => {
       plane.resize(ww.value, wh.value);
-      glContext.addScene(mesh);
+      gl.addScene(mesh);
 
       return () => {
         if (history.value === 'pop') {
-          glContext.removeScene(mesh);
-
+          gl.removeScene(mesh);
           return;
         }
 
-        Tween.tween(uniforms.u_alpha, 0.55, 'power3.inOut', {
-          onComplete: () => {
-            glContext.removeScene(mesh);
-          },
-          value: 0,
-        });
+        gl.removeScene(mesh);
       };
     });
   },

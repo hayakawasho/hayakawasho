@@ -22,6 +22,16 @@ export const PageWithHeader: FC<{
           data-ref="windowSizeWatcher"
         />
         <div css={bg} role="presentation" />
+        <div aria-hidden="true" data-ref="glWorld">
+          <canvas
+            className="fixed inset-0 w-screen h-screen pointer-events-none"
+            data-ref="back"
+          ></canvas>
+          <canvas
+            className="fixed inset-0 w-screen h-screen pointer-events-none z-10"
+            data-ref="front"
+          ></canvas>
+        </div>
         <div css={gradUpper} role="presentation" />
         <div css={gradLower} role="presentation" />
         <div css={gridLeft} role="presentation" />
@@ -41,13 +51,6 @@ export const PageWithHeader: FC<{
           </div>
         </div>
         <div css={scrollbar} data-component="Scrollbar" />
-        <div
-          aria-hidden="true"
-          className="fixed inset-0 w-screen h-screen pointer-events-none z-10"
-          data-ref="glWorld"
-        >
-          <canvas className="w-screen h-screen" data-ref="canvas"></canvas>
-        </div>
         <div css={ui}>
           <div className="sp:hidden" data-component="Cursor" />
         </div>
@@ -64,7 +67,7 @@ const svh = css`
 const grad = css`
   pointer-events: none;
   display: block;
-  height: 8rem;
+  // height: 8rem;
   height: 33vh;
   width: 100%;
   position: fixed;
@@ -73,7 +76,7 @@ const grad = css`
   opacity: 0.4;
 
   @media (min-width: 640px) {
-    height: 12rem;
+    // height: 12rem;
     height: 25vh;
   }
 `;
@@ -183,7 +186,7 @@ const screen = css`
 const bg = css`
   ${screen}
   pointer-events: none;
-  background: linear-gradient(0deg, #fff, var(--color-bg));
+  background: linear-gradient(180deg, #fff, #eaeaea);
 
   @media (prefers-color-scheme: dark) {
     background: var(--color-bg);

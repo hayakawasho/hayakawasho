@@ -33,6 +33,8 @@ export default defineComponent({
   name: 'GridItem',
   setup(el: HTMLElement, context: Props) {
     const { glContext, mq, infiniteScrollContext } = context;
+
+    const gl = glContext.glFront;
     const { diff, posY } = infiniteScrollContext;
 
     const { refs } = useDomRef<Refs>('plane', 'link');
@@ -105,10 +107,10 @@ export default defineComponent({
 
     useMount(() => {
       plane.resize(ww.value, wh.value);
-      glContext.addScene(mesh);
+      gl.addScene(mesh);
 
       return () => {
-        glContext.removeScene(mesh);
+        gl.removeScene(mesh);
       };
     });
   },

@@ -1,6 +1,25 @@
 import { css } from '@emotion/react';
 import { mq } from '@/_foundation/mq';
 
+export const back = css`
+  position: fixed;
+  top: 1rem;
+  left: calc(var(--grid) - 2rem);
+  z-index: 9;
+  font-size: 1.1rem;
+  overflow: hidden;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  padding: 2rem;
+  backface-visibility: hidden;
+
+  @media ${mq.pc} {
+    left: calc(var(--grid) - var(--gap) * 0.5 - 2rem);
+    top: 5rem;
+    font-size: 1.3rem;
+  }
+`;
+
 export const sub = css`
   font-size: 4.3rem;
   font-family: var(--font-en);
@@ -64,7 +83,7 @@ export const intro__hgroup = css`
   @media ${mq.pc} {
     position: absolute;
     top: 50%;
-    margin-top: -14rem;
+    margin-top: -15rem;
     padding: 0;
   }
 `;
@@ -79,7 +98,7 @@ export const intro__info = css`
 
   @media ${mq.pc} {
     position: absolute;
-    bottom: 6rem;
+    bottom: 7rem;
     left: calc(var(--grid) * 3);
     padding: 0;
   }
@@ -143,14 +162,14 @@ export const stacks__hr = css`
 
 export const intro__indexNumber = css`
   position: absolute;
-  top: 4rem;
+  top: 3rem;
   right: var(--grid);
   font-size: 1.1rem;
   overflow: hidden;
 
   @media ${mq.pc} {
     right: calc(var(--grid) - var(--gap) * 0.5);
-    top: 6rem;
+    top: 7rem;
     font-size: 1.3rem;
   }
 `;
@@ -182,7 +201,7 @@ export const screenshots = css`
 
   @media ${mq.pc} {
     width: calc(var(--grid) * 8);
-    max-width: 1280px;
+    max-width: 1200px;
     gap: 14rem;
   }
 `;

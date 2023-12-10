@@ -29,6 +29,7 @@ export default defineComponent({
   name: 'Projects',
   setup(el: HTMLElement, context: Props) {
     const { glContext, mq, infiniteScrollContext, history } = context;
+    const gl = glContext.glFront;
     // const { diff, posY } = infiniteScrollContext;
 
     const { addChild } = useSlot();
@@ -37,10 +38,10 @@ export default defineComponent({
     const group = new Object3D();
 
     useMount(() => {
-      glContext.addScene(group);
+      gl.addScene(group);
 
       return () => {
-        glContext.removeScene(group);
+        gl.removeScene(group);
       };
     });
   },
