@@ -5,24 +5,27 @@ import type { AppContext } from '@/_foundation/type';
 
 export default defineComponent({
   name: 'eyecatch',
-  setup(el, { mq }: AppContext) {
-    const elImg = el.querySelector('img')!;
-    const isVisible = ref(false);
+  setup(el, context: AppContext) {
+    const imgSrc = el.dataset.src!;
+    const imgW = Number(el.dataset.w);
+    const imgH = Number(el.dataset.h);
 
-    if (mq.value === 'sp') {
-      return;
-    }
-
-    const [_] = useWindowSize(() => {
-      //
-    });
-
-    useScrollPosY(({ currentY, oldY }) => {
-      if (!isVisible.value || currentY === oldY) {
-        return;
-      }
-
-      elImg.style.transform = `translateY(${currentY * 0.06}px) translateZ(0)`;
-    });
+    console.log(imgSrc);
+    // const elImg = el.querySelector('img')!;
+    // const isVisible = ref(false);
+    // if (mq.value === 'sp') {
+    //   return;
+    // }
+    // const [_] = useWindowSize(() => {
+    //   //
+    // });
+    //
+    // useScrollPosY(({ currentY, oldY }) => {
+    //   if (!isVisible.value || currentY === oldY) {
+    //     return;
+    //   }
+    //
+    //   elImg.style.transform = `translateY(${currentY * 0.06}px) translateZ(0)`;
+    // });
   },
 });

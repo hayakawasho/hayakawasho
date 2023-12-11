@@ -42,6 +42,7 @@ void main() {
   }
 
   vec4 tex = texture2D(u_texture, uv_repeat);
+  tex.a = u_alpha;
 
   if(1.0 - u_clipTop.y < vUv.y && u_clipBottom.y > vUv.y) {
     gl_FragColor = tex;

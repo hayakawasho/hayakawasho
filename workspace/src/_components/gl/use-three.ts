@@ -9,12 +9,15 @@ type Context = {
 };
 
 export const useThree = (canvas: HTMLCanvasElement, { resolution = 1 }: Context) => {
+  const { width, height } = canvas.getBoundingClientRect();
+  const aspect = width / height;
+
   const renderer = new WebGLRenderer({
     alpha: true,
     canvas,
   });
 
-  renderer.setSize(1, 1);
+  renderer.setSize(width, height);
   renderer.setClearColor(0x000000, 0);
   renderer.setPixelRatio(resolution);
 
@@ -31,7 +34,7 @@ export const useThree = (canvas: HTMLCanvasElement, { resolution = 1 }: Context)
     return (h * 0.5) / Math.tan(fovRad);
   };
 
-  const camera = new PerspectiveCamera(FOV, 1 / 1, 0.1, 2000);
+  const camera = new PerspectiveCamera(FOV, aspect, 0.1, 3000);
   camera.position.z = calcCamDistance(1);
 
   const scene = new Scene();

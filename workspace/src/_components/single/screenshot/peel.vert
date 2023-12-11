@@ -22,7 +22,8 @@ void main () {
     float bend = smoothstep(startAt, finishAt, 1. - u_progress);
 
     pos.x *= 1. + (bend * .2) * abs(ssCoords.x);
-    pos.z += ((1. - u_progress + 0.5) * 250.);
+    // pos.z += ((1. - u_progress + 0.5) * 250.);
+    pos.z += ((1. - u_progress + 0.5) * 100.);
   }
 
   vUv = uv;
