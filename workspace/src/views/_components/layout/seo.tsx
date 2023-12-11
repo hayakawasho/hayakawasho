@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
 const SITE_URL = 'https://shohayakawa.dev';
-const siteTitle = 'Sho Hayakawa';
+const siteTitle = 'Sho Hayakawa Portfolio';
 const description = 'Frontend Engineer Sho Hayakawa 早川翔 portfolio website';
 
 export const Seo: FC<{
@@ -9,7 +9,7 @@ export const Seo: FC<{
   permalink: string;
   prepend?: React.ReactNode;
 }> = props => {
-  const title = props.title ? props.title + ' - ' + siteTitle : siteTitle;
+  const title = props.title ? props.title + ' | ' + siteTitle : siteTitle;
 
   return (
     <>

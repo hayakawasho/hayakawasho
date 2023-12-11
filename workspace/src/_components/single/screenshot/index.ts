@@ -21,8 +21,7 @@ loader.crossOrigin = 'anonymous';
 export default defineComponent({
   name: 'Screenshot',
   setup(el: HTMLImageElement, context: AppContext) {
-    const { glContext, mq, history } = context;
-    const gl = glContext.glFront;
+    const { frontCanvasContext, mq, history } = context;
 
     const src = el.dataset.src!;
     const texSrc = {
@@ -85,15 +84,15 @@ export default defineComponent({
 
     useMount(() => {
       plane.resize(ww.value, wh.value);
-      gl.addScene(mesh);
+      frontCanvasContext.addScene(mesh);
 
       return () => {
         if (history.value === 'pop') {
-          gl.removeScene(mesh);
+          frontCanvasContext.removeScene(mesh);
           return;
         }
 
-        gl.removeScene(mesh);
+        frontCanvasContext.removeScene(mesh);
       };
     });
   },

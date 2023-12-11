@@ -15,7 +15,7 @@ type Refs = {
 export default defineComponent({
   name: 'Works',
   setup(_el, context: AppContext) {
-    const { glBack } = context.glContext;
+    const { backCanvasContext } = context;
 
     const { addChild } = useSlot();
     const { refs } = useDomRef<Refs>('items', 'item');
@@ -57,10 +57,10 @@ export default defineComponent({
     });
 
     useMount(() => {
-      glBack.addScene(parentScene);
+      backCanvasContext.addScene(parentScene);
 
       return () => {
-        glBack.removeScene(parentScene);
+        backCanvasContext.removeScene(parentScene);
       };
     });
   },

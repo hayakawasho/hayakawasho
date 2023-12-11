@@ -28,7 +28,7 @@ type Refs = {
 export default defineComponent({
   name: 'Single',
   setup(_el, context: AppContext) {
-    const { once, history } = context;
+    const { once, history, mq } = context;
 
     const { addChild } = useSlot();
     const { refs } = useDomRef<Refs>(
@@ -59,6 +59,7 @@ export default defineComponent({
 
     useMouseoverSplitText(refs.back, {
       chars: refs.c,
+      mq: mq.value,
     });
 
     useMount(() => {

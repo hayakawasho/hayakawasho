@@ -1,7 +1,7 @@
 <script lang="ts">
   import { getContext, onMount } from 'svelte';
-  import { useRoute } from '@/_states/route';
   import { useMouseoverSplitText } from '@/_foundation/hooks';
+  import { useRoute } from '@/_states/route';
   import type { AppContext, RouteName } from '@/_foundation/type';
   import type { Context$ } from 'lake';
 
@@ -29,19 +29,20 @@
     };
   };
 
-  const VIEW = [...'View']
-  const ALL = [...'all']
-  const PROJECTS = [...'projects']
+  const VIEW = [...'View'];
+  const ALL = [...'all'];
+  const PROJECTS = [...'projects'];
 
-  let refViewAllProjects: null | HTMLAnchorElement = null
+  let refViewAllProjects: HTMLAnchorElement;
   let refsChar: HTMLElement[] = [];
 
-  onMount(()=> {
+  onMount(() => {
     useMouseoverSplitText(refViewAllProjects as HTMLElement, {
       chars: refsChar,
+      mq: mq.value,
       stagger: 0.01,
-    })
-  })
+    });
+  });
 </script>
 
 <div class="menuLinkWrap" aria-hidden={current !== 'home'}>
@@ -54,7 +55,7 @@
         </span>
       </span>
     {/each}
-    <span class="inline-block relative overflow-hidden w-[.25em]" aria-hidden="true"></span>
+    <span class="inline-block relative overflow-hidden w-[.25em]" aria-hidden="true" />
     {#each ALL as c, i}
       <span class="inline-block relative overflow-hidden" aria-hidden="true">
         <span class="inline-block" bind:this={refsChar[i + 4]}>
@@ -63,7 +64,7 @@
         </span>
       </span>
     {/each}
-    <span class="inline-block relative overflow-hidden w-[.25em]" aria-hidden="true"></span>
+    <span class="inline-block relative overflow-hidden w-[.25em]" aria-hidden="true" />
     {#each PROJECTS as c, i}
       <span class="inline-block relative overflow-hidden" aria-hidden="true">
         <span class="inline-block" bind:this={refsChar[i + 7]}>
@@ -80,11 +81,12 @@
 <style lang="postcss">
   .menuLinkWrap {
     position: fixed;
-    left: calc(var(--grid) - var(--gap) * 0.5 - 2rem);
-    bottom: 4rem;
+    left: calc(var(--grid) - 2rem);
+    bottom: 3rem;
     z-index: 99;
 
     @media (min-width: 640px) {
+      left: calc(var(--grid) - var(--gap) * 0.5 - 2rem);
       bottom: 5rem;
     }
 

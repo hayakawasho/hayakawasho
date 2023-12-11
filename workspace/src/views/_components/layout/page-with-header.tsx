@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { mq } from '@/_foundation/mq';
 import { Head } from './head';
-import { Svgsprite } from './svgsprite';
 import type { FC, ReactNode } from 'react';
 
 export const PageWithHeader: FC<{
@@ -14,7 +13,6 @@ export const PageWithHeader: FC<{
     <html lang="ja">
       <Head seo={seo} />
       <body data-page={namespace}>
-        <Svgsprite />
         <div
           aria-hidden="true"
           className="fixed inset-0 w-screen pointer-events-none -z-1 invisible"
@@ -22,16 +20,11 @@ export const PageWithHeader: FC<{
           data-ref="windowSizeWatcher"
         />
         <div css={bg} role="presentation" />
-        <div aria-hidden="true" data-ref="glWorld">
-          <canvas
-            className="fixed inset-0 w-screen h-screen pointer-events-none"
-            data-ref="back"
-          ></canvas>
-          <canvas
-            className="fixed inset-0 w-screen h-screen pointer-events-none z-10"
-            data-ref="front"
-          ></canvas>
-        </div>
+        <canvas
+          aria-hidden="true"
+          className="fixed inset-0 w-screen h-screen pointer-events-none"
+          data-ref="backCanvas"
+        />
         <div css={gradUpper} role="presentation" />
         <div css={gradLower} role="presentation" />
         <div css={gridLeft} role="presentation" />
@@ -50,6 +43,11 @@ export const PageWithHeader: FC<{
             {children}
           </div>
         </div>
+        <canvas
+          aria-hidden="true"
+          className="fixed inset-0 w-screen h-screen pointer-events-none"
+          data-ref="frontCanvas"
+        />
         <div css={scrollbar} data-component="Scrollbar" />
         <div css={ui}>
           <div className="sp:hidden" data-component="Cursor" />
