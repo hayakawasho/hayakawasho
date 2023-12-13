@@ -45,7 +45,7 @@ export const PageWithHeader: FC<{
         </div>
         <canvas
           aria-hidden="true"
-          className="fixed inset-0 w-screen h-screen pointer-events-none"
+          className="fixed inset-0 w-screen h-full pointer-events-none"
           data-ref="frontCanvas"
         />
         <div css={scrollbar} data-component="Scrollbar" />

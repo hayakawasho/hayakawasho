@@ -26,7 +26,7 @@ export default defineComponent({
     const refContainer = ref(el);
 
     const EASE = {
-      pc: 0.1,
+      pc: 0.08,
       sp: 0.09,
     } as const;
 

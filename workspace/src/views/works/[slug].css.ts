@@ -200,7 +200,7 @@ export const screenshots = css`
   margin-bottom: 5rem;
 
   @media ${mq.pc} {
-    width: calc(var(--grid) * 8);
+    width: calc(var(--grid) * 9);
     max-width: 1200px;
     gap: 14rem;
   }
