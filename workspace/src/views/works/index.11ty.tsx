@@ -55,9 +55,10 @@ const Item = ({ post, ...props }: { post: WorkMetadata }) => {
   return (
     <li
       {...props}
-      data-image={post.eyecatch.src + IMG_API + '&w=1440'}
-      data-image-size={`[${post.eyecatch.width}, ${post.eyecatch.height}]`}
+      data-h={post.eyecatch.height}
       data-ref="item"
+      data-src={post.eyecatch.src + IMG_API + '&w=1440'}
+      data-w={post.eyecatch.width}
     >
       <Link css={styles.item} to={`./${post.id}/`}>
         <div className="pc:hidden" css={styles.item__thumb}>

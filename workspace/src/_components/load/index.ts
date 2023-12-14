@@ -2,9 +2,9 @@ import htmx from 'htmx.org';
 import { defineComponent, useDomRef, useSlot, useMount, ref, readonly } from 'lake';
 import { wideQuery } from '@/_foundation/env';
 import { useElementSize } from '@/_foundation/hooks';
-import { windowSizeMutators } from '@/_states/window-size';
 import { routeMutators } from '@/_states/route';
-import GlWorld from '../glworld';
+import { windowSizeMutators } from '@/_states/window-size';
+import Gl from '../gl';
 import ScrollTweenContainer from '../scroll-tween-container';
 import type { AppContext, RouteName } from '@/_foundation/type';
 
@@ -15,8 +15,9 @@ type Props = {
 };
 
 type Refs = {
+  backCanvas: HTMLCanvasElement;
+  frontCanvas: HTMLCanvasElement;
   main: HTMLElement;
-  glWorld: HTMLElement;
   windowSizeWatcher: HTMLElement;
 };
 
@@ -24,7 +25,7 @@ export default defineComponent({
   name: 'Load',
   setup(_el, { onCreated, onUpdated, onCleanup }: Props) {
     const { addChild } = useSlot();
-    const { refs } = useDomRef<Refs>('glWorld', 'main', 'windowSizeWatcher');
+    const { refs } = useDomRef<Refs>('backCanvas', 'frontCanvas', 'main', 'windowSizeWatcher');
 
     const history = ref<'push' | 'pop'>('push');
 
@@ -35,10 +36,17 @@ export default defineComponent({
       mq: readonlyMediaQuery,
     });
 
-    const [glWorldContext] = addChild(refs.glWorld, GlWorld);
+    const dpr = Math.min(window.devicePixelRatio, 1.5);
+    const [frontCanvasContext] = addChild(refs.frontCanvas, Gl, {
+      resolution: dpr,
+    });
+    const [backCanvasContext] = addChild(refs.backCanvas, Gl, {
+      resolution: 1,
+    });
 
     const provides = {
-      glContext: glWorldContext.current,
+      backCanvasContext: backCanvasContext.current,
+      frontCanvasContext: frontCanvasContext.current,
       history: readonly(history),
       mq: readonlyMediaQuery,
       scrollContext: scrollContext.current,

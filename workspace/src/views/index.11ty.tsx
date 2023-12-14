@@ -8,7 +8,7 @@ import { Link } from './_components/ui/link';
 import * as styles from './index.css';
 import type { WorkMetadata } from '@/_work/model';
 
-const PER_PAGE = 7;
+const PER_PAGE = 5;
 const IMG_API = '?auto=compress,format';
 
 class Component {
@@ -36,26 +36,34 @@ class Component {
             permalink=""
             prepend={
               <>
-                {posts.map(post => (
-                  <link
-                    as="image"
-                    crossOrigin="anonymous"
-                    href={post.eyecatch.src + IMG_API + '&w=1440'}
-                    key={post.id}
-                    media={mq.pc}
-                    rel="preload"
-                  />
-                ))}
-                {posts.map(post => (
-                  <link
-                    as="image"
-                    crossOrigin="anonymous"
-                    href={post.eyecatch.src + IMG_API + '&w=750'}
-                    key={post.id}
-                    media={mq.sp}
-                    rel="preload"
-                  />
-                ))}
+                <link
+                  as="image"
+                  crossOrigin="anonymous"
+                  href={posts[0].eyecatch.src + IMG_API + '&w=1440'}
+                  media={mq.pc}
+                  rel="preload"
+                />
+                <link
+                  as="image"
+                  crossOrigin="anonymous"
+                  href={posts[1].eyecatch.src + IMG_API + '&w=1440'}
+                  media={mq.pc}
+                  rel="preload"
+                />
+                <link
+                  as="image"
+                  crossOrigin="anonymous"
+                  href={posts[0].eyecatch.src + IMG_API + '&w=750'}
+                  media={mq.pc}
+                  rel="preload"
+                />
+                <link
+                  as="image"
+                  crossOrigin="anonymous"
+                  href={posts[1].eyecatch.src + IMG_API + '&w=750'}
+                  media={mq.pc}
+                  rel="preload"
+                />
               </>
             }
             title=""
@@ -65,46 +73,16 @@ class Component {
         <main className="h-full" data-component="Home">
           <div aria-hidden="true" data-scroll-item />
           <h1 className="sr-only">Sho Hayakawa Portfolio</h1>
-          {
-            // <Link css={styles.toProjects} swap="swap:.95s" to="./works/">
-            //   {[...VIEW_PROJECTS].map(c => (
-            //     <span aria-hidden="true" className="_c" data-ref="char">
-            //       {c}
-            //     </span>
-            //   ))}
-            //   <span className="sr-only">{VIEW_PROJECTS}</span>
-            // </Link>
-          }
           <div css={styles.screen}>
-            <ul className="" css={styles.projects} data-ref="grid">
+            <ul className="" css={styles.projects} data-ref="projects">
               {posts.map((post, index) => (
                 <li css={styles.project} key={post.id}>
                   <Thumbnail index={index} post={post} />
                 </li>
               ))}
               {posts.map((post, index) => (
-                <li aria-hidden="true" css={styles.project} key={post.id}>
-                  <Thumbnail index={index + PER_PAGE} post={post} />
-                </li>
-              ))}
-              {posts.map((post, index) => (
-                <li aria-hidden="true" css={styles.project} key={post.id}>
-                  <Thumbnail index={index + PER_PAGE * 2} post={post} />
-                </li>
-              ))}
-              {posts.map((post, index) => (
-                <li aria-hidden="true" css={styles.project} key={post.id}>
-                  <Thumbnail index={index + PER_PAGE * 3} post={post} />
-                </li>
-              ))}
-              {posts.map((post, index) => (
-                <li aria-hidden="true" css={styles.project} key={post.id}>
-                  <Thumbnail index={index + PER_PAGE * 4} post={post} />
-                </li>
-              ))}
-              {posts.map((post, index) => (
-                <li aria-hidden="true" css={styles.project} key={post.id}>
-                  <Thumbnail index={index + PER_PAGE * 5} post={post} />
+                <li css={styles.project} key={post.id}>
+                  <Thumbnail index={index} post={post} />
                 </li>
               ))}
             </ul>
@@ -115,27 +93,21 @@ class Component {
   }
 }
 
-const Thumbnail = ({ post, index }: { post: WorkMetadata; index: number }) => {
-  const speed = {
-    0: 0.8,
-    1: 1,
-    2: 0.8,
-  }[index % 3];
-
+const Thumbnail = ({ post }: { post: WorkMetadata; index: number }) => {
   return (
-    <div css={styles.project__eyecatch} data-ref="gridItem">
+    <div css={styles.project__eyecatch} data-ref="projectItem">
       <img
         alt=""
         className="w-full h-full invisible"
         data-h={post.eyecatch.height}
         data-ref="plane"
-        data-speed={speed}
+        data-speed={1}
         data-src={post.eyecatch.src}
         data-w={post.eyecatch.width}
         height={post.eyecatch.height}
         width={post.eyecatch.width}
       />
-      <Link className="absolute inset-0 block" to={`/works/${post.id}/`} data-ref="link">
+      <Link className="absolute inset-0 block" data-ref="link" to={`/works/${post.id}/`}>
         <span className="sr-only">{post.title}</span>
       </Link>
     </div>

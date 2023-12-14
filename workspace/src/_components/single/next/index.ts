@@ -1,4 +1,4 @@
-import { defineComponent, useDomRef } from 'lake';
+import { defineComponent, useDomRef, useMount, ref } from 'lake';
 import { map } from '@/_foundation/math';
 import { Tween } from '@/_foundation/tween';
 import { useScrollPosY } from '@/_states/scroll';
@@ -14,33 +14,37 @@ type Refs = {
 export default defineComponent({
   name: 'Next',
   setup(_el, _context: AppContext) {
-    const state = {
-      resize: false,
-      visible: false,
-    };
+    const isResizing = ref(false);
 
     const { refs } = useDomRef<Refs>('nextLink', 'end', 'nextProject');
-
-    const { top, bottom } = refs.end.getBoundingClientRect();
     const [_, wh] = useWindowSize();
 
-    const cache = {
-      bottom,
+    const cache = ref({
+      bottom: 0,
       currentY: 0,
-      top,
-      wh: wh.value,
-    };
+      top: 0,
+    });
 
-    useScrollPosY(({ currentY }) => {
-      if (!state.visible || state.resize) {
+    useMount(() => {
+      const { top, bottom } = refs.end.getBoundingClientRect();
+
+      cache.value = {
+        ...cache.value,
+        bottom,
+        top,
+      };
+    });
+
+    useScrollPosY(({ currentY, oldY }) => {
+      if (isResizing.value || currentY === oldY) {
         return;
       }
 
-      cache.currentY = currentY;
+      cache.value.currentY = currentY;
 
-      const startPos = cache.top + cache.wh * 0.5;
-      const endPos = cache.bottom;
-      const range = currentY + cache.wh;
+      const startPos = cache.value.top + wh.value * 0.5;
+      const endPos = cache.value.bottom;
+      const range = currentY + wh.value;
 
       const opacity = map(range, startPos, endPos, 0, 1);
       const y = map(range, startPos, endPos, 0, 25) - 25;
@@ -57,16 +61,18 @@ export default defineComponent({
       );
     });
 
-    useWindowSize(({ wh }) => {
-      state.resize = true;
+    useWindowSize(() => {
+      isResizing.value = true;
 
       const { top, bottom } = refs.end.getBoundingClientRect();
 
-      cache.top = cache.currentY + top;
-      cache.bottom = cache.currentY + bottom;
-      cache.wh = wh;
+      cache.value = {
+        ...cache.value,
+        bottom: cache.value.currentY + bottom,
+        top: cache.value.currentY + top,
+      };
 
-      state.resize = false;
+      isResizing.value = false;
     });
   },
 });

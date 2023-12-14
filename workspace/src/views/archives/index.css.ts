@@ -31,13 +31,20 @@ export const toProjects = css`
 export const projects = css`
   position: absolute;
   top: 0;
-  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: calc(100% + var(--grid) * 8);
+  left: calc(var(--grid) * -4);
+
+  @media ${mq.pc} {
+    width: calc(100% + var(--grid) * 3);
+    left: calc(var(--grid) * -1.5);
+  }
 `;
 
 export const project = css`
   position: relative;
-  padding-top: calc(2 / 3 * 100%);
-  padding-top: 62.5%;
+  padding-top: 100%;
 
   @media ${mq.pc} {
     padding-top: 62.5%;
@@ -46,7 +53,7 @@ export const project = css`
 
 export const project__eyecatch = css`
   position: absolute;
-  inset: 2.5rem 3rem;
+  inset: 0.2rem;
   display: block;
 
   @media ${mq.pc} {

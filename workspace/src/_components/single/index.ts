@@ -1,6 +1,8 @@
 import { defineComponent, useDomRef, useSlot, useMount } from 'lake';
+import { useMouseoverSplitText } from '@/_foundation/hooks';
 import { splitTextNode2Words } from '@/_foundation/split-text';
 import { Tween } from '@/_foundation/tween';
+import { waitFrame } from '@/_foundation/utils';
 import { useWindowSize } from '@/_states/window-size';
 import Eyecatch from './eyecatch';
 import NextProject from './next';
@@ -8,6 +10,8 @@ import Screenshot from './screenshot';
 import type { AppContext } from '@/_foundation/type';
 
 type Refs = {
+  back: HTMLElement;
+  c: HTMLElement[];
   now: HTMLElement;
   max: HTMLElement;
   dash: HTMLElement;
@@ -24,10 +28,12 @@ type Refs = {
 export default defineComponent({
   name: 'Single',
   setup(_el, context: AppContext) {
-    const { once, history } = context;
+    const { once, history, mq } = context;
 
     const { addChild } = useSlot();
     const { refs } = useDomRef<Refs>(
+      'back',
+      'c',
       'now',
       'max',
       'dash',
@@ -49,6 +55,11 @@ export default defineComponent({
 
     useWindowSize(() => {
       onSplitUpdate();
+    });
+
+    useMouseoverSplitText(refs.back, {
+      chars: refs.c,
+      mq: mq.value,
     });
 
     useMount(() => {
@@ -79,6 +90,10 @@ export default defineComponent({
             willChange: 'transform',
             y: '1.2em',
           }),
+          Tween.prop(refs.c, {
+            willChange: 'transform',
+            y: '100%',
+          }),
           Tween.wait(0.1),
           Tween.parallel(
             Tween.tween([refs.now, refs.max], 0.85, 'power2.out', {
@@ -106,6 +121,10 @@ export default defineComponent({
               delay: 0.05,
               stagger: 0.03,
               y: '0em',
+            }),
+            Tween.tween(refs.c, 1.45, 'expo.out', {
+              stagger: 0.02,
+              y: '0%',
             })
           ),
           Tween.immediate(() => {
@@ -114,6 +133,7 @@ export default defineComponent({
                 refs.now,
                 refs.max,
                 refs.dash,
+                refs.c,
                 refs.infoText,
                 refs.stack,
                 refs.infoLine,
@@ -128,10 +148,21 @@ export default defineComponent({
         );
       }
 
-      return () => {
+      return async () => {
         if (history.value === 'pop') {
           return;
         }
+
+        Tween.kill(refs.c);
+        Tween.prop(refs.c, {
+          willChange: 'transform',
+          y: '-100%',
+        });
+        Tween.prop([refs.sub, split.words], {
+          willChange: 'transform',
+        });
+
+        await waitFrame();
 
         Tween.parallel(
           Tween.tween(
@@ -150,6 +181,9 @@ export default defineComponent({
               alpha: 0,
             }
           ),
+          Tween.tween([refs.c], 0.45, 'custom.in', {
+            y: '-240%',
+          }),
           Tween.tween([refs.sub, split.words], 0.45, 'custom.in', {
             y: '-1.2em',
           })

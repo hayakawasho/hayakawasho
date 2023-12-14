@@ -83,39 +83,11 @@ export default defineComponent({
 
     useEvent(
       window as any,
-      'touchstart',
-      e => {
-        if (!state.active) {
-          return;
-        }
-
-        state.dragging = true;
-        state.position = state.currentPos;
-        state.startPos = e.touches[0].clientY;
-      },
-      {
-        passive: true,
-      }
-    );
-
-    useEvent(window as any, 'touchend', () => {
-      if (!state.dragging || !state.active) {
-        state.dragging = false;
-      }
-    });
-
-    useEvent(
-      window as any,
       'touchmove',
       e => {
-        if (!state.dragging || !state.active) {
-          return;
-        }
+        const targetPos = scrollTweenContext.onTouchMove(e);
 
-        const y = e.touches[0].clientY;
-        const distance = (state.startPos - y) * 2;
-
-        state.targetPos = clamp(state.position + distance, {
+        state.targetPos = clamp(targetPos!, {
           max: state.scrollLimit,
           min: -0,
         });
@@ -133,9 +105,12 @@ export default defineComponent({
           return;
         }
 
-        const { pixelY } = NormalizeWheel(e);
-        state.targetPos += pixelY;
-        state.targetPos = clamp(state.targetPos, { max: state.scrollLimit, min: -0 });
+        const targetPos = scrollTweenContext.onWheel(e);
+
+        state.targetPos = clamp(targetPos, {
+          max: state.scrollLimit,
+          min: -0,
+        });
       },
       {
         passive: true,

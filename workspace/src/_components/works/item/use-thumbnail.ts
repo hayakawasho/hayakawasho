@@ -1,4 +1,4 @@
-import { useMount, useEvent } from 'lake';
+import { useEvent, useUnmount } from 'lake';
 import {
   Vector2,
   Mesh,
@@ -7,25 +7,27 @@ import {
   TextureLoader,
   LinearFilter,
 } from '@/_foundation/three';
-// import { useTick } from "@/_foundation/hooks";
 // import { Tween } from "@/_foundation/tween";
 import { useWindowSize } from '@/_states/window-size';
 import fragment from './fragment.frag';
 import vertex from './vertex.vert';
-import type { AppContext } from '@/_foundation/type';
+import type { Object3D } from '@/_foundation/three';
 
 const loader = new TextureLoader();
 loader.crossOrigin = 'anonymous';
 
-export const useThumbnail = (el: HTMLElement, glContext: AppContext['glContext']) => {
-  const image = el.dataset.image!;
-  const [imageWidth, imageHeight] = JSON.parse(el.dataset.imageSize!);
+export const useThumbnail = (el: HTMLElement, parentScene: Object3D) => {
+  const imgSrc = el.dataset.src!;
+  const imgW = Number(el.dataset.w);
+  const imgH = Number(el.dataset.h);
 
   const [ww, wh] = useWindowSize();
 
-  const texture = loader.load(image, texture => {
+  const texture = loader.load(imgSrc, texture => {
     texture.minFilter = LinearFilter;
     texture.generateMipmaps = false;
+
+    parentScene.add(mesh);
   });
 
   const uniforms = {
@@ -39,7 +41,7 @@ export const useThumbnail = (el: HTMLElement, glContext: AppContext['glContext']
       value: new Vector2(0, 1),
     },
     u_image_size: {
-      value: new Vector2(imageWidth, imageHeight),
+      value: new Vector2(imgW, imgH),
     },
     u_mesh_size: {
       value: new Vector2(ww.value, wh.value),
@@ -56,7 +58,6 @@ export const useThumbnail = (el: HTMLElement, glContext: AppContext['glContext']
   };
 
   const geometry = new PlaneBufferGeometry(1, 1);
-
   const material = new ShaderMaterial({
     fragmentShader: fragment,
     transparent: true,
@@ -74,11 +75,7 @@ export const useThumbnail = (el: HTMLElement, glContext: AppContext['glContext']
     //
   });
 
-  useMount(() => {
-    glContext.addScene(mesh);
-
-    return () => {
-      glContext.removeScene(mesh);
-    };
+  useUnmount(() => {
+    parentScene.remove(mesh);
   });
 };
