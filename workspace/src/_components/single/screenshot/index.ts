@@ -39,10 +39,15 @@ export default defineComponent({
 
     const [ww, wh] = useWindowSize();
 
+    const BOTTOM_MARGIN = {
+      pc: wh.value * 0.25,
+      sp: wh.value * 0.15,
+    };
+
     const bounds = el.getBoundingClientRect();
     const offset = -wh.value + bounds.top;
     const offsetY = ref(offset);
-    const endY = ref(offset + bounds.height);
+    const endY = ref(offset + bounds.height + BOTTOM_MARGIN[mq.value]);
 
     const uniforms = {
       u_image_size: {
@@ -59,6 +64,12 @@ export default defineComponent({
       },
       u_progress: {
         value: 0,
+      },
+      u_depth: {
+        value: {
+          pc: 120,
+          sp: 30,
+        }[mq.value],
       },
     };
 
@@ -80,7 +91,7 @@ export default defineComponent({
       const bounds = el.getBoundingClientRect();
       const offset = -wh + bounds.top;
       offsetY.value = offset;
-      endY.value = offset + bounds.height + wh * 0.1;
+      endY.value = offset + bounds.height + BOTTOM_MARGIN[mq.value];
 
       isResizing.value = false;
     });

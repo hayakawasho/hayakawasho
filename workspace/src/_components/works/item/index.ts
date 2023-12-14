@@ -29,7 +29,7 @@ export default defineComponent({
     const isResizing = ref(false);
 
     if (mq.value === 'pc') {
-      useThumbnail(el, parentScene);
+      // useThumbnail(el, parentScene);
     }
 
     const SPEED = {
