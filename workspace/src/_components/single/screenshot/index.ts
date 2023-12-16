@@ -1,4 +1,6 @@
 import { defineComponent, useMount, ref } from 'lake';
+import { IMAGIX_API } from '@/_foundation/const';
+import { map } from '@/_foundation/math';
 import {
   Vector2,
   Mesh,
@@ -8,7 +10,6 @@ import {
   LinearFilter,
 } from '@/_foundation/three';
 // import { Tween } from '@/_foundation/tween';
-import { map } from '@/_foundation/math';
 import { ImagePlane } from '@/_glsl';
 import { useScrollPosY } from '@/_states/scroll';
 import { useWindowSize } from '@/_states/window-size';
@@ -26,8 +27,8 @@ export default defineComponent({
 
     const src = el.dataset.src!;
     const texSrc = {
-      pc: src + '?auto=compress,format',
-      sp: src + '?auto=compress,format&w=750',
+      pc: src + IMAGIX_API + '&w=1200',
+      sp: src + IMAGIX_API + '&w=750',
     };
 
     const isResizing = ref(false);
@@ -50,14 +51,17 @@ export default defineComponent({
     const endY = ref(offset + bounds.height + BOTTOM_MARGIN[mq.value]);
 
     const uniforms = {
+      u_depth: {
+        value: {
+          pc: 120,
+          sp: 30,
+        }[mq.value],
+      },
       u_image_size: {
         value: new Vector2(Number(el.dataset.w), Number(el.dataset.h)),
       },
       u_mesh_size: {
         value: new Vector2(bounds.width, bounds.height),
-      },
-      u_texture: {
-        value: texture,
       },
       u_opacity: {
         value: 1,
@@ -65,11 +69,8 @@ export default defineComponent({
       u_progress: {
         value: 0,
       },
-      u_depth: {
-        value: {
-          pc: 120,
-          sp: 30,
-        }[mq.value],
+      u_texture: {
+        value: texture,
       },
     };
 

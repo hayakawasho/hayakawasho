@@ -1,4 +1,5 @@
 import { renderToStaticMarkup as r } from 'react-dom/server';
+import { IMAGIX_API } from '@/_foundation/const';
 import * as styles from './index.css';
 import { Header } from '../_components/layout/header';
 import { PageWithHeader } from '../_components/layout/page-with-header';
@@ -48,16 +49,13 @@ class Component {
   }
 }
 
-const IMG_API = '?auto=compress,format';
-const IMG_API_CROPPED = IMG_API + '&fit=crop&w=100&h=100';
-
 const Item = ({ post, ...props }: { post: WorkMetadata }) => {
   return (
     <li
       {...props}
       data-h={post.eyecatch.height}
       data-ref="item"
-      data-src={post.eyecatch.src + IMG_API + '&w=1440'}
+      data-src={post.eyecatch.src + IMAGIX_API + '&w=1440'}
       data-w={post.eyecatch.width}
     >
       <Link css={styles.item} to={`./${post.id}/`}>
@@ -69,7 +67,7 @@ const Item = ({ post, ...props }: { post: WorkMetadata }) => {
             pcSize={[1, 1]}
             pcSrc="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
             spSize={[100, 100]}
-            spSrc={post.eyecatch.src + IMG_API_CROPPED}
+            spSrc={post.eyecatch.src + IMAGIX_API + '&fit=crop&w=100&h=100'}
           />
         </div>
         <h2 className="pl-[0.05em]" css={styles.item__title} data-ref="text">

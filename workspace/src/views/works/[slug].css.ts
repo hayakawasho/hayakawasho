@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { mq } from '@/_foundation/mq';
+import { mq } from '@/_foundation/const';
 
 export const back = css`
   position: fixed;

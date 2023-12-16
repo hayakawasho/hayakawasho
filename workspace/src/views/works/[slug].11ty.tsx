@@ -1,5 +1,5 @@
 import { renderToStaticMarkup as r } from 'react-dom/server';
-import { mq } from '@/_foundation/mq';
+import { mq, IMAGIX_API } from '@/_foundation/const';
 import { zeroPadding } from '@/_foundation/utils';
 import * as styles from './[slug].css';
 import { Header } from '../_components/layout/header';
@@ -24,7 +24,7 @@ class Component {
 
   render(props: any) {
     const post: WorkMetadata = props.post;
-    const eyecatch = post.eyecatch.src + '?auto=compress,format';
+    const eyecatch = post.eyecatch.src;
 
     const { page } = props.pagination;
     const { last, first, next } = page;
@@ -47,14 +47,14 @@ class Component {
                 <link
                   as="image"
                   crossOrigin="anonymous"
-                  href={eyecatch + '&w=750'}
+                  href={eyecatch + IMAGIX_API + '&w=750'}
                   media={mq.sp}
                   rel="preload"
                 />
                 <link
                   as="image"
                   crossOrigin="anonymous"
-                  href={eyecatch + '&w=1440'}
+                  href={eyecatch + IMAGIX_API + '&w=1440'}
                   media={mq.pc}
                   rel="preload"
                 />
@@ -134,11 +134,11 @@ class Component {
               <img
                 alt=""
                 className="pointer-events-none invisible"
+                css={styles.eyecatchImg}
                 data-h={post.eyecatch.height}
                 data-ref="eyecatch"
                 data-src={eyecatch}
                 data-w={post.eyecatch.width}
-                css={styles.eyecatchImg}
                 height={post.eyecatch.height}
                 width={post.eyecatch.width}
               />
@@ -155,7 +155,7 @@ class Component {
                       className="pointer-events-none invisible"
                       data-h={i.height}
                       data-ref="screenshot"
-                      data-src={`${i.src}?auto=compress,format&w=1200`}
+                      data-src={i.src}
                       data-w={i.width}
                       height={i.height}
                       width={i.width}

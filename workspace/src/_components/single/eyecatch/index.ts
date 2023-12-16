@@ -1,4 +1,6 @@
 import { defineComponent, useMount, ref } from 'lake';
+import { IMAGIX_API } from '@/_foundation/const';
+import { map } from '@/_foundation/math';
 import {
   Vector2,
   Mesh,
@@ -7,7 +9,6 @@ import {
   TextureLoader,
   LinearFilter,
 } from '@/_foundation/three';
-import { map } from '@/_foundation/math';
 import { ImagePlane } from '@/_glsl';
 import { useScrollPosY } from '@/_states/scroll';
 import { useWindowSize } from '@/_states/window-size';
@@ -27,8 +28,8 @@ export default defineComponent({
 
     const imgSrc = el.dataset.src!;
     const texSrc = {
-      pc: imgSrc + '?auto=compress,format',
-      sp: imgSrc + '?auto=compress,format&w=750',
+      pc: imgSrc + IMAGIX_API + '&w=1440',
+      sp: imgSrc + IMAGIX_API + '&w=750',
     };
 
     const texture = loader.load(texSrc[mq.value], texture => {
@@ -49,32 +50,29 @@ export default defineComponent({
       u_image_size: {
         value: new Vector2(Number(el.dataset.w), Number(el.dataset.h)),
       },
-      u_mesh_size: {
-        value: new Vector2(bounds.width, bounds.height),
-      },
-      u_innerScale: {
-        value: map(currentY.value, offsetY.value, endY.value, 1.2, 1),
+      u_innerX: {
+        value: 0,
       },
       u_innerY: {
         value: map(currentY.value, offsetY.value, endY.value, -0.2, 0.1),
       },
-      u_texture: {
-        value: texture,
+      u_mesh_size: {
+        value: new Vector2(bounds.width, bounds.height),
       },
       u_opacity: {
         value: 1,
       },
-      u_progress: {
-        value: 0,
+      u_scale: {
+        value: map(currentY.value, offsetY.value, endY.value, 1.2, 1),
       },
-      u_innerX: {
-        value: 0,
-      },
-      u_screenCenterTexture: {
+      u_screen_center_exture: {
         value: 0,
       },
       u_size: {
-        value: [1, 1],
+        value: new Vector2(1, 1),
+      },
+      u_texture: {
+        value: texture,
       },
     };
 
@@ -93,10 +91,10 @@ export default defineComponent({
 
       plane.resize(ww, wh);
 
-      const bounds = el.getBoundingClientRect();
-      const offset = -wh + bounds.top;
+      const { top, height } = el.getBoundingClientRect();
+      const offset = -wh + top;
       offsetY.value = offset;
-      endY.value = offset + wh + bounds.height;
+      endY.value = offset + wh + height;
 
       isResizing.value = false;
     });
@@ -108,11 +106,8 @@ export default defineComponent({
 
       plane.updateY(currentY);
 
-      const innerY = map(currentY, offsetY.value, endY.value, -0.2, 0.1);
-      const innerScale = map(currentY, offsetY.value, endY.value, 1.2, 1);
-
-      uniforms.u_innerY.value = innerY;
-      uniforms.u_innerScale.value = innerScale;
+      uniforms.u_innerY.value = map(currentY, offsetY.value, endY.value, -0.2, 0.1);
+      uniforms.u_scale.value = map(currentY, offsetY.value, endY.value, 1.2, 1);
     });
 
     useMount(() => {
