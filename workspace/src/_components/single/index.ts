@@ -114,16 +114,15 @@ export default defineComponent({
               opacity: 1,
               scaleY: 1,
             }),
-            Tween.tween(refs.sub, 1.25, 'custom.out', {
+            Tween.tween(refs.sub, 2.2, 'expo.out', {
               y: '0em',
             }),
-            Tween.tween(split.words, 1.25, 'custom.out', {
+            Tween.tween(split.words, 2.2, 'expo.out', {
               delay: 0.05,
               stagger: 0.03,
               y: '0em',
             }),
-            Tween.tween(refs.c, 1.45, 'expo.out', {
-              stagger: 0.02,
+            Tween.tween(refs.c, 1.85, 'expo.out', {
               y: '0%',
             })
           ),
@@ -181,7 +180,7 @@ export default defineComponent({
               alpha: 0,
             }
           ),
-          Tween.tween([refs.c], 0.45, 'custom.in', {
+          Tween.tween(refs.c, 0.45, 'custom.in', {
             y: '-240%',
           }),
           Tween.tween([refs.sub, split.words], 0.45, 'custom.in', {

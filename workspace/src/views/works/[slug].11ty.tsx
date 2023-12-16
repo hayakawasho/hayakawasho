@@ -130,20 +130,16 @@ class Component {
               </div>
             </div>
 
-            <div
-              className="pc:hidden"
-              css={styles.eyecatch}
-              data-h={post.eyecatch.height}
-              data-ref="eyecatch"
-              data-src={eyecatch + '&w=1440'}
-              data-w={post.eyecatch.width}
-            >
+            <div className="pc:hidden" css={styles.eyecatch}>
               <img
                 alt=""
-                className="pointer-events-none"
+                className="pointer-events-none invisible"
+                data-h={post.eyecatch.height}
+                data-ref="eyecatch"
+                data-src={eyecatch}
+                data-w={post.eyecatch.width}
                 css={styles.eyecatchImg}
                 height={post.eyecatch.height}
-                src={eyecatch + '&w=750'}
                 width={post.eyecatch.width}
               />
             </div>
@@ -156,7 +152,7 @@ class Component {
                   <li className="" key={index}>
                     <img
                       alt=""
-                      className={`pointer-events-none invisible`}
+                      className="pointer-events-none invisible"
                       data-h={i.height}
                       data-ref="screenshot"
                       data-src={`${i.src}?auto=compress,format&w=1200`}
