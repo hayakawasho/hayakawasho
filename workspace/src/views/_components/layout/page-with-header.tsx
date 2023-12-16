@@ -65,16 +65,13 @@ const svh = css`
 const grad = css`
   pointer-events: none;
   display: block;
-  // height: 8rem;
-  height: 33vh;
+  height: 20vh;
   width: 100%;
   position: fixed;
   z-index: 11;
   left: 0;
-  opacity: 0.4;
 
   @media (min-width: 640px) {
-    // height: 12rem;
     height: 25vh;
   }
 `;
@@ -82,13 +79,7 @@ const grad = css`
 const gradUpper = css`
   ${grad}
   top: 0;
-  // background: linear-gradient(
-  //   to bottom,
-  //   rgba(22, 22, 22, 0.32) 0%,
-  //   rgba(22, 22, 22, 0.16) 40%,
-  //   rgba(22, 22, 22, 0.04) 80%,
-  //   rgba(22, 22, 22, 0) 100%
-  // );
+  opacity: 0.4;
 
   background-image: linear-gradient(
     hsla(0, 0%, 0%, 0.5),
@@ -110,13 +101,7 @@ const gradUpper = css`
 const gradLower = css`
   ${grad}
   bottom: 0;
-  // background: linear-gradient(
-  //   to top,
-  //   rgba(22, 22, 22, 0.32) 0%,
-  //   rgba(22, 22, 22, 0.16) 40%,
-  //   rgba(22, 22, 22, 0.04) 80%,
-  //   rgba(22, 22, 22, 0) 100%
-  // );
+  opacity: 0.3;
 
   background-image: linear-gradient(
     hsla(0, 0%, 0%, 0),
