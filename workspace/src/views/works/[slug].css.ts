@@ -177,16 +177,21 @@ export const intro__indexNumber = css`
 export const eyecatch = css`
   overflow: hidden;
   backface-visibility: hidden;
+  position: relative;
+
+  &:before {
+    content: '';
+    padding-top: calc(2 / 3 * 100%);
+    display: block;
+  }
 `;
 
 export const eyecatchImg = css`
+  position: absolute;
+  top: 0;
   width: 100%;
+  height: 100%;
   object-fit: cover;
-  aspect-ratio: 3 / 2;
-
-  @media ${mq.pc} {
-    aspect-ratio: auto;
-  }
 `;
 
 export const screenshots = css`
