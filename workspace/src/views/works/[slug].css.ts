@@ -3,7 +3,7 @@ import { mq } from '@/_foundation/const';
 
 export const back = css`
   position: fixed;
-  top: 1rem;
+  top: 1.2rem;
   left: calc(var(--grid) - 2rem);
   z-index: 9;
   font-size: 1.1rem;
@@ -104,6 +104,20 @@ export const intro__info = css`
   }
 `;
 
+export const intro__indexNumber = css`
+  position: absolute;
+  top: 3.2rem;
+  right: var(--grid);
+  font-size: 1.1rem;
+  overflow: hidden;
+
+  @media ${mq.pc} {
+    right: calc(var(--grid) - var(--gap) * 0.5);
+    top: 7rem;
+    font-size: 1.3rem;
+  }
+`;
+
 export const info = css`
   width: calc(var(--grid) * 5);
   display: flex;
@@ -157,20 +171,6 @@ export const stacks__hr = css`
 
   @media ${mq.pc} {
     //
-  }
-`;
-
-export const intro__indexNumber = css`
-  position: absolute;
-  top: 3rem;
-  right: var(--grid);
-  font-size: 1.1rem;
-  overflow: hidden;
-
-  @media ${mq.pc} {
-    right: calc(var(--grid) - var(--gap) * 0.5);
-    top: 7rem;
-    font-size: 1.3rem;
   }
 `;
 

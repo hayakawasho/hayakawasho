@@ -94,22 +94,10 @@ const base = css`
   }
 
   html {
-    font-size: 10px;
+    font-size: calc(10 / 1280 * 100vw);
 
-    @media screen and (max-width: 1080px) {
-      font-size: 9px;
-    }
-
-    @media screen and (max-width: 960px) {
-      font-size: 8px;
-    }
-
-    @media screen and (max-width: 854px) {
-      font-size: 7px;
-    }
-
-    @media screen and (max-width: 767px) {
-      font-size: 6px;
+    @media (min-width: 1280px) {
+      font-size: calc(10px + (12 - 10) * ((100vw - 1280px) / (1680 - 1280)));
     }
 
     @media screen and (max-width: 639px) {
