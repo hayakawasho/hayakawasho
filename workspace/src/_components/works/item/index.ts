@@ -64,7 +64,7 @@ export default defineComponent({
           }),
           Tween.wait(0.1),
           Tween.parallel(
-            Tween.tween([refs.img, split.words], 1.25, 'custom.out', {
+            Tween.tween([refs.img, split.words], 2.2, 'expo.out', {
               stagger: 0.03,
               y: '0em',
             })

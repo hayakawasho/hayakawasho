@@ -10,7 +10,7 @@ type Context = {
 
 export const useMouseoverSplitText = (
   target: HTMLElement,
-  { chars, stagger = 0.02, mq }: Context
+  { chars, stagger = 0.0175, mq }: Context
 ) => {
   useEvent(target, 'mouseenter', async () => {
     if (mq === 'sp') {
