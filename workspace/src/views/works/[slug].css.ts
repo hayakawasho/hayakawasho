@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
-import { mq } from '@/_foundation/mq';
+import { mq } from '@/_foundation/const';
 
 export const back = css`
   position: fixed;
-  top: 1rem;
+  top: 1.2rem;
   left: calc(var(--grid) - 2rem);
   z-index: 9;
   font-size: 1.1rem;
@@ -104,6 +104,20 @@ export const intro__info = css`
   }
 `;
 
+export const intro__indexNumber = css`
+  position: absolute;
+  top: 3.2rem;
+  right: var(--grid);
+  font-size: 1.1rem;
+  overflow: hidden;
+
+  @media ${mq.pc} {
+    right: calc(var(--grid) - var(--gap) * 0.5);
+    top: 7rem;
+    font-size: 1.3rem;
+  }
+`;
+
 export const info = css`
   width: calc(var(--grid) * 5);
   display: flex;
@@ -160,33 +174,25 @@ export const stacks__hr = css`
   }
 `;
 
-export const intro__indexNumber = css`
-  position: absolute;
-  top: 3rem;
-  right: var(--grid);
-  font-size: 1.1rem;
-  overflow: hidden;
-
-  @media ${mq.pc} {
-    right: calc(var(--grid) - var(--gap) * 0.5);
-    top: 7rem;
-    font-size: 1.3rem;
-  }
-`;
-
 export const eyecatch = css`
   overflow: hidden;
   backface-visibility: hidden;
+  position: relative;
+
+  &:before {
+    content: '';
+    // padding-top: calc(2 / 3 * 100%);
+    padding-top: calc(9 / 16 * 100%);
+    display: block;
+  }
 `;
 
 export const eyecatchImg = css`
+  position: absolute;
+  top: 0;
   width: 100%;
+  height: 100%;
   object-fit: cover;
-  aspect-ratio: 3 / 2;
-
-  @media ${mq.pc} {
-    aspect-ratio: auto;
-  }
 `;
 
 export const screenshots = css`

@@ -5,7 +5,7 @@
   import type { AppContext, RouteName } from '@/_foundation/type';
   import type { Context$ } from 'lake';
 
-  const { mq, ...context } = getContext<
+  const { ...context } = getContext<
     Context$<
       AppContext & {
         current: RouteName;
@@ -39,7 +39,6 @@
   onMount(() => {
     useMouseoverSplitText(refViewAllProjects as HTMLElement, {
       chars: refsChar,
-      mq: mq.value,
       stagger: 0.01,
     });
   });

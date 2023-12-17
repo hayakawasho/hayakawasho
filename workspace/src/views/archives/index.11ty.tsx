@@ -1,5 +1,5 @@
 import { renderToStaticMarkup as r } from 'react-dom/server';
-import { mq } from '@/_foundation/mq';
+import { mq } from '@/_foundation/const';
 import { shuffle } from '@/_foundation/shuffle';
 import * as styles from './index.css';
 import { Header } from '../_components/layout/header';

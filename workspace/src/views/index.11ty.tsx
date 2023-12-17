@@ -1,5 +1,5 @@
 import { renderToStaticMarkup as r } from 'react-dom/server';
-import { mq } from '@/_foundation/mq';
+import { mq, IMAGIX_API } from '@/_foundation/const';
 import { shuffle } from '@/_foundation/shuffle';
 import { Header } from './_components/layout/header';
 import { PageWithHeader } from './_components/layout/page-with-header';
@@ -9,7 +9,6 @@ import * as styles from './index.css';
 import type { WorkMetadata } from '@/_work/model';
 
 const PER_PAGE = 5;
-const IMG_API = '?auto=compress,format';
 
 class Component {
   data() {
@@ -39,28 +38,28 @@ class Component {
                 <link
                   as="image"
                   crossOrigin="anonymous"
-                  href={posts[0].eyecatch.src + IMG_API + '&w=1440'}
+                  href={posts[0].eyecatch.src + IMAGIX_API + '&w=1440'}
                   media={mq.pc}
                   rel="preload"
                 />
                 <link
                   as="image"
                   crossOrigin="anonymous"
-                  href={posts[1].eyecatch.src + IMG_API + '&w=1440'}
+                  href={posts[1].eyecatch.src + IMAGIX_API + '&w=1440'}
                   media={mq.pc}
                   rel="preload"
                 />
                 <link
                   as="image"
                   crossOrigin="anonymous"
-                  href={posts[0].eyecatch.src + IMG_API + '&w=750'}
+                  href={posts[0].eyecatch.src + IMAGIX_API + '&w=750'}
                   media={mq.pc}
                   rel="preload"
                 />
                 <link
                   as="image"
                   crossOrigin="anonymous"
-                  href={posts[1].eyecatch.src + IMG_API + '&w=750'}
+                  href={posts[1].eyecatch.src + IMAGIX_API + '&w=750'}
                   media={mq.pc}
                   rel="preload"
                 />

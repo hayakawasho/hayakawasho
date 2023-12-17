@@ -6,17 +6,17 @@ import { useScrollTween } from '@/_foundation/hooks/use-scroll-tween';
 import { lerp } from '@/_foundation/math';
 import { Tween } from '@/_foundation/tween';
 import { qsa } from '@/_foundation/utils';
-import { scrollPosMutators } from '@/_states/scroll';
+import { useMediaQuery } from '@/_states/mq';
+import { scrollPosYMutators } from '@/_states/scroll';
 import { useWindowSize } from '@/_states/window-size';
 import { useHandleCache } from './use-handle-cache';
 import type { Cache } from './use-handle-cache';
-import type { AppContext } from '@/_foundation/type';
 
 const SELECTOR_CLASS = '[data-scroll-item]';
 
 export default defineComponent({
   name: 'ScrollTweenContainer',
-  setup(el, { mq }: Pick<AppContext, 'mq'>) {
+  setup(el) {
     const elItems = qsa<HTMLElement>(SELECTOR_CLASS, el);
 
     if (!elItems.length) {
@@ -25,19 +25,20 @@ export default defineComponent({
 
     const refContainer = ref(el);
 
+    const mq = useMediaQuery();
+
     const EASE = {
       pc: 0.1,
       sp: 0.09,
     } as const;
 
-    const scrollTweenContext = useScrollTween(EASE[mq.value]);
+    const scrollTweenContext = useScrollTween();
 
     const state = {
       active: false,
       currentPos: 0,
       dragging: false,
       position: 0,
-      resizing: false,
       scrollLimit: 0,
       startPos: 0,
       targetPos: 0,
@@ -46,7 +47,7 @@ export default defineComponent({
     const { createCache, updateCache } = useHandleCache();
     const cache = ref(createCache(elItems));
 
-    const [_, wh] = useWindowSize();
+    const [_, wh, { isResizing }] = useWindowSize();
 
     const setScrollLimit = () => {
       const { height } = refContainer.value.getBoundingClientRect();
@@ -73,7 +74,7 @@ export default defineComponent({
       cache.forEach(item => {
         const { isVisible: visibleOr, transform } = isVisible(item);
 
-        if (visibleOr || state.resizing || !item.out) {
+        if (visibleOr || isResizing.value || !item.out) {
           item.out = item.out ? true : false;
           item.transform = transform;
           item.el.style.transform = `translateY(${-transform}px) translateZ(0)`;
@@ -143,8 +144,6 @@ export default defineComponent({
     );
 
     useWindowSize(() => {
-      state.resizing = true;
-
       cache.value = updateCache(cache.value);
       state.scrollLimit = setScrollLimit();
 
@@ -152,8 +151,6 @@ export default defineComponent({
         max: state.scrollLimit,
         min: -0,
       });
-
-      state.resizing = false;
     });
 
     useTick(({ timeRatio }) => {
@@ -169,7 +166,7 @@ export default defineComponent({
         state.currentPos = 0;
       }
 
-      scrollPosMutators(state.currentPos);
+      scrollPosYMutators(state.currentPos);
       transformElms(cache.value);
     });
 

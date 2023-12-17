@@ -1,6 +1,6 @@
 import { ref, readonly, useUnmount } from 'lake';
 import { map } from 'nanostores';
-import { noop } from '@/_foundation/utils';
+import { noop, waitFrame } from '@/_foundation/utils';
 import type { Size } from '@/_foundation/type';
 
 const viewport = map<Size>({
@@ -13,29 +13,38 @@ export const useWindowSize = (
 ) => {
   const { width, height } = viewport.get();
 
-  const state = {
-    wh: ref(height),
-    ww: ref(width),
-  };
+  const windowWidth = ref(width);
+  const windowHeight = ref(height);
+  const isResizing = ref(false);
 
-  const unbind = viewport.listen(({ width, height }) => {
-    const aspect = width / height;
+  const unbind = viewport.listen(async ({ width, height }) => {
+    isResizing.value = true;
 
     callback({
-      aspect,
+      aspect: width / height,
       wh: height,
       ww: width,
     });
 
-    state.ww.value = width;
-    state.wh.value = height;
+    windowWidth.value = width;
+    windowHeight.value = height;
+
+    await waitFrame();
+
+    isResizing.value = false;
   });
 
   useUnmount(() => {
     unbind();
   });
 
-  return [readonly(state.ww), readonly(state.wh)] as const;
+  return [
+    readonly(windowWidth),
+    readonly(windowHeight),
+    {
+      isResizing: readonly(isResizing),
+    },
+  ] as const;
 };
 
 export const windowSizeMutators = (update: Size) => viewport.set(update);

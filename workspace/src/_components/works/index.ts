@@ -1,4 +1,4 @@
-import { defineComponent, useSlot, useDomRef, useMount } from 'lake';
+import { defineComponent, useSlot, useDomRef, useMount, useUnmount } from 'lake';
 import { useInfiniteScroll, useTick } from '@/_foundation/hooks';
 import { lerp, map } from '@/_foundation/math';
 import { Object3D } from '@/_foundation/three';
@@ -20,9 +20,9 @@ export default defineComponent({
     const { addChild } = useSlot();
     const { refs } = useDomRef<Refs>('items', 'item');
 
-    const infiniteScrollContext = useInfiniteScroll(refs.items, context.mq.value);
+    const infiniteScrollContext = useInfiniteScroll(refs.items);
 
-    const [ww, wh] = useWindowSize(({ ww, wh }) => {
+    const [ww, wh, { isResizing }] = useWindowSize(({ ww, wh }) => {
       state.centerX = ww * 0.5;
       state.centerY = wh * 0.5;
     });
@@ -38,6 +38,10 @@ export default defineComponent({
     const parentScene = new Object3D();
 
     useTick(({ timeRatio }) => {
+      if (isResizing.value) {
+        return;
+      }
+
       const easeVal = 1 - (1 - 0.12) ** timeRatio;
 
       state.lastX = lerp(state.lastX, mouseX.value, easeVal);
@@ -47,9 +51,6 @@ export default defineComponent({
       parentScene.position.y = -map(state.lastY, 0, wh.value, -state.centerY, state.centerY);
     });
 
-    const aspect = 2560 / 1440;
-    parentScene.scale.set(aspect * 320, 320, 1);
-
     addChild(refs.item, Item, {
       ...context,
       infiniteScrollContext,
@@ -57,11 +58,13 @@ export default defineComponent({
     });
 
     useMount(() => {
+      const aspect = 2560 / 1440;
+      parentScene.scale.set(aspect * 320, 320, 1);
       backCanvasContext.addScene(parentScene);
+    });
 
-      return () => {
-        backCanvasContext.removeScene(parentScene);
-      };
+    useUnmount(() => {
+      backCanvasContext.removeScene(parentScene);
     });
   },
 });

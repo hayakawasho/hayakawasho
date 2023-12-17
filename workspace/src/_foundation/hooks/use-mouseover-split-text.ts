@@ -1,19 +1,21 @@
 import { useEvent } from 'lake';
 import { Tween } from '@/_foundation/tween';
 import { waitFrame } from '@/_foundation/utils';
+import { useMediaQuery } from '@/_states/mq';
 
 type Context = {
   chars: HTMLElement[];
   stagger?: number;
-  mq: 'pc' | 'sp';
 };
 
 export const useMouseoverSplitText = (
   target: HTMLElement,
-  { chars, stagger = 0.0175, mq }: Context
+  { chars, stagger = 0.0175 }: Context
 ) => {
+  const mq = useMediaQuery();
+
   useEvent(target, 'mouseenter', async () => {
-    if (mq === 'sp') {
+    if (mq.value === 'sp') {
       return;
     }
 

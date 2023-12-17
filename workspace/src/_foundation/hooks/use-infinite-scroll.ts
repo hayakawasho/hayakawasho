@@ -2,13 +2,8 @@ import { useMount, useEvent } from 'lake';
 import { useWindowSize } from '@/_states/window-size';
 import { useScrollTween } from './use-scroll-tween';
 
-export const useInfiniteScroll = (container: HTMLElement, mq: 'pc' | 'sp') => {
-  const EASE = {
-    pc: 0.08,
-    sp: 0.09,
-  } as const;
-
-  const scrollTweenContext = useScrollTween(EASE[mq]);
+export const useInfiniteScroll = (container: HTMLElement) => {
+  const scrollTweenContext = useScrollTween();
 
   useWindowSize(() => {
     const maxY = container.getBoundingClientRect().height / 2;
