@@ -6,7 +6,7 @@
   import type { AppContext, RouteName } from '@/_foundation/type';
   import type { Context$ } from 'lake';
 
-  const {  ...context } = getContext<
+  const { ...context } = getContext<
     Context$<
       AppContext & {
         current: RouteName;
@@ -14,7 +14,7 @@
     >
   >('$');
 
-  const mq = useMediaQuery()
+  const mq = useMediaQuery();
 
   let current = context.current;
 

@@ -1,5 +1,4 @@
-import { defineComponent, useMount, useUnmount, ref } from 'lake';
-import { IMAGIX_API } from '@/_foundation/const';
+import { defineComponent, useMount, useUnmount } from 'lake';
 import { Plane } from './plane';
 import { useMediaQuery } from '@/_states/mq';
 import { useScrollPosY } from '@/_states/scroll';
@@ -13,14 +12,6 @@ export default defineComponent({
 
     const mq = useMediaQuery();
 
-    const imgSrc = el.dataset.src!;
-    const texSrc = {
-      pc: imgSrc + IMAGIX_API + '&w=1440',
-      sp: imgSrc + IMAGIX_API + '&w=750',
-    };
-
-    const plane = new Plane(el);
-
     const [ww, wh] = useWindowSize(({ ww, wh }) => {
       plane.resize(ww, wh);
     });
@@ -32,9 +23,14 @@ export default defineComponent({
       plane.updateY(currentY);
     });
 
-    useMount(() => {
-      plane.init(texSrc[mq.value], ww.value, wh.value, currentY.value);
+    const plane = new Plane(el, {
+      ww: ww.value,
+      wh: wh.value,
+      currentY: currentY.value,
+      mq: mq.value,
+    });
 
+    useMount(() => {
       frontCanvasContext.addScene(plane);
     });
 
