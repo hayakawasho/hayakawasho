@@ -4,6 +4,7 @@ import { wideQuery } from '@/_foundation/env';
 import { useElementSize } from '@/_foundation/hooks';
 import { routeMutators } from '@/_states/route';
 import { windowSizeMutators } from '@/_states/window-size';
+import { mediaQueryMutators } from '@/_states/mq';
 import Gl from '../gl';
 import ScrollTweenContainer from '../scroll-tween-container';
 import type { AppContext, RouteName } from '@/_foundation/type';
@@ -29,17 +30,14 @@ export default defineComponent({
 
     const history = ref<'push' | 'pop'>('push');
 
-    const mediaQuery = ref<'pc' | 'sp'>(wideQuery.matches ? 'pc' : 'sp');
-    const readonlyMediaQuery = readonly(mediaQuery);
+    mediaQueryMutators(wideQuery.matches ? 'pc' : 'sp');
 
-    const [scrollContext] = addChild(refs.main, ScrollTweenContainer, {
-      mq: readonlyMediaQuery,
-    });
+    const [scrollContext] = addChild(refs.main, ScrollTweenContainer);
 
-    const dpr = Math.min(window.devicePixelRatio, 1.5);
     const [frontCanvasContext] = addChild(refs.frontCanvas, Gl, {
-      resolution: dpr,
+      resolution: Math.min(window.devicePixelRatio, 1.5),
     });
+
     const [backCanvasContext] = addChild(refs.backCanvas, Gl, {
       resolution: 1,
     });
@@ -48,7 +46,6 @@ export default defineComponent({
       backCanvasContext: backCanvasContext.current,
       frontCanvasContext: frontCanvasContext.current,
       history: readonly(history),
-      mq: readonlyMediaQuery,
       scrollContext: scrollContext.current,
     } as AppContext;
 

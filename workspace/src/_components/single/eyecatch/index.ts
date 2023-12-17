@@ -1,4 +1,4 @@
-import { defineComponent, useMount, ref } from 'lake';
+import { defineComponent, useMount, useUnmount, ref } from 'lake';
 import { IMAGIX_API } from '@/_foundation/const';
 import { map } from '@/_foundation/math';
 import {
@@ -10,6 +10,7 @@ import {
   LinearFilter,
 } from '@/_foundation/three';
 import { ImagePlane } from '@/_glsl';
+import { useMediaQuery } from '@/_states/mq';
 import { useScrollPosY } from '@/_states/scroll';
 import { useWindowSize } from '@/_states/window-size';
 import fragment from './fragment.frag';
@@ -22,9 +23,9 @@ loader.crossOrigin = 'anonymous';
 export default defineComponent({
   name: 'eyecatch',
   setup(el: HTMLElement, context: AppContext) {
-    const { frontCanvasContext, mq, history } = context;
+    const { frontCanvasContext, history } = context;
 
-    const isResizing = ref(false);
+    const mq = useMediaQuery();
 
     const imgSrc = el.dataset.src!;
     const texSrc = {
@@ -37,7 +38,7 @@ export default defineComponent({
       texture.generateMipmaps = false;
     });
 
-    const [ww, wh] = useWindowSize();
+    const [ww, wh, { isResizing }] = useWindowSize();
 
     const bounds = el.getBoundingClientRect();
     const offset = -wh.value + bounds.top;
@@ -87,20 +88,16 @@ export default defineComponent({
     const plane = new ImagePlane(mesh, el);
 
     useWindowSize(({ ww, wh }) => {
-      isResizing.value = true;
-
       plane.resize(ww, wh);
 
       const { top, height } = el.getBoundingClientRect();
       const offset = -wh + top;
       offsetY.value = offset;
       endY.value = offset + wh + height;
-
-      isResizing.value = false;
     });
 
     useScrollPosY(({ currentY, oldY }) => {
-      if (isResizing.value || currentY === oldY) {
+      if (currentY === oldY) {
         return;
       }
 
@@ -113,15 +110,10 @@ export default defineComponent({
     useMount(() => {
       plane.resize(ww.value, wh.value);
       frontCanvasContext.addScene(mesh);
+    });
 
-      return () => {
-        if (history.value === 'pop') {
-          frontCanvasContext.removeScene(mesh);
-          return;
-        }
-
-        frontCanvasContext.removeScene(mesh);
-      };
+    useUnmount(() => {
+      frontCanvasContext.removeScene(mesh);
     });
   },
 });

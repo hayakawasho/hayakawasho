@@ -1,10 +1,11 @@
-import { defineComponent, useMount, useDomRef, ref } from 'lake';
+import { defineComponent, useMount, useDomRef } from 'lake';
 import { useTick } from '@/_foundation/hooks';
 import { splitTextNode2Words } from '@/_foundation/split-text';
 import { Tween } from '@/_foundation/tween';
 import { waitFrame } from '@/_foundation/utils';
+import { useMediaQuery } from '@/_states/mq';
 import { useWindowSize } from '@/_states/window-size';
-import { useThumbnail } from './use-thumbnail';
+// import { useThumbnail } from './use-thumbnail';
 import type { useInfiniteScroll } from '@/_foundation/hooks';
 import type { Object3D } from '@/_foundation/three';
 import type { AppContext } from '@/_foundation/type';
@@ -22,15 +23,15 @@ type Refs = {
 export default defineComponent({
   name: 'Item',
   setup(el: HTMLElement, context: Props) {
-    const { once, infiniteScrollContext, mq, history, parentScene } = context;
+    const { once, infiniteScrollContext, history, parentScene } = context;
     const { posY, diff } = infiniteScrollContext;
 
+    const mq = useMediaQuery();
     const { refs } = useDomRef<Refs>('text', 'img');
-    const isResizing = ref(false);
 
-    if (mq.value === 'pc') {
-      // useThumbnail(el, parentScene);
-    }
+    const [, , { isResizing }] = useWindowSize(() => {
+      onSplitUpdate();
+    });
 
     const SPEED = {
       pc: 0.9,
@@ -49,11 +50,11 @@ export default defineComponent({
 
     const { split, onSplitUpdate } = splitTextNode2Words(refs.text);
 
-    useWindowSize(() => {
-      isResizing.value = true;
-      onSplitUpdate();
-      isResizing.value = false;
-    });
+    // useMount(() => {
+    //   if (mq.value === 'pc') {
+    //     useThumbnail(el, parentScene);
+    //   }
+    // });
 
     useMount(() => {
       if (!once && history.value === 'push') {

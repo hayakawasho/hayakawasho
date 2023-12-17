@@ -28,7 +28,7 @@ type Refs = {
 export default defineComponent({
   name: 'Single',
   setup(_el, context: AppContext) {
-    const { once, history, mq } = context;
+    const { once, history } = context;
 
     const { addChild } = useSlot();
     const { refs } = useDomRef<Refs>(
@@ -59,7 +59,6 @@ export default defineComponent({
 
     useMouseoverSplitText(refs.back, {
       chars: refs.c,
-      mq: mq.value,
     });
 
     useMount(() => {
@@ -157,35 +156,30 @@ export default defineComponent({
           willChange: 'transform',
           y: '-100%',
         });
-        Tween.prop([refs.sub, split.words], {
-          willChange: 'transform',
-        });
+        Tween.prop(
+          [refs.dash, refs.max, refs.now, refs.infoText, refs.stack, refs.sub, split.words],
+          {
+            willChange: 'transform',
+          }
+        );
 
         await waitFrame();
 
         Tween.parallel(
-          Tween.tween(
-            [
-              refs.dash,
-              refs.max,
-              refs.now,
-              refs.infoText,
-              refs.infoLine,
-              refs.eyecatch,
-              refs.stack,
-            ],
-            0.55,
-            'power3.inOut',
-            {
-              alpha: 0,
-            }
-          ),
+          Tween.tween([refs.infoLine], 0.55, 'power3.inOut', {
+            alpha: 0,
+          }),
           Tween.tween(refs.c, 0.45, 'custom.in', {
             y: '-240%',
           }),
-          Tween.tween([refs.sub, split.words], 0.45, 'custom.in', {
-            y: '-1.2em',
-          })
+          Tween.tween(
+            [refs.dash, refs.max, refs.now, refs.infoText, refs.stack, refs.sub, split.words],
+            0.45,
+            'custom.in',
+            {
+              y: '-1.2em',
+            }
+          )
         );
       };
     });

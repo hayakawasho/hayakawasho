@@ -2,16 +2,19 @@
   import { getContext, onMount } from 'svelte';
   import { useMouseoverSplitText } from '@/_foundation/hooks';
   import { useRoute } from '@/_states/route';
+  import { useMediaQuery } from '@/_states/mq';
   import type { AppContext, RouteName } from '@/_foundation/type';
   import type { Context$ } from 'lake';
 
-  const { mq, ...context } = getContext<
+  const {  ...context } = getContext<
     Context$<
       AppContext & {
         current: RouteName;
       }
     >
   >('$');
+
+  const mq = useMediaQuery()
 
   let current = context.current;
 

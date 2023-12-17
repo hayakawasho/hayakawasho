@@ -5,7 +5,6 @@ import type { ReadonlyRef } from 'lake';
 export type AppContext = {
   once: boolean;
   history: ReadonlyRef<'push' | 'pop'>;
-  mq: ReadonlyRef<'pc' | 'sp'>;
   backCanvasContext: ReturnType<(typeof GlContext)['setup']>;
   frontCanvasContext: ReturnType<(typeof GlContext)['setup']>;
   scrollContext: ReturnType<(typeof ScrollContext)['setup']>;

@@ -41,7 +41,7 @@ export const useThree = (canvas: HTMLCanvasElement, { resolution = 1 }: Context)
   const addScene = (child: Object3D) => scene.add(child);
   const removeScene = (child: Object3D) => scene.remove(child);
 
-  useWindowSize(({ aspect, wh, ww }) => {
+  const [, , { isResizing }] = useWindowSize(({ aspect, wh, ww }) => {
     renderer.setSize(ww, wh);
     camera.aspect = aspect;
     camera.position.z = calcCamDistance(wh);
@@ -49,7 +49,7 @@ export const useThree = (canvas: HTMLCanvasElement, { resolution = 1 }: Context)
   });
 
   useTick(() => {
-    renderer.render(scene, camera);
+    isResizing.value && renderer.render(scene, camera);
   });
 
   return {

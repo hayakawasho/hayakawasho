@@ -1,4 +1,4 @@
-import { defineComponent, useMount, ref } from 'lake';
+import { defineComponent, useMount, useUnmount, ref } from 'lake';
 import { IMAGIX_API } from '@/_foundation/const';
 import { map } from '@/_foundation/math';
 import {
@@ -11,6 +11,7 @@ import {
 } from '@/_foundation/three';
 // import { Tween } from '@/_foundation/tween';
 import { ImagePlane } from '@/_glsl';
+import { useMediaQuery } from '@/_states/mq';
 import { useScrollPosY } from '@/_states/scroll';
 import { useWindowSize } from '@/_states/window-size';
 import fragment from './fragment.frag';
@@ -23,15 +24,15 @@ loader.crossOrigin = 'anonymous';
 export default defineComponent({
   name: 'Screenshot',
   setup(el: HTMLImageElement, context: AppContext) {
-    const { frontCanvasContext, mq, history } = context;
+    const { frontCanvasContext, history } = context;
+
+    const mq = useMediaQuery();
 
     const src = el.dataset.src!;
     const texSrc = {
       pc: src + IMAGIX_API + '&w=1200',
       sp: src + IMAGIX_API + '&w=750',
     };
-
-    const isResizing = ref(false);
 
     const texture = loader.load(texSrc[mq.value], texture => {
       texture.minFilter = LinearFilter;
@@ -53,7 +54,7 @@ export default defineComponent({
     const uniforms = {
       u_depth: {
         value: {
-          pc: 120,
+          pc: 80,
           sp: 30,
         }[mq.value],
       },
@@ -85,20 +86,16 @@ export default defineComponent({
     const plane = new ImagePlane(mesh, el);
 
     useWindowSize(({ ww, wh }) => {
-      isResizing.value = true;
-
       plane.resize(ww, wh);
 
       const bounds = el.getBoundingClientRect();
       const offset = -wh + bounds.top;
       offsetY.value = offset;
       endY.value = offset + bounds.height + BOTTOM_MARGIN[mq.value];
-
-      isResizing.value = false;
     });
 
     useScrollPosY(({ currentY, oldY }) => {
-      if (isResizing.value || currentY === oldY) {
+      if (currentY === oldY) {
         return;
       }
 
@@ -111,15 +108,10 @@ export default defineComponent({
     useMount(() => {
       plane.resize(ww.value, wh.value);
       frontCanvasContext.addScene(mesh);
+    });
 
-      return () => {
-        if (history.value === 'pop') {
-          frontCanvasContext.removeScene(mesh);
-          return;
-        }
-
-        frontCanvasContext.removeScene(mesh);
-      };
+    useUnmount(() => {
+      frontCanvasContext.removeScene(mesh);
     });
   },
 });
