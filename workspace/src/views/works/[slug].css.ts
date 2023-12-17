@@ -181,7 +181,8 @@ export const eyecatch = css`
 
   &:before {
     content: '';
-    padding-top: calc(2 / 3 * 100%);
+    // padding-top: calc(2 / 3 * 100%);
+    padding-top: calc(9 / 16 * 100%);
     display: block;
   }
 `;

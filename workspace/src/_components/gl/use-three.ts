@@ -49,7 +49,7 @@ export const useThree = (canvas: HTMLCanvasElement, { resolution = 1 }: Context)
   });
 
   useTick(() => {
-    isResizing.value && renderer.render(scene, camera);
+    !isResizing.value && renderer.render(scene, camera);
   });
 
   return {
