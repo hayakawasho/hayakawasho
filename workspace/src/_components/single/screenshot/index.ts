@@ -20,10 +20,7 @@ export default defineComponent({
     });
 
     const [currentY] = useScrollPosY(({ currentY, oldY }) => {
-      if (currentY === oldY) {
-        return;
-      }
-      plane.updateY(currentY);
+      currentY !== oldY && plane.updateY(currentY);
     });
 
     const plane = new Plane(el, {

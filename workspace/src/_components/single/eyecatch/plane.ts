@@ -19,8 +19,7 @@ export class Plane extends GlObject {
   #offsetY = 0;
   #endY = 0;
   #mesh;
-
-  public uniforms;
+  uniforms;
 
   constructor(
     el: HTMLElement,
@@ -28,18 +27,13 @@ export class Plane extends GlObject {
       currentY: number;
       ww: number;
       wh: number;
-      mq: 'pc' | 'sp';
     }
   ) {
     super(el);
 
-    const imgSrc = el.dataset.src!;
-    const texSrc = {
-      pc: imgSrc + IMAGIX_API + '&w=1440',
-      sp: imgSrc + IMAGIX_API + '&w=750',
-    };
+    const imgSrc = el.dataset.src! + IMAGIX_API + '&w=750';
 
-    const texture = loader.load(texSrc[props.mq], texture => {
+    const texture = loader.load(imgSrc, texture => {
       texture.minFilter = LinearFilter;
       texture.generateMipmaps = false;
     });

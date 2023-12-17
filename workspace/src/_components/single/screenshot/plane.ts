@@ -19,8 +19,7 @@ export class Plane extends GlObject {
   #endY = 0;
   #mesh;
   #mq;
-
-  public uniforms;
+  uniforms;
 
   constructor(
     el: HTMLElement,
@@ -44,12 +43,14 @@ export class Plane extends GlObject {
       texture.generateMipmaps = false;
     });
 
+    const depth = {
+      pc: 80,
+      sp: 30,
+    };
+
     this.uniforms = {
       u_depth: {
-        value: {
-          pc: 80,
-          sp: 30,
-        }[props.mq],
+        value: depth[props.mq],
       },
       u_opacity: {
         value: 1,
@@ -73,6 +74,7 @@ export class Plane extends GlObject {
     this.add(this.#mesh);
 
     this.#mq = props.mq;
+
     this.resize(props.ww, props.wh);
     this.updateY(props.currentY);
   }
@@ -80,14 +82,14 @@ export class Plane extends GlObject {
   resize = (ww: number, wh: number) => {
     const bounds = super.resize(ww, wh);
 
-    const BOTTOM_MARGIN = {
+    const bottomMargin = {
       pc: wh * 0.25,
       sp: wh * 0.15,
     };
 
     const offset = -wh + bounds.top;
     this.#offsetY = offset;
-    this.#endY = offset + bounds.height + BOTTOM_MARGIN[this.#mq];
+    this.#endY = offset + bounds.height + bottomMargin[this.#mq];
 
     this.#mesh.scale.set(bounds.width, bounds.height, 1);
 
