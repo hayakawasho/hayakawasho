@@ -45,7 +45,7 @@ export class Plane extends GlObject {
 
     const depth = {
       pc: 80,
-      sp: 30,
+      sp: 35,
     };
 
     this.uniforms = {
@@ -95,7 +95,6 @@ export class Plane extends GlObject {
   updateY = (current: number) => {
     super.updateY(current);
 
-    const progress = map(current, this.#offsetY, this.#endY, 0, 1.5);
-    this.uniforms.u_progress.value = progress;
+    this.uniforms.u_progress.value = map(current, this.#offsetY, this.#endY, 0, 1.5);
   };
 }
