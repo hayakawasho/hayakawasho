@@ -2,9 +2,9 @@ import htmx from 'htmx.org';
 import { defineComponent, useDomRef, useSlot, useMount, ref, readonly } from 'lake';
 import { wideQuery } from '@/_foundation/env';
 import { useElementSize } from '@/_foundation/hooks';
+import { mediaQueryMutators } from '@/_states/mq';
 import { routeMutators } from '@/_states/route';
 import { windowSizeMutators } from '@/_states/window-size';
-import { mediaQueryMutators } from '@/_states/mq';
 import Gl from '../gl';
 import ScrollTweenContainer from '../scroll-tween-container';
 import type { AppContext, RouteName } from '@/_foundation/type';
@@ -28,8 +28,6 @@ export default defineComponent({
     const { addChild } = useSlot();
     const { refs } = useDomRef<Refs>('backCanvas', 'frontCanvas', 'main', 'windowSizeWatcher');
 
-    const history = ref<'push' | 'pop'>('push');
-
     mediaQueryMutators(wideQuery.matches ? 'pc' : 'sp');
 
     const [scrollContext] = addChild(refs.main, ScrollTweenContainer);
@@ -37,10 +35,9 @@ export default defineComponent({
     const [frontCanvasContext] = addChild(refs.frontCanvas, Gl, {
       resolution: Math.min(window.devicePixelRatio, 1.5),
     });
+    const [backCanvasContext] = addChild(refs.backCanvas, Gl);
 
-    const [backCanvasContext] = addChild(refs.backCanvas, Gl, {
-      resolution: 1,
-    });
+    const history = ref<'push' | 'pop'>('push');
 
     const provides = {
       backCanvasContext: backCanvasContext.current,
@@ -51,6 +48,13 @@ export default defineComponent({
 
     useMount(() => {
       onCreated(provides);
+    });
+
+    useElementSize(refs.windowSizeWatcher, ({ width, height }) => {
+      windowSizeMutators({
+        height,
+        width,
+      });
     });
 
     //----------------------------------------------------------------
@@ -111,15 +115,6 @@ export default defineComponent({
       const loadProgress = Math.floor((detail.loaded / detail.total) * 1000) / 1000;
 
       console.log(loadProgress);
-    });
-
-    //----------------------------------------------------------------
-
-    useElementSize(refs.windowSizeWatcher, ({ width, height }) => {
-      windowSizeMutators({
-        height,
-        width,
-      });
     });
   },
 });

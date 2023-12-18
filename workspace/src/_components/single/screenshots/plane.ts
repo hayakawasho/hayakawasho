@@ -1,4 +1,3 @@
-import { GlObject } from '@/_glsl/gl-object';
 import { IMAGIX_API } from '@/_foundation/const';
 import { map } from '@/_foundation/math';
 import {
@@ -8,8 +7,8 @@ import {
   TextureLoader,
   LinearFilter,
 } from '@/_foundation/three';
-import fragment from './fragment.frag';
-import vertex from './vertex.vert';
+import { GlObject } from '@/_glsl/gl-object';
+import type { Size } from '@/_foundation/type';
 
 const loader = new TextureLoader();
 loader.crossOrigin = 'anonymous';
@@ -25,9 +24,10 @@ export class Plane extends GlObject {
     el: HTMLElement,
     props: {
       currentY: number;
-      ww: number;
-      wh: number;
       mq: 'pc' | 'sp';
+      windowSize: Size;
+      geo: PlaneBufferGeometry;
+      mat: ShaderMaterial;
     }
   ) {
     super(el);
@@ -63,31 +63,27 @@ export class Plane extends GlObject {
       },
     };
 
-    const geo = new PlaneBufferGeometry(1, 1, 4, 20);
-    const mat = new ShaderMaterial({
-      fragmentShader: fragment,
-      uniforms: this.uniforms,
-      vertexShader: vertex,
-    });
+    const mat = props.mat.clone() as ShaderMaterial;
+    mat.uniforms = this.uniforms;
 
-    this.#mesh = new Mesh(geo, mat);
+    this.#mesh = new Mesh(props.geo, mat);
     this.add(this.#mesh);
 
     this.#mq = props.mq;
 
-    this.resize(props.ww, props.wh);
+    this.resize(props.windowSize);
     this.updateY(props.currentY);
   }
 
-  resize = (ww: number, wh: number) => {
-    const bounds = super.resize(ww, wh);
+  resize = (size: Size) => {
+    const bounds = super.resize(size);
 
     const bottomMargin = {
-      pc: wh * 0.25,
-      sp: wh * 0.15,
+      pc: size.height * 0.25,
+      sp: size.height * 0.15,
     };
 
-    const offset = -wh + bounds.top;
+    const offset = -size.height + bounds.top;
     this.#offsetY = offset;
     this.#endY = offset + bounds.height + bottomMargin[this.#mq];
 

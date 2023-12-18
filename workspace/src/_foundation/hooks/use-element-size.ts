@@ -1,18 +1,17 @@
 import { useMount } from 'lake';
 import { debounce } from '@/_foundation/utils';
+import type { Size } from '@/_foundation/type';
 
 export const useElementSize = <T extends Element>(
   targetOrTargets: T | T[],
-  callback: (payload: { aspect: number; width: number; height: number }) => void,
+  callback: (payload: Size) => void,
   debounceTime = 200
 ) => {
   const ro = new ResizeObserver(
     debounce(([entry]) => {
       const { width, height } = entry.contentRect;
-      const aspect = width / height;
 
       callback({
-        aspect,
         height,
         width,
       });

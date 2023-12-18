@@ -7,10 +7,8 @@ type Context = {
 
 export default defineComponent({
   name: 'Gl',
-  setup(canvas: HTMLCanvasElement, { resolution }: Context) {
-    const { addScene, removeScene } = useThree(canvas, {
-      resolution,
-    });
+  setup(canvas: HTMLCanvasElement, { resolution = 1 }: Context) {
+    const { addScene, removeScene } = useThree(canvas, resolution);
 
     return {
       addScene,

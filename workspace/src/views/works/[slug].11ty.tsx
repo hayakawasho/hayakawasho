@@ -146,7 +146,7 @@ class Component {
           </div>
 
           <div data-scroll-item>
-            <ul className="" css={styles.screenshots}>
+            <ul className="" css={styles.screenshots} data-ref="screenshots">
               {post.screenshots.map((i, index) => {
                 return (
                   <li className="" key={index}>
@@ -154,7 +154,7 @@ class Component {
                       alt=""
                       className="pointer-events-none invisible"
                       data-h={i.height}
-                      data-ref="screenshot"
+                      data-ref="screenshotItem"
                       data-src={i.src}
                       data-w={i.width}
                       height={i.height}

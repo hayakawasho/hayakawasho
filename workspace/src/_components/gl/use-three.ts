@@ -4,13 +4,8 @@ import { WebGLRenderer, PerspectiveCamera, Scene } from '@/_foundation/three';
 import { useWindowSize } from '@/_states/window-size';
 import type { Object3D } from '@/_foundation/three';
 
-type Context = {
-  resolution: number;
-};
-
-export const useThree = (canvas: HTMLCanvasElement, { resolution = 1 }: Context) => {
+export const useThree = (canvas: HTMLCanvasElement, resolution: number) => {
   const { width, height } = canvas.getBoundingClientRect();
-  const aspect = width / height;
 
   const renderer = new WebGLRenderer({
     alpha: true,
@@ -34,17 +29,17 @@ export const useThree = (canvas: HTMLCanvasElement, { resolution = 1 }: Context)
     return (h * 0.5) / Math.tan(fovRad);
   };
 
-  const camera = new PerspectiveCamera(FOV, aspect, 0.1, 3000);
+  const camera = new PerspectiveCamera(FOV, width / height, 0.1, 3000);
   camera.position.z = calcCamDistance(1);
 
   const scene = new Scene();
   const addScene = (child: Object3D) => scene.add(child);
   const removeScene = (child: Object3D) => scene.remove(child);
 
-  const [, , { isResizing }] = useWindowSize(({ aspect, wh, ww }) => {
-    renderer.setSize(ww, wh);
-    camera.aspect = aspect;
-    camera.position.z = calcCamDistance(wh);
+  const [, , { isResizing }] = useWindowSize(({ width, height }) => {
+    renderer.setSize(width, height);
+    camera.aspect = width / height;
+    camera.position.z = calcCamDistance(height);
     camera.updateProjectionMatrix();
   });
 

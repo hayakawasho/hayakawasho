@@ -8,9 +8,7 @@ const viewport = map<Size>({
   width: window.innerWidth,
 });
 
-export const useWindowSize = (
-  callback: (payload: { aspect: number; ww: number; wh: number }) => void = noop
-) => {
+export const useWindowSize = (callback: (payload: Size) => void = noop) => {
   const { width, height } = viewport.get();
 
   const windowWidth = ref(width);
@@ -21,9 +19,8 @@ export const useWindowSize = (
     isResizing.value = true;
 
     callback({
-      aspect: width / height,
-      wh: height,
-      ww: width,
+      height,
+      width,
     });
 
     windowWidth.value = width;

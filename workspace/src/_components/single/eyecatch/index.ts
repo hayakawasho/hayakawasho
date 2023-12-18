@@ -1,8 +1,8 @@
 import { defineComponent, useMount, useUnmount } from 'lake';
-import { Plane } from './plane';
 import { useMediaQuery } from '@/_states/mq';
 import { useScrollPosY } from '@/_states/scroll';
 import { useWindowSize } from '@/_states/window-size';
+import { Plane } from './plane';
 import type { AppContext } from '@/_foundation/type';
 
 export default defineComponent({
@@ -12,8 +12,11 @@ export default defineComponent({
 
     const mq = useMediaQuery();
 
-    const [ww, wh] = useWindowSize(({ ww, wh }) => {
-      plane.resize(ww, wh);
+    const [ww, wh] = useWindowSize(({ width, height }) => {
+      plane.resize({
+        height,
+        width,
+      });
     });
 
     const [currentY] = useScrollPosY(({ currentY, oldY }) => {
@@ -21,9 +24,11 @@ export default defineComponent({
     });
 
     const plane = new Plane(el, {
-      ww: ww.value,
-      wh: wh.value,
       currentY: currentY.value,
+      windowSize: {
+        height: wh.value,
+        width: ww.value,
+      },
     });
 
     useMount(() => {

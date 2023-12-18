@@ -6,7 +6,7 @@ import { waitFrame } from '@/_foundation/utils';
 import { useWindowSize } from '@/_states/window-size';
 import Eyecatch from './eyecatch';
 import NextProject from './next';
-import Screenshot from './screenshot';
+import Screenshots from './screenshots';
 import type { AppContext } from '@/_foundation/type';
 
 type Refs = {
@@ -17,7 +17,7 @@ type Refs = {
   dash: HTMLElement;
   sub: HTMLElement;
   h1: HTMLElement;
-  screenshot: HTMLImageElement[];
+  screenshots: HTMLElement;
   eyecatch: HTMLElement;
   infoText: HTMLElement[];
   infoLine: HTMLElement;
@@ -39,7 +39,7 @@ export default defineComponent({
       'dash',
       'sub',
       'h1',
-      'screenshot',
+      'screenshots',
       'eyecatch',
       'infoText',
       'infoLine',
@@ -48,7 +48,7 @@ export default defineComponent({
     );
 
     addChild(refs.eyecatch, Eyecatch, context);
-    addChild(refs.screenshot, Screenshot, context);
+    addChild(refs.screenshots, Screenshots, context);
     addChild(refs.next, NextProject, context);
 
     const { split, onSplitUpdate } = splitTextNode2Words(refs.h1);

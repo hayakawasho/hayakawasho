@@ -1,4 +1,3 @@
-import { GlObject } from '@/_glsl/gl-object';
 import { IMAGIX_API } from '@/_foundation/const';
 import { map } from '@/_foundation/math';
 import {
@@ -9,8 +8,10 @@ import {
   TextureLoader,
   LinearFilter,
 } from '@/_foundation/three';
+import { GlObject } from '@/_glsl/gl-object';
 import fragment from './fragment.frag';
 import vertex from './vertex.vert';
+import type { Size } from '@/_foundation/type';
 
 const loader = new TextureLoader();
 loader.crossOrigin = 'anonymous';
@@ -25,15 +26,14 @@ export class Plane extends GlObject {
     el: HTMLElement,
     props: {
       currentY: number;
-      ww: number;
-      wh: number;
+      windowSize: Size;
     }
   ) {
     super(el);
 
-    const imgSrc = el.dataset.src! + IMAGIX_API + '&w=750';
+    const texSrc = el.dataset.src! + IMAGIX_API + '&w=750';
 
-    const texture = loader.load(imgSrc, texture => {
+    const texture = loader.load(texSrc, texture => {
       texture.minFilter = LinearFilter;
       texture.generateMipmaps = false;
     });
@@ -72,16 +72,16 @@ export class Plane extends GlObject {
     this.#mesh = new Mesh(geo, mat);
     this.add(this.#mesh);
 
-    this.resize(props.ww, props.wh);
+    this.resize(props.windowSize);
     this.updateY(props.currentY);
   }
 
-  resize = (ww: number, wh: number) => {
-    const bounds = super.resize(ww, wh);
+  resize = (size: Size) => {
+    const bounds = super.resize(size);
 
-    const offset = -wh + bounds.top;
+    const offset = -size.height + bounds.top;
     this.#offsetY = offset;
-    this.#endY = offset + wh + bounds.height;
+    this.#endY = offset + size.height + bounds.height;
 
     this.#mesh.scale.set(bounds.width, bounds.height, 1);
 
