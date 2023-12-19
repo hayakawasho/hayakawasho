@@ -19,17 +19,17 @@ export const PageWithHeader: FC<{
           css={svh}
           data-ref="windowSizeWatcher"
         />
-        <div css={bg} role="presentation" />
+        <div css={bg} aria-hidden="true" />
         <canvas
           aria-hidden="true"
           className="fixed inset-0 w-screen h-screen pointer-events-none"
           data-ref="backCanvas"
         />
-        <div css={gradUpper} role="presentation" />
-        <div css={gradLower} role="presentation" />
-        <div css={gridLeft} role="presentation" />
-        <div css={gridMiddle} role="presentation" />
-        <div css={gridRight} role="presentation" />
+        <div css={gradUpper} aria-hidden="true" />
+        <div css={gradLower} aria-hidden="true" />
+        <div css={gridLeft} aria-hidden="true" />
+        <div css={gridMiddle} aria-hidden="true" />
+        <div css={gridRight} aria-hidden="true" />
         {header}
         <div data-component="Scrollbar" />
         <div
