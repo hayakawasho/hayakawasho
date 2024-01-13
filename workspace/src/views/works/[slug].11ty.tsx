@@ -80,7 +80,7 @@ class Component {
             ))}
             <span className="sr-only">Back</span>
           </Link>
-          <div className="mb-[10rem] pc:mb-[20rem]" data-scroll-item>
+          <div className="mb-[8rem] pc:mb-[20rem]" data-scroll-item>
             <div css={styles.intro}>
               <div css={styles.intro__g}>
                 <div css={styles.intro__indexNumber}>
