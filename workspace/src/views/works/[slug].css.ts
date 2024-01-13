@@ -202,7 +202,7 @@ export const screenshots = css`
   backface-visibility: hidden;
   display: flex;
   flex-direction: column;
-  gap: 5rem;
+  gap: var(--grid);
   margin-bottom: 5rem;
 
   @media ${mq.pc} {
