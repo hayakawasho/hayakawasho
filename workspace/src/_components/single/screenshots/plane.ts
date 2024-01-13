@@ -45,7 +45,7 @@ export class Plane extends GlObject {
 
     const depth = {
       pc: 60,
-      sp: 32,
+      sp: 30,
     };
 
     this.uniforms = {
