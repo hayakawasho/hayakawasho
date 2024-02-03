@@ -1,15 +1,21 @@
-_site
-# Node dependencies
-node_modules
-# System files
-*.log
-.DS_Store
-.cache
+# build output
+dist/
 
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# environment variables
 .env
-.node-version
+.env.production
 
-tmp
-
-/_transpiled
-/_bk
+# macOS-specific files
+.DS_Store
