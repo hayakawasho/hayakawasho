@@ -1,5 +1,5 @@
-import { Header } from '~/_features/header/view';
-import { PageWrapper } from '~/_features/layout/page-wrapper';
+import { Header } from '../header/view';
+import { PageWrapper } from '../page-wrapper';
 
 const Component = () => {
   return (

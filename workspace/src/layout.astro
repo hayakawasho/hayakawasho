@@ -1,6 +1,6 @@
 ---
 import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
-// import { ClientOnly } from '../client-only.tsx';
+import { ClientOnly } from './client-only.tsx';
 
 export interface Props {
 	title: string;
@@ -47,17 +47,18 @@ const title = props.title ? props.title + ' | ' + siteTitle : siteTitle;
       data-ref="backCanvas"
     ></canvas>
     <slot />
+    <div data-component="Scrollbar" />
     <canvas
       aria-hidden="true"
       class="fixed inset-0 w-screen h-full pointer-events-none"
       data-ref="frontCanvas"
     ></canvas>
-    <!--ClientOnly client:only /-->
+    <ClientOnly client:only />
   </body>
 </html>
 
 <script>
-  import '../../entry';
+  // import '../entry';
 </script>
 
 <style is:global>
@@ -147,3 +148,4 @@ const title = props.title ? props.title + ' | ' + siteTitle : siteTitle;
     font-display: swap;
   }
 </style>
+../client-only.tsx

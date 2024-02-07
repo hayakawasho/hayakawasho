@@ -1,4 +1,3 @@
-// import { mq } from '~/_foundation/const';
 import type { FC, ReactNode } from 'react';
 
 export const PageWrapper: FC<{
@@ -9,7 +8,6 @@ export const PageWrapper: FC<{
   return (
     <>
       {header}
-      <div data-component="Scrollbar" />
       <div
         aria-live="polite"
         className="w-full absolute top-0 left-0 backface-hidden"
