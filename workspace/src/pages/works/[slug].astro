@@ -1,6 +1,6 @@
 ---
 import Layout from '~/_features/layout/index.astro';
-import WorksIndex from '~/_features/page.works/view';
+import WorksDetail from '~/_features/page.works-single/view';
 import dotenv from 'dotenv';
 import { WorksRepository } from '~/_repositories/works';
 
@@ -8,10 +8,21 @@ dotenv.config();
 
 const repository = WorksRepository.create(process.env.API_KEY!);
 
-const result = await repository.findList({
-  limit: 99,
-  orders: '-launch',
-});
+export async function getStaticPaths() {
+  const { works } = await repository.findList({
+    limit: 99,
+    orders: '-launch',
+  });
+
+  return works.map((item) => ({
+    params: {
+      slug: item.id,
+    },
+  }));
+}
+
+const { slug } = Astro.params;
+const result = await repository.findOne(slug);
 ---
 
 <Layout title="Works" permalink=''>
@@ -23,5 +34,5 @@ const result = await repository.findList({
     media=""
     rel="preload"
   />
-  <WorksIndex />
+  <WorksDetail />
 </Layout>

@@ -1,8 +1,8 @@
 import { api } from '~/_foundation/api';
 import { searchParamsToString } from '~/_foundation/utils';
-import { Work } from '~/_work/model';
+import { Work } from '~/_features/work/model';
 import type { WorksAPISchema } from '../schema';
-import type { WorkMetadata } from '~/_work/model';
+import type { WorkMetadata } from '~/_features/work/model';
 
 const convertWorkFromCMS = (rawItem: any): WorkMetadata => {
   return {
@@ -61,6 +61,25 @@ export class WorksRepository {
       works: data.contents.map(item => {
         return Work.create(convertWorkFromCMS(item)).toJSON();
       }),
+    };
+  };
+
+  findOne = async (
+    id: string
+  ): Promise<{
+    works: WorkMetadata;
+  }> => {
+    const { data } = await api.get<WorksAPISchema>(`${API_ENDPOINT}/works/${id}}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-MICROCMS-API-KEY': this._apiKey,
+      },
+    });
+
+    return {
+      works: data.contents.map(item => {
+        return Work.create(convertWorkFromCMS(item)).toJSON();
+      })[0],
     };
   };
 }

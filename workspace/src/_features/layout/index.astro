@@ -1,6 +1,6 @@
 ---
 import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
-import { ClientOnly } from '../client-only.tsx';
+// import { ClientOnly } from '../client-only.tsx';
 
 export interface Props {
 	title: string;
@@ -34,9 +34,31 @@ const title = props.title ? props.title + ' | ' + siteTitle : siteTitle;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Jost:wght@400&display=swap" />
 	</head>
-	<slot />
-  <ClientOnly client:only />
+  <body class="">
+    <div
+      aria-hidden="true"
+      class="fixed inset-0 w-screen pointer-events-none -z-1 invisible"
+      data-ref="windowSizeWatcher"
+    ></div>
+    <div aria-hidden="true"></div>
+    <canvas
+      aria-hidden="true"
+      class="fixed inset-0 w-screen h-screen pointer-events-none"
+      data-ref="backCanvas"
+    ></canvas>
+    <slot />
+    <canvas
+      aria-hidden="true"
+      class="fixed inset-0 w-screen h-full pointer-events-none"
+      data-ref="frontCanvas"
+    ></canvas>
+    <!--ClientOnly client:only /-->
+  </body>
 </html>
+
+<script>
+  import '../../entry';
+</script>
 
 <style is:global>
 	:root {

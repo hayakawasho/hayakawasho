@@ -5,6 +5,9 @@ import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 // https://astro.build/config
 export default defineConfig({
+  devToolbar: {
+    enabled: false,
+  },
   integrations: [react(), tailwind()],
   compressHTML: true,
   build: {
