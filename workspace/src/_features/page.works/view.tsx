@@ -45,7 +45,7 @@ const Item = ({ post, ...props }: { post: WorkMetadata }) => {
         <div className={cx(Styles.item__thumb, 'pc:hidden')}>
           <ResponsiveImage
             alt=""
-            className="w-full h-full rounded-1/2"
+            className="w-full h-full rounded-[50%]"
             data-ref="img"
             pcSize={[1, 1]}
             pcSrc="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"

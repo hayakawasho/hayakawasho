@@ -110,10 +110,8 @@ export default defineComponent({
     });
 
     htmx.on('htmx:xhr:progress', e => {
-      const { detail } = e as CustomEvent;
-      const loadProgress = Math.floor((detail.loaded / detail.total) * 1000) / 1000;
-
-      console.log(loadProgress);
+      // const { detail } = e as CustomEvent;
+      // const loadProgress = Math.floor((detail.loaded / detail.total) * 1000) / 1000;
     });
   },
 });

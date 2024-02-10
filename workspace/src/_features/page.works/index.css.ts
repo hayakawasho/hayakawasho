@@ -64,7 +64,6 @@ export const item__title = style({
 });
 
 export const item__thumb = style({
-  borderRadius: '50%',
   height: '0.85em',
   marginTop: '0.1em',
   overflow: 'hidden',

@@ -1,9 +1,8 @@
-import { Model } from '~/_foundation/model';
 import type { Size } from '~/_foundation/type';
 
-type Image = {
+type Image = Size & {
   src: string;
-} & Size;
+};
 
 export type WorkMetadata = {
   id: string;
@@ -15,9 +14,3 @@ export type WorkMetadata = {
   url: string;
   launch: Date;
 };
-
-export class Work extends Model<WorkMetadata> {
-  static create = (data: WorkMetadata) => {
-    return new Work(data);
-  };
-}

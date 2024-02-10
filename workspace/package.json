@@ -4,7 +4,8 @@
   "scripts": {
     "dev:astro": "astro dev",
     "start": "NODE_ENV=development run-p dev:*",
-    "build:astro": "astro check && astro build",
+    "check": "astro check",
+    "build:astro": "astro build",
     "build": "NODE_ENV=production run-p build:*",
     "preview": "astro preview",
     "astro": "astro",
@@ -54,14 +55,14 @@
     "prettier-plugin-svelte": "^2.10.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "svelte": "^4.0.1",
-    "svelte-preprocess": "^5.0.4",
+    "svelte": "^4.2.10",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-glslify": "^2.0.2"
   },
   "dependencies": {
+    "@astrojs/svelte": "^5.0.3",
     "astro-critters": "^2.0.11",
     "astro-google-fonts-optimizer": "^0.2.2",
     "detect-gpu": "^5.0.30",

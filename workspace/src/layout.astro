@@ -1,6 +1,8 @@
 ---
 import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
 import { ClientOnly } from './client-only.tsx';
+import '~/_features/page.works/index.css';
+import '~/_features/page.works-single/index.css';
 
 export interface Props {
 	title: string;
@@ -14,6 +16,9 @@ const siteTitle = 'Sho Hayakawa Portfolio';
 const description = 'Frontend Engineer Sho Hayakawa 早川翔 portfolio website';
 
 const title = props.title ? props.title + ' | ' + siteTitle : siteTitle;
+
+// const idDev = process.env.NODE_ENV !== 'production';
+// const LOCAL_IP_ADDR = process.env.LOCAL_IP_ADDR || 'localhost';
 ---
 
 <!DOCTYPE html>
@@ -75,7 +80,7 @@ const title = props.title ? props.title + ' | ' + siteTitle : siteTitle;
     <div class="ui">
       <div class="sp:hidden" data-component="Cursor"></div>
     </div>
-    <ClientOnly client:only />
+    <ClientOnly client:only="react" />
   </body>
 </html>
 
@@ -227,6 +232,11 @@ const title = props.title ? props.title + ' | ' + siteTitle : siteTitle;
 
     --color-text: #1e1f1f;
     --color-bg: #c4c4c4;
+
+    @media (prefers-color-scheme: dark) {
+      --color-text: #c4c4c4;
+      --color-bg: #1e1f1f;
+    }
 	}
 
   *,
@@ -261,6 +271,11 @@ const title = props.title ? props.title + ' | ' + siteTitle : siteTitle;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     color: var(--color-text);
     background-color: var(--color-bg);
+
+    @media (min-resolution: 1.5dppx) {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
   }
 
   html {
