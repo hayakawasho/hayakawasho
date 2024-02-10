@@ -4,7 +4,7 @@ import { selectDatetime, selectLaunch, selectUrl } from '~/_features/work/select
 import { zeroPadding } from '~/_foundation/utils';
 import * as Styles from './index.css';
 import { Header } from '../header/view';
-import { PageWrapper } from '../page-wrapper';
+import { PageWrapper } from '../page-wrapper/view';
 import { Link } from '../ui/link';
 import type { WorkMetadata } from '~/_features/work/model';
 

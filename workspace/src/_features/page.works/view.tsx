@@ -3,7 +3,7 @@ import React from 'react';
 import { IMAGIX_API } from '~/_foundation/const';
 import * as Styles from './index.css';
 import { Header } from '../header/view';
-import { PageWrapper } from '../page-wrapper';
+import { PageWrapper } from '../page-wrapper/view';
 import { Link } from '../ui/link';
 import { ResponsiveImage } from '../ui/responsive-image';
 import type { WorkMetadata } from '~/_features/work/model';
