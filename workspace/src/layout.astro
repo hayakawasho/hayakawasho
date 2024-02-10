@@ -85,7 +85,7 @@ const title = props.title ? props.title + ' | ' + siteTitle : siteTitle;
 </html>
 
 <script>
-import './entry';
+// import './entry';
 </script>
 
 <style>
@@ -329,5 +329,25 @@ import './entry';
     font-weight: 400;
     font-style: normal;
     font-display: swap;
+  }
+
+  html.lenis {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
   }
 </style>
