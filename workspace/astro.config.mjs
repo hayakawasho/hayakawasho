@@ -5,6 +5,7 @@ import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 // import critters from 'astro-critters';
 import { glslify } from 'vite-plugin-glslify';
 import svelte from '@astrojs/svelte';
+import cloudflare from '@astrojs/cloudflare';
 
 // https://astro.build/config
 export default defineConfig({
@@ -26,4 +27,6 @@ export default defineConfig({
     },
     plugins: [vanillaExtractPlugin(), glslify()],
   },
+  output: 'server',
+  adapter: cloudflare(),
 });
