@@ -1,13 +1,12 @@
 import { create, withSvelte } from 'lake';
-// import Cursor from './_features/cursor.svelte';
-// import Home from './_features/home';
+import Cursor from '~/_features/cursor.svelte';
 import Load from './_features/load';
-// import NavMenu from './_features/menu';
-// import Noop from './_features/noop.svelte';
+import NavMenu from './_features/menu';
+import Noop from './_features/noop.svelte';
+import Home from './_features/page.home';
 // import Scrollbar from './_features/scrollbar.svelte';
-// import Single from './_features/single';
-// import Works from './_features/works';
-// import { wideQuery, mediaPrint } from './_foundation/env';
+import Works from './_features/page.works';
+import Single from './_features/page.works-single';
 import { qsa } from './_foundation/utils';
 import type { IComponent, ComponentContext } from 'lake';
 
@@ -15,13 +14,13 @@ import type { IComponent, ComponentContext } from 'lake';
   const { component, unmount } = create();
 
   const table: Record<string, IComponent> = {
-    // Cursor: withSvelte(Cursor, 'Cursor'),
-    // Home,
-    // NavMenu,
-    // Noop: withSvelte(Noop, 'Noop'),
+    Cursor: withSvelte(Cursor, 'Cursor'),
+    Home,
+    NavMenu,
+    Noop: withSvelte(Noop, 'Noop'),
     // // Scrollbar: withSvelte(Scrollbar, 'Scrollbar'),
-    // Single,
-    // Works,
+    Single,
+    Works,
   } as const;
 
   const mountComponents = (scope: HTMLElement, props: Record<string, unknown>) => {

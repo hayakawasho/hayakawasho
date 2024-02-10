@@ -2,11 +2,11 @@
 import Layout from '~/layout.astro';
 import WorksIndex from '~/_features/page.works/view';
 import dotenv from 'dotenv';
-import { WorksRepository } from '~/_repositories/works';
+import { createWorksRepository } from '~/_repositories/works';
 
 dotenv.config();
 
-const repository = WorksRepository.create(process.env.API_KEY!);
+const repository = createWorksRepository(process.env.API_KEY!);
 
 const result = await repository.findList({
   limit: 99,
@@ -14,14 +14,6 @@ const result = await repository.findList({
 });
 ---
 
-<Layout title="Works" permalink=''>
-  <link
-    slot="prependHead"
-    as="image"
-    crossorigin="anonymous"
-    href=""
-    media=""
-    rel="preload"
-  />
-  <WorksIndex />
+<Layout title="Works" permalink='/works/'>
+  <WorksIndex posts={result.works}  />
 </Layout>

@@ -30,27 +30,23 @@ export default defineComponent({
 
     mediaQueryMutators(wideQuery.matches ? 'pc' : 'sp');
 
-    /*
-
-    // const [scrollContext] = addChild(refs.main, ScrollTweenContainer);
-
-    // const [frontCanvasContext] = addChild(refs.frontCanvas, Gl, {
-    //   resolution: Math.min(window.devicePixelRatio, 1.5),
-    // });
-    // const [backCanvasContext] = addChild(refs.backCanvas, Gl);
+    const [scrollContext] = addChild(refs.main, ScrollTweenContainer);
+    const [backCanvasContext] = addChild(refs.backCanvas, Gl);
+    const [frontCanvasContext] = addChild(refs.frontCanvas, Gl, {
+      resolution: Math.min(window.devicePixelRatio, 1.5),
+    });
 
     const history = ref<'push' | 'pop'>('push');
 
     const provides = {
-      // backCanvasContext: backCanvasContext.current,
-      // frontCanvasContext: frontCanvasContext.current,
+      backCanvasContext: backCanvasContext.current,
+      frontCanvasContext: frontCanvasContext.current,
       history: readonly(history),
-      // scrollContext: scrollContext.current,
+      scrollContext: scrollContext.current,
     } as AppContext;
 
     useMount(() => {
-      // onCreated(provides);
-      console.log('created');
+      onCreated(provides);
     });
 
     useElementSize(refs.windowSizeWatcher, ({ width, height }) => {
@@ -63,7 +59,7 @@ export default defineComponent({
     //----------------------------------------------------------------
 
     const onLeave = (from: HTMLElement) => {
-      // scrollContext.current.pause();
+      scrollContext.current.pause();
       onCleanup(from);
     };
 
@@ -71,9 +67,9 @@ export default defineComponent({
       const namespace = to.dataset.xhr as RouteName;
       document.body.dataset.page = namespace;
 
-      // scrollContext.current.reInit(to);
-      // scrollContext.current.set(0);
-      // scrollContext.current.resume();
+      scrollContext.current.reInit(to);
+      scrollContext.current.set(0);
+      scrollContext.current.resume();
 
       onUpdated(to, provides);
 
@@ -119,6 +115,5 @@ export default defineComponent({
 
       console.log(loadProgress);
     });
-    */
   },
 });
