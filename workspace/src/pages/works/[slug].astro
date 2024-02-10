@@ -1,0 +1,55 @@
+---
+import Layout from '~/layout.astro';
+import WorksDetail from '~/_features/page.works-single/view';
+import dotenv from 'dotenv';
+import { createWorksRepository } from '~/_repositories/works';
+import { IMAGIX_API, mq } from '~/_foundation/const';
+
+dotenv.config();
+
+export async function getStaticPaths() {
+  const repository = createWorksRepository(process.env.API_KEY!);
+  const result = await repository.findList({
+    limit: 99,
+    orders: '-launch',
+  });
+
+  const { works } = result
+  const last = works[works.length - 1]
+
+  return works.map((item, index) => ({
+    params: {
+      slug: item.id,
+    },
+    props: {
+      post: item,
+      next: last.id === item.id ? works[0] : works[index + 1],
+      totalCount: result.totalCount,
+      currentIndex: index + 1
+    },
+  }));
+}
+
+const { post, next, totalCount, currentIndex } = Astro.props;
+const eyecatch = post.eyecatch.src;
+---
+
+<Layout title="Works" permalink={`/works/${post.id}/`}>
+  <link
+    slot="prependHead"
+    as="image"
+    crossorigin="anonymous"
+    href={eyecatch + IMAGIX_API + '&w=750'}
+    media={mq.sp}
+    rel="preload"
+  />
+  <link
+    slot="prependHead"
+    as="image"
+    crossorigin="anonymous"
+    href={eyecatch + IMAGIX_API + '&w=1440'}
+    media={mq.pc}
+    rel="preload"
+  />
+  <WorksDetail post={post} nextPost={next} now={currentIndex} max={totalCount}  />
+</Layout>
