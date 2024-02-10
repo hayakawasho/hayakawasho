@@ -1,6 +1,6 @@
 ---
-import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
-import { ClientOnly } from './client-only.tsx';
+// import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
+// import { ClientOnly } from './client-only.tsx';
 import '~/_features/page.works/index.css';
 import '~/_features/page.works-single/index.css';
 
@@ -51,7 +51,8 @@ const title = props.title ? props.title + ' | ' + siteTitle : siteTitle;
     <meta content={siteTitle} property="og:site_name" />
     <meta content={SITE_URL + '/ogp.jpg'} property="og:image" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Jost:wght@400&display=swap" />
+    {//}<GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Jost:wght@400&display=swap" />
+    }
 	</head>
   <body class="">
     <div
@@ -80,7 +81,6 @@ const title = props.title ? props.title + ' | ' + siteTitle : siteTitle;
     <div class="ui">
       <div class="sp:hidden" data-component="Cursor"></div>
     </div>
-    <ClientOnly client:only="react" />
   </body>
 </html>
 
