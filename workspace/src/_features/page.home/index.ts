@@ -1,5 +1,5 @@
 import { defineComponent, useSlot, useDomRef, useMount } from 'lake';
-import { useInfiniteScroll } from '~/_foundation/hooks';
+// import { useInfiniteScroll } from '~/_foundation/hooks';
 // import { Tween } from '~/_foundation/tween';
 // import { waitFrame } from '~/_foundation/utils';
 // import Projects from './projects';
@@ -14,8 +14,8 @@ export default defineComponent({
   setup(_el, context: AppContext) {
     const { history } = context;
 
-    const { addChild } = useSlot();
-    const { refs } = useDomRef<Refs>('projects');
+    const { addChild: _ } = useSlot();
+    const { refs: __ } = useDomRef<Refs>('projects');
 
     useMount(() => {
       if (history.value === 'push') {

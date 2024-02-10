@@ -1,11 +1,11 @@
 <script lang="ts">
   import { useScrollbarProgress } from '~/_states/scrollbar-progress';
 
-  let progressY = 0;
+  // Thislet progressY = 0;
   let valueNow = 0;
 
   useScrollbarProgress(({ pos, now }) => {
-    progressY = pos;
+    // progressY = pos;
     valueNow = now;
   });
 </script>

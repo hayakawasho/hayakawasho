@@ -16,7 +16,7 @@ export default defineComponent({
       mat: ShaderMaterial;
     } & AppContext
   ) {
-    const { frontCanvasContext, history, geo, mat } = context;
+    const { frontCanvasContext, history: _, geo, mat } = context;
 
     const mq = useMediaQuery();
 

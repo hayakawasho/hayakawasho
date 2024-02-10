@@ -1,5 +1,6 @@
 import cx from 'clsx';
 import React from 'react';
+import { selectDatetime, selectLaunch, selectUrl } from '~/_features/work/selector';
 import { zeroPadding } from '~/_foundation/utils';
 import * as Styles from './index.css';
 import { Header } from '../header/view';
@@ -55,15 +56,53 @@ const Component: React.FC<{
 
               <div className={Styles.intro__info}>
                 <div className={Styles.info}>
-                  {
-                    //<InfoCategory post={post} />
-                  }
-                  {
-                    //<InfoDate post={post} />
-                  }
-                  {
-                    // post.url && <InfoUrl post={post} />
-                  }
+                  <dl className={Styles.infoItem}>
+                    <dt className={Styles.infoItem__heading}>
+                      <span className="inline-block uppercase" data-ref="infoText">
+                        (Category)
+                      </span>
+                    </dt>
+                    <dd className={Styles.infoItem__label}>
+                      <span className="inline-block" data-ref="infoText">
+                        {post.category}
+                      </span>
+                    </dd>
+                  </dl>
+                  <dl className={Styles.infoItem}>
+                    <dt className={Styles.infoItem__heading}>
+                      <span className="inline-block uppercase" data-ref="infoText">
+                        (Date)
+                      </span>
+                    </dt>
+                    <dd className={cx(Styles.infoItem__label, 'uppercase')}>
+                      <time
+                        className="inline-block"
+                        data-ref="infoText"
+                        dateTime={selectDatetime(post)}
+                      >
+                        {selectLaunch(post)}
+                      </time>
+                    </dd>
+                  </dl>
+                  {post.url && (
+                    <dl className={Styles.infoItem}>
+                      <dt className={Styles.infoItem__heading}>
+                        <span className="inline-block uppercase" data-ref="infoText">
+                          (Url)
+                        </span>
+                      </dt>
+                      <dd className={Styles.infoItem__url}>
+                        <a
+                          className="inline-block"
+                          data-ref="infoText"
+                          href={post.url}
+                          target="_blank"
+                        >
+                          {selectUrl(post)} <span className="text-[90%]">↗</span>
+                        </a>
+                      </dd>
+                    </dl>
+                  )}
                 </div>
                 {post.stacks.length > 0 && (
                   <div className={Styles.stacks}>

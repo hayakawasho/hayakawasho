@@ -145,6 +145,32 @@ export const info = style({
   width: 'calc(var(--grid) * 5)',
 });
 
+export const infoItem = style({
+  '@media': {
+    [mq.pc]: {
+      fontSize: '1.3rem',
+    },
+  },
+  fontSize: '1.1rem',
+});
+
+export const infoItem__heading = style({
+  backfaceVisibility: 'hidden',
+  opacity: 0.5,
+  overflow: 'hidden',
+});
+
+export const infoItem__label = style({
+  backfaceVisibility: 'hidden',
+  overflow: 'hidden',
+});
+
+export const infoItem__url = style({
+  backfaceVisibility: 'hidden',
+  fontSize: '110%',
+  overflow: 'hidden',
+});
+
 export const stacks = style({
   marginTop: '0.2rem',
   paddingBottom: '0.5em',
@@ -185,9 +211,9 @@ export const stacks__hr = style({
 
 export const eyecatch = style({
   ':before': {
+    aspectRatio: '16 / 9',
     content: '',
     display: 'block',
-    aspectRatio: '16 / 9',
   },
   backfaceVisibility: 'hidden',
   overflow: 'hidden',

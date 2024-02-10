@@ -3,8 +3,6 @@ import { convertWorkFromCMS } from './converter';
 import type { WorksAPISchema } from '../schema';
 import type { WorkMetadata } from '~/_features/work/model';
 
-const API_ENDPOINT = 'https://hayakawasho.microcms.io/api/v1';
-
 export const createWorksRepository = (apiKey: string) => ({
   findList: async (
     q: WorksAPISchema['GET']['request']['params']
@@ -12,15 +10,18 @@ export const createWorksRepository = (apiKey: string) => ({
     works: WorkMetadata[];
     totalCount: number;
   }> => {
-    const res = await axios.get<WorksAPISchema['GET']['response']>(`${API_ENDPOINT}/works`, {
-      params: {
-        ...q,
-      },
-      headers: {
-        'Content-Type': 'application/json',
-        'X-MICROCMS-API-KEY': apiKey,
-      },
-    });
+    const res = await axios.get<WorksAPISchema['GET']['response']>(
+      `https://hayakawasho.microcms.io/api/v1/works`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-MICROCMS-API-KEY': apiKey,
+        },
+        params: {
+          ...q,
+        },
+      }
+    );
 
     return {
       totalCount: res.data.totalCount,

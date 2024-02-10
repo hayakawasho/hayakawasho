@@ -23,7 +23,7 @@ type Refs = {
 export default defineComponent({
   name: 'Item',
   setup(el: HTMLElement, context: Props) {
-    const { once, infiniteScrollContext, history, parentScene } = context;
+    const { once, infiniteScrollContext, history, parentScene: _ } = context;
     const { posY, diff } = infiniteScrollContext;
 
     const mq = useMediaQuery();

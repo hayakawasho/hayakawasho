@@ -2,7 +2,7 @@ import { defineComponent, ref, useMount, useEvent } from 'lake';
 import NormalizeWheel from 'normalize-wheel';
 import { clamp } from 'remeda';
 import { useTick } from '~/_foundation/hooks';
-import { useScrollTween } from '~/_foundation/hooks/use-scroll-tween';
+// import { useScrollTween } from '~/_foundation/hooks/use-scroll-tween';
 import { lerp } from '~/_foundation/math';
 import { Tween } from '~/_foundation/tween';
 import { qsa } from '~/_foundation/utils';
@@ -32,7 +32,7 @@ export default defineComponent({
       sp: 0.09,
     } as const;
 
-    const scrollTweenContext = useScrollTween();
+    // const scrollTweenContext = useScrollTween();
 
     const state = {
       active: false,
