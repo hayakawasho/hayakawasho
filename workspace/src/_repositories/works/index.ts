@@ -10,18 +10,17 @@ export const createWorksRepository = (apiKey: string) => ({
     works: WorkMetadata[];
     totalCount: number;
   }> => {
-    const res = await axios.get<WorksAPISchema['GET']['response']>(
-      `https://hayakawasho.microcms.io/api/v1/works`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'X-MICROCMS-API-KEY': apiKey,
-        },
-        params: {
-          ...q,
-        },
-      }
-    );
+    const res = await axios<WorksAPISchema['GET']['response']>({
+      url: `https://hayakawasho.microcms.io/api/v1/works`,
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-MICROCMS-API-KEY': apiKey,
+      },
+      params: {
+        ...q,
+      },
+    })
 
     return {
       totalCount: res.data.totalCount,

@@ -10,6 +10,8 @@ export default defineConfig({
   devToolbar: {
     enabled: false
   },
+  publicDir: './static',
+  outDir: './public',
   compressHTML: true,
   build: {
     inlineStylesheets: "never"
