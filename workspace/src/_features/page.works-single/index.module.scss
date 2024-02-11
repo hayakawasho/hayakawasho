@@ -226,7 +226,7 @@ $mq-pc: 640px;
   width: calc((var(--grid) * 10));
 
   @media screen and (min-width: #{$mq-pc}) {
-    gap: 14rem;
+    gap: 12rem;
     max-width: 1200px;
     width: calc(var(--grid) * 9);
   }
