@@ -1,6 +1,6 @@
-import { useMount, useEvent } from 'lake';
-import { useWindowSize } from '~/_states/window-size';
-import { useScrollTween } from './use-scroll-tween';
+import { useMount, useEvent } from "lake";
+import { useWindowSize } from "@/_states/window-size";
+import { useScrollTween } from "./use-scroll-tween";
 
 export const useInfiniteScroll = (container: HTMLElement) => {
   const scrollTweenContext = useScrollTween();
@@ -10,11 +10,11 @@ export const useInfiniteScroll = (container: HTMLElement) => {
     scrollTweenContext.resize(maxY);
   });
 
-  useEvent(window as any, 'wheel', scrollTweenContext.onWheel, {
+  useEvent(window as any, "wheel", scrollTweenContext.onWheel, {
     passive: true,
   });
 
-  useEvent(window as any, 'touchmove', scrollTweenContext.onTouchmove, {
+  useEvent(window as any, "touchmove", scrollTweenContext.onTouchmove, {
     passive: true,
   });
 

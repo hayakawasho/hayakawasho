@@ -1,13 +1,13 @@
 import { defineComponent, useDomRef, useSlot, useMount } from "lake";
-import { useMouseoverSplitText } from "~/_foundation/hooks";
-import { splitTextNode2Words } from "~/_foundation/split-text";
-import { Tween } from "~/_foundation/tween";
-import { waitFrame } from "~/_foundation/utils";
-import { useWindowSize } from "~/_states/window-size";
+import { useMouseoverSplitText } from "@/_foundation/hooks";
+import { splitTextNode2Words } from "@/_foundation/split-text";
+import { Tween } from "@/_foundation/tween";
+import { waitFrame } from "@/_foundation/utils";
+import { useWindowSize } from "@/_states/window-size";
 import Eyecatch from "./eyecatch";
 import NextProject from "./next";
 import Screenshots from "./screenshots";
-import type { AppContext } from "~/_foundation/type";
+import type { AppContext } from "@/_foundation/type";
 
 type Refs = {
   back: HTMLElement;
@@ -157,15 +157,7 @@ export default defineComponent({
           y: "-100%",
         });
         Tween.prop(
-          [
-            refs.dash,
-            refs.max,
-            refs.now,
-            refs.infoText,
-            refs.stack,
-            refs.sub,
-            split.words,
-          ],
+          [refs.dash, refs.max, refs.now, refs.infoText, refs.stack, refs.sub, split.words],
           {
             willChange: "transform",
           },
@@ -181,15 +173,7 @@ export default defineComponent({
             y: "-240%",
           }),
           Tween.tween(
-            [
-              refs.dash,
-              refs.max,
-              refs.now,
-              refs.infoText,
-              refs.stack,
-              refs.sub,
-              split.words,
-            ],
+            [refs.dash, refs.max, refs.now, refs.infoText, refs.stack, refs.sub, split.words],
             0.45,
             "custom.in",
             {

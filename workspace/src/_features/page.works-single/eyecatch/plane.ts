@@ -1,6 +1,6 @@
-import { IMAGIX_API } from '~/_foundation/const';
-import { GlObject } from '~/_foundation/glsl/gl-object';
-import { map } from '~/_foundation/math';
+import { IMAGIX_API } from "@/_foundation/const";
+import { GlObject } from "@/_foundation/glsl/gl-object";
+import { map } from "@/_foundation/math";
 import {
   Vector2,
   Mesh,
@@ -8,13 +8,13 @@ import {
   ShaderMaterial,
   TextureLoader,
   LinearFilter,
-} from '~/_foundation/three';
-import fragment from './fragment.frag';
-import vertex from './vertex.vert';
-import type { Size } from '~/_foundation/type';
+} from "@/_foundation/three";
+import fragment from "./fragment.frag";
+import vertex from "./vertex.vert";
+import type { Size } from "@/_foundation/type";
 
 const loader = new TextureLoader();
-loader.crossOrigin = 'anonymous';
+loader.crossOrigin = "anonymous";
 
 export class Plane extends GlObject {
   #offsetY = 0;
@@ -27,11 +27,11 @@ export class Plane extends GlObject {
     props: {
       currentY: number;
       windowSize: Size;
-    }
+    },
   ) {
     super(el);
 
-    const texSrc = el.dataset.src! + IMAGIX_API + '&w=750';
+    const texSrc = el.dataset.src! + IMAGIX_API + "&w=750";
 
     const texture = loader.load(texSrc, texture => {
       texture.minFilter = LinearFilter;

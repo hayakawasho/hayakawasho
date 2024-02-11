@@ -1,10 +1,13 @@
-import type { Mesh } from '~/_foundation/three';
-import type { Point } from '~/_foundation/type';
+import type { Mesh } from "@/_foundation/three";
+import type { Point } from "@/_foundation/type";
 
 export class ImagePlane {
   private _pos: Point;
 
-  constructor(private _mesh: Mesh, private _el: HTMLElement) {
+  constructor(
+    private _mesh: Mesh,
+    private _el: HTMLElement,
+  ) {
     this._pos = {
       x: 0,
       y: 0,

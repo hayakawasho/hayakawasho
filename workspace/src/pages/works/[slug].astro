@@ -1,9 +1,9 @@
 ---
-import Layout from '~/layout.astro';
-import WorksDetail from '~/_features/page.works-single/view';
 import dotenv from 'dotenv';
-import { createWorksRepository } from '~/_repositories/works';
-import { IMAGIX_API, mq } from '~/_foundation/const';
+import { IMAGIX_API, mq } from '@/_foundation/const';
+import WorksDetail from '@/_features/page.works-single/view';
+import { createWorksRepository } from '@/_repositories/works';
+import Layout from '@/layout.astro';
 
 dotenv.config();
 

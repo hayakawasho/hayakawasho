@@ -5,11 +5,12 @@
     "jsxImportSource": "react",
     "baseUrl": "./",
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": ["src/*"],
+      "@/*": ["src/*"]
     },
     "moduleResolution": "Node",
     "allowJs": true
   },
   "include": ["src/**/*", "@types"],
-  "exclude": ["node_modules/*", "static/*", "./lib"],
+  "exclude": ["node_modules/*", "static/*", "./lib"]
 }

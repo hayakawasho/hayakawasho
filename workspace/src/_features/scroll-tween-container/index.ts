@@ -1,21 +1,21 @@
-import { defineComponent, ref, useMount, useEvent } from 'lake';
-import NormalizeWheel from 'normalize-wheel';
-import { clamp } from 'remeda';
-import { useTick } from '~/_foundation/hooks';
-// import { useScrollTween } from '~/_foundation/hooks/use-scroll-tween';
-import { lerp } from '~/_foundation/math';
-import { Tween } from '~/_foundation/tween';
-import { qsa } from '~/_foundation/utils';
-import { useMediaQuery } from '~/_states/mq';
-import { scrollPosYMutators } from '~/_states/scroll';
-import { useWindowSize } from '~/_states/window-size';
-import { useHandleCache } from './use-handle-cache';
-import type { Cache } from './use-handle-cache';
+import { defineComponent, ref, useMount, useEvent } from "lake";
+import NormalizeWheel from "normalize-wheel";
+import { clamp } from "remeda";
+import { useTick } from "@/_foundation/hooks";
+// import { useScrollTween } from '@/_foundation/hooks/use-scroll-tween';
+import { lerp } from "@/_foundation/math";
+import { Tween } from "@/_foundation/tween";
+import { qsa } from "@/_foundation/utils";
+import { useMediaQuery } from "@/_states/mq";
+import { scrollPosYMutators } from "@/_states/scroll";
+import { useWindowSize } from "@/_states/window-size";
+import { useHandleCache } from "./use-handle-cache";
+import type { Cache } from "./use-handle-cache";
 
-const SELECTOR_CLASS = '[data-scroll-item]';
+const SELECTOR_CLASS = "[data-scroll-item]";
 
 export default defineComponent({
-  name: 'ScrollTweenContainer',
+  name: "ScrollTweenContainer",
   setup(el) {
     const elItems = qsa<HTMLElement>(SELECTOR_CLASS, el);
 
@@ -84,7 +84,7 @@ export default defineComponent({
 
     useEvent(
       window as any,
-      'touchstart',
+      "touchstart",
       e => {
         if (!state.active) {
           return;
@@ -96,10 +96,10 @@ export default defineComponent({
       },
       {
         passive: true,
-      }
+      },
     );
 
-    useEvent(window as any, 'touchend', () => {
+    useEvent(window as any, "touchend", () => {
       if (!state.dragging || !state.active) {
         state.dragging = false;
       }
@@ -107,7 +107,7 @@ export default defineComponent({
 
     useEvent(
       window as any,
-      'touchmove',
+      "touchmove",
       e => {
         if (!state.dragging || !state.active) {
           return;
@@ -123,12 +123,12 @@ export default defineComponent({
       },
       {
         passive: true,
-      }
+      },
     );
 
     useEvent(
       window as any,
-      'wheel',
+      "wheel",
       e => {
         if (!state.active) {
           return;
@@ -136,11 +136,14 @@ export default defineComponent({
 
         const { pixelY } = NormalizeWheel(e);
         state.targetPos += pixelY;
-        state.targetPos = clamp(state.targetPos, { max: state.scrollLimit, min: -0 });
+        state.targetPos = clamp(state.targetPos, {
+          max: state.scrollLimit,
+          min: -0,
+        });
       },
       {
         passive: true,
-      }
+      },
     );
 
     useWindowSize(() => {
@@ -193,7 +196,7 @@ export default defineComponent({
     };
 
     const scrollTo = (y: number) => {
-      Tween.tween(state, 0.8, 'power2.inOut', {
+      Tween.tween(state, 0.8, "power2.inOut", {
         targetPos: clamp(y, {
           max: state.scrollLimit,
         }),

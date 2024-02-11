@@ -1,17 +1,17 @@
-import { IMAGIX_API } from '~/_foundation/const';
-import { GlObject } from '~/_foundation/glsl/gl-object';
-import { map } from '~/_foundation/math';
+import { IMAGIX_API } from "@/_foundation/const";
+import { GlObject } from "@/_foundation/glsl/gl-object";
+import { map } from "@/_foundation/math";
 import {
   Mesh,
   PlaneBufferGeometry,
   ShaderMaterial,
   TextureLoader,
   LinearFilter,
-} from '~/_foundation/three';
-import type { Size } from '~/_foundation/type';
+} from "@/_foundation/three";
+import type { Size } from "@/_foundation/type";
 
 const loader = new TextureLoader();
-loader.crossOrigin = 'anonymous';
+loader.crossOrigin = "anonymous";
 
 export class Plane extends GlObject {
   #offsetY = 0;
@@ -24,18 +24,18 @@ export class Plane extends GlObject {
     el: HTMLElement,
     props: {
       currentY: number;
-      mq: 'pc' | 'sp';
+      mq: "pc" | "sp";
       windowSize: Size;
       geo: PlaneBufferGeometry;
       mat: ShaderMaterial;
-    }
+    },
   ) {
     super(el);
 
     const imgSrc = el.dataset.src!;
     const texSrc = {
-      pc: imgSrc + IMAGIX_API + '&w=1200',
-      sp: imgSrc + IMAGIX_API + '&w=750',
+      pc: imgSrc + IMAGIX_API + "&w=1200",
+      sp: imgSrc + IMAGIX_API + "&w=750",
     };
 
     const texture = loader.load(texSrc[props.mq], texture => {

@@ -1,4 +1,4 @@
-import { useWindowSize } from '~/_states/window-size';
+import { useWindowSize } from "@/_states/window-size";
 
 export type Cache = {
   el: HTMLElement;
@@ -43,7 +43,7 @@ export const useHandleCache = () => {
         transform: 0,
       });
 
-      el.style.transform = 'translate3d(0, 0, 0)';
+      el.style.transform = "translate3d(0, 0, 0)";
 
       return acc;
     }, []);

@@ -1,7 +1,7 @@
 import axios from "redaxios";
 import { convertWorkFromCMS } from "./converter";
 import type { WorksAPISchema } from "../schema";
-import type { WorkMetadata } from "~/_features/work/model";
+import type { WorkMetadata } from "@/_features/work/model";
 
 export const createWorksRepository = (apiKey: string) => ({
   findList: async (

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { useTick } from '~/_foundation/hooks';
-  import { lerp } from '~/_foundation/math';
-  import { mousePosMutators } from '~/_states/mouse';
+  import { useTick } from '@/_foundation/hooks';
+  import { lerp } from '@/_foundation/math';
+  import { mousePosMutators } from '@/_states/mouse';
 
   let timer: number;
 

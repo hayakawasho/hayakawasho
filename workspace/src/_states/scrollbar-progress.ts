@@ -1,7 +1,7 @@
-import { useUnmount } from 'lake';
-import { map } from 'nanostores';
-import { noop } from '~/_foundation/utils';
-import { useWindowSize } from '~/_states/window-size';
+import { useUnmount } from "lake";
+import { map } from "nanostores";
+import { noop } from "@/_foundation/utils";
+import { useWindowSize } from "@/_states/window-size";
 
 const progress = map<{
   now: number;
@@ -12,7 +12,7 @@ const progress = map<{
 });
 
 export const useScrollbarProgress = (
-  callback: (payload: { now: number; pos: number }) => void = noop
+  callback: (payload: { now: number; pos: number }) => void = noop,
 ) => {
   const [_wh, wh] = useWindowSize();
 

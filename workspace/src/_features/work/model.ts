@@ -1,4 +1,4 @@
-import type { Size } from '~/_foundation/type';
+import type { Size } from "@/_foundation/type";
 
 type Image = Size & {
   src: string;

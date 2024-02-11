@@ -1,7 +1,7 @@
-import { useEvent } from 'lake';
-import { Tween } from '~/_foundation/tween';
-import { waitFrame } from '~/_foundation/utils';
-import { useMediaQuery } from '~/_states/mq';
+import { useEvent } from "lake";
+import { Tween } from "@/_foundation/tween";
+import { waitFrame } from "@/_foundation/utils";
+import { useMediaQuery } from "@/_states/mq";
 
 type Context = {
   chars: HTMLElement[];
@@ -10,27 +10,27 @@ type Context = {
 
 export const useMouseoverSplitText = (
   target: HTMLElement,
-  { chars, stagger = 0.0175 }: Context
+  { chars, stagger = 0.0175 }: Context,
 ) => {
   const mq = useMediaQuery();
 
-  useEvent(target, 'mouseenter', async () => {
-    if (mq.value === 'sp') {
+  useEvent(target, "mouseenter", async () => {
+    if (mq.value === "sp") {
       return;
     }
 
     Tween.kill(chars);
     Tween.prop(chars, {
-      willChange: 'transform',
-      y: '0%',
+      willChange: "transform",
+      y: "0%",
     });
 
     await waitFrame();
 
-    Tween.tween(chars, 1.6, 'expo.out', {
+    Tween.tween(chars, 1.6, "expo.out", {
       onComplete: () => {
         Tween.prop(chars, {
-          clearProps: 'will-change',
+          clearProps: "will-change",
         });
       },
       stagger,

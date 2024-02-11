@@ -1,12 +1,12 @@
-import cx from 'clsx';
-import React from 'react';
-import { selectDatetime, selectLaunch, selectUrl } from '~/_features/work/selector';
-import { zeroPadding } from '~/_foundation/utils';
-import Styles from './index.module.scss';
-import { Header } from '../header/view';
-import { PageWrapper } from '../page-wrapper/view';
-import { Link } from '../ui/link';
-import type { WorkMetadata } from '~/_features/work/model';
+import cx from "clsx";
+import React from "react";
+import { selectDatetime, selectLaunch, selectUrl } from "@/_features/work/selector";
+import { zeroPadding } from "@/_foundation/utils";
+import Styles from "./index.module.scss";
+import { Header } from "../header/view";
+import { PageWrapper } from "../page-wrapper/view";
+import { Link } from "../ui/link";
+import type { WorkMetadata } from "@/_features/work/model";
 
 const Component: React.FC<{
   post: WorkMetadata;
@@ -18,7 +18,7 @@ const Component: React.FC<{
     <PageWrapper header={<Header current="single" />} namespace="single">
       <main data-component="Single">
         <Link className={Styles.back} data-ref="back" to="../">
-          {[...'Back'].map((c, index) => (
+          {[..."Back"].map((c, index) => (
             <span aria-hidden="true" className="inline-block relative overflow-hidden" key={index}>
               <span className="inline-block" data-ref="c">
                 <span className="inline-block relative">{c}</span>
@@ -44,12 +44,12 @@ const Component: React.FC<{
               </div>
 
               <div className={Styles.intro__hgroup}>
-                <p className={cx(Styles.sub, 'overflow-hidden')}>
+                <p className={cx(Styles.sub, "overflow-hidden")}>
                   <span className="block uppercase" data-ref="sub">
                     Projects/
                   </span>
                 </p>
-                <h1 className={cx(Styles.heading, 'overflow-hidden mt-[-.1em]')} data-ref="h1">
+                <h1 className={cx(Styles.heading, "overflow-hidden mt-[-.1em]")} data-ref="h1">
                   {post.title}
                 </h1>
               </div>
@@ -74,7 +74,7 @@ const Component: React.FC<{
                         (Date)
                       </span>
                     </dt>
-                    <dd className={cx(Styles.infoItem__label, 'uppercase')}>
+                    <dd className={cx(Styles.infoItem__label, "uppercase")}>
                       <time
                         className="inline-block"
                         data-ref="infoText"
@@ -122,10 +122,10 @@ const Component: React.FC<{
             </div>
           </div>
 
-          <div className={cx(Styles.eyecatch, 'pc:hidden')}>
+          <div className={cx(Styles.eyecatch, "pc:hidden")}>
             <img
               alt=""
-              className={cx(Styles.eyecatchImg, 'pointer-events-none invisible')}
+              className={cx(Styles.eyecatchImg, "pointer-events-none invisible")}
               data-h={post.eyecatch.height}
               data-ref="eyecatch"
               data-src={post.eyecatch.src}
@@ -165,10 +165,10 @@ const Component: React.FC<{
               data-href={`../${nextPost.id}/`}
               data-ref="nextLink"
             >
-              <p className={cx(Styles.sub, '!pc:text-center')}>
+              <p className={cx(Styles.sub, "!pc:text-center")}>
                 <span className="inline-block uppercase">Next</span>
               </p>
-              <h2 className={cx(Styles.heading, '!pc:text-center mt-[-.05em]')}>
+              <h2 className={cx(Styles.heading, "!pc:text-center mt-[-.05em]")}>
                 {nextPost.title}
               </h2>
             </div>

@@ -1,4 +1,4 @@
-import { useEvent, useUnmount } from 'lake';
+import { useEvent, useUnmount } from "lake";
 import {
   Vector2,
   Mesh,
@@ -6,15 +6,15 @@ import {
   ShaderMaterial,
   TextureLoader,
   LinearFilter,
-} from '~/_foundation/three';
-// import { Tween } from "~/_foundation/tween";
-import { useWindowSize } from '~/_states/window-size';
-import fragment from './fragment.frag';
-import vertex from './vertex.vert';
-import type { Object3D } from '~/_foundation/three';
+} from "@/_foundation/three";
+// import { Tween } from "@/_foundation/tween";
+import { useWindowSize } from "@/_states/window-size";
+import fragment from "./fragment.frag";
+import vertex from "./vertex.vert";
+import type { Object3D } from "@/_foundation/three";
 
 const loader = new TextureLoader();
-loader.crossOrigin = 'anonymous';
+loader.crossOrigin = "anonymous";
 
 export const useThumbnail = (el: HTMLElement, parentScene: Object3D) => {
   const imgSrc = el.dataset.src!;
@@ -67,11 +67,11 @@ export const useThumbnail = (el: HTMLElement, parentScene: Object3D) => {
 
   const mesh = new Mesh(geometry, material);
 
-  useEvent(el, 'mouseenter', () => {
+  useEvent(el, "mouseenter", () => {
     //
   });
 
-  useEvent(el, 'mouseleave', () => {
+  useEvent(el, "mouseleave", () => {
     //
   });
 

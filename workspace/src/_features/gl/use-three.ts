@@ -1,8 +1,8 @@
-import { getGPUTier } from 'detect-gpu';
-import { useTick } from '~/_foundation/hooks';
-import { WebGLRenderer, PerspectiveCamera, Scene } from '~/_foundation/three';
-import { useWindowSize } from '~/_states/window-size';
-import type { Object3D } from '~/_foundation/three';
+import { getGPUTier } from "detect-gpu";
+import { useTick } from "@/_foundation/hooks";
+import { WebGLRenderer, PerspectiveCamera, Scene } from "@/_foundation/three";
+import { useWindowSize } from "@/_states/window-size";
+import type { Object3D } from "@/_foundation/three";
 
 export const useThree = (canvas: HTMLCanvasElement, resolution: number) => {
   const { width, height } = canvas.getBoundingClientRect();

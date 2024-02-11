@@ -1,11 +1,11 @@
-import { defineComponent, useSlot, useDomRef, useMount, useUnmount } from 'lake';
-import { useInfiniteScroll, useTick } from '~/_foundation/hooks';
-import { lerp, map } from '~/_foundation/math';
-import { Object3D } from '~/_foundation/three';
-import { useMousePos } from '~/_states/mouse';
-import { useWindowSize } from '~/_states/window-size';
-import Item from './item';
-import type { AppContext } from '~/_foundation/type';
+import { defineComponent, useSlot, useDomRef, useMount, useUnmount } from "lake";
+import { useInfiniteScroll, useTick } from "@/_foundation/hooks";
+import { lerp, map } from "@/_foundation/math";
+import { Object3D } from "@/_foundation/three";
+import { useMousePos } from "@/_states/mouse";
+import { useWindowSize } from "@/_states/window-size";
+import Item from "./item";
+import type { AppContext } from "@/_foundation/type";
 
 type Refs = {
   items: HTMLElement;
@@ -13,12 +13,12 @@ type Refs = {
 };
 
 export default defineComponent({
-  name: 'Works',
+  name: "Works",
   setup(_el, context: AppContext) {
     const { backCanvasContext } = context;
 
     const { addChild } = useSlot();
-    const { refs } = useDomRef<Refs>('items', 'item');
+    const { refs } = useDomRef<Refs>("items", "item");
 
     const infiniteScrollContext = useInfiniteScroll(refs.items);
 

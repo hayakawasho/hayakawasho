@@ -1,7 +1,7 @@
-import { ref, readonly, useUnmount } from 'lake';
-import { map } from 'nanostores';
-import { noop, waitFrame } from '~/_foundation/utils';
-import type { Size } from '~/_foundation/type';
+import { ref, readonly, useUnmount } from "lake";
+import { map } from "nanostores";
+import { noop, waitFrame } from "@/_foundation/utils";
+import type { Size } from "@/_foundation/type";
 
 const viewport = map<Size>({
   height: window.innerHeight,

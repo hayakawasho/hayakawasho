@@ -1,12 +1,12 @@
-import { defineComponent, useMount, useUnmount } from 'lake';
-// import { useMediaQuery } from '~/_states/mq';
-import { useScrollPosY } from '~/_states/scroll';
-import { useWindowSize } from '~/_states/window-size';
-import { Plane } from './plane';
-import type { AppContext } from '~/_foundation/type';
+import { defineComponent, useMount, useUnmount } from "lake";
+// import { useMediaQuery } from '@/_states/mq';
+import { useScrollPosY } from "@/_states/scroll";
+import { useWindowSize } from "@/_states/window-size";
+import { Plane } from "./plane";
+import type { AppContext } from "@/_foundation/type";
 
 export default defineComponent({
-  name: 'eyecatch',
+  name: "eyecatch",
   setup(el: HTMLElement, context: AppContext) {
     const { frontCanvasContext, history: _ } = context;
 

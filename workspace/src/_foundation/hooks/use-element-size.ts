@@ -1,11 +1,11 @@
-import { useMount } from 'lake';
-import { debounce } from '~/_foundation/utils';
-import type { Size } from '~/_foundation/type';
+import { useMount } from "lake";
+import { debounce } from "@/_foundation/utils";
+import type { Size } from "@/_foundation/type";
 
 export const useElementSize = <T extends Element>(
   targetOrTargets: T | T[],
   callback: (payload: Size) => void,
-  debounceTime = 200
+  debounceTime = 200,
 ) => {
   const ro = new ResizeObserver(
     debounce(([entry]) => {
@@ -15,7 +15,7 @@ export const useElementSize = <T extends Element>(
         height,
         width,
       });
-    }, debounceTime)
+    }, debounceTime),
   );
 
   const watch = (targetOrTargets: T | T[]) => {

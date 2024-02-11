@@ -1,4 +1,4 @@
-import type { RouteName } from '~/_foundation/type';
+import type { RouteName } from "@/_foundation/type";
 
 export const Header = ({ current }: { current: RouteName }) => {
   return (

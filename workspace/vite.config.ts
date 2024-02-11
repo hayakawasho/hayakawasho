@@ -2,7 +2,6 @@ import { resolve } from "path";
 import { splitVendorChunkPlugin, defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import preprocess from "svelte-preprocess";
-import viteCompression from "vite-plugin-compression";
 import { glslify } from "vite-plugin-glslify";
 
 const isDev = process.env.NODE_ENV !== "production";
@@ -12,6 +11,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "~": resolve(__dirname, "src"),
+      "@": resolve(__dirname, "src"),
     },
   },
   server: {
@@ -23,7 +23,6 @@ export default defineConfig({
     svelte({
       preprocess: preprocess(),
     }),
-    viteCompression(),
     glslify(),
     splitVendorChunkPlugin(),
   ],

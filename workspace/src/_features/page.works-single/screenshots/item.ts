@@ -1,20 +1,20 @@
-import { defineComponent, useMount, useUnmount } from 'lake';
-// import { Tween } from '~/_foundation/tween';
-import { useMediaQuery } from '~/_states/mq';
-import { useScrollPosY } from '~/_states/scroll';
-import { useWindowSize } from '~/_states/window-size';
-import { Plane } from './plane';
-import type { PlaneBufferGeometry, ShaderMaterial } from '~/_foundation/three';
-import type { AppContext } from '~/_foundation/type';
+import { defineComponent, useMount, useUnmount } from "lake";
+// import { Tween } from '@/_foundation/tween';
+import { useMediaQuery } from "@/_states/mq";
+import { useScrollPosY } from "@/_states/scroll";
+import { useWindowSize } from "@/_states/window-size";
+import { Plane } from "./plane";
+import type { PlaneBufferGeometry, ShaderMaterial } from "@/_foundation/three";
+import type { AppContext } from "@/_foundation/type";
 
 export default defineComponent({
-  name: 'Screenshot',
+  name: "Screenshot",
   setup(
     el: HTMLImageElement,
     context: {
       geo: PlaneBufferGeometry;
       mat: ShaderMaterial;
-    } & AppContext
+    } & AppContext,
   ) {
     const { frontCanvasContext, history: _, geo, mat } = context;
 

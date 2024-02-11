@@ -1,9 +1,9 @@
-import { defineComponent, useDomRef, useMount, ref } from 'lake';
-import { map } from '~/_foundation/math';
-import { Tween } from '~/_foundation/tween';
-import { useScrollPosY } from '~/_states/scroll';
-import { useWindowSize } from '~/_states/window-size';
-import type { AppContext } from '~/_foundation/type';
+import { defineComponent, useDomRef, useMount, ref } from "lake";
+import { map } from "@/_foundation/math";
+import { Tween } from "@/_foundation/tween";
+import { useScrollPosY } from "@/_states/scroll";
+import { useWindowSize } from "@/_states/window-size";
+import type { AppContext } from "@/_foundation/type";
 
 type Refs = {
   nextProject: HTMLElement;
@@ -12,11 +12,11 @@ type Refs = {
 };
 
 export default defineComponent({
-  name: 'Next',
+  name: "Next",
   setup(_el, _context: AppContext) {
     const isResizing = ref(false);
 
-    const { refs } = useDomRef<Refs>('nextLink', 'end', 'nextProject');
+    const { refs } = useDomRef<Refs>("nextLink", "end", "nextProject");
     const [_, wh] = useWindowSize();
 
     const cache = ref({
@@ -57,7 +57,7 @@ export default defineComponent({
         Tween.prop(refs.nextLink, {
           y,
           z,
-        })
+        }),
       );
     });
 
