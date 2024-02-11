@@ -43,14 +43,18 @@ export class Plane extends GlObject {
       texture.generateMipmaps = false;
     });
 
-    const depth = {
-      pc: 60,
-      sp: 30,
-    };
-
     this.uniforms = {
+      u_bend: {
+        value: {
+          pc: 1,
+          sp: 0.5,
+        }[props.mq],
+      },
       u_depth: {
-        value: depth[props.mq],
+        value: {
+          pc: 100,
+          sp: 60,
+        }[props.mq],
       },
       u_opacity: {
         value: 1,

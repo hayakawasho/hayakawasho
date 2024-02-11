@@ -5,6 +5,7 @@ varying vec4 v_worldPos;
 varying vec2 ssCoords;
 uniform float u_progress;
 uniform float u_depth;
+uniform float u_bend;
 
 void main () {
   vec3 pos = position;
@@ -18,7 +19,7 @@ void main () {
   float finishAt = uv.y;
   float bend = smoothstep(startAt, finishAt, 1. - u_progress);
 
-  pos.x *= 1. + (bend * .1) * abs(ssCoords.x);
+  pos.x *= 1. + (bend * .1) * abs(ssCoords.x) * u_bend;
   pos.z += ((1. - u_progress + 0.5) * u_depth);
 
   vUv = uv;
