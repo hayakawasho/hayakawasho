@@ -47,12 +47,12 @@ export class Plane extends GlObject {
       u_bend: {
         value: {
           pc: 1,
-          sp: 0.5,
+          sp: 0.6,
         }[props.mq],
       },
       u_depth: {
         value: {
-          pc: 100,
+          pc: 90,
           sp: 50,
         }[props.mq],
       },
