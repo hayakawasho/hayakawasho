@@ -7,12 +7,12 @@ export const splitTextNode2Words = (textNode: HTMLElement) => {
     tagName: 'span',
     types: 'words, lines',
     wordClass: '_w',
-  } as SplitTypeOptions;
+  };
 
-  const split = new SplitType(textNode, options);
+  const split = new SplitType(textNode, options as SplitTypeOptions);
 
   return {
-    onSplitUpdate: () => split.split(options),
+    onSplitUpdate: () => split.split(options as SplitTypeOptions),
     split,
   } as const;
 };

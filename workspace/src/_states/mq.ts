@@ -1,10 +1,10 @@
-import { useUnmount, ref, readonly } from 'lake';
-import { atom } from 'nanostores';
-import { noop } from '@/_foundation/utils';
+import { useUnmount, ref, readonly } from "lake";
+import { atom } from "nanostores";
+import { noop } from "@/_foundation/utils";
 
-type MediaQuery = 'pc' | 'sp';
+type MediaQuery = "pc" | "sp";
 
-const mediaQuery = atom<MediaQuery>('pc');
+const mediaQuery = atom<MediaQuery>("pc");
 
 export const useMediaQuery = (callback: (payload: MediaQuery) => void = noop) => {
   const mq = ref<MediaQuery>(mediaQuery.get());

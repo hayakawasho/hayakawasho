@@ -1,12 +1,12 @@
-import { useUnmount, ref, readonly } from 'lake';
-import { atom } from 'nanostores';
-import { noop } from '@/_foundation/utils';
+import { useUnmount, ref, readonly } from "lake";
+import { atom } from "nanostores";
+import { noop } from "@/_foundation/utils";
 
 const posY = atom(0);
 const isScrolling = atom(false);
 
 export const useScrollPosY = (
-  callback: (payload: { currentY: number; oldY: number }) => void = noop
+  callback: (payload: { currentY: number; oldY: number }) => void = noop,
 ) => {
   const refPosY = ref(posY.get());
   const refIsScrolling = ref(isScrolling.get());

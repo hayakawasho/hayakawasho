@@ -1,0 +1,68 @@
+$mq-pc: 640px;
+
+.screen {
+  height: 100%;
+  position: fixed;
+  width: 100%;
+}
+
+.listItem {
+  padding: 1rem 0;
+  padding-left: var(--gap);
+
+  @media screen and (min-width: #{$mq-pc}) {
+    padding: 0;
+    text-align: center;
+    will-change: transform;
+  }
+}
+
+.item {
+  display: grid;
+  font-family: var(--font-en);
+  font-size: 4.3rem;
+  gap: 1.5rem;
+  grid-template-columns: 0.8em 1fr;
+  letter-spacing: 0.02em;
+  width: 100%;
+
+  @media screen and (min-width: #{$mq-pc}) {
+    display: inline-block;
+    font-size: 9.8rem;
+    line-height: 1;
+    padding-left: 0;
+    padding-top: 0.1em;
+    width: auto;
+  }
+
+  @media (hover: hover) {
+    opacity: 0.7;
+    transition: opacity 0.65s cubic-bezier(0.32, 0.94, 0.6, 1);
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.item__title {
+  display: inline-block;
+  line-height: 1.15;
+  overflow: hidden;
+  transform: translateZ(0);
+
+  > :global(._l) {
+    overflow: hidden;
+  }
+
+  > :global(._l + ._l) {
+    margin-top: -0.2em;
+  }
+}
+
+.item__thumb {
+  height: 0.85em;
+  margin-top: 0.1em;
+  overflow: hidden;
+  width: 0.85em;
+}

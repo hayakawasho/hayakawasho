@@ -1,10 +1,10 @@
-import { gsap } from 'gsap';
-import { ref, readonly, useEvent } from 'lake';
-import NormalizeWheel from 'normalize-wheel';
-import { useTick } from '@/_foundation/hooks';
-import { lerp } from '@/_foundation/math';
-import { useMediaQuery } from '@/_states/mq';
-import { useWindowSize } from '@/_states/window-size';
+import { gsap } from "gsap";
+import { ref, readonly, useEvent } from "lake";
+import NormalizeWheel from "normalize-wheel";
+import { useTick } from "@/_foundation/hooks";
+import { lerp } from "@/_foundation/math";
+import { useMediaQuery } from "@/_states/mq";
+import { useWindowSize } from "@/_states/window-size";
 
 const EASE = {
   pc: 0.1,
@@ -27,7 +27,7 @@ export const useScrollTween = () => {
 
   useEvent(
     window as any,
-    'touchstart',
+    "touchstart",
     e => {
       state.dragging = true;
       state.position = posY.value;
@@ -35,10 +35,10 @@ export const useScrollTween = () => {
     },
     {
       passive: true,
-    }
+    },
   );
 
-  useEvent(window as any, 'touchend', () => {
+  useEvent(window as any, "touchend", () => {
     if (state.dragging) {
       state.dragging = false;
     }

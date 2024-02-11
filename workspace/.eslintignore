@@ -1,7 +1,4 @@
-_site
-/_transpiled
-/_bk
-
+.gitignore
 
 # Node dependencies
 /node_modules/

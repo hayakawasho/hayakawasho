@@ -21,7 +21,6 @@ type RawDBResponse<T> = {
   limit: number;
 };
 
-// WIP
 type RawWorkResponse = {
   title: string;
   eyecatch: {
@@ -29,6 +28,15 @@ type RawWorkResponse = {
     width?: number;
     height?: number;
   };
+  screenshots?: {
+    url?: string;
+    width?: number;
+    height?: number;
+  }[];
+  category: string[];
+  launch: Date;
+  url?: string;
+  stacks: string[];
 };
 
 export type WorksAPISchema = {
