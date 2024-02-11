@@ -1,5 +1,5 @@
 import { resolve } from "path";
-import { defineConfig } from "vite";
+import { splitVendorChunkPlugin, defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import preprocess from "svelte-preprocess";
 // // import viteCompression from "vite-plugin-compression";
@@ -25,6 +25,7 @@ export default defineConfig({
     }),
     // viteCompression(),
     glslify(),
+    splitVendorChunkPlugin(),
   ],
   build: {
     outDir: "./out/assets",

@@ -36,18 +36,11 @@ $mq-pc: 640px;
   }
 
   @media (hover: hover) {
-    &:hover {
-      opacity: 1;
-    }
     opacity: 0.7;
     transition: opacity 0.65s cubic-bezier(0.32, 0.94, 0.6, 1);
-  }
 
-  ._l {
-    overflow: hidden;
-
-    + ._l {
-      margin-top: -0.2em;
+    &:hover {
+      opacity: 1;
     }
   }
 }
@@ -57,6 +50,14 @@ $mq-pc: 640px;
   line-height: 1.15;
   overflow: hidden;
   transform: translateZ(0);
+
+  > :global(._l) {
+    overflow: hidden;
+  }
+
+  > :global(._l + ._l) {
+    margin-top: -0.2em;
+  }
 }
 
 .item__thumb {

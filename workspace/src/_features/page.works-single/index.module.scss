@@ -52,6 +52,15 @@ $mq-pc: 640px;
   @media screen and (min-width: #{$mq-pc}) {
     font-size: 9.4rem;
   }
+
+  > :global(._l) {
+    overflow: hidden;
+    line-height: 1.25;
+  }
+
+  > :global(._l + ._l) {
+    margin-top: -0.2em;
+  }
 }
 
 .intro {
@@ -187,14 +196,15 @@ $mq-pc: 640px;
 }
 
 .eyecatch {
-  &:before {
-    aspect-ratio: 16 / 9;
-    content: '';
-    display: block;
-  }
   backface-visibility: hidden;
   overflow: hidden;
   position: relative;
+
+  &:before {
+    aspect-ratio: 16 / 9;
+    content: "";
+    display: block;
+  }
 }
 
 .eyecatchImg {

@@ -325,29 +325,9 @@ const LOCAL_IP_ADDR = process.env.LOCAL_IP_ADDR || 'localhost';
 
   @font-face {
     font-family: 'Gallery Modern';
-    src: url('/assets/gallerymodern-webfont.woff2') format('woff2');
+    src: url('/gallerymodern-webfont.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
-  }
-
-  html.lenis {
-    height: auto;
-  }
-
-  .lenis.lenis-smooth {
-    scroll-behavior: auto !important;
-  }
-
-  .lenis.lenis-smooth [data-lenis-prevent] {
-    overscroll-behavior: contain;
-  }
-
-  .lenis.lenis-stopped {
-    overflow: hidden;
-  }
-
-  .lenis.lenis-scrolling iframe {
-    pointer-events: none;
   }
 </style>
