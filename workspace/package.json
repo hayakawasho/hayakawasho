@@ -6,9 +6,10 @@
     "dev:vite": "vite",
     "dev:astro": "astro dev",
     "start": "NODE_ENV=development run-p dev:*",
-    "build:vite": "vite build",
     "build:astro": "astro build",
-    "build": "NODE_ENV=production astro check && run-p build:*",
+    "build:vite": "vite build",
+    "build": "NODE_ENV=production run-s build:*",
+    "check": "astro check",
     "preview": "astro preview",
     "astro": "astro"
   },

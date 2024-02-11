@@ -7,16 +7,15 @@ import critters from "astro-critters";
 export default defineConfig({
   integrations: [react(), tailwind(), critters()],
   devToolbar: {
-    enabled: false
+    enabled: false,
   },
-  publicDir: './static',
-  outDir: './public',
+  outDir: "./out/",
   compressHTML: true,
   build: {
-    inlineStylesheets: "never"
+    inlineStylesheets: "never",
   },
   server: {
-    port: 3000
+    port: 3000,
   },
   prefetch: true,
   vite: {
@@ -24,5 +23,5 @@ export default defineConfig({
       // cssCodeSplit: false,
     },
     plugins: [],
-  }
+  },
 });

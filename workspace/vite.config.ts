@@ -27,15 +27,15 @@ export default defineConfig({
     glslify(),
   ],
   build: {
-    outDir: "./public",
+    outDir: "./out/assets",
     sourcemap: isDev,
     manifest: true,
     rollupOptions: {
       input: "./src/entry.ts",
       output: {
-        assetFileNames: `assets/[name].[ext]`,
-        entryFileNames: `assets/[name].js`,
-        chunkFileNames: `assets/[name].js`,
+        assetFileNames: `[name].[ext]`,
+        entryFileNames: `[name].js`,
+        chunkFileNames: `[name].js`,
       },
     },
   },
