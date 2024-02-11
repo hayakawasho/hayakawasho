@@ -17,19 +17,26 @@
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
     "astro": "^4.3.5",
+    "astro-google-fonts-optimizer": "^0.2.2",
+    "dayjs": "^1.11.10",
     "detect-gpu": "^5.0.38",
     "glsl-noise": "^0.0.0",
     "gsap": "^3.12.5",
     "htmx.org": "^1.9.10",
+    "lake": "file:lib/lake",
     "nanostores": "^0.9.5",
     "normalize-wheel": "^1.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "redaxios": "^0.5.1",
     "remeda": "^1.40.1",
     "split-type": "^0.3.4",
     "svelte": "^4.2.10",
     "tailwindcss": "^3.4.1",
     "three": "^0.125.0",
     "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/normalize-wheel": "^1.0.4"
   }
 }
