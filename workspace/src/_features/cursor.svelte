@@ -74,7 +74,7 @@
   </span>
 </div>
 
-<style lang="postcss">
+<style lang="scss">
   .cursor {
     align-items: center;
     display: flex;

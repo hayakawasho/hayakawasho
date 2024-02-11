@@ -12,7 +12,7 @@ export default defineConfig({
   outDir: "./out/",
   compressHTML: true,
   build: {
-    inlineStylesheets: "never",
+    // inlineStylesheets: "never",
   },
   server: {
     port: 3000,

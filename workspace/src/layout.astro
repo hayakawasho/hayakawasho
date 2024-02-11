@@ -38,6 +38,14 @@ const LOCAL_IP_ADDR = process.env.LOCAL_IP_ADDR || 'localhost';
       onload="this.onload=null;this.rel='stylesheet';"
       rel="preload"
     />
+    {!idDev && (
+      <link
+        as="style"
+        href="/assets/entry.css"
+        onload="this.onload=null;this.rel='stylesheet';"
+        rel="preload"
+      />
+    )}
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
