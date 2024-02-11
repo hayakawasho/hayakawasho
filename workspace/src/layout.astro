@@ -1,8 +1,8 @@
 ---
 import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
-// import { ClientOnly } from './client-only.tsx';
-// import '~/_features/page.works/index.css';
-// import '~/_features/page.works-single/index.css';
+import { ClientOnly } from './client-only.tsx';
+import '~/_features/page.works/index.module.scss';
+import '~/_features/page.works-single/index.module.scss';
 
 export interface Props {
 	title: string;
@@ -17,8 +17,8 @@ const description = 'Frontend Engineer Sho Hayakawa 早川翔 portfolio website'
 
 const title = props.title ? props.title + ' | ' + siteTitle : siteTitle;
 
-// const idDev = process.env.NODE_ENV !== 'production';
-// const LOCAL_IP_ADDR = process.env.LOCAL_IP_ADDR || 'localhost';
+const idDev = process.env.NODE_ENV !== 'production';
+const LOCAL_IP_ADDR = process.env.LOCAL_IP_ADDR || 'localhost';
 ---
 
 <!DOCTYPE html>
@@ -52,6 +52,10 @@ const title = props.title ? props.title + ' | ' + siteTitle : siteTitle;
     <meta content={SITE_URL + '/ogp.jpg'} property="og:image" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Jost:wght@400&display=swap" />
+    {idDev && (
+      <script defer src={`http://${LOCAL_IP_ADDR}:5173/src/entry.ts`} type="module" />
+    )}
+    {!idDev && <script defer src="/assets/entry.js" type="module" />}
 	</head>
   <body class="">
     <div
@@ -80,6 +84,7 @@ const title = props.title ? props.title + ' | ' + siteTitle : siteTitle;
     <div class="ui">
       <div class="sp:hidden" data-component="Cursor"></div>
     </div>
+    <ClientOnly client:only="react" />
   </body>
 </html>
 

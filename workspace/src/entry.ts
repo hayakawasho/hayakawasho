@@ -1,8 +1,8 @@
 import { create, withSvelte } from 'lake';
-// import Cursor from '~/_features/cursor.svelte';
+import Cursor from '~/_features/cursor.svelte';
 import Load from './_features/load';
 import NavMenu from './_features/menu';
-// import Noop from './_features/noop.svelte';
+import Noop from './_features/noop.svelte';
 import Home from './_features/page.home';
 // import Scrollbar from './_features/scrollbar.svelte';
 import Works from './_features/page.works';
@@ -14,10 +14,10 @@ import type { IComponent, ComponentContext } from 'lake';
   const { component, unmount } = create();
 
   const table: Record<string, IComponent> = {
-    // Cursor: withSvelte(Cursor, 'Cursor'),
+    Cursor: withSvelte(Cursor, 'Cursor'),
     Home,
     NavMenu,
-    // Noop: withSvelte(Noop, 'Noop'),
+    Noop: withSvelte(Noop, 'Noop'),
     // // Scrollbar: withSvelte(Scrollbar, 'Scrollbar'),
     Single,
     Works,
@@ -56,3 +56,18 @@ import type { IComponent, ComponentContext } from 'lake';
     },
   });
 })();
+
+if (process.env.NODE_ENV === 'development') {
+  const Stats = await ((await import('https://cdn.skypack.dev/stats.js.fps?dts')) as any).default;
+  const stats = new Stats();
+  stats.showPanel(0);
+
+  document.body.appendChild(stats.dom);
+
+  const loop = () => {
+    stats.update();
+    requestAnimationFrame(loop);
+  };
+
+  loop();
+}

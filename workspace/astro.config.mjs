@@ -1,12 +1,11 @@
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
-import svelte from "@astrojs/svelte";
 import critters from "astro-critters";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [react(), tailwind(), svelte(), critters()],
+  integrations: [react(), tailwind(), critters()],
   devToolbar: {
     enabled: false
   },
@@ -23,7 +22,7 @@ export default defineConfig({
   vite: {
     build: {
       // cssCodeSplit: false,
-    }
-    // plugins: [vanillaExtractPlugin(), glslify()],
+    },
+    plugins: [],
   }
 });

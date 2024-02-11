@@ -15,5 +15,5 @@ const result = await repository.findList({
 ---
 
 <Layout title="Works" permalink='/works/'>
-  <WorksIndex />
+  <WorksIndex posts={result.works} />
 </Layout>

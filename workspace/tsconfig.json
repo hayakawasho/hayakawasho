@@ -9,5 +9,7 @@
     },
     "moduleResolution": "Node",
     "allowJs": true
-  }
+  },
+  "include": ["src/**/*", "@types"],
+  "exclude": ["node_modules/*", "static/*", "./lib"],
 }
