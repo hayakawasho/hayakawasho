@@ -53,7 +53,7 @@ export class Plane extends GlObject {
       u_depth: {
         value: {
           pc: 80,
-          sp: 60,
+          sp: 50,
         }[props.mq],
       },
       u_opacity: {
