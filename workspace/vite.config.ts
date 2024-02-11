@@ -37,6 +37,11 @@ export default defineConfig({
         assetFileNames: `[name].[ext]`,
         entryFileNames: `[name].js`,
         chunkFileNames: `[name].js`,
+        manualChunks(id) {
+          if (id.includes("three")) {
+            return "vendor.three";
+          }
+        },
       },
     },
   },
