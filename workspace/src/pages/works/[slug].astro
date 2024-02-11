@@ -34,7 +34,7 @@ const { post, next, totalCount, currentIndex } = Astro.props;
 const eyecatch = post.eyecatch.src;
 ---
 
-<Layout title="Works" permalink={`/works/${post.id}/`}>
+<Layout title={post.title} permalink={`/works/${post.id}/`}>
   <link
     slot="prependHead"
     as="image"
