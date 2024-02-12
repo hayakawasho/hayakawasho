@@ -46,8 +46,8 @@ export class Plane extends GlObject {
     this.uniforms = {
       u_bend: {
         value: {
-          pc: 0.8,
-          sp: 0.5,
+          pc: 1.5,
+          sp: 0.8,
         }[props.mq],
       },
       u_depth: {
@@ -83,8 +83,8 @@ export class Plane extends GlObject {
     const bounds = super.resize(size);
 
     const bottomMargin = {
-      pc: size.height * 0.1,
-      sp: size.height * 0.1,
+      pc: size.height * 0.2,
+      sp: size.height * 0.15,
     };
 
     const offset = -size.height + bounds.top;
