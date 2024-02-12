@@ -9,7 +9,6 @@ services:
       - LOCAL_IP_ADDR=${LOCAL_IP_ADDR}
     ports:
       - 3000:3000
-      - 8080:8080
       - 5173:5173
 
 volumes:
