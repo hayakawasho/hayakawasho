@@ -143,7 +143,7 @@ const Component: React.FC<{
                 <li className="" key={index}>
                   <img
                     alt=""
-                    className="pointer-events-none invisible"
+                    className="pointer-events-none invisible w-full"
                     data-h={i.height}
                     data-ref="screenshotItem"
                     data-src={i.src}
