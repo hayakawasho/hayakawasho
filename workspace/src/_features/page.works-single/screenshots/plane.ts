@@ -84,7 +84,7 @@ export class Plane extends GlObject {
 
     const bottomMargin = {
       pc: size.height * 0.2,
-      sp: size.height * 0.07
+      sp: size.height * 0.075
     };
 
     const offset = -size.height + bounds.top;
