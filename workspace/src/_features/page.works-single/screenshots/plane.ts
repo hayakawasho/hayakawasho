@@ -52,7 +52,7 @@ export class Plane extends GlObject {
       },
       u_depth: {
         value: {
-          pc: 100,
+          pc: 90,
           sp: 45,
         }[props.mq],
       },
@@ -84,7 +84,7 @@ export class Plane extends GlObject {
 
     const bottomMargin = {
       pc: size.height * 0.2,
-      sp: size.height * 0.09,
+      sp: size.height * 0.1,
     };
 
     const offset = -size.height + bounds.top;
