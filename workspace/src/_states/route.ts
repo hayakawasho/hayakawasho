@@ -10,7 +10,7 @@ const route = map<Route>({
   name: "home",
 });
 
-export const useRoute = (callback: (payload: { name: RouteName }) => void) => {
+export const useRouteContext = (callback: (payload: { name: RouteName }) => void) => {
   const unbind = route.listen(({ name }) => {
     callback({
       name,

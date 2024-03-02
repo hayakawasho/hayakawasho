@@ -1,8 +1,8 @@
 import { defineComponent, useMount, useUnmount } from "lake";
 // import { Tween } from '@/_foundation/tween';
-import { useMediaQuery } from "@/_states/mq";
-import { useScrollPosY } from "@/_states/scroll";
-import { useWindowSize } from "@/_states/window-size";
+import { useMediaQueryContext } from "@/_states/mq";
+import { useScrollPosYContext } from "@/_states/scroll";
+import { useWindowSizeContext } from "@/_states/window-size";
 import { Plane } from "./plane";
 import type { PlaneBufferGeometry, ShaderMaterial } from "@/_foundation/three";
 import type { AppContext } from "@/_foundation/type";
@@ -18,16 +18,16 @@ export default defineComponent({
   ) {
     const { frontCanvasContext, history: _, geo, mat } = context;
 
-    const mq = useMediaQuery();
+    const mq = useMediaQueryContext();
 
-    const [ww, wh] = useWindowSize(({ width, height }) => {
+    const [ww, wh] = useWindowSizeContext(({ width, height }) => {
       plane.resize({
         height,
         width,
       });
     });
 
-    const [currentY] = useScrollPosY(({ currentY, oldY }) => {
+    const [currentY] = useScrollPosYContext(({ currentY, oldY }) => {
       currentY !== oldY && plane.updateY(currentY);
     });
 

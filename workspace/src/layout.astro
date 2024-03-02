@@ -32,12 +32,6 @@ const LOCAL_IP_ADDR = process.env.LOCAL_IP_ADDR || 'localhost';
       rel="preload"
       type="font/woff2"
     />
-    <link
-      as="style"
-      href="https://api.fontshare.com/css?f[]=satoshi@500&display=swap"
-      onload="this.onload=null;this.rel='stylesheet';"
-      rel="preload"
-    />
     {!idDev && (
       <link
         as="style"
@@ -101,7 +95,7 @@ const LOCAL_IP_ADDR = process.env.LOCAL_IP_ADDR || 'localhost';
 	:root {
     --font: 'Jost', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Arial,
       'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
-    --font-heading: 'Satoshi', sans-serif;
+    --font-heading: "Helvetica Neue", Helvetica, Arial, sans-serif;
     --font-en: 'Gallery Modern', serif;
 
     --vh: 1vh;

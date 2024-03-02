@@ -2,8 +2,8 @@ import { defineComponent, useSlot, useDomRef, useMount, useUnmount } from "lake"
 import { useInfiniteScroll, useTick } from "@/_foundation/hooks";
 import { lerp, map } from "@/_foundation/math";
 import { Object3D } from "@/_foundation/three";
-import { useMousePos } from "@/_states/mouse";
-import { useWindowSize } from "@/_states/window-size";
+import { useMousePositionContext } from "@/_states/mouse";
+import { useWindowSizeContext } from "@/_states/window-size";
 import Item from "./item";
 import type { AppContext } from "@/_foundation/type";
 
@@ -22,7 +22,7 @@ export default defineComponent({
 
     const infiniteScrollContext = useInfiniteScroll(refs.items);
 
-    const [ww, wh, { isResizing }] = useWindowSize(({ width, height }) => {
+    const [ww, wh, { isResizing }] = useWindowSizeContext(({ width, height }) => {
       state.centerX = width * 0.5;
       state.centerY = height * 0.5;
     });
@@ -34,7 +34,7 @@ export default defineComponent({
       lastY: 0,
     };
 
-    const [mouseX, mouseY] = useMousePos();
+    const [mouseX, mouseY] = useMousePositionContext();
     const parentScene = new Object3D();
 
     useTick(({ timeRatio }) => {

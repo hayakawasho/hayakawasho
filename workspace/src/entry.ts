@@ -6,7 +6,7 @@ import Noop from "@/_features/noop.svelte";
 import Home from "@/_features/page.home";
 // import Scrollbar from '@/_features/scrollbar.svelte';
 import Works from "@/_features/page.works";
-import Single from "@/_features/page.works-single";
+import WorksSingle from "@/_features/page.works-single";
 import { qsa } from "@/_foundation/utils";
 import type { IComponent, ComponentContext } from "lake";
 
@@ -19,7 +19,7 @@ const init = () => {
     NavMenu,
     Noop: withSvelte(Noop, "Noop"),
     // // Scrollbar: withSvelte(Scrollbar, 'Scrollbar'),
-    Single,
+    WorksSingle,
     Works,
   } as const;
 

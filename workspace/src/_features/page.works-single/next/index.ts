@@ -1,8 +1,8 @@
 import { defineComponent, useDomRef, useMount, ref } from "lake";
 import { map } from "@/_foundation/math";
 import { Tween } from "@/_foundation/tween";
-import { useScrollPosY } from "@/_states/scroll";
-import { useWindowSize } from "@/_states/window-size";
+import { useScrollPosYContext } from "@/_states/scroll";
+import { useWindowSizeContext } from "@/_states/window-size";
 import type { AppContext } from "@/_foundation/type";
 
 type Refs = {
@@ -17,7 +17,7 @@ export default defineComponent({
     const isResizing = ref(false);
 
     const { refs } = useDomRef<Refs>("nextLink", "end", "nextProject");
-    const [_, wh] = useWindowSize();
+    const [_, wh] = useWindowSizeContext();
 
     const cache = ref({
       bottom: 0,
@@ -35,7 +35,7 @@ export default defineComponent({
       };
     });
 
-    useScrollPosY(({ currentY, oldY }) => {
+    useScrollPosYContext(({ currentY, oldY }) => {
       if (isResizing.value || currentY === oldY) {
         return;
       }
@@ -61,7 +61,7 @@ export default defineComponent({
       );
     });
 
-    useWindowSize(() => {
+    useWindowSizeContext(() => {
       isResizing.value = true;
 
       const { top, bottom } = refs.end.getBoundingClientRect();

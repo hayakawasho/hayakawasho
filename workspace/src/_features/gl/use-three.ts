@@ -1,7 +1,7 @@
 import { getGPUTier } from "detect-gpu";
 import { useTick } from "@/_foundation/hooks";
 import { WebGLRenderer, PerspectiveCamera, Scene } from "@/_foundation/three";
-import { useWindowSize } from "@/_states/window-size";
+import { useWindowSizeContext } from "@/_states/window-size";
 import type { Object3D } from "@/_foundation/three";
 
 export const useThree = (canvas: HTMLCanvasElement, resolution: number) => {
@@ -36,7 +36,7 @@ export const useThree = (canvas: HTMLCanvasElement, resolution: number) => {
   const addScene = (child: Object3D) => scene.add(child);
   const removeScene = (child: Object3D) => scene.remove(child);
 
-  const [, , { isResizing }] = useWindowSize(({ width, height }) => {
+  const [, , { isResizing }] = useWindowSizeContext(({ width, height }) => {
     renderer.setSize(width, height);
     camera.aspect = width / height;
     camera.position.z = calcCamDistance(height);

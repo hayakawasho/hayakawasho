@@ -6,9 +6,9 @@ import { useTick } from "@/_foundation/hooks";
 import { lerp } from "@/_foundation/math";
 import { Tween } from "@/_foundation/tween";
 import { qsa } from "@/_foundation/utils";
-import { useMediaQuery } from "@/_states/mq";
+import { useMediaQueryContext } from "@/_states/mq";
 import { scrollPosYMutators } from "@/_states/scroll";
-import { useWindowSize } from "@/_states/window-size";
+import { useWindowSizeContext } from "@/_states/window-size";
 import { useHandleCache } from "./use-handle-cache";
 import type { Cache } from "./use-handle-cache";
 
@@ -25,7 +25,7 @@ export default defineComponent({
 
     const refContainer = ref(el);
 
-    const mq = useMediaQuery();
+    const mq = useMediaQueryContext();
 
     const EASE = {
       pc: 0.1,
@@ -47,7 +47,7 @@ export default defineComponent({
     const { createCache, updateCache } = useHandleCache();
     const cache = ref(createCache(elItems));
 
-    const [_, wh, { isResizing }] = useWindowSize();
+    const [_, wh, { isResizing }] = useWindowSizeContext();
 
     const setScrollLimit = () => {
       const { height } = refContainer.value.getBoundingClientRect();
@@ -146,7 +146,7 @@ export default defineComponent({
       },
     );
 
-    useWindowSize(() => {
+    useWindowSizeContext(() => {
       cache.value = updateCache(cache.value);
       state.scrollLimit = setScrollLimit();
 

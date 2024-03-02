@@ -8,7 +8,7 @@ import {
   LinearFilter,
 } from "@/_foundation/three";
 // import { Tween } from "@/_foundation/tween";
-import { useWindowSize } from "@/_states/window-size";
+import { useWindowSizeContext } from "@/_states/window-size";
 import fragment from "./fragment.frag";
 import vertex from "./vertex.vert";
 import type { Object3D } from "@/_foundation/three";
@@ -21,7 +21,7 @@ export const useThumbnail = (el: HTMLElement, parentScene: Object3D) => {
   const imgW = Number(el.dataset.w);
   const imgH = Number(el.dataset.h);
 
-  const [ww, wh] = useWindowSize();
+  const [ww, wh] = useWindowSizeContext();
 
   const texture = loader.load(imgSrc, texture => {
     texture.minFilter = LinearFilter;

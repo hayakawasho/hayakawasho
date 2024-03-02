@@ -3,7 +3,7 @@ import { useMouseoverSplitText } from "@/_foundation/hooks";
 import { splitTextNode2Words } from "@/_foundation/split-text";
 import { Tween } from "@/_foundation/tween";
 import { waitFrame } from "@/_foundation/utils";
-import { useWindowSize } from "@/_states/window-size";
+import { useWindowSizeContext } from "@/_states/window-size";
 import Eyecatch from "./eyecatch";
 import NextProject from "./next";
 import Screenshots from "./screenshots";
@@ -53,7 +53,7 @@ export default defineComponent({
 
     const { split, onSplitUpdate } = splitTextNode2Words(refs.h1);
 
-    useWindowSize(() => {
+    useWindowSizeContext(() => {
       onSplitUpdate();
     });
 

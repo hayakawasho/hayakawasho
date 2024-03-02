@@ -15,8 +15,8 @@ const Component: React.FC<{
   max: number;
 }> = ({ post, nextPost, now, max }) => {
   return (
-    <PageWrapper header={<Header current="single" />} namespace="single">
-      <main data-component="Single">
+    <PageWrapper header={<Header current="works-single" />} namespace="works-single">
+      <main data-component="WorksSingle">
         <Link className={Styles.back} data-ref="back" to="../">
           {[..."Back"].map((c, index) => (
             <span aria-hidden="true" className="inline-block relative overflow-hidden" key={index}>
@@ -30,19 +30,18 @@ const Component: React.FC<{
         </Link>
         <div className="mb-[8rem] pc:mb-[20rem]" data-scroll-item>
           <div className={Styles.intro}>
+            <div className={Styles.intro__indexNumber}>
+              <span className="inline-block tracking-[-0.02em]" data-ref="now">
+                {zeroPadding(now)}
+              </span>
+              <span className="relative inline-block mx-[.5em]" data-ref="dash">
+                ー
+              </span>
+              <span className="inline-block  tracking-[-0.02em]" data-ref="max">
+                {zeroPadding(max)}
+              </span>
+            </div>
             <div className={Styles.intro__g}>
-              <div className={Styles.intro__indexNumber}>
-                <span className="inline-block tracking-[-0.02em]" data-ref="now">
-                  {zeroPadding(now)}
-                </span>
-                <span className="relative inline-block mx-[.5em]" data-ref="dash">
-                  ー
-                </span>
-                <span className="inline-block  tracking-[-0.02em]" data-ref="max">
-                  {zeroPadding(max)}
-                </span>
-              </div>
-
               <div className={Styles.intro__hgroup}>
                 <p className={cx(Styles.sub, "overflow-hidden")}>
                   <span className="block uppercase" data-ref="sub">
@@ -122,7 +121,7 @@ const Component: React.FC<{
             </div>
           </div>
 
-          <div className={cx(Styles.eyecatch, "pc:hidden")}>
+          <div className={cx(Styles.eyecatch)}>
             <img
               alt=""
               className={cx(Styles.eyecatchImg, "pointer-events-none invisible")}

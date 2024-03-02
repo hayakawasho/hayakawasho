@@ -3,8 +3,8 @@ import { useTick } from "@/_foundation/hooks";
 import { splitTextNode2Words } from "@/_foundation/split-text";
 import { Tween } from "@/_foundation/tween";
 import { waitFrame } from "@/_foundation/utils";
-import { useMediaQuery } from "@/_states/mq";
-import { useWindowSize } from "@/_states/window-size";
+import { useMediaQueryContext } from "@/_states/mq";
+import { useWindowSizeContext } from "@/_states/window-size";
 // import { useThumbnail } from './use-thumbnail';
 import type { useInfiniteScroll } from "@/_foundation/hooks";
 import type { Object3D } from "@/_foundation/three";
@@ -26,10 +26,10 @@ export default defineComponent({
     const { once, infiniteScrollContext, history, parentScene: _ } = context;
     const { posY, diff } = infiniteScrollContext;
 
-    const mq = useMediaQuery();
+    const mq = useMediaQueryContext();
     const { refs } = useDomRef<Refs>("text", "img");
 
-    const [, , { isResizing }] = useWindowSize(() => {
+    const [, , { isResizing }] = useWindowSizeContext(() => {
       onSplitUpdate();
     });
 

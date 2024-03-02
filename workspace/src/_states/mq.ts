@@ -6,7 +6,7 @@ type MediaQuery = "pc" | "sp";
 
 const mediaQuery = atom<MediaQuery>("pc");
 
-export const useMediaQuery = (callback: (payload: MediaQuery) => void = noop) => {
+export const useMediaQueryContext = (callback: (payload: MediaQuery) => void = noop) => {
   const mq = ref<MediaQuery>(mediaQuery.get());
 
   const unbind = mediaQuery.listen(val => {

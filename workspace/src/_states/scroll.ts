@@ -5,7 +5,7 @@ import { noop } from "@/_foundation/utils";
 const posY = atom(0);
 const isScrolling = atom(false);
 
-export const useScrollPosY = (
+export const useScrollPosYContext = (
   callback: (payload: { currentY: number; oldY: number }) => void = noop,
 ) => {
   const refPosY = ref(posY.get());

@@ -7,7 +7,7 @@ const pos = map<Point>({
   y: 0,
 });
 
-export const useMousePos = () => {
+export const useMousePositionContext = () => {
   const { x, y } = pos.get();
   const posX = ref(x);
   const posY = ref(y);
