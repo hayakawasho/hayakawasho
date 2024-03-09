@@ -1,6 +1,6 @@
 import type { ReadonlyRef } from "lake";
-import type GlContext from "@/_features/gl";
-import type ScrollContext from "@/_features/scroll-tween-container";
+import type GlContext from "~/_components/gl";
+import type ScrollContext from "~/_components/scroll-tween-container";
 
 export type AppContext = {
   once: boolean;

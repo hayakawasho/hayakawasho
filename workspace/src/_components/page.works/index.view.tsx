@@ -6,7 +6,7 @@ import { Header } from "../header/view";
 import { PageWrapper } from "../page-wrapper/index.view";
 import { Link } from "../ui/link";
 import { ResponsiveImage } from "../ui/responsive-image";
-import type { WorkMetadata } from "@/_features/work/model";
+import type { WorkMetadata } from "~/_components/work/model";
 
 const Component: React.FC<{
   posts: WorkMetadata[];

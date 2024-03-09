@@ -1,12 +1,12 @@
 import cx from "clsx";
 import React from "react";
-import { selectDatetime, selectLaunch, selectUrl } from "@/_features/work/selector";
+import { selectDatetime, selectLaunch, selectUrl } from "~/_components/work/selector";
 import { zeroPadding } from "@/_foundation/utils";
 import Styles from "./index.module.scss";
 import { Header } from "../header/view";
 import { PageWrapper } from "../page-wrapper/index.view";
 import { Link } from "../ui/link";
-import type { WorkMetadata } from "@/_features/work/model";
+import type { WorkMetadata } from "~/_components/work/model";
 
 const Component: React.FC<{
   post: WorkMetadata;

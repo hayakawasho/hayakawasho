@@ -1,4 +1,5 @@
 import { defineComponent, useSlot, useDomRef, useMount } from "lake";
+import { ScrollTween } from "../scroll";
 // import { useInfiniteScroll } from '@/_foundation/hooks';
 // import { Tween } from '@/_foundation/tween';
 // import { waitFrame } from '@/_foundation/utils';

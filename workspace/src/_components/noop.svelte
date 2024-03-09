@@ -1,3 +1,3 @@
 <script lang="ts">
-  console.log('Hello');
+  console.log('hello');
 </script>

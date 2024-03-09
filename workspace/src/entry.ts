@@ -1,11 +1,11 @@
 import { create, withSvelte } from "lake";
-import Cursor from "./_features/cursor.svelte";
-import Load from "./_features/load";
-import NavMenu from "./_features/menu";
-import Noop from "./_features/noop.svelte";
-import Home from "./_features/page.home";
-import Works from "./_features/page.works";
-import WorksSingle from "./_features/page.works-single";
+import Cursor from "./_components/cursor.svelte";
+import Load from "./_components/load";
+import NavMenu from "./_components/menu";
+import Noop from "./_components/noop.svelte";
+import Home from "./_components/page.home";
+import Works from "./_components/page.works";
+import WorksSingle from "./_components/page.works-single";
 import { qsa } from "./_foundation/utils";
 import { bootstrap } from "./bootstrap";
 import type { IComponent, ComponentContext } from "lake";
