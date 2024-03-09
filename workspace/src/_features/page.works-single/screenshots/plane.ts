@@ -34,7 +34,7 @@ export class Plane extends GlObject {
 
     const imgSrc = el.dataset.src!;
     const texSrc = {
-      pc: imgSrc + IMAGIX_API + "&w=1200",
+      pc: imgSrc + IMAGIX_API + "&w=14000",
       sp: imgSrc + IMAGIX_API + "&w=750",
     };
 
@@ -46,7 +46,7 @@ export class Plane extends GlObject {
     this.uniforms = {
       u_bend: {
         value: {
-          pc: 1.5,
+          pc: 1.25,
           sp: 0.7,
         }[props.mq],
       },
@@ -83,7 +83,7 @@ export class Plane extends GlObject {
     const bounds = super.resize(size);
 
     const bottomMargin = {
-      pc: size.height * 0.2,
+      pc: size.height * 0.175,
       sp: size.height * 0.1,
     };
 

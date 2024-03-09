@@ -4,7 +4,7 @@ import { selectDatetime, selectLaunch, selectUrl } from "@/_features/work/select
 import { zeroPadding } from "@/_foundation/utils";
 import Styles from "./index.module.scss";
 import { Header } from "../header/view";
-import { PageWrapper } from "../page-wrapper/view";
+import { PageWrapper } from "../page-wrapper/index.view";
 import { Link } from "../ui/link";
 import type { WorkMetadata } from "@/_features/work/model";
 
@@ -43,14 +43,17 @@ const Component: React.FC<{
             </div>
             <div className={Styles.intro__g}>
               <div className={Styles.intro__hgroup}>
-                <p className={cx(Styles.sub, "overflow-hidden")}>
+                <p className={cx(Styles.sub, "overflow-hidden", "sr-only")}>
                   <span className="block uppercase" data-ref="sub">
                     Projects/
                   </span>
                 </p>
-                <h1 className={cx(Styles.heading, "overflow-hidden mt-[-.1em]")} data-ref="h1">
-                  {post.title}
-                </h1>
+                <div className={Styles.heading}>
+                  <h1 className={cx("overflow-hidden mt-[-.1em]")} data-ref="h1">
+                    {post.title}
+                  </h1>
+                  <span className={Styles.heading__date}>(2023)</span>
+                </div>
               </div>
 
               <div className={Styles.intro__info}>
@@ -65,22 +68,6 @@ const Component: React.FC<{
                       <span className="inline-block" data-ref="infoText">
                         {post.category}
                       </span>
-                    </dd>
-                  </dl>
-                  <dl className={Styles.infoItem}>
-                    <dt className={Styles.infoItem__heading}>
-                      <span className="inline-block uppercase" data-ref="infoText">
-                        (Date)
-                      </span>
-                    </dt>
-                    <dd className={cx(Styles.infoItem__label, "uppercase")}>
-                      <time
-                        className="inline-block"
-                        data-ref="infoText"
-                        dateTime={selectDatetime(post)}
-                      >
-                        {selectLaunch(post)}
-                      </time>
                     </dd>
                   </dl>
                   {post.url && (
@@ -121,58 +108,53 @@ const Component: React.FC<{
             </div>
           </div>
 
-          <div className={cx(Styles.eyecatch)}>
-            <img
-              alt=""
-              className={cx(Styles.eyecatchImg, "pointer-events-none invisible")}
-              data-h={post.eyecatch.height}
-              data-ref="eyecatch"
-              data-src={post.eyecatch.src}
-              data-w={post.eyecatch.width}
-              height={post.eyecatch.height}
-              width={post.eyecatch.width}
-            />
+          <div className={Styles.eyecatchLayout}>
+            <div className={cx(Styles.eyecatch)}>
+              <img
+                alt=""
+                className={cx(Styles.eyecatchImg, "pointer-events-none invisible")}
+                data-h={post.eyecatch.height}
+                data-ref="eyecatch"
+                data-src={post.eyecatch.src}
+                data-w={post.eyecatch.width}
+                height={post.eyecatch.height}
+                width={post.eyecatch.width}
+              />
+            </div>
           </div>
         </div>
 
-        <div data-scroll-item>
+        <div data-scroll-item className="mb-[20rem]">
           <ul className={Styles.screenshots} data-ref="screenshots">
-            {post.screenshots.map((i, index) => {
-              return (
-                <li className="" key={index}>
-                  <img
-                    alt=""
-                    className="pointer-events-none invisible w-full"
-                    data-h={i.height}
-                    data-ref="screenshotItem"
-                    data-src={i.src}
-                    data-w={i.width}
-                    height={i.height}
-                    width={i.width}
-                  />
-                </li>
-              );
-            })}
+            {post.screenshots &&
+              post.screenshots.map((i, index) => {
+                return (
+                  <li className="" key={index}>
+                    <img
+                      alt=""
+                      className="pointer-events-none invisible w-full"
+                      data-h={i.height}
+                      data-ref="screenshotItem"
+                      data-src={i.src}
+                      data-w={i.width}
+                      height={i.height}
+                      width={i.width}
+                    />
+                  </li>
+                );
+              })}
           </ul>
         </div>
 
-        <aside data-ref="next">
-          <div aria-hidden="true" className={Styles.dummy} data-ref="end" data-scroll-item />
+        <article data-scroll-item data-ref="next" className="">
           <div className={Styles.next} data-ref="nextProject">
-            <div
-              className={Styles.next__hgroup}
-              data-href={`../${nextPost.id}/`}
-              data-ref="nextLink"
-            >
-              <p className={cx(Styles.sub, "!pc:text-center")}>
-                <span className="inline-block uppercase">Next</span>
-              </p>
-              <h2 className={cx(Styles.heading, "!pc:text-center mt-[-.05em]")}>
+            <Link className={Styles.next__hgroup} to={`../${nextPost.id}/`} data-ref="nextLink">
+              <h2 className={cx(Styles.next__heading, "!pc:text-center mt-[-.05em] mb-[10rem]")}>
                 {nextPost.title}
               </h2>
-            </div>
+            </Link>
           </div>
-        </aside>
+        </article>
       </main>
     </PageWrapper>
   );

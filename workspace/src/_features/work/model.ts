@@ -6,19 +6,11 @@ type Image = Size & {
 
 export type WorkMetadata = {
   id: string;
-  eyecatch: {
-    src?: string;
-    width?: number;
-    height?: number;
-  };
+  eyecatch: Image;
   title: string;
   category: string;
   stacks: string[];
-  screenshots: {
-    src?: string;
-    width?: number;
-    height?: number;
-  }[];
+  screenshots?: Image[];
   url?: string;
   launch: Date;
 };

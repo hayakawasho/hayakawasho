@@ -5,7 +5,6 @@ import { Tween } from "@/_foundation/tween";
 import { waitFrame } from "@/_foundation/utils";
 import { useWindowSizeContext } from "@/_states/window-size";
 import Eyecatch from "./eyecatch";
-import NextProject from "./next";
 import Screenshots from "./screenshots";
 import type { AppContext } from "@/_foundation/type";
 
@@ -22,7 +21,7 @@ type Refs = {
   infoText: HTMLElement[];
   infoLine: HTMLElement;
   stack: HTMLElement | HTMLElement[];
-  next: HTMLElement;
+  // next: HTMLElement;
 };
 
 export default defineComponent({
@@ -44,12 +43,12 @@ export default defineComponent({
       "infoText",
       "infoLine",
       "stack",
-      "next",
+      // "next",
     );
 
     addChild(refs.eyecatch, Eyecatch, context);
     addChild(refs.screenshots, Screenshots, context);
-    addChild(refs.next, NextProject, context);
+    // addChild(refs.next, NextProject, context);
 
     const { split, onSplitUpdate } = splitTextNode2Words(refs.h1);
 

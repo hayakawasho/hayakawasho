@@ -1,16 +1,16 @@
 import { create, withSvelte } from "lake";
-import Cursor from "@/_features/cursor.svelte";
-import Load from "@/_features/load";
-import NavMenu from "@/_features/menu";
-import Noop from "@/_features/noop.svelte";
-import Home from "@/_features/page.home";
-// import Scrollbar from '@/_features/scrollbar.svelte';
-import Works from "@/_features/page.works";
-import WorksSingle from "@/_features/page.works-single";
-import { qsa } from "@/_foundation/utils";
+import Cursor from "./_features/cursor.svelte";
+import Load from "./_features/load";
+import NavMenu from "./_features/menu";
+import Noop from "./_features/noop.svelte";
+import Home from "./_features/page.home";
+import Works from "./_features/page.works";
+import WorksSingle from "./_features/page.works-single";
+import { qsa } from "./_foundation/utils";
+import { bootstrap } from "./bootstrap";
 import type { IComponent, ComponentContext } from "lake";
 
-const init = () => {
+bootstrap(() => {
   const { component, unmount } = create();
 
   const table: Record<string, IComponent> = {
@@ -18,7 +18,6 @@ const init = () => {
     Home,
     NavMenu,
     Noop: withSvelte(Noop, "Noop"),
-    // // Scrollbar: withSvelte(Scrollbar, 'Scrollbar'),
     WorksSingle,
     Works,
   } as const;
@@ -55,13 +54,7 @@ const init = () => {
       });
     },
   });
-};
-
-if (document.readyState !== "loading") {
-  init();
-} else {
-  document.addEventListener("DOMContentLoaded", init);
-}
+});
 
 if (process.env.NODE_ENV === "development") {
   const Stats = await ((await import("https://cdn.skypack.dev/stats.js.fps?dts")) as any).default;

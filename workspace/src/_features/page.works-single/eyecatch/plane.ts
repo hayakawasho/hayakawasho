@@ -27,13 +27,18 @@ export class Plane extends GlObject {
     props: {
       currentY: number;
       windowSize: Size;
+      mq: "pc" | "sp";
     },
   ) {
     super(el);
 
-    const texSrc = el.dataset.src! + IMAGIX_API + "&w=750";
+    const imgSrc = el.dataset.src!;
+    const texSrc = {
+      pc: imgSrc + IMAGIX_API + "&w=1440",
+      sp: imgSrc + IMAGIX_API + "&w=750",
+    };
 
-    const texture = loader.load(texSrc, texture => {
+    const texture = loader.load(texSrc[props.mq], texture => {
       texture.minFilter = LinearFilter;
       texture.generateMipmaps = false;
     });
@@ -91,7 +96,7 @@ export class Plane extends GlObject {
   updateY = (current: number) => {
     super.updateY(current);
 
-    this.uniforms.u_innerY.value = map(current, this.#offsetY, this.#endY, -0.2, 0.1);
+    this.uniforms.u_innerY.value = map(current, this.#offsetY, this.#endY, -0.1, 0.1);
     this.uniforms.u_scale.value = map(current, this.#offsetY, this.#endY, 1.2, 1);
   };
 }

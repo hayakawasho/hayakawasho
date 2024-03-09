@@ -1,5 +1,5 @@
 import { defineComponent, useMount, useUnmount } from "lake";
-// import { useMediaQueryContext } from '@/_states/mq';
+import { useMediaQueryContext } from "@/_states/mq";
 import { useScrollPosYContext } from "@/_states/scroll";
 import { useWindowSizeContext } from "@/_states/window-size";
 import { Plane } from "./plane";
@@ -10,7 +10,7 @@ export default defineComponent({
   setup(el: HTMLElement, context: AppContext) {
     const { frontCanvasContext, history: _ } = context;
 
-    // const mq = useMediaQueryContext();
+    const mq = useMediaQueryContext();
 
     const [ww, wh] = useWindowSizeContext(({ width, height }) => {
       plane.resize({
@@ -29,6 +29,7 @@ export default defineComponent({
         height: wh.value,
         width: ww.value,
       },
+      mq: mq.value,
     });
 
     useMount(() => {
