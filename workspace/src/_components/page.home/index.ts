@@ -1,13 +1,12 @@
 import { defineComponent, useSlot, useDomRef, useMount } from "lake";
 import { ScrollTween } from "../scroll";
-// import { useInfiniteScroll } from '@/_foundation/hooks';
 // import { Tween } from '@/_foundation/tween';
 // import { waitFrame } from '@/_foundation/utils';
-// import Projects from './projects';
+import Item from "./item";
 import type { AppContext } from "@/_foundation/type";
 
 type Refs = {
-  projects: HTMLElement;
+  project: HTMLElement[];
 };
 
 export default defineComponent({
@@ -15,8 +14,10 @@ export default defineComponent({
   setup(_el, context: AppContext) {
     const { history } = context;
 
-    const { addChild: _ } = useSlot();
-    const { refs: __ } = useDomRef<Refs>("projects");
+    const { addChild } = useSlot();
+    const { refs } = useDomRef<Refs>("project");
+
+    addChild(refs.project, Item, context);
 
     useMount(() => {
       if (history.value === "push") {

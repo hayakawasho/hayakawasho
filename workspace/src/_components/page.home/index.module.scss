@@ -9,6 +9,7 @@ $mq-pc: 640px;
   line-height: 1;
   white-space: nowrap;
   pointer-events: none;
+  opacity: 0.05;
 }
 
 .h1__sub {
@@ -32,13 +33,14 @@ $mq-pc: 640px;
 }
 
 .entry {
-  font-size: 3.25vw;
+  font-size: 3.5vw;
   // line-height: 4.2708vw;
-  line-height: 1.2;
+  // line-height: 1.2;
+  line-height: 1.15;
   font-family: var(--font-en);
-  // font-family: var(--font-heading);
-  // font-weight: 500;
-  opacity: 0.25;
+  opacity: 0.3;
   overflow: hidden;
   letter-spacing: 0.025em;
+  display: block;
+  margin-top: -0.2em;
 }

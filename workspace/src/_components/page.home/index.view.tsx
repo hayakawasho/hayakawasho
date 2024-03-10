@@ -14,13 +14,13 @@ const Component: React.FC<{
         <span className={Styles.h1__main}>Projects</span>
       </h1>
       <div data-scroll-item className=""></div>
-      <div className={`${Styles.grid} items-start sp:!hidden`}>
-        <ul className="col-span-8 | list flex flex-wrap gap-x-[1.6rem] pointer-events-auto">
+      <div className={`${Styles.grid} items-start sp:!hidden`} data-component="Home">
+        <ul className="col-span-9 | list flex flex-wrap gap-x-[1.6rem] pointer-events-auto">
           {posts.map((post, index) => {
             return (
-              <li key={post.id}>
+              <li key={post.id} data-ref="project">
                 <Link className={`${Styles.entry} hover:opacity-100`} to={`./works/${post.id}/`}>
-                  <span>
+                  <span className="overflow-hidden inline-block" data-ref="text">
                     {post.title}
                     {index < posts.length - 1 && <span>,</span>}
                   </span>
@@ -29,8 +29,12 @@ const Component: React.FC<{
             );
           })}
         </ul>
-        <div className="col-span-4">
-          <img src={posts[0].eyecatch.src} alt="" className=" aspect-video object-cover" />
+        <div className="col-span-2 col-start-11 pt-[125%] relative">
+          <img
+            src={posts[0].eyecatch.src}
+            alt=""
+            className="w-full h-full absolute inset-0 object-cover"
+          />
         </div>
       </div>
     </PageWrapper>

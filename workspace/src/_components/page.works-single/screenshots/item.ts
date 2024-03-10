@@ -7,15 +7,14 @@ import { Plane } from "./plane";
 import type { PlaneBufferGeometry, ShaderMaterial } from "@/_foundation/three";
 import type { AppContext } from "@/_foundation/type";
 
+type Props = AppContext & {
+  geo: PlaneBufferGeometry;
+  mat: ShaderMaterial;
+};
+
 export default defineComponent({
   name: "Screenshot",
-  setup(
-    el: HTMLImageElement,
-    context: {
-      geo: PlaneBufferGeometry;
-      mat: ShaderMaterial;
-    } & AppContext,
-  ) {
+  setup(el: HTMLImageElement, context: Props) {
     const { frontCanvasContext, history: _, geo, mat } = context;
 
     const mq = useMediaQueryContext();
