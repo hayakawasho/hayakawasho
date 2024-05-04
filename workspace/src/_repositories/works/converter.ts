@@ -1,5 +1,5 @@
 import type { WorksAPISchema } from "../schema";
-import type { WorkMetadata } from "@/_features/work/model";
+import type { WorkMetadata } from "~/_components/work/model";
 
 export const convertWorkFromCMS = (
   rawItem: WorksAPISchema["GET"]["response"]["contents"][0],

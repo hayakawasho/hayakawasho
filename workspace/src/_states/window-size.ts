@@ -44,4 +44,4 @@ export const useWindowSizeContext = (callback: (payload: Size) => void = noop) =
   ] as const;
 };
 
-export const windowSizeMutators = (update: Size) => viewport.set(update);
+export const windowSizeMutators = viewport.set;

@@ -1,44 +1,26 @@
 import { useUnmount, ref, readonly } from "lake";
 import { atom } from "nanostores";
-import { noop } from "@/_foundation/utils";
 
-const posY = atom(0);
-const isScrolling = atom(false);
+const scrollState = atom({
+  // direction: 1,
+  scrolling: false,
+  // ready: false,
+});
 
-export const useScrollPosYContext = (
-  callback: (payload: { currentY: number; oldY: number }) => void = noop,
-) => {
-  const refPosY = ref(posY.get());
-  const refIsScrolling = ref(isScrolling.get());
+export const useScrollStateContext = () => {
+  const scrolling = ref(false);
 
-  const unbindScrolling = isScrolling.listen(running => {
-    refIsScrolling.value = running;
-  });
-
-  const unbindPosY = posY.listen(y => {
-    const oldY = refPosY.value;
-
-    callback({
-      currentY: y,
-      oldY,
-    });
-
-    refPosY.value = y;
+  const unbind = scrollState.listen(payload => {
+    scrolling.value = payload.scrolling;
   });
 
   useUnmount(() => {
-    unbindScrolling();
-    unbindPosY();
+    unbind();
   });
 
-  return [
-    readonly(refPosY),
-    {
-      isScrolling: readonly(refIsScrolling),
-    },
-  ] as const;
+  return {
+    scrolling: readonly(scrolling),
+  };
 };
 
-export const scrollPosYMutators = (value: number) => posY.set(value);
-
-export const isScrollingMutators = (value: boolean) => isScrolling.set(value);
+export const scrollStateYMutators = scrollState.set;

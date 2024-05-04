@@ -1,12 +1,26 @@
 import htmx from "htmx.org";
-import { defineComponent, useDomRef, useSlot, useMount, ref, readonly } from "lake";
-import { wideQuery } from "@/_foundation/env";
+import {
+  defineComponent,
+  useDomRef,
+  useSlot,
+  useMount,
+  useEvent,
+  ref,
+  readonly,
+  withSvelte,
+} from "lake";
 import { useElementSize } from "@/_foundation/hooks";
+import { BREAK_POINTS } from "@/_foundation/mq";
+import { cursorTypeMutators } from "@/_states/cusor";
 import { mediaQueryMutators } from "@/_states/mq";
 import { routeMutators } from "@/_states/route";
+import { scrollStateYMutators } from "@/_states/scroll";
+import { scrollPositionMutators } from "@/_states/scroll-position";
 import { windowSizeMutators } from "@/_states/window-size";
-import Gl from "../gl";
-import ScrollTweenContainer from "../scroll-tween-container";
+import Cursor from "../cursor.svelte";
+import BackCanvas from "../glworld/back";
+import FrontCanvas from "../glworld/front";
+import PageScroll from "../page-scroll";
 import type { AppContext, RouteName } from "@/_foundation/type";
 
 type Props = {
@@ -20,46 +34,43 @@ type Refs = {
   frontCanvas: HTMLCanvasElement;
   main: HTMLElement;
   windowSizeWatcher: HTMLElement;
+  cursor: HTMLElement;
 };
 
 export default defineComponent({
   name: "Load",
   setup(_el, { onCreated, onUpdated, onCleanup }: Props) {
     const { addChild } = useSlot();
-    const { refs } = useDomRef<Refs>("backCanvas", "frontCanvas", "main", "windowSizeWatcher");
-
-    mediaQueryMutators(wideQuery.matches ? "pc" : "sp");
-
-    const [scrollContext] = addChild(refs.main, ScrollTweenContainer);
-    const [backCanvasContext] = addChild(refs.backCanvas, Gl);
-    const [frontCanvasContext] = addChild(refs.frontCanvas, Gl, {
-      resolution: Math.min(window.devicePixelRatio, 1.5),
-    });
+    const { refs } = useDomRef<Refs>(
+      "backCanvas",
+      "frontCanvas",
+      "main",
+      "windowSizeWatcher",
+      "cursor",
+    );
 
     const history = ref<"push" | "pop">("push");
 
-    const provides = {
+    const wideQuery = window.matchMedia(BREAK_POINTS["pc"]);
+    const mediaQuery = {
+      anyHover: window.matchMedia("(any-hover:hover)").matches,
+      device: wideQuery.matches ? "pc" : "sp",
+    } as const;
+
+    const [backCanvasContext] = addChild(refs.backCanvas, BackCanvas);
+    const [frontCanvasContext] = addChild(refs.frontCanvas, FrontCanvas);
+    const [scrollContext] = addChild(refs.main, PageScroll);
+
+    const appProvides = {
       backCanvasContext: backCanvasContext.current,
       frontCanvasContext: frontCanvasContext.current,
       history: readonly(history),
       scrollContext: scrollContext.current,
     } as AppContext;
 
-    useMount(() => {
-      onCreated(provides);
-    });
-
-    useElementSize(refs.windowSizeWatcher, ({ width, height }) => {
-      windowSizeMutators({
-        height,
-        width,
-      });
-    });
-
     //----------------------------------------------------------------
 
     const onLeave = (from: HTMLElement) => {
-      scrollContext.current.pause();
       onCleanup(from);
     };
 
@@ -67,12 +78,11 @@ export default defineComponent({
       const namespace = to.dataset.xhr as RouteName;
       document.body.dataset.page = namespace;
 
-      scrollContext.current.reInit(to);
-      scrollContext.current.set(0);
-      scrollContext.current.resume();
+      // scrollContext.current.reset();
+      // scrollPositionMutators(0);
 
-      onUpdated(to, provides);
-
+      onUpdated(to, appProvides);
+      cursorTypeMutators("default");
       routeMutators({
         name: namespace,
       });
@@ -87,14 +97,12 @@ export default defineComponent({
       history.value = "pop";
       onLeave(fromContainer.value);
 
-      const { detail } = e as CustomEvent;
-      const newContainer = htmx.find(detail.elt, xhr) as HTMLElement;
+      const newContainer = htmx.find((e as CustomEvent).detail.elt, xhr) as HTMLElement;
       onEnter(newContainer);
     });
 
     htmx.on("htmx:beforeHistorySave", e => {
-      const { detail } = e as CustomEvent;
-      const oldContainer = htmx.find(detail.historyElt, xhr) as HTMLElement;
+      const oldContainer = htmx.find((e as CustomEvent).detail.historyElt, xhr) as HTMLElement;
       onLeave(oldContainer);
       fromContainer.value = oldContainer;
     });
@@ -104,14 +112,71 @@ export default defineComponent({
     });
 
     htmx.on("htmx:afterSwap", e => {
-      const { detail } = e as CustomEvent;
-      const newContainer = htmx.find(detail.target, xhr) as HTMLElement;
+      const newContainer = htmx.find((e as CustomEvent).detail.target, xhr) as HTMLElement;
       onEnter(newContainer);
     });
 
-    htmx.on("htmx:xhr:progress", e => {
-      // const { detail } = e as CustomEvent;
-      // const loadProgress = Math.floor((detail.loaded / detail.total) * 1000) / 1000;
+    htmx.on("htmx:xhr:loadstart", _e => {
+      cursorTypeMutators("loading");
     });
+
+    //----------------------------------------------------------------
+
+    useMount(() => {
+      mediaQueryMutators(mediaQuery);
+
+      if (mediaQuery.device === "pc") {
+        addChild(refs.cursor, withSvelte(Cursor, "Cursor"));
+      }
+
+      onCreated(appProvides);
+    });
+
+    //----------------------------------------------------------------
+
+    wideQuery.addEventListener(
+      "change",
+      () => {
+        location.reload();
+      },
+      {
+        once: true,
+      },
+    );
+
+    //----------------------------------------------------------------
+
+    useElementSize(refs.windowSizeWatcher, ({ width, height }) => {
+      windowSizeMutators({
+        height,
+        width,
+      });
+    });
+
+    //----------------------------------------------------------------
+
+    let timer: number;
+
+    useEvent(
+      window as any,
+      "scroll",
+      () => {
+        clearTimeout(timer);
+
+        scrollPositionMutators(scrollContext.current.scrollTop());
+        scrollStateYMutators({
+          scrolling: true,
+        });
+
+        timer = window.setTimeout(() => {
+          scrollStateYMutators({
+            scrolling: false,
+          });
+        }, 500);
+      },
+      {
+        passive: true,
+      },
+    );
   },
 });

@@ -21,7 +21,7 @@ export default defineConfig({
   prefetch: true,
   vite: {
     build: {
-      // cssCodeSplit: false,
+      cssCodeSplit: false,
     },
     plugins: [],
   },

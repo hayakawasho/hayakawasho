@@ -1,11 +1,26 @@
 import { useUnmount, ref, readonly } from "lake";
 import { map } from "nanostores";
+import { atom } from "jotai";
+import { store } from "./";
 import type { Point } from "@/_foundation/type";
 
 const pos = map<Point>({
   x: 0,
   y: 0,
 });
+
+const $pos = atom({
+  x: 0,
+  y: 0,
+});
+
+export const useMousePosState = () => {
+  return store.get($pos);
+};
+
+export const useMousePosMutators = (newValue: { x: number; y: number }) => {
+  return store.set(newValue);
+};
 
 export const useMousePositionContext = () => {
   const { x, y } = pos.get();
@@ -24,4 +39,4 @@ export const useMousePositionContext = () => {
   return [readonly(posX), readonly(posY)] as const;
 };
 
-export const mousePosMutators = (update: Point) => pos.set(update);
+export const mousePosMutators = pos.set;

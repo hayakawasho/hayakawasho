@@ -2,14 +2,20 @@ import { useUnmount, ref, readonly } from "lake";
 import { atom } from "nanostores";
 import { noop } from "@/_foundation/utils";
 
-type MediaQuery = "pc" | "sp";
+type MediaQuery = {
+  device: "pc" | "sp";
+  anyHover: boolean;
+};
 
-const mediaQuery = atom<MediaQuery>("pc");
+const mqState = atom<MediaQuery>({
+  anyHover: true,
+  device: "pc",
+});
 
 export const useMediaQueryContext = (callback: (payload: MediaQuery) => void = noop) => {
-  const mq = ref<MediaQuery>(mediaQuery.get());
+  const mq = ref<MediaQuery>(mqState.get());
 
-  const unbind = mediaQuery.listen(val => {
+  const unbind = mqState.listen(val => {
     mq.value = val;
     callback(val);
   });
@@ -18,7 +24,7 @@ export const useMediaQueryContext = (callback: (payload: MediaQuery) => void = n
     unbind();
   });
 
-  return readonly(mq);
+  return readonly(mq).value;
 };
 
-export const mediaQueryMutators = (update: MediaQuery) => mediaQuery.set(update);
+export const mediaQueryMutators = mqState.set;

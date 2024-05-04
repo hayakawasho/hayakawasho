@@ -1,0 +1,56 @@
+---
+import dotenv from 'dotenv';
+import { IMG_API } from '../../_foundation/const';
+import { BREAK_POINTS } from '../../_foundation/mq';
+import WorksDetail from '../../_components/page.work-single/index.view';
+import { createWorksRepository } from '../../_repositories/works';
+import Layout from '../../layout.astro';
+
+dotenv.config();
+
+export async function getStaticPaths() {
+  const repository = createWorksRepository(process.env.API_KEY!);
+  const result = await repository.findList({
+    limit: 99,
+    orders: '-launch',
+  });
+
+  const { works } = result
+  const last = works[works.length - 1]
+
+  return works.map((item, index) => ({
+    params: {
+      slug: item.id,
+    },
+    props: {
+      post: item,
+      next: last.id === item.id ? works[0] : works[index + 1],
+      totalCount: result.totalCount,
+      currentIndex: index + 1
+    },
+  }));
+}
+
+const { post, next, totalCount, currentIndex } = Astro.props;
+const eyecatch = post.eyecatch.src;
+---
+
+<Layout title={post.title} permalink={`/work/${post.id}/`} namespace="work-single">
+  <link
+    slot="prependHead"
+    as="image"
+    crossorigin="anonymous"
+    href={eyecatch + IMG_API + '&w=750'}
+    media={BREAK_POINTS['sp']}
+    rel="preload"
+  />
+  <link
+    slot="prependHead"
+    as="image"
+    crossorigin="anonymous"
+    href={eyecatch + IMG_API + '&w=1440'}
+    media={BREAK_POINTS['pc']}
+    rel="preload"
+  />
+  <WorksDetail post={post} nextPost={next} now={currentIndex} max={totalCount} />
+</Layout>

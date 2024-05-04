@@ -22,4 +22,4 @@ export const useRouteContext = (callback: (payload: { name: RouteName }) => void
   });
 };
 
-export const routeMutators = (update: Route) => route.set(update);
+export const routeMutators = route.set;
