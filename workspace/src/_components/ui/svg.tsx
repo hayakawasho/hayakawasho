@@ -1,5 +1,5 @@
-import cx from 'clsx';
-import type { FC } from 'react';
+import cx from "clsx";
+import type { FC } from "react";
 
 export const Svg: FC<{
   name: string;
@@ -10,7 +10,7 @@ export const Svg: FC<{
       aria-hidden="true"
       className={cx(
         className,
-        'w-full h-full pointer-events-none absolute top-0 left-0 fill-current'
+        "w-full h-full pointer-events-none absolute top-0 left-0 fill-current",
       )}
     >
       <use xlinkHref={`#${name}`}></use>

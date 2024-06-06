@@ -1,9 +1,9 @@
 import { defineComponent, useMount } from "lake";
-import { useMediaQueryContext } from "@/_states/mq";
-import { useWindowSizeContext } from "@/_states/window-size";
-import { useTick } from "@/_foundation/hooks";
+import { useTick } from "~/_foundation/hooks";
+import { useMediaQueryContext } from "~/_states/mq";
+import { useWindowSizeContext } from "~/_states/window-size";
 import { Plane } from "./plane";
-import type { AppContext } from "@/_foundation/type";
+import type { AppContext } from "~/_foundation/type";
 
 export default defineComponent({
   name: "eyecatch",
@@ -16,10 +16,13 @@ export default defineComponent({
 
     const { device } = useMediaQueryContext();
 
-    const [windowWidth, windowHeight] = useWindowSizeContext(payload => {
+    const [windowWidth, windowHeight] = useWindowSizeContext(({ width, height }) => {
       state.resizing = true;
-      plane.updateCache({ offset: scrollContext.scrollTop() });
-      plane.resize(payload);
+      plane.resize({
+        height,
+        width,
+        y: scrollContext.scrollTop(),
+      });
       state.resizing = false;
     });
 
@@ -32,9 +35,9 @@ export default defineComponent({
 
     const plane = new Plane(el, {
       currentY: scrollContext.scrollTop(),
+      device,
       windowHeight: windowHeight.value,
       windowWidth: windowWidth.value,
-      device,
     });
 
     useMount(() => {

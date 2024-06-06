@@ -1,8 +1,8 @@
-import { useUnmount, ref, readonly } from "lake";
-import { map } from "nanostores";
 import { atom } from "jotai";
+import { map } from "nanostores";
+import { useUnmount, ref, readonly } from "lake";
+import type { Point } from "~/_foundation/type";
 import { store } from "./";
-import type { Point } from "@/_foundation/type";
 
 const pos = map<Point>({
   x: 0,

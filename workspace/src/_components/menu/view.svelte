@@ -1,9 +1,9 @@
 <script lang="ts">
   import { getContext, onMount } from 'svelte';
-  import { useMouseoverSplitText } from '@/_foundation/hooks';
-  import { useRouteContext } from '@/_states/route';
+  import { useMouseoverSplitText } from '~/_foundation/hooks';
+  import { useRouteContext } from '~/_states/route';
   import type { Context$ } from 'lake';
-  import type { AppContext, RouteName } from '@/_foundation/type';
+  import type { AppContext, RouteName } from '~/_foundation/type';
 
   const { ...context } = getContext<
     Context$<

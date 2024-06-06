@@ -1,69 +1,118 @@
-import { lerp } from "@/_foundation/math";
+import NormalizeWheel from "normalize-wheel";
+import { createEmitter } from "@/_foundation/emitter";
+import { SpringTween } from "@/_foundation/spring";
+import type { SpringConfig } from "@/_foundation/spring";
 
 export class Smooth {
   #state;
   #scroll;
+  #emitter;
+  #spring;
+  public off;
+  public on;
 
-  constructor() {
+  constructor({ stiffness, damping, mass }: Partial<SpringConfig>) {
     this.#state = {
+      active: false,
       scrollLimit: 0,
       scrolling: false,
-      stopped: true,
+      pointerDown: false,
     };
 
     this.#scroll = {
       current: 0,
       target: 0,
+      diff: 0,
+      downPos: 0,
+      prevPos: 0,
     };
 
-    this.resume();
+    this.#emitter = createEmitter<{ currentY: number }>();
+    this.on = this.#emitter.on;
+    this.off = this.#emitter.off;
+
+    this.#spring = new SpringTween(0, {
+      stiffness,
+      damping,
+      mass,
+    });
   }
 
-  updateHeight = (contentHeight: number, windowHeight: number) => {
+  onResize = (contentHeight: number, windowHeight: number) => {
     this.#state.scrollLimit = contentHeight - windowHeight;
   };
 
   pause = () => {
-    this.#state.stopped = true;
+    this.#state.active = false;
   };
 
   resume = () => {
-    this.#state.stopped = false;
-  };
-
-  #setPosY = (value: number) => {
-    window.scrollTo(0, value);
+    this.#state.active = true;
   };
 
   #clamp = (value: number, min: number, max: number) => {
     return Math.min(Math.max(value, min), max);
   };
 
-  tick = ({ timeRatio }: { deltaTime: number; timestamp: number; timeRatio: number }) => {
-    if (this.#state.stopped) {
+  raf = ({ deltaRatio }: { deltaRatio: number }) => {
+    if (!this.#state.active) {
       return;
     }
 
     const diff = this.#scroll.target - this.#scroll.current;
-
     this.#state.scrolling = Math.abs(diff) >= 0.05;
+    this.#scroll.diff = diff;
 
     if (this.#state.scrolling) {
-      const p = 1 - (1 - 0.1) ** timeRatio;
-      this.#scroll.current = lerp(this.#scroll.current, this.#scroll.target, p);
-      this.#setPosY(this.#scroll.current);
+      this.#scroll.current = this.#spring.tween(deltaRatio);
+
+      this.#emitter.emit({
+        currentY: this.#scroll.current,
+      });
     }
   };
 
-  onVScroll = ({ deltaY, originalEvent: evt }: { deltaY: number; originalEvent: Event }) => {
-    if (this.#state.stopped) {
+  onTouchstart = (e: TouchEvent) => {
+    if (!this.#state.active) {
       return;
     }
 
-    evt.preventDefault();
+    this.#state.pointerDown = true;
+    this.#scroll.downPos = this.#scroll.prevPos = e.changedTouches[0].pageY;
+  };
 
-    this.#scroll.target += deltaY * -1;
+  onTouchend = (_e: TouchEvent) => {
+    if (!this.#state.pointerDown) {
+      this.#state.pointerDown = false;
+      this.#scroll.downPos = this.#scroll.prevPos = 0;
+    }
+  };
+
+  onTouchmove = (e: TouchEvent) => {
+    if (!this.#state.pointerDown || !this.#state.active) {
+      return;
+    }
+
+    this.#scroll.prevPos = this.#scroll.downPos;
+    this.#scroll.downPos = e.changedTouches[0].pageY;
+    const dist = (this.#scroll.prevPos - this.#scroll.downPos) * 1;
+
+    this.#scroll.target += dist;
     this.#scroll.target = this.#clamp(this.#scroll.target, -0, this.#state.scrollLimit);
+    this.#spring.set(this.#scroll.target);
+  };
+
+  onWheel = (e: WheelEvent) => {
+    if (!this.#state.active) {
+      return;
+    }
+
+    e.preventDefault();
+    const { pixelY } = NormalizeWheel(e);
+
+    this.#scroll.target += pixelY;
+    this.#scroll.target = this.#clamp(this.#scroll.target, -0, this.#state.scrollLimit);
+    this.#spring.set(this.#scroll.target);
   };
 
   onNativeScroll = () => {
@@ -72,14 +121,13 @@ export class Smooth {
     }
   };
 
-  reset = () => {
-    this.#scroll.target = this.#scroll.current = 0;
-    this.#setPosY(0);
+  set = (val: number) => {
+    this.#scroll.target = this.#scroll.current = val;
+    this.#spring.sync(val);
   };
 
-  destroy = () => {
-    (this.#state as any) = null;
-    (this.#scroll as any) = null;
+  reset = () => {
+    this.set(0);
   };
 
   scrollTop = () => {

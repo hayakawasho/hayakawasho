@@ -1,8 +1,8 @@
 import type BackCanvasContext from "../_components/glworld/back";
 import type FrontCanvasContext from "../_components/glworld/front";
 import type PageScrollContext from "../_components/page-scroll";
-import type { Object3D, Scene } from "@/_gl/three";
 import type { ReadonlyRef } from "lake";
+import type { Object3D, Scene } from "~/_gl/three";
 
 export type AppContext = {
   once: boolean;

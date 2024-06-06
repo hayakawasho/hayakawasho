@@ -1,4 +1,4 @@
-import { mq } from "@/_foundation/const";
+import { mq } from "~/_foundation/const";
 
 type Props = {
   alt: string;

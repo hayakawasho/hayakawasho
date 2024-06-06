@@ -1,17 +1,10 @@
 import { Object3D } from "./three";
-import type { Point, Size } from "@/_foundation/type";
-
-type UpdateCache = {
-  left?: number;
-  top?: number;
-  offset?: number;
-  width?: number;
-  height?: number;
-};
+import type { Point } from "@/_foundation/type";
 
 export class GlObject extends Object3D {
   #pos: Point;
-  protected cache;
+  cache;
+  protected order: number;
 
   constructor(protected el: HTMLElement) {
     super();
@@ -22,15 +15,26 @@ export class GlObject extends Object3D {
     };
 
     this.cache = {
+      height: 0,
       left: 0,
       top: 0,
       width: 0,
-      height: 0,
-      offset: 0,
+      x: 0,
+      y: 0,
     };
+
+    const order = this.el.dataset.glOrder || 1;
+    this.order = Number(order);
   }
 
-  updateCache = (newCache: UpdateCache) => {
+  protected updateCache = (newCache: {
+    left?: number;
+    top?: number;
+    width?: number;
+    height?: number;
+    x?: number;
+    y?: number;
+  }) => {
     const old = this.cache;
 
     this.cache = {
@@ -39,21 +43,28 @@ export class GlObject extends Object3D {
     };
   };
 
-  resize(size: Size) {
+  setSize({
+    x = 0,
+    y = 0,
+    ...newValues
+  }: {
+    x?: number;
+    y?: number;
+    width: number;
+    height: number;
+  }) {
     const bounds = this.el.getBoundingClientRect();
     const { left, top, width, height } = bounds;
-    this.updateCache({ left, top, width, height });
+    this.updateCache({ height, left, top, width, x, y });
 
-    const offsetX = left - size.width / 2 + width / 2;
-    const offsetY = -(this.cache.offset + top) + size.height / 2 - height / 2;
+    const xOffset = x + left - newValues.width * 0.5 + width * 0.5;
+    const yOffset = -(y + top) + newValues.height * 0.5 - height * 0.5;
 
-    this.#pos = {
-      x: offsetX,
-      y: offsetY,
-    };
+    this.position.x = xOffset;
+    this.position.y = yOffset;
 
-    this.position.x = this.#pos.x;
-    this.position.y = this.#pos.y;
+    this.#pos.x = xOffset;
+    this.#pos.y = yOffset;
   }
 
   update({ x = 0, y = 0 }: { x?: number; y?: number }) {

@@ -9,19 +9,19 @@ import {
   readonly,
   withSvelte,
 } from "lake";
-import { useElementSize } from "@/_foundation/hooks";
-import { BREAK_POINTS } from "@/_foundation/mq";
-import { cursorTypeMutators } from "@/_states/cusor";
-import { mediaQueryMutators } from "@/_states/mq";
-import { routeMutators } from "@/_states/route";
-import { scrollStateYMutators } from "@/_states/scroll";
-import { scrollPositionMutators } from "@/_states/scroll-position";
-import { windowSizeMutators } from "@/_states/window-size";
+import { useElementSize } from "~/_foundation/hooks";
+import { BREAK_POINTS } from "~/_foundation/mq";
+import { cursorTypeMutators } from "~/_states/cursor";
+import { mediaQueryMutators } from "~/_states/mq";
+import { routeMutators } from "~/_states/route";
+import { scrollStateYMutators } from "~/_states/scroll";
+import { scrollPositionMutators } from "~/_states/scroll-position";
+import { windowSizeMutators } from "~/_states/window-size";
 import Cursor from "../cursor.svelte";
 import BackCanvas from "../glworld/back";
 import FrontCanvas from "../glworld/front";
 import PageScroll from "../page-scroll";
-import type { AppContext, RouteName } from "@/_foundation/type";
+import type { AppContext, RouteName } from "~/_foundation/type";
 
 type Props = {
   onCreated: (props?: Omit<AppContext, "once">) => void;
@@ -57,9 +57,13 @@ export default defineComponent({
       device: wideQuery.matches ? "pc" : "sp",
     } as const;
 
-    const [backCanvasContext] = addChild(refs.backCanvas, BackCanvas);
-    const [frontCanvasContext] = addChild(refs.frontCanvas, FrontCanvas);
-    const [scrollContext] = addChild(refs.main, PageScroll);
+    const [scrollContext] = addChild(refs.main, PageScroll, {
+      anyHover: mediaQuery.anyHover,
+    });
+
+    const dpr = Math.min(window.devicePixelRatio, 1.5);
+    const [backCanvasContext] = addChild(refs.backCanvas, BackCanvas, { dpr });
+    const [frontCanvasContext] = addChild(refs.frontCanvas, FrontCanvas, { dpr });
 
     const appProvides = {
       backCanvasContext: backCanvasContext.current,
@@ -78,8 +82,8 @@ export default defineComponent({
       const namespace = to.dataset.xhr as RouteName;
       document.body.dataset.page = namespace;
 
-      // scrollContext.current.reset();
-      // scrollPositionMutators(0);
+      scrollContext.current.reset();
+      scrollPositionMutators(0);
 
       onUpdated(to, appProvides);
       cursorTypeMutators("default");
@@ -125,7 +129,7 @@ export default defineComponent({
     useMount(() => {
       mediaQueryMutators(mediaQuery);
 
-      if (mediaQuery.device === "pc") {
+      if (mediaQuery.anyHover) {
         addChild(refs.cursor, withSvelte(Cursor, "Cursor"));
       }
 
@@ -163,7 +167,6 @@ export default defineComponent({
       () => {
         clearTimeout(timer);
 
-        scrollPositionMutators(scrollContext.current.scrollTop());
         scrollStateYMutators({
           scrolling: true,
         });

@@ -1,6 +1,6 @@
-import { IMG_API } from "@/_foundation/const";
-import { GlObject } from "@/_gl/gl-object";
-import { map } from "@/_foundation/math";
+import { IMG_API } from "~/_foundation/const";
+import { map } from "~/_foundation/math";
+import { GlObject } from "~/_gl/object";
 import {
   Vector2,
   Mesh,
@@ -8,13 +8,9 @@ import {
   ShaderMaterial,
   TextureLoader,
   LinearFilter,
-} from "@/_foundation/three";
+} from "~/_gl/three";
 import fragment from "./fragment.frag";
 import vertex from "./vertex.vert";
-import type { Size } from "@/_foundation/type";
-
-const loader = new TextureLoader();
-loader.crossOrigin = "anonymous";
 
 export class Plane extends GlObject {
   #offsetY = 0;
@@ -43,6 +39,9 @@ export class Plane extends GlObject {
       pc: imgSrc + IMG_API + "&w=1440",
       sp: imgSrc + IMG_API + "&w=750",
     };
+
+    const loader = new TextureLoader();
+    loader.crossOrigin = "anonymous";
 
     const texture = loader.load(texSrc[device], texture => {
       texture.minFilter = LinearFilter;
@@ -83,19 +82,19 @@ export class Plane extends GlObject {
     this.#mesh = new Mesh(geo, mat);
     this.add(this.#mesh);
 
-    this.updateCache({ offset: currentY });
     this.resize({
       height: windowHeight,
       width: windowWidth,
+      y: currentY,
     });
   }
 
-  resize = (size: Size) => {
-    super.resize(size);
+  resize = (newValues: Parameters<GlObject["resize"]>[0]) => {
+    super.resize(newValues);
 
-    const offset = -size.height + this.cache.top + this.cache.offset;
+    const offset = -newValues.height + this.cache.top + this.cache.y;
     this.#offsetY = offset;
-    this.#endY = offset + size.height + this.cache.height;
+    this.#endY = offset + newValues.height + this.cache.height;
 
     this.#mesh.scale.set(this.cache.width, this.cache.height, 1);
   };

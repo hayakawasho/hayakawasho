@@ -4,6 +4,8 @@ import { ClientOnly } from "./client-only.tsx";
 import "./_components/page.work/index.module.scss";
 import "./_components/page.work-single/index.module.scss";
 import gallerymodernFont  from "./assets/gallerymodern-webfont.woff2"
+import noiseImg from './assets/noise_1100x1100.webp';
+import noiseSpImg from './assets/noise_550x550.webp';
 import type { RouteName } from "./_foundation/type";
 
 export interface Props {
@@ -26,15 +28,16 @@ const idDev = process.env.NODE_ENV !== 'production';
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <slot name="prependHead" />
     {
-      // <link
-      //   as="font"
-      //   href={gallerymodernFont}
-      //   rel="preload"
-      //   type="font/woff2"
-      // />
+      <link
+        as="font"
+        href={gallerymodernFont}
+        rel="preload"
+        type="font/woff2"
+      />
     }
     {!idDev && (
       <link
@@ -44,7 +47,6 @@ const idDev = process.env.NODE_ENV !== 'production';
         rel="preload"
       />
     )}
-		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
     <meta name="format-detection" content="telephone=no" />
     <title>{title}</title>
@@ -56,21 +58,22 @@ const idDev = process.env.NODE_ENV !== 'production';
     <meta content={siteTitle} property="og:site_name" />
     <meta content={SITE_URL + '/ogp.jpg'} property="og:image" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link href="https://db.onlinewebfonts.com/c/4d4f45d65a23eec6fb297a1bcf0c046f?family=SchnyderMLight" rel="stylesheet" type="text/css"/>
+    { // <link href="https://db.onlinewebfonts.com/c/4d4f45d65a23eec6fb297a1bcf0c046f?family=SchnyderMLight" rel="stylesheet" type="text/css"/>
+    }
     <GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Jost:wght@400&display=swap" />
     {idDev && (
-      <script defer src={`http://${process.env.LOCAL_IP_ADDR || 'localhost'}:5173/src/entry.ts`} type="module" />
+      <script src={`http://${process.env.LOCAL_IP_ADDR || 'localhost'}:5173/src/entry.ts`} type="module" />
     )}
-    {!idDev && <script defer src="/assets/entry.js" type="module" />}
+    {!idDev && <script src="/assets/entry.js" type="module" />}
 	</head>
   <body class="" data-page={props.namespace}>
     <div
       aria-hidden="true"
       class="svh | fixed inset-0 w-screen pointer-events-none -z-1 invisible"
       data-ref="windowSizeWatcher"
-    ></div>
+    />
     <div class="bg" aria-hidden="true"></div>
-    <canvas aria-hidden="true" class="glCanvas" data-ref="backCanvas"></canvas>
+    <canvas aria-hidden="true" class="glCanvas" data-ref="backCanvas" data-pc={noiseImg.src} data-mob={noiseSpImg.src}></canvas>
     <div class="grad grad--upper" aria-hidden="true"></div>
     <div class="grad grad--lower" aria-hidden="true"></div>
     <div class="gridLine gridLine--left" aria-hidden="true"></div>

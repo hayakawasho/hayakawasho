@@ -1,6 +1,6 @@
-import { useUnmount, ref, readonly } from "lake";
 import { atom } from "nanostores";
-import { noop } from "@/_foundation/utils";
+import { useUnmount, ref, readonly } from "lake";
+import { noop } from "~/_foundation/utils";
 
 type MediaQuery = {
   device: "pc" | "sp";

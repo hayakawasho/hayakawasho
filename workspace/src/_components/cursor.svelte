@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { useTick } from '@/_foundation/hooks';
-  import { lerp } from '@/_foundation/math';
-  import { mousePosMutators } from '@/_states/mouse';
+  import { useTick } from '~/_foundation/hooks';
+  import { lerp } from '~/_foundation/math';
+  import { mousePosMutators } from '~/_states/mouse';
 
   let timer: number;
 
@@ -43,15 +43,15 @@
     }, 500);
   };
 
-  useTick(({ timeRatio }) => {
+  useTick(({ deltaRatio }) => {
     if (!state.isRunning) {
       return;
     }
 
-    const easeVal = 1 - (1 - 0.2) ** timeRatio;
+    const p = 0.2 * deltaRatio;
 
-    lastX = lerp(lastX, state.x, easeVal);
-    lastY = lerp(lastY, state.y, easeVal);
+    lastX = lerp(lastX, state.x, p);
+    lastY = lerp(lastY, state.y, p);
   });
 
   $: diffX = lastX - state.x;

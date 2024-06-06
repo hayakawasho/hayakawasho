@@ -1,6 +1,6 @@
 import { defineComponent, useDomRef, useSlot, withSvelte as _withSvelte } from "lake";
 // import Menu from './view.svelte';
-import type { AppContext } from "@/_foundation/type";
+import type { AppContext } from "~/_foundation/type";
 
 type Refs = {
   menu: HTMLElement;

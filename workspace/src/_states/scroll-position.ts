@@ -5,16 +5,18 @@ import { noop } from "@/_foundation/utils";
 const posYState = atom(0);
 
 export const useScrollPositionContext = (
-  callback: (payload: { currentY: number; oldY: number }) => void = noop
+  callback: (payload: { currentY: number; oldY: number; diff: number }) => void = noop,
 ) => {
   const currentY = ref(0);
 
   const unbind = posYState.listen(y => {
     const oldY = currentY.value;
+    const diff = y - oldY;
 
     callback({
       currentY: y,
       oldY,
+      diff,
     });
 
     currentY.value = y;

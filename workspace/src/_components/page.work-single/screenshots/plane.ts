@@ -1,17 +1,13 @@
-import { IMG_API } from "@/_foundation/const";
-import { GlObject } from "@/_gl/gl-object";
-import { map } from "@/_foundation/math";
+import { IMG_API } from "~/_foundation/const";
+import { map } from "~/_foundation/math";
+import { GlObject } from "~/_gl/object";
 import {
   Mesh,
   PlaneBufferGeometry,
   ShaderMaterial,
   TextureLoader,
   LinearFilter,
-} from "@/_foundation/three";
-import type { Size } from "@/_foundation/type";
-
-const loader = new TextureLoader();
-loader.crossOrigin = "anonymous";
+} from "~/_gl/three";
 
 export class Plane extends GlObject {
   #offsetY = 0;
@@ -45,6 +41,9 @@ export class Plane extends GlObject {
       pc: imgSrc + IMG_API + "&w=14000",
       sp: imgSrc + IMG_API + "&w=750",
     };
+
+    const loader = new TextureLoader();
+    loader.crossOrigin = "anonymous";
 
     const texture = loader.load(texSrc[device], texture => {
       texture.minFilter = LinearFilter;
@@ -86,20 +85,19 @@ export class Plane extends GlObject {
     this.resize({
       height: windowHeight,
       width: windowWidth,
+      y: currentY,
     });
-
-    this.updateY(currentY);
   }
 
-  resize = (size: Size) => {
-    super.resize(size);
+  resize = (newValues: Parameters<GlObject["resize"]>[0]) => {
+    super.resize(newValues);
 
     const bottomMargin = {
-      pc: size.height * 0.175,
-      sp: size.height * 0.1,
+      pc: newValues.height * 0.175,
+      sp: newValues.height * 0.1,
     };
 
-    const offset = -size.height + this.cache.top + this.cache.offset;
+    const offset = -newValues.height + this.cache.top + this.cache.y;
     this.#offsetY = offset;
     this.#endY = offset + this.cache.height + bottomMargin[this.#device];
 

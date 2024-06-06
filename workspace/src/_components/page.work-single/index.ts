@@ -1,12 +1,12 @@
 import { defineComponent, useDomRef, useSlot, useMount } from "lake";
-import { useMouseoverSplitText } from "@/_foundation/hooks";
-import { splitTextNode2Words } from "@/_foundation/split-text";
-import { Tween } from "@/_foundation/tween";
-import { waitFrame } from "@/_foundation/utils";
-import { useWindowSizeContext } from "@/_states/window-size";
+import { useMouseoverSplitText } from "~/_foundation/hooks";
+import { splitTextNode2Words } from "~/_foundation/split-text";
+import { Tween } from "~/_foundation/tween";
+import { waitFrame } from "~/_foundation/utils";
+import { useWindowSizeContext } from "~/_states/window-size";
 import Eyecatch from "./eyecatch";
 import Screenshots from "./screenshots";
-import type { AppContext } from "@/_foundation/type";
+import type { AppContext } from "~/_foundation/type";
 
 type Refs = {
   back: HTMLElement;
@@ -15,6 +15,7 @@ type Refs = {
   max: HTMLElement;
   dash: HTMLElement;
   h1: HTMLElement;
+  date: HTMLElement;
   screenshots: HTMLElement;
   eyecatch: HTMLElement;
   infoText: HTMLElement[];
@@ -36,6 +37,7 @@ export default defineComponent({
       "max",
       "dash",
       "h1",
+      "date",
       "screenshots",
       "eyecatch",
       "infoText",
@@ -44,15 +46,15 @@ export default defineComponent({
       "next",
     );
 
-    addChild(refs.eyecatch, Eyecatch, context);
-    addChild(refs.screenshots, Screenshots, context);
-    // addChild(refs.next, NextProject, context);
-
     const { split, onSplitUpdate } = splitTextNode2Words(refs.h1);
 
     useWindowSizeContext(() => {
       onSplitUpdate();
     });
+
+    addChild(refs.eyecatch, Eyecatch, context);
+    addChild(refs.screenshots, Screenshots, context);
+    // addChild(refs.next, NextProject, context);
 
     useMouseoverSplitText(refs.back, {
       chars: refs.c,
@@ -73,7 +75,7 @@ export default defineComponent({
             willChange: "transform",
             x: "110%",
           }),
-          Tween.prop([refs.infoText, refs.stack], {
+          Tween.prop([refs.infoText, refs.stack, refs.date], {
             willChange: "transform",
             y: "110%",
           }),
@@ -82,7 +84,7 @@ export default defineComponent({
             scaleY: 0,
             willChange: "transform,opacity",
           }),
-          Tween.prop(split.words, {
+          Tween.prop([split.words], {
             willChange: "transform",
             y: "1.2em",
           }),
@@ -98,7 +100,7 @@ export default defineComponent({
             Tween.tween(refs.dash, 1.2, "expo.out", {
               scaleX: 1,
             }),
-            Tween.tween(refs.infoText, 1.85, "expo.out", {
+            Tween.tween([refs.infoText], 1.85, "expo.out", {
               stagger: 0.05,
               y: "0%",
             }),
@@ -110,10 +112,14 @@ export default defineComponent({
               opacity: 1,
               scaleY: 1,
             }),
-            Tween.tween(split.words, 2.2, "expo.out", {
+            Tween.tween([split.words], 2.1, "expo.out", {
               delay: 0.05,
               stagger: 0.03,
               y: "0em",
+            }),
+            Tween.tween([refs.date], 1.6, "expo.out", {
+              delay: 0.25,
+              y: "0%",
             }),
             Tween.tween(refs.c, 1.85, "expo.out", {
               y: "0%",
@@ -122,6 +128,7 @@ export default defineComponent({
           Tween.immediate(() => {
             Tween.prop(
               [
+                refs.date,
                 refs.now,
                 refs.max,
                 refs.dash,
@@ -146,9 +153,12 @@ export default defineComponent({
             willChange: "transform",
             y: "-100%",
           });
-          Tween.prop([refs.dash, refs.max, refs.now, refs.infoText, refs.stack, split.words], {
-            willChange: "transform",
-          });
+          Tween.prop(
+            [refs.dash, refs.max, refs.now, refs.infoText, refs.stack, split.words, refs.date],
+            {
+              willChange: "transform",
+            },
+          );
 
           await waitFrame();
 
@@ -160,7 +170,7 @@ export default defineComponent({
               y: "-240%",
             }),
             Tween.tween(
-              [refs.dash, refs.max, refs.now, refs.infoText, refs.stack, split.words],
+              [refs.dash, refs.max, refs.now, refs.infoText, refs.stack, split.words, refs.date],
               0.45,
               "custom.in",
               {

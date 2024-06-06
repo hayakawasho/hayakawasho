@@ -1,12 +1,12 @@
 import { defineComponent, useMount } from "lake";
-// import { Tween } from '@/_foundation/tween';
-import { useMediaQueryContext } from "@/_states/mq";
-// import { useScrollStateContext } from "@/_states/scroll";
-import { useWindowSizeContext } from "@/_states/window-size";
-import { useTick } from "@/_foundation/hooks";
+import { useTick } from "~/_foundation/hooks";
+import { useMediaQueryContext } from "~/_states/mq";
+import { useWindowSizeContext } from "~/_states/window-size";
+// import { Tween } from '~/_foundation/tween';
+// import { useScrollStateContext } from "~/_states/scroll";
 import { Plane } from "./plane";
-import type { PlaneBufferGeometry, ShaderMaterial } from "@/_foundation/three";
-import type { AppContext } from "@/_foundation/type";
+import type { AppContext } from "~/_foundation/type";
+import type { PlaneBufferGeometry, ShaderMaterial } from "~/_gl/three";
 
 type Props = AppContext & {
   geo: PlaneBufferGeometry;
@@ -24,10 +24,13 @@ export default defineComponent({
 
     const { device } = useMediaQueryContext();
 
-    const [windowWidth, windowHeight] = useWindowSizeContext(payload => {
+    const [windowWidth, windowHeight] = useWindowSizeContext(({ width, height }) => {
       state.resizing = true;
-      plane.updateCache({ offset: scrollContext.scrollTop() });
-      plane.resize(payload);
+      plane.resize({
+        width,
+        height,
+        y: scrollContext.scrollTop(),
+      });
       state.resizing = false;
     });
 
@@ -40,9 +43,9 @@ export default defineComponent({
 
     const plane = new Plane(el, {
       currentY: scrollContext.scrollTop(),
+      device,
       geo,
       mat,
-      device,
       windowWidth: windowWidth.value,
       windowHeight: windowHeight.value,
     });

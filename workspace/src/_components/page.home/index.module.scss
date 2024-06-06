@@ -13,7 +13,7 @@ $mq-pc: 640px;
 }
 
 .h1__sub {
-  font-family: var(--font-heading);
+  font-family: var(--font-number);
   margin-right: 0.25em;
 }
 
@@ -34,13 +34,12 @@ $mq-pc: 640px;
 
 .entry {
   font-size: 3.5vw;
-  // line-height: 4.2708vw;
-  // line-height: 1.2;
-  line-height: 1.15;
+  line-height: 1.2;
   font-family: var(--font-en);
   opacity: 0.3;
   overflow: hidden;
   letter-spacing: 0.025em;
   display: block;
-  margin-top: -0.2em;
+  height: 1.2em;
+  white-space: nowrap;
 }

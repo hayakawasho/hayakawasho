@@ -1,7 +1,7 @@
 import cx from "clsx";
 import React from "react";
 import { selectDatetime, selectLaunch, selectUrl } from "~/_components/work/selector";
-import { zeroPadding } from "@/_foundation/utils";
+import { zeroPadding } from "~/_foundation/utils";
 import Styles from "./index.module.scss";
 import { Header } from "../header/view";
 import { PageWrapper } from "../page-wrapper/index.view";
@@ -28,7 +28,7 @@ const Component: React.FC<{
           ))}
           <span className="sr-only">Back</span>
         </Link>
-        <div className="mb-[8rem] pc:mb-[20rem]">
+        <div className="mb-[8rem] pc:mb-[16rem]">
           <div className={Styles.intro}>
             <div className={Styles.intro__indexNumber}>
               <span className="inline-block tracking-[-0.02em]" data-ref="now">
@@ -44,7 +44,7 @@ const Component: React.FC<{
             <div className={Styles.intro__g}>
               <div className={Styles.intro__hgroup}>
                 <div className={Styles.heading}>
-                  <h1 className={cx("overflow-hidden mt-[-.1em]")} data-ref="h1">
+                  <h1 className="overflow-hidden" data-ref="h1">
                     {post.title}
                   </h1>
                   <time className={Styles.heading__date} dateTime={selectDatetime(post)}>
@@ -90,40 +90,41 @@ const Component: React.FC<{
                   )}
                 </div>
                 {post.stacks.length > 0 && (
-                  <div className={Styles.stacks}>
-                    <ul className={Styles.stacksItems}>
-                      {post.stacks.map((stack, i) => (
-                        <li className="overflow-hidden" key={i}>
-                          <span className="inline-block" data-ref="stack">
-                            {stack}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                    <hr className={Styles.stacks__hr} data-ref="infoLine" />
-                  </div>
+                  <dl className={Styles.stacks}>
+                    <dt className="sr-only">(Skills used)</dt>
+                    <dd>
+                      <ul className={Styles.stacksItems}>
+                        {post.stacks.map((stack, i) => (
+                          <li className="overflow-hidden" key={i}>
+                            <span className="inline-block" data-ref="stack">
+                              {stack}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                      <hr className={Styles.stacks__hr} data-ref="infoLine" />
+                    </dd>
+                  </dl>
                 )}
               </div>
             </div>
           </div>
 
-          <div className={Styles.eyecatchLayout}>
-            <div className={cx(Styles.eyecatch)}>
-              <img
-                alt=""
-                className={cx(Styles.eyecatchImg, "pointer-events-none invisible")}
-                data-h={post.eyecatch.height}
-                data-ref="eyecatch"
-                data-src={post.eyecatch.src}
-                data-w={post.eyecatch.width}
-                height={post.eyecatch.height}
-                width={post.eyecatch.width}
-              />
-            </div>
+          <div className={cx(Styles.eyecatch)}>
+            <img
+              alt=""
+              className={cx(Styles.eyecatchImg, "pointer-events-none invisible")}
+              data-height={post.eyecatch.height}
+              data-ref="eyecatch"
+              data-src={post.eyecatch.src}
+              data-width={post.eyecatch.width}
+              height={post.eyecatch.height}
+              width={post.eyecatch.width}
+            />
           </div>
         </div>
 
-        <div className="mb-[20rem]">
+        <div className="mb-[16rem]">
           <ul className={Styles.screenshots} data-ref="screenshots">
             {post.screenshots &&
               post.screenshots.map((i, index) => {
@@ -132,10 +133,10 @@ const Component: React.FC<{
                     <img
                       alt=""
                       className="pointer-events-none invisible w-full"
-                      data-h={i.height}
+                      data-height={i.height}
                       data-ref="screenshotItem"
                       data-src={i.src}
-                      data-w={i.width}
+                      data-width={i.width}
                       height={i.height}
                       width={i.width}
                     />
@@ -146,14 +147,20 @@ const Component: React.FC<{
         </div>
 
         <aside data-ref="next" className="">
-          <div className={Styles.next} data-ref="nextProject">
-            <Link className={Styles.next__hgroup} to={`../${nextPost.id}/`} data-ref="nextLink">
-              <h2 className={cx(Styles.next__heading, "!pc:text-center mt-[-.05em] mb-[10rem]")}>
-                {nextPost.title}
-              </h2>
-            </Link>
-          </div>
+          <div className={Styles.next} data-ref="nextProject"></div>
         </aside>
+
+        {
+          // <aside data-ref="next" className="">
+          //   <div className={Styles.next} data-ref="nextProject">
+          //     <Link className={Styles.next__hgroup} to={`../${nextPost.id}/`} data-ref="nextLink">
+          //       <h2 className={cx(Styles.next__heading, "!pc:text-center mt-[-.05em] mb-[10rem]")}>
+          //         {nextPost.title}
+          //       </h2>
+          //     </Link>
+          //   </div>
+          // </aside>
+        }
       </main>
     </PageWrapper>
   );

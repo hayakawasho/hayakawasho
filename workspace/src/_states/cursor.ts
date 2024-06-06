@@ -1,6 +1,6 @@
-import { useUnmount } from "lake";
 import { atom } from "nanostores";
-import { noop } from "@/_foundation/utils";
+import { useUnmount } from "lake";
+import { noop } from "~/_foundation/utils";
 
 export type CursorType = "default" | "hide" | "loading" | "scale" | "drag" | "drag.scale";
 

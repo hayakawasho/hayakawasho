@@ -11,15 +11,17 @@
     "build": "NODE_ENV=production run-s build:*",
     "check": "astro check",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "fix:prettier": "prettier --write ./src/**/*.{ts,tsx}",
+    "fix:eslint": "eslint './src/**/*.{ts,tsx,svelte}' -c .eslintrc.json --fix",
+    "fix": "run-s fix:*"
   },
   "dependencies": {
     "@astrojs/check": "^0.5.2",
     "@astrojs/react": "^3.0.10",
     "@astrojs/tailwind": "^5.1.0",
-    "@types/react": "^18.2.55",
-    "@types/react-dom": "^18.2.19",
-    "astro": "^4.3.5",
+    "@unseenco/e": "^2.4.0",
+    "astro": "^4.5.5",
     "astro-critters": "^2.1.1",
     "astro-google-fonts-optimizer": "^0.2.2",
     "dayjs": "^1.11.10",
@@ -29,6 +31,7 @@
     "glslify": "^7.1.1",
     "gsap": "^3.12.5",
     "htmx.org": "^1.9.10",
+    "jotai": "^2.8.0",
     "lake": "file:lib/lake",
     "nanostores": "^0.9.5",
     "normalize-wheel": "^1.0.1",
@@ -36,19 +39,28 @@
     "react-dom": "^18.2.0",
     "redaxios": "^0.5.1",
     "remeda": "^1.40.1",
-    "sass": "^1.70.0",
     "split-type": "^0.3.4",
     "svelte": "^4.2.10",
     "tailwindcss": "^3.4.1",
     "three": "^0.125.0",
-    "typescript": "^5.3.3",
     "virtual-scroll": "^2.2.1",
-    "vite-plugin-glslify": "^2.0.2"
+    "vite-plugin-glslify": "^2.0.2",
+    "what-input": "^5.2.12"
   },
   "devDependencies": {
     "@types/normalize-wheel": "^1.0.4",
+    "@types/preloadjs": "^0.6.36",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
     "@types/virtual-scroll": "^2.0.3",
-    "npm-run-all": "^4.1.5"
+    "@typescript-eslint/eslint-plugin": "^7.8.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-svelte": "^2.38.0",
+    "npm-run-all": "^4.1.5",
+    "prettier-plugin-svelte": "^3.2.3",
+    "sass": "^1.77.4",
+    "typescript": "^5.4.5"
   },
   "browserslist": [
     "defaults",
