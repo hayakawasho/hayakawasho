@@ -1,25 +1,33 @@
-import { map } from "nanostores";
-import { useUnmount } from "lake";
-import type { RouteName } from "~/_foundation/type";
+import { atom, createStore } from "jotai";
+import { useUnmount, ref, readonly } from "lake";
+import type { RouteName } from "~/_foundation/types";
 
 type Route = {
   name: RouteName;
 };
 
-const route = map<Route>({
+const store = createStore();
+const routeAtom = atom<Route>({
   name: "home",
 });
 
-export const useRouteContext = (callback: (payload: { name: RouteName }) => void) => {
-  const unbind = route.listen(({ name }) => {
+export const useRoute = (callback: (payload: { name: RouteName }) => void) => {
+  const route = ref<Route>(store.get(routeAtom));
+
+  const unsub = store.sub(routeAtom, () => {
+    const { name } = store.get(routeAtom);
+    route.value.name = name;
+
     callback({
       name,
     });
   });
 
   useUnmount(() => {
-    unbind();
+    unsub();
   });
+
+  return readonly(route);
 };
 
-export const routeMutators = route.set;
+export const routeMutators = (val: Route) => store.set(routeAtom, val);

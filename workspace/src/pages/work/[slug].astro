@@ -1,16 +1,15 @@
 ---
 import dotenv from 'dotenv';
-import { IMG_API } from '../../_foundation/const';
-import { BREAK_POINTS } from '../../_foundation/mq';
-import WorksDetail from '../../_components/page.work-single/index.view';
-import { createWorksRepository } from '../../_repositories/works';
-import Layout from '../../layout.astro';
+import WorkSingle from '../../_components/page/work-single';
+import { IMG_API, BREAK_POINTS } from '../../_foundation/const';
+import DefalutLayout from "../../layout.astro";
+import { createWorkRepository } from '../../_repositories/works';
 
 dotenv.config();
 
 export async function getStaticPaths() {
-  const repository = createWorksRepository(process.env.API_KEY!);
-  const result = await repository.findList({
+  const workRepo = createWorkRepository(process.env.API_KEY);
+  const result = await workRepo.findList({
     limit: 99,
     orders: '-launch',
   });
@@ -32,15 +31,15 @@ export async function getStaticPaths() {
 }
 
 const { post, next, totalCount, currentIndex } = Astro.props;
-const eyecatch = post.eyecatch.src;
+
 ---
 
-<Layout title={post.title} permalink={`/work/${post.id}/`} namespace="work-single">
+<DefalutLayout title={post.title} permalink={`/work/${post.id}/`} namespace="work-single">
   <link
     slot="prependHead"
     as="image"
     crossorigin="anonymous"
-    href={eyecatch + IMG_API + '&w=750'}
+    href={post.mv.src + IMG_API + '&w=640'}
     media={BREAK_POINTS['sp']}
     rel="preload"
   />
@@ -48,9 +47,9 @@ const eyecatch = post.eyecatch.src;
     slot="prependHead"
     as="image"
     crossorigin="anonymous"
-    href={eyecatch + IMG_API + '&w=1440'}
+    href={post.mv.src + IMG_API + '&w=1440'}
     media={BREAK_POINTS['pc']}
     rel="preload"
   />
-  <WorksDetail post={post} nextPost={next} now={currentIndex} max={totalCount} />
-</Layout>
+  <WorkSingle post={post} nextPost={next} now={currentIndex} max={totalCount} />
+</DefalutLayout>

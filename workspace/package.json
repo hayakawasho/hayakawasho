@@ -1,20 +1,19 @@
 {
-  "name": "app",
-  "type": "module",
-  "version": "0.0.1",
+  "private": true,
   "scripts": {
     "dev:vite": "vite",
     "dev:astro": "astro dev",
-    "start": "NODE_ENV=development run-p dev:*",
+    "start": "NODE_ENV=development concurrently \"npm:dev:vite\" \"npm:dev:astro\"",
     "build:astro": "astro build",
     "build:vite": "vite build",
-    "build": "NODE_ENV=production run-s build:*",
+    "build": "NODE_ENV=production build:astro && build:vite",
     "check": "astro check",
     "preview": "astro preview",
     "astro": "astro",
-    "fix:prettier": "prettier --write ./src/**/*.{ts,tsx}",
-    "fix:eslint": "eslint './src/**/*.{ts,tsx,svelte}' -c .eslintrc.json --fix",
-    "fix": "run-s fix:*"
+    "fix:prettier": "prettier --write \"./src/**/*.{ts,tsx}\"",
+    "fix:lint": "eslint \"./src/**/*.{ts,tsx,svelte}\" -c .eslintrc.json --fix",
+    "fix": "concurrently \"npm:fix:lint\" \"npm:fix:prettier\"",
+    "markuplint": "markuplint \"./src/**/*.tsx\""
   },
   "dependencies": {
     "@astrojs/check": "^0.5.2",
@@ -33,14 +32,14 @@
     "htmx.org": "^1.9.10",
     "jotai": "^2.8.0",
     "lake": "file:lib/lake",
-    "nanostores": "^0.9.5",
     "normalize-wheel": "^1.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "redaxios": "^0.5.1",
     "remeda": "^1.40.1",
     "split-type": "^0.3.4",
-    "svelte": "^4.2.10",
+    "svelte": "^4.2.19",
+    "tailwind-merge": "^2.4.0",
     "tailwindcss": "^3.4.1",
     "three": "^0.125.0",
     "virtual-scroll": "^2.2.1",
@@ -48,22 +47,26 @@
     "what-input": "^5.2.12"
   },
   "devDependencies": {
+    "@markuplint/jsx-parser": "^4.7.5",
+    "@markuplint/react-spec": "^4.5.5",
     "@types/normalize-wheel": "^1.0.4",
     "@types/preloadjs": "^0.6.36",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@types/virtual-scroll": "^2.0.3",
     "@typescript-eslint/eslint-plugin": "^7.8.0",
+    "concurrently": "^8.2.2",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.34.1",
-    "eslint-plugin-svelte": "^2.38.0",
-    "npm-run-all": "^4.1.5",
-    "prettier-plugin-svelte": "^3.2.3",
+    "eslint-plugin-svelte": "^2.44.0",
+    "markuplint": "^4.9.2",
+    "prettier-plugin-svelte": "^3.2.6",
     "sass": "^1.77.4",
     "typescript": "^5.4.5"
   },
   "browserslist": [
     "defaults",
     "not IE 11"
-  ]
+  ],
+  "type": "module"
 }

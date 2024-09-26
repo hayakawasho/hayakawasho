@@ -1,18 +1,23 @@
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
-import critters from "astro-critters";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [react(), tailwind(), critters()],
+  integrations: [
+    react(),
+    tailwind({
+      applyBaseStyles: false,
+    }),
+    // (await import("astro-critters")).default(),
+  ],
   devToolbar: {
     enabled: false,
   },
   outDir: "./out/",
   compressHTML: true,
   build: {
-    // inlineStylesheets: "never",
+    inlineStylesheets: "never",
   },
   server: {
     host: "0.0.0.0",

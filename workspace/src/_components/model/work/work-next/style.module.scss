@@ -1,0 +1,56 @@
+.dummy {
+  height: 101svh;
+  position: relative;
+
+  @media (min-width: 640px) {
+    height: 125svh;
+  }
+}
+
+.next {
+  align-items: center;
+  // background-color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+  // inset: 0;
+  justify-content: center;
+  // opacity: 0;
+  // perspective: 1000px;
+  // pointer-events: none;
+  // position: fixed;
+  z-index: 100;
+
+  @media (min-width: 640px) {
+    // padding-bottom: 15rem;
+    // padding-top: 15rem;
+    height: 75vh;
+  }
+}
+
+.next__hgroup {
+  display: inline-block;
+}
+
+.next__heading {
+  backface-visibility: hidden;
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+  font-size: 5rem;
+  font-family: var(--font-en);
+  letter-spacing: 0.02em;
+  margin-block: calc((1em - 1lh) / 2);
+
+  @media (min-width: 640px) {
+    font-size: 8rem;
+  }
+
+  > :global(._l) {
+    overflow: hidden;
+    line-height: 1.15;
+  }
+
+  > :global(._l + ._l) {
+    margin-top: -0.2em;
+  }
+}

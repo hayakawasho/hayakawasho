@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font: "Jost", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+      "Hiragino Sans", Meiryo, sans-serif;
+    --font-number: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-en: "Gallery Modern", serif;
+
+    --vh: 1vh;
+    --leading-trim: calc((1em - 1lh) / 2);
+
+    --ease-power2-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+    --ease-power3-out: cubic-bezier(0.165, 0.84, 0.44, 1);
+    --ease-expo-out: cubic-bezier(0.19, 1, 0.22, 1);
+
+    --grid: calc(1 / 12 * 100vw);
+    --gap: calc(30 / 750 * 100vw);
+
+    --color-text: #1e1f1f;
+    --color-bg: #c4c4c4;
+
+    @media (prefers-color-scheme: dark) {
+      --color-text: #c4c4c4;
+      --color-bg: #1e1f1f;
+    }
+  }
+
+  @supports not (top: 1lh) {
+    :root {
+      --leading-trim: 0px;
+    }
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    width: 100%;
+    min-height: calc(var(--vh) * 100);
+    min-height: 100svh;
+    font-size: calc(10 / 16 * 100%);
+    text-size-adjust: 100%;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll;
+
+    @media screen and (max-width: 1080px) {
+      font-size: calc(9 / 16 * 100%);
+    }
+
+    @media screen and (max-width: 960px) {
+      font-size: calc(8 / 16 * 100%);
+    }
+
+    @media screen and (max-width: 854px) {
+      font-size: calc(7 / 16 * 100%);
+    }
+
+    @media screen and (max-width: 767px) {
+      font-size: calc(6 / 16 * 100%);
+    }
+
+    @media screen and (max-width: 639px) {
+      font-size: calc(10 / 16 * 100%);
+    }
+
+    @media (min-width: 1680px) {
+      font-size: calc(12 / 16 * 100%);
+    }
+  }
+
+  body {
+    width: 100%;
+    min-width: 320px;
+    overflow-x: hidden;
+    overflow-x: clip;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    font-family: var(--font);
+    overflow-wrap: break-word;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: unset;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+
+    @media (min-resolution: 1.5dppx) {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  }
+
+  body ::-moz-selection {
+    color: var(--color-bg);
+    background: var(--color-text);
+  }
+
+  body ::selection {
+    color: var(--color-bg);
+    background: var(--color-text);
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  picture {
+    display: block;
+  }
+
+  summary {
+    display: block;
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  :where(ul, ol) {
+    list-style: none;
+    list-style-type: "";
+    padding: unset;
+  }
+
+  :where(button, [type="button"], [type="reset"], [type="submit"]) {
+    touch-action: manipulation;
+  }
+
+  :where(
+      :any-link,
+      button,
+      [type="button"],
+      [type="reset"],
+      [type="submit"],
+      label[for],
+      select,
+      summary,
+      [role="tab"],
+      [role="button"]
+    ) {
+    cursor: pointer;
+  }
+
+  :where(:focus-visible) {
+    outline: none;
+    box-shadow: none;
+    outline-offset: 0;
+  }
+
+  :focus {
+    outline-color: var(--color-theme);
+  }
+
+  [data-whatinput="keyboard"] *:focus {
+    outline: 2px solid Canvas;
+  }
+
+  [hidden]:not([hidden="until-found"]) {
+    display: none !important;
+  }
+}

@@ -1,0 +1,146 @@
+// .sub {
+//   backface-visibility: hidden;
+//   font-family: var(--font-en);
+//   font-size: 5rem;
+//   letter-spacing: 0.02em;
+//   line-height: 1;
+//   text-transform: uppercase;
+//
+//   @media (min-width: 640px) {
+//     font-size: 12rem;
+//   }
+// }
+
+.heading {
+  backface-visibility: hidden;
+  font-weight: 400;
+  line-height: 1.15;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  font-size: 4.8rem;
+  font-family: var(--font-en);
+  letter-spacing: 0.02em;
+  margin-block: calc((1em - 1lh) / 2);
+
+  @media (min-width: 640px) {
+    font-size: 12.8rem;
+    line-height: 1.15;
+  }
+
+  :global(._l) {
+    overflow: hidden;
+    padding-left: 0.025em;
+  }
+
+  :global(._l + ._l) {
+    margin-top: -0.25em;
+  }
+}
+
+.heading__date {
+  font-size: 1.1rem;
+  font-family: var(--font);
+  text-align: center;
+  display: block;
+  overflow: hidden;
+  margin-top: 0.25em;
+
+  @media (min-width: 640px) {
+    font-size: 1.6rem;
+  }
+}
+
+.intro {
+  position: relative;
+}
+
+.intro__g {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.intro__hgroup {
+  padding-top: 12rem;
+  padding-bottom: 14rem;
+  text-align: center;
+
+  @media (min-width: 640px) {
+    padding: 15rem 4rem;
+  }
+}
+
+.intro__info {
+  align-items: flex-start;
+  display: flex;
+  left: 0;
+  padding: 0 var(--grid) 6rem;
+
+  @media (min-width: 640px) {
+    padding: 0 calc(var(--grid) * 3) 8rem;
+  }
+}
+
+.intro__indexNumber {
+  font-size: 1.1rem;
+  overflow: hidden;
+  position: absolute;
+  right: var(--grid);
+  top: 3rem;
+
+  @media (min-width: 640px) {
+    font-size: 1.3rem;
+    right: calc(var(--grid) - var(--gap) * 0.5);
+    top: 7rem;
+    opacity: 0;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 50%;
+
+  @media (min-width: 640px) {
+    gap: 1.4rem;
+  }
+}
+
+.stacks {
+  margin-top: 0.2rem;
+  padding-bottom: 0.5em;
+  padding-left: 0.6em;
+  position: relative;
+}
+
+.stacksItems {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.1rem;
+  gap: 0.2em;
+  line-height: 1.15;
+
+  @media (min-width: 640px) {
+    font-size: 1.2rem;
+    gap: 0.3rem;
+  }
+
+  > li {
+    backface-visibility: hidden;
+  }
+}
+
+.stacks__hr {
+  background-color: currentColor;
+  border: 0;
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform-origin: top left;
+  translate: -50%;
+  width: 1px;
+}

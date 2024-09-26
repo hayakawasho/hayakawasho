@@ -1,0 +1,27 @@
+:root {
+  --font: "Jost", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  --font-number: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-en: "Gallery Modern", serif;
+  // --font-en: 'SchnyderMLight', serif;
+
+  --vh: 1vh;
+  --leading-trim: calc((1em - 1lh) / 2);
+
+  --grid: calc(1 / 12 * 100vw);
+  --gap: calc(30 / 750 * 100vw);
+
+  --color-text: #1e1f1f;
+  --color-bg: #c4c4c4;
+
+  @media (prefers-color-scheme: dark) {
+    --color-text: #c4c4c4;
+    --color-bg: #1e1f1f;
+  }
+}
+
+@supports not (top: 1lh) {
+  :root {
+    --leading-trim: 0px;
+  }
+}

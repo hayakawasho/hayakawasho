@@ -1,42 +1,28 @@
-import { atom } from "jotai";
-import { map } from "nanostores";
-import { useUnmount, ref, readonly } from "lake";
-import type { Point } from "~/_foundation/type";
-import { store } from "./";
+import { atom, createStore } from "jotai";
+import { useUnmount } from "lake";
+import { noop } from "~/_foundation/utils";
+import globalStore from ".";
+import type { Point } from "~/_foundation/types";
 
-const pos = map<Point>({
-  x: 0,
-  y: 0,
-});
+const store = createStore();
+const mousePosAtom = atom<Point>(globalStore.coordinate);
 
-const $pos = atom({
-  x: 0,
-  y: 0,
-});
+export const useMousePosition = (callback: (payload: Point) => void = noop) => {
+  const getState = () => store.get(mousePosAtom);
 
-export const useMousePosState = () => {
-  return store.get($pos);
-};
+  const setState = (coordinate: Point) => {
+    globalStore.coordinate = coordinate;
+    store.set(mousePosAtom, coordinate);
+  };
 
-export const useMousePosMutators = (newValue: { x: number; y: number }) => {
-  return store.set(newValue);
-};
-
-export const useMousePositionContext = () => {
-  const { x, y } = pos.get();
-  const posX = ref(x);
-  const posY = ref(y);
-
-  const unbind = pos.listen(({ x, y }) => {
-    posX.value = x;
-    posY.value = y;
+  const unsub = store.sub(mousePosAtom, () => {
+    const coordinate = store.get(mousePosAtom);
+    callback(coordinate);
   });
 
   useUnmount(() => {
-    unbind();
+    unsub();
   });
 
-  return [readonly(posX), readonly(posY)] as const;
+  return [getState, setState] as const;
 };
-
-export const mousePosMutators = pos.set;

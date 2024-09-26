@@ -1,19 +1,22 @@
-import { atom } from "nanostores";
+import { atom, createStore } from "jotai";
 import { useUnmount } from "lake";
 import { noop } from "~/_foundation/utils";
 
 export type CursorType = "default" | "hide" | "loading" | "scale" | "drag" | "drag.scale";
 
-const cursorTypeState = atom<CursorType>("default");
+const store = createStore();
+const cursorTypeAtom = atom<CursorType>("default");
 
 export const useCursorTypeContext = (callback: (payload: CursorType) => void = noop) => {
-  const unbind = cursorTypeState.listen(val => {
-    callback(val);
+  const unsub = store.sub(cursorTypeAtom, () => {
+    const cursorType = store.get(cursorTypeAtom);
+
+    callback(cursorType);
   });
 
   useUnmount(() => {
-    unbind();
+    unsub();
   });
 };
 
-export const cursorTypeMutators = cursorTypeState.set;
+export const cursorTypeMutators = (val: CursorType) => store.set(cursorTypeAtom, val);

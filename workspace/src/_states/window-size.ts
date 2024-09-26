@@ -1,47 +1,41 @@
-import { map } from "nanostores";
-import { ref, readonly, useUnmount } from "lake";
-import { noop, waitFrame } from "~/_foundation/utils";
-import type { Size } from "~/_foundation/type";
+import { atom, createStore } from "jotai";
+import { useUnmount } from "lake";
+import { noop } from "~/_foundation/utils";
+import globalStore from ".";
+import type { Size } from "~/_foundation/types";
 
-const viewport = map<Size>({
-  height: window.innerHeight,
-  width: window.innerWidth,
+const store = createStore();
+
+const viewportAtom = atom<Size>({
+  height: globalStore.bounds.wh,
+  width: globalStore.bounds.ww,
 });
 
-export const useWindowSizeContext = (callback: (payload: Size) => void = noop) => {
-  const { width, height } = viewport.get();
+export const useWindowSize = (callback: (payload: { aspect: number; windowSize: Size }) => void = noop) => {
+  const getState = () => store.get(viewportAtom);
 
-  const windowWidth = ref(width);
-  const windowHeight = ref(height);
-  const isResizing = ref(false);
+  const setState = (windowSize: Size) => {
+    globalStore.bounds.ww = windowSize.width;
+    globalStore.bounds.wh = windowSize.height;
+    globalStore.bounds.centerX = windowSize.width * 0.5;
+    globalStore.bounds.centerY = windowSize.height * 0.5;
 
-  const unbind = viewport.listen(async ({ width, height }) => {
-    isResizing.value = true;
+    store.set(viewportAtom, windowSize);
+  };
+
+  const unsub = store.sub(viewportAtom, () => {
+    const windowSize = store.get(viewportAtom);
+    const aspect = windowSize.width / windowSize.height;
 
     callback({
-      height,
-      width,
+      aspect,
+      windowSize,
     });
-
-    windowWidth.value = width;
-    windowHeight.value = height;
-
-    await waitFrame();
-
-    isResizing.value = false;
   });
 
   useUnmount(() => {
-    unbind();
+    unsub();
   });
 
-  return [
-    readonly(windowWidth),
-    readonly(windowHeight),
-    {
-      isResizing: readonly(isResizing),
-    },
-  ] as const;
+  return [getState, setState] as const;
 };
-
-export const windowSizeMutators = viewport.set;

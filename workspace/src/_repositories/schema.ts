@@ -28,6 +28,11 @@ type RawWorkResponse = {
     width: number;
     height: number;
   };
+  thumbnail: {
+    url: string;
+    width: number;
+    height: number;
+  };
   screenshots?: {
     url: string;
     width: number;

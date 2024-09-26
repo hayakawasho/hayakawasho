@@ -1,21 +1,24 @@
-import { atom } from "nanostores";
+import { atom, createStore } from "jotai";
 import { useUnmount, ref, readonly } from "lake";
 
-const scrollState = atom({
-  // direction: 1,
+type ScrollState = {
+  scrolling: boolean;
+};
+
+const store = createStore();
+const scrollAtom = atom<ScrollState>({
   scrolling: false,
-  // ready: false,
 });
 
 export const useScrollStateContext = () => {
   const scrolling = ref(false);
 
-  const unbind = scrollState.listen(payload => {
-    scrolling.value = payload.scrolling;
+  const unsub = store.sub(scrollAtom, () => {
+    scrolling.value = store.get(scrollAtom).scrolling;
   });
 
   useUnmount(() => {
-    unbind();
+    unsub();
   });
 
   return {
@@ -23,4 +26,4 @@ export const useScrollStateContext = () => {
   };
 };
 
-export const scrollStateYMutators = scrollState.set;
+export const scrollStateYMutators = (val: ScrollState) => store.set(scrollAtom, val);

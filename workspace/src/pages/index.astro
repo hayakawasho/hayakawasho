@@ -1,19 +1,19 @@
 ---
 import dotenv from 'dotenv';
-import Home from '../_components/page.home/index.view';
-import { createWorksRepository } from '../_repositories/works';
-import Layout from '../layout.astro';
+import Home from '../_components/page/home';
+import DefalutLayout from "../layout.astro";
+import { createWorkRepository } from '../_repositories/works';
 
 dotenv.config();
 
-const repository = createWorksRepository(process.env.API_KEY!);
-const result = await repository.findList({
+const workRepo = createWorkRepository(process.env.API_KEY);
+const result = await workRepo.findList({
   limit: 99,
   orders: '-launch',
 });
 
 ---
 
-<Layout title="" permalink="" namespace="home">
+<DefalutLayout title="" permalink="" namespace="home">
   <Home posts={result.works} />
-</Layout>
+</DefalutLayout>

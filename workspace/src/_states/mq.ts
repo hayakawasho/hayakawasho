@@ -1,4 +1,4 @@
-import { atom } from "nanostores";
+import { atom, createStore } from "jotai";
 import { useUnmount, ref, readonly } from "lake";
 import { noop } from "~/_foundation/utils";
 
@@ -7,24 +7,30 @@ type MediaQuery = {
   anyHover: boolean;
 };
 
-const mqState = atom<MediaQuery>({
+const store = createStore();
+const mqAtom = atom<MediaQuery>({
   anyHover: true,
   device: "pc",
 });
 
-export const useMediaQueryContext = (callback: (payload: MediaQuery) => void = noop) => {
-  const mq = ref<MediaQuery>(mqState.get());
+export const useMediaQuery = (callback: (payload: MediaQuery) => void = noop) => {
+  const mq = ref(store.get(mqAtom));
 
-  const unbind = mqState.listen(val => {
-    mq.value = val;
-    callback(val);
+  const unsub = store.sub(mqAtom, () => {
+    const { anyHover, device } = store.get(mqAtom);
+    mq.value = { anyHover, device };
+
+    callback({
+      anyHover,
+      device,
+    });
   });
 
   useUnmount(() => {
-    unbind();
+    unsub();
   });
 
   return readonly(mq).value;
 };
 
-export const mediaQueryMutators = mqState.set;
+export const mediaQueryMutators = (val: MediaQuery) => store.set(mqAtom, val);

@@ -1,24 +1,22 @@
 import type { WorksAPISchema } from "../schema";
-import type { WorkMetadata } from "~/_components/work/model";
+import type { WorkMetadata } from "~/(work)/model";
 
-export const convertWorkFromCMS = (
-  rawItem: WorksAPISchema["GET"]["response"]["contents"][0],
-): WorkMetadata => {
+const rawImageToImageMetadata = (raw: WorksAPISchema["GET"]["response"]["contents"][0]["eyecatch"]) => {
+  return {
+    height: raw.height,
+    src: raw.url,
+    width: raw.width,
+  };
+};
+
+export const convertWorkFromCMS = (rawItem: WorksAPISchema["GET"]["response"]["contents"][0]): WorkMetadata => {
   return {
     category: rawItem.category[0],
-    eyecatch: {
-      height: rawItem.eyecatch.height,
-      src: rawItem.eyecatch.url,
-      width: rawItem.eyecatch.width,
-    },
+    mv: rawImageToImageMetadata(rawItem.eyecatch),
+    thumbnail: rawImageToImageMetadata(rawItem.thumbnail ?? {}),
     id: rawItem.id,
     launch: rawItem.launch,
-    screenshots:
-      rawItem.screenshots?.map(i => ({
-        height: i.height,
-        src: i.url,
-        width: i.width,
-      })) ?? [],
+    screenshots: rawItem.screenshots?.map(rawImageToImageMetadata) ?? [],
     stacks: rawItem.stacks,
     title: rawItem.title,
     url: rawItem.url,

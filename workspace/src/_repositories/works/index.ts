@@ -1,10 +1,12 @@
 import axios from "redaxios";
 import { convertWorkFromCMS } from "./converter";
 import type { WorksAPISchema } from "../schema";
-import type { WorkMetadata } from "~/_components/work/model";
+import type { WorkMetadata } from "~/(work)/model";
 
-export const createWorksRepository = (apiKey: string) => ({
-  findList: async (
+class WorkRepository {
+  constructor(private _apiKey: string) {}
+
+  findList = async (
     q: WorksAPISchema["GET"]["request"]["params"],
   ): Promise<{
     works: WorkMetadata[];
@@ -15,7 +17,7 @@ export const createWorksRepository = (apiKey: string) => ({
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "X-MICROCMS-API-KEY": apiKey,
+        "X-MICROCMS-API-KEY": this._apiKey,
       },
       params: {
         ...q,
@@ -26,5 +28,13 @@ export const createWorksRepository = (apiKey: string) => ({
       totalCount: res.data.totalCount,
       works: res.data.contents.map(convertWorkFromCMS),
     };
-  },
-});
+  };
+}
+
+export const createWorkRepository = (apiKey = "") => {
+  if (!apiKey) {
+    throw new Error("apiKey is null");
+  }
+
+  return new WorkRepository(apiKey);
+};
