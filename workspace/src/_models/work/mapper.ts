@@ -26,7 +26,7 @@ export class WorkDataMap {
         })) ?? [],
       stacks: raw.stacks,
       name: raw.title,
-      url: raw.url,
+      siteUrl: raw.url,
     });
   }
 
@@ -39,7 +39,7 @@ export class WorkDataMap {
       category: data.category!,
       stacks: data.stacks!,
       screenshots: data.screenshots!,
-      url: data.url!,
+      siteUrl: data.siteUrl!,
       launch: data.launch!,
     };
   }

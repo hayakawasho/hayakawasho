@@ -7,14 +7,14 @@ import noiseSpImg from '../../../assets/noise_550x550.webp';
 // import type { RouteName } from "./_foundation/types";
 
 export interface Props {
-  // namespace: RouteName;
+  namespace: "home" | "work-single"
 }
 
 const { props } = Astro;
 
 ---
 
-<body class="">
+<body class={props.namespace}>
   <div aria-hidden="true" class="svh fixed inset-0 w-screen pointer-events-none -z-1 invisible" data-ref="windowSizeWatcher" />
   <div aria-hidden="true" class="bg" />
   <canvas aria-hidden="true" class="canvas" data-ref="backCanvas" data-pc={noiseImg.src} data-mob={noiseSpImg.src} />
@@ -23,7 +23,9 @@ const { props } = Astro;
   <div aria-hidden="true" class="grid-vr left-[2rem] pc:left-1/4" />
   <div aria-hidden="true" class="grid-vr left-1/2" />
   <div aria-hidden="true" class="grid-vr right-[2rem] pc:right-auto pc:left-3/4" />
+
   <slot />
+
   <canvas aria-hidden="true" class="canvas" data-ref="frontCanvas" />
   <div class="cursor" data-ref="cursor" />
 </body>
@@ -31,7 +33,7 @@ const { props } = Astro;
 <style lang="scss" is:global>
 @font-face {
   font-family: "Gallery Modern";
-  src: url("./assets/gallerymodern-webfont.woff2") format("woff2");
+  src: url("../../../assets/gallerymodern-webfont.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;

@@ -20,7 +20,7 @@ export type WorkProps = {
     width: number;
     height: number;
   }[];
-  url?: string;
+  siteUrl?: string;
   launch?: Date;
 };
 
@@ -32,7 +32,7 @@ export class Work extends Entity<WorkProps> {
   category = this._value.category ?? null;
   stacks = this._value.stacks ?? null;
   screenshots = this._value.screenshots ?? null;
-  url = this._value.url ?? null;
+  siteUrl = this._value.siteUrl ?? null;
   launch = this._value.launch ?? null;
 
   static create(value: WorkProps) {
