@@ -8,8 +8,27 @@ import Layout from "../_components/ui/layout/default.astro"
 
 dotenv.config();
 
-const repository = WorkRepository.create(process.env.API_KEY);
-const result = await repository.findAll();
+export async function getStaticPaths() {
+  const repository = WorkRepository.create(process.env.API_KEY);
+  const result = await repository.findAll();
+
+  const { works } = result
+  const last = works[works.length - 1]
+
+  return works.map((item, index) => ({
+    params: {
+      slug: item.id,
+    },
+    props: {
+      post: item,
+      next: last.id === item.id ? works[0] : works[index + 1],
+      totalCount: result.totalCount,
+      currentIndex: index + 1
+    },
+  }));
+}
+
+const { post, next, totalCount, currentIndex } = Astro.props;
 
 ---
 

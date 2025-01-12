@@ -1,0 +1,169 @@
+---
+import "../../../tailwind.css";
+// import "./_components/page/work/index.module.scss";
+// import "./_components/page/work-single/index.module.scss";
+import noiseImg from '../../../assets/noise_1100x1100.webp';
+import noiseSpImg from '../../../assets/noise_550x550.webp';
+// import type { RouteName } from "./_foundation/types";
+
+export interface Props {
+  // namespace: RouteName;
+}
+
+const { props } = Astro;
+
+---
+
+<body class="">
+  <div aria-hidden="true" class="svh fixed inset-0 w-screen pointer-events-none -z-1 invisible" data-ref="windowSizeWatcher" />
+  <div aria-hidden="true" class="bg" />
+  <canvas aria-hidden="true" class="canvas" data-ref="backCanvas" data-pc={noiseImg.src} data-mob={noiseSpImg.src} />
+  <div aria-hidden="true" class="grad grad--upper | h-[20vh] pc:h-[25vh]" />
+  <div aria-hidden="true" class="grad grad--lower | h-[20vh] pc:h-[25vh]" />
+  <div aria-hidden="true" class="grid-vr left-[2rem] pc:left-1/4" />
+  <div aria-hidden="true" class="grid-vr left-1/2" />
+  <div aria-hidden="true" class="grid-vr right-[2rem] pc:right-auto pc:left-3/4" />
+  <slot />
+  <canvas aria-hidden="true" class="canvas" data-ref="frontCanvas" />
+  <div class="cursor" data-ref="cursor" />
+</body>
+
+<style lang="scss" is:global>
+@font-face {
+  font-family: "Gallery Modern";
+  src: url("./assets/gallerymodern-webfont.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+</style>
+
+<style lang="scss">
+.svh {
+  height: 100vh;
+  height: 100svh;
+}
+
+.grad {
+  pointer-events: none;
+  display: block;
+  width: 100%;
+  position: fixed;
+  z-index: 11;
+  left: 0;
+  opacity: .8;
+
+  @media (prefers-color-scheme: dark) {
+    opacity: 1;
+  }
+}
+
+.grad--upper {
+  top: 0;
+
+  background-image: linear-gradient(
+    hsla(0, 0%, 0%, 0.5),
+    hsla(0, 0%, 0%, 0.49016) 1.17%,
+    hsla(0, 0%, 0%, 0.46296) 4.49%,
+    hsla(0, 0%, 0%, 0.42188) 9.72%,
+    hsla(0, 0%, 0%, 0.37037) 16.59%,
+    hsla(0, 0%, 0%, 0.31192) 24.86%,
+    hsla(0, 0%, 0%, 0.25) 34.25%,
+    hsla(0, 0%, 0%, 0.18808) 44.52%,
+    hsla(0, 0%, 0%, 0.12963) 55.41%,
+    hsla(0, 0%, 0%, 0.07813) 66.66%,
+    hsla(0, 0%, 0%, 0.03704) 78.01%,
+    hsla(0, 0%, 0%, 0.00984) 89.21%,
+    hsla(0, 0%, 0%, 0)
+  );
+}
+
+.grad--lower {
+  bottom: 0;
+
+  background-image: linear-gradient(
+    hsla(0, 0%, 0%, 0),
+    hsla(0, 0%, 0%, 0.00984) 10.79%,
+    hsla(0, 0%, 0%, 0.03704) 21.99%,
+    hsla(0, 0%, 0%, 0.07813) 33.34%,
+    hsla(0, 0%, 0%, 0.12963) 44.59%,
+    hsla(0, 0%, 0%, 0.18808) 55.48%,
+    hsla(0, 0%, 0%, 0.25) 65.75%,
+    hsla(0, 0%, 0%, 0.31192) 75.14%,
+    hsla(0, 0%, 0%, 0.37037) 83.41%,
+    hsla(0, 0%, 0%, 0.42188) 90.28%,
+    hsla(0, 0%, 0%, 0.46296) 95.51%,
+    hsla(0, 0%, 0%, 0.49016) 98.83%,
+    hsla(0, 0%, 0%, 0.5)
+  );
+}
+
+.grid-vr {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  transform: translateX(-50%);
+  background: rgba(4, 31, 30, 0.1);
+
+  @media (prefers-color-scheme: dark) {
+    background: rgba(255, 246, 229, 0.07);
+  }
+}
+
+// .grid-hr {
+//   pointer-events: none;
+//   position: fixed;
+//   left: 0;
+//   width: 100%;
+//   height: 1px;
+//   background: rgba(4, 31, 30, 0.07);
+//
+//   @media (prefers-color-scheme: dark) {
+//     background: rgba(255, 246, 229, 0.07);
+//   }
+// }
+
+.bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(180deg, #fff, #eaeaea);
+
+  @media (prefers-color-scheme: dark) {
+    background: var(--color-bg);
+  }
+}
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+
+  @media not (hover: hover) {
+    display: none !important;
+  }
+}
+
+.canvas {
+  contain: strict;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  overflow: clip;
+  transform: rotate(0.0001deg);
+  pointer-events: none;
+  user-select: none;
+}
+</style>
