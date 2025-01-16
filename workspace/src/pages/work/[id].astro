@@ -1,17 +1,30 @@
 ---
 import dotenv from 'dotenv';
 import { WorkRepository } from '../../_repositories/work/repository';
-import { WorkItemUseCase } from '../../_components/page/work.$id/reader';
-import ContentLayout from "../../_components/ui/layout/default.astro"
+import { WorkDataMap } from "../../_models/work/mapper";
 import Head from "../../_components/ui/layout/head.astro"
 import Seo from "../../_components/ui/layout/seo.astro"
+import WorkSingle from "../../_components/page/work.$id"
 
 dotenv.config();
 
 export async function getStaticPaths() {
   const repository = WorkRepository.create(process.env.API_KEY);
-  const useCase = new WorkItemUseCase(repository)
-  return useCase.execute();
+  const result = await repository.findAll();
+  const posts = result.works.map(WorkDataMap.toDTO);
+  const last = posts[posts.length - 1];
+
+  return posts.map((post, index) => ({
+    params: {
+      id: post.id,
+    },
+    props: {
+      post,
+      next: last.id === post.id ? posts[0] : posts[index + 1],
+      totalCount: result.totalCount,
+      currentIndex: index + 1,
+    },
+  }))
 }
 
 const { post, next, totalCount, currentIndex } = Astro.props;
@@ -21,10 +34,4 @@ const { post, next, totalCount, currentIndex } = Astro.props;
 <Head>
   <Seo title={post.name} url={`/${post.id}/`} />
 </Head>
-<ContentLayout namespace="work-single">
-  <div id="main" class="w-full absolute top-0 left-0 backface-hidden | sp:fixed sp:overflow-hidden" data-ref="main">
-    <div class="h-full" data-xhr="home" data-ref="scrollTarget">
-
-    </div>
-  </div>
-</ContentLayout>
+<WorkSingle post={post} currentIndex={currentIndex} />

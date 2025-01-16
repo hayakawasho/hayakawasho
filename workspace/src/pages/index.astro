@@ -1,30 +1,21 @@
 ---
 import dotenv from 'dotenv';
 import { WorkRepository } from '../_repositories/work/repository';
-import { WorkIndexUseCase } from '../_components/page/home/reader';
-import ContentLayout from "../_components/ui/layout/default.astro"
+import { WorkDataMap } from "../_models/work/mapper";
 import Head from "../_components/ui/layout/head.astro"
 import Seo from "../_components/ui/layout/seo.astro"
+import Home from "../_components/page/home"
 
 dotenv.config();
 
 const repository = WorkRepository.create(process.env.API_KEY);
-const useCase = new WorkIndexUseCase(repository)
-const result = await useCase.execute();
+const result = await repository.findAll();
+
+const posts = result.works.map(WorkDataMap.toDTO)
 
 ---
 
 <Head>
   <Seo title="" url="" />
 </Head>
-<ContentLayout namespace="home">
-  <div id="main" class="w-full absolute top-0 left-0 backface-hidden | sp:fixed sp:overflow-hidden" data-ref="main">
-    <div class="h-full" data-xhr="home" data-ref="scrollTarget">
-      <ul class="">
-        {result.posts.map((i) => (
-          <li class="">{i.name}</li>
-        ))}
-      </ul>
-    </div>
-  </div>
-</ContentLayout>
+<Home posts={posts} />
