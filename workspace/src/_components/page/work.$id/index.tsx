@@ -11,19 +11,29 @@ export default function Component({ posts, post }: { posts: WorkDTO[]; post: Wor
   return (
     <ContentLayout namespace="work-single" asChild>
       <div className="h-full relative">
+        <h1
+          className={`
+            absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[calc(var(--grid)*12)] text-center z-10 mix-blend-exclusion
+            text-[3.2rem] tracking-[.08em] my-[--leading-trim]
+            | pc:sr-only`}
+        >
+          {post.name}
+        </h1>
         <button className="overflow-hidden absolute bottom-[4rem] left-[--gap] border-solid border-[1px] border-current rounded-full my-[--leading-trim] w-[5.4rem] text-[1.2rem] leading-[1.2] text-center | pc:hidden">
           <span className="h-[1.2em] block">
-            <span aria-hidden="true" className="w-[.5em] inline-block">
-              I
+            <span className="flex justify-center">
+              <span aria-hidden="true" className="w-[.5em] inline-block">
+                I
+              </span>
+              <span aria-hidden="true" className="tracking-[.08em]">
+                N
+              </span>
+              <span aria-hidden="true">F</span>
+              <span aria-hidden="true" className="tracking-[.04em]">
+                O
+              </span>
+              <span className="sr-only">Info</span>
             </span>
-            <span aria-hidden="true" className="tracking-[.08em]">
-              N
-            </span>
-            <span aria-hidden="true">F</span>
-            <span aria-hidden="true" className="tracking-[.04em]">
-              O
-            </span>
-            <span className="sr-only">Info</span>
             <span className="tracking-[.04em] uppercase">Close</span>
           </span>
         </button>
@@ -45,14 +55,6 @@ export default function Component({ posts, post }: { posts: WorkDTO[]; post: Wor
             </div>
           </WorkLayout.Head>
           <div className="relative aspect-[4/5] w-[calc(var(--grid)*8)] | pc:w-fit pc:aspect-auto">
-            <h1
-              className={`
-                absolute top-[calc(-1em-1.2rem)] left-1/2 -translate-x-1/2 w-[calc(var(--grid)*12)] text-center
-                text-[2.8rem] tracking-[.08em] my-[--leading-trim]
-                | pc:sr-only`}
-            >
-              {post.name}
-            </h1>
             <ul className="overflow-hidden h-full grid gap-[2rem]">
               <li className="">
                 <Image className="w-full pc:min-h-[--100vh] pc:object-cover" metadata={post.thumb} />

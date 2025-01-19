@@ -6,7 +6,7 @@
     "start": "NODE_ENV=development concurrently \"npm:dev:vite\" \"npm:dev:astro\"",
     "build:astro": "astro build",
     "build:vite": "vite build",
-    "build": "NODE_ENV=production build:astro && build:vite",
+    "build": "NODE_ENV=production npm run build:astro && npm run build:vite",
     "check": "astro check",
     "preview": "astro preview",
     "astro": "astro",
