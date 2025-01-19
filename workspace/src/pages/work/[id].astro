@@ -12,6 +12,7 @@ export async function getStaticPaths() {
   const repository = WorkRepository.create(process.env.API_KEY);
   const result = await repository.findAll();
   const posts = result.works.map(WorkDataMap.toDTO);
+  const first = posts[0];
   const last = posts[posts.length - 1];
 
   return posts.map((post, index) => ({
@@ -19,19 +20,21 @@ export async function getStaticPaths() {
       id: post.id,
     },
     props: {
+      posts,
       post,
-      next: last.id === post.id ? posts[0] : posts[index + 1],
-      totalCount: result.totalCount,
+      prev: first.id === post.id ? last : posts[index - 1],
+      next: last.id === post.id ? first : posts[index + 1],
+      total: result.totalCount,
       currentIndex: index + 1,
     },
   }))
 }
 
-const { post, next, totalCount, currentIndex } = Astro.props;
+const { posts, post, next, total, currentIndex } = Astro.props;
 
 ---
 
 <Head>
   <Seo title={post.name} url={`/${post.id}/`} />
 </Head>
-<WorkSingle post={post} currentIndex={currentIndex} />
+<WorkSingle posts={posts} post={post} currentIndex={currentIndex} />
