@@ -11,14 +11,7 @@ export default function Component({ posts, post }: { posts: WorkDTO[]; post: Wor
   return (
     <ContentLayout namespace="work-single" asChild>
       <div className="h-full relative">
-        <h1
-          className={`
-            absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[calc(var(--grid)*12)] text-center z-10 mix-blend-exclusion
-            text-[3.2rem] tracking-[.08em] my-[--leading-trim]
-            | pc:sr-only`}
-        >
-          {post.name}
-        </h1>
+        <h1 className="sr-only">{post.name}</h1>
         <button className="overflow-hidden absolute bottom-[4rem] left-[--gap] border-solid border-[1px] border-current rounded-full my-[--leading-trim] w-[5.4rem] text-[1.2rem] leading-[1.2] text-center | pc:hidden">
           <span className="h-[1.2em] block">
             <span className="flex justify-center">
@@ -43,7 +36,7 @@ export default function Component({ posts, post }: { posts: WorkDTO[]; post: Wor
         </dialog>
         <WorkLayout.Root>
           <WorkLayout.Head>
-            <ul className=" | text-[1.2rem] leading-[2] tracking-[.04em] text-right">
+            <ul className="text-[1.2rem] tracking-[.04em] text-right grid gap-[1rem]">
               {posts.map((i, index) => (
                 <li key={index} className={`${post.id === i.id ? "font-bold" : "opacity-20"}`}>
                   {i.name}
