@@ -1,9 +1,9 @@
 // import { WorkPresenter } from "../../../_models/work/presenter";
+import * as WorkLayout from "./layout";
 import { WorkInfo } from "../../model/work/info";
 import { WorkInfoToggle } from "../../model/work/info-toggle";
-import { WorkScreenshots } from "../../model/work/screenshots";
 import { WorkNavigation } from "../../model/work/navigation";
-import * as WorkLayout from "../../model/work/layout";
+import { WorkScreenshots } from "../../model/work/screenshots";
 import ContentLayout from "../../ui/layout/default";
 import type { WorkDTO } from "../../../_models/work/dto";
 
@@ -19,17 +19,17 @@ export default function Component({ posts, post }: { posts: WorkDTO[]; post: Wor
           <h2>{post.name}</h2>
           <WorkInfo metadata={post} />
         </dialog>
-        <div className="">
+        <WorkLayout.Root>
           <WorkLayout.Head>
             <WorkNavigation posts={posts} current={post.id} />
             <div className="w-full absolute bottom-0 left-0 | sp:hidden">
               <WorkInfo metadata={post} />
             </div>
           </WorkLayout.Head>
-          <div className="relative aspect-[4/5] w-[calc(var(--grid)*9)] | pc:w-fit pc:aspect-auto">
+          <WorkLayout.Content>
             <WorkScreenshots post={post} />
-          </div>
-        </div>
+          </WorkLayout.Content>
+        </WorkLayout.Root>
       </div>
     </ContentLayout>
   );

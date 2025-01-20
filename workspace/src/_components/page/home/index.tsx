@@ -1,5 +1,5 @@
+import * as WorkLayout from "./layout";
 import { Image } from "../../model/work/image";
-import * as WorkLayout from "../../model/work/layout";
 import ContentLayout from "../../ui/layout/default";
 import type { WorkDTO } from "../../../_models/work/dto";
 
@@ -7,8 +7,8 @@ export default function Component({ posts }: { posts: WorkDTO[] }) {
   return (
     <ContentLayout namespace="home" asChild>
       <div className="h-full">
-        <div className="tp-layout">
-          <div className="tp-layoutHead">
+        <WorkLayout.Root>
+          <WorkLayout.Head>
             <div className="absolute top-0 left-0">
               <h2 className="text-[1.2rem] tracking-[.04em] font-bold uppercase">Full site soon</h2>
             </div>
@@ -17,8 +17,8 @@ export default function Component({ posts }: { posts: WorkDTO[] }) {
                 <li className={`${index > 0 ? "opacity-20" : "font-bold"}`}>{i.name}</li>
               ))}
             </ul>
-          </div>
-          <div className="tp-layoutBody">
+          </WorkLayout.Head>
+          <WorkLayout.Content>
             <ul className="">
               {posts.map((i) => (
                 <li className="h-[--100vh] overflow-hidden" key={i.id}>
@@ -26,8 +26,8 @@ export default function Component({ posts }: { posts: WorkDTO[] }) {
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
+          </WorkLayout.Content>
+        </WorkLayout.Root>
       </div>
     </ContentLayout>
   );
