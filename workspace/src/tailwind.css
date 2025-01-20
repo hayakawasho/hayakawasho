@@ -292,4 +292,27 @@
     pointer-events: none;
     user-select: none;
   }
+
+  .tp-layout {
+    @apply relative grid justify-center h-[--100vh] pc:grid-cols-2 pc:h-auto pc:items-start;
+  }
+
+  .tp-layoutHead {
+    @apply absolute right-[--gap] top-[2.4rem] pc:sticky pc:top-0 pc:pt-[4.8rem] pc:pb-[6rem] pc:p-[--gap] pc:h-[--100vh];
+  }
+
+  .tp-layoutBody {
+    @apply relative w-[calc(var(--grid)*12)] overflow-hidden pc:w-fit pc:aspect-auto;
+  }
+
+  .ws-layout {
+  }
+
+  .ws-layoutHead {
+    @apply absolute right-[--gap] top-[2.4rem] pc:sticky pc:top-0 pc:pt-[4.8rem] pc:pb-[6rem] pc:p-[--gap] pc:h-[--100vh];
+  }
+
+  .ws-layoutBody {
+    @apply relative aspect-[4/5] w-[calc(var(--grid)*9)] pc:w-fit pc:aspect-auto;
+  }
 }
