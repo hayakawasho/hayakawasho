@@ -10,7 +10,7 @@ export default function Component({ posts, post }: { posts: WorkDTO[]; post: Wor
   return (
     <ContentLayout namespace="work-single" asChild>
       <div className="h-full relative">
-        <h1 className="absolute bottom-[4rem] right-[--grid] text-[1.3rem] leading-[1.2] tracking-[.08em] | pc:sr-only">
+        <h1 className="absolute bottom-[4rem] right-[--grid] text-[1.3rem] tracking-[.08em] | pc:sr-only">
           {post.name}
         </h1>
         <WorkInfoToggle />
