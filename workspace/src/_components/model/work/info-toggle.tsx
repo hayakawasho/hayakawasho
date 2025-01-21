@@ -1,6 +1,6 @@
 export function WorkInfoToggle() {
   return (
-    <button className="overflow-hidden absolute bottom-[4rem] left-[--gap] border-solid border-[1px] border-current rounded-full my-[--leading-trim] w-[5.4rem] text-[1.2rem] leading-[1.2] text-center | pc:hidden">
+    <button className="overflow-hidden absolute bottom-[4rem] left-[--grid] border-solid border-[1px] border-current rounded-full w-[5.4rem] text-[1.2rem] leading-[1.2] text-center | pc:hidden">
       <span className="h-[1.2em] block">
         <span className="flex justify-center">
           <span aria-hidden="true" className="w-[.5em] inline-block">
