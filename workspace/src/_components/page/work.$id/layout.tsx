@@ -17,3 +17,7 @@ export function Head({ children }: { children: React.ReactNode }) {
 export function Content({ children }: { children: React.ReactNode }) {
   return <div className="relative aspect-[4/5] w-[calc(var(--grid)*9)] | pc:w-fit pc:aspect-auto">{children}</div>;
 }
+
+export function Info({ children }: { children: React.ReactNode }) {
+  return <div className="w-full absolute bottom-0 left-0 | sp:hidden">{children}</div>;
+}
