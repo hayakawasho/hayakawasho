@@ -17,7 +17,7 @@ export default function Component({ posts }: { posts: WorkDTO[] }) {
           </HomeLayout.Head>
           <HomeLayout.Content>
             <div className="flex justify-center gap-[1rem] whitespace-nowrap absolute top-1/2 left-0 z-10 mix-blend-difference | pc:hidden">
-              <ul className="text-[3.6rem] font-extralight tracking-[.04em] flex items-center gap-[1rem]">
+              <ul className="text-[4rem] font-extralight tracking-[.04em] flex items-center gap-[1rem]">
                 {posts.map((i) => (
                   <li className="whitespace-nowrap flex items-center gap-[1rem]" key={i.id}>
                     {i.name}
@@ -25,7 +25,7 @@ export default function Component({ posts }: { posts: WorkDTO[] }) {
                   </li>
                 ))}
               </ul>
-              <ul className="text-[3.6rem] font-extralight tracking-[.04em] flex items-center gap-[1rem]">
+              <ul className="text-[4rem] font-extralight tracking-[.04em] flex items-center gap-[1rem]">
                 {posts.map((i) => (
                   <li className="whitespace-nowrap flex items-center gap-[1rem]" key={i.id}>
                     {i.name}
