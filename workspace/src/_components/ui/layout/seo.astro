@@ -34,6 +34,6 @@ const isDev = process.env.NODE_ENV !== 'production';
 <meta content={siteTitle} property="og:site_name" />
 <meta content={SITE_URL + '/ogp.jpg'} property="og:image" />
 
-<GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Jost:wght@200..500&display=swap" />
+<GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Jost:wght@200..600&display=swap" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PreloadJS/1.0.1/preloadjs.min.js" is:inline />
 {isDev ? (<script src={`http://${process.env.LOCAL_IP_ADDR || 'localhost'}:5173/src/entry.ts`} type="module" />) : <script src="/assets/entry.js" type="module" />}
