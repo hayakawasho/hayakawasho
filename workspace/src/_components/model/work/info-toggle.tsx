@@ -1,8 +1,14 @@
 export function WorkInfoToggle() {
   return (
-    <button className="overflow-hidden absolute z-10 top-[4rem] right-[--grid] border-solid border-[1px] border-current rounded-full w-[5.4rem] text-[1.2rem] leading-[1.3] text-center | pc:hidden">
-      <span className="h-[1.3em] block">
-        <span className="flex justify-center">
+    <button
+      className={`
+      absolute z-10 top-[4rem] right-[--grid] overflow-hidden rounded-full w-[5.4rem] text-[1.2rem] h-[1.5em]
+      | before:block before:absolute before:inset-0 before:rounded-full before:border-solid before:border-[1px] before:border-current
+      | pc:hidden
+    `}
+    >
+      <span className="relative block">
+        <span className="block">
           <span aria-hidden="true" className="w-[.5em] inline-block">
             I
           </span>
@@ -17,7 +23,7 @@ export function WorkInfoToggle() {
           </span>
           <span className="sr-only">Info</span>
         </span>
-        <span className="tracking-[.04em] uppercase">Close</span>
+        <span className="absolute block w-full tracking-[.04em] uppercase">Close</span>
       </span>
     </button>
   );
