@@ -10,8 +10,10 @@ export default function Component({ posts }: { posts: WorkDTO[] }) {
       <div className="h-full">
         <HomeLayout.Root>
           <HomeLayout.Head>
-            <div className="absolute top-0 left-0">
-              <h2 className="text-[1.2rem] tracking-[.04em] font-medium uppercase">Full site soon</h2>
+            <div className="absolute top-0 left-0 z-[10] | sp:hidden">
+              <h2 className="text-[1.2rem] tracking-[.04em] font-medium uppercase my-[--leading-trim]">
+                Full site soon
+              </h2>
             </div>
             <WorkNavigation posts={posts} current={"pkshatech"} />
           </HomeLayout.Head>

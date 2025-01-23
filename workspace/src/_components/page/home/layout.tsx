@@ -6,7 +6,7 @@ export function Root({ children }: { children: React.ReactNode }) {
 
 export function Head({ children }: { children: React.ReactNode }) {
   return (
-    <div className="absolute right-[--grid] top-[4rem] | pc:sticky pc:top-0 pc:pt-[4.8rem] pc:pb-[6rem] pc:p-[--gap] pc:h-[--100vh]">
+    <div className="absolute top-0 left-0 pt-[4rem] px-[--grid] w-full | pc:sticky pc:top-0 pc:pt-[4.8rem] pc:pb-[6rem] pc:p-[--gap] pc:h-[--100vh]">
       <div className="size-full relative">{children}</div>
     </div>
   );
