@@ -3,7 +3,7 @@ import type { WorkDTO } from "../../../_models/work/dto";
 export function WorkNavigation({ posts, current }: { posts: WorkDTO[]; current: string }) {
   return (
     <ul
-      className={`sp:text-[rgb(30,31,31)] | relative z-10 text-[1.2rem] tracking-[.04em] text-right leading-[1.3] flex flex-col gap-[1.6rem]`}
+      className={`sp:text-[--color-dark] | relative z-10 text-[1.2rem] tracking-[.04em] text-right leading-[1.3] flex flex-col gap-[1.6rem]`}
     >
       {posts.map((i, index) => (
         <li
