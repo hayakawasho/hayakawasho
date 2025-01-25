@@ -1,4 +1,4 @@
-export function WorkInfoToggle() {
+export function WorkInfoTrigger() {
   return (
     <button
       className={`

@@ -1,6 +1,6 @@
 import { defineComponent, useDomRef, useSlot, useMount, ref, readonly, withSvelte } from "lake";
 import { usePjax } from "./use-pjax";
-import { useElementSize } from "../../_hooks/use-element-size";
+import { useElementSize } from "../../_libs/lake/use-element-size";
 import { useCursorTypeContext } from "../../_stores/cursor";
 import { useMediaQuery } from "../../_stores/mq";
 import { useRoute } from "../../_stores/route";
@@ -8,8 +8,8 @@ import { useWindowSize } from "../../_stores/window-size";
 import Cursor from "../cusor/index.svelte";
 import { useBackCanvas } from "../glworld/back";
 import { useFrontCanvas } from "../glworld/front";
-import { usePageScroll } from "../pagescroll";
-import type { AppContext, RouteName } from "../../_utils/types";
+import { usePageScroll } from "../scroll";
+// import type { AppContext } from "../../_utils/types";
 
 type ComponentProps = {
   onCreated: (props?: Omit<AppContext, "once">) => void;
@@ -21,7 +21,7 @@ type Refs = {
   backCanvas: HTMLCanvasElement;
   frontCanvas: HTMLCanvasElement;
   main: HTMLElement;
-  windowSizeWatcher: HTMLElement;
+  resizeSentinel: HTMLElement;
   cursor: HTMLElement;
 };
 
@@ -29,7 +29,7 @@ export default defineComponent({
   name: "Load",
   setup(_el, { onCreated, onUpdated, onCleanup }: ComponentProps) {
     const { addChild } = useSlot();
-    const { refs } = useDomRef<Refs>("backCanvas", "frontCanvas", "main", "windowSizeWatcher", "cursor");
+    const { refs } = useDomRef<Refs>("backCanvas", "frontCanvas", "main", "resizeSentinel", "cursor");
 
     const history = ref<"push" | "pop">("push");
 
@@ -75,7 +75,7 @@ export default defineComponent({
     //----------------------------------------------------------------
 
     const [_, setWindowSize] = useWindowSize();
-    useElementSize(refs.windowSizeWatcher, (elementSize) => setWindowSize(elementSize));
+    useElementSize(refs.resizeSentinel, (elementSize) => setWindowSize(elementSize));
 
     //----------------------------------------------------------------
 

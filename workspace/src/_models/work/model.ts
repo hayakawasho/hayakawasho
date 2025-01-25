@@ -35,6 +35,10 @@ export class Work extends Entity<WorkProps> {
   siteUrl = this._value.siteUrl ?? null;
   launch = this._value.launch ?? null;
 
+  static get modelName() {
+    return "Work";
+  }
+
   static create(value: WorkProps) {
     return new Work(value);
   }

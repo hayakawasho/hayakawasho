@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { useTick } from '../../_hooks/use-tick';
+  import { useTick } from '../../_libs/lake/use-tick';
   import { useMousePosition } from '../../_stores/mouse';
   import { lerp } from '../../_utils/lerp';
 

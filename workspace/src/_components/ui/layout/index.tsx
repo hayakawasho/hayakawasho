@@ -18,7 +18,7 @@ export default function Component({
       <div
         aria-hidden="true"
         className="fixed inset-0 w-screen h-[--100vh] pointer-events-none -z-1 invisible"
-        data-ref="windowSizeWatcher"
+        data-ref="resizeSentinel"
       />
       <div aria-hidden="true" className="ui-bg" />
       <canvas

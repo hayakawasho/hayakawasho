@@ -1,5 +1,5 @@
+import { apiClient } from "../../_libs/api";
 import { WorkDataMap } from "../../_models/work/mapper";
-import { apiClient } from "../../_utils/api";
 import type { WorksAPISchema } from "./schema";
 
 export class WorkRepository {

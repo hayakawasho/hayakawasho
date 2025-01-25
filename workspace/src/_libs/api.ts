@@ -11,13 +11,6 @@ dotenv.config();
 
 const client = ky.create({
   timeout: 10000, // milliseconds
-  hooks: {
-    beforeRequest: [
-      (request) => {
-        // accessToken && request.headers.set("Authorization", `Bearer ${accessToken}`);
-      },
-    ],
-  },
 });
 
 class HttpError<T = any> extends Error {

@@ -1,9 +1,9 @@
 import { getGPUTier } from "detect-gpu";
-import { useTick } from "../../_hooks/use-tick";
+import { useTick } from "../../_libs/lake/use-tick";
+import { WebGLRenderer, PerspectiveCamera, Scene } from "../../_libs/three";
 import globalStore from "../../_stores";
 import { useWindowSize } from "../../_stores/window-size";
-import { WebGLRenderer, PerspectiveCamera, Scene } from "../../_utils/three";
-import type { Object3D } from "../../_utils/three";
+import type { Object3D } from "../../_libs/three";
 
 export const useThree = (canvas: HTMLCanvasElement, resolution: number) => {
   const { width, height } = canvas.getBoundingClientRect();

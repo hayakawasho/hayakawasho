@@ -2,10 +2,10 @@ import { RepeatWrapping } from "three";
 import { defineComponent, useMount } from "lake";
 import fragmentShader from "./fragment.frag";
 import vertexShader from "./vertex.vert";
+import { PlaneBufferGeometry, ShaderMaterial, Mesh, TextureLoader, LinearFilter } from "../../../_libs/three";
 import globalStore from "../../../_stores";
 import { useMediaQuery } from "../../../_stores/mq";
 import { useWindowSize } from "../../../_stores/window-size";
-import { PlaneBufferGeometry, ShaderMaterial, Mesh, TextureLoader, LinearFilter } from "../../../_utils/three";
 import type { ParentScene } from "../../../_utils/types";
 
 type ComponentProps = ParentScene & {

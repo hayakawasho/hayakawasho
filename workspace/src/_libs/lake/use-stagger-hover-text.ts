@@ -1,7 +1,7 @@
 import { useEvent } from "lake";
-import { Tween } from "~/_foundation/libs/tween";
-import { waitFrame } from "~/_foundation/utils";
-import { useMediaQuery } from "~/_states/mq";
+import { useMediaQuery } from "../../_stores/mq";
+import { waitFrame } from "../../_utils/wait";
+import { Tween } from "../tween";
 
 type Options = {
   stagger?: number;

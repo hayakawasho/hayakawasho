@@ -1,5 +1,5 @@
 import { useMount } from "lake";
-import { debounce } from "../_utils/debounce";
+import { debounce } from "../../_utils/debounce";
 
 export const useElementSize = <T extends Element>(
   targetOrTargets: T | T[],

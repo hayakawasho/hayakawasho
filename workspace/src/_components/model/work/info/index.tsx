@@ -1,12 +1,8 @@
 import { Slot } from "@radix-ui/react-slot";
-import { WorkPresenter } from "../../../_models/work/presenter";
-import type { WorkDTO } from "../../../_models/work/dto";
+import { WorkPresenter } from "../../../../_models/work/presenter";
+import type { WorkDTO } from "../../../../_models/work/dto";
 
-export function Layout({ children }: { children: React.ReactNode }) {
-  return <div className="grid gap-[1rem]">{children}</div>;
-}
-
-export function Item({ label, children }: { label: string; children: React.ReactNode }) {
+function Item({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <dl className="flex justify-between">
       <dt className="opacity-50 text-[1rem] pc:text-[1.1rem]">
@@ -19,7 +15,7 @@ export function Item({ label, children }: { label: string; children: React.React
   );
 }
 
-export function Content({ children, asChild, ...props }: { children: React.ReactNode; asChild?: true }) {
+function Content({ children, asChild, ...props }: { children: React.ReactNode; asChild?: true }) {
   const Comp = asChild ? Slot : "span";
 
   return (
@@ -33,7 +29,7 @@ export function WorkInfo({ metadata }: { metadata: WorkDTO }) {
   const { launchDateTime, launch, siteUrl } = WorkPresenter.complete(metadata);
 
   return (
-    <Layout>
+    <div className="grid gap-[1rem]">
       <Item label="(Category)">
         <Content>{metadata.category}</Content>
       </Item>
@@ -52,6 +48,6 @@ export function WorkInfo({ metadata }: { metadata: WorkDTO }) {
           </Content>
         </Item>
       )}
-    </Layout>
+    </div>
   );
 }

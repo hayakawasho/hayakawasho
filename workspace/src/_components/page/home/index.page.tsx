@@ -1,7 +1,7 @@
 import * as HomeLayout from "./layout";
 import { WorkNavigation } from "../../model/work/navigation";
 import { WorkVisuals } from "../../model/work/visuals";
-import ContentLayout from "../../ui/layout/default";
+import ContentLayout from "../../ui/layout";
 import type { WorkDTO } from "../../../_models/work/dto";
 
 export default function Component({ posts }: { posts: WorkDTO[] }) {

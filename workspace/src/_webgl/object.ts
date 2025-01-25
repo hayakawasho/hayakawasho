@@ -1,6 +1,6 @@
+import { Object3D, Texture } from "../_libs/three";
 import globalStore from "../_stores";
 import { loadAsset } from "../_utils/loader";
-import { Object3D, Texture } from "../_utils/three";
 
 class GlObject extends Object3D {
   #pos = {

@@ -1,5 +1,5 @@
 import { useEvent } from "lake";
-import { useMediaQuery } from "../_stores/mq";
+import { useMediaQuery } from "../../_stores/mq";
 
 export const useHover = (target: HTMLElement, handler: (evt: HTMLElementEventMap["mouseenter"]) => void) => {
   const { anyHover } = useMediaQuery();
