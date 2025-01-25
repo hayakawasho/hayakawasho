@@ -1,15 +1,11 @@
 {
   "private": true,
   "scripts": {
-    "dev:vite": "vite",
-    "dev:astro": "astro dev",
-    "start": "NODE_ENV=development concurrently \"npm:dev:vite\" \"npm:dev:astro\"",
-    "build:astro": "astro build",
-    "build:vite": "vite build",
-    "build": "NODE_ENV=production npm run build:astro && npm run build:vite",
+    "dev": "NODE_ENV=development concurrently \"npx vite\" \"npx astro dev\"",
+    "start": "npm run dev",
+    "build": "NODE_ENV=production npx astro build && npx vite build",
     "check": "astro check",
     "preview": "astro preview",
-    "astro": "astro",
     "fix:prettier": "prettier --write \"./src/**/*.{ts,tsx}\"",
     "fix:lint": "eslint \"./src/**/*.{ts,tsx,svelte}\" -c .eslintrc.json --fix",
     "fix": "concurrently \"npm:fix:lint\" \"npm:fix:prettier\"",
@@ -36,7 +32,6 @@
     "normalize-wheel": "^1.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "redaxios": "^0.5.1",
     "remeda": "^1.40.1",
     "split-type": "^0.3.4",
     "svelte": "^4.2.19",
@@ -45,6 +40,7 @@
     "tailwindcss": "^3.4.1",
     "three": "^0.125.0",
     "virtual-scroll": "^2.2.1",
+    "vite": "^4.5.9",
     "vite-plugin-glslify": "^2.0.2",
     "what-input": "^5.2.12"
   },
@@ -63,7 +59,6 @@
     "eslint-plugin-svelte": "^2.44.0",
     "markuplint": "^4.9.2",
     "prettier-plugin-svelte": "^3.2.6",
-    "sass": "^1.77.4",
     "typescript": "^5.4.5"
   },
   "browserslist": [
