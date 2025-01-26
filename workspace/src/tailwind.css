@@ -8,7 +8,7 @@
       "Hiragino Sans", Meiryo, sans-serif;
     --font-number: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-    --vh: 1svh;
+    --vh: 1vh;
     --100vh: 100svh;
 
     --leading-trim: calc((1em - 1lh) / 2);
@@ -61,14 +61,6 @@
 
     @media screen and (max-width: 960px) {
       font-size: calc(8 / 16 * 100%);
-    }
-
-    @media screen and (max-width: 854px) {
-      font-size: calc(7 / 16 * 100%);
-    }
-
-    @media screen and (max-width: 767px) {
-      font-size: calc(6 / 16 * 100%);
     }
 
     @media screen and (max-width: 639px) {
@@ -142,17 +134,17 @@
   }
 
   :where(
-      :any-link,
-      button,
-      [type="button"],
-      [type="reset"],
-      [type="submit"],
-      label[for],
-      select,
-      summary,
-      [role="tab"],
-      [role="button"]
-    ) {
+    :any-link,
+    button,
+    [type="button"],
+    [type="reset"],
+    [type="submit"],
+    label[for],
+    select,
+    summary,
+    [role="tab"],
+    [role="button"]
+  ) {
     cursor: pointer;
   }
 
@@ -188,7 +180,6 @@
 
   .grad--upper {
     top: 0;
-
     background-image: linear-gradient(
       hsla(0, 0%, 0%, 0.5),
       hsla(0, 0%, 0%, 0.49016) 1.17%,
@@ -208,7 +199,6 @@
 
   .grad--lower {
     bottom: 0;
-
     background-image: linear-gradient(
       hsla(0, 0%, 0%, 0),
       hsla(0, 0%, 0%, 0.00984) 10.79%,

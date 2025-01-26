@@ -14,13 +14,14 @@ export default function Component({
   const Comp = asChild ? Slot : "div";
 
   return (
-    <body className={namespace}>
+    <body className={`page-${namespace}`}>
       <div
         aria-hidden="true"
         className="fixed inset-0 w-screen h-[--100vh] pointer-events-none -z-1 invisible"
         data-ref="resizeSentinel"
       />
       <div aria-hidden="true" className="ui-bg" />
+      <div aria-hidden="true" className="grid-hr bottom-0" />
       <canvas
         aria-hidden="true"
         className="ui-canvas"
