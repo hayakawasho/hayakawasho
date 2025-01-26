@@ -24,25 +24,25 @@ export default function Component({
       <canvas
         aria-hidden="true"
         className="ui-canvas"
-        data-ref="backCanvas"
+        data-ref="glBack"
         // data-pc={noiseImg.src}
         // data-mob={noiseSpImg.src}
       />
-      <div aria-hidden="true" className="grad grad--upper | h-[20vh] pc:h-[25vh]" />
-      <div aria-hidden="true" className="grad grad--lower | h-[20vh] pc:h-[25vh]" />
+      <div aria-hidden="true" className="grad grad--upper h-[20vh] pc:h-[25vh]" />
+      <div aria-hidden="true" className="grad grad--lower h-[20vh] pc:h-[25vh]" />
       <div aria-hidden="true" className="grid-vr left-[2rem] | pc:left-1/4" />
       <div aria-hidden="true" className="grid-vr left-1/2" />
       <div aria-hidden="true" className="grid-vr right-[2rem] | pc:right-auto pc:left-3/4" />
 
       <div
         id="main"
-        className="w-full absolute top-0 left-0 backface-hidden | sp:fixed sp:overflow-hidden"
+        className="fixed overflow-hidden w-full top-0 left-0 backface-hidden | pc:overflow-visible pc:absolute"
         data-ref="main"
       >
         <Comp data-xhr={namespace}>{children}</Comp>
       </div>
 
-      <canvas aria-hidden="true" className="ui-canvas" data-ref="frontCanvas" />
+      <canvas aria-hidden="true" className="ui-canvas" data-ref="glFront" />
       <div className="ui-cursor" data-ref="cursor" />
     </body>
   );

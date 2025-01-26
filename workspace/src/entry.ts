@@ -1,8 +1,8 @@
-import { create, withSvelte } from "lake";
+import { create, withSvelte, defineComponent } from "lake";
 import Home from "./_components/page/home/script";
 import WorkSingle from "./_components/page/work.$id/script";
-import Load from "./_features/load";
 import Noop from "./_features/noop.svelte";
+import { useOnLoad } from "./_libs/lake/useOnLoad";
 import type { IComponent, ComponentContext } from "lake";
 
 (() => {
@@ -31,17 +31,22 @@ import type { IComponent, ComponentContext } from "lake";
 
   const html = document.documentElement;
 
-  const loadProvides = {
-    onCleanup: (scope: HTMLElement) => {
-      unmount([...scope.querySelectorAll<HTMLElement>("[data-component]")]);
-    },
-    onCreated: (context?: Record<string, unknown>) => {
-      mountComponents(html, { ...context, once: true });
-    },
-    onUpdated: (scope: HTMLElement, context: Record<string, unknown>) => {
-      mountComponents(scope, { ...context, once: false });
-    },
-  };
-
-  component(Load)(html, loadProvides);
+  component(
+    defineComponent({
+      name: "OnLoad",
+      setup() {
+        useOnLoad({
+          onCleanup(scope: HTMLElement) {
+            unmount([...scope.querySelectorAll<HTMLElement>("[data-component]")]);
+          },
+          onCreated(props?: Record<string, unknown>) {
+            mountComponents(html, { ...props, once: true });
+          },
+          onUpdated(scope: HTMLElement, props: Record<string, unknown>) {
+            mountComponents(scope, { ...props, once: false });
+          },
+        });
+      },
+    }),
+  )(html);
 })();
