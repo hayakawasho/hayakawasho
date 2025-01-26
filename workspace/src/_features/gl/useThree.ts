@@ -1,5 +1,5 @@
 import { getGPUTier } from "detect-gpu";
-import { useTick } from "../../_libs/lake/use-tick";
+import { useTick } from "../../_libs/lake/useTick";
 import { WebGLRenderer, PerspectiveCamera, Scene } from "../../_libs/three";
 import globalStore from "../../_stores";
 import { useWindowSize } from "../../_stores/window-size";

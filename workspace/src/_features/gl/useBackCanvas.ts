@@ -1,5 +1,5 @@
 import { useSlot } from "lake";
-import { useThree } from "./use-three";
+import { useThree } from "./useThree";
 
 export const useBackCanvas = (canvas: HTMLCanvasElement) => {
   const { addChild: _ } = useSlot();

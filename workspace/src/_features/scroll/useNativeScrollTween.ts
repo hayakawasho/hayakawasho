@@ -1,9 +1,9 @@
 import { gsap } from "gsap";
 import { useMount } from "lake";
 import { Smoother } from "./smoother";
-import { useElementSize } from "../../_libs/lake/use-element-size";
-import { useTick } from "../../_libs/lake/use-tick";
-import { useWindowEvent } from "../../_libs/lake/use-window-event";
+import { useElementSize } from "../../_libs/lake/useElementSize";
+import { useTick } from "../../_libs/lake/useTick";
+import { useWindowEvent } from "../../_libs/lake/useWindowEvent";
 import globalStore from "../../_stores";
 import { useWindowScroll } from "../../_stores/window-scroll";
 

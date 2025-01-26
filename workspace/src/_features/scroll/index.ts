@@ -1,6 +1,6 @@
-import { useNativeScrollTween } from "./use-native-scroll-tween";
-import { useVScrollTween } from "./use-vscroll-tween";
-import { useWindowEvent } from "../../_libs/lake/use-window-event";
+import { useNativeScrollTween } from "./useNativeScrollTween";
+import { useVScrollTween } from "./useVScrollTween";
+import { useWindowEvent } from "../../_libs/lake/useWindowEvent";
 import { scrollStateYMutators } from "../../_stores/scroll";
 
 export const usePageScroll = (el: HTMLElement, anyHover: boolean) => {

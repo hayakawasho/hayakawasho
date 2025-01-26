@@ -1,13 +1,13 @@
 import { defineComponent, useDomRef, useSlot, useMount, ref, readonly, withSvelte } from "lake";
 import { usePjax } from "./use-pjax";
-import { useElementSize } from "../../_libs/lake/use-element-size";
+import { useElementSize } from "../../_libs/lake/useElementSize";
 import { useCursorTypeContext } from "../../_stores/cursor";
 import { useMediaQuery } from "../../_stores/mq";
 import { useRoute } from "../../_stores/route";
 import { useWindowSize } from "../../_stores/window-size";
 import Cursor from "../cusor/index.svelte";
-import { useBackCanvas } from "../glworld/back";
-import { useFrontCanvas } from "../glworld/front";
+import { useBackCanvas } from "../gl/useBackCanvas";
+import { useFrontCanvas } from "../gl/useFrontCanvas";
 import { usePageScroll } from "../scroll";
 // import type { AppContext } from "../../_utils/types";
 
