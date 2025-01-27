@@ -1,11 +1,11 @@
 import { useMount } from "lake";
 import { debounce } from "../../_utils/debounce";
 
-export const useElementSize = <T extends Element>(
+export function useElementSize<T extends Element>(
   targetOrTargets: T | T[],
   callback: (payload: Size) => void,
   debounceTime = 200,
-) => {
+) {
   const ro = new ResizeObserver(
     debounce(([entry]) => {
       const { width, height } = entry.contentRect;
@@ -40,4 +40,4 @@ export const useElementSize = <T extends Element>(
   return {
     unwatch,
   };
-};
+}

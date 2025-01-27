@@ -5,7 +5,7 @@ import { useWindowSize } from "../../_stores/window-size";
 import { WebGLRenderer, PerspectiveCamera, Scene } from "../three";
 import type { Object3D } from "../three";
 
-export const useThree = (canvas: HTMLCanvasElement, resolution: number) => {
+export function useThree(canvas: HTMLCanvasElement, resolution: number) {
   const { width, height } = canvas.getBoundingClientRect();
 
   const renderer = new WebGLRenderer({
@@ -56,4 +56,4 @@ export const useThree = (canvas: HTMLCanvasElement, resolution: number) => {
     removeScene,
     setRenderTarget,
   };
-};
+}

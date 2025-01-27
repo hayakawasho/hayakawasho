@@ -2,7 +2,7 @@ import { useUnmount } from "lake";
 
 const FPS_60_SEC = 1000 / 60;
 
-export const useTick = (callback: (payload: { deltaTime: number; timestamp: number; deltaRatio: number }) => void) => {
+export function useTick(callback: (payload: { deltaTime: number; timestamp: number; deltaRatio: number }) => void) {
   let then = 0;
 
   const loop = (timestamp: number) => {
@@ -32,4 +32,4 @@ export const useTick = (callback: (payload: { deltaTime: number; timestamp: numb
   useUnmount(() => {
     cancelAnimationFrame(rafId);
   });
-};
+}

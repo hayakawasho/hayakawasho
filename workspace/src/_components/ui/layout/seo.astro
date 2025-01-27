@@ -39,7 +39,8 @@ const isDev = process.env.NODE_ENV !== 'production';
 <style>
   @font-face {
     font-family: "Jost";
-    src: url("/Jost-VariableFont_wght.ttf");
+    src: local("Jost"),
+      url("/Jost-VariableFont_wght.ttf") format('truetype');
     font-style: normal;
     font-display: swap;
   }
