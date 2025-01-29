@@ -27,6 +27,10 @@ export const apiClient = {
         ...options,
         prefixUrl: `https://hayakawasho.microcms.io/api/v1`,
         searchParams: options?.params ?? undefined,
+        headers: {
+          "Content-Type": "application/json",
+          "X-MICROCMS-API-KEY": process.env.API_KEY,
+        },
       });
       return response;
     } catch (e) {

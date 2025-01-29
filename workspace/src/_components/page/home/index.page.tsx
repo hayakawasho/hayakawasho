@@ -7,7 +7,7 @@ import type { WorkDTO } from "../../../_models/work/dto";
 export default function Component({ posts }: { posts: WorkDTO[] }) {
   return (
     <ContentLayout namespace="home" asChild>
-      <div className="relative size-full">
+      <div className="relative size-full" data-component="Home">
         <HomeLayout.Wrap>
           <HomeLayout.Head>
             <div className="absolute top-0 left-0 z-[10] | sp:hidden">

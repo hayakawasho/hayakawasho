@@ -25,13 +25,13 @@ export function useSwup({ onCreated, onUpdated, onCleanup }: Props) {
   const isAnyHover = true;
 
   const pageScrollContext = usePageScroll(refs.main, isAnyHover);
-  const glBackContext = useGlBack(refs.glBack);
-  const glFrontContext = useGlFront(refs.glFront, Math.min(window.devicePixelRatio, 1.5));
+  // const glBackContext = useGlBack(refs.glBack);
+  // const glFrontContext = useGlFront(refs.glFront, Math.min(window.devicePixelRatio, 1.5));
 
   const contexts = {
     pageScrollContext,
-    glBackContext,
-    glFrontContext,
+    // glBackContext,
+    // glFrontContext,
   };
 
   onCreated(contexts);

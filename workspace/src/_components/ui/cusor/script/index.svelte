@@ -66,8 +66,8 @@
     ></span>
   </div>
   <span class="cursor__hold absolute inset-0">
-    <span class="cursor__hold-inner absolute inset-0 js-cursor-hold-inner" />
-    <span class="cursor__hold-outer absolute inset-0 js-cursor-hold-outer" />
+    <span class="cursor__hold-inner absolute inset-0 js-cursor-hold-inner"></span>
+    <span class="cursor__hold-outer absolute inset-0 js-cursor-hold-outer"></span>
   </span>
 </div>
 

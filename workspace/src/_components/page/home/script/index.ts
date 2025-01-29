@@ -2,7 +2,7 @@ import { defineComponent } from "lake";
 
 export default defineComponent({
   name: "Home",
-  setup(_el) {
-    //
+  setup(_el, context) {
+    console.log(context);
   },
 });

@@ -3,15 +3,7 @@ import { WorkDataMap } from "../../_models/work/mapper";
 import type { WorksAPISchema } from "./schema";
 
 export class WorkRepository {
-  constructor(private _apiKey: string) {}
-
-  static create(apiKey?: string) {
-    if (!apiKey) {
-      throw new Error();
-    }
-
-    return new WorkRepository(apiKey);
-  }
+  constructor() {}
 
   async findAll() {
     const res = await apiClient.get<WorksAPISchema["GET"]["response"], WorksAPISchema["GET"]["request"]["params"]>(
@@ -20,10 +12,6 @@ export class WorkRepository {
         params: {
           limit: 99,
           orders: "-launch",
-        },
-        headers: {
-          "Content-Type": "application/json",
-          "X-MICROCMS-API-KEY": this._apiKey,
         },
       },
     );

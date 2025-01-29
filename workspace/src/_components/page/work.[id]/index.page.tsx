@@ -10,7 +10,7 @@ import type { WorkDTO } from "../../../_models/work/dto";
 export default function Component({ posts, post }: { posts: WorkDTO[]; post: WorkDTO; currentIndex: number }) {
   return (
     <ContentLayout namespace="work-single" asChild>
-      <div className="relative size-full">
+      <div className="relative size-full" data-component="WorkSingle">
         <WorkLayout.Title>
           <h1 className="text-[1.3rem] tracking-[.04em] font-[450] my-[--leading-trim] z-10 | pc:sr-only">
             {post.name}
