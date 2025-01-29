@@ -2,7 +2,7 @@ export function WorkInfoTrigger() {
   return (
     <button
       className={`
-        overflow-hidden rounded-full w-[5rem] text-[1.1rem] leading-[1.4] font-[450] my-[--leading-trim]
+        overflow-hidden rounded-full w-[5rem] text-[1.1rem] leading-[1.4] font-[450]
         | before:block before:absolute before:inset-0 before:rounded-full before:border-solid before:border-[1px] before:border-current
     `}
     >
