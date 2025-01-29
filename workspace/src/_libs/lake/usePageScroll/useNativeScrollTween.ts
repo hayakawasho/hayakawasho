@@ -1,36 +1,24 @@
 import { gsap } from "gsap";
-import { useMount, useDomRef } from "lake";
+import { useMount } from "lake";
 import { Smoother } from "./smoother";
-import { useElementSize } from "../../_libs/lake/useElementSize";
-import { useTick } from "../../_libs/lake/useTick";
-import { useWindowEvent } from "../../_libs/lake/useWindowEvent";
-import globalStore from "../../_stores";
-import { useWindowScroll } from "../../_stores/window-scroll";
+import globalStore from "../../../_stores";
+import { useWindowScroll } from "../../../_stores/window-scroll";
+import { useElementSize } from "../useElementSize";
+import { useTick } from "../useTick";
+import { useWindowEvent } from "../useWindowEvent";
 
-type Refs = {
-  scrollTarget: HTMLElement;
-};
-
-export const useVScrollTween = (el: HTMLElement) => {
-  const { refs } = useDomRef<Refs>("scrollTarget");
-
+export const useNativeScrollTween = (el: HTMLElement) => {
   const smooth = new Smoother({
-    stiffness: 0.2,
-    damping: 1.6,
-    mass: 1,
+    stiffness: 0.3,
+    damping: 1.2,
+    mass: 1.14,
   });
 
   useElementSize(el, ({ height }) => {
     smooth.resize(height, globalStore.bounds.wh);
   });
 
-  useWindowEvent("touchstart", smooth.onTouchstart, {
-    passive: true,
-  });
-
-  useWindowEvent("touchend", smooth.onTouchend);
-
-  useWindowEvent("touchmove", smooth.onTouchmove, {
+  useWindowEvent("scroll", smooth.onNativeScroll, {
     passive: true,
   });
 
@@ -44,9 +32,8 @@ export const useVScrollTween = (el: HTMLElement) => {
 
   useMount(() => {
     const scrollTo = (val: number) => {
-      gsap.to(refs.scrollTarget, {
+      gsap.to(window, {
         duration: 0,
-        y: -val,
         scrollTo: {
           y: val,
           autoKill: true,

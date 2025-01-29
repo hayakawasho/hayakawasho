@@ -1,7 +1,7 @@
 import { create, withSvelte, defineComponent } from "lake";
 import Home from "./_components/page/home/script";
 import WorkSingle from "./_components/page/work.$id/script";
-import Noop from "./_features/noop.svelte";
+import Noop from "./_libs/lake/noop.svelte";
 import { useOnLoad } from "./_libs/lake/useOnLoad";
 import type { IComponent, ComponentContext } from "lake";
 

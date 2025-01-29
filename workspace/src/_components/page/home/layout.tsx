@@ -9,7 +9,7 @@ export function Wrap({ children }: { children: React.ReactNode }) {
 export function Head({ children }: { children: React.ReactNode }) {
   return (
     <div
-      className={`absolute top-0 left-0 pt-[4rem] px-[--grid] w-full | pc:sticky pc:top-0 pc:pt-[4.8rem] pc:pb-[6rem] pc:p-[--gap] pc:h-[--100vh]`}
+      className={`absolute top-0 left-0 py-[4rem] px-[2rem] size-full | pc:sticky pc:top-0 pc:pt-[4.8rem] pc:pb-[6rem] pc:p-[--gap] pc:h-[--100vh]`}
     >
       <div className="size-full relative">{children}</div>
     </div>

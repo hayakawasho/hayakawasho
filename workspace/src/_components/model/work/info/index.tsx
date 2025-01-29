@@ -5,12 +5,12 @@ import type { WorkDTO } from "../../../../_models/work/dto";
 function Item({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <dl className="flex justify-between">
-      <dt className="opacity-50 text-[1rem] pc:text-[1.1rem]">
+      <dt className="opacity-50 text-[1rem] font-[450] pc:text-[1.1rem]">
         <span className="inline-block uppercase" data-ref="infoText">
           {label}
         </span>
       </dt>
-      <dd className="text-[1.1rem] tracking-[.04em] | pc:text-[1.2rem]">{children}</dd>
+      <dd className="text-[1.1rem] tracking-[.02em] font-[450] | pc:text-[1.2rem]">{children}</dd>
     </dl>
   );
 }

@@ -1,6 +1,6 @@
 import NormalizeWheel from "normalize-wheel";
 import { createSpring } from "./spring";
-import { createEmitter } from "../../_utils/emitter";
+import { createEmitter } from "../../../_utils/emitter";
 import type { SpringConfig } from "./spring";
 
 export class Smoother {
@@ -133,7 +133,7 @@ export class Smoother {
     this.set(0);
   };
 
-  scrollOffset = () => {
+  get scrollOffset() {
     return this.scroll.current;
-  };
+  }
 }

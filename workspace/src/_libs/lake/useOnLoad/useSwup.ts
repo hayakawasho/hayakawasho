@@ -1,9 +1,9 @@
 import SwupParallelPlugin from "@swup/parallel-plugin";
 import Swup from "swup";
-import { useDomRef } from "lake";
-import { useGlBack } from "../../../_features/gl/useGlBack";
-import { useGlFront } from "../../../_features/gl/useGlFront";
-import { usePageScroll } from "../../../_features/scroll";
+import { useDomRef, ref } from "lake";
+import { useGlBack } from "../../../_components/ui/gl/script/useGlBack";
+import { useGlFront } from "../../../_components/ui/gl/script/useGlFront";
+import { usePageScroll } from "../usePageScroll";
 
 type Refs = {
   glBack: HTMLCanvasElement;
@@ -19,6 +19,8 @@ type Props = {
 
 export function useSwup({ onCreated, onUpdated, onCleanup }: Props) {
   const { refs } = useDomRef<Refs>("glBack", "glFront", "main");
+
+  const history = ref<"push" | "pop">("push");
 
   const isAnyHover = true;
 
@@ -47,22 +49,21 @@ export function useSwup({ onCreated, onUpdated, onCleanup }: Props) {
     ],
   });
 
-  swup.hooks.on("visit:start", (e) => {
-    //
-  });
+  swup.hooks.on("visit:start", (e) => {});
 
   swup.hooks.on("visit:end", (e) => {
     //
   });
 
-  swup.hooks.on("history:popstate", (e) => {
-    //
-  });
-
   swup.hooks.on("page:view", (e) => {
+    if (e.history.popstate) {
+      history.value = "pop";
+    } else {
+      history.value = "push";
+    }
+
     // fromContainer.value = refs.main.querySelector(xhr) as HTMLElement;
-    // onEnter(fromContainer.value);
-    // console.log("page:view");
+    // onUpdated()
   });
 
   return {

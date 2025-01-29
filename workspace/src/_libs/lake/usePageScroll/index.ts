@@ -1,7 +1,7 @@
 import { useNativeScrollTween } from "./useNativeScrollTween";
 import { useVScrollTween } from "./useVScrollTween";
-import { useWindowEvent } from "../../_libs/lake/useWindowEvent";
-import { scrollStateYMutators } from "../../_stores/scroll";
+import { scrollStateYMutators } from "../../../_stores/scroll";
+import { useWindowEvent } from "../useWindowEvent";
 
 export const usePageScroll = (el: HTMLElement, anyHover: boolean) => {
   let timer = 0;

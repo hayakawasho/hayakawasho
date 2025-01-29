@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { useTick } from '../../_libs/lake/useTick';
-  import { useMousePosition } from '../../_stores/mouse';
-  import { lerp } from '../../_utils/lerp';
+  import { useTick } from '../../../../_libs/lake/useTick';
+  import { useMousePosition } from '../../../../_stores/mouse';
+  import { lerp } from '../../../../_utils/lerp';
 
   let timer: number;
 

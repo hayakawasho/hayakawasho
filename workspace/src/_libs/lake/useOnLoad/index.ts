@@ -1,5 +1,5 @@
 import { useDomRef, useSlot, withSvelte } from "lake";
-import Cursor from "../../../_features/cusor/index.svelte";
+import Cursor from "../../../_components/ui/cusor/script/index.svelte";
 // import { useCursorTypeContext } from "../../../_stores/cursor";
 // import { useMediaQuery } from "../../../_stores/mq";
 // import { useRoute } from "../../../_stores/route";
