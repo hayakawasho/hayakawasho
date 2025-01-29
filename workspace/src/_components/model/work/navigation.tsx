@@ -8,7 +8,7 @@ export function WorkNavigation({ posts, current }: { posts: WorkDTO[]; current: 
         | pc:text-[--color-text] pc:gap-[1.2rem]`}
     >
       {posts.map((i, index) => (
-        <li key={index} className={`${current === i.id ? "font-[550]" : "opacity-30"}`}>
+        <li key={index} className={`${current === i.id ? "font-[550]" : "opacity-25"}`}>
           <span>{i.name}</span>
         </li>
       ))}
