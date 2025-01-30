@@ -22,12 +22,12 @@ export function Content({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function Title({ children }: { children: React.ReactNode }) {
-  return <div className="absolute bottom-[8rem] left-[2rem] | pc:hidden">{children}</div>;
-}
-
-export function Trigger({ children }: { children: React.ReactNode }) {
-  return <div className="absolute z-10 bottom-[4rem] left-[2rem] | pc:hidden">{children}</div>;
+export function HGroup({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="absolute bottom-[2.4rem] px-[2rem] w-full flex items-center justify-between | pc:hidden">
+      {children}
+    </div>
+  );
 }
 
 export function Info({ children }: { children: React.ReactNode }) {

@@ -11,14 +11,10 @@ export default function Component({ posts, post }: { posts: WorkDTO[]; post: Wor
   return (
     <ContentLayout namespace="work-single" asChild>
       <div className="relative size-full" data-component="WorkSingle">
-        <WorkLayout.Title>
-          <h1 className="text-[1.3rem] tracking-[.04em] font-[450] my-[--leading-trim] z-10 | pc:sr-only">
-            {post.name}
-          </h1>
-        </WorkLayout.Title>
-        <WorkLayout.Trigger>
+        <WorkLayout.HGroup>
           <WorkInfoTrigger />
-        </WorkLayout.Trigger>
+          <h1 className="text-[1.3rem] tracking-[.04em] font-[450] my-[--leading-trim] | pc:sr-only">{post.name}</h1>
+        </WorkLayout.HGroup>
         <WorkInfoDialog post={post} />
         <WorkLayout.Wrap>
           <WorkLayout.Head>
