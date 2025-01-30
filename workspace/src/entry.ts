@@ -6,7 +6,7 @@ import { useOnLoad } from "./_libs/lake/useOnLoad";
 import type { IComponent, ComponentContext } from "lake";
 
 (() => {
-  const { component, unmount } = create();
+  const { component, unmount: unmountComponents } = create();
 
   const table: Record<string, IComponent> = {
     Home,
@@ -29,17 +29,12 @@ import type { IComponent, ComponentContext } from "lake";
     }, []);
   };
 
-  const html = document.documentElement;
-
   component(
     defineComponent({
       name: "OnLoad",
       setup() {
-        useOnLoad({
-          mountComponents,
-          unmountComponents: unmount,
-        });
+        useOnLoad({ mountComponents, unmountComponents });
       },
     }),
-  )(html);
+  )(document.documentElement);
 })();
