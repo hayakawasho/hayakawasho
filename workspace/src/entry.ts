@@ -36,15 +36,8 @@ import type { IComponent, ComponentContext } from "lake";
       name: "OnLoad",
       setup() {
         useOnLoad({
-          onCleanup(scope: HTMLElement) {
-            unmount([...scope.querySelectorAll<HTMLElement>("[data-component]")]);
-          },
-          onCreated(props?: Record<string, unknown>) {
-            mountComponents(html, { ...props, once: true });
-          },
-          onUpdated(scope: HTMLElement, props: Record<string, unknown>) {
-            mountComponents(scope, { ...props, once: false });
-          },
+          mountComponents,
+          unmountComponents: unmount,
         });
       },
     }),

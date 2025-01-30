@@ -12,7 +12,12 @@ type Refs = {
   cursor: HTMLElement;
 };
 
-export function useOnLoad(props: Parameters<typeof useSwup>[0]) {
+type OnLoadProps = {
+  mountComponents: (scope: HTMLElement, props: Record<string, unknown>) => void;
+  unmountComponents: (targets: HTMLElement[]) => void;
+};
+
+export function useOnLoad({ mountComponents, unmountComponents }: OnLoadProps) {
   const { refs } = useDomRef<Refs>("resizeSentinel", "cursor");
   const { addChild } = useSlot();
 
@@ -37,5 +42,15 @@ export function useOnLoad(props: Parameters<typeof useSwup>[0]) {
     addChild(refs.cursor, withSvelte(Cursor, "Cursor"));
   }
 
-  useSwup(props);
+  useSwup({
+    onCleanup(scope: HTMLElement) {
+      unmountComponents([...scope.querySelectorAll<HTMLElement>("[data-component]")]);
+    },
+    onCreated(props?: Record<string, unknown>) {
+      mountComponents(document.documentElement, { ...props, once: true });
+    },
+    onUpdated(scope: HTMLElement, props: Record<string, unknown>) {
+      mountComponents(scope, { ...props, once: false });
+    },
+  });
 }
