@@ -1,12 +1,7 @@
 import SwupParallelPlugin from "@swup/parallel-plugin";
+import SwupPreloadPlugin from "@swup/preload-plugin";
 import Swup from "swup";
 import { ref } from "lake";
-
-type Refs = {
-  glBack: HTMLCanvasElement;
-  glFront: HTMLCanvasElement;
-  main: HTMLElement;
-};
 
 type Props = {
   onCreated: () => void;
@@ -15,19 +10,13 @@ type Props = {
 };
 
 export function useSwup({ onCreated, onUpdated, onCleanup }: Props) {
-  let history = ref<"push" | "pop">("push");
+  const history = ref<"push" | "pop">("push");
 
   const swup = new Swup({
     animationSelector: false,
     containers: ["[data-xhr]"],
     cache: true,
-    plugins: [
-      new SwupParallelPlugin(),
-      // new e(hr('{"preloadHoveredLinks":true,"preloadVisibleLinks":false}')),
-      // new t(hr("{}")),
-      // new n(hr('{"awaitAssets":true}')),
-      // new r(hr("{}")),
-    ],
+    plugins: [new SwupParallelPlugin(), new SwupPreloadPlugin()],
   });
 
   swup.hooks.on("visit:start", (e) => {

@@ -74,10 +74,6 @@ class Tween {
     );
   }
 
-  static immediate(callback: gsap.Callback) {
-    return gsap.delayedCall(0, callback);
-  }
-
   static kill(targets: gsap.TweenTarget, properties?: string | object) {
     gsap.killTweensOf(targets, properties);
   }

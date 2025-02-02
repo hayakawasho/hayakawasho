@@ -1,5 +1,6 @@
-import { useDomRef, useSlot, withSvelte } from "lake";
-import Cursor from "../../../_components/ui/cusor/script/index.svelte";
+import { useDomRef, useSlot } from "lake";
+// import Cursor from "../../../_components/ui/cusor/script/index.svelte";
+// import { withSvelte } from "../../../_libs/lake/withSvelte";
 // import { useCursorTypeContext } from "../../../_stores/cursor";
 // import { useMediaQuery } from "../../../_stores/mq";
 // import { useRoute } from "../../../_stores/route";
@@ -25,7 +26,7 @@ type Props = {
 
 export function useOnLoad({ mountComponents, unmountComponents }: Props) {
   const { refs } = useDomRef<Refs>("resizeSentinel", "cursor", "glBack", "glFront", "main");
-  const { addChild } = useSlot();
+  const { addChild: _addChild } = useSlot();
 
   const [_, setWindowSize] = useWindowSize();
   useElementSize(refs.resizeSentinel, (elementSize) => setWindowSize(elementSize));
@@ -48,7 +49,7 @@ export function useOnLoad({ mountComponents, unmountComponents }: Props) {
   // const glFrontContext = useGlFront(refs.glFront, Math.min(window.devicePixelRatio, 1.5));
 
   if (isAnyHover) {
-    addChild(refs.cursor, withSvelte(Cursor, "Cursor"));
+    // addChild(refs.cursor, withSvelte(Cursor, "Cursor"));
   }
 
   useSwup({

@@ -17,6 +17,7 @@
     "@astrojs/tailwind": "^5.1.5",
     "@radix-ui/react-slot": "^1.1.1",
     "@swup/parallel-plugin": "^0.4.0",
+    "@swup/preload-plugin": "^3.2.11",
     "@unseenco/e": "^2.4.0",
     "astro": "^5.1.10",
     "astro-critters": "^2.2.1",
@@ -40,7 +41,6 @@
     "tailwind-merge": "^2.4.0",
     "tailwindcss": "^3.4.1",
     "three": "^0.125.0",
-    "virtual-scroll": "^2.2.1",
     "vite": "^4.5.9",
     "vite-plugin-glslify": "^2.0.2",
     "what-input": "^5.2.12"
