@@ -10,7 +10,7 @@ export function WorkScreenshots({ post }: { post: WorkDTO }) {
       {post.screenshots.map((i, index) => (
         <li key={index} className="absolute top-0 left-0 size-full">
           <Image
-            className="w-full aspect-[4/5] object-contain bg-black px-[--gap] | pc:aspect-auto pc:min-h-[--100vh] pc:px-[--grid]"
+            className="w-full aspect-[4/5] object-contain bg-black px-[--gap] | pc:aspect-auto pc:min-h-[--100vh]"
             metadata={i}
           />
         </li>

@@ -5,12 +5,12 @@ import type { WorkDTO } from "../../../../_models/work/dto";
 function Item({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <dl className="flex justify-between">
-      <dt className="opacity-50 text-[1rem] font-[450] pc:text-[1.1rem]">
+      <dt className="text-[1rem] font-[350] opacity-50 | pc:text-[1.1rem]">
         <span className="inline-block uppercase" data-ref="infoText">
           {label}
         </span>
       </dt>
-      <dd className="text-[1.1rem] tracking-[.02em] font-[450] | pc:text-[1.2rem]">{children}</dd>
+      <dd className="text-[1.1rem] tracking-[.02em] font-[350] | pc:text-[1.2rem]">{children}</dd>
     </dl>
   );
 }
@@ -41,8 +41,8 @@ export function WorkInfo({ metadata }: { metadata: WorkDTO }) {
       {metadata.siteUrl && (
         <Item label="(Url)">
           <Content asChild>
-            <a href={metadata.siteUrl} target="_blank">
-              {siteUrl}
+            <a href={metadata.siteUrl} target="_blank" className="">
+              <span className="underline">{siteUrl}</span>
               <span className="text-[90%] ml-[.5em]">↗</span>
             </a>
           </Content>

@@ -30,6 +30,10 @@ export function HGroup({ children }: { children: React.ReactNode }) {
   );
 }
 
+export function Title({ children }: { children: React.ReactNode }) {
+  return <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 | sp:hidden">{children}</div>;
+}
+
 export function Info({ children }: { children: React.ReactNode }) {
   return <div className="w-full absolute bottom-0 left-0 | sp:hidden">{children}</div>;
 }

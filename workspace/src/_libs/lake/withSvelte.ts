@@ -1,7 +1,7 @@
 import { mount, unmount } from "svelte";
 import { defineComponent, useUnmount } from "lake";
-import type { Component } from "svelte";
 import type { RefElement } from "lake";
+import type { Component } from "svelte";
 
 export type Context$<T = Record<string, unknown>> = T & {
   rootRef: RefElement;
