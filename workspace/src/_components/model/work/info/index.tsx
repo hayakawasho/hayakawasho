@@ -43,7 +43,6 @@ export function WorkInfo({ metadata }: { metadata: WorkDTO }) {
           <Content asChild>
             <a href={metadata.siteUrl} target="_blank" className="">
               <span className="underline">{siteUrl}</span>
-              <span className="text-[90%] ml-[.5em]">↗</span>
             </a>
           </Content>
         </Item>

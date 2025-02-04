@@ -1,7 +1,7 @@
-import { splitVendorChunkPlugin, defineConfig } from "vite";
+import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
-import preprocess from "svelte-preprocess";
-import { glslify } from "vite-plugin-glslify";
+// import preprocess from "svelte-preprocess";
+// import { glslify } from "vite-plugin-glslify";
 
 const isDev = process.env.NODE_ENV !== "production";
 
@@ -14,11 +14,10 @@ export default defineConfig({
     strictPort: true,
   },
   plugins: [
+    // glslify(),
     svelte({
-      preprocess: preprocess(),
+      // preprocess: preprocess(),
     }),
-    glslify(),
-    splitVendorChunkPlugin(),
   ],
   build: {
     outDir: "./out/assets",

@@ -10,8 +10,8 @@ export default function Component({ posts }: { posts: WorkDTO[] }) {
       <div className="relative size-full" data-component="Home">
         <HomeLayout.Wrap>
           <HomeLayout.Head>
-            <div className="absolute top-0 left-0 z-[10] | sp:hidden">
-              <h2 className="text-[1.2rem] tracking-[.04em] font-[550] uppercase my-[--leading-trim]">
+            <div className="absolute top-0 left-0 z-[10] | max-pc:hidden">
+              <h2 className="text-[1.2rem] tracking-[.04em] font-[550] uppercase my-[var(--leading-trim)]">
                 Full site soon
               </h2>
             </div>

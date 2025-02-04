@@ -1,6 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@source "./**/*.{astro,html,svelte,ts,tsx}";
+
+@theme {
+  --breakpoint-pc: 640px;
+}
 
 @layer base {
   :root {

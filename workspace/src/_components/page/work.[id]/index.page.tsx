@@ -21,13 +21,13 @@ export default function Component({
     <ContentLayout namespace="work-single" asChild>
       <div className="relative size-full" data-component="WorkSingle">
         <WorkLayout.Title>
-          <h1 className="text-[7rem] tracking-[.04em] font-[100] my-[--leading-trim] mix-blend-difference whitespace-nowrap opacity-0">
+          <h1 className="text-[7rem] tracking-[.04em] font-[100] my-[var(--leading-trim)] mix-blend-difference whitespace-nowrap opacity-0">
             {post.name}
           </h1>
         </WorkLayout.Title>
         <WorkLayout.HGroup>
           <WorkInfoTrigger />
-          <h1 className="text-[1.3rem] tracking-[.04em] font-[450] my-[--leading-trim] flex gap-[.5em]">
+          <h1 className="text-[1.3rem] tracking-[.04em] font-[450] my-[var(--leading-trim)] flex gap-[.5em]">
             <span>{zeroPadding(currentIndex)}.</span>
             <span>{post.name}</span>
           </h1>

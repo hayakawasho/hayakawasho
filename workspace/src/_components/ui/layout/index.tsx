@@ -17,7 +17,7 @@ export default function Component({
     <body data-page={`${namespace}`}>
       <div
         aria-hidden="true"
-        className="fixed inset-0 w-screen h-[--100vh] pointer-events-none -z-1 invisible"
+        className="fixed inset-0 w-screen h-[var(--100vh)] pointer-events-none -z-1 invisible"
         data-ref="resizeSentinel"
       />
       <div aria-hidden="true" className="ui-bg" />
