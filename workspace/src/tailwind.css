@@ -3,13 +3,15 @@
 
 @theme {
   --breakpoint-pc: 640px;
+
+  --color-*: initial;
+  --text-*: initial;
 }
 
 @layer base {
   :root {
-    --font: "Jost", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+    --font-sans: "Jost", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
       "Hiragino Sans", Meiryo, sans-serif;
-    --font-number: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
     --vh: 1vh;
     --100vh: 100svh;
@@ -57,20 +59,34 @@
     text-size-adjust: 100%;
     -webkit-overflow-scrolling: touch;
     overflow-y: scroll;
+  }
 
-    @media screen and (max-width: 1080px) {
+  @media screen and (max-width: 1080px) {
+    html {
       font-size: calc(9 / 16 * 100%);
     }
+  }
 
-    @media screen and (max-width: 960px) {
+  @media screen and (max-width: 800px) {
+    html {
       font-size: calc(8 / 16 * 100%);
     }
+  }
 
-    @media screen and (max-width: 639px) {
+  @media screen and (max-width: 639px) {
+    html {
       font-size: calc(10 / 16 * 100%);
     }
+  }
 
-    @media (min-width: 1680px) {
+  @media (min-width: 1680px) {
+    html {
+      font-size: calc(11 / 16 * 100%);
+    }
+  }
+
+  @media (min-width: 1920px) {
+    html {
       font-size: calc(12 / 16 * 100%);
     }
   }
@@ -82,7 +98,7 @@
     overflow-x: clip;
     color: var(--color-text);
     background-color: var(--color-bg);
-    font-family: var(--font);
+    font-family: var(--font-sans);
     overflow-wrap: break-word;
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: subpixel-antialiased;
@@ -226,7 +242,7 @@
     width: 1px;
     height: 100%;
     transform: translateX(-50%);
-    background: rgba(30, 31, 31, 0.07);
+    background: rgba(30, 31, 31, 0.08);
   }
 
   .grid-hr {
@@ -284,11 +300,11 @@
     }
 
     .grid-vr {
-      background: rgba(219, 214, 208, 0.05);
+      background: rgba(219, 214, 208, 0.08);
     }
 
     .grid-hr {
-      background: rgba(219, 214, 208, 0.05);
+      background: rgba(219, 214, 208, 0.08);
     }
 
     .ui-bg {

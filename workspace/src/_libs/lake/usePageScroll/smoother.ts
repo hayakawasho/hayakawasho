@@ -1,6 +1,6 @@
 import NormalizeWheel from "normalize-wheel";
-import { createSpring } from "./spring";
 import { createEmitter } from "../../emitter";
+import { createSpring } from "./spring";
 import type { SpringConfig } from "./spring";
 
 export class Smoother {

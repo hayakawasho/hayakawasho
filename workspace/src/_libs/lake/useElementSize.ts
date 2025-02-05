@@ -19,7 +19,9 @@ export function useElementSize<T extends Element>(
 
   const watch = (targetOrTargets: T | T[]) => {
     if (Array.isArray(targetOrTargets)) {
-      targetOrTargets.forEach((el) => ro.observe(el));
+      for (const el of targetOrTargets) {
+        ro.observe(el);
+      }
     } else {
       ro.observe(targetOrTargets);
     }

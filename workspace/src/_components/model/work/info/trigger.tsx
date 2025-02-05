@@ -1,14 +1,14 @@
 export function WorkInfoTrigger() {
   return (
     <button
-      className={`
-        relative overflow-hidden rounded-full w-[5rem] text-[1.1rem] leading-[1.4] font-[450]
-        | before:block before:absolute before:inset-0 before:rounded-full before:border-solid before:border-[1px] before:border-current
-    `}
+      type="button"
+      className={
+        "relative w-[5rem] overflow-hidden rounded-full font-[450] text-[1.1rem] leading-[1.4] before:absolute before:inset-0 before:block before:rounded-full before:border-[1px] before:border-current before:border-solid"
+      }
     >
       <span className="relative block">
         <span className="block">
-          <span aria-hidden="true" className="w-[.4em] inline-block">
+          <span aria-hidden="true" className="inline-block w-[.4em]">
             I
           </span>
           <span aria-hidden="true" className="tracking-[.02em]">
@@ -22,7 +22,7 @@ export function WorkInfoTrigger() {
           </span>
           <span className="sr-only">Info</span>
         </span>
-        <span className="absolute block w-full tracking-[.02em] uppercase">Close</span>
+        <span className="absolute block w-full uppercase tracking-[.02em]">Close</span>
       </span>
     </button>
   );

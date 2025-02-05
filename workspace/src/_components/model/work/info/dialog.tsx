@@ -1,5 +1,5 @@
-import type { WorkDTO } from "../../../../_models/work/dto";
 import { WorkInfo } from ".";
+import type { WorkDTO } from "../../../../_models/work/dto";
 
 export function WorkInfoDialog({ post }: { post: WorkDTO }) {
   return (

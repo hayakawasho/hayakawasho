@@ -1,4 +1,6 @@
 import { useDomRef, useSlot } from "lake";
+import { useGlBack } from "../../../_components/ui/gl/script/useGlBack";
+import { useGlFront } from "../../../_components/ui/gl/script/useGlFront";
 // import Cursor from "../../../_components/ui/cusor/script/index.svelte";
 // import { withSvelte } from "../../../_libs/lake/withSvelte";
 // import { useCursorTypeContext } from "../../../_stores/cursor";
@@ -7,8 +9,6 @@ import { useDomRef, useSlot } from "lake";
 import { useWindowSize } from "../../../_stores/window-size";
 import { useElementSize } from "../useElementSize";
 import { useSwup } from "./useSwup";
-// import { useGlBack } from "../../../_components/ui/gl/script/useGlBack";
-// import { useGlFront } from "../../../_components/ui/gl/script/useGlFront";
 // import { usePageScroll } from "../usePageScroll";
 
 type Refs = {
@@ -45,8 +45,8 @@ export function useOnLoad({ mountComponents, unmountComponents }: Props) {
   const isAnyHover = window.matchMedia("(any-hover:hover)").matches;
 
   // const pageScrollContext = usePageScroll(refs.main, isAnyHover);
-  // const glBackContext = useGlBack(refs.glBack);
-  // const glFrontContext = useGlFront(refs.glFront, Math.min(window.devicePixelRatio, 1.5));
+  const glBackContext = useGlBack(refs.glBack);
+  const glFrontContext = useGlFront(refs.glFront, Math.min(window.devicePixelRatio, 1.5));
 
   if (isAnyHover) {
     // addChild(refs.cursor, withSvelte(Cursor, "Cursor"));

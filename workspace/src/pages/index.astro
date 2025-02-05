@@ -1,18 +1,20 @@
 ---
-import { WorkRepository } from '../_repositories/work/repository';
+import Home from "../_components/page/home/index.page";
+import Head from "../_components/ui/layout/head.astro";
+import Seo from "../_components/ui/layout/seo.astro";
 import { WorkDataMap } from "../_models/work/mapper";
-import Head from "../_components/ui/layout/head.astro"
-import Seo from "../_components/ui/layout/seo.astro"
-import Home from "../_components/page/home/index.page"
+import { WorkRepository } from "../_repositories/work/repository";
 
 const repository = new WorkRepository();
 const result = await repository.findAll();
 
-const posts = result.works.map(WorkDataMap.toDTO)
-
+const posts = result.works.map(WorkDataMap.toDTO);
 ---
 
-<Head>
-  <Seo title="" url="" />
-</Head>
-<Home posts={posts} />
+<!DOCTYPE html>
+<html lang="ja">
+  <Head>
+    <Seo title="" url="" />
+  </Head>
+  <Home posts={posts} />
+</html>

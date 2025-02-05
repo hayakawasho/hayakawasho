@@ -1,6 +1,6 @@
 import { Slot } from "@radix-ui/react-slot";
 import Cusor from "../cusor";
-import { GlFront, GlBack } from "../gl";
+import { GlBack, GlFront } from "../gl";
 
 export default function Component({
   namespace,
@@ -17,28 +17,25 @@ export default function Component({
     <body data-page={`${namespace}`}>
       <div
         aria-hidden="true"
-        className="fixed inset-0 w-screen h-[var(--100vh)] pointer-events-none -z-1 invisible"
+        className="-z-1 pointer-events-none invisible fixed inset-0 h-[var(--100vh)] w-screen"
         data-ref="resizeSentinel"
-      />
-      <div aria-hidden="true" className="ui-bg" />
-      <div aria-hidden="true" className="grid-hr bottom-0" />
+      ></div>
+      <div aria-hidden="true" className="ui-bg"></div>
+      <div aria-hidden="true" className="grid-hr bottom-0"></div>
       <GlBack />
-      <div aria-hidden="true" className="grad grad--upper h-[20vh] pc:h-[25vh]" />
-      <div aria-hidden="true" className="grad grad--lower h-[20vh] pc:h-[25vh]" />
-      <div aria-hidden="true" className="grid-vr left-[2rem] | pc:left-1/4" />
-      <div aria-hidden="true" className="grid-vr left-1/2" />
-      <div aria-hidden="true" className="grid-vr right-[2rem] | pc:right-auto pc:left-3/4" />
-
+      <div aria-hidden="true" className="grad grad--upper h-[20vh] pc:h-[25vh]"></div>
+      <div aria-hidden="true" className="grad grad--lower h-[20vh] pc:h-[25vh]"></div>
+      <div aria-hidden="true" className="grid-vr left-[2rem] pc:left-1/4"></div>
+      <div aria-hidden="true" className="grid-vr left-1/2"></div>
+      <div aria-hidden="true" className="grid-vr pc:right-auto right-[2rem] pc:left-3/4"></div>
       <div
         id="main"
-        className="fixed overflow-hidden w-full top-0 left-0 backface-hidden | pc:overflow-visible pc:absolute"
+        className="backface-hidden fixed pc:absolute top-0 left-0 w-full overflow-hidden pc:overflow-visible"
         data-ref="main"
       >
         <Comp data-xhr={namespace}>{children}</Comp>
       </div>
-
       <GlFront />
-      <canvas aria-hidden="true" className="ui-canvas" data-ref="glFront" />
       <Cusor />
     </body>
   );

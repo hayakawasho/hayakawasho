@@ -3,9 +3,9 @@ import type { WorkDTO } from "../../../_models/work/dto";
 export function WorkNavigation({ posts, current }: { posts: WorkDTO[]; current: string }) {
   return (
     <ul
-      className={`
-        text-[var(--color-dark)] relative z-10 text-[1.2rem] tracking-[.02em] font-[350] text-right grid gap-[1rem] leading-[1.4] my-[var(--leading-trim)]
-        | pc:text-[var(--color-text)]`}
+      className={
+        "relative z-10 my-[var(--leading-trim)] grid gap-[1rem] text-right font-[400] pc:text-[var(--color-text)] text-[1.2rem] text-[var(--color-dark)] leading-[1.4] pc:tracking-[.02em] tracking-[.04em]"
+      }
     >
       {posts.map((i, index) => (
         <li key={index} className={`${current === i.id ? "font-[550]" : "opacity-25"}`}>

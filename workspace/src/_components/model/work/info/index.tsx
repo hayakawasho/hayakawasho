@@ -1,21 +1,34 @@
 import { Slot } from "@radix-ui/react-slot";
-import { WorkPresenter } from "../../../../_models/work/presenter";
 import type { WorkDTO } from "../../../../_models/work/dto";
+import { WorkPresenter } from "../../../../_models/work/presenter";
 
-function Item({ label, children }: { label: string; children: React.ReactNode }) {
+function Item({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <dl className="flex justify-between">
-      <dt className="text-[1rem] font-[350] opacity-50 | pc:text-[1.1rem]">
+      <dt className="font-[400] pc:text-[1.1rem] text-[1rem] opacity-50">
         <span className="inline-block uppercase" data-ref="infoText">
           {label}
         </span>
       </dt>
-      <dd className="text-[1.1rem] tracking-[.02em] font-[350] | pc:text-[1.2rem]">{children}</dd>
+      <dd className="font-[400] pc:text-[1.2rem] text-[1.1rem]">{children}</dd>
     </dl>
   );
 }
 
-function Content({ children, asChild, ...props }: { children: React.ReactNode; asChild?: true }) {
+function Content({
+  children,
+  asChild,
+  ...props
+}: {
+  children: React.ReactNode;
+  asChild?: true;
+}) {
   const Comp = asChild ? Slot : "span";
 
   return (
@@ -41,7 +54,7 @@ export function WorkInfo({ metadata }: { metadata: WorkDTO }) {
       {metadata.siteUrl && (
         <Item label="(Url)">
           <Content asChild>
-            <a href={metadata.siteUrl} target="_blank" className="">
+            <a href={metadata.siteUrl} target="_blank" className="" rel="noreferrer">
               <span className="underline">{siteUrl}</span>
             </a>
           </Content>

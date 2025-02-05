@@ -1,6 +1,6 @@
+import type { WorkDTO } from "./dto";
 // import dayjs from "dayjs";
 import { Work } from "./model";
-import type { WorkDTO } from "./dto";
 
 export class WorkDataMap {
   static toDomain(raw: any): Work {

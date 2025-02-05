@@ -1,13 +1,17 @@
 import { atom, createStore } from "jotai";
 import { useUnmount } from "lake";
-import { noop } from "../_utils/noop";
 import globalStore from ".";
+import { noop } from "../_utils/noop";
 
 const store = createStore();
 const scrollYAtom = atom(globalStore.offsetY);
 
 export const useWindowScroll = (
-  callback: (payload: { currentY: number; oldY: number; diff: number }) => void = noop,
+  callback: (payload: {
+    currentY: number;
+    oldY: number;
+    diff: number;
+  }) => void = noop,
 ) => {
   const getState = () => store.get(scrollYAtom);
 

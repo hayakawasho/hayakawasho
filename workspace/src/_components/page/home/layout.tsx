@@ -1,6 +1,6 @@
 export function Wrap({ children }: { children: React.ReactNode }) {
   return (
-    <div className={`relative grid justify-center h-[var(--100vh)] | pc:grid-cols-2 pc:h-auto pc:items-start`}>
+    <div className={"relative grid h-[var(--100vh)] pc:h-auto pc:grid-cols-2 pc:items-start justify-center"}>
       {children}
     </div>
   );
@@ -9,13 +9,15 @@ export function Wrap({ children }: { children: React.ReactNode }) {
 export function Head({ children }: { children: React.ReactNode }) {
   return (
     <div
-      className={`absolute top-0 left-0 pt-[4rem] px-[2rem] size-full pointer-events-none | pc:sticky pc:top-0 pc:pt-[4.8rem] pc:pb-[6rem] pc:p-[var(--gap)] pc:h-[var(--100vh)]`}
+      className={
+        "pointer-events-none absolute pc:sticky pc:top-0 top-0 left-0 size-full pc:h-[var(--100vh)] pc:p-[var(--gap)] px-[2rem] pc:pt-[4.8rem] pt-[4rem] pc:pb-[6rem]"
+      }
     >
-      <div className="size-full relative">{children}</div>
+      <div className="relative size-full">{children}</div>
     </div>
   );
 }
 
 export function Content({ children }: { children: React.ReactNode }) {
-  return <div className="relative w-[calc(var(--grid)*12)] overflow-hidden | pc:w-fit pc:aspect-auto">{children}</div>;
+  return <div className={"relative pc:aspect-auto pc:w-fit w-[calc(var(--grid)*12)] overflow-hidden"}>{children}</div>;
 }

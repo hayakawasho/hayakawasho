@@ -1,7 +1,7 @@
 import SwupParallelPlugin from "@swup/parallel-plugin";
 import SwupPreloadPlugin from "@swup/preload-plugin";
+// import { ref } from "lake";
 import Swup from "swup";
-import { ref } from "lake";
 
 type Props = {
   onCreated: () => void;
@@ -10,7 +10,7 @@ type Props = {
 };
 
 export function useSwup({ onCreated, onUpdated, onCleanup }: Props) {
-  const history = ref<"push" | "pop">("push");
+  // const history = ref<"push" | "pop">("push");
 
   const swup = new Swup({
     animationSelector: false,
@@ -28,8 +28,7 @@ export function useSwup({ onCreated, onUpdated, onCleanup }: Props) {
   });
 
   swup.hooks.on("page:view", (e) => {
-    history.value = e.history.popstate ? "pop" : "push";
-
+    // history.value = e.history.popstate ? "pop" : "push";
     // fromContainer.value = refs.main.querySelector(xhr) as HTMLElement;
     // onUpdated()
   });

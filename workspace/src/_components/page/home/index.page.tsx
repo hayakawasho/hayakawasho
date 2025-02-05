@@ -1,8 +1,8 @@
-import * as HomeLayout from "./layout";
-import { WorkNavigation } from "../../model/work/navigation";
-import { WorkVisuals } from "../../model/work/visuals";
-import ContentLayout from "../../ui/layout";
 import type { WorkDTO } from "../../../_models/work/dto";
+import { WorkHero } from "../../model/work/hero";
+import { WorkNavigation } from "../../model/work/navigation";
+import ContentLayout from "../../ui/layout";
+import * as HomeLayout from "./layout";
 
 export default function Component({ posts }: { posts: WorkDTO[] }) {
   return (
@@ -10,15 +10,16 @@ export default function Component({ posts }: { posts: WorkDTO[] }) {
       <div className="relative size-full" data-component="Home">
         <HomeLayout.Wrap>
           <HomeLayout.Head>
-            <div className="absolute top-0 left-0 z-[10] | max-pc:hidden">
-              <h2 className="text-[1.2rem] tracking-[.04em] font-[550] uppercase my-[var(--leading-trim)]">
-                Full site soon
-              </h2>
+            <div className="absolute top-0 left-0 z-10 mix-blend-difference max-pc:hidden">
+              <h1 className="my-[var(--leading-trim)] font-[400] text-[1.3rem] tracking-[.04em]">Full site soon</h1>
+            </div>
+            <div className="pointer-events-none absolute top-0 left-0 z-10 opacity-0 max-pc:hidden">
+              <div className="mt-[-.35em] font-[500] text-[4rem] tracking-[-.02em]">01</div>
             </div>
             <WorkNavigation posts={posts} current={"pkshatech"} />
           </HomeLayout.Head>
           <HomeLayout.Content>
-            <WorkVisuals posts={posts} />
+            <WorkHero posts={posts} />
           </HomeLayout.Content>
         </HomeLayout.Wrap>
       </div>

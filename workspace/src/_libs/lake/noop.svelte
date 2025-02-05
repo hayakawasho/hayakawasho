@@ -1,3 +1,3 @@
 <script lang="ts">
-  console.log('hello');
+console.log("hello svelte");
 </script>

@@ -16,7 +16,7 @@ export function Image({
   return (
     <img
       className={className}
-      src={metadata.src + `?auto=compress,format&fm=avif&w=${maxWidth}`}
+      src={`${metadata.src}?auto=compress,format&fm=avif&w=${maxWidth}`}
       width={metadata.width}
       height={metadata.height}
       alt=""

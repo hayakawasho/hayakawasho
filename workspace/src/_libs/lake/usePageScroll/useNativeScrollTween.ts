@@ -1,11 +1,11 @@
 import { gsap } from "gsap";
 import { useMount } from "lake";
-import { Smoother } from "./smoother";
 import globalStore from "../../../_stores";
 import { useWindowScroll } from "../../../_stores/window-scroll";
 import { useElementSize } from "../useElementSize";
 import { useTick } from "../useTick";
 import { useWindowEvent } from "../useWindowEvent";
+import { Smoother } from "./smoother";
 
 export const useNativeScrollTween = (el: HTMLElement) => {
   const smooth = new Smoother({

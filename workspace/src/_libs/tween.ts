@@ -1,4 +1,4 @@
-import { gsap, Linear, Quad, Cubic, Quart, Quint, Expo, Sine } from "gsap";
+import { Cubic, Expo, Linear, Quad, Quart, Quint, Sine, gsap } from "gsap";
 import { CustomEase } from "gsap/CustomEase";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
@@ -35,7 +35,10 @@ type Tweens = (gsap.core.Tween | gsap.core.Timeline)[];
 class Tween {
   static serial(...tweens: Tweens) {
     const tl = gsap.timeline();
-    tweens.forEach((tween) => tl.add(tween));
+
+    for (const tween of tweens) {
+      tl.add(tween);
+    }
 
     return tl;
   }

@@ -25,7 +25,7 @@ export const apiClient = {
     try {
       const response = await client.get<T>(path, {
         ...options,
-        prefixUrl: `https://hayakawasho.microcms.io/api/v1`,
+        prefixUrl: "https://hayakawasho.microcms.io/api/v1",
         searchParams: options?.params ?? undefined,
         headers: {
           "Content-Type": "application/json",
@@ -36,9 +36,8 @@ export const apiClient = {
     } catch (e) {
       if (e instanceof HTTPError) {
         throw new HttpError(e.response);
-      } else {
-        throw e;
       }
+      throw e;
     }
   },
 };

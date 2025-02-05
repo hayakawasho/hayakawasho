@@ -1,11 +1,11 @@
 import { gsap } from "gsap";
-import { useMount, useDomRef } from "lake";
-import { Smoother } from "./smoother";
+import { useDomRef, useMount } from "lake";
 import globalStore from "../../../_stores";
 import { useWindowScroll } from "../../../_stores/window-scroll";
 import { useElementSize } from "../useElementSize";
 import { useTick } from "../useTick";
 import { useWindowEvent } from "../useWindowEvent";
+import { Smoother } from "./smoother";
 
 type Refs = {
   scrollTarget: HTMLElement;

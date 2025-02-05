@@ -3,20 +3,19 @@ import "../../../tailwind.css";
 // import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
 
 export interface Props {
-	title: string;
+  title: string;
   url: string;
 }
 
 const { props } = Astro;
 
-const SITE_URL = 'https://shohayakawa.dev';
-const siteTitle = 'Sho Hayakawa Portfolio';
-const description = 'Frontend Engineer Sho Hayakawa 早川翔 portfolio website';
-const title = props.title ? props.title + ' - ' + siteTitle : siteTitle;
-const ogUrl = SITE_URL + props.url
+const SITE_URL = "https://shohayakawa.dev";
+const siteTitle = "Sho Hayakawa Portfolio";
+const description = "Frontend Engineer Sho Hayakawa 早川翔 portfolio website";
+const title = props.title ? `${props.title} - ${siteTitle}` : siteTitle;
+const ogUrl = SITE_URL + props.url;
 
-const isDev = process.env.NODE_ENV !== 'production';
-
+const isDev = process.env.NODE_ENV !== "production";
 ---
 <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/PreloadJS/1.0.1/preloadjs.min.js" as="script">
 <link as="font" rel="preload" href="/Jost-VariableFont_wght.ttf" crossorigin />
@@ -47,5 +46,5 @@ const isDev = process.env.NODE_ENV !== 'production';
     font-display: swap;
   }
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/PreloadJS/1.0.1/preloadjs.min.js" is:inline />
-{isDev ? (<script src={`http://${process.env.LOCAL_IP_ADDR || 'localhost'}:5173/src/entry.ts`} type="module" />) : <script src="/assets/entry.js" type="module" />}
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/PreloadJS/1.0.1/preloadjs.min.js" is:inline />
+{isDev ? (<script src={`http://${process.env.LOCAL_IP_ADDR || 'localhost'}:8080/src/entry.ts`} type="module" />) : <script src="/assets/entry.js" type="module" />}

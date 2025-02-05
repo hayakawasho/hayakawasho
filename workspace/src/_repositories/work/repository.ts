@@ -3,11 +3,9 @@ import { WorkDataMap } from "../../_models/work/mapper";
 import type { WorksAPISchema } from "./schema";
 
 export class WorkRepository {
-  constructor() {}
-
   async findAll() {
     const res = await apiClient.get<WorksAPISchema["GET"]["response"], WorksAPISchema["GET"]["request"]["params"]>(
-      `works`,
+      "works",
       {
         params: {
           limit: 99,

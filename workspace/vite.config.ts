@@ -1,6 +1,6 @@
 import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
-// import preprocess from "svelte-preprocess";
+import { sveltePreprocess } from "svelte-preprocess";
 // import { glslify } from "vite-plugin-glslify";
 
 const isDev = process.env.NODE_ENV !== "production";
@@ -10,13 +10,13 @@ export default defineConfig({
   resolve: {},
   server: {
     host: "0.0.0.0",
-    port: 5173,
+    port: 8080,
     strictPort: true,
   },
   plugins: [
     // glslify(),
     svelte({
-      // preprocess: preprocess(),
+      preprocess: sveltePreprocess(),
     }),
   ],
   build: {
@@ -30,8 +30,8 @@ export default defineConfig({
         entryFileNames: `[name].js`,
         chunkFileNames: `[name].js`,
         manualChunks(id) {
-          if (id.includes("three")) {
-            return "vendor.three";
+          if (id.includes("node_modules")) {
+            return "vendor";
           }
         },
       },

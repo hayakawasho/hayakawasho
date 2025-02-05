@@ -1,7 +1,7 @@
 import { atom, createStore } from "jotai";
 import { useUnmount } from "lake";
-import { noop } from "../_utils/noop";
 import globalStore from ".";
+import { noop } from "../_utils/noop";
 
 const store = createStore();
 const mousePosAtom = atom<Point>(globalStore.coordinate);
