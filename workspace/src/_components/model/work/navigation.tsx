@@ -4,7 +4,7 @@ export function WorkNavigation({ posts, current }: { posts: WorkDTO[]; current: 
   return (
     <ul
       className={
-        "relative z-10 my-[var(--leading-trim)] grid gap-[1rem] text-right font-[400] pc:text-[var(--color-text)] text-[1.2rem] text-[var(--color-dark)] leading-[1.4] pc:tracking-[.02em] tracking-[.04em]"
+        "relative z-10 my-[var(--leading-trim)] grid gap-[1rem] font-[400] pc:text-[var(--color-text)] text-[1.2rem] text-[var(--color-dark)] leading-[1.4] pc:tracking-[.02em] tracking-[.04em]"
       }
     >
       {posts.map((i, index) => (
