@@ -25,9 +25,9 @@ export default function Component({
       <GlBack />
       <div aria-hidden="true" className="grad grad--upper h-[20vh] pc:h-[25vh]"></div>
       <div aria-hidden="true" className="grad grad--lower h-[20vh] pc:h-[25vh]"></div>
-      <div aria-hidden="true" className="grid-vr left-[2rem] pc:left-1/4"></div>
+      <div aria-hidden="true" className="grid-vr left-[2.4rem] pc:left-1/4"></div>
       <div aria-hidden="true" className="grid-vr left-1/2"></div>
-      <div aria-hidden="true" className="grid-vr pc:right-auto right-[2rem] pc:left-3/4"></div>
+      <div aria-hidden="true" className="grid-vr pc:right-auto right-[2.4rem] pc:left-3/4"></div>
       <div
         id="main"
         className="backface-hidden fixed pc:absolute top-0 left-0 w-full overflow-hidden pc:overflow-visible"

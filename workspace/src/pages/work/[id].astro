@@ -31,7 +31,7 @@ const { posts, post, next, total, currentIndex } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" style={post.theme === "light" ? "--theme-text: var(--color-dark); --theme-bg: var(--color-light);" : "--theme-text: var(--color-light); --theme-bg: var(--color-dark);"}>
   <Head>
     <Seo title={post.name} url={`/${post.id}/`} />
   </Head>

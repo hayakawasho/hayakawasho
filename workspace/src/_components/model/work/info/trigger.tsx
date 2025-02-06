@@ -2,9 +2,7 @@ export function WorkInfoTrigger() {
   return (
     <button
       type="button"
-      className={
-        "relative w-[5rem] overflow-hidden rounded-full font-[450] text-[1.1rem] leading-[1.4] before:absolute before:inset-0 before:block before:rounded-full before:border-[1px] before:border-current before:border-solid"
-      }
+      className={"relative w-[5rem] overflow-hidden rounded-full text-right font-[450] text-[1.3rem]"}
     >
       <span className="relative block">
         <span className="block">

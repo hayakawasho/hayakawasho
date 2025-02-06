@@ -11,12 +11,14 @@ export default function Component({ posts }: { posts: WorkDTO[] }) {
         <HomeLayout.Wrap>
           <HomeLayout.Head>
             <div className="absolute top-0 left-0 z-10 mix-blend-difference max-pc:hidden">
-              <h1 className="my-[var(--leading-trim)] font-[400] text-[1.3rem] tracking-[.04em]">
-                Full site soon
-              </h1>
+              <h1 className="my-[var(--leading-trim)] font-[400] text-[1.3rem] tracking-[.04em]">Full site soon</h1>
             </div>
-            <div className="text-right">
-              <WorkNavigation posts={posts} current={"pkshatech"} />
+            <div className="pc:static absolute bottom-[2rem] h-[1.5rem] pc:h-auto overflow-hidden pc:overflow-visible pc:text-right">
+              <WorkNavigation
+                posts={posts}
+                current={"pkshatech"}
+                className="pc:text-[var(--color-text)] text-[var(--theme-text)]"
+              />
             </div>
           </HomeLayout.Head>
           <HomeLayout.Content>

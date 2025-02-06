@@ -33,10 +33,10 @@ export default function Component({
           </WorkLayout.Head>
         </WorkLayout.Wrap>
         <WorkLayout.HGroup>
-          <WorkInfoTrigger />
-          <h1 className="my-[var(--leading-trim)] flex gap-[.5em] font-[450] text-[1.3rem] tracking-[.04em]">
+          <h1 className="my-[var(--leading-trim)] font-[450] text-[1.3rem] tracking-[.04em]">
             <span>{post.name}</span>
           </h1>
+          <WorkInfoTrigger />
         </WorkLayout.HGroup>
         <WorkInfoDialog post={post} />
       </div>

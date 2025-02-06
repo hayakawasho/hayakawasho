@@ -10,7 +10,7 @@ export function Head({ children }: { children: React.ReactNode }) {
   return (
     <div
       className={
-        "pointer-events-none absolute pc:sticky pc:top-0 top-0 left-0 size-full pc:h-[var(--100vh)] pc:p-[var(--gap)] px-[2rem] pc:pt-[4.8rem] pt-[4rem] pc:pb-[6rem]"
+        "pointer-events-none absolute pc:sticky pc:top-0 top-0 left-0 size-full pc:h-[var(--100vh)] pc:p-[var(--gap)] px-[2.4rem] pc:pt-[4.8rem] pt-[4rem] pc:pb-[6rem]"
       }
     >
       <div className="relative size-full">{children}</div>

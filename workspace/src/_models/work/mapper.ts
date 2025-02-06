@@ -5,6 +5,7 @@ import { Work } from "./model";
 export class WorkDataMap {
   static toDomain(raw: any): Work {
     return Work.create({
+      theme: raw.is_dark ? "dark" : "light",
       category: raw.category[0],
       eyeCatch: {
         height: raw.eyecatch.height,
@@ -34,6 +35,7 @@ export class WorkDataMap {
     return {
       id: data.id!,
       name: data.name!,
+      theme: data.theme!,
       eyeCatch: data.eyeCatch!,
       thumb: data.thumb!,
       category: data.category!,

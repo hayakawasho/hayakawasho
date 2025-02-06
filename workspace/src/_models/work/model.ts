@@ -3,6 +3,7 @@ import { Entity } from "../";
 export type WorkProps = {
   id?: string;
   name?: string;
+  theme?: "dark" | "light";
   eyeCatch?: {
     src: string;
     width: number;
@@ -27,6 +28,7 @@ export type WorkProps = {
 export class Work extends Entity<WorkProps> {
   id = this._value.id ?? null;
   name = this._value.name ?? null;
+  theme = this._value.theme ?? null;
   eyeCatch = this._value.eyeCatch ?? null;
   thumb = this._value.thumb ?? null;
   category = this._value.category ?? null;

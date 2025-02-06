@@ -30,6 +30,9 @@
 
     --color-text: var(--color-dark);
     --color-bg: var(--color-light);
+
+    --theme-text: var(--color-text);
+    --theme-bg: var(--color-bg);
   }
 
   @media (prefers-color-scheme: dark) {
