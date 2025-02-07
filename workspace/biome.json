@@ -36,6 +36,9 @@
             "attributes": ["class", "className"]
           }
         }
+      },
+      "complexity": {
+        "noStaticOnlyClass": "off"
       }
     }
   },

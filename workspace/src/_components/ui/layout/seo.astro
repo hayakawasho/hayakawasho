@@ -47,4 +47,4 @@ const isDev = process.env.NODE_ENV !== "production";
   }
 </style>
 <script defer src="https://cdn.jsdelivr.net/npm/preloadjs@1.0.1/lib/preloadjs.min.js" is:inline />
-{isDev ? (<script src={`http://${process.env.LOCAL_IP_ADDR || 'localhost'}:8080/src/entry.ts`} type="module" />) : <script src="/assets/entry.js" type="module" />}
+{isDev ? (<script src={`http://${process.env.LOCAL_IP_ADDR || 'localhost'}:9000/src/entry.ts`} type="module" />) : <script src="/assets/entry.js" type="module" />}

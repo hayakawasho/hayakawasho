@@ -10,16 +10,19 @@ export default function Component({ posts }: { posts: WorkDTO[] }) {
       <div className="relative size-full" data-component="Home">
         <HomeLayout.Wrap>
           <HomeLayout.Head>
-            <div className="absolute top-0 left-0 z-10 mix-blend-difference max-pc:hidden">
-              <h1 className="my-[var(--leading-trim)] font-[400] text-[1.3rem] tracking-[.04em]">Full site soon</h1>
-            </div>
-            <div className="pc:static absolute bottom-[2rem] h-[1.5rem] pc:h-auto overflow-hidden pc:overflow-visible pc:text-right">
-              <WorkNavigation
-                posts={posts}
-                current={"pkshatech"}
-                className="pc:text-[var(--color-text)] text-[var(--theme-text)]"
-              />
-            </div>
+            <HomeLayout.Soon>
+              <h1 className="font-[400] text-[1.3rem] tracking-[.04em]">Full site soon</h1>
+            </HomeLayout.Soon>
+            <HomeLayout.HeadGroup>
+              <WorkNavigation posts={posts} current={"pkshatech"} className="h-[1.5em] pc:h-auto" />
+              <p
+                className={
+                  "pc:absolute pc:right-0 pc:bottom-0 z-10 pc:hidden overflow-hidden font-[450] pc:text-[1.1rem] text-[1.4rem] uppercase tracking-[.02em]"
+                }
+              >
+                (scroll)
+              </p>
+            </HomeLayout.HeadGroup>
           </HomeLayout.Head>
           <HomeLayout.Content>
             <WorkHero posts={posts} />

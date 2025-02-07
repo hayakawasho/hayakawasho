@@ -22,7 +22,7 @@ export function useThree(canvas: HTMLCanvasElement, dpr: number) {
       console.log("getGPUTier:", { ...result });
 
       if (result.tier > 1) {
-        return
+        return;
       }
 
       renderer.setPixelRatio(1);

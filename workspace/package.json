@@ -1,7 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=development concurrently \"npx vite\" \"npx astro dev\"",
+    "dev:vite": "npx vite",
+    "dev": "NODE_ENV=development concurrently \"npm:dev:vite\" \"npx astro dev\"",
     "start": "npm run dev",
     "build": "NODE_ENV=production npx astro build && npx vite build",
     "check": "astro check",
@@ -15,6 +16,7 @@
     "@astrojs/react": "^4.2.0",
     "@radix-ui/react-slot": "^1.1.1",
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@swup/head-plugin": "^2.3.1",
     "@swup/parallel-plugin": "^0.4.0",
     "@swup/preload-plugin": "^3.2.11",
     "@tailwindcss/vite": "^4.0.3",
@@ -35,7 +37,7 @@
     "react-dom": "^19.0.0",
     "remeda": "^1.40.1",
     "split-type": "^0.3.4",
-    "svelte": "^5.19.6",
+    "svelte": "^5.19.9",
     "svelte-preprocess": "^6.0.3",
     "swup": "^4.8.1",
     "tailwindcss": "^4.0.3",

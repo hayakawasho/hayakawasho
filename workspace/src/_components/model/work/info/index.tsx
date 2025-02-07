@@ -42,7 +42,7 @@ export function WorkInfo({ metadata }: { metadata: WorkDTO }) {
   const { launchDateTime, launch, siteUrl } = WorkPresenter.complete(metadata);
 
   return (
-    <div className="grid gap-[1rem]">
+    <div className="grid gap-[.8rem]">
       <Item label="(Category)">
         <Content>{metadata.category}</Content>
       </Item>

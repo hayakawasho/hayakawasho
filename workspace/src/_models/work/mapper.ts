@@ -33,16 +33,16 @@ export class WorkDataMap {
 
   static toDTO(data: Work): WorkDTO {
     return {
-      id: data.id!,
-      name: data.name!,
-      theme: data.theme!,
-      eyeCatch: data.eyeCatch!,
-      thumb: data.thumb!,
-      category: data.category!,
-      stacks: data.stacks!,
-      screenshots: data.screenshots!,
-      siteUrl: data.siteUrl!,
-      launch: data.launch!,
-    };
+      id: data.id,
+      name: data.name,
+      theme: data.theme,
+      eyeCatch: data.eyeCatch,
+      thumb: data.thumb,
+      category: data.category,
+      stacks: data.stacks,
+      screenshots: data.screenshots,
+      siteUrl: data.siteUrl,
+      launch: data.launch,
+    } as WorkDTO;
   }
 }

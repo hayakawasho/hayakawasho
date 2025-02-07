@@ -2,9 +2,7 @@ import { Cubic, Expo, Linear, Quad, Quart, Quint, Sine, gsap } from "gsap";
 import { CustomEase } from "gsap/CustomEase";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
-{
-  gsap.registerPlugin(CustomEase), gsap.registerPlugin(ScrollToPlugin);
-}
+gsap.registerPlugin(CustomEase, ScrollToPlugin);
 
 const EASE = {
   "custom.in": CustomEase.create("in", ".4,0,.68,.06"),
@@ -50,7 +48,7 @@ class Tween {
   static tween(
     targets: gsap.TweenTarget,
     duration: number,
-    ease: keyof typeof EASE | undefined = "power1.out",
+    ease: Required<keyof typeof EASE>,
     vars: Omit<gsap.TweenVars, "duration" | "ease">,
   ) {
     return gsap.to(targets, {
