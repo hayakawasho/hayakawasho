@@ -39,10 +39,10 @@ function Content({
 }
 
 export function WorkInfo({ metadata }: { metadata: WorkDTO }) {
-  const { launchDateTime, launch, siteUrl } = WorkPresenter.complete(metadata);
+  const { launchDateTime, launch, siteUrl } = WorkPresenter.toWorkSingle(metadata);
 
   return (
-    <div className="grid gap-[.8rem]">
+    <div className="grid gap-[1rem]">
       <Item label="(Category)">
         <Content>{metadata.category}</Content>
       </Item>
@@ -60,6 +60,11 @@ export function WorkInfo({ metadata }: { metadata: WorkDTO }) {
           </Content>
         </Item>
       )}
+      <Item label="(Stack)">
+        <Content>
+          {metadata.stacks.join(",")}
+        </Content>
+      </Item>
     </div>
   );
 }
