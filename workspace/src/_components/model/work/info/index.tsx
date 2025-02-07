@@ -61,9 +61,7 @@ export function WorkInfo({ metadata }: { metadata: WorkDTO }) {
         </Item>
       )}
       <Item label="(Stack)">
-        <Content>
-          {metadata.stacks.join(",")}
-        </Content>
+        <Content>{metadata.stacks.join(",")}</Content>
       </Item>
     </div>
   );
