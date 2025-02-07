@@ -43,10 +43,11 @@ export function useOnLoad({ mountComponents, unmountComponents }: Props) {
   );
 
   const isAnyHover = window.matchMedia("(any-hover:hover)").matches;
+  const dpr = Math.min(window.devicePixelRatio, 1.5);
 
   // const pageScrollContext = usePageScroll(refs.main, isAnyHover);
   const glBackContext = useGlBack(refs.glBack);
-  const glFrontContext = useGlFront(refs.glFront, Math.min(window.devicePixelRatio, 1.5));
+  const glFrontContext = useGlFront(refs.glFront, dpr);
 
   if (isAnyHover) {
     // addChild(refs.cursor, withSvelte(Cursor, "Cursor"));

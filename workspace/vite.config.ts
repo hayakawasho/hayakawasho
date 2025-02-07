@@ -13,6 +13,9 @@ export default defineConfig({
     port: 8080,
     strictPort: true,
   },
+  optimizeDeps: {
+    force: false
+  },
   plugins: [
     // glslify(),
     svelte({
@@ -30,7 +33,9 @@ export default defineConfig({
         entryFileNames: `[name].js`,
         chunkFileNames: `[name].js`,
         manualChunks(id) {
-          if (id.includes("node_modules")) {
+          if (id.includes("three")) {
+            return "vendor.three";
+          } else if (id.includes("node_modules")) {
             return "vendor";
           }
         },

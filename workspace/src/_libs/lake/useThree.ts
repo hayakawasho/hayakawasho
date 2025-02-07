@@ -5,7 +5,7 @@ import { PerspectiveCamera, Scene, WebGLRenderer } from "../three";
 import type { Object3D } from "../three";
 import { useTick } from "./useTick";
 
-export function useThree(canvas: HTMLCanvasElement, resolution: number) {
+export function useThree(canvas: HTMLCanvasElement, dpr: number) {
   const { width, height } = canvas.getBoundingClientRect();
 
   const renderer = new WebGLRenderer({
@@ -15,13 +15,19 @@ export function useThree(canvas: HTMLCanvasElement, resolution: number) {
 
   renderer.setSize(width, height);
   renderer.setClearColor(13092551, 0);
-  renderer.setPixelRatio(resolution);
+  renderer.setPixelRatio(dpr);
 
-  getGPUTier().then((result) => {
-    if (result.tier === 1 && resolution > 1) {
+  if (dpr > 1) {
+    getGPUTier().then((result) => {
+      console.log("getGPUTier:", { ...result });
+
+      if (result.tier > 1) {
+        return
+      }
+
       renderer.setPixelRatio(1);
-    }
-  });
+    });
+  }
 
   const FOV = 60;
   const calcCamDistance = (h: number) => {
