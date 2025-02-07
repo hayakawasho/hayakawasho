@@ -7,7 +7,7 @@ export function Wrap({ children }: { children: React.ReactNode }) {
 }
 
 export function Soon({ children }: { children: React.ReactNode }) {
-  return <div className={"absolute top-0 left-0 z-10 mix-blend-difference"}>{children}</div>;
+  return <div className={"absolute top-0 left-0 z-10"}>{children}</div>;
 }
 
 export function Head({ children }: { children: React.ReactNode }) {
