@@ -145,6 +145,18 @@
     display: none;
   }
 
+  :where(dialog) {
+    border: none;
+    background: none;
+    inset: unset;
+    max-width: unset;
+    max-height: unset;
+  }
+
+  :where(dialog:not([open])) {
+    display: none !important;
+  }
+
   :where(ul, ol) {
     list-style: none;
     list-style-type: "";
