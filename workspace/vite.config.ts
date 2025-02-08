@@ -14,7 +14,7 @@ export default defineConfig({
     port: 9000,
     strictPort: true,
   },
-  cacheDir: path.join(__dirname, '.vite'),
+  cacheDir: '.cache/vite',
   plugins: [
     // glslify(),
     svelte({
