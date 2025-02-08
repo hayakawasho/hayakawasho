@@ -27,7 +27,7 @@ export default defineComponent({
 
     const openDialog = () => {
       isOpen = true;
-      refs.infoDialog.show()
+      refs.infoDialog.show();
     };
 
     useEvent(refs.infoTrigger, "click", (e) => {

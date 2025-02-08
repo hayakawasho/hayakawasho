@@ -24,7 +24,7 @@ export function Content({ children }: { children: React.ReactNode }) {
 
 export function HGroup({ children }: { children: React.ReactNode }) {
   return (
-    <div className={"absolute bottom-[1.6rem] flex pc:hidden w-full items-center justify-between px-[2.4rem]"}>
+    <div className={"absolute bottom-[2rem] flex pc:hidden w-full items-center justify-between px-[2.4rem]"}>
       {children}
     </div>
   );

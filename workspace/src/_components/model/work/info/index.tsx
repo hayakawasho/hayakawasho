@@ -11,12 +11,12 @@ function Item({
 }) {
   return (
     <dl className="flex pc:flex-row flex-col pc:justify-between gap-[.2rem]">
-      <dt className="font-[400] pc:text-[1.1rem] text-[1.1rem] pc:opacity-50">
+      <dt className="font-[400] pc:text-[1.1rem] text-[1.2rem] opacity-50">
         <span className="inline-block uppercase" data-ref="infoText">
           {label}
         </span>
       </dt>
-      <dd className="font-[400] pc:text-[1.2rem] text-[1.3rem]">{children}</dd>
+      <dd className="font-[400] pc:text-[1.2rem] text-[1.4rem]">{children}</dd>
     </dl>
   );
 }
