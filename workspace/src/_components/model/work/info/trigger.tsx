@@ -6,7 +6,7 @@ export function WorkInfoTrigger() {
       data-ref="infoTrigger"
     >
       <span className="relative block w-[5rem] overflow-hidden">
-        <span className="block" data-ref="infoTriggerLabel">
+        <span className="block transform-gpu" data-ref="infoTriggerLabel">
           <span aria-hidden="true" className="inline-block w-[.35em] text-center">
             I
           </span>

@@ -33,10 +33,7 @@ type Tweens = (gsap.core.Tween | gsap.core.Timeline)[];
 class Tween {
   static serial(...tweens: Tweens) {
     const tl = gsap.timeline();
-
-    for (const tween of tweens) {
-      tl.add(tween);
-    }
+    tweens.forEach((tween) => tl.add(tween));
 
     return tl;
   }
@@ -62,17 +59,8 @@ class Tween {
     return gsap.set(targets, vars);
   }
 
-  static wait(time: number, onComplete?: gsap.TweenVars["onComplete"]) {
-    return gsap.to(
-      {
-        val: 0,
-      },
-      {
-        duration: time,
-        onComplete,
-        val: 1,
-      },
-    );
+  static wait(time: number, callback: gsap.Callback) {
+    return gsap.delayedCall(time, callback);
   }
 
   static kill(targets: gsap.TweenTarget, properties?: string | object) {

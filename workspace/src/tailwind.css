@@ -153,10 +153,6 @@
     max-height: unset;
   }
 
-  :where(dialog:not([open])) {
-    display: none !important;
-  }
-
   :where(ul, ol) {
     list-style: none;
     list-style-type: "";

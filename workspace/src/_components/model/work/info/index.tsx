@@ -11,12 +11,12 @@ function Item({
 }) {
   return (
     <dl className="flex pc:flex-row flex-col pc:justify-between gap-[.2rem]">
-      <dt className="font-[400] pc:text-[1.1rem] text-[1.2rem] opacity-50">
-        <span className="inline-block uppercase" data-ref="infoText">
+      <dt className="overflow-hidden font-[400] pc:text-[1.1rem] text-[1.2rem] opacity-50">
+        <span className="backface-hidden inline-block uppercase" data-ref="infoText">
           {label}
         </span>
       </dt>
-      <dd className="font-[400] pc:text-[1.2rem] text-[1.4rem]">{children}</dd>
+      <dd className="overflow-hidden font-[400] pc:text-[1.2rem] text-[1.4rem]">{children}</dd>
     </dl>
   );
 }
@@ -32,7 +32,7 @@ function Content({
   const Comp = asChild ? Slot : "span";
 
   return (
-    <Comp {...props} data-ref="infoText" className="inline-block">
+    <Comp {...props} data-ref="infoText" className="block">
       {children}
     </Comp>
   );
@@ -54,8 +54,8 @@ export function WorkInfo({ metadata }: { metadata: WorkDTO }) {
       {metadata.siteUrl && (
         <Item label="(Url)">
           <Content asChild>
-            <a href={metadata.siteUrl} target="_blank" className="" rel="noreferrer">
-              <span className="underline">{siteUrl}</span>
+            <a href={metadata.siteUrl} rel="noreferrer" target="_blank" className="transform-gpu underline">
+              {siteUrl}
             </a>
           </Content>
         </Item>

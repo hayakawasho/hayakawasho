@@ -1,5 +1,4 @@
 import type { WorkDTO } from "../../../_models/work/dto";
-import { zeroPadding } from "../../../_utils/util";
 import { WorkInfo } from "../../model/work/info";
 import { WorkInfoDialog } from "../../model/work/info/dialog";
 import { WorkInfoTrigger } from "../../model/work/info/trigger";
@@ -34,8 +33,10 @@ export default function Component({
         </WorkLayout.Wrap>
         <WorkInfoDialog post={post} />
         <WorkLayout.HGroup>
-          <h1 className="font-[450] text-[1.4rem] tracking-[.04em]">
-            <span>{post.name}</span>
+          <h1 className="overflow-hidden font-[450] text-[1.4rem] tracking-[.04em]">
+            <span className="block transform-gpu" data-ref="title">
+              {post.name}
+            </span>
           </h1>
           <WorkInfoTrigger />
         </WorkLayout.HGroup>
