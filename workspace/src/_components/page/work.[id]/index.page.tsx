@@ -32,13 +32,13 @@ export default function Component({
             </WorkLayout.Info>
           </WorkLayout.Head>
         </WorkLayout.Wrap>
+        <WorkInfoDialog post={post} />
         <WorkLayout.HGroup>
           <h1 className="font-[450] text-[1.4rem] tracking-[.04em]">
             <span>{post.name}</span>
           </h1>
           <WorkInfoTrigger />
         </WorkLayout.HGroup>
-        <WorkInfoDialog post={post} />
       </div>
     </ContentLayout>
   );

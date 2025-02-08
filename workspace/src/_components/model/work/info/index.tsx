@@ -10,13 +10,13 @@ function Item({
   children: React.ReactNode;
 }) {
   return (
-    <dl className="flex justify-between">
-      <dt className="font-[400] pc:text-[1.1rem] text-[1rem] opacity-50">
+    <dl className="flex pc:flex-row flex-col pc:justify-between">
+      <dt className="font-[400] pc:text-[1.1rem] text-[1.1rem] pc:opacity-50">
         <span className="inline-block uppercase" data-ref="infoText">
           {label}
         </span>
       </dt>
-      <dd className="font-[400] pc:text-[1.2rem] text-[1.1rem]">{children}</dd>
+      <dd className="font-[400] pc:text-[1.2rem] text-[1.3rem]">{children}</dd>
     </dl>
   );
 }
@@ -42,7 +42,7 @@ export function WorkInfo({ metadata }: { metadata: WorkDTO }) {
   const { launchDateTime, launch, siteUrl } = WorkPresenter.toWorkSingle(metadata);
 
   return (
-    <div className="grid gap-[1rem]">
+    <div className="grid gap-[1.2rem] pc:gap-[1rem] pc:text-left text-center">
       <Item label="(Category)">
         <Content>{metadata.category}</Content>
       </Item>

@@ -17,8 +17,8 @@ export default function Component({ posts }: { posts: WorkDTO[] }) {
             </HomeLayout.Soon>
             <HomeLayout.HeadGroup>
               <WorkNavigation posts={posts} current={"pkshatech"} className="h-[1.5em] pc:h-auto" />
-              <div className="relative z-10 pc:hidden overflow-hidden font-[400] text-[1.4rem] uppercase">
-                <p className="opacity-25">(scroll)</p>
+              <div className="relative z-10 pc:hidden overflow-hidden font-[400] text-[1.4rem] uppercase tracking-[.02em]">
+                <p className="opacity-40">(scroll)</p>
                 <div aria-hidden="true" className="-translate-x-full absolute top-0 left-0">
                   (scroll)
                 </div>
