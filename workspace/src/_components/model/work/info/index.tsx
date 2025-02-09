@@ -10,7 +10,7 @@ function Item({
   children: React.ReactNode;
 }) {
   return (
-    <dl className="pc:grid pc:justify-between">
+    <dl className="pc:flex pc:justify-between">
       <dt className="overflow-hidden font-[400] pc:text-[1.1rem] text-[1.2rem] opacity-50" data-ref="infoScrollItem">
         <span className="backface-hidden inline-block uppercase" data-ref="infoText">
           {label}
