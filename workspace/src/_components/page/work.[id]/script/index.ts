@@ -52,7 +52,7 @@ export default defineComponent({
       await waitFrame();
 
       Tween.parallel(
-        Tween.tween([refs.infoTriggerLabel, refs.title], 1.6, "expo.out", {
+        Tween.tween([refs.infoTriggerLabel, refs.title], 1, "expo.out", {
           yPercent: 0,
         }),
         Tween.serial(
@@ -102,16 +102,16 @@ export default defineComponent({
           Tween.tween(refs.infoDialogBackground, 0.45, "power2.out", {
             opacity: 1,
           }),
-          Tween.tween(refs.infoDialogTitle, 0.85, "custom.out", {
+          Tween.tween(refs.infoDialogTitle, 0.8, "custom.out", {
             yPercent: 0,
           }),
-          Tween.tween(refs.infoTriggerLabel, 1.6, "expo.out", {
-            yPercent: -110,
+          Tween.tween(refs.infoTriggerLabel, 1.2, "expo.out", {
+            yPercent: -120,
           }),
-          Tween.tween(refs.title, 1.6, "expo.out", {
-            yPercent: 110,
+          Tween.tween(refs.title, 1.2, "expo.out", {
+            yPercent: 120,
           }),
-          Tween.tween(refs.infoText, 0.7, "custom.out", {
+          Tween.tween(refs.infoText, 0.65, "custom.out", {
             yPercent: 0,
             stagger: 0.02,
           }),

@@ -33,7 +33,7 @@ export default function Component({
         </WorkLayout.Wrap>
         <WorkInfoDialog post={post} />
         <WorkLayout.HGroup>
-          <h1 className="overflow-hidden font-[450] text-[1.4rem] tracking-[.04em]">
+          <h1 className="overflow-hidden font-[450] text-[1.4rem] leading-[1.2] tracking-[.04em]">
             <span className="block transform-gpu" data-ref="title">
               {post.name}
             </span>

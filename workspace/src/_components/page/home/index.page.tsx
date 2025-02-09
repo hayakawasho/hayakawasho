@@ -1,10 +1,11 @@
 import type { WorkDTO } from "../../../_models/work/dto";
+import { zeroPadding } from "../../../_utils/util";
 import { WorkHero } from "../../model/work/hero";
 import { WorkNavigation } from "../../model/work/navigation";
 import ContentLayout from "../../ui/layout";
 import * as HomeLayout from "./layout";
 
-export default function Component({ posts }: { posts: WorkDTO[] }) {
+export default function Component({ posts, total }: { posts: WorkDTO[]; total: number }) {
   return (
     <ContentLayout namespace="home" asChild>
       <div className="relative size-full" data-component="Home">
@@ -16,11 +17,10 @@ export default function Component({ posts }: { posts: WorkDTO[] }) {
               </h1>
             </HomeLayout.Soon>
             <HomeLayout.HeadGroup>
-              <WorkNavigation posts={posts} current={"pkshatech"} className="h-[1.5em] pc:h-auto" />
-              <div className="relative z-10 pc:hidden overflow-hidden font-[400] text-[1.4rem] uppercase tracking-[.02em]">
-                <p className="opacity-40">(scroll)</p>
-                <div aria-hidden="true" className="-translate-x-full absolute top-0 left-0">
-                  (scroll)
+              <WorkNavigation posts={posts} current={"pkshatech"} className="max-pc:h-[1em] max-pc:leading-[1.2]" />
+              <div className="relative z-10 pc:hidden overflow-hidden font-[400] text-[1.4rem] uppercase leading-[1.2]">
+                <div className="">
+                  {zeroPadding(1)} / {zeroPadding(total)}
                 </div>
               </div>
             </HomeLayout.HeadGroup>

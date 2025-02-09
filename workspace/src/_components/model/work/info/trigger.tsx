@@ -2,7 +2,7 @@ export function WorkInfoTrigger() {
   return (
     <button
       type="button"
-      className={"my-[-1rem] mr-[-1rem] px-[1rem] py-[1rem] text-right font-[450] text-[1.4rem]"}
+      className={"my-[-1rem] mr-[-1rem] px-[1rem] py-[1rem] text-right font-[450] text-[1.4rem] leading-[1.2]"}
       data-ref="infoTrigger"
     >
       <span className="relative block w-[5rem] overflow-hidden">
