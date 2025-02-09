@@ -1,31 +1,35 @@
 import { defineComponent, useDomRef, useEvent, useSlot } from "lake";
+import { useTick } from "../../../../../_libs/lake/useTick";
 import { Tween } from "../../../../../_libs/tween";
 import { waitFrame } from "../../../../../_utils/wait";
-
-type Refs = {
-  infoTrigger: HTMLButtonElement;
-  infoTriggerLabel: HTMLElement;
-  infoDialog: HTMLDialogElement;
-  infoDialogTitle: HTMLElement;
-  infoDialogContent: HTMLElement;
-  infoDialogBackground: HTMLElement;
-  infoText: HTMLElement[];
-  title: HTMLElement;
-};
+import InfoScroll from "./scroll";
 
 export default defineComponent({
   name: "Info",
   setup() {
-    const { refs } = useDomRef<Refs>(
+    const { refs } = useDomRef<{
+      infoTrigger: HTMLButtonElement;
+      infoTriggerLabel: HTMLElement;
+      infoDialog: HTMLDialogElement;
+      infoDialogTitle: HTMLElement;
+      infoDialogBackground: HTMLElement;
+      infoText: HTMLElement[];
+      infoScrollItem: HTMLElement[];
+      title: HTMLElement;
+    }>(
       "infoTrigger",
       "infoTriggerLabel",
       "infoDialog",
       "infoDialogTitle",
-      "infoDialogContent",
       "infoDialogBackground",
       "infoText",
       "title",
+      "infoScrollItem",
     );
+
+    const { addChild } = useSlot();
+
+    const infoScrollContext = addChild(refs.infoScrollItem, InfoScroll);
 
     let isOpen = false;
 
@@ -60,6 +64,8 @@ export default defineComponent({
             });
 
             isOpen = false;
+
+            infoScrollContext.forEach((i) => i.current.onReset());
             refs.infoDialog.close();
           }),
         ),
@@ -98,7 +104,7 @@ export default defineComponent({
           Tween.tween(refs.infoTriggerLabel, 1.2, "expo.out", {
             yPercent: -100,
           }),
-          Tween.tween(refs.title, 0.8, "expo.out", {
+          Tween.tween(refs.title, 1, "expo.out", {
             yPercent: 100,
           }),
           Tween.tween(refs.infoText, 0.65, "custom.out", {
@@ -117,6 +123,14 @@ export default defineComponent({
     useEvent(refs.infoTrigger, "click", (e) => {
       e.preventDefault();
       isOpen ? closeDialog() : openDialog();
+    });
+
+    useTick(({ deltaRatio }) => {
+      if (!isOpen) {
+        return;
+      }
+
+      infoScrollContext.forEach((i) => i.current.onUpdate({ deltaRatio }));
     });
   },
 });

@@ -11,12 +11,17 @@ function Item({
 }) {
   return (
     <dl className="pc:grid pc:justify-between">
-      <dt className="overflow-hidden font-[400] pc:text-[1.1rem] text-[1.2rem] opacity-50">
+      <dt className="overflow-hidden font-[400] pc:text-[1.1rem] text-[1.2rem] opacity-50" data-ref="infoScrollItem">
         <span className="backface-hidden inline-block uppercase" data-ref="infoText">
           {label}
         </span>
       </dt>
-      <dd className="overflow-hidden font-[400] pc:text-[1.2rem] text-[1.4rem]">{children}</dd>
+      <dd
+        className="backface-hidden overflow-hidden font-[400] pc:text-[1.2rem] text-[1.4rem]"
+        data-ref="infoScrollItem"
+      >
+        {children}
+      </dd>
     </dl>
   );
 }
