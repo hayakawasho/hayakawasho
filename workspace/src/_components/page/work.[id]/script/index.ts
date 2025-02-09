@@ -55,10 +55,10 @@ export default defineComponent({
         }),
         Tween.serial(
           Tween.parallel(
-            Tween.tween([refs.infoDialogTitle, refs.infoText], 0.45, "power2.out", {
+            Tween.tween([refs.infoDialogTitle, refs.infoText], 0.5, "power2.out", {
               yPercent: 120,
             }),
-            Tween.tween(refs.infoDialogBackground, 0.45, "power2.out", {
+            Tween.tween(refs.infoDialogBackground, 0.5, "power2.out", {
               opacity: 0,
             }),
           ),
@@ -97,7 +97,7 @@ export default defineComponent({
 
       Tween.serial(
         Tween.parallel(
-          Tween.tween(refs.infoDialogBackground, 0.45, "power2.out", {
+          Tween.tween(refs.infoDialogBackground, 0.65, "power2.out", {
             opacity: 1,
           }),
           Tween.tween(refs.infoDialogTitle, 0.8, "custom.out", {

@@ -5,7 +5,7 @@ export function WorkInfoDialog({ post }: { post: WorkDTO }) {
   return (
     <dialog className="fixed top-0 left-0 size-full text-[var(--color-text)]" data-ref="infoDialog">
       <div
-        className="pointer-events-none absolute inset-0 bg-[var(--color-bg)]/70"
+        className="pointer-events-none absolute inset-0 bg-[var(--color-bg)]/75"
         aria-hidden="true"
         data-ref="infoDialogBackground"
       />
