@@ -1,5 +1,6 @@
 import { defineComponent, useDomRef, useEvent, useSlot } from "lake";
 import { useTick } from "../../../../../_libs/lake/useTick";
+import { useElementSize } from "../../../../../_libs/lake/useElementSize";
 import { Tween } from "../../../../../_libs/tween";
 import { waitFrame } from "../../../../../_utils/wait";
 import InfoScroll from "./scroll";
@@ -14,6 +15,7 @@ export default defineComponent({
       infoDialogTitle: HTMLElement;
       infoDialogBackground: HTMLElement;
       infoText: HTMLElement[];
+      infoDialogContent: HTMLElement;
       infoScrollItem: HTMLElement[];
       title: HTMLElement;
     }>(
@@ -23,8 +25,9 @@ export default defineComponent({
       "infoDialogTitle",
       "infoDialogBackground",
       "infoText",
-      "title",
+      "infoDialogContent",
       "infoScrollItem",
+      "title",
     );
 
     const { addChild } = useSlot();
@@ -125,12 +128,20 @@ export default defineComponent({
       isOpen ? closeDialog() : openDialog();
     });
 
+    let infoDialogContentHeight = 0;
+    let windowHeight = 0;
+
+    useElementSize(refs.infoDialogContent, ({ height }) => {
+      infoDialogContentHeight = height;
+      windowHeight = window.innerHeight;
+    });
+
     useTick(({ deltaRatio }) => {
       if (!isOpen) {
         return;
       }
 
-      infoScrollContext.forEach((i) => i.current.onUpdate({ deltaRatio }));
+      infoScrollContext.forEach((i) => i.current.onUpdate({ deltaRatio, infoDialogContentHeight, windowHeight }));
     });
   },
 });

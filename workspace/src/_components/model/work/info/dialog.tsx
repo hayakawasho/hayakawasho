@@ -9,7 +9,7 @@ export function WorkInfoDialog({ post }: { post: WorkDTO }) {
         aria-hidden="true"
         data-ref="infoDialogBackground"
       />
-      <div className="relative">
+      <div className="relative" data-ref="infoDialogContent">
         <div className="h-[calc(var(--100vh)/2)]" aria-hidden="true" />
         <h2
           className="my-[var(--leading-trim)] mb-[16rem] overflow-hidden text-center font-[200] text-[3.6rem] leading-[1.2] tracking-[.04em]"
