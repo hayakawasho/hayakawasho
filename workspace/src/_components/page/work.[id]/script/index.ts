@@ -50,7 +50,7 @@ export default defineComponent({
       await waitFrame();
 
       Tween.parallel(
-        Tween.tween([refs.infoTriggerLabel, refs.title], .9, "expo.out", {
+        Tween.tween([refs.infoTriggerLabel, refs.title], 1, "expo.out", {
           yPercent: 0,
         }),
         Tween.serial(
@@ -104,10 +104,10 @@ export default defineComponent({
             yPercent: 0,
           }),
           Tween.tween(refs.infoTriggerLabel, 1.2, "expo.out", {
-            yPercent: -120,
+            yPercent: -100,
           }),
           Tween.tween(refs.title, 1.2, "expo.out", {
-            yPercent: 120,
+            yPercent: 100,
           }),
           Tween.tween(refs.infoText, 0.65, "custom.out", {
             yPercent: 0,
