@@ -57,7 +57,7 @@ export function WorkInfo({ metadata }: { metadata: WorkDTO }) {
         </Content>
       </Item>
       {metadata.siteUrl && (
-        <Item label="(Url)">
+        <Item label="(Website)">
           <Content asChild>
             <a href={metadata.siteUrl} rel="noreferrer" target="_blank" className="transform-gpu underline">
               {siteUrl}
