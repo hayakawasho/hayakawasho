@@ -42,25 +42,23 @@ export default defineComponent({
 
       Tween.prop(refs.infoDialogBackground, {
         willChange: "opacity",
-        opacity: 1,
       });
       Tween.prop([refs.infoDialogTitle, refs.infoText], {
         willChange: "transform",
-        yPercent: 0,
       });
 
       await waitFrame();
 
       Tween.parallel(
-        Tween.tween([refs.infoTriggerLabel, refs.title], 1, "expo.out", {
+        Tween.tween([refs.infoTriggerLabel, refs.title], .9, "expo.out", {
           yPercent: 0,
         }),
         Tween.serial(
           Tween.parallel(
-            Tween.tween([refs.infoDialogTitle, refs.infoText], 0.5, "power2.out", {
+            Tween.tween([refs.infoDialogTitle, refs.infoText], 0.45, "power2.out", {
               yPercent: 120,
             }),
-            Tween.tween(refs.infoDialogBackground, 0.5, "power2.out", {
+            Tween.tween(refs.infoDialogBackground, 0.45, "power2.out", {
               opacity: 0,
             }),
           ),
