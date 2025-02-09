@@ -89,7 +89,7 @@ export default defineComponent({
         willChange: "opacity",
       });
       Tween.prop([refs.infoDialogTitle, refs.infoText], {
-        yPercent: 120,
+        yPercent: 100,
         willChange: "transform",
       });
 
@@ -106,7 +106,7 @@ export default defineComponent({
           Tween.tween(refs.infoTriggerLabel, 1.2, "expo.out", {
             yPercent: -100,
           }),
-          Tween.tween(refs.title, 1.2, "expo.out", {
+          Tween.tween(refs.title, .8, "expo.out", {
             yPercent: 100,
           }),
           Tween.tween(refs.infoText, 0.65, "custom.out", {
