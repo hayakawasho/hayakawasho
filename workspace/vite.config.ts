@@ -1,8 +1,6 @@
-import path from "path";
-import { defineConfig } from "vite";
+import { defineConfig, type Plugin } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import { sveltePreprocess } from "svelte-preprocess";
-// import { glslify } from "vite-plugin-glslify";
 
 const isDev = process.env.NODE_ENV !== "production";
 
@@ -16,7 +14,6 @@ export default defineConfig({
   },
   cacheDir: '.cache/vite',
   plugins: [
-    // glslify(),
     svelte({
       preprocess: sveltePreprocess(),
     }),
@@ -26,6 +23,7 @@ export default defineConfig({
     sourcemap: isDev,
     manifest: true,
     rollupOptions: {
+      // plugins: [glslify() as Plugin],
       input: "./src/entry.ts",
       output: {
         assetFileNames: `[name].[ext]`,

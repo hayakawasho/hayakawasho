@@ -1,6 +1,6 @@
 import { defineComponent, useDomRef, useEvent, useSlot } from "lake";
-import { useTick } from "../../../../../_libs/lake/useTick";
 import { useElementSize } from "../../../../../_libs/lake/useElementSize";
+import { useTick } from "../../../../../_libs/lake/useTick";
 import { Tween } from "../../../../../_libs/tween";
 import { waitFrame } from "../../../../../_utils/wait";
 import InfoScroll from "./scroll";
@@ -66,10 +66,10 @@ export default defineComponent({
               clearProps: "will-change",
             });
 
-            isOpen = false;
-
-            infoScrollContext.forEach((i) => i.current.onReset());
             refs.infoDialog.close();
+            infoScrollContext.forEach((i) => i.current.onReset());
+
+            isOpen = false;
           }),
         ),
       );
@@ -85,6 +85,7 @@ export default defineComponent({
         // MEMO: safariのaタグ位置バグ対応
         clearProps: "transform",
       });
+
       Tween.prop(refs.infoDialogBackground, {
         opacity: 0,
         willChange: "opacity",
@@ -128,8 +129,8 @@ export default defineComponent({
       isOpen ? closeDialog() : openDialog();
     });
 
-    let infoDialogContentHeight = 0;
-    let windowHeight = 0;
+    let infoDialogContentHeight = 1247;
+    let windowHeight = window.innerHeight;
 
     useElementSize(refs.infoDialogContent, ({ height }) => {
       infoDialogContentHeight = height;

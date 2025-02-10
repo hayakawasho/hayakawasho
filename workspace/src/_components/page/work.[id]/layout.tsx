@@ -24,7 +24,11 @@ export function Content({ children }: { children: React.ReactNode }) {
 
 export function HGroup({ children }: { children: React.ReactNode }) {
   return (
-    <div className={"absolute bottom-[2rem] flex pc:hidden w-full items-center justify-between px-[2.4rem]"}>
+    <div
+      className={
+        "absolute top-[2rem] flex pc:hidden w-full items-center justify-between px-[2.4rem] pc:text-[var(--color-text)] text-[var(--theme-text)]"
+      }
+    >
       {children}
     </div>
   );

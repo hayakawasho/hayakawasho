@@ -1,4 +1,3 @@
-import dotenv from "dotenv";
 import ky, { HTTPError } from "ky";
 
 type Options<T = object> = {
@@ -6,8 +5,6 @@ type Options<T = object> = {
   headers?: HeadersInit;
   signal?: AbortSignal;
 };
-
-dotenv.config();
 
 const client = ky.create({
   timeout: 10000, // milliseconds
@@ -29,7 +26,7 @@ export const apiClient = {
         searchParams: options?.params ?? undefined,
         headers: {
           "Content-Type": "application/json",
-          "X-MICROCMS-API-KEY": process.env.API_KEY,
+          "X-MICROCMS-API-KEY": import.meta.env.VITE_API_KEY,
         },
       });
       return response;
