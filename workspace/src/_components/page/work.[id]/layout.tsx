@@ -1,8 +1,6 @@
 export function Wrap({ children }: { children: React.ReactNode }) {
   return (
-    <div
-      className={"relative grid h-[var(--100vh)] pc:h-auto pc:grid-cols-2 items-end pc:items-start justify-center"}
-    >
+    <div className={"relative grid h-[var(--100vh)] pc:h-auto pc:grid-cols-2 pc:items-start items-end justify-center"}>
       {children}
     </div>
   );
@@ -19,16 +17,20 @@ export function Head({ children }: { children: React.ReactNode }) {
 }
 
 export function Content({ children }: { children: React.ReactNode }) {
-  return <div className={"relative aspect-4/5 pc:h-[var(--100vh)] pc:w-full w-[calc(var(--grid)*12)]"}>{children}</div>;
+  return (
+    <div
+      className={
+        "relative aspect-square pc:aspect-auto pc:h-[var(--100vh)] min-h-[calc(var(--100vh)/2)] pc:w-full w-[calc(var(--grid)*12)]"
+      }
+    >
+      {children}
+    </div>
+  );
 }
 
 export function HGroup({ children }: { children: React.ReactNode }) {
   return (
-    <div
-      className={
-        "absolute top-[2rem] flex pc:hidden w-full items-center justify-between px-[2.4rem]"
-      }
-    >
+    <div className={"absolute top-[2rem] flex pc:hidden w-full items-center justify-between px-[2.4rem]"}>
       {children}
     </div>
   );
