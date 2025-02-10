@@ -20,7 +20,7 @@ export function WorkInfoTrigger() {
             O
           </span>
           <span className="sr-only">Info</span>
-          <span className="absolute block w-full uppercase tracking-[.02em] text-[var(--color-text)]">Close</span>
+          <span className="absolute block w-full uppercase tracking-[.02em]">Close</span>
         </span>
       </span>
     </button>

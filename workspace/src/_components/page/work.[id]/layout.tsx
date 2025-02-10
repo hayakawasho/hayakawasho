@@ -1,7 +1,7 @@
 export function Wrap({ children }: { children: React.ReactNode }) {
   return (
     <div
-      className={"relative grid h-[var(--100vh)] pc:h-auto pc:grid-cols-2 items-start pc:items-start justify-center"}
+      className={"relative grid h-[var(--100vh)] pc:h-auto pc:grid-cols-2 items-end pc:items-start justify-center"}
     >
       {children}
     </div>
@@ -26,7 +26,7 @@ export function HGroup({ children }: { children: React.ReactNode }) {
   return (
     <div
       className={
-        "absolute top-[2rem] flex pc:hidden w-full items-center justify-between px-[2.4rem] pc:text-[var(--color-text)] text-[var(--theme-text)]"
+        "absolute top-[2rem] flex pc:hidden w-full items-center justify-between px-[2.4rem]"
       }
     >
       {children}
