@@ -19,17 +19,17 @@ export default function Component({
     <ContentLayout namespace="work-single" asChild>
       <div className="relative size-full" data-component="WorkSingle">
         <WorkLayout.Wrap>
-          <WorkLayout.Content>
-            <WorkScreenshots post={post} />
-          </WorkLayout.Content>
           <WorkLayout.Head>
-            <div className="grid gap-[3.2rem]">
+            <div className="grid gap-[3.2rem] pc:text-right">
               <WorkNavigation posts={posts} current={post.id} />
             </div>
             <WorkLayout.Info>
               <WorkInfo metadata={post} />
             </WorkLayout.Info>
           </WorkLayout.Head>
+          <WorkLayout.Content>
+            <WorkScreenshots post={post} />
+          </WorkLayout.Content>
         </WorkLayout.Wrap>
         <WorkInfoDialog post={post} />
         <WorkLayout.HGroup>
