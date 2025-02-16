@@ -15,7 +15,7 @@ export function WorkHero({ posts }: { posts: WorkDTO[] }) {
       </ul>
       <div className="fixed pc:top-1/2 bottom-[3.2rem] pc:bottom-auto left-1/2 pc:left-3/4">
         <ul
-          className={`-ml-[2.4rem] pc:-translate-x-1/2 pc:-translate-y-1/2 pc:ml-0 flex pc:grid pc:aspect-[4/5] pc:w-[var(--grid)] w-full pc:min-w-[12rem] gap-[.6rem]`}
+          className={`-ml-[2.4rem] pc:-translate-x-1/2 pc:-translate-y-1/2 pc:ml-0 flex pc:grid pc:aspect-[4/5] pc:w-[calc(var(--grid)+var(--gap))] w-full pc:min-w-[12rem] gap-[.6rem]`}
         >
           {posts.map((i, index) => (
             <li
