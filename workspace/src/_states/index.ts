@@ -50,5 +50,5 @@ export const globalStore = createStore<States>((set) => {
       ...windowScrollStore.actions(set),
       ...windowScrollStore.selectors,
     },
-  };
+  } as const;
 });

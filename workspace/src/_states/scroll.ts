@@ -38,5 +38,5 @@ export function createWindowScrollSlice() {
     state,
     selectors,
     actions,
-  };
+  } as const;
 }

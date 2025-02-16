@@ -1,8 +1,13 @@
-import { defineComponent } from "lake";
+import { defineComponent, useSlot } from "lake";
+import Hero from "./hero";
 
 export default defineComponent({
   name: "Home",
-  setup(_el, context) {
+  setup(el, context) {
     console.log("Home:", context);
+
+    const { addChild } = useSlot();
+
+    addChild(el, Hero);
   },
 });

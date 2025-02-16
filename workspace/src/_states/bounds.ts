@@ -38,5 +38,5 @@ export function createWindowSizeSlice() {
     state,
     selectors,
     actions,
-  };
+  } as const;
 }

@@ -24,5 +24,5 @@ export function createMousePositionSlice() {
     state,
     selectors,
     actions,
-  };
+  } as const;
 }
