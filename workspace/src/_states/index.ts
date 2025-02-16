@@ -23,7 +23,9 @@ export type States = {
     onMouseMove: (x: number, y: number) => void;
   };
   scroll: {
-    offsetY: number;
+    currentY: number;
+    oldY: number;
+    diff: number;
     onScroll: (offsetY: number) => void;
   };
 };
