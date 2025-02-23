@@ -23,11 +23,6 @@ type RawDBResponse<T> = {
 
 type RawWorkResponse = {
   title: string;
-  eyecatch: {
-    url: string;
-    width: number;
-    height: number;
-  };
   thumbnail: {
     url: string;
     width: number;

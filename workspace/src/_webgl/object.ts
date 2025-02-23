@@ -1,5 +1,5 @@
 import { Object3D, Texture } from "../_libs/three";
-import globalStore from "../_stores";
+import { globalStore } from "../_states";
 import { loadAsset } from "../_utils/loader";
 
 class GlObject extends Object3D {
@@ -18,14 +18,18 @@ class GlObject extends Object3D {
 
   #setCache = () => {
     const bounds = this.el.getBoundingClientRect();
+    const {
+      scroll: { currentY },
+      bounds: { ww, wh },
+    } = globalStore.getState();
 
     return {
       bounds,
       centerX: bounds.left + bounds.width * 0.5,
       centerY: bounds.top + bounds.height * 0.5,
-      offset: globalStore.offsetY,
-      windowW: globalStore.bounds.ww,
-      windowH: globalStore.bounds.wh,
+      offset: currentY,
+      windowW: ww,
+      windowH: wh,
     };
   };
 

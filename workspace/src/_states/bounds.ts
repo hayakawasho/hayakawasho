@@ -23,7 +23,7 @@ export function createWindowSizeSlice() {
   };
 
   const actions = (set: ZSet<States>) => ({
-    onResizeWindow: (width: number, height: number) => {
+    resizeWindow: (width: number, height: number) => {
       set((state) => ({
         ...state,
         ww: width,

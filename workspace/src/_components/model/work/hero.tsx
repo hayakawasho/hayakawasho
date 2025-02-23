@@ -1,15 +1,14 @@
 import { Fragment } from "react";
 import type { WorkDTO } from "../../../_models/work/dto";
-import { Image } from "./image";
 
 const MAX_W = 1675;
 
 export function WorkHero({ posts }: { posts: WorkDTO[] }) {
   return (
-    <div className="relative size-full">
-      <ul className="">
+    <div className="relative size-full" data-ref="hero">
+      <ul className="" data-ref="heroSlideItems">
         {posts.map((i) => (
-          <li className="h-[var(--100vh)] overflow-hidden" key={i.id}>
+          <li className="h-[var(--100vh)] overflow-hidden" key={i.id} data-ref="heroSlideItem">
             <a href={`/work/${i.id}/`}>
               <img
                 className="h-full pc:h-fit pc:min-h-[var(--100vh)] w-full object-cover"
@@ -17,12 +16,13 @@ export function WorkHero({ posts }: { posts: WorkDTO[] }) {
                 width={i.thumb.width}
                 height={i.thumb.height}
                 alt={i.name}
+                data-ref="heroImage"
               />
             </a>
           </li>
         ))}
       </ul>
-      <div className="fixed pc:top-1/2 bottom-[3.2rem] pc:bottom-auto left-1/2 pc:left-3/4">
+      <div className="fixed pc:top-1/2 bottom-[3.2rem] pc:bottom-auto left-1/2 pc:left-3/4" data-ref="heroNavigation">
         <ul className="-ml-[2.4rem] pc:-translate-x-1/2 pc:-translate-y-1/2 pc:ml-0 flex pc:grid pc:aspect-[4/5] pc:w-[calc(var(--grid)+var(--gap))] w-full pc:min-w-[12rem] gap-[.8rem]">
           {posts.map((i) => (
             <li
@@ -36,7 +36,7 @@ export function WorkHero({ posts }: { posts: WorkDTO[] }) {
                   className="h-full pc:h-fit w-full"
                   width={i.thumb.width}
                   height={i.thumb.height}
-                  loading="lazy"
+                  data-ref="heroThumb"
                 />
                 {i.screenshots.map((j, index) => (
                   <Fragment key={index}>

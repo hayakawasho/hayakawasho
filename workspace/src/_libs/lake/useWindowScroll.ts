@@ -1,10 +1,12 @@
 import { useUnmount } from "lake";
 import { globalStore } from "../../_states";
 
-export const useWindowScroll = (cb: (payload: { offsetY: number }) => void) => {
+export const useWindowScroll = (cb: (payload: { currentY: number; oldY: number; diff: number }) => void) => {
   const unsub = globalStore.subscribe(({ scroll }) => {
     cb({
-      offsetY: scroll.offsetY,
+      currentY: scroll.currentY,
+      oldY: scroll.oldY,
+      diff: scroll.diff,
     });
   });
 

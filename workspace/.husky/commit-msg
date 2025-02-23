@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+# https://commitlint.js.org/guides/local-setup.html#using-a-git-hooks-manager
+npx --no -- commitlint --edit $1

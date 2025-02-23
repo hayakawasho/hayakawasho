@@ -1,15 +1,17 @@
 {
   "private": true,
   "scripts": {
-    "dev:vite": "npx vite",
-    "dev": "NODE_ENV=development concurrently \"npm:dev:vite\" \"npx astro dev\"",
+    "dev": "NODE_ENV=development concurrently \"npx vite\" \"npx astro dev\"",
     "start": "npm run dev",
     "build": "NODE_ENV=production npx astro build && npx vite build",
     "check": "astro check",
     "preview": "astro preview",
     "format": "biome format --write ./src",
     "fix": "biome check --write ./src",
-    "markuplint": "markuplint \"./src/**/*.tsx\""
+    "a11y": "npx playwright test",
+    "lint:markup": "markuplint \"./src/_components/**/*.tsx\"",
+    "lint": "concurrently \"npm:lint:*\"",
+    "prepare": "husky"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -19,7 +21,6 @@
     "@swup/head-plugin": "^2.3.1",
     "@swup/parallel-plugin": "^0.4.0",
     "@swup/preload-plugin": "^3.2.11",
-    "@tailwindcss/vite": "^4.0.3",
     "astro": "^5.1.10",
     "astro-critters": "^2.2.1",
     "astro-google-fonts-optimizer": "^0.2.2",
@@ -43,16 +44,22 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.10.1",
     "@biomejs/biome": "1.9.4",
     "@markuplint/jsx-parser": "^4.7.5",
     "@markuplint/react-spec": "^4.5.5",
+    "@playwright/test": "^1.50.1",
+    "@tailwindcss/vite": "^4.0.7",
     "@types/normalize-wheel": "^1.0.4",
     "@types/preloadjs": "^0.6.36",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
+    "axe-html-reporter": "^2.2.11",
     "concurrently": "^8.2.2",
     "glslify": "^7.1.1",
     "glslify-import": "^3.1.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
     "markuplint": "^4.9.2",
     "svelte": "^5.19.9",
     "svelte-preprocess": "^6.0.3",

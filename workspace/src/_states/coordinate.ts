@@ -11,7 +11,7 @@ export function createMousePositionSlice() {
   };
 
   const actions = (set: ZSet<States>) => ({
-    onMouseMove: (x: number, y: number) => {
+    updateCoordinate: (x: number, y: number) => {
       set((state) => ({
         ...state,
         x,

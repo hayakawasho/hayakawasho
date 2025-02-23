@@ -24,7 +24,7 @@ export function createWindowScrollSlice() {
   };
 
   const actions = (set: ZSet<States>) => ({
-    onScroll: (offsetY: number) => {
+    updateScrollY: (offsetY: number) => {
       set((state) => ({
         ...state,
         currentY: offsetY,

@@ -6,7 +6,7 @@ import { useGlFront } from "../../../_components/ui/gl/script/useGlFront";
 // import { useCursorTypeContext } from "../../../_stores/cursor";
 // import { useMediaQuery } from "../../../_stores/mq";
 // import { useRoute } from "../../../_stores/route";
-import { useWindowSize } from "../../../_stores/window-size";
+import { globalStore } from "../../../_states";
 import { useElementSize } from "../useElementSize";
 import { useSwup } from "./useSwup";
 // import { usePageScroll } from "../usePageScroll";
@@ -28,8 +28,9 @@ export function useOnLoad({ mountComponents, unmountComponents }: Props) {
   const { refs } = useDomRef<Refs>("resizeSentinel", "cursor", "glBack", "glFront", "main");
   const { addChild: _addChild } = useSlot();
 
-  const [_, setWindowSize] = useWindowSize();
-  useElementSize(refs.resizeSentinel, (elementSize) => setWindowSize(elementSize));
+  useElementSize(refs.resizeSentinel, ({ width, height }) => {
+    globalStore.getState().bounds.resizeWindow(width, height);
+  });
 
   const wideQuery = window.matchMedia("(min-width: 640px)");
   wideQuery.addEventListener(

@@ -15,22 +15,22 @@ export type States = {
     centerX: number;
     centerY: number;
     aspect: number;
-    onResizeWindow: (width: number, height: number) => void;
+    resizeWindow: (width: number, height: number) => void;
   };
   coordinate: {
     x: number;
     y: number;
-    onMouseMove: (x: number, y: number) => void;
+    updateCoordinate: (x: number, y: number) => void;
   };
   scroll: {
     currentY: number;
     oldY: number;
     diff: number;
-    onScroll: (offsetY: number) => void;
+    updateScrollY: (offsetY: number) => void;
   };
 };
 
-export const globalStore = createStore<States>((set) => {
+export const globalStore = createStore<States>()((set) => {
   const windowSizeStore = createWindowSizeSlice();
   const mousePositionStore = createMousePositionSlice();
   const windowScrollStore = createWindowScrollSlice();

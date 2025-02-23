@@ -1,6 +1,6 @@
 import { getGPUTier } from "detect-gpu";
-import globalStore from "../../_stores";
-import { useWindowSize } from "../../_stores/window-size";
+import { useWindowSize } from "../../_libs/lake/useWindowSize";
+import { globalStore } from "../../_states";
 import { PerspectiveCamera, Scene, WebGLRenderer } from "../three";
 import type { Object3D } from "../three";
 import { useTick } from "./useTick";
@@ -37,16 +37,16 @@ export function useThree(canvas: HTMLCanvasElement, dpr: number) {
   };
 
   const camera = new PerspectiveCamera(FOV, width / height, 0.1, 3000);
-  camera.position.z = calcCamDistance(globalStore.bounds.wh);
+  camera.position.z = calcCamDistance(globalStore.getState().bounds.wh);
 
   const scene = new Scene();
   const addScene = (child: Object3D) => scene.add(child);
   const removeScene = (child: Object3D) => scene.remove(child);
 
-  useWindowSize(({ windowSize, aspect }) => {
-    renderer.setSize(windowSize.width, windowSize.height);
+  useWindowSize(({ width, height, aspect }) => {
+    renderer.setSize(width, height);
     camera.aspect = aspect;
-    camera.position.z = calcCamDistance(windowSize.height);
+    camera.position.z = calcCamDistance(height);
 
     camera.updateProjectionMatrix();
   });
