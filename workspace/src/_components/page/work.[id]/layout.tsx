@@ -1,6 +1,10 @@
 export function Wrap({ children }: { children: React.ReactNode }) {
   return (
-    <div className={"relative grid h-[var(--100vh)] pc:h-auto pc:grid-cols-2 pc:items-start items-end justify-center"}>
+    <div
+      className={
+        "relative grid h-[var(--100vh)] pc:h-auto pc:grid-cols-[1fr_calc(var(--grid)*7)] pc:items-start items-end justify-center"
+      }
+    >
       {children}
     </div>
   );

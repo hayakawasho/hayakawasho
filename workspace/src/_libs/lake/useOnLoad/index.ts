@@ -11,21 +11,17 @@ import { useElementSize } from "../useElementSize";
 import { useSwup } from "./useSwup";
 // import { usePageScroll } from "../usePageScroll";
 
-type Refs = {
-  resizeSentinel: HTMLElement;
-  cursor: HTMLElement;
-  glBack: HTMLCanvasElement;
-  glFront: HTMLCanvasElement;
-  main: HTMLElement;
-};
-
-type Props = {
+export function useOnLoad({ mountComponents, unmountComponents }: {
   mountComponents: (scope: HTMLElement, props: Record<string, unknown>) => void;
-  unmountComponents: (targets: HTMLElement[]) => void;
-};
-
-export function useOnLoad({ mountComponents, unmountComponents }: Props) {
-  const { refs } = useDomRef<Refs>("resizeSentinel", "cursor", "glBack", "glFront", "main");
+  unmountComponents: (scope: HTMLElement) => void;
+}) {
+  const { refs } = useDomRef<{
+    resizeSentinel: HTMLElement;
+    cursor: HTMLElement;
+    glBack: HTMLCanvasElement;
+    glFront: HTMLCanvasElement;
+    main: HTMLElement;
+  }>("resizeSentinel", "cursor", "glBack", "glFront", "main");
   const { addChild: _addChild } = useSlot();
 
   useElementSize(refs.resizeSentinel, ({ width, height }) => {
@@ -55,14 +51,18 @@ export function useOnLoad({ mountComponents, unmountComponents }: Props) {
   }
 
   useSwup({
-    onCreated() {
-      mountComponents(document.documentElement, { once: true });
+    created(props) {
+      mountComponents(document.documentElement, {
+        ...props,
+        once: true,
+      });
     },
-    onUpdated(scope: HTMLElement) {
-      mountComponents(scope, { once: false });
+    updated(scope, props) {
+      mountComponents(scope, {
+        ...props,
+        once: false,
+      });
     },
-    onCleanup(scope: HTMLElement) {
-      unmountComponents([...scope.querySelectorAll<HTMLElement>("[data-component]")]);
-    },
+    unmountComponents,
   });
 }

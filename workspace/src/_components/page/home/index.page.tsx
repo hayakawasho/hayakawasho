@@ -15,7 +15,7 @@ export default function Component({ posts, total }: { posts: WorkDTO[]; total: n
           </HomeLayout.Content>
           <HomeLayout.Head>
             <HomeLayout.HeadGroup>
-              <div className="pc:text-left">
+              <div className="pc:fixed pc:left-[var(--gap)] z-10 pc:text-left">
                 <WorkNavigation posts={posts} current={"pkshatech"} className="max-pc:h-[1em] max-pc:leading-[1.2]" />
               </div>
             </HomeLayout.HeadGroup>

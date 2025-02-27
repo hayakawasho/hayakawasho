@@ -20,7 +20,7 @@ export default function Component({
       <div className="relative size-full" data-component="WorkSingle">
         <WorkLayout.Wrap>
           <WorkLayout.Head>
-            <div className="grid gap-[3.2rem] pc:text-right">
+            <div className="grid gap-[3.2rem] pc:text-left">
               <WorkNavigation posts={posts} current={post.id} />
             </div>
             <WorkLayout.Info>

@@ -1,4 +1,4 @@
-import { defineComponent, useSlot } from "lake";
+import { defineComponent, useMount, useSlot } from "lake";
 import Info from "./info";
 
 export default defineComponent({
@@ -9,5 +9,13 @@ export default defineComponent({
     const { addChild } = useSlot();
 
     addChild(el, Info);
+
+    useMount(() => {
+      console.log("mount:WorkSingle", context);
+
+      return () => {
+        console.log("unmount:WorkSingle", context);
+      };
+    });
   },
 });

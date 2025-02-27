@@ -7,7 +7,7 @@ import { useOnLoad } from "./_libs/lake/useOnLoad";
 import { withSvelte } from "./_libs/lake/withSvelte";
 
 (() => {
-  const { component, unmount: unmountComponents } = create();
+  const { component, unmount } = create();
 
   const table: Record<string, IComponent> = {
     Noop: withSvelte(Noop, "Noop"),
@@ -34,7 +34,12 @@ import { withSvelte } from "./_libs/lake/withSvelte";
     defineComponent({
       name: "OnLoad",
       setup() {
-        useOnLoad({ mountComponents, unmountComponents });
+        useOnLoad({
+          mountComponents,
+          unmountComponents: (scope: HTMLElement) => {
+            unmount([...scope.querySelectorAll<HTMLElement>("[data-component]")]);
+          },
+        });
       },
     }),
   )(document.documentElement);

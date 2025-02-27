@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import type { WorkDTO } from "../../../_models/work/dto";
 
-const MAX_W = 1675;
+const MAX_W = 1920;
 
 export function WorkHero({ posts }: { posts: WorkDTO[] }) {
   return (
@@ -22,7 +22,7 @@ export function WorkHero({ posts }: { posts: WorkDTO[] }) {
           </li>
         ))}
       </ul>
-      <div className="fixed pc:top-1/2 bottom-[3.2rem] pc:bottom-auto left-1/2 pc:left-3/4" data-ref="heroNavigation">
+      <div className="fixed pc:top-1/2 bottom-[3.2rem] pc:bottom-auto left-1/2 pc:left-4/5" data-ref="heroNavigation">
         <ul className="-ml-[2.4rem] pc:-translate-x-1/2 pc:-translate-y-1/2 pc:ml-0 flex pc:grid pc:aspect-[4/5] pc:w-[calc(var(--grid)+var(--gap))] w-full pc:min-w-[12rem] gap-[.8rem]">
           {posts.map((i) => (
             <li
@@ -33,7 +33,7 @@ export function WorkHero({ posts }: { posts: WorkDTO[] }) {
                 <img
                   src={`${i.thumb.src}?auto=compress,format&fm=avif&w=300`}
                   alt=""
-                  className="h-full pc:h-fit w-full"
+                  className="h-full pc:h-fit w-full object-cover"
                   width={i.thumb.width}
                   height={i.thumb.height}
                   data-ref="heroThumb"

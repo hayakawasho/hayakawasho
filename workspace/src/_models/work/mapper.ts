@@ -7,6 +7,11 @@ export class WorkDataMap {
     return Work.create({
       theme: raw.is_dark ? "dark" : "light",
       category: raw.category[0],
+      eyeCatch: {
+        src: raw.eyecatch.url,
+        width: raw.eyecatch.width,
+        height: raw.eyecatch.height,
+      },
       thumb: {
         height: raw.thumbnail.height,
         src: raw.thumbnail.url,
@@ -30,6 +35,7 @@ export class WorkDataMap {
     return {
       id: data.id,
       name: data.name,
+      eyeCatch: data.eyeCatch,
       theme: data.theme,
       thumb: data.thumb,
       category: data.category,
