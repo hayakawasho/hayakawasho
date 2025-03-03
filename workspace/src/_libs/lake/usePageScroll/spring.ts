@@ -4,7 +4,10 @@ export type SpringConfig = {
   mass: number; // 質量
 };
 
-export const createSpring = (start, { stiffness = 0.1, damping = 0.8, mass = 1 }: Partial<SpringConfig>) => {
+export const createSpring = (
+  start: number,
+  { stiffness = 0.1, damping = 0.8, mass = 1 }: Partial<SpringConfig>,
+) => {
   const state = {
     current: start,
     old: start,

@@ -1,4 +1,10 @@
-export const mapRange = (val: number, inputMin: number, inputMax: number, outputMin: number, outputMax: number) => {
+export const mapRange = (
+  val: number,
+  inputMin: number,
+  inputMax: number,
+  outputMin: number,
+  outputMax: number,
+) => {
   if (val <= inputMin) return outputMin;
   if (val >= inputMax) return outputMax;
 

@@ -1,14 +1,17 @@
 import { Slot } from "@radix-ui/react-slot";
+import type { RouteName } from "../../../const";
 import Cusor from "../cusor";
 import { GlBack, GlFront } from "../gl";
 
 export default function Component({
   namespace,
   children,
+  header,
   asChild,
 }: {
   children: React.ReactNode;
-  namespace: string;
+  header: React.ReactNode;
+  namespace: RouteName;
   asChild?: true;
 }) {
   const Comp = asChild ? Slot : "div";
@@ -22,18 +25,20 @@ export default function Component({
       />
       <div aria-hidden="true" className="ui-bg" />
       <GlBack />
-      <div aria-hidden="true" className="grad grad--upper h-[20vh] pc:h-[25vh]" />
-      <div aria-hidden="true" className="grad grad--lower h-[20vh] pc:h-[25vh]" />
+      <div
+        aria-hidden="true"
+        className="grad grad--upper h-[20vh] pc:h-[25vh]"
+      />
+      <div
+        aria-hidden="true"
+        className="grad grad--lower h-[20vh] pc:h-[25vh]"
+      />
+      {header}
       <div
         id="main"
         className="backface-hidden fixed pc:absolute top-0 left-0 w-full overflow-hidden pc:overflow-visible"
-        data-ref="main"
       >
-        <div data-xhr={namespace}>
-          <Comp className="">
-            {children}
-          </Comp>
-        </div>
+        <Comp data-xhr={namespace}>{children}</Comp>
       </div>
       <GlFront />
       <Cusor />

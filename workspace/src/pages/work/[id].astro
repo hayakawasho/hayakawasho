@@ -8,35 +8,38 @@ import { WorkRepository } from "../../_repositories/work/repository";
 export async function getStaticPaths() {
   const repository = new WorkRepository();
   const result = await repository.findAll();
-  const posts = result.works.map(WorkDataMap.toDTO);
-  const first = posts[0];
-  const last = posts[posts.length - 1];
+  const allPosts = result.works.map(WorkDataMap.toDTO);
+  const first = allPosts[0];
+  const last = allPosts[allPosts.length - 1];
 
-  return posts.map((post, index) => ({
+  return allPosts.map((post, index) => ({
     params: {
       id: post.id,
     },
     props: {
-      posts,
+      allPosts,
       post,
-      prev: first.id === post.id ? last : posts[index - 1],
-      next: last.id === post.id ? first : posts[index + 1],
+      prev: first.id === post.id ? last : allPosts[index - 1],
+      next: last.id === post.id ? first : allPosts[index + 1],
       total: result.totalCount,
-      currentIndex: index + 1,
+      currentIndex: index,
     },
   }));
 }
 
-const { posts, post, next, total, currentIndex } = Astro.props;
+const { allPosts, post, currentIndex } = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html
   lang="ja"
-  style={post.theme === "light" ? "--theme-text: var(--color-dark); --theme-bg: var(--color-light);" : "--theme-text: var(--color-light); --theme-bg: var(--color-dark);"}
+  style={`${post.theme === "light"
+    ? "--theme-text: var(--color-dark); --theme-bg: var(--color-light);"
+    : "--theme-text: var(--color-light); --theme-bg: var(--color-dark);"
+  }`}
 >
   <Head>
     <Seo title={post.name} url={`/work/${post.id}/`} />
   </Head>
-  <WorkSingle posts={posts} post={post} currentIndex={currentIndex} />
+  <WorkSingle allPosts={allPosts} currentIndex={currentIndex} />
 </html>

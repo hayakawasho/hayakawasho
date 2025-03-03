@@ -101,7 +101,11 @@ export class Smoother {
     const dist = (this.scroll.prevPos - this.scroll.downPos) * 1;
 
     this.scroll.target += dist;
-    this.scroll.target = this.#clamp(this.scroll.target, -0, this.state.scrollLimit);
+    this.scroll.target = this.#clamp(
+      this.scroll.target,
+      -0,
+      this.state.scrollLimit,
+    );
     this.spring.set(this.scroll.target);
   };
 
@@ -114,7 +118,11 @@ export class Smoother {
     const { pixelY } = NormalizeWheel(e);
 
     this.scroll.target += pixelY;
-    this.scroll.target = this.#clamp(this.scroll.target, -0, this.state.scrollLimit);
+    this.scroll.target = this.#clamp(
+      this.scroll.target,
+      -0,
+      this.state.scrollLimit,
+    );
     this.spring.set(this.scroll.target);
   };
 

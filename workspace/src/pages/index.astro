@@ -14,10 +14,13 @@ const posts = result.works.map(WorkDataMap.toDTO);
 <!DOCTYPE html>
 <html
   lang="ja"
-  style={posts[0].theme === "light" ? "--theme-text: var(--color-dark); --theme-bg: var(--color-light);" : "--theme-text: var(--color-light); --theme-bg: var(--color-dark);"}
+  style={`${posts[0].theme === "light"
+    ? "--theme-text: var(--color-dark); --theme-bg: var(--color-light);"
+    : "--theme-text: var(--color-light); --theme-bg: var(--color-dark);"
+  }`}
 >
   <Head>
     <Seo title="" url="" />
   </Head>
-  <Home posts={posts} total={result.totalCount} />
+  <Home allPosts={posts} />
 </html>

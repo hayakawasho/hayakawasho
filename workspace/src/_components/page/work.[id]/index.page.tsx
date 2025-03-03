@@ -1,46 +1,45 @@
 import type { WorkDTO } from "../../../_models/work/dto";
-import { WorkInfo } from "../../model/work/info";
-import { WorkInfoDialog } from "../../model/work/info/dialog";
-import { WorkInfoTrigger } from "../../model/work/info/trigger";
-import { WorkNavigation } from "../../model/work/navigation";
-import { WorkScreenshots } from "../../model/work/screenshots";
 import ContentLayout from "../../ui/layout";
+// import { Header } from "../../ui/layout/header";
+import Info from "./info";
+import InfoDialog from "./info/dialog";
+import InfoTrigger from "./info/trigger";
 import * as WorkLayout from "./layout";
+import Screenshot from "./screenshots";
 
 export default function Component({
-  posts,
-  post,
+  allPosts,
+  currentIndex,
 }: {
-  posts: WorkDTO[];
-  post: WorkDTO;
+  allPosts: WorkDTO[];
   currentIndex: number;
 }) {
+  const currentPost = allPosts[currentIndex];
+
   return (
-    <ContentLayout namespace="work-single" asChild>
-      <div className="relative size-full" data-component="WorkSingle">
+    <ContentLayout
+      namespace="work-single"
+      // header={<Header allPosts={allPosts} current={currentPost.id} />}
+      header={<></>}
+      asChild
+    >
+      <main data-component="WorkSingle">
+        <h1 className="sr-only">{currentPost.name}</h1>
         <WorkLayout.Wrap>
           <WorkLayout.Head>
-            <div className="grid gap-[3.2rem] pc:text-left">
-              <WorkNavigation posts={posts} current={post.id} />
-            </div>
+            <WorkLayout.HGroup>
+              <InfoTrigger />
+            </WorkLayout.HGroup>
             <WorkLayout.Info>
-              <WorkInfo metadata={post} />
+              <Info metadata={currentPost} />
             </WorkLayout.Info>
           </WorkLayout.Head>
           <WorkLayout.Content>
-            <WorkScreenshots post={post} />
+            <Screenshot post={currentPost} />
           </WorkLayout.Content>
         </WorkLayout.Wrap>
-        <WorkInfoDialog post={post} />
-        <WorkLayout.HGroup>
-          <h1 className="overflow-hidden font-[450] text-[1.4rem] leading-[1.2] tracking-[.04em]">
-            <span className="block transform-gpu" data-ref="title">
-              {post.name}
-            </span>
-          </h1>
-          <WorkInfoTrigger />
-        </WorkLayout.HGroup>
-      </div>
+        <InfoDialog post={currentPost} />
+      </main>
     </ContentLayout>
   );
 }

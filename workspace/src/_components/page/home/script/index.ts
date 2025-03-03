@@ -1,10 +1,11 @@
 import { defineComponent, useMount, useSlot } from "lake";
+import type { DefineComponentContext } from "../../../../const";
 import Hero from "./hero";
 
 export default defineComponent({
   name: "Home",
-  setup(el, context: { history: { value: "push" | "pop" }, once: boolean }) {
-    const { once, history } = context
+  setup(el, context: DefineComponentContext) {
+    const { once, history } = context;
     const { addChild } = useSlot();
 
     useMount(() => {

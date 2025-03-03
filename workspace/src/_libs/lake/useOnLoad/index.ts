@@ -9,19 +9,30 @@ import { useGlFront } from "../../../_components/ui/gl/script/useGlFront";
 import { globalStore } from "../../../_states";
 import { useElementSize } from "../useElementSize";
 import { useSwup } from "./useSwup";
-// import { usePageScroll } from "../usePageScroll";
 
-export function useOnLoad({ mountComponents, unmountComponents }: {
+type Refs = {
+  resizeSentinel: HTMLElement;
+  cursor: HTMLElement;
+  glBack: HTMLCanvasElement;
+  glFront: HTMLCanvasElement;
+  main: HTMLElement;
+};
+
+export function useOnLoad({
+  mountComponents,
+  unmountComponents,
+}: {
   mountComponents: (scope: HTMLElement, props: Record<string, unknown>) => void;
   unmountComponents: (scope: HTMLElement) => void;
 }) {
-  const { refs } = useDomRef<{
-    resizeSentinel: HTMLElement;
-    cursor: HTMLElement;
-    glBack: HTMLCanvasElement;
-    glFront: HTMLCanvasElement;
-    main: HTMLElement;
-  }>("resizeSentinel", "cursor", "glBack", "glFront", "main");
+  const { refs } = useDomRef<Refs>(
+    "resizeSentinel",
+    "cursor",
+    "glBack",
+    "glFront",
+    "main",
+  );
+
   const { addChild: _addChild } = useSlot();
 
   useElementSize(refs.resizeSentinel, ({ width, height }) => {
@@ -42,7 +53,6 @@ export function useOnLoad({ mountComponents, unmountComponents }: {
   const isAnyHover = window.matchMedia("(any-hover:hover)").matches;
   const dpr = Math.min(window.devicePixelRatio, 1.5);
 
-  // const pageScrollContext = usePageScroll(refs.main, isAnyHover);
   const glBackContext = useGlBack(refs.glBack);
   const glFrontContext = useGlFront(refs.glFront, dpr);
 

@@ -16,6 +16,7 @@
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/react": "^4.2.0",
+    "@glidejs/glide": "^3.7.1",
     "@radix-ui/react-slot": "^1.1.1",
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "@swup/head-plugin": "^2.3.1",
@@ -28,7 +29,6 @@
     "detect-gpu": "^5.0.67",
     "glsl-noise": "^0.0.0",
     "gsap": "^3.12.7",
-    "jotai": "^2.8.0",
     "ky": "^1.7.4",
     "lake": "file:lib/lake",
     "normalize-wheel": "^1.0.1",
@@ -50,6 +50,7 @@
     "@markuplint/react-spec": "^4.5.5",
     "@playwright/test": "^1.50.1",
     "@tailwindcss/vite": "^4.0.7",
+    "@types/glidejs__glide": "^3.6.6",
     "@types/normalize-wheel": "^1.0.4",
     "@types/preloadjs": "^0.6.36",
     "@types/react": "^19.0.8",

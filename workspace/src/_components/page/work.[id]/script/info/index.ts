@@ -5,20 +5,22 @@ import { Tween } from "../../../../../_libs/tween";
 import { waitFrame } from "../../../../../_utils/wait";
 import InfoScroll from "./scroll";
 
+type Refs = {
+  infoTrigger: HTMLButtonElement;
+  infoTriggerLabel: HTMLElement;
+  infoDialog: HTMLDialogElement;
+  infoDialogTitle: HTMLElement;
+  infoDialogBackground: HTMLElement;
+  infoText: HTMLElement[];
+  infoDialogContent: HTMLElement;
+  infoScrollItem: HTMLElement[];
+  title: HTMLElement;
+};
+
 export default defineComponent({
   name: "Info",
   setup() {
-    const { refs } = useDomRef<{
-      infoTrigger: HTMLButtonElement;
-      infoTriggerLabel: HTMLElement;
-      infoDialog: HTMLDialogElement;
-      infoDialogTitle: HTMLElement;
-      infoDialogBackground: HTMLElement;
-      infoText: HTMLElement[];
-      infoDialogContent: HTMLElement;
-      infoScrollItem: HTMLElement[];
-      title: HTMLElement;
-    }>(
+    const { refs } = useDomRef<Refs>(
       "infoTrigger",
       "infoTriggerLabel",
       "infoDialog",
@@ -37,7 +39,13 @@ export default defineComponent({
     let isOpen = false;
 
     const closeDialog = async () => {
-      Tween.kill([refs.infoDialogTitle, refs.infoText, refs.infoDialogBackground, refs.title, refs.infoTriggerLabel]);
+      Tween.kill([
+        refs.infoDialogTitle,
+        refs.infoText,
+        refs.infoDialogBackground,
+        refs.title,
+        refs.infoTriggerLabel,
+      ]);
 
       Tween.prop(refs.infoDialogBackground, {
         willChange: "opacity",
@@ -54,17 +62,25 @@ export default defineComponent({
         }),
         Tween.serial(
           Tween.parallel(
-            Tween.tween([refs.infoDialogTitle, refs.infoText], 0.5, "power2.out", {
-              yPercent: 120,
-            }),
+            Tween.tween(
+              [refs.infoDialogTitle, refs.infoText],
+              0.5,
+              "power2.out",
+              {
+                yPercent: 120,
+              },
+            ),
             Tween.tween(refs.infoDialogBackground, 0.5, "power2.out", {
               opacity: 0,
             }),
           ),
           Tween.wait(0, () => {
-            Tween.prop([refs.infoDialogTitle, refs.infoText, refs.infoDialogBackground], {
-              clearProps: "will-change",
-            });
+            Tween.prop(
+              [refs.infoDialogTitle, refs.infoText, refs.infoDialogBackground],
+              {
+                clearProps: "will-change",
+              },
+            );
 
             refs.infoDialog.close();
             infoScrollContext.forEach((i) => i.current.onReset());
@@ -79,7 +95,13 @@ export default defineComponent({
       isOpen = true;
       refs.infoDialog.show();
 
-      Tween.kill([refs.infoDialogTitle, refs.infoText, refs.infoDialogBackground, refs.title, refs.infoTriggerLabel]);
+      Tween.kill([
+        refs.infoDialogTitle,
+        refs.infoText,
+        refs.infoDialogBackground,
+        refs.title,
+        refs.infoTriggerLabel,
+      ]);
 
       Tween.prop([refs.infoDialogTitle, refs.infoText], {
         // MEMO: safariのaタグ位置バグ対応
@@ -117,9 +139,12 @@ export default defineComponent({
           }),
         ),
         Tween.wait(0, () => {
-          Tween.prop([refs.infoDialogTitle, refs.infoText, refs.infoDialogBackground], {
-            clearProps: "will-change",
-          });
+          Tween.prop(
+            [refs.infoDialogTitle, refs.infoText, refs.infoDialogBackground],
+            {
+              clearProps: "will-change",
+            },
+          );
         }),
       );
     };
@@ -142,7 +167,13 @@ export default defineComponent({
         return;
       }
 
-      infoScrollContext.forEach((i) => i.current.onUpdate({ deltaRatio, infoDialogContentHeight, windowHeight }));
+      infoScrollContext.forEach((i) =>
+        i.current.onUpdate({
+          deltaRatio,
+          infoDialogContentHeight,
+          windowHeight,
+        }),
+      );
     });
   },
 });

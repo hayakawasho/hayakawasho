@@ -11,8 +11,14 @@ function Item({
 }) {
   return (
     <dl className="pc:flex pc:justify-between">
-      <dt className="overflow-hidden font-[400] pc:text-[1.1rem] text-[1.2rem] opacity-50" data-ref="infoScrollItem">
-        <span className="backface-hidden inline-block uppercase" data-ref="infoText">
+      <dt
+        className="overflow-hidden font-[400] pc:text-[1.1rem] text-[1.2rem] opacity-50"
+        data-ref="infoScrollItem"
+      >
+        <span
+          className="backface-hidden inline-block uppercase"
+          data-ref="infoText"
+        >
           {label}
         </span>
       </dt>
@@ -43,8 +49,9 @@ function Content({
   );
 }
 
-export function WorkInfo({ metadata }: { metadata: WorkDTO }) {
-  const { launchDateTime, launch, siteUrl } = WorkPresenter.toWorkSingle(metadata);
+export default function Component({ metadata }: { metadata: WorkDTO }) {
+  const { launchDateTime, launch, siteUrl } =
+    WorkPresenter.toWorkSingle(metadata);
 
   return (
     <div className="grid gap-[1.6rem] pc:gap-[1rem] pc:text-left text-center">
@@ -59,7 +66,12 @@ export function WorkInfo({ metadata }: { metadata: WorkDTO }) {
       {metadata.siteUrl && (
         <Item label="(Website)">
           <Content asChild>
-            <a href={metadata.siteUrl} rel="noreferrer" target="_blank" className="transform-gpu underline">
+            <a
+              href={metadata.siteUrl}
+              rel="noreferrer"
+              target="_blank"
+              className="transform-gpu underline"
+            >
               {siteUrl}
             </a>
           </Content>

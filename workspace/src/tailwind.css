@@ -10,7 +10,8 @@
 
 @layer base {
   :root {
-    --font-default: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    --font-default: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
+      "Hiragino Sans", Meiryo, sans-serif;
     --font-sans: "Jost", var(--font-default);
 
     --vh: 1vh;

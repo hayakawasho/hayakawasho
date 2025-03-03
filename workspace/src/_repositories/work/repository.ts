@@ -4,15 +4,15 @@ import type { WorksAPISchema } from "./schema";
 
 export class WorkRepository {
   async findAll() {
-    const res = await apiClient.get<WorksAPISchema["GET"]["response"], WorksAPISchema["GET"]["request"]["params"]>(
-      "works",
-      {
-        params: {
-          limit: 99,
-          orders: "-launch",
-        },
+    const res = await apiClient.get<
+      WorksAPISchema["GET"]["response"],
+      WorksAPISchema["GET"]["request"]["params"]
+    >("works", {
+      params: {
+        limit: 99,
+        orders: "-launch",
       },
-    );
+    });
 
     const { totalCount, contents } = await res.json();
 

@@ -53,7 +53,10 @@ class GlObject extends Object3D {
 }
 
 class GlImage extends GlObject {
-  loadTexture = (src: string, onLoad: (texture: Texture) => void = () => {}) => {
+  loadTexture = (
+    src: string,
+    onLoad: (texture: Texture) => void = () => {},
+  ) => {
     const texture = new Texture();
 
     loadAsset<HTMLImageElement>(src).then((result) => {

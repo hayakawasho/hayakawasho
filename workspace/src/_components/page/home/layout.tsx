@@ -2,38 +2,27 @@ export function Wrap({ children }: { children: React.ReactNode }) {
   return (
     <div
       className={
-        "relative grid h-[var(--100vh)] pc:h-auto pc:grid-cols-[calc(var(--grid)*7)_1fr] pc:items-start justify-center"
+        "relative pc:grid h-[var(--100vh)] pc:h-auto pc:grid-cols-[calc(var(--grid)*7)_1fr] pc:items-start pc:justify-center"
       }
     >
-      {children}
-    </div>
-  );
-}
-
-// export function Soon({ children }: { children: React.ReactNode }) {
-//   return <div className={"absolute top-0 right-0 z-10"}>{children}</div>;
-// }
-
-export function Head({ children }: { children: React.ReactNode }) {
-  return (
-    <div
-      className={
-        "pointer-events-none absolute pc:sticky pc:top-0 top-0 left-0 size-full pc:h-[var(--100vh)] pc:p-[var(--gap)] px-[2.4rem] pc:pt-[4.8rem] pt-[2rem] pb-[2rem] pc:pb-[5.6rem]"
-      }
-    >
-      <div className="relative size-full">{children}</div>
-    </div>
-  );
-}
-
-export function HeadGroup({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="absolute pc:relative top-0 pc:bottom-auto pc:block flex pc:h-full w-full items-start justify-between overflow-hidden pc:overflow-visible pc:text-right pc:text-[var(--color-text)] text-[var(--theme-text)]">
       {children}
     </div>
   );
 }
 
 export function Content({ children }: { children: React.ReactNode }) {
-  return <div className={"relative pc:aspect-auto pc:w-fit w-[calc(var(--grid)*12)] overflow-hidden"}>{children}</div>;
+  return <div className={"pc:sticky pc:top-0 w-full"}>{children}</div>;
+}
+
+export function HeroThumb({ children }: { children: React.ReactNode }) {
+  return (
+    <div
+      className={
+        "pc:static absolute bottom-[3.2rem] left-1/2 pc:flex pc:h-[var(--100vh)] pc:items-center pc:justify-center"
+      }
+      data-ref="heroNavigation"
+    >
+      <div className="-ml-[2.4rem] pc:ml-0">{children}</div>
+    </div>
+  );
 }

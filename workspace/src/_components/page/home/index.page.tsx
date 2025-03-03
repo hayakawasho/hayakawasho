@@ -1,27 +1,29 @@
 import type { WorkDTO } from "../../../_models/work/dto";
-import { WorkHero } from "../../model/work/hero";
-import { WorkNavigation } from "../../model/work/navigation";
 import ContentLayout from "../../ui/layout";
+// import { Header } from "../../ui/layout/header";
+import Hero from "./hero";
+import HeroThumb from "./hero/thumb";
 import * as HomeLayout from "./layout";
 
-export default function Component({ posts, total }: { posts: WorkDTO[]; total: number }) {
+export default function Component({ allPosts }: { allPosts: WorkDTO[] }) {
   return (
-    <ContentLayout namespace="home" asChild>
-      <div className="relative size-full" data-component="Home">
+    <ContentLayout
+      namespace="home"
+      // header={<Header allPosts={allPosts} current={allPosts[0].id} />}
+      header={<></>}
+      asChild
+    >
+      <main data-component="Home">
+        <h1 className="sr-only">Sho Hayakawa Portfolio</h1>
         <HomeLayout.Wrap>
-          <h1 className="sr-only">Sho Hayakawa Portfolio</h1>
+          <Hero posts={allPosts} />
           <HomeLayout.Content>
-            <WorkHero posts={posts} />
+            <HomeLayout.HeroThumb>
+              <HeroThumb posts={allPosts} />
+            </HomeLayout.HeroThumb>
           </HomeLayout.Content>
-          <HomeLayout.Head>
-            <HomeLayout.HeadGroup>
-              <div className="pc:fixed pc:left-[var(--gap)] z-10 pc:text-left">
-                <WorkNavigation posts={posts} current={"pkshatech"} className="max-pc:h-[1em] max-pc:leading-[1.2]" />
-              </div>
-            </HomeLayout.HeadGroup>
-          </HomeLayout.Head>
         </HomeLayout.Wrap>
-      </div>
+      </main>
     </ContentLayout>
   );
 }
