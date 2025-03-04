@@ -1,8 +1,8 @@
-// import Glide from "@glidejs/glide";
 import { defineComponent, useDomRef, useEvent, useMount, useSlot } from "lake";
 import { useWindowEvent } from "../../../../../_libs/lake/useWindowEvent";
 import type { DefineComponentContext } from "../../../../../const";
-import HeroImage from "./image";
+import HomeHeroVisual from "./visual/pc";
+import { useHero } from "./useHero";
 
 type Refs = {
   hero: HTMLElement;
@@ -14,28 +14,19 @@ type Refs = {
 export default defineComponent({
   name: "HomeHero",
   setup(el, props: DefineComponentContext) {
-    const { addChild } = useSlot();
+    const {} = useHero();
 
-    const { refs } = useDomRef<Refs>(
-      "hero",
-      "heroImage",
-      "heroNavigation",
-      "heroThumb",
-    );
-
-    addChild(refs.heroImage, HeroImage);
-
-    useEvent(refs.heroNavigation, "touchstart", (evt) => {
-      console.log(evt);
-    });
-
-    useEvent(refs.heroNavigation, "touchmove", (evt) => {
-      console.log(evt);
-    });
-
-    useEvent(refs.heroNavigation, "touchend", (evt) => {
-      console.log(evt);
-    });
+    // useEvent(refs.heroNavigation, "touchstart", (evt) => {
+    //   console.log(evt);
+    // });
+    //
+    // useEvent(refs.heroNavigation, "touchmove", (evt) => {
+    //   console.log(evt);
+    // });
+    //
+    // useEvent(refs.heroNavigation, "touchend", (evt) => {
+    //   console.log(evt);
+    // });
 
     // useWindowEvent("wheel", (evt) => {
     //   console.log(evt);

@@ -1,32 +1,37 @@
 import { defineComponent, useMount, useSlot } from "lake";
 import type { DefineComponentContext } from "../../../../const";
 import Hero from "./hero";
+import SplashScreen from "./splashscreen";
 
 export default defineComponent({
   name: "Home",
-  setup(el, context: DefineComponentContext) {
-    const { once, history } = context;
-    const { addChild } = useSlot();
+  setup(el, props: DefineComponentContext) {
+    const { once, history } = props;
+    const { addChild, removeChild } = useSlot();
 
     useMount(() => {
-      console.log("mount:Home", context);
+      console.log("mount:Home", props);
 
       (async () => {
         if (once) {
-          const done = async () => {
-            addChild(el, Hero);
+          const [splashscreenContext] = addChild(el, SplashScreen, props);
+
+          const done = () => {
+            addChild(el, Hero, props);
+            removeChild([splashscreenContext]);
           };
 
+          await splashscreenContext.current.onBoot();
           done();
         } else if (!once && history.value === "push") {
-          addChild(el, Hero);
+          addChild(el, Hero, props);
         } else {
-          addChild(el, Hero);
+          addChild(el, Hero, props);
         }
       })();
 
       return () => {
-        console.log("unmount:Home", context);
+        console.log("unmount:Home", props);
       };
     });
   },

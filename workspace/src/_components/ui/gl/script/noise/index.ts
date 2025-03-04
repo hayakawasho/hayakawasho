@@ -1,23 +1,32 @@
-import { RepeatWrapping } from "three";
 import { defineComponent, useMount } from "lake";
-import fragmentShader from "./fragment.frag";
-import vertexShader from "./vertex.vert";
-import { PlaneBufferGeometry, ShaderMaterial, Mesh, TextureLoader, LinearFilter } from "../../../_libs/three";
-import globalStore from "../../../_stores";
-import { useMediaQuery } from "../../../_stores/mq";
-import { useWindowSize } from "../../../_stores/window-size";
-import type { ParentScene } from "../../../_utils/types";
-
-type ComponentProps = ParentScene & {
-  dpr: number;
-};
+import { RepeatWrapping } from "three";
+import {
+  LinearFilter,
+  Mesh,
+  PlaneBufferGeometry,
+  ShaderMaterial,
+  TextureLoader,
+} from "../../../../../_libs/three";
+import { globalStore } from "../../../../../_states";
+// import { useMediaQuery } from "../../../../../_libs/lake/useMediaQuery";
+import { useWindowSize } from "../../../../../_libs/lake/useWindowSize";
+// import type { DefineComponentContext } from "../../../../../const";
+import fragmentShader from "./noise.frag";
+import vertexShader from "./noise.vert";
 
 export default defineComponent({
   name: "RepeatNoise",
-  setup(canvas: HTMLCanvasElement, context: ComponentProps) {
-    const { addScene, removeScene, dpr } = context;
+  setup(
+    canvas: HTMLCanvasElement,
+    props: {
+      dpr: number;
+      addScene: (scene: Mesh) => void;
+      removeScene: (scene: Mesh) => void;
+    },
+  ) {
+    const { addScene, removeScene, dpr } = props;
 
-    const { device } = useMediaQuery();
+    // const { device } = useMediaQuery();
 
     const { pc, mob } = canvas.dataset;
     const textureSrc = {
@@ -25,7 +34,7 @@ export default defineComponent({
       sp: mob as string,
     };
     const loader = new TextureLoader();
-    const texture = loader.load(textureSrc[device], (tex) => {
+    const texture = loader.load(textureSrc["pc"], (tex) => {
       tex.needsUpdate = true;
       tex.minFilter = LinearFilter;
       tex.generateMipmaps = false;
@@ -37,7 +46,7 @@ export default defineComponent({
         value: {
           pc: (1100 / 198) * dpr * 2,
           sp: (1100 / 128) * dpr * 2,
-        }[device],
+        }["pc"],
       },
       uNoiseTexture: {
         value: texture,
@@ -59,11 +68,13 @@ export default defineComponent({
 
     const noisePixelRatio = 0.5;
     const noisePlane = new Mesh(geo, mat);
-    noisePlane.scale.set(globalStore.bounds.ww * noisePixelRatio, globalStore.bounds.wh * noisePixelRatio, 1);
 
-    useWindowSize(({ windowSize }) => {
-      noisePlane.scale.x = windowSize.width * noisePixelRatio;
-      noisePlane.scale.y = windowSize.height * noisePixelRatio;
+    const { ww, wh } = globalStore.getState().bounds;
+    noisePlane.scale.set(ww * noisePixelRatio, wh * noisePixelRatio, 1);
+
+    useWindowSize(({ width, height }) => {
+      noisePlane.scale.x = width * noisePixelRatio;
+      noisePlane.scale.y = height * noisePixelRatio;
     });
 
     useMount(() => {

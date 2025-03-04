@@ -2,7 +2,7 @@ import SwupHeadPlugin from "@swup/head-plugin";
 import SwupParallelPlugin from "@swup/parallel-plugin";
 import SwupPreloadPlugin from "@swup/preload-plugin";
 import { useMount } from "lake";
-import { ref } from "lake";
+import { ref, readonly } from "lake";
 import Swup from "swup";
 
 const PJAX_CONTAINER_SELECTOR = "[data-xhr]";
@@ -17,6 +17,7 @@ export function useSwup({
   unmountComponents: (scope: HTMLElement) => void;
 }) {
   const history = ref<"push" | "pop">("push");
+  const readonlyHistory = readonly(history);
 
   const swup = new Swup({
     animationSelector: false,
@@ -35,7 +36,7 @@ export function useSwup({
   swup.hooks.before("content:insert", (_visit, { containers }) => {
     for (const { next, previous } of containers) {
       updated(next.parentElement as HTMLElement, {
-        history,
+        history: readonlyHistory,
         prevRouteName: previous.dataset.xhr,
       });
     }
@@ -53,7 +54,7 @@ export function useSwup({
 
   useMount(() => {
     created({
-      history,
+      history: readonlyHistory,
     });
 
     return () => {
