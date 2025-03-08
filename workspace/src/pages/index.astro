@@ -5,10 +5,10 @@ import Seo from "../_components/ui/layout/seo.astro";
 import { WorkDataMap } from "../_models/work/mapper";
 import { WorkRepository } from "../_repositories/work/repository";
 
-const repository = new WorkRepository();
-const result = await repository.findAll();
+const workRepository = new WorkRepository();
+const { works } = await workRepository.findAll();
 
-const posts = result.works.map(WorkDataMap.toDTO);
+const posts = works.map(WorkDataMap.toDTO);
 ---
 
 <!DOCTYPE html>

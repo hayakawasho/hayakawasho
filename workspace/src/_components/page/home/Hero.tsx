@@ -1,4 +1,4 @@
-import type { WorkDTO } from "../../../../_models/work/dto";
+import type { WorkDTO } from "../../../_models/work/dto";
 
 const MAX_W = 1920;
 

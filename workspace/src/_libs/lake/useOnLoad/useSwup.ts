@@ -2,7 +2,7 @@ import SwupHeadPlugin from "@swup/head-plugin";
 import SwupParallelPlugin from "@swup/parallel-plugin";
 import SwupPreloadPlugin from "@swup/preload-plugin";
 import { useMount } from "lake";
-import { ref, readonly } from "lake";
+import { readonly, ref } from "lake";
 import Swup from "swup";
 
 const PJAX_CONTAINER_SELECTOR = "[data-xhr]";

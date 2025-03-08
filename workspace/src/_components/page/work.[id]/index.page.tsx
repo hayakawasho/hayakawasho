@@ -1,11 +1,11 @@
 import type { WorkDTO } from "../../../_models/work/dto";
 import ContentLayout from "../../ui/layout";
-// import { Header } from "../../ui/layout/header";
-import Info from "./info";
 import InfoDialog from "./info/dialog";
+// import { Header } from "../../ui/layout/header";
+import Info from "./info/info";
 import InfoTrigger from "./info/trigger";
-import * as WorkLayout from "./layout";
-import Screenshot from "./screenshots";
+import * as Layout from "./layout";
+import Screenshots from "./screenshots";
 
 export default function Component({
   allPosts,
@@ -25,19 +25,19 @@ export default function Component({
     >
       <main data-component="WorkSingle">
         <h1 className="sr-only">{currentPost.name}</h1>
-        <WorkLayout.Wrap>
-          <WorkLayout.Head>
-            <WorkLayout.HGroup>
+        <Layout.Wrap>
+          <Layout.Head>
+            <Layout.HGroup>
               <InfoTrigger />
-            </WorkLayout.HGroup>
-            <WorkLayout.Info>
+            </Layout.HGroup>
+            <Layout.Info>
               <Info metadata={currentPost} />
-            </WorkLayout.Info>
-          </WorkLayout.Head>
-          <WorkLayout.Content>
-            <Screenshot post={currentPost} />
-          </WorkLayout.Content>
-        </WorkLayout.Wrap>
+            </Layout.Info>
+          </Layout.Head>
+          <Layout.Content>
+            <Screenshots post={currentPost} />
+          </Layout.Content>
+        </Layout.Wrap>
         <InfoDialog post={currentPost} />
       </main>
     </ContentLayout>

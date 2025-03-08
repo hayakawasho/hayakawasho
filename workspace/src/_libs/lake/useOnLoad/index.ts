@@ -50,27 +50,36 @@ export function useOnLoad({
     },
   );
 
-  const isAnyHover = window.matchMedia("(any-hover:hover)").matches;
+  const device = wideQuery.matches ? "pc" : "sp";
+
+  const anyHover = window.matchMedia("(any-hover:hover)").matches
+    ? "hover"
+    : "none";
+
   const dpr = Math.min(window.devicePixelRatio, 1.5);
 
   const glBackContext = useGlBack(refs.glBack);
   const glFrontContext = useGlFront(refs.glFront, dpr);
 
-  if (isAnyHover) {
-    // addChild(refs.cursor, withSvelte(Cursor, "Cursor"));
-  }
+  // if (anyHover === "hover") {
+  // addChild(refs.cursor, withSvelte(Cursor, "Cursor"));
+  // }
 
   useSwup({
     created(props) {
       mountComponents(document.documentElement, {
         ...props,
         once: true,
+        device,
+        anyHover,
       });
     },
     updated(scope, props) {
       mountComponents(scope, {
         ...props,
         once: false,
+        device,
+        anyHover,
       });
     },
     unmountComponents,

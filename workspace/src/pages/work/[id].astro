@@ -6,9 +6,9 @@ import { WorkDataMap } from "../../_models/work/mapper";
 import { WorkRepository } from "../../_repositories/work/repository";
 
 export async function getStaticPaths() {
-  const repository = new WorkRepository();
-  const result = await repository.findAll();
-  const allPosts = result.works.map(WorkDataMap.toDTO);
+  const workRepository = new WorkRepository();
+  const { works, totalCount } = await workRepository.findAll();
+  const allPosts = works.map(WorkDataMap.toDTO);
   const first = allPosts[0];
   const last = allPosts[allPosts.length - 1];
 
@@ -21,7 +21,7 @@ export async function getStaticPaths() {
       post,
       prev: first.id === post.id ? last : allPosts[index - 1],
       next: last.id === post.id ? first : allPosts[index + 1],
-      total: result.totalCount,
+      total: totalCount,
       currentIndex: index,
     },
   }));

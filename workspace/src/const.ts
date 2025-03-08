@@ -4,6 +4,8 @@ export type RouteName = "home" | "work-single";
 
 export type DefineComponentContext = {
   history: ReadonlyRef<"push" | "pop">;
-  once: boolean;
-  prevRouteName: RouteName;
+  anyHover: Readonly<"hover" | "none">;
+  device: Readonly<"pc" | "sp">;
+  once: Readonly<boolean>;
+  prevRouteName: Readonly<RouteName>;
 };

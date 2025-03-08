@@ -2,8 +2,8 @@ import type { WorkDTO } from "../../../_models/work/dto";
 import ContentLayout from "../../ui/layout";
 // import { Header } from "../../ui/layout/header";
 import Hero from "./hero";
-import HeroThumb from "./hero/thumb";
-import * as HomeLayout from "./layout";
+import * as Layout from "./layout";
+import HeroThumb from "./thumb";
 
 export default function Component({ allPosts }: { allPosts: WorkDTO[] }) {
   return (
@@ -15,14 +15,14 @@ export default function Component({ allPosts }: { allPosts: WorkDTO[] }) {
     >
       <main data-component="Home">
         <h1 className="sr-only">Sho Hayakawa Portfolio</h1>
-        <HomeLayout.Wrap>
+        <Layout.Wrap>
           <Hero posts={allPosts} />
-          <HomeLayout.Content>
-            <HomeLayout.HeroThumb>
+          <Layout.Content>
+            <Layout.HeroThumb>
               <HeroThumb posts={allPosts} />
-            </HomeLayout.HeroThumb>
-          </HomeLayout.Content>
-        </HomeLayout.Wrap>
+            </Layout.HeroThumb>
+          </Layout.Content>
+        </Layout.Wrap>
       </main>
     </ContentLayout>
   );

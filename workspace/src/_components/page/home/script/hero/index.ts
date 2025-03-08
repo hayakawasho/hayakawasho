@@ -1,53 +1,17 @@
-import { defineComponent, useDomRef, useEvent, useMount, useSlot } from "lake";
-import { useWindowEvent } from "../../../../../_libs/lake/useWindowEvent";
+import { defineComponent, useSlot } from "lake";
 import type { DefineComponentContext } from "../../../../../const";
-import HomeHeroVisual from "./visual/pc";
-import { useHero } from "./useHero";
-
-type Refs = {
-  hero: HTMLElement;
-  heroImage: HTMLImageElement[];
-  heroNavigation: HTMLElement;
-  heroThumb: HTMLImageElement[];
-};
+import PcHomeHeroControl from "./control/pc";
+import SpHomeHeroControl from "./control/sp";
 
 export default defineComponent({
   name: "HomeHero",
   setup(el, props: DefineComponentContext) {
-    const {} = useHero();
+    const { device } = props;
 
-    // useEvent(refs.heroNavigation, "touchstart", (evt) => {
-    //   console.log(evt);
-    // });
-    //
-    // useEvent(refs.heroNavigation, "touchmove", (evt) => {
-    //   console.log(evt);
-    // });
-    //
-    // useEvent(refs.heroNavigation, "touchend", (evt) => {
-    //   console.log(evt);
-    // });
+    const { addChild } = useSlot();
 
-    // useWindowEvent("wheel", (evt) => {
-    //   console.log(evt);
-    // });
-
-    // const slide = new Glide(refs.hero, { startAt: 0 }).mutate([
-    //   (Glide: any, Components: any, Events: any) => {
-    //     return {
-    //       modify(translate: number) {
-    //         //
-    //       },
-    //     };
-    //   },
-    // ] as Glide.TransformerFunction[]);
-
-    // useMount(() => {
-    //   slide.mount({});
-    //
-    //   return () => {
-    //     slide.destroy();
-    //   };
-    // });
+    device === "pc"
+      ? addChild(el, PcHomeHeroControl, props)
+      : addChild(el, SpHomeHeroControl, props);
   },
 });

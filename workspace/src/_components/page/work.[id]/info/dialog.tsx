@@ -1,5 +1,5 @@
-import Info from ".";
 import type { WorkDTO } from "../../../../_models/work/dto";
+import Info from "./info";
 
 export default function Component({ post }: { post: WorkDTO }) {
   return (

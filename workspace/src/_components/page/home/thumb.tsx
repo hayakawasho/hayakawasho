@@ -1,5 +1,4 @@
-import { Fragment } from "react";
-import type { WorkDTO } from "../../../../_models/work/dto";
+import type { WorkDTO } from "../../../_models/work/dto";
 
 export default function Component({ posts }: { posts: WorkDTO[] }) {
   return (
