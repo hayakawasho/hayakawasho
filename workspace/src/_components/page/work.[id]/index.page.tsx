@@ -35,10 +35,10 @@ export default function Component({
             </Layout.Info>
           </Layout.Head>
           <Layout.Content>
-            <Screenshots post={currentPost} />
+            <Screenshots metadata={currentPost} />
           </Layout.Content>
         </Layout.Wrap>
-        <InfoDialog post={currentPost} />
+        <InfoDialog metadata={currentPost} />
       </main>
     </ContentLayout>
   );

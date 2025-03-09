@@ -1,20 +1,34 @@
-import { defineComponent, useMount, useSlot } from "lake";
+import { defineComponent, useDomRef, useMount, useSlot } from "lake";
+import type { DefineComponentContext } from "../../../../const";
 import Info from "./info";
+import PcScreenShots from "./screenshots/pc";
+import SpScreenShots from "./screenshots/sp";
+
+type Refs = {
+  screenshots: HTMLElement;
+};
 
 export default defineComponent({
   name: "WorkSingle",
-  setup(el, context) {
-    console.log("WorkSingle:", context);
+  setup(el, props: DefineComponentContext) {
+    const { device } = props;
+
+    const { refs } = useDomRef<Refs>();
 
     const { addChild } = useSlot();
 
-    addChild(el, Info);
+    if (device === "sp") {
+      addChild(el, Info);
+      addChild(refs.screenshots, SpScreenShots);
+    } else {
+      addChild(refs.screenshots, PcScreenShots);
+    }
 
     useMount(() => {
-      console.log("mount:WorkSingle", context);
+      console.log("mount:WorkSingle", props);
 
       return () => {
-        console.log("unmount:WorkSingle", context);
+        console.log("unmount:WorkSingle", props);
       };
     });
   },

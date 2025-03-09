@@ -5,12 +5,12 @@ const MAX_W = 1920;
 export default function Component({ posts }: { posts: WorkDTO[] }) {
   return (
     <div className="relative h-full pc:w-fit w-full" data-ref="hero">
-      <ul className="" data-ref="heroSlideItems">
+      <ul className="" data-ref="heroItems">
         {posts.map((i) => (
           <li
             className="h-[var(--100vh)] overflow-hidden"
             key={i.id}
-            data-ref="heroSlideItem"
+            data-ref="heroItem"
           >
             <a href={`/work/${i.id}/`}>
               <img

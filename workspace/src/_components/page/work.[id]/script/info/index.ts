@@ -1,5 +1,6 @@
 import { defineComponent, useDomRef, useEvent, useSlot } from "lake";
 import { useElementSize } from "../../../../../_libs/lake/useElementSize";
+import { globalStore } from "../../../../../_states";
 import { useTick } from "../../../../../_libs/lake/useTick";
 import { Tween } from "../../../../../_libs/tween";
 import { waitFrame } from "../../../../../_utils/wait";
@@ -155,11 +156,11 @@ export default defineComponent({
     });
 
     let infoDialogContentHeight = 1247;
-    let windowHeight = window.innerHeight;
+    let windowHeight = globalStore.getState().bounds.wh;
 
     useElementSize(refs.infoDialogContent, ({ height }) => {
       infoDialogContentHeight = height;
-      windowHeight = window.innerHeight;
+      windowHeight = globalStore.getState().bounds.wh;
     });
 
     useTick(({ deltaRatio }) => {

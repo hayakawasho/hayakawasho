@@ -1,7 +1,7 @@
 import type { WorkDTO } from "../../../../_models/work/dto";
 import Info from "./info";
 
-export default function Component({ post }: { post: WorkDTO }) {
+export default function Component({ metadata }: { metadata: WorkDTO }) {
   return (
     <dialog
       className="fixed top-0 left-0 size-full text-[var(--color-text)]"
@@ -19,10 +19,10 @@ export default function Component({ post }: { post: WorkDTO }) {
           data-ref="infoScrollItem"
         >
           <span className="backface-hidden block" data-ref="infoDialogTitle">
-            {post.name}
+            {metadata.name}
           </span>
         </h2>
-        <Info metadata={post} />
+        <Info metadata={metadata} />
         <div className="h-[calc(var(--100vh)/2)]" aria-hidden="true" />
       </div>
     </dialog>
