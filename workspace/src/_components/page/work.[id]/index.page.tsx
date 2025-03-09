@@ -21,7 +21,6 @@ export default function Component({
       namespace="work-single"
       // header={<Header allPosts={allPosts} current={currentPost.id} />}
       header={<></>}
-      asChild
     >
       <main data-component="WorkSingle">
         <h1 className="sr-only">{currentPost.name}</h1>

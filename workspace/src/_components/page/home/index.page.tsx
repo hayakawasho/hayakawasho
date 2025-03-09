@@ -11,7 +11,6 @@ export default function Component({ allPosts }: { allPosts: WorkDTO[] }) {
       namespace="home"
       // header={<Header allPosts={allPosts} current={allPosts[0].id} />}
       header={<></>}
-      asChild
     >
       <main data-component="Home">
         <h1 className="sr-only">Sho Hayakawa Portfolio</h1>

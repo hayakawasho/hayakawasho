@@ -35,7 +35,7 @@ export function useSwup({
 
   swup.hooks.before("content:insert", (_visit, { containers }) => {
     for (const { next, previous } of containers) {
-      updated(next.parentElement as HTMLElement, {
+      updated(next, {
         history: readonlyHistory,
         prevRouteName: previous.dataset.xhr,
       });
@@ -44,7 +44,7 @@ export function useSwup({
 
   swup.hooks.before("content:remove", (_visit, { containers }) => {
     for (const { remove } of containers) {
-      unmountComponents(remove[0].parentElement as HTMLElement);
+      unmountComponents(remove[0] as HTMLElement);
     }
   });
 

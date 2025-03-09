@@ -13,13 +13,13 @@ export default defineComponent({
   setup(el, props: DefineComponentContext) {
     const { device } = props;
 
-    const { refs } = useDomRef<Refs>();
+    const { refs } = useDomRef<Refs>("screenshots");
 
     const { addChild } = useSlot();
 
     if (device === "sp") {
       addChild(el, Info);
-      addChild(refs.screenshots, SpScreenShots);
+      // addChild(refs.screenshots, SpScreenShots);
     } else {
       addChild(refs.screenshots, PcScreenShots);
     }

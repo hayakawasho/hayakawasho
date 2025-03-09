@@ -1,8 +1,8 @@
 import { defineComponent, useDomRef, useEvent, useSlot } from "lake";
 import { useElementSize } from "../../../../../_libs/lake/useElementSize";
-import { globalStore } from "../../../../../_states";
 import { useTick } from "../../../../../_libs/lake/useTick";
 import { Tween } from "../../../../../_libs/tween";
+import { globalStore } from "../../../../../_states";
 import { waitFrame } from "../../../../../_utils/wait";
 import InfoScroll from "./scroll";
 
