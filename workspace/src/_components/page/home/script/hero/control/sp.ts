@@ -1,18 +1,18 @@
 import { defineComponent, useDomRef, useEvent, useMount, useSlot } from "lake";
 import { useWindowEvent } from "../../../../../../_libs/lake/useWindowEvent";
 import type { DefineComponentContext } from "../../../../../../const";
-import HomeHeroThumb from "../thumb//sp";
-import HomeHeroVisual from "../visual/sp";
+import HeroThumb from "../thumb/pc";
+import HeroVisual from "../visual/pc";
 
 type Refs = {
   hero: HTMLElement;
-  heroImage: HTMLImageElement[];
+  heroItem: HTMLElement[];
   heroNavigation: HTMLElement;
-  heroThumb: HTMLImageElement[];
+  heroThumbItem: HTMLElement[];
 };
 
 export default defineComponent({
-  name: "HomeHeroControl",
+  name: "HeroControl",
   setup(el, props: DefineComponentContext) {
     const { addChild } = useSlot();
 
@@ -20,10 +20,10 @@ export default defineComponent({
       "hero",
       "heroImage",
       "heroNavigation",
-      "heroThumb",
+      "heroThumbItem",
     );
 
-    addChild(refs.heroImage, HomeHeroVisual);
-    addChild(refs.heroThumb, HomeHeroThumb);
+    const visualContext = addChild(refs.heroItem, HeroVisual);
+    const thumbContext = addChild(refs.heroThumbItem, HeroThumb);
   },
 });

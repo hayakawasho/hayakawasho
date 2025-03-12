@@ -2,7 +2,7 @@ import { defineComponent, useDomRef, useMount } from "lake";
 import { useElementSize } from "../../../../../_libs/lake/useElementSize";
 import { useTick } from "../../../../../_libs/lake/useTick";
 import { useWindowEvent } from "../../../../../_libs/lake/useWindowEvent";
-import { Smoother } from "../../../../../_libs/scroll/smoother";
+import { ScrollSmoother } from "../../../../../_libs/scroll/smoother";
 import { Tween } from "../../../../../_libs/tween";
 import type { DefineComponentContext } from "../../../../../const";
 
@@ -15,7 +15,7 @@ export default defineComponent({
   setup(el, _props: DefineComponentContext) {
     const { refs } = useDomRef<Refs>("screenshotItem");
 
-    const smooth = new Smoother({
+    const smooth = ScrollSmoother.create({
       stiffness: 0.24,
       damping: 1,
       mass: 1.6,
@@ -40,15 +40,11 @@ export default defineComponent({
     });
 
     useMount(() => {
-      const scrollTo = (val: number) => {
+      function onSmooth({ currentY = 0 }) {
         Tween.prop(refs.screenshotItem, {
-          x: -val,
+          x: -currentY,
         });
-      };
-
-      const onSmooth = ({ currentY = 0 }) => {
-        scrollTo(currentY);
-      };
+      }
 
       smooth.on(onSmooth);
       smooth.resume();

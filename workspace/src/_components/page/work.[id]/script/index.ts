@@ -19,7 +19,7 @@ export default defineComponent({
 
     if (device === "sp") {
       addChild(el, Info);
-      // addChild(refs.screenshots, SpScreenShots);
+      addChild(refs.screenshots, SpScreenShots);
     } else {
       addChild(refs.screenshots, PcScreenShots);
     }

@@ -3,6 +3,6 @@ import { useTick } from "../../../../../../_libs/lake/useTick";
 import { useWindowEvent } from "../../../../../../_libs/lake/useWindowEvent";
 
 export default defineComponent({
-  name: "HomeHeroThumb",
+  name: "HeroThumb",
   setup(el, context) {},
 });

@@ -16,10 +16,10 @@ export default defineComponent({
         if (once) {
           const [splashscreenContext] = addChild(el, SplashScreen, props);
 
-          const done = () => {
+          function done() {
             addChild(el, Hero, props);
             removeChild([splashscreenContext]);
-          };
+          }
 
           await splashscreenContext.current.onBoot();
           done();

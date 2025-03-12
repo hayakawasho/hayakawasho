@@ -3,7 +3,7 @@ import { createEmitter } from "../emitter";
 import { createSpring } from "./spring";
 import type { SpringConfig } from "./spring";
 
-export class Smoother {
+export class ScrollSmoother {
   protected state;
   protected scroll;
   protected emitter;
@@ -12,7 +12,7 @@ export class Smoother {
   public off;
   public on;
 
-  constructor({ stiffness, damping, mass }: Partial<SpringConfig>) {
+  private constructor({ stiffness, damping, mass }: Partial<SpringConfig>) {
     this.state = {
       active: false,
       scrollLimit: 0,
@@ -39,6 +39,10 @@ export class Smoother {
       mass,
     });
   }
+
+  static create = (config: Partial<SpringConfig>) => {
+    return new ScrollSmoother(config);
+  };
 
   resize = (contentH: number, windowH: number) => {
     this.state.scrollLimit = contentH - windowH;
