@@ -26,8 +26,11 @@ export function createWindowSizeSlice() {
     resizeWindow: (width: number, height: number) => {
       set((state) => ({
         ...state,
-        ww: width,
-        wh: height,
+        bounds: {
+          ...state.bounds,
+          ww: width,
+          wh: height,
+        },
       }));
 
       _setWindowSize(set);

@@ -1,59 +1,48 @@
 <script lang="ts">
-  import { useTick } from '../../../../_libs/lake/useTick';
-  import { useMousePosition } from '../../../../_stores/mouse';
-  import { lerp } from '../../../../_utils/lerp';
+import { useTick } from "../../../../_libs/lake/useTick";
+import { globalStore } from "../../../../_states";
+import { lerp } from "../../../../_utils/lerp";
 
-  let timer: number;
+let timer: number;
 
-  const state = {
-    isRunning: false,
-    x: 0,
-    y: 0,
-  };
+const state = {
+  isRunning: false,
+  x: 0,
+  y: 0,
+};
 
-  let lastX = -100;
-  let lastY = -100;
-  let diffX = 0;
-  let diffY = 0;
+let lastX = -100;
+let lastY = -100;
+let diffX = 0;
+let diffY = 0;
 
-  const [_, setMousePos] = useMousePosition()
+const onMove = (e: MouseEvent) => {
+  clearTimeout(timer);
 
-  const calcAngle = (x: number, y: number) => (180 * Math.atan2(y, x)) / Math.PI;
-  const calcSqueeze = (x: number, y: number) => {
-    const val = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-    return Math.min(val / 200, 0.55);
-  };
+  state.isRunning = true;
 
-  const onMove = (e: MouseEvent) => {
-    clearTimeout(timer);
+  state.x = e.clientX;
+  state.y = e.clientY;
 
-    state.isRunning = true;
+  globalStore.getState().coordinate.updateCoordinate(state.x, state.y);
 
-    state.x = e.clientX;
-    state.y = e.clientY;
+  timer = window.setTimeout(() => {
+    state.isRunning = false;
+  }, 500);
+};
 
-    setMousePos({
-      x: state.x,
-      y: state.y,
-    });
+useTick(({ deltaRatio }) => {
+  if (!state.isRunning) {
+    return;
+  }
 
-    timer = window.setTimeout(() => {
-      state.isRunning = false;
-    }, 500);
-  };
+  const p = 0.2 * deltaRatio;
+  lastX = lerp(lastX, state.x, p);
+  lastY = lerp(lastY, state.y, p);
+});
 
-  useTick(({ deltaRatio }) => {
-    if (!state.isRunning) {
-      return;
-    }
-
-    const p = 0.2 * deltaRatio;
-    lastX = lerp(lastX, state.x, p);
-    lastY = lerp(lastY, state.y, p);
-  });
-
-  $: diffX = lastX - state.x;
-  $: diffY = lastY - state.y;
+$: diffX = lastX - state.x;
+$: diffY = lastY - state.y;
 </script>
 
 <svelte:body on:mousemove|passive={onMove} />
@@ -62,7 +51,6 @@
   <div class="cursor__inner">
     <span
       class="cursor__circle absolute inset-0"
-      style={`transform: rotate(${calcAngle(diffX, diffY)}deg) scale(${1 + calcSqueeze(diffX, diffY)}, ${1 - calcSqueeze(diffX, diffY)}) translateZ(0)`}
     ></span>
   </div>
   <span class="cursor__hold absolute inset-0">

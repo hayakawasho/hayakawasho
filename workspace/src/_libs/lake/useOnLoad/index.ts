@@ -1,11 +1,8 @@
-import { useDomRef, useSlot } from "lake";
-import { useGlBack } from "../../../_components/ui/gl/script/useGlBack";
-import { useGlFront } from "../../../_components/ui/gl/script/useGlFront";
-// import Cursor from "../../../_components/ui/cusor/script/index.svelte";
-// import { withSvelte } from "../../../_libs/lake/withSvelte";
-// import { useCursorTypeContext } from "../../../_stores/cursor";
-// import { useMediaQuery } from "../../../_stores/mq";
-// import { useRoute } from "../../../_stores/route";
+import { useDomRef, useMount, useSlot } from "lake";
+import Cursor from "../../../_components/ui/cusor/script/index.svelte";
+import Gl from "../../../_components/ui/gl/script";
+import { useRepeatNoise } from "../../../_components/ui/gl/script/noise/useRepeatNoise";
+import { withSvelte } from "../../../_libs/lake/withSvelte";
 import { globalStore } from "../../../_states";
 import { useElementSize } from "../useElementSize";
 import { useSwup } from "./useSwup";
@@ -33,7 +30,7 @@ export function useOnLoad({
     "main",
   );
 
-  const { addChild: _addChild } = useSlot();
+  const { addChild } = useSlot();
 
   useElementSize(refs.resizeSentinel, ({ width, height }) => {
     globalStore.getState().bounds.resizeWindow(width, height);
@@ -58,12 +55,31 @@ export function useOnLoad({
 
   const dpr = Math.min(window.devicePixelRatio, 1.5);
 
-  const glBackContext = useGlBack(refs.glBack);
-  const glFrontContext = useGlFront(refs.glFront, dpr);
+  const [glBackContext] = addChild(refs.glBack, Gl, {
+    resolution: 1,
+    device,
+    anyHover,
+  });
 
-  // if (anyHover === "hover") {
-  // addChild(refs.cursor, withSvelte(Cursor, "Cursor"));
-  // }
+  const [glFrontContext] = addChild(refs.glFront, Gl, {
+    resolution: dpr,
+    device,
+    anyHover,
+  });
+
+  const noise = useRepeatNoise(refs.glBack, 1, device);
+
+  useMount(() => {
+    glBackContext.current.addScene(noise);
+
+    if (anyHover === "hover") {
+      addChild(refs.cursor, withSvelte(Cursor, "Cursor"));
+    }
+
+    return () => {
+      glBackContext.current.removeScene(noise);
+    };
+  });
 
   useSwup({
     created(props) {
@@ -72,6 +88,8 @@ export function useOnLoad({
         once: true,
         device,
         anyHover,
+        glBackContext: glBackContext.current,
+        glFrontContext: glFrontContext.current,
       });
     },
     updated(scope, props) {
@@ -80,6 +98,8 @@ export function useOnLoad({
         once: false,
         device,
         anyHover,
+        glBackContext: glBackContext.current,
+        glFrontContext: glFrontContext.current,
       });
     },
     unmountComponents,

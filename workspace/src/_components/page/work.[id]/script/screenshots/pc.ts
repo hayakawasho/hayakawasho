@@ -11,8 +11,8 @@ type Refs = {
 };
 
 export default defineComponent({
-  name: "Screenshots",
-  setup(el, _props: DefineComponentContext) {
+  name: "ScreenShots",
+  setup(el, props: DefineComponentContext) {
     const { refs } = useDomRef<Refs>("screenshotItem");
 
     const smooth = ScrollSmoother.create({
@@ -25,15 +25,9 @@ export default defineComponent({
       smooth.resize(el.scrollWidth, width);
     });
 
-    useWindowEvent(
-      "wheel",
-      (e) => {
-        smooth.onWheel(e);
-      },
-      {
-        passive: false,
-      },
-    );
+    useWindowEvent("wheel", smooth.onWheel, {
+      passive: false,
+    });
 
     useTick(({ deltaRatio }) => {
       smooth.raf({ deltaRatio });
