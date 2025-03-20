@@ -7,11 +7,10 @@ export default defineComponent({
   name: "Home",
   setup(el, props: DefineComponentContext) {
     const { once, history } = props;
+
     const { addChild, removeChild } = useSlot();
 
     useMount(() => {
-      console.log("mount:Home", props);
-
       (async () => {
         if (once) {
           const [splashscreenContext] = addChild(el, SplashScreen, props);
@@ -31,7 +30,7 @@ export default defineComponent({
       })();
 
       return () => {
-        console.log("unmount:Home", props);
+        //
       };
     });
   },

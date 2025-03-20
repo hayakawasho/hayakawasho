@@ -63,25 +63,17 @@ export default defineComponent({
         }),
         Tween.serial(
           Tween.parallel(
-            Tween.tween(
-              [refs.infoDialogTitle, refs.infoText],
-              0.5,
-              "power2.out",
-              {
-                yPercent: 120,
-              },
-            ),
+            Tween.tween([refs.infoDialogTitle, refs.infoText], 0.5, "power2.out", {
+              yPercent: 120,
+            }),
             Tween.tween(refs.infoDialogBackground, 0.5, "power2.out", {
               opacity: 0,
             }),
           ),
           Tween.wait(0, () => {
-            Tween.prop(
-              [refs.infoDialogTitle, refs.infoText, refs.infoDialogBackground],
-              {
-                clearProps: "will-change",
-              },
-            );
+            Tween.prop([refs.infoDialogTitle, refs.infoText, refs.infoDialogBackground], {
+              clearProps: "will-change",
+            });
 
             refs.infoDialog.close();
             infoScrollContext.forEach((i) => i.current.onReset());
@@ -140,12 +132,9 @@ export default defineComponent({
           }),
         ),
         Tween.wait(0, () => {
-          Tween.prop(
-            [refs.infoDialogTitle, refs.infoText, refs.infoDialogBackground],
-            {
-              clearProps: "will-change",
-            },
-          );
+          Tween.prop([refs.infoDialogTitle, refs.infoText, refs.infoDialogBackground], {
+            clearProps: "will-change",
+          });
         }),
       );
     };

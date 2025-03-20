@@ -1,10 +1,6 @@
 import { defineComponent, useDomRef, useMount } from "lake";
-import { useElementSize } from "../../../../../_libs/lake/useElementSize";
-import { useTick } from "../../../../../_libs/lake/useTick";
-import { useWindowEvent } from "../../../../../_libs/lake/useWindowEvent";
-import { ScrollSmoother } from "../../../../../_libs/scroll/smoother";
-import { Tween } from "../../../../../_libs/tween";
 import type { DefineComponentContext } from "../../../../../const";
+import { useScreenShotPlane } from "./useScreenShotPlane";
 
 type Refs = {
   plane: HTMLImageElement;
@@ -12,9 +8,28 @@ type Refs = {
 
 export default defineComponent({
   name: "ScreenShotItem",
-  setup(el, props: DefineComponentContext) {
-    const { refs } = useDomRef<Refs>("plane");
+  setup(_el, props: DefineComponentContext) {
+    const { glFrontContext } = props;
 
-    return {};
+    console.log(glFrontContext);
+
+    const { refs } = useDomRef<Refs>("plane");
+    const { plane, uniforms } = useScreenShotPlane(refs.plane);
+
+    glFrontContext.addScene(plane);
+
+    useMount(() => {
+      return () => {
+        glFrontContext.removeScene(plane);
+      };
+    });
+
+    function updateX(x: number) {
+      plane.updateX(x);
+    }
+
+    return {
+      updateX,
+    };
   },
 });

@@ -1,15 +1,15 @@
-import Pool from "./pool";
+import Pool from "../_libs/pool";
 
-export const loadAsset = <T>(src: string) => {
+export function assetLoader<T>(src: string) {
   return new Promise<T>((resolve) => {
     const checkLoaded = Pool.pop<T>(src);
 
     if (checkLoaded) {
-      resolve(checkLoaded);
-    } else {
-      Pool.loadFile(src).then((result) => {
-        resolve(result);
-      });
+      return resolve(checkLoaded);
     }
+
+    Pool.loadFile(src).then((result) => {
+      return resolve(result);
+    });
   });
-};
+}

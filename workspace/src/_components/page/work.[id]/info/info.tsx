@@ -15,10 +15,7 @@ function Item({
         className="overflow-hidden font-[400] pc:text-[1.1rem] text-[1.2rem] opacity-50"
         data-ref="infoScrollItem"
       >
-        <span
-          className="backface-hidden inline-block uppercase"
-          data-ref="infoText"
-        >
+        <span className="backface-hidden inline-block uppercase" data-ref="infoText">
           {label}
         </span>
       </dt>
@@ -50,8 +47,7 @@ function Content({
 }
 
 export default function Component({ metadata }: { metadata: WorkDTO }) {
-  const { launchDateTime, launch, siteUrl } =
-    WorkPresenter.toWorkSingle(metadata);
+  const { launchDateTime, launch, siteUrl } = WorkPresenter.toWorkSingle(metadata);
 
   return (
     <div className="grid gap-[1.6rem] pc:gap-[1rem] pc:text-left text-center">

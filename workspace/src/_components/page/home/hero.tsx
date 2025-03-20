@@ -1,6 +1,6 @@
 import type { WorkDTO } from "../../../_models/work/dto";
 
-const MAX_W = 1920;
+const MAX_W = 2400;
 
 export default function Component({ posts }: { posts: WorkDTO[] }) {
   return (
@@ -12,6 +12,7 @@ export default function Component({ posts }: { posts: WorkDTO[] }) {
               <img
                 className="h-full pc:h-fit pc:min-h-[var(--100vh)] w-full object-cover"
                 src={`${i.thumb.src}?auto=compress,format&fm=avif&w=${MAX_W > i.thumb.width ? i.thumb.width : MAX_W}`}
+                data-src={`${i.thumb.src}?auto=compress,format&fm=avif&w=${MAX_W > i.thumb.width ? i.thumb.width : MAX_W}`}
                 width={i.thumb.width}
                 height={i.thumb.height}
                 alt={i.name}

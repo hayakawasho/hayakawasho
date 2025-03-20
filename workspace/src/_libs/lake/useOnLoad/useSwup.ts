@@ -53,9 +53,7 @@ export function useSwup({
   });
 
   useMount(() => {
-    created({
-      history: readonlyHistory,
-    });
+    created({ history: readonlyHistory });
 
     return () => {
       swup.destroy();

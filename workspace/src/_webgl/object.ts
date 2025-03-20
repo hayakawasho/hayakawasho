@@ -1,8 +1,7 @@
-import { Object3D, Texture } from "../_libs/three";
+import { Object3D } from "../_libs/three";
 import { globalStore } from "../_states";
-import { loadAsset } from "../_utils/loader";
 
-class GlObject extends Object3D {
+export class GlObject extends Object3D {
   #pos = {
     x: 0,
     y: 0,
@@ -16,7 +15,7 @@ class GlObject extends Object3D {
     this.#setPosition();
   }
 
-  #setCache = () => {
+  #setCache = (width?: number, height?: number) => {
     const bounds = this.el.getBoundingClientRect();
     const {
       scroll: { currentY },
@@ -28,13 +27,13 @@ class GlObject extends Object3D {
       centerX: bounds.left + bounds.width * 0.5,
       centerY: bounds.top + bounds.height * 0.5,
       offset: currentY,
-      windowW: ww,
-      windowH: wh,
+      windowW: width || ww,
+      windowH: height || wh,
     };
   };
 
-  resize = () => {
-    this.cache = this.#setCache();
+  resize = (width?: number, height?: number) => {
+    this.cache = this.#setCache(width, height);
     this.#setPosition();
   };
 
@@ -47,25 +46,11 @@ class GlObject extends Object3D {
     this.position.y = this.#pos.y;
   }
 
-  updatePosition = (current = 0) => {
+  updateY = (current = 0) => {
     this.position.y = current - this.cache.offset + this.#pos.y;
   };
-}
 
-class GlImage extends GlObject {
-  loadTexture = (
-    src: string,
-    onLoad: (texture: Texture) => void = () => {},
-  ) => {
-    const texture = new Texture();
-
-    loadAsset<HTMLImageElement>(src).then((result) => {
-      texture.image = result;
-      onLoad(texture);
-    });
-
-    return texture;
+  updateX = (current = 0) => {
+    this.position.x = current + this.#pos.x;
   };
 }
-
-export { GlObject, GlImage };

@@ -1,7 +1,7 @@
 import { defineComponent, useSlot } from "lake";
 import type { DefineComponentContext } from "../../../../../const";
-import PcHomeHeroControl from "./control/pc";
-import SpHomeHeroControl from "./control/sp";
+import PcHomeHeroControl from "./control/index.pc";
+import SpHomeHeroControl from "./control/index.sp";
 
 export default defineComponent({
   name: "HomeHero",

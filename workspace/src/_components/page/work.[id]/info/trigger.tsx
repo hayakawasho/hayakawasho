@@ -9,10 +9,7 @@ export default function Component() {
     >
       <span className="relative block w-[5rem] overflow-hidden">
         <span className="block transform-gpu" data-ref="infoTriggerLabel">
-          <span
-            aria-hidden="true"
-            className="inline-block w-[.35em] text-center"
-          >
+          <span aria-hidden="true" className="inline-block w-[.35em] text-center">
             I
           </span>
           <span aria-hidden="true" className="tracking-[.02em]">
@@ -25,9 +22,7 @@ export default function Component() {
             O
           </span>
           <span className="sr-only">Info</span>
-          <span className="absolute block w-full uppercase tracking-[.02em]">
-            Close
-          </span>
+          <span className="absolute block w-full uppercase tracking-[.02em]">Close</span>
         </span>
       </span>
     </button>

@@ -265,6 +265,7 @@
     height: 100%;
     pointer-events: none;
     z-index: 999;
+    mix-blend-mode: difference;
   }
 
   @media not (hover: hover) {

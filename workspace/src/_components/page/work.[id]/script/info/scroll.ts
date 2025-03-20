@@ -1,6 +1,5 @@
 import { gsap } from "gsap";
 import { defineComponent } from "lake";
-import { useElementSize as _useElementSize } from "../../../../../_libs/lake/useElementSize";
 
 export default defineComponent({
   name: "InfoScroll",

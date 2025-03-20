@@ -25,14 +25,8 @@ export default function Component({
       />
       <div aria-hidden="true" className="ui-bg" />
       <GlBack />
-      <div
-        aria-hidden="true"
-        className="grad grad--upper h-[20vh] pc:h-[25vh]"
-      />
-      <div
-        aria-hidden="true"
-        className="grad grad--lower h-[20vh] pc:h-[25vh]"
-      />
+      <div aria-hidden="true" className="grad grad--upper h-[20vh] pc:h-[25vh]" />
+      <div aria-hidden="true" className="grad grad--lower h-[20vh] pc:h-[25vh]" />
       {header}
       <div
         id="main"

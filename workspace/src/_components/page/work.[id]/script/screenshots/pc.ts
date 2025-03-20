@@ -1,10 +1,10 @@
-import { defineComponent, useDomRef, useMount } from "lake";
+import { defineComponent, useDomRef, useMount, useSlot } from "lake";
 import { useElementSize } from "../../../../../_libs/lake/useElementSize";
 import { useTick } from "../../../../../_libs/lake/useTick";
 import { useWindowEvent } from "../../../../../_libs/lake/useWindowEvent";
 import { ScrollSmoother } from "../../../../../_libs/scroll/smoother";
-import { Tween } from "../../../../../_libs/tween";
 import type { DefineComponentContext } from "../../../../../const";
+import ScreenShotItem from "./item";
 
 type Refs = {
   screenshotItem: HTMLElement[];
@@ -14,6 +14,7 @@ export default defineComponent({
   name: "ScreenShots",
   setup(el, props: DefineComponentContext) {
     const { refs } = useDomRef<Refs>("screenshotItem");
+    const { addChild } = useSlot();
 
     const smooth = ScrollSmoother.create({
       stiffness: 0.24,
@@ -34,9 +35,13 @@ export default defineComponent({
     });
 
     useMount(() => {
+      console.log("mount");
+
+      const screenshotItemsContext = addChild(refs.screenshotItem, ScreenShotItem, props);
+
       function onSmooth({ currentY = 0 }) {
-        Tween.prop(refs.screenshotItem, {
-          x: -currentY,
+        screenshotItemsContext.forEach((item) => {
+          item.current.updateX(-currentY);
         });
       }
 

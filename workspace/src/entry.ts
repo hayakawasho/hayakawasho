@@ -15,24 +15,22 @@ import { withSvelte } from "./_libs/lake/withSvelte";
     WorkSingle,
   } as const;
 
-  const mountComponents = (
-    scope: HTMLElement,
-    props: Record<string, unknown>,
-  ) => {
-    return [...scope.querySelectorAll<HTMLElement>("[data-component]")].reduce<
-      ComponentContext[]
-    >((acc, el) => {
-      const name = el.dataset.component || "Noop";
+  const mountComponents = (scope: HTMLElement, props: Record<string, unknown>) => {
+    return [...scope.querySelectorAll<HTMLElement>("[data-component]")].reduce<ComponentContext[]>(
+      (acc, el) => {
+        const name = el.dataset.component || "Noop";
 
-      try {
-        const mount = component(table[`${name}`]);
-        acc.push(mount(el, props));
-      } catch (error) {
-        console.error({ name, html: scope, error });
-      }
+        try {
+          const mount = component(table[`${name}`]);
+          acc.push(mount(el, props));
+        } catch (error) {
+          console.error({ name, html: scope, error });
+        }
 
-      return acc;
-    }, []);
+        return acc;
+      },
+      [],
+    );
   };
 
   component(
@@ -42,9 +40,7 @@ import { withSvelte } from "./_libs/lake/withSvelte";
         useOnLoad({
           mountComponents,
           unmountComponents: (scope: HTMLElement) => {
-            unmount([
-              ...scope.querySelectorAll<HTMLElement>("[data-component]"),
-            ]);
+            unmount([...scope.querySelectorAll<HTMLElement>("[data-component]")]);
           },
         });
       },

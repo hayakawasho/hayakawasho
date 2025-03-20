@@ -1,8 +1,8 @@
 import { useDomRef, useMount, useSlot } from "lake";
-import Cursor from "../../../_components/ui/cusor/script/index.svelte";
+// import Cursor from "../../../_components/ui/cusor/script/index.svelte";
 import Gl from "../../../_components/ui/gl/script";
 import { useRepeatNoise } from "../../../_components/ui/gl/script/noise/useRepeatNoise";
-import { withSvelte } from "../../../_libs/lake/withSvelte";
+// import { withSvelte } from "../../../_libs/lake/withSvelte";
 import { globalStore } from "../../../_states";
 import { useElementSize } from "../useElementSize";
 import { useSwup } from "./useSwup";
@@ -22,13 +22,7 @@ export function useOnLoad({
   mountComponents: (scope: HTMLElement, props: Record<string, unknown>) => void;
   unmountComponents: (scope: HTMLElement) => void;
 }) {
-  const { refs } = useDomRef<Refs>(
-    "resizeSentinel",
-    "cursor",
-    "glBack",
-    "glFront",
-    "main",
-  );
+  const { refs } = useDomRef<Refs>("resizeSentinel", "cursor", "glBack", "glFront", "main");
 
   const { addChild } = useSlot();
 
@@ -49,22 +43,16 @@ export function useOnLoad({
 
   const device = wideQuery.matches ? "pc" : "sp";
 
-  const anyHover = window.matchMedia("(any-hover:hover)").matches
-    ? "hover"
-    : "none";
+  const anyHover = window.matchMedia("(any-hover:hover)").matches ? "hover" : "none";
 
   const dpr = Math.min(window.devicePixelRatio, 1.5);
 
   const [glBackContext] = addChild(refs.glBack, Gl, {
     resolution: 1,
-    device,
-    anyHover,
   });
 
   const [glFrontContext] = addChild(refs.glFront, Gl, {
     resolution: dpr,
-    device,
-    anyHover,
   });
 
   const noise = useRepeatNoise(refs.glBack, 1, device);
@@ -72,9 +60,9 @@ export function useOnLoad({
   useMount(() => {
     glBackContext.current.addScene(noise);
 
-    if (anyHover === "hover") {
-      addChild(refs.cursor, withSvelte(Cursor, "Cursor"));
-    }
+    // if (anyHover === "hover") {
+    //   addChild(refs.cursor, withSvelte(Cursor, "Cursor"));
+    // }
 
     return () => {
       glBackContext.current.removeScene(noise);
@@ -86,6 +74,7 @@ export function useOnLoad({
       mountComponents(document.documentElement, {
         ...props,
         once: true,
+        dpr,
         device,
         anyHover,
         glBackContext: glBackContext.current,
@@ -96,6 +85,7 @@ export function useOnLoad({
       mountComponents(scope, {
         ...props,
         once: false,
+        dpr,
         device,
         anyHover,
         glBackContext: glBackContext.current,

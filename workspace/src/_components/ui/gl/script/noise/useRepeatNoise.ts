@@ -8,14 +8,10 @@ import {
   TextureLoader,
 } from "../../../../../_libs/three";
 import { globalStore } from "../../../../../_states";
-import fragmentShader from "./noise.frag";
-import vertexShader from "./noise.vert";
+import fragmentShader from "./noise.fs";
+import vertexShader from "./noise.vs";
 
-export function useRepeatNoise(
-  canvas: HTMLCanvasElement,
-  resolution: number,
-  device: "pc" | "sp",
-) {
+export function useRepeatNoise(canvas: HTMLCanvasElement, resolution: number, device: "pc" | "sp") {
   const { pc, mob } = canvas.dataset;
 
   const textureSrc = {
@@ -43,7 +39,7 @@ export function useRepeatNoise(
       value: texture,
     },
     uAlpha: {
-      value: 1,
+      value: 0.08,
     },
   };
 

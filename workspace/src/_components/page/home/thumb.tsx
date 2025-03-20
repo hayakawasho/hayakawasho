@@ -7,15 +7,9 @@ export default function Component({ posts }: { posts: WorkDTO[] }) {
       data-ref="heroThumbItems"
     >
       {posts.map((i) => (
-        <li
-          key={i.id}
-          className={`pc:absolute aspect-[5/6] pc:w-full w-[4.8rem]`}
-        >
+        <li key={i.id} className={`pc:absolute aspect-[5/6] pc:w-full w-[4.8rem]`}>
           <div className="relative size-full" data-ref="heroThumbItem">
-            <div
-              className="absolute inset-0 h-full overflow-hidden"
-              data-ref="heroThumbImageWrap"
-            >
+            <div className="absolute inset-0 h-full overflow-hidden" data-ref="heroThumbImageWrap">
               <img
                 src={`${i.thumb.src}?auto=compress,format&fm=avif&w=300`}
                 alt=""

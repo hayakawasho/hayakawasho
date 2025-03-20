@@ -4,10 +4,7 @@ import { createMousePositionSlice } from "./coordinate";
 import { createWindowScrollSlice } from "./scroll";
 
 export type ZSet<T> = {
-  (
-    partial: T | Partial<T> | ((state: T) => T | Partial<T>),
-    replace?: false | undefined,
-  ): void;
+  (partial: T | Partial<T> | ((state: T) => T | Partial<T>), replace?: false | undefined): void;
   (state: T | ((state: T) => T), replace: true): void;
 };
 

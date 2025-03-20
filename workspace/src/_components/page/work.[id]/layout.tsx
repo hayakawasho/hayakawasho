@@ -2,7 +2,7 @@ export function Wrap({ children }: { children: React.ReactNode }) {
   return (
     <div
       className={
-        "relative grid h-[var(--100vh)] pc:h-fit pc:grid-cols-[1fr_calc(var(--grid)*7)] grid-rows-[1fr_max(50vh,100vw)] pc:grid-rows-none pc:items-start"
+        "relative grid h-[var(--100vh)] pc:h-fit pc:grid-cols-[calc(var(--grid)*5)_calc(var(--grid)*7)] grid-rows-[1fr_max(50vh,100vw)] pc:grid-rows-none pc:items-start overflow-hidden"
       }
     >
       {children}
@@ -27,15 +27,9 @@ export function Content({ children }: { children: React.ReactNode }) {
 }
 
 export function HGroup({ children }: { children: React.ReactNode }) {
-  return (
-    <div className={"absolute top-0 right-0 z-10 pc:hidden"}>{children}</div>
-  );
+  return <div className={"absolute top-0 right-0 z-10 pc:hidden"}>{children}</div>;
 }
 
 export function Info({ children }: { children: React.ReactNode }) {
-  return (
-    <div className={"absolute bottom-0 left-0 w-full max-pc:hidden"}>
-      {children}
-    </div>
-  );
+  return <div className={"absolute bottom-0 left-0 w-full max-pc:hidden"}>{children}</div>;
 }

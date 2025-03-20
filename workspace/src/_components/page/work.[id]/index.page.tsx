@@ -34,6 +34,10 @@ export default function Component({
             </Layout.Info>
           </Layout.Head>
           <Layout.Content>
+            <canvas
+              className="pointer-events-none absolute inset-0 h-full w-full"
+              data-ref="glWorkSingle"
+            ></canvas>
             <Screenshots metadata={currentPost} />
           </Layout.Content>
         </Layout.Wrap>

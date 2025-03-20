@@ -1,8 +1,6 @@
 import { useEvent } from "lake";
 
-export function useWindowEvent<
-  T extends keyof HTMLElementEventMap = keyof HTMLElementEventMap,
->(
+export function useWindowEvent<T extends keyof HTMLElementEventMap = keyof HTMLElementEventMap>(
   eventType: T,
   listener: Parameters<typeof useEvent<any, T>>[2],
   optionsOrUseCapture?: Parameters<typeof useEvent>[3],

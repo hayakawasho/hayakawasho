@@ -16,7 +16,7 @@
     "indentStyle": "space",
     "indentWidth": 2,
     "lineEnding": "lf",
-    "lineWidth": 80,
+    "lineWidth": 100,
     "attributePosition": "auto",
     "bracketSpacing": true,
     "ignore": ["**/.gitignore", "**/node_modules"]
@@ -27,8 +27,21 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
+      "a11y": {
+        "recommended": true,
+        "noAccessKey": "error"
+      },
+      "complexity": {
+        "recommended": true
+      },
+      "correctness": {
+        "recommended": true
+      },
+      "security": {
+        "recommended": true
+      },
       "nursery": {
+        "recommended": true,
         "useSortedClasses": {
           "level": "warn",
           "fix": "safe",
@@ -37,22 +50,12 @@
           }
         }
       },
-      "complexity": {
-        "noStaticOnlyClass": "off"
+      "style": {
+        "recommended": true
+      },
+      "suspicious": {
+        "recommended": true
       }
-    }
-  },
-  "javascript": {
-    "formatter": {
-      "jsxQuoteStyle": "double",
-      "quoteProperties": "asNeeded",
-      "trailingCommas": "all",
-      "semicolons": "always",
-      "arrowParentheses": "always",
-      "bracketSameLine": false,
-      "quoteStyle": "double",
-      "attributePosition": "auto",
-      "bracketSpacing": true
     }
   }
 }

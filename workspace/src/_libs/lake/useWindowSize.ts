@@ -12,7 +12,7 @@ export const useWindowSize = (
 ) => {
   const unsub = globalStore.subscribe(({ bounds }) => {
     cb({
-      aspect: bounds.aspect,
+      aspect: bounds.ww / bounds.wh, // TODO: aspect ratio
       width: bounds.ww,
       height: bounds.wh,
       centerX: bounds.centerX,
